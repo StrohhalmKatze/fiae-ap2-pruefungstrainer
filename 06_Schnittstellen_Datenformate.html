@@ -1,0 +1,2066 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>06 Schnittstellen &amp; Datenformate – Übungen</title>
+<link rel="stylesheet" href="style.css">
+<script src="uebungen.js"></script>
+<style>
+  /* Zusatzregeln Block 06 */
+  nav.toc ol ol { columns: 2; column-gap: 24px; font-size: 13px; }
+  table.kompakt td, table.kompakt th { padding: 2px 6px; }
+  table.leer td { height: 34px; }
+  table.leer.hoch td { height: 64px; }
+  table.leer.sehrhoch td { height: 96px; }
+  td.mono, th.mono { font-family: Consolas, "Courier New", monospace; font-size: 13px; }
+  .zn { color: #888; }
+  pre.xml { border-left: 4px solid #6b7280; }
+  pre.json { border-left: 4px solid var(--oft); }
+  pre.http { border-left: 4px solid var(--accent); }
+  pre.klein { font-size: 12px; }
+  .zweispaltig { display: flex; gap: 16px; flex-wrap: wrap; }
+  .zweispaltig > * { flex: 1 1 300px; min-width: 0; }
+  .englisch { font-family: Georgia, "Times New Roman", serif; font-size: 14.5px; }
+  .englisch p { margin: 6px 0; }
+  table.leer td.vorgabe { height: auto; }
+  .codelabel { break-after: avoid; page-break-after: avoid; }
+  @media print { .zweispaltig, .zusammen, .einheit { break-inside: avoid; } }
+  #erklaerung > h3:not(#e-01) { break-before: page; }
+  @media print {
+    pre { font-size: 11.5px; }
+    /* Aufgaben dürfen über Seiten laufen, Frage und Antwortfeld bleiben zusammen */
+    .aufgabe { break-inside: auto; }
+    .aufgabe .kopf, .teilaufgabe, .aufgabe > p:not(.quelle) { break-after: avoid; }
+    .antwort, table, pre, figure, .zeichenflaeche { break-inside: avoid; }
+    #aufgaben > h3:not(#a-01):not(#originale) { break-before: page; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== KOPF ===================== -->
+<header class="blockkopf">
+  <h1>Block 06 · Schnittstellen &amp; Datenformate</h1>
+  <div class="unter">
+    <span class="badge k-immer">Immer</span> 8/9 Prüfungen · Ø 15 von 200 Punkten · fast ausschließlich Teil 1 (8×) · Trend ↑ bei REST/HTTP
+    · Lösungen: <a href="06_Schnittstellen_Datenformate_Loesungen.html">06_Schnittstellen_Datenformate_Loesungen.html</a>
+  </div>
+</header>
+
+<nav class="toc">
+  <strong>Inhalt</strong>
+  <ol>
+    <li><a href="#erklaerung">Erklärungssatz</a>
+      <ol>
+        <li><a href="#e-01">SD-01 XML</a></li>
+        <li><a href="#e-02">SD-02 JSON</a></li>
+        <li><a href="#e-03">SD-03 REST &amp; HTTP-Methoden</a></li>
+        <li><a href="#e-04">SD-04 HTTP-Request/Response, Statuscodes</a></li>
+        <li><a href="#e-05">SD-05 eRechnung</a></li>
+      </ol>
+    </li>
+    <li><a href="#belegsatz">Belegsatz</a> (Anlagen 1–12: Ausgangssituation, API-Dokumentation, HTTP-Beispiele, Klassen, XML/DTD, Tabellen, englischer Text, Rechnungsauszug)</li>
+    <li><a href="#aufgaben">Aufgaben</a>
+      <ol>
+        <li><a href="#a-01">SD-01 XML (3 Aufgaben)</a></li>
+        <li><a href="#a-02">SD-02 JSON (3 Aufgaben)</a></li>
+        <li><a href="#a-03">SD-03 REST (3 Aufgaben)</a></li>
+        <li><a href="#a-04">SD-04 HTTP (3 Aufgaben)</a></li>
+        <li><a href="#a-05">SD-05 eRechnung (3 Aufgaben)</a></li>
+        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+
+<div class="info no-print">
+  <span class="kastentitel">So arbeitest du mit diesem Block</span>
+  Erst den Erklärungssatz lesen, dann die Aufgaben mit dem Belegsatz daneben lösen (Belegsatz am besten separat ausdrucken und neben die Aufgaben legen). Zeitrichtwert: 1 Punkt ≈ 0,9 Minuten.
+  Lösungen erst danach in der separaten Lösungsdatei nachsehen. Zu den Code- und Validierungsaufgaben gibt es dort Pseudocode bzw. Musterlösungen <em>und</em> lauffähige Java-Dateien im Ordner <code>java\06_Schnittstellen_Datenformate\</code> (nur JDK, keine Bibliotheken).
+</div>
+
+<!-- ===================== TEIL A: ERKLÄRUNGSSATZ ===================== -->
+<section class="teil" id="erklaerung">
+  <h2>A · Erklärungssatz</h2>
+
+  <p>Schnittstellen und Datenformate kamen in <strong>8 von 9</strong> Prüfungen vor, fast immer in <strong>Teil 1</strong> als eine Teilaufgabe von 6 bis 25 Punkten. Die Fragen sind meist Wissens- und Verständnisfragen („Erläutern Sie …“, „Beschreiben Sie die Parameter …“), dazu kommen Anwendungsaufgaben: XML-Fehler anhand einer DTD finden, Tabellen in JSON überführen, eine HTTP-Antwort im Code zusammenbauen. Einen Belegsatz mit Notationshilfen gibt es für diesen Block <strong>nicht</strong> – Syntax und Begriffe musst du selbst können.</p>
+
+  <table class="kompakt">
+    <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
+    <tr><td>SD-01 XML</td><td><span class="badge k-meistens">Meistens</span> (JSON/XML)</td><td>6–13</td><td>wohlgeformt vs. gültig, Fehler anhand einer DTD finden, Grenzen der Schema-Validierung</td></tr>
+    <tr><td>SD-02 JSON</td><td><span class="badge k-meistens">Meistens</span> (JSON/XML)</td><td>7–14</td><td>Tabellen fehlerfrei in JSON überführen, Embedding vs. Referenz, JSON im Code erzeugen</td></tr>
+    <tr><td>SD-03 REST &amp; HTTP-Methoden</td><td><span class="badge k-oft">Oft ↑</span> (REST/HTTP)</td><td>2–12</td><td>REST-Konzept erläutern, CRUD ↔ HTTP-Methoden, Endpunkte entwerfen</td></tr>
+    <tr><td>SD-04 HTTP-Request/Response</td><td><span class="badge k-oft">Oft ↑</span> (REST/HTTP)</td><td>2–10</td><td>Aufbau von Request und Response, Statuscodes, URL-Parameter, Antwort im Code bauen</td></tr>
+    <tr><td>SD-05 eRechnung</td><td><span class="badge k-sonstige">Sonstige ⚠</span></td><td>ca. 18 (W25)</td><td>Ziel, Formate, Pflichten, Validierung, Datenschutz – oft mit englischem Text</td></tr>
+  </table>
+  <p class="klein">Punkte des Blocks je Prüfung: W21 2 · S22 – · W22 13 · S23 13 · W23 14 · S24 25 · W24 18 · W25 24 · S26 12.</p>
+
+  <!-- ===================== SD-01 ===================== -->
+  <h3 id="e-01">SD-01 · XML <span class="badge k-meistens">Meistens</span></h3>
+  <p class="klein">Vorkommen: JSON/XML zusammen 6/9 (W22, S23, W23, S24, W24, W25) · XML konkret: W22 T1 A3c (13 P: Zweck der DTD, wohlgeformt/gültig, Fehler finden), W25 T1 A3bc (6 P: warum Schema-Validierung nicht reicht); eRechnungen (W25) sind XML-Dokumente</p>
+
+  <h4>Was ist XML?</h4>
+  <p>XML (<em>Extensible Markup Language</em>) ist eine textbasierte <strong>Auszeichnungssprache für hierarchisch strukturierte Daten</strong>. Sie ist für Menschen und Maschinen lesbar, plattform- und programmiersprachenunabhängig und wird vor allem für den <strong>Datenaustausch zwischen Systemen</strong> verwendet (eRechnung, Behördenstandards, SOAP-Webservices, Konfigurationsdateien, Office-Dateiformate). Anders als HTML gibt XML keine Elementnamen vor („extensible“): Die Namen legt man selbst fest. Welche Elemente in welcher Reihenfolge erlaubt sind, beschreibt eine <strong>DTD</strong> oder ein <strong>XML-Schema (XSD)</strong>.</p>
+
+  <h4>Aufbau eines XML-Dokuments</h4>
+  <p>Beispiel: Spielplan eines Stadttheaters (die Zeilennummern gehören nicht zum Dokument).</p>
+  <pre class="xml"><span class="zn"> 1</span>  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<span class="zn"> 2</span>  &lt;!DOCTYPE spielplan SYSTEM "spielplan.dtd"&gt;
+<span class="zn"> 3</span>  &lt;!-- Spielplan des Stadttheaters (Auszug) --&gt;
+<span class="zn"> 4</span>  &lt;spielplan saison="2026/27"&gt;
+<span class="zn"> 5</span>    &lt;vorstellung id="v1" saal="gross"&gt;
+<span class="zn"> 6</span>      &lt;stueck&gt;Der Besuch der alten Dame&lt;/stueck&gt;
+<span class="zn"> 7</span>      &lt;datum&gt;2026-11-14&lt;/datum&gt;
+<span class="zn"> 8</span>      &lt;preis&gt;32.00&lt;/preis&gt;
+<span class="zn"> 9</span>    &lt;/vorstellung&gt;
+<span class="zn">10</span>    &lt;vorstellung id="v2" saal="studio" ausverkauft="ja"&gt;
+<span class="zn">11</span>      &lt;stueck&gt;Momo&lt;/stueck&gt;
+<span class="zn">12</span>      &lt;datum&gt;2026-11-15&lt;/datum&gt;
+<span class="zn">13</span>      &lt;preis&gt;12.50&lt;/preis&gt;
+<span class="zn">14</span>      &lt;hinweis&gt;ab 8 Jahren&lt;/hinweis&gt;
+<span class="zn">15</span>      &lt;hinweis&gt;Einführung 19:15 Uhr&lt;/hinweis&gt;
+<span class="zn">16</span>    &lt;/vorstellung&gt;
+<span class="zn">17</span>  &lt;/spielplan&gt;</pre>
+
+  <table class="kompakt">
+    <tr><th style="width:22%">Bestandteil</th><th style="width:36%">Beispiel (Zeile)</th><th>Erklärung</th></tr>
+    <tr><td>Prolog / XML-Deklaration</td><td><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</code> (1)</td><td>nennt XML-Version und Zeichenkodierung; optional, muss aber – wenn vorhanden – ganz am Anfang stehen</td></tr>
+    <tr><td>Dokumenttyp-Deklaration</td><td><code>&lt;!DOCTYPE spielplan SYSTEM "spielplan.dtd"&gt;</code> (2)</td><td>verweist auf die DTD, gegen die geprüft wird; der Name muss dem Wurzelelement entsprechen</td></tr>
+    <tr><td>Kommentar</td><td><code>&lt;!-- … --&gt;</code> (3)</td><td>wird vom Parser ignoriert</td></tr>
+    <tr><td>Wurzelelement</td><td><code>&lt;spielplan&gt; … &lt;/spielplan&gt;</code> (4–17)</td><td>genau <strong>ein</strong> Element umschließt alle anderen</td></tr>
+    <tr><td>Element</td><td><code>&lt;stueck&gt;Momo&lt;/stueck&gt;</code> (11)</td><td>Start-Tag, Inhalt, End-Tag; Inhalt = Text und/oder Kindelemente</td></tr>
+    <tr><td>leeres Element</td><td><code>&lt;pause/&gt;</code></td><td>Kurzform für <code>&lt;pause&gt;&lt;/pause&gt;</code></td></tr>
+    <tr><td>Attribut</td><td><code>saal="studio"</code> (10)</td><td>Name-Wert-Paar im Start-Tag; Wert immer in Anführungszeichen; jeder Attributname höchstens einmal je Element</td></tr>
+    <tr><td>Textinhalt</td><td><code>32.00</code> (8)</td><td>ohne Schema ist alles Text – „32.00“ ist für den Parser eine Zeichenkette</td></tr>
+    <tr><td>Entität</td><td><code>&amp;lt; &amp;gt; &amp;amp; &amp;quot; &amp;apos;</code></td><td>Ersatz für Sonderzeichen, z. B. <code>Hansen &amp;amp; Söhne</code></td></tr>
+  </table>
+
+  <figure>
+    <svg viewBox="0 0 760 290" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <!-- Verbindungslinien -->
+      <g stroke="#222" fill="none">
+        <line x1="360" y1="52" x2="195" y2="90"/>
+        <line x1="360" y1="52" x2="570" y2="90"/>
+        <line x1="195" y1="132" x2="85" y2="170"/>
+        <line x1="195" y1="132" x2="195" y2="170"/>
+        <line x1="195" y1="132" x2="305" y2="170"/>
+        <line x1="570" y1="132" x2="450" y2="170"/>
+        <line x1="570" y1="132" x2="535" y2="170"/>
+        <line x1="570" y1="132" x2="620" y2="170"/>
+        <line x1="570" y1="132" x2="710" y2="170"/>
+      </g>
+      <g stroke="#222" stroke-dasharray="3,3" fill="none">
+        <line x1="85" y1="200" x2="85" y2="212"/>
+        <line x1="195" y1="200" x2="195" y2="212"/>
+        <line x1="305" y1="200" x2="305" y2="212"/>
+        <line x1="450" y1="200" x2="450" y2="212"/>
+        <line x1="535" y1="200" x2="535" y2="212"/>
+        <line x1="620" y1="200" x2="620" y2="212"/>
+        <line x1="710" y1="200" x2="710" y2="212"/>
+      </g>
+      <!-- Wurzel -->
+      <rect x="280" y="10" width="160" height="42" rx="6" fill="#eef3fa" stroke="#222" stroke-width="1.5"/>
+      <text x="360" y="28" text-anchor="middle" font-weight="bold">spielplan</text>
+      <text x="360" y="45" text-anchor="middle" font-size="11">@saison="2026/27"</text>
+      <!-- vorstellung v1 -->
+      <rect x="95" y="90" width="200" height="42" rx="6" fill="#fff" stroke="#222"/>
+      <text x="195" y="108" text-anchor="middle" font-weight="bold">vorstellung</text>
+      <text x="195" y="125" text-anchor="middle" font-size="11">@id="v1"  @saal="gross"</text>
+      <!-- vorstellung v2 -->
+      <rect x="440" y="90" width="260" height="42" rx="6" fill="#fff" stroke="#222"/>
+      <text x="570" y="108" text-anchor="middle" font-weight="bold">vorstellung</text>
+      <text x="570" y="125" text-anchor="middle" font-size="11">@id="v2"  @saal="studio"  @ausverkauft="ja"</text>
+      <!-- Kinder v1 -->
+      <rect x="40" y="170" width="90" height="30" rx="5" fill="#fff" stroke="#222"/>
+      <text x="85" y="190" text-anchor="middle">stueck</text>
+      <rect x="150" y="170" width="90" height="30" rx="5" fill="#fff" stroke="#222"/>
+      <text x="195" y="190" text-anchor="middle">datum</text>
+      <rect x="260" y="170" width="90" height="30" rx="5" fill="#fff" stroke="#222"/>
+      <text x="305" y="190" text-anchor="middle">preis</text>
+      <!-- Kinder v2 -->
+      <rect x="412" y="170" width="76" height="30" rx="5" fill="#fff" stroke="#222"/>
+      <text x="450" y="190" text-anchor="middle">stueck</text>
+      <rect x="497" y="170" width="76" height="30" rx="5" fill="#fff" stroke="#222"/>
+      <text x="535" y="190" text-anchor="middle">datum</text>
+      <rect x="582" y="170" width="76" height="30" rx="5" fill="#fff" stroke="#222"/>
+      <text x="620" y="190" text-anchor="middle">preis</text>
+      <rect x="667" y="170" width="86" height="30" rx="5" fill="#fff" stroke="#222"/>
+      <text x="710" y="190" text-anchor="middle">hinweis (2×)</text>
+      <!-- Textknoten -->
+      <g font-size="11" font-style="italic" text-anchor="middle" fill="#333">
+        <text x="85" y="226">„Der Besuch …“</text>
+        <text x="195" y="226">„2026-11-14“</text>
+        <text x="305" y="226">„32.00“</text>
+        <text x="450" y="226">„Momo“</text>
+        <text x="535" y="226">„2026-11-15“</text>
+        <text x="620" y="226">„12.50“</text>
+        <text x="710" y="226">„ab 8 Jahren“</text>
+        <text x="710" y="241">„Einführung …“</text>
+      </g>
+      <!-- Legende -->
+      <rect x="40" y="262" width="26" height="16" rx="4" fill="#fff" stroke="#222"/>
+      <text x="74" y="275" font-size="12">= Element</text>
+      <text x="160" y="275" font-size="12">@name = Attribut (gehört zum Element, ist kein Kindknoten)</text>
+      <text x="530" y="275" font-size="12" font-style="italic">„…“ = Textinhalt (Blatt)</text>
+    </svg>
+    <figcaption>Abb. A-1: Das Dokument als Baum – ein Wurzelelement, Kindelemente, Attribute und Textinhalte</figcaption>
+  </figure>
+
+  <p><strong>Element oder Attribut?</strong> Faustregel: Attribute für Kennungen und kurze Metadaten (<code>id</code>, <code>saal</code>, <code>einheit</code>), Elemente für die eigentlichen Daten – und immer dann, wenn ein Wert mehrfach vorkommen oder selbst Struktur haben kann (Attribute sind nicht wiederholbar und nicht verschachtelbar).</p>
+  <p><strong>Namensräume</strong> (<em>namespaces</em>) verhindern Namenskonflikte, wenn Elemente aus verschiedenen Vokabularen in einem Dokument zusammenkommen. Ein Namensraum wird durch eine eindeutige URI bezeichnet (sie muss nicht abrufbar sein) und entweder als Standardnamensraum (<code>xmlns="…"</code>) oder mit Präfix (<code>xmlns:cbc="…"</code>, Elemente dann <code>&lt;cbc:ID&gt;</code>) deklariert. eRechnungen im UBL-Format nutzen z. B. die Präfixe <code>cbc</code> und <code>cac</code> (Beispiel in SD-05).</p>
+
+  <h4>Wohlgeformt und gültig</h4>
+  <div class="merke"><span class="kastentitel">Merke</span>
+    <strong>Wohlgeformt</strong> (<em>well-formed</em>) = das Dokument hält die Syntaxregeln von XML ein. Das prüft jeder XML-Parser, auch ohne DTD.<br>
+    <strong>Gültig</strong> (<em>valid</em>) = das Dokument ist wohlgeformt <strong>und</strong> entspricht zusätzlich einer vorgegebenen Grammatik (DTD oder XSD): nur erlaubte Elemente und Attribute, richtige Reihenfolge und Anzahl, Pflichtangaben vorhanden.<br>
+    Jedes gültige Dokument ist wohlgeformt – aber nicht umgekehrt.
+  </div>
+
+  <div class="zweispaltig">
+    <div>
+      <p><strong>Regeln der Wohlgeformtheit (Syntax)</strong></p>
+      <ol>
+        <li>genau ein Wurzelelement</li>
+        <li>zu jedem Start-Tag ein passendes End-Tag (oder leeres Element <code>&lt;x/&gt;</code>)</li>
+        <li>korrekt verschachtelt: <code>&lt;a&gt;&lt;b&gt;&lt;/b&gt;&lt;/a&gt;</code>, nicht <code>&lt;a&gt;&lt;b&gt;&lt;/a&gt;&lt;/b&gt;</code></li>
+        <li>Groß-/Kleinschreibung zählt: <code>&lt;Preis&gt;</code> ≠ <code>&lt;preis&gt;</code></li>
+        <li>Attributwerte in Anführungszeichen, kein Attributname doppelt im selben Element</li>
+        <li><code>&lt;</code> und <code>&amp;</code> im Text nur als Entität</li>
+        <li>Namen beginnen mit Buchstabe oder <code>_</code>, keine Leerzeichen</li>
+        <li>XML-Deklaration (falls vorhanden) ganz am Anfang</li>
+      </ol>
+    </div>
+    <div>
+      <p><strong>Zusätzlich für die Gültigkeit (gegen DTD/XSD)</strong></p>
+      <ol>
+        <li>nur deklarierte Elemente und Attribute</li>
+        <li>Kindelemente in der vorgegebenen Reihenfolge und Anzahl</li>
+        <li>Pflichtattribute vorhanden, Attributwerte aus der erlaubten Liste</li>
+        <li>Werte vom Typ <code>ID</code> im ganzen Dokument eindeutig</li>
+        <li>Wurzelelement wie in der DOCTYPE-Deklaration</li>
+        <li>nur bei XSD: Datentypen und Wertebereiche (z. B. Datum, Zahl ≥ 0)</li>
+      </ol>
+    </div>
+  </div>
+
+  <figure>
+    <svg viewBox="0 0 560 215" width="560" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <rect x="10" y="10" width="540" height="195" rx="14" fill="#fff" stroke="#222"/>
+      <text x="24" y="32">alle Textdateien (z. B. mit Endung .xml)</text>
+      <rect x="40" y="45" width="480" height="150" rx="12" fill="#f3f4f6" stroke="#222"/>
+      <text x="54" y="67">wohlgeformte XML-Dokumente (Syntaxregeln eingehalten)</text>
+      <rect x="80" y="82" width="400" height="100" rx="10" fill="#eef3fa" stroke="#222" stroke-width="1.6"/>
+      <text x="280" y="115" text-anchor="middle" font-weight="bold">gültige XML-Dokumente</text>
+      <text x="280" y="138" text-anchor="middle">wohlgeformt UND passend zu einer DTD bzw. XSD</text>
+      <text x="280" y="162" text-anchor="middle" font-size="12">gültig ⇒ wohlgeformt, aber nicht umgekehrt</text>
+    </svg>
+    <figcaption>Abb. A-2: Gültige Dokumente sind eine Teilmenge der wohlgeformten Dokumente</figcaption>
+  </figure>
+
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>
+    <ul>
+      <li>Ein nicht wohlgeformtes Dokument ist streng genommen <strong>gar kein</strong> XML-Dokument: Der Parser bricht beim <strong>ersten</strong> Syntaxfehler ab. Gültigkeitsfehler meldet ein validierender Parser dagegen alle.</li>
+      <li>„Gültig“ bezieht sich immer auf <strong>eine bestimmte</strong> DTD/XSD. Ohne DTD/XSD kann ein Dokument nur wohlgeformt sein.</li>
+      <li>Falsche Groß-/Kleinschreibung im End-Tag (<code>&lt;name&gt;…&lt;/Name&gt;</code>) ist ein <strong>Wohlgeformtheitsfehler</strong>, kein Gültigkeitsfehler. Ein Element, das die DTD nicht kennt, ist dagegen ein <strong>Gültigkeitsfehler</strong> – syntaktisch ist es in Ordnung.</li>
+    </ul>
+  </div>
+
+  <h4>DTD (Document Type Definition)</h4>
+  <p>Die DTD ist die <strong>Grammatik</strong> (der Bauplan) eines Dokumenttyps: Sie legt fest, welche Elemente und Attribute vorkommen dürfen, in welcher Reihenfolge und wie oft. <strong>Wofür?</strong> Damit Sender und Empfänger eine gemeinsame, verbindliche Struktur haben (Schnittstellenvertrag) und eingehende Dokumente <strong>automatisch geprüft (validiert)</strong> werden können, bevor sie verarbeitet werden. Die DTD kann im Dokument stehen (interne DTD in <code>&lt;!DOCTYPE spielplan [ … ]&gt;</code>) oder – wie oben – in einer externen Datei, auf die die DOCTYPE-Deklaration mit <code>SYSTEM "datei.dtd"</code> verweist; so können viele Dokumente dieselbe DTD nutzen.</p>
+  <pre class="xml"><span class="zn"> 1</span>  &lt;!ELEMENT spielplan (vorstellung+)&gt;
+<span class="zn"> 2</span>  &lt;!ATTLIST spielplan saison CDATA #REQUIRED&gt;
+<span class="zn"> 3</span>  &lt;!ELEMENT vorstellung (stueck, datum, preis, hinweis*)&gt;
+<span class="zn"> 4</span>  &lt;!ATTLIST vorstellung id          ID             #REQUIRED
+<span class="zn"> 5</span>                        saal        (gross|studio) "gross"
+<span class="zn"> 6</span>                        ausverkauft (ja|nein)      #IMPLIED&gt;
+<span class="zn"> 7</span>  &lt;!ELEMENT stueck  (#PCDATA)&gt;
+<span class="zn"> 8</span>  &lt;!ELEMENT datum   (#PCDATA)&gt;
+<span class="zn"> 9</span>  &lt;!ELEMENT preis   (#PCDATA)&gt;
+<span class="zn">10</span>  &lt;!ELEMENT hinweis (#PCDATA)&gt;</pre>
+
+  <div class="zweispaltig">
+    <table class="kompakt">
+      <caption>Elementdeklaration <code>&lt;!ELEMENT name (inhalt)&gt;</code></caption>
+      <tr><th>Schreibweise</th><th>Bedeutung</th></tr>
+      <tr><td class="mono">(a, b, c)</td><td>Sequenz: genau in dieser Reihenfolge</td></tr>
+      <tr><td class="mono">(a | b)</td><td>Auswahl: entweder a oder b</td></tr>
+      <tr><td class="mono">a</td><td>genau einmal (1)</td></tr>
+      <tr><td class="mono">a?</td><td>optional, höchstens einmal (0..1)</td></tr>
+      <tr><td class="mono">a*</td><td>beliebig oft, auch keinmal (0..n)</td></tr>
+      <tr><td class="mono">a+</td><td>mindestens einmal (1..n)</td></tr>
+      <tr><td class="mono">(#PCDATA)</td><td>nur Text (<em>parsed character data</em>)</td></tr>
+      <tr><td class="mono">EMPTY / ANY</td><td>leeres Element / beliebiger Inhalt</td></tr>
+    </table>
+    <table class="kompakt">
+      <caption>Attributdeklaration <code>&lt;!ATTLIST element name typ vorgabe&gt;</code></caption>
+      <tr><th>Teil</th><th>Möglichkeiten</th></tr>
+      <tr><td>Typ</td><td><code>CDATA</code> beliebiger Text<br><code>ID</code> im Dokument eindeutig (Wert beginnt mit Buchstabe)<br><code>IDREF</code> verweist auf eine ID<br><code>(w1|w2|w3)</code> Aufzählung erlaubter Werte</td></tr>
+      <tr><td>Vorgabe</td><td><code>#REQUIRED</code> Pflichtattribut<br><code>#IMPLIED</code> optional, ohne Standardwert<br><code>"wert"</code> Standardwert, wenn das Attribut fehlt<br><code>#FIXED "wert"</code> fester Wert</td></tr>
+    </table>
+  </div>
+  <p>Kardinalitäten gelten auch für Gruppen: <code>(telefon | email)+</code> heißt „mindestens ein Kontakt, jeweils Telefon oder E-Mail“. Lies die DTD aus Zeile 3 so: Eine Vorstellung besteht aus genau einem Stück, dann genau einem Datum, dann genau einem Preis, danach beliebig vielen Hinweisen – genau in dieser Reihenfolge.</p>
+
+  <h4>So gehst du vor: Fehler in einem XML-Dokument anhand der DTD finden</h4>
+  <ol>
+    <li><strong>DTD in Worte fassen:</strong> Für jedes Element notieren, welche Kinder in welcher Reihenfolge und Anzahl erlaubt sind; für jedes Attribut: Pflicht? erlaubte Werte? ID?</li>
+    <li><strong>Erster Durchgang – Wohlgeformtheit</strong>, Zeile für Zeile: passt jedes End-Tag exakt (auch Groß-/Kleinschreibung, Schrägstrich)? Ist alles korrekt verschachtelt und geschlossen? Stehen alle Attributwerte in Anführungszeichen?</li>
+    <li><strong>Zweiter Durchgang – Gültigkeit:</strong> Ist jedes Element und Attribut deklariert? Stimmen Reihenfolge und Anzahl der Kinder? Fehlen Pflichtelemente oder Pflichtattribute? Sind Aufzählungswerte erlaubt? Kommt ein ID-Wert doppelt vor?</li>
+    <li><strong>Antwort je Fehler:</strong> Zeile, kurze Beschreibung („End-Tag passt nicht zum Start-Tag“), verletzte Eigenschaft (Wohlgeformtheit oder Gültigkeit).</li>
+  </ol>
+  <p>Beispiel: Auszug mit Fehlern, geprüft gegen die Spielplan-DTD von oben.</p>
+  <pre class="xml"><span class="zn"> 1</span>  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<span class="zn"> 2</span>  &lt;!DOCTYPE spielplan SYSTEM "spielplan.dtd"&gt;
+<span class="zn"> 3</span>  &lt;spielplan saison="2026/27"&gt;
+<span class="zn"> 4</span>    &lt;vorstellung id="v3" saal="foyer"&gt;
+<span class="zn"> 5</span>      &lt;datum&gt;2026-11-20&lt;/datum&gt;
+<span class="zn"> 6</span>      &lt;stueck&gt;Faust&lt;/stueck&gt;
+<span class="zn"> 7</span>      &lt;preis&gt;18.00&lt;/preis&gt;
+<span class="zn"> 8</span>    &lt;/vorstellung&gt;
+<span class="zn"> 9</span>    &lt;vorstellung id="v3"&gt;
+<span class="zn">10</span>      &lt;stueck&gt;Woyzeck&lt;/Stueck&gt;
+<span class="zn">11</span>      &lt;datum&gt;2026-11-21&lt;/datum&gt;
+<span class="zn">12</span>      &lt;preis&gt;21.00&lt;/preis&gt;
+<span class="zn">13</span>    &lt;/vorstellung&gt;
+<span class="zn">14</span>  &lt;/spielplan&gt;</pre>
+  <table class="kompakt">
+    <tr><th style="width:9%">Zeile</th><th>Beschreibung</th><th style="width:20%">Eigenschaft</th></tr>
+    <tr><td>4</td><td><code>saal="foyer"</code> ist kein erlaubter Wert der Aufzählung <code>(gross|studio)</code></td><td>Gültigkeit</td></tr>
+    <tr><td>5–6</td><td><code>datum</code> steht vor <code>stueck</code>; die DTD verlangt <code>(stueck, datum, preis, hinweis*)</code></td><td>Gültigkeit</td></tr>
+    <tr><td>9</td><td><code>id="v3"</code> ist bereits in Zeile 4 vergeben; Werte vom Typ ID müssen eindeutig sein</td><td>Gültigkeit</td></tr>
+    <tr><td>10</td><td>End-Tag <code>&lt;/Stueck&gt;</code> passt nicht zum Start-Tag <code>&lt;stueck&gt;</code> (Groß-/Kleinschreibung)</td><td>Wohlgeformtheit</td></tr>
+  </table>
+
+  <h4>XML-Schema (XSD)</h4>
+  <p>Ein XML-Schema (<em>XML Schema Definition</em>, Dateiendung <code>.xsd</code>) erfüllt denselben Zweck wie eine DTD, ist aber selbst ein XML-Dokument und deutlich mächtiger: Es kennt <strong>Datentypen</strong>, <strong>Wertebereiche</strong>, genaue Mindest- und Höchstanzahlen und <strong>Namensräume</strong>. eRechnungen (UBL, CII) werden mit XSD-Dateien beschrieben. Dasselbe Spielplan-Format als XSD:</p>
+  <pre class="xml"><span class="zn"> 1</span>  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<span class="zn"> 2</span>  &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+<span class="zn"> 3</span>    &lt;xs:element name="spielplan"&gt;
+<span class="zn"> 4</span>      &lt;xs:complexType&gt;
+<span class="zn"> 5</span>        &lt;xs:sequence&gt;
+<span class="zn"> 6</span>          &lt;xs:element ref="vorstellung" maxOccurs="unbounded"/&gt;
+<span class="zn"> 7</span>        &lt;/xs:sequence&gt;
+<span class="zn"> 8</span>        &lt;xs:attribute name="saison" type="xs:string" use="required"/&gt;
+<span class="zn"> 9</span>      &lt;/xs:complexType&gt;
+<span class="zn">10</span>    &lt;/xs:element&gt;
+<span class="zn">11</span>    &lt;xs:element name="vorstellung"&gt;
+<span class="zn">12</span>      &lt;xs:complexType&gt;
+<span class="zn">13</span>        &lt;xs:sequence&gt;
+<span class="zn">14</span>          &lt;xs:element name="stueck"  type="xs:string"/&gt;
+<span class="zn">15</span>          &lt;xs:element name="datum"   type="xs:date"/&gt;
+<span class="zn">16</span>          &lt;xs:element name="preis"   type="betrag"/&gt;
+<span class="zn">17</span>          &lt;xs:element name="hinweis" type="xs:string" minOccurs="0" maxOccurs="unbounded"/&gt;
+<span class="zn">18</span>        &lt;/xs:sequence&gt;
+<span class="zn">19</span>        &lt;xs:attribute name="id"          type="xs:ID"      use="required"/&gt;
+<span class="zn">20</span>        &lt;xs:attribute name="saal"        type="xs:string"  default="gross"/&gt;
+<span class="zn">21</span>        &lt;xs:attribute name="ausverkauft" type="xs:string"/&gt;
+<span class="zn">22</span>      &lt;/xs:complexType&gt;
+<span class="zn">23</span>    &lt;/xs:element&gt;
+<span class="zn">24</span>    &lt;xs:simpleType name="betrag"&gt;
+<span class="zn">25</span>      &lt;xs:restriction base="xs:decimal"&gt;
+<span class="zn">26</span>        &lt;xs:minInclusive value="0"/&gt;
+<span class="zn">27</span>        &lt;xs:fractionDigits value="2"/&gt;
+<span class="zn">28</span>      &lt;/xs:restriction&gt;
+<span class="zn">29</span>    &lt;/xs:simpleType&gt;
+<span class="zn">30</span>  &lt;/xs:schema&gt;</pre>
+  <table class="kompakt">
+    <tr><th style="width:40%">XSD</th><th>Bedeutung</th><th style="width:16%">DTD</th></tr>
+    <tr><td class="mono">&lt;xs:element name="x" type="xs:string"/&gt;</td><td>Element mit Datentyp</td><td class="mono">(#PCDATA)</td></tr>
+    <tr><td class="mono">xs:string, xs:integer, xs:decimal, xs:boolean, xs:date, xs:dateTime</td><td>eingebaute Datentypen (<code>xs:date</code> = JJJJ-MM-TT, <code>xs:decimal</code> mit Dezimal<strong>punkt</strong>)</td><td>– (alles Text)</td></tr>
+    <tr><td class="mono">ohne Angabe</td><td>minOccurs = maxOccurs = 1, also genau einmal</td><td class="mono">a</td></tr>
+    <tr><td class="mono">minOccurs="0"</td><td>optional</td><td class="mono">a?</td></tr>
+    <tr><td class="mono">minOccurs="0" maxOccurs="unbounded"</td><td>beliebig oft</td><td class="mono">a*</td></tr>
+    <tr><td class="mono">maxOccurs="unbounded"</td><td>mindestens einmal</td><td class="mono">a+</td></tr>
+    <tr><td class="mono">minOccurs="2" maxOccurs="5"</td><td>zwei bis fünf Mal</td><td>nicht möglich</td></tr>
+    <tr><td class="mono">&lt;xs:sequence&gt; / &lt;xs:choice&gt;</td><td>feste Reihenfolge / Auswahl</td><td class="mono">,  /  |</td></tr>
+    <tr><td class="mono">use="required"</td><td>Pflichtattribut</td><td class="mono">#REQUIRED</td></tr>
+    <tr><td class="mono">&lt;xs:restriction&gt; mit minInclusive, maxLength, pattern, enumeration</td><td>eigener, eingeschränkter Datentyp (z. B. Betrag ≥ 0 mit 2 Nachkommastellen)</td><td>nur Aufzählung bei Attributen</td></tr>
+  </table>
+
+  <table class="kompakt">
+    <caption>DTD und XSD im Vergleich</caption>
+    <tr><th style="width:22%">Kriterium</th><th>DTD</th><th>XSD</th></tr>
+    <tr><td>Schreibweise</td><td>eigene Syntax</td><td>selbst XML – mit XML-Werkzeugen bearbeit- und prüfbar</td></tr>
+    <tr><td>Datentypen</td><td>keine, alles ist Text</td><td>viele eingebaute Typen, eigene Typen mit Einschränkungen</td></tr>
+    <tr><td>Anzahl</td><td>nur <code>? * +</code></td><td>beliebige Mindest-/Höchstwerte</td></tr>
+    <tr><td>Namensräume</td><td>nicht unterstützt</td><td>unterstützt</td></tr>
+    <tr><td>Aufwand</td><td>kurz und einfach</td><td>umfangreicher, aber genauer</td></tr>
+  </table>
+
+  <h4>Warum eine Schema-Validierung allein nicht reicht</h4>
+  <p>DTD und XSD prüfen <strong>Struktur</strong> und (nur XSD) <strong>Datentypen einzelner Felder</strong>. Sie prüfen nicht, ob die Inhalte <strong>fachlich zueinander passen</strong>. Am Spielplan-Beispiel:</p>
+  <table class="kompakt">
+    <tr><th>Fehler im Dokument</th><th>DTD</th><th>XSD</th><th>Wer findet ihn?</th></tr>
+    <tr><td><code>&lt;datum&gt;14.11.2026&lt;/datum&gt;</code> oder <code>2026-02-30</code></td><td>nein</td><td>ja (kein <code>xs:date</code>)</td><td>Schema</td></tr>
+    <tr><td><code>&lt;preis&gt;-5.00&lt;/preis&gt;</code></td><td>nein</td><td>ja, mit <code>minInclusive</code></td><td>Schema</td></tr>
+    <tr><td>Vorstellung liegt außerhalb der Saison 2026/27</td><td>nein</td><td>nein</td><td>Geschäftsregel</td></tr>
+    <tr><td>Ermäßigter Preis ist höher als der Normalpreis</td><td>nein</td><td>nein</td><td>Geschäftsregel</td></tr>
+  </table>
+  <p>Für solche <strong>logischen Fehler</strong> braucht man zusätzlich <strong>Geschäftsregeln</strong>: Plausibilitätsprüfungen im Programmcode, Regeln in <strong>Schematron</strong> (XML-basierte Regelsprache mit XPath-Ausdrücken, z. B. <code>&lt;sch:assert test="gesamt = sum(position/betrag)"&gt;</code>), Unit-Tests mit Testdokumenten und – bei Standards wie der eRechnung – den offiziellen Validator, der Schema <em>und</em> Schematron prüft.</p>
+
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li><strong>W22 T1 A3c (13 P):</strong> Kursprogramm als XML mit externer DTD. ca) Erläutern, wofür die DTD benötigt wird (3 P). cb) „wohlgeformt“ und „gültig“ in einer Tabelle erläutern (4 P). cc) In einem XML-Dokument mit Zeilennummern zwei weitere Fehler finden – Zeile, Beschreibung, verletzte Eigenschaft (6 P); ein Fehler war als Beispiel eingetragen. Die DTD enthielt Auswahl <code>|</code>, <code>?</code>, <code>*</code>, <code>+</code>, <code>ID #REQUIRED</code> und <code>#IMPLIED</code>.</li>
+      <li><strong>W25 T1 A3bc (6 P):</strong> Anhand einer XML-Rechnung erklären, warum eine reine XSD-Validierung nicht ausreicht. Die markierte Fehlerstelle war ein <strong>Rechenfehler</strong> (Nettosumme stimmte nicht mit den Positionen überein) – formal korrekt, fachlich falsch.</li>
+      <li>Bei „Erläutern“ immer beide Seiten nennen: was geprüft wird <em>und</em> was nicht.</li>
+    </ul>
+  </div>
+
+  <!-- ===================== SD-02 ===================== -->
+  <h3 id="e-02">SD-02 · JSON <span class="badge k-meistens">Meistens</span></h3>
+  <p class="klein">Vorkommen: JSON/XML zusammen 6/9 · JSON konkret: S23 T1 A4cb (JSON-Sensordaten in ein Relationenmodell übernehmen), W23 T1 A3c (14 P: Tabellen in JSON überführen, Embedding), S24 T1 A2c (JSON-Body eines Requests), W24 T1 A2c (8 P: Skript mit JSON-Ausgabe)</p>
+
+  <h4>Syntax</h4>
+  <p>JSON (<em>JavaScript Object Notation</em>) ist ein schlankes, textbasiertes Datenaustauschformat. Es ist das Standardformat von REST-APIs und dokumentenorientierten NoSQL-Datenbanken (z. B. MongoDB). Medientyp: <code>application/json</code>, Zeichenkodierung UTF-8. JSON kennt genau sechs Arten von Werten:</p>
+  <table class="kompakt">
+    <tr><th style="width:12%">Typ</th><th style="width:40%">Schreibweise</th><th>Beispiel</th></tr>
+    <tr><td>Objekt</td><td><code>{ "schlüssel": wert, … }</code> – ungeordnete Menge von Schlüssel-Wert-Paaren</td><td><code>{"kursNr": 101, "titel": "Rückenfit"}</code></td></tr>
+    <tr><td>Array</td><td><code>[ wert, wert, … ]</code> – geordnete Liste beliebiger Werte</td><td><code>["MO", "MI", "FR"]</code></td></tr>
+    <tr><td>String</td><td>in <strong>doppelten</strong> Anführungszeichen</td><td><code>"Rückenfit"</code>, <code>"2026-09-07"</code></td></tr>
+    <tr><td>Zahl</td><td>ohne Anführungszeichen, Dezimal<strong>punkt</strong>, optional mit Exponent</td><td><code>12</code>, <code>45.00</code>, <code>-3.5</code>, <code>1.2e3</code></td></tr>
+    <tr><td>Boolean</td><td><code>true</code> oder <code>false</code> (klein geschrieben)</td><td><code>"ausgebucht": false</code></td></tr>
+    <tr><td>null</td><td><code>null</code> – „kein Wert vorhanden“</td><td><code>"start": null</code></td></tr>
+  </table>
+  <p>Objekte und Arrays lassen sich beliebig verschachteln. <strong>Schlüssel</strong> sind immer Strings in doppelten Anführungszeichen. Ein <strong>Datum</strong> hat keinen eigenen Typ – es wird als String geschrieben, üblich im ISO-Format <code>"JJJJ-MM-TT"</code>.</p>
+
+  <p>Beispiel: Die Tabelle <code>Kurs</code> eines Sportvereins …</p>
+  <table class="daten" style="width:auto">
+    <tr><th>kursNr</th><th>titel</th><th>trainerin</th><th>plaetze</th><th>ausgebucht</th><th>beitrag</th><th>start</th></tr>
+    <tr><td>101</td><td>Rückenfit</td><td>Meyer</td><td>12</td><td>nein</td><td>45.00</td><td>2026-09-07</td></tr>
+    <tr><td>102</td><td>Yoga am Abend</td><td>Öztürk</td><td>15</td><td>ja</td><td>60.00</td><td>(leer)</td></tr>
+  </table>
+  <p>… als JSON-Dokument mit einem Array <code>kurse</code>:</p>
+  <pre class="json">{
+  "kurse": [
+    { "kursNr": 101, "titel": "Rückenfit", "trainerin": "Meyer", "plaetze": 12,
+      "ausgebucht": false, "beitrag": 45.00, "start": "2026-09-07" },
+    { "kursNr": 102, "titel": "Yoga am Abend", "trainerin": "Öztürk", "plaetze": 15,
+      "ausgebucht": true, "beitrag": 60.00, "start": null }
+  ]
+}</pre>
+
+  <div class="falle"><span class="kastentitel">Typische Syntaxfehler</span>
+    <ul>
+      <li>einfache Anführungszeichen (<code>'titel'</code>) oder Schlüssel ohne Anführungszeichen (<code>titel: …</code>) – erlaubt ist nur <code>"titel"</code></li>
+      <li>Komma <strong>nach dem letzten</strong> Element (<code>[1, 2, 3,]</code>) oder fehlendes Komma zwischen zwei Paaren</li>
+      <li>Dezimalkomma (<code>45,00</code>) statt Dezimalpunkt – das Komma trennt in JSON Elemente!</li>
+      <li><code>True</code>, <code>FALSE</code>, <code>NULL</code>, <code>undefined</code> – nur <code>true</code>, <code>false</code>, <code>null</code> sind erlaubt</li>
+      <li>Kommentare (<code>//</code>, <code>/* */</code>) gibt es in JSON nicht</li>
+      <li>Zahlen mit führender Null (<code>007</code>) sind ungültig – Postleitzahlen, Telefonnummern und IDs mit führender Null daher als String: <code>"plz": "01067"</code></li>
+      <li>Anführungszeichen im Text müssen maskiert werden: <code>"titel": "Kurs \"Fit ab 60\""</code></li>
+      <li>Zahlen in Anführungszeichen (<code>"plaetze": "12"</code>) sind zwar gültiges JSON, aber dann ein String – in Prüfungen wird auf passende Datentypen geachtet.</li>
+    </ul>
+  </div>
+
+  <h4>So gehst du vor: Tabellen in JSON überführen</h4>
+  <ol>
+    <li>Jede <strong>Zeile</strong> wird ein <strong>Objekt</strong> <code>{…}</code>, jede <strong>Spalte</strong> ein <strong>Schlüssel</strong> (Spaltennamen übernehmen, sofern nichts anderes verlangt ist).</li>
+    <li>Mehrere Zeilen kommen in ein <strong>Array</strong> <code>[…]</code>, meist mit sprechendem Namen: <code>{"kurse": [ … ]}</code>.</li>
+    <li><strong>Datentyp je Spalte</strong> wählen: Zahlen ohne Anführungszeichen, Texte und Datumswerte mit, ja/nein → <code>true</code>/<code>false</code>, leere Zelle → <code>null</code>.</li>
+    <li><strong>Beziehungen</strong> (Fremdschlüssel) abbilden: entweder als Verweis (die ID wird übernommen) oder eingebettet (die zugehörigen Datensätze stehen als Array im übergeordneten Objekt) – siehe unten.</li>
+    <li>Zum Schluss Klammern zählen und Kommas prüfen: Komma <strong>zwischen</strong> den Elementen, nie nach dem letzten.</li>
+  </ol>
+  <p>Der umgekehrte Weg (S23 T1 A4cb: JSON-Sensordaten in ein Relationenmodell übernehmen): Jedes wiederkehrende Objekt wird eine Entität/Tabelle, ein eingebettetes Array wird eine eigene Tabelle mit Fremdschlüssel auf das übergeordnete Objekt.</p>
+
+  <h4>Embedding und Referenz</h4>
+  <p>In einer dokumentenorientierten Datenbank (Sammlungen von JSON-Dokumenten statt Tabellen) gibt es zwei Möglichkeiten, eine 1:n-Beziehung abzubilden. Beispiel: Abteilungen eines Sportvereins und ihre Trainingszeiten.</p>
+  <figure>
+    <svg viewBox="0 0 740 250" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e02a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10" fill="none" stroke="#222" stroke-width="1.5"/>
+        </marker>
+      </defs>
+      <text x="180" y="18" text-anchor="middle" font-weight="bold">Referenz: zwei Sammlungen</text>
+      <rect x="10" y="30" width="340" height="52" rx="5" fill="#fff" stroke="#222"/>
+      <text x="20" y="48" font-size="12" fill="#555">Sammlung „abteilungen“</text>
+      <text x="20" y="70" font-family="Consolas, Courier New, monospace" font-size="11">{"abteilungId": 3, "name": "Handball", …}</text>
+      <rect x="10" y="120" width="340" height="74" rx="5" fill="#fff" stroke="#222"/>
+      <text x="20" y="138" font-size="12" fill="#555">Sammlung „trainingszeiten“</text>
+      <text x="20" y="160" font-family="Consolas, Courier New, monospace" font-size="11">{"zeitId": 31, "abteilungId": 3, "tag": "MO", …}</text>
+      <text x="20" y="180" font-family="Consolas, Courier New, monospace" font-size="11">{"zeitId": 32, "abteilungId": 3, "tag": "DO", …}</text>
+      <line x1="150" y1="120" x2="150" y2="84" stroke="#222" stroke-dasharray="5,3" marker-end="url(#e02a-pfeil)"/>
+      <text x="160" y="106" font-size="12">Verweis über abteilungId</text>
+
+      <text x="560" y="18" text-anchor="middle" font-weight="bold">Embedding: ein Dokument</text>
+      <rect x="390" y="30" width="340" height="164" rx="5" fill="#fff" stroke="#222"/>
+      <text x="400" y="48" font-size="12" fill="#555">Sammlung „abteilungen“</text>
+      <g font-family="Consolas, Courier New, monospace" font-size="11">
+        <text x="400" y="70">{"abteilungId": 3, "name": "Handball",</text>
+        <text x="407" y="90">"leitung": "K. Brandt",</text>
+        <text x="407" y="110">"trainingszeiten": [</text>
+        <text x="432" y="132">{"tag": "MO", "von": "18:00", …},</text>
+        <text x="432" y="152">{"tag": "DO", "von": "19:30", …}</text>
+        <text x="407" y="174">]}</text>
+      </g>
+      <rect x="420" y="117" width="250" height="44" rx="4" fill="none" stroke="#222" stroke-width="1.4" stroke-dasharray="4,3"/>
+      <text x="180" y="222" text-anchor="middle" font-size="12">2 Abfragen bzw. Verknüpfung nötig · keine Redundanz</text>
+      <text x="560" y="222" text-anchor="middle" font-size="12">1 Abfrage liefert alles · Daten gehören zur Abteilung</text>
+      <text x="370" y="244" text-anchor="middle" font-size="12" fill="#555">gestrichelter Rahmen: eingebettete Unterdokumente (Array im Elternobjekt)</text>
+    </svg>
+    <figcaption>Abb. A-3: Referenz (wie ein Fremdschlüssel) und Embedding (Unterdokumente im Elternobjekt)</figcaption>
+  </figure>
+
+  <p class="codelabel">Referenz – Dokument in der Sammlung „abteilungen“</p>
+  <pre class="json">{ "abteilungId": 3, "name": "Handball", "leitung": "K. Brandt" }</pre>
+  <p class="codelabel">Referenz – Dokumente in der Sammlung „trainingszeiten“ (verweisen über abteilungId)</p>
+  <pre class="json">[
+  { "zeitId": 31, "abteilungId": 3, "tag": "MO", "von": "18:00", "halle": "Sporthalle Nord" },
+  { "zeitId": 32, "abteilungId": 3, "tag": "DO", "von": "19:30", "halle": "Sporthalle Nord" }
+]</pre>
+  <p class="codelabel">Embedding – ein Dokument in der Sammlung „abteilungen“</p>
+  <pre class="json">{
+  "abteilungId": 3,
+  "name": "Handball",
+  "leitung": "K. Brandt",
+  "trainingszeiten": [
+    { "tag": "MO", "von": "18:00", "halle": "Sporthalle Nord" },
+    { "tag": "DO", "von": "19:30", "halle": "Sporthalle Nord" }
+  ]
+}</pre>
+
+  <table class="kompakt">
+    <tr><th style="width:16%"></th><th>Einbetten (Embedding)</th><th>Referenzieren</th></tr>
+    <tr><td>Aufbau</td><td>zugehörige Datensätze als Array/Objekt im übergeordneten Dokument</td><td>eigene Dokumente; Verbindung über eine ID (wie ein Fremdschlüssel)</td></tr>
+    <tr><td>Lesen</td><td>eine Abfrage liefert alles – schnell</td><td>mehrere Abfragen bzw. Verknüpfung (Lookup) nötig</td></tr>
+    <tr><td>gut geeignet, wenn …</td><td>1:1 oder 1:wenige; die Daten werden fast immer zusammen gelesen und gehören nur zu diesem Elternobjekt (z. B. die Trainingszeiten einer Abteilung)</td><td>sehr viele oder unbegrenzt wachsende Einträge; n:m-Beziehungen; Daten werden von vielen Dokumenten genutzt oder unabhängig geändert (z. B. Mitglieder, die in mehreren Abteilungen trainieren)</td></tr>
+    <tr><td>Nachteil</td><td>Redundanz und Änderungsaufwand, wenn dieselben Daten in vielen Dokumenten stecken; Dokumente können sehr groß werden</td><td>mehr Abfragen; die Konsistenz der Verweise muss die Anwendung sichern (keine Fremdschlüssel-Constraints)</td></tr>
+  </table>
+
+  <h4>JSON im Programm erzeugen</h4>
+  <p>Manchmal soll ein Skript oder eine Funktion ihr Ergebnis als JSON ausgeben (W24 T1 A2c). In der Praxis erledigen das Bibliotheken (z. B. Jackson oder Gson in Java), in der Prüfung baut man den Text meist selbst zusammen. Dabei kommt es auf drei Dinge an: Klammern öffnen und schließen, <strong>Kommas nur zwischen</strong> den Elementen, Strings in Anführungszeichen (im Code als <code>\"</code> maskiert). Beispiel: Namen aus einem Array als JSON-Array ausgeben.</p>
+  <pre class="pseudo">funktion namenAlsJson(namen : string[]) : string
+  json : string := "["
+  zähle i von 0 bis namen.length - 1
+    wenn i &gt; 0 dann
+      json := json + ", "                  // Komma nur ZWISCHEN den Elementen
+    Ende wenn
+    json := json + "\"" + namen[i] + "\""   // Wert in Anführungszeichen
+  Ende zähle
+  json := json + "]"
+  rückgabe json
+Ende funktion</pre>
+  <p>Ergebnis für <code>["Anna", "Ben", "Cem"]</code>: <code>["Anna", "Ben", "Cem"]</code>; für ein leeres Array: <code>[]</code>. Zahlen und <code>true</code>/<code>false</code> werden ohne Anführungszeichen angehängt.</p>
+  <div class="falle"><span class="kastentitel">Achtung beim Filtern</span>Wird nur ein Teil der Elemente ausgegeben, ist das erste <em>ausgegebene</em> Element nicht unbedingt das mit dem Index 0. Die Bedingung <code>i &gt; 0</code> setzt dann ein Komma zu viel. Man braucht eine andere Art, sich zu merken, ob schon etwas ausgegeben wurde.</div>
+
+  <h4>JSON, XML, CSV und YAML im Vergleich</h4>
+  <table class="kompakt">
+    <tr><th style="width:18%">Kriterium</th><th>JSON</th><th>XML</th></tr>
+    <tr><td>Aufbau</td><td>Objekte, Arrays, Schlüssel-Wert-Paare</td><td>Elemente mit Start-/End-Tags, Attribute, Baum</td></tr>
+    <tr><td>Datentypen</td><td>String, Zahl, Boolean, null eingebaut</td><td>ohne Schema nur Text; Typen erst über XSD</td></tr>
+    <tr><td>Datenmenge</td><td>gering (keine End-Tags)</td><td>größer (jeder Name steht doppelt)</td></tr>
+    <tr><td>Verarbeitung</td><td>direkt in Objekte von JavaScript/Java/C# abbildbar, schnell zu parsen</td><td>DOM-/SAX-Parser, XPath, XSLT</td></tr>
+    <tr><td>Prüfung</td><td>JSON Schema (weniger verbreitet)</td><td>DTD, XSD, Schematron – sehr ausgereift</td></tr>
+    <tr><td>Kommentare, Namensräume</td><td>nein</td><td>ja</td></tr>
+    <tr><td>typischer Einsatz</td><td>REST-APIs, Web und Apps, NoSQL-Datenbanken</td><td>eRechnung, Behördenstandards, SOAP, Office-Formate, Dokumente</td></tr>
+  </table>
+  <div class="zweispaltig">
+    <div>
+      <p><strong>CSV</strong> (<em>Comma-Separated Values</em>): eine Textzeile je Datensatz, Werte durch Trennzeichen getrennt (in Deutschland oft <code>;</code>), erste Zeile meist mit Spaltennamen. Keine Hierarchie, keine Datentypen, Probleme bei Trennzeichen im Text. Einsatz: Tabellen-Export und -Import.</p>
+      <pre class="klein">kursNr;titel;plaetze
+101;Rückenfit;12
+102;Yoga am Abend;15</pre>
+    </div>
+    <div>
+      <p><strong>YAML</strong>: Struktur über <strong>Einrückung</strong>, Kommentare mit <code>#</code>, sehr gut lesbar. Einsatz vor allem für Konfigurationsdateien (Docker Compose, CI/CD-Pipelines). Fast jedes JSON-Dokument ist auch gültiges YAML.</p>
+      <pre class="klein">kurs:
+  kursNr: 101
+  titel: Rückenfit
+  tage: [MO, MI]   # Kommentar erlaubt</pre>
+    </div>
+  </div>
+
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li><strong>W23 T1 A3c (14 P):</strong> Das neue Datenbanksystem speichert JSON-Dokumente. ca) Zwei Tabellen (Weingüter, Verkaufsstellen mit Fremdschlüssel) in JSON umwandeln (7 P: 3 P und 4 P). cb) Die Verkaufsstellen als Array in das Weingut-Dokument einbetten (7 P). Eine kurze JSON-Syntaxbeschreibung stand in der Aufgabe.</li>
+      <li><strong>W24 T1 A2c (8 P):</strong> Skript in Pseudocode oder einer Skriptsprache, das alle Geräte eines Subnetzes durchläuft und das Ergebnis (IP- und MAC-Adresse) als JSON-Array ausgibt.</li>
+      <li><strong>S24 T1 A2c (3 P):</strong> Bestandteile eines HTTP-Requests mit JSON-Body benennen (siehe SD-04).</li>
+      <li>Bewertet werden korrekte Klammerung, Kommas, Anführungszeichen und passende Datentypen. Einrückung ist nicht vorgeschrieben, hilft aber dir selbst.</li>
+    </ul>
+  </div>
+
+  <!-- ===================== SD-03 ===================== -->
+  <h3 id="e-03">SD-03 · REST-Grundlagen &amp; HTTP-Methoden <span class="badge k-oft">Oft ↑</span></h3>
+  <p class="klein">Vorkommen: REST/HTTP zusammen 4/9 (W21, S24, W24, S26), davon 3 in den letzten 4 Prüfungen · S24 T1 A2a/b (REST-Konzept 2 P, CRUD-Tabelle 6 P), S26 T1 A2ba/bc (REST-Konzept 3 P, zwei weitere HTTP-Methoden 6 P)</p>
+
+  <h4>Begriffe</h4>
+  <ul>
+    <li><strong>Schnittstelle / API</strong> (<em>Application Programming Interface</em>): festgelegter Zugang, über den ein Programm Funktionen oder Daten eines anderen Programms nutzt – welche Anfragen möglich sind, wie sie aussehen und was zurückkommt.</li>
+    <li><strong>Web-API / Webservice:</strong> eine API, die über das Netz per HTTP(S) aufgerufen wird. Der Client (App, Web-Frontend, anderes System) kennt nur die Schnittstelle, nicht die Implementierung des Servers (lose Kopplung).</li>
+    <li><strong>REST</strong> (<em>Representational State Transfer</em>): ein <strong>Architekturstil</strong> – kein Protokoll und kein Standard –, der 2000 von Roy Fielding beschrieben wurde und HTTP konsequent nutzt. Eine API nach diesem Stil heißt <strong>REST-API</strong> bzw. RESTful.</li>
+  </ul>
+
+  <h4>Die Prinzipien von REST</h4>
+  <table class="kompakt">
+    <tr><th style="width:21%">Prinzip</th><th>Bedeutung</th><th style="width:28%">Beispiel (Bibliotheks-API)</th></tr>
+    <tr><td>Ressourcen mit eindeutiger URI</td><td>Alles, worauf man zugreift (Medium, Leser, Ausleihe), ist eine Ressource mit eigener Adresse.</td><td><code>/medien/M-30815</code><br><code>/leser/4711/ausleihen</code></td></tr>
+    <tr><td>einheitliche Schnittstelle</td><td>Ressourcen werden nur über die Standardmethoden von HTTP bearbeitet; Ergebnisse werden mit Standard-Statuscodes gemeldet.</td><td>GET liest, DELETE löscht – bei jeder Ressource gleich</td></tr>
+    <tr><td>Repräsentationen</td><td>Übertragen wird eine Darstellung der Ressource (meist JSON, auch XML), nicht die Ressource selbst. Der Client kann das Format wählen.</td><td><code>Accept: application/json</code></td></tr>
+    <tr><td>Zustandslosigkeit</td><td>Jeder Request enthält alle nötigen Informationen (auch die Authentifizierung). Der Server speichert zwischen zwei Requests keinen Sitzungszustand des Clients.</td><td>Token in jedem Request</td></tr>
+    <tr><td>Client-Server</td><td>Oberfläche (Client) und Datenhaltung/Logik (Server) sind getrennt und unabhängig weiterentwickelbar.</td><td>App, Website und Partner nutzen dieselbe API</td></tr>
+    <tr><td>Cachefähigkeit</td><td>Antworten geben an, ob und wie lange sie zwischengespeichert werden dürfen.</td><td><code>Cache-Control: max-age=3600</code></td></tr>
+    <tr><td>Schichtensystem</td><td>Zwischen Client und Server dürfen Proxys, Load-Balancer oder Gateways liegen, ohne dass der Client es merkt.</td><td>API-Gateway vor mehreren Servern</td></tr>
+  </table>
+  <p class="klein">Selten gefragt: HATEOAS – Antworten enthalten Links auf mögliche Folgeaktionen, z. B. zur Verlängerung einer Ausleihe.</p>
+
+  <figure>
+    <svg viewBox="0 0 740 252" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e03a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10" fill="none" stroke="#222" stroke-width="1.5"/>
+        </marker>
+      </defs>
+      <text x="295" y="22" text-anchor="middle" font-size="12">Request: Methode + URI (+ JSON-Body), z. B. GET /medien/M-30815</text>
+      <rect x="10" y="40" width="150" height="36" rx="5" fill="#fff" stroke="#222"/>
+      <text x="85" y="63" text-anchor="middle">Smartphone-App</text>
+      <rect x="10" y="100" width="150" height="36" rx="5" fill="#fff" stroke="#222"/>
+      <text x="85" y="123" text-anchor="middle">Web-Frontend</text>
+      <rect x="10" y="160" width="150" height="36" rx="5" fill="#fff" stroke="#222"/>
+      <text x="85" y="183" text-anchor="middle">Partner-System</text>
+      <g stroke="#222" stroke-width="1.3">
+        <line x1="162" y1="58" x2="428" y2="92" marker-start="url(#e03a-pfeil)" marker-end="url(#e03a-pfeil)"/>
+        <line x1="162" y1="118" x2="428" y2="118" marker-start="url(#e03a-pfeil)" marker-end="url(#e03a-pfeil)"/>
+        <line x1="162" y1="178" x2="428" y2="144" marker-start="url(#e03a-pfeil)" marker-end="url(#e03a-pfeil)"/>
+      </g>
+      <text x="295" y="110" text-anchor="middle" font-size="12" fill="#555">HTTPS</text>
+      <rect x="430" y="40" width="180" height="156" rx="6" fill="#eef3fa" stroke="#222" stroke-width="1.5"/>
+      <text x="520" y="60" text-anchor="middle" font-weight="bold">REST-API (Server)</text>
+      <line x1="430" y1="68" x2="610" y2="68" stroke="#222"/>
+      <g font-family="Consolas, Courier New, monospace" font-size="11">
+        <text x="440" y="88">/medien</text>
+        <text x="440" y="106">/medien/{medienNr}</text>
+        <text x="440" y="124">/leser/{leserNr}</text>
+        <text x="440" y="142">/leser/{nr}/ausleihen</text>
+        <text x="440" y="160">/leser/{nr}/vormerkungen</text>
+        <text x="440" y="178">…</text>
+      </g>
+      <line x1="612" y1="110" x2="648" y2="110" stroke="#222" stroke-width="1.3" marker-start="url(#e03a-pfeil)" marker-end="url(#e03a-pfeil)"/>
+      <path d="M650,70 L650,150 A40,10 0 0 0 730,150 L730,70" fill="#fff" stroke="#222"/>
+      <ellipse cx="690" cy="70" rx="40" ry="10" fill="#fff" stroke="#222"/>
+      <text x="690" y="115" text-anchor="middle" font-size="12">Daten-</text>
+      <text x="690" y="130" text-anchor="middle" font-size="12">bank</text>
+      <text x="295" y="216" text-anchor="middle" font-size="12">Response: Statuscode + Repräsentation (meist JSON)</text>
+      <text x="370" y="244" text-anchor="middle" font-size="11.5" fill="#555">Zustandslos: Jeder Request enthält alle nötigen Informationen (z. B. Token); der Server speichert keine Sitzung.</text>
+    </svg>
+    <figcaption>Abb. A-4: Verschiedene Clients greifen über HTTPS auf die Ressourcen einer REST-API zu</figcaption>
+  </figure>
+
+  <div class="merke"><span class="kastentitel">Merke: Was in die Antwort auf „Erläutern Sie das Konzept einer REST-API“ gehört</span>
+    Mindestens drei Aspekte in ganzen Sätzen: <strong>Ressourcen</strong> mit eindeutiger <strong>URI/URL</strong> · Zugriff über die <strong>HTTP-Methoden</strong> (einheitliche Schnittstelle) · Austausch von <strong>Repräsentationen</strong> (meist JSON) · <strong>zustandslos</strong> (jede Anfrage ist in sich vollständig) · <strong>Client und Server lose gekoppelt</strong>. Nur „REST ist eine Schnittstelle im Internet“ reicht nicht.
+  </div>
+
+  <h4>CRUD und HTTP-Methoden</h4>
+  <p>CRUD steht für die vier Grundoperationen auf Daten: <em>Create, Read, Update, Delete</em>. Bei REST übernimmt die HTTP-Methode die Rolle des Verbs, die URI benennt nur die Ressource.</p>
+  <table class="kompakt">
+    <tr><th>CRUD</th><th>HTTP-Methode</th><th>Beispiel (Bibliothek)</th><th>typische Antwort</th></tr>
+    <tr><td>Create – anlegen</td><td><strong>POST</strong> (Server vergibt die ID)<br><strong>PUT</strong>, wenn der Client die URI/ID festlegt</td><td><code>POST /leser/4711/vormerkungen</code></td><td>201 Created + Header <code>Location</code></td></tr>
+    <tr><td>Read – lesen</td><td><strong>GET</strong></td><td><code>GET /medien?titel=Momo</code></td><td>200 OK + Daten</td></tr>
+    <tr><td>Update – ändern</td><td><strong>PUT</strong> (vollständig ersetzen)<br><strong>PATCH</strong> (einzelne Felder ändern)</td><td><code>PATCH /leser/4711</code></td><td>200 OK oder 204 No Content</td></tr>
+    <tr><td>Delete – löschen</td><td><strong>DELETE</strong></td><td><code>DELETE /leser/4711/vormerkungen/912</code></td><td>204 No Content (oder 200)</td></tr>
+  </table>
+  <p>Weitere Methoden: <strong>HEAD</strong> (wie GET, aber nur die Header – z. B. um Größe oder Änderungsdatum zu prüfen) und <strong>OPTIONS</strong> (welche Methoden sind für eine Ressource erlaubt?).</p>
+
+  <h4>Sicher und idempotent</h4>
+  <ul>
+    <li><strong>Sicher</strong> (<em>safe</em>): Die Methode verändert auf dem Server nichts, sie liest nur. Sicher sind GET, HEAD und OPTIONS.</li>
+    <li><strong>Idempotent:</strong> Wird dieselbe Anfrage mehrfach gesendet, ist der Zustand auf dem Server danach derselbe wie nach einmaligem Senden. Idempotent sind alle sicheren Methoden sowie <strong>PUT</strong> (zweimal „ersetze durch X“ ergibt X) und <strong>DELETE</strong> (zweimal löschen: weg ist weg – die zweite Antwort darf 404 sein, der Zustand ändert sich nicht mehr).</li>
+    <li><strong>Nicht idempotent:</strong> <strong>POST</strong> – jede Wiederholung kann eine weitere Ressource anlegen. <strong>PATCH</strong> ist nicht garantiert idempotent: „setze E-Mail auf x“ wäre es, „erhöhe den Zähler um 1“ nicht. Entscheidend ist also, was die konkrete Änderung bewirkt.</li>
+  </ul>
+  <p>Warum das wichtig ist: Bei schlechter Verbindung weiß ein Client oft nicht, ob seine Anfrage angekommen ist. Idempotente Anfragen darf er (oder ein Proxy) gefahrlos wiederholen – bei nicht idempotenten Anfragen kann eine Wiederholung Schaden anrichten.</p>
+
+  <h4>PUT oder PATCH?</h4>
+  <p>Die Ressource <code>/leser/4711</code> sieht so aus: <code>{"leserNr": 4711, "name": "Tom Berger", "email": "tom@mail.example", "newsletter": false}</code>. Nur die E-Mail-Adresse soll sich ändern:</p>
+  <div class="zweispaltig">
+    <pre class="http">PUT /v2/leser/4711
+Content-Type: application/json
+
+{"leserNr": 4711, "name": "Tom Berger",
+ "email": "t.berger@mail.example",
+ "newsletter": false}</pre>
+    <pre class="http">PATCH /v2/leser/4711
+Content-Type: application/json
+
+{"email": "t.berger@mail.example"}</pre>
+  </div>
+  <p>PUT überträgt die <strong>vollständige</strong> neue Repräsentation und ersetzt die alte. Schickt man bei PUT nur ein Feld, wären die übrigen danach leer bzw. auf Standardwerte gesetzt. PATCH überträgt <strong>nur die Änderung</strong>.</p>
+
+  <h4>Endpunkte entwerfen</h4>
+  <ul>
+    <li><strong>Substantive statt Verben</strong>, Sammlungen im Plural: <code>/medien</code>, nicht <code>/getMedien</code>. Die Aktion steckt in der HTTP-Methode.</li>
+    <li><strong>Hierarchie</strong> für abhängige Ressourcen: <code>/leser/{leserNr}/ausleihen/{ausleihId}</code>.</li>
+    <li><strong>Pfadparameter</strong> identifizieren eine bestimmte Ressource (<code>/medien/M-30815</code>). <strong>Query-Parameter</strong> filtern, sortieren oder teilen eine Ergebnisliste in Seiten auf (<code>/medien?typ=dvd&amp;sort=titel&amp;seite=2</code>) – sie sind meist optional.</li>
+    <li>Kleinbuchstaben, keine Dateiendungen (<code>.json</code>); das Format regeln <code>Accept</code> und <code>Content-Type</code>.</li>
+    <li><strong>Versionierung</strong>, meist im Pfad (<code>/v1/…</code>, <code>/v2/…</code>), seltener über einen Header: Bei inkompatiblen Änderungen (Feld umbenannt, Struktur geändert) wird eine neue Version veröffentlicht, die alte bleibt eine Zeit lang parallel erreichbar. So funktionieren bereits ausgelieferte Clients (z. B. nicht aktualisierte Apps) weiter.</li>
+    <li>Dokumentiert werden REST-APIs heute meist mit <strong>OpenAPI</strong> (früher Swagger).</li>
+  </ul>
+  <table class="kompakt">
+    <tr><th>Anforderung (Bibliothek)</th><th>schlecht</th><th>besser</th></tr>
+    <tr><td>alle DVDs anzeigen</td><td class="mono">GET /getAllDvds</td><td class="mono">GET /medien?typ=dvd</td></tr>
+    <tr><td>Leser 4711 löschen</td><td class="mono">GET /leser/delete?id=4711</td><td class="mono">DELETE /leser/4711</td></tr>
+    <tr><td>Vormerkung anlegen</td><td class="mono">POST /neueVormerkung</td><td class="mono">POST /leser/4711/vormerkungen</td></tr>
+    <tr><td>E-Mail-Adresse eines Lesers ändern</td><td class="mono">POST /leser/4711/update</td><td class="mono">PATCH /leser/4711</td></tr>
+  </table>
+  <div class="falle"><span class="kastentitel">Typische Fehler</span>
+    <ul>
+      <li>Verben im Pfad (<code>/loescheLeser</code>) oder Daten ändernde Aktionen per GET – GET muss sicher bleiben (Suchmaschinen, Caches und Vorschau-Funktionen rufen GET-Links einfach auf).</li>
+      <li>POST und PUT verwechseln: POST legt in einer Sammlung an (<code>POST /leser</code>), PUT ersetzt eine bestimmte Ressource (<code>PUT /leser/4711</code>).</li>
+      <li>Die ID in den Query-String statt in den Pfad (<code>/leser?id=4711</code>) – funktioniert, widerspricht aber der Idee „eine Ressource = eine URI“.</li>
+    </ul>
+  </div>
+
+  <h4>Ablauf eines API-Aufrufs</h4>
+  <p>In S24 T1 A2e (11 P) sollte der Ablauf App → WebService → Datenbank als <strong>Sequenzdiagramm</strong> mit <code>alt</code>-Fragment gezeichnet werden (Notation siehe Block 03 UML). So sieht das für eine einfache Leseanfrage aus:</p>
+  <figure>
+    <svg viewBox="0 0 700 322" width="700" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e03b-voll" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#222"/>
+        </marker>
+        <marker id="e03b-offen" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+          <path d="M0,0 L10,5 L0,10" fill="none" stroke="#222" stroke-width="1.5"/>
+        </marker>
+      </defs>
+      <rect x="40" y="10" width="120" height="34" fill="#fff" stroke="#222"/>
+      <text x="100" y="32" text-anchor="middle">:App</text>
+      <rect x="290" y="10" width="120" height="34" fill="#fff" stroke="#222"/>
+      <text x="350" y="32" text-anchor="middle">:REST-API</text>
+      <rect x="540" y="10" width="120" height="34" fill="#fff" stroke="#222"/>
+      <text x="600" y="32" text-anchor="middle">:Datenbank</text>
+      <g stroke="#222" stroke-dasharray="5,4">
+        <line x1="100" y1="44" x2="100" y2="312"/>
+        <line x1="350" y1="44" x2="350" y2="312"/>
+        <line x1="600" y1="44" x2="600" y2="312"/>
+      </g>
+      <rect x="95" y="68" width="10" height="226" fill="#fff" stroke="#222"/>
+      <rect x="345" y="80" width="10" height="208" fill="#fff" stroke="#222"/>
+      <rect x="595" y="115" width="10" height="27" fill="#fff" stroke="#222"/>
+      <line x1="105" y1="82" x2="344" y2="82" stroke="#222" marker-end="url(#e03b-voll)"/>
+      <text x="225" y="75" text-anchor="middle" font-size="12">GET /v2/medien/M-30815</text>
+      <line x1="355" y1="117" x2="594" y2="117" stroke="#222" marker-end="url(#e03b-voll)"/>
+      <text x="475" y="110" text-anchor="middle" font-size="12">Medium M-30815 lesen (SELECT)</text>
+      <line x1="595" y1="140" x2="356" y2="140" stroke="#222" stroke-dasharray="6,4" marker-end="url(#e03b-offen)"/>
+      <text x="475" y="134" text-anchor="middle" font-size="12">Datensatz bzw. leere Ergebnismenge</text>
+      <!-- alt-Fragment -->
+      <rect x="30" y="158" width="640" height="140" fill="none" stroke="#222"/>
+      <path d="M30,158 H72 V172 L64,180 H30 Z" fill="#fff" stroke="#222"/>
+      <text x="38" y="174" font-size="12" font-weight="bold">alt</text>
+      <text x="115" y="188" font-size="12">[Medium gefunden]</text>
+      <line x1="345" y1="216" x2="106" y2="216" stroke="#222" stroke-dasharray="6,4" marker-end="url(#e03b-offen)"/>
+      <text x="225" y="209" text-anchor="middle" font-size="12">200 OK + JSON des Mediums</text>
+      <line x1="30" y1="234" x2="670" y2="234" stroke="#222" stroke-dasharray="8,5"/>
+      <text x="115" y="254" font-size="12">[else]</text>
+      <line x1="345" y1="278" x2="106" y2="278" stroke="#222" stroke-dasharray="6,4" marker-end="url(#e03b-offen)"/>
+      <text x="225" y="271" text-anchor="middle" font-size="12">404 Not Found</text>
+    </svg>
+    <figcaption>Abb. A-5: Sequenzdiagramm eines GET-Aufrufs mit alt-Fragment (synchrone Nachricht = gefüllte Spitze, Antwort = gestrichelt)</figcaption>
+  </figure>
+
+  <h4>REST und SOAP</h4>
+  <table class="kompakt">
+    <tr><th style="width:20%"></th><th>REST</th><th>SOAP</th></tr>
+    <tr><td>Art</td><td>Architekturstil</td><td>Protokoll (W3C-Standard)</td></tr>
+    <tr><td>Datenformat</td><td>beliebig, meist JSON</td><td>nur XML (SOAP-Envelope mit Header und Body)</td></tr>
+    <tr><td>Beschreibung</td><td>optional, z. B. OpenAPI</td><td>verbindlich per WSDL</td></tr>
+    <tr><td>Aufruf</td><td>HTTP-Methoden auf Ressourcen-URIs</td><td>meist ein Endpunkt, Operation steht im XML (fast immer POST)</td></tr>
+    <tr><td>Eigenschaften</td><td>leichtgewichtig, cachebar, zustandslos</td><td>umfangreich, mit Zusatzstandards (WS-Security, Transaktionen)</td></tr>
+    <tr><td>Einsatz</td><td>Web, Apps, öffentliche APIs</td><td>Banken, Behörden, ältere Unternehmenssysteme</td></tr>
+  </table>
+
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li><strong>S24 T1 A2 (25 P):</strong> a) REST-API-Konzept erläutern (2 P). b) Tabelle C, R, U, D mit Bedeutung und HTTP-Methode (6 P) – die Lösung akzeptierte POST/PUT für Create und PUT/PATCH für Update. Dazu c) Request-Bestandteile, d) Statuscodes, e) Sequenzdiagramm App/WebService/DB.</li>
+      <li><strong>S26 T1 A2b (12 P):</strong> ba) REST-API-Konzept erläutern (3 P). bc) Neben GET zwei weitere HTTP-Methoden nennen und beschreiben (6 P – also je 3 P: Name plus aussagekräftige Beschreibung mit Bezug zur Situation).</li>
+      <li>„Beschreiben“ heißt: Was macht die Methode, an welcher Ressource, mit welchem Ergebnis – z. B. „DELETE löscht die über die URI adressierte Ressource, z. B. eine Vormerkung“.</li>
+    </ul>
+  </div>
+
+  <!-- ===================== SD-04 ===================== -->
+  <h3 id="e-04">SD-04 · HTTP-Request/Response &amp; Statuscodes <span class="badge k-oft">Oft ↑</span></h3>
+  <p class="klein">Vorkommen: REST/HTTP zusammen 4/9 · W21 T1 A3c (Ursache für HTTP 404, 2 P), S24 T1 A2c/d (Bestandteile eines Requests 3 P, Statuscode-Klassen 3 P), W24 T2 A2a (HTTP-Antwort im Code bauen, 10 P), S26 T1 A2bb (Parameter einer URL beschreiben, 3 P)</p>
+
+  <h4>HTTP in Kürze</h4>
+  <p>HTTP (<em>Hypertext Transfer Protocol</em>) ist ein Protokoll der Anwendungsschicht nach dem <strong>Request-Response-Prinzip</strong>: Der Client sendet eine Anfrage, der Server beantwortet sie. HTTP ist <strong>zustandslos</strong> – jede Anfrage steht für sich (Sitzungen entstehen erst durch Cookies oder Tokens). Standardport 80; <strong>HTTPS</strong> ist HTTP über eine TLS-verschlüsselte Verbindung (Port 443) und heute der Normalfall. Bei HTTP/1.1 sind die Nachrichten reiner Text; HTTP/2 und HTTP/3 übertragen binär, Methoden, Header und Statuscodes bleiben aber gleich.</p>
+
+  <h4>Aufbau von Request und Response</h4>
+  <figure>
+    <svg viewBox="0 0 760 352" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <text x="10" y="16" font-weight="bold">Request (Client → Server)</text>
+      <rect x="10" y="24" width="470" height="158" rx="4" fill="#f3f4f6" stroke="#222"/>
+      <g font-family="Consolas, Courier New, monospace" font-size="12">
+        <text x="20" y="44" font-weight="bold">POST /v2/leser/4711/vormerkungen HTTP/1.1</text>
+        <text x="20" y="62">Host: api.stadtbibliothek.example</text>
+        <text x="20" y="80">Content-Type: application/json</text>
+        <text x="20" y="98">Accept: application/json</text>
+        <text x="20" y="116">Authorization: Bearer eyJhbGciOiJIUzI1NiJ9…</text>
+        <text x="20" y="134">Content-Length: 23</text>
+        <text x="20" y="170">{"medienNr": "M-30815"}</text>
+      </g>
+      <text x="20" y="152" font-size="11" font-style="italic" fill="#777">(Leerzeile)</text>
+      <g stroke="#222" fill="none">
+        <path d="M488,34 h6 v14 h-6"/>
+        <path d="M488,52 h6 v86 h-6"/>
+        <path d="M488,143 h6 v12 h-6"/>
+        <path d="M488,160 h6 v14 h-6"/>
+      </g>
+      <g font-size="12">
+        <text x="502" y="45">① Request-Zeile: Methode, Pfad, Version</text>
+        <text x="502" y="92">② Header (Metadaten): Zielserver,</text>
+        <text x="502" y="108">    Formate, Zugangsdaten, Länge</text>
+        <text x="502" y="153">③ Leerzeile: Ende der Header</text>
+        <text x="502" y="171">④ Body: Nutzdaten (hier JSON)</text>
+      </g>
+
+      <text x="10" y="210" font-weight="bold">Response (Server → Client)</text>
+      <rect x="10" y="218" width="470" height="124" rx="4" fill="#f3f4f6" stroke="#222"/>
+      <g font-family="Consolas, Courier New, monospace" font-size="12">
+        <text x="20" y="238" font-weight="bold">HTTP/1.1 201 Created</text>
+        <text x="20" y="256">Content-Type: application/json; charset=utf-8</text>
+        <text x="20" y="274">Location: /v2/leser/4711/vormerkungen/912</text>
+        <text x="20" y="292">Content-Length: 59</text>
+        <text x="20" y="328">{"vormerkungId": 912, "medienNr": "M-30815", "position": 3}</text>
+      </g>
+      <text x="20" y="310" font-size="11" font-style="italic" fill="#777">(Leerzeile)</text>
+      <g stroke="#222" fill="none">
+        <path d="M488,228 h6 v14 h-6"/>
+        <path d="M488,246 h6 v50 h-6"/>
+        <path d="M488,301 h6 v12 h-6"/>
+        <path d="M488,318 h6 v14 h-6"/>
+      </g>
+      <g font-size="12">
+        <text x="502" y="239">① Statuszeile: Version, Statuscode, Text</text>
+        <text x="502" y="266">② Header: Format, URI der neuen</text>
+        <text x="502" y="282">    Ressource, Länge des Bodys</text>
+        <text x="502" y="311">③ Leerzeile</text>
+        <text x="502" y="329">④ Body: Repräsentation (JSON)</text>
+      </g>
+    </svg>
+    <figcaption>Abb. A-6: Ein HTTP-Request (Vormerkung anlegen) und die zugehörige Response</figcaption>
+  </figure>
+
+  <table class="kompakt">
+    <tr><th style="width:22%">Header</th><th style="width:12%">in</th><th>Bedeutung</th></tr>
+    <tr><td class="mono">Host</td><td>Request</td><td>Name des Zielservers (Pflicht bei HTTP/1.1)</td></tr>
+    <tr><td class="mono">Content-Type</td><td>beide</td><td>Format des Bodys: <code>application/json</code>, <code>application/xml</code>, <code>text/plain</code>, <code>text/html</code>, ggf. mit <code>charset=utf-8</code></td></tr>
+    <tr><td class="mono">Accept</td><td>Request</td><td>Format, das der Client als Antwort haben möchte</td></tr>
+    <tr><td class="mono">Authorization</td><td>Request</td><td>Zugangsdaten, z. B. <code>Bearer &lt;Token&gt;</code> oder <code>Basic &lt;Base64(name:passwort)&gt;</code></td></tr>
+    <tr><td class="mono">X-API-Key</td><td>Request</td><td>API-Schlüssel (eigener Header, der Name ist je nach API verschieden)</td></tr>
+    <tr><td class="mono">Content-Length</td><td>beide</td><td>Länge des Bodys in <strong>Bytes</strong></td></tr>
+    <tr><td class="mono">Location</td><td>Response</td><td>URI der neu angelegten Ressource (bei 201) oder Ziel einer Weiterleitung (bei 3xx)</td></tr>
+    <tr><td class="mono">Cache-Control</td><td>Response</td><td>ob und wie lange die Antwort zwischengespeichert werden darf</td></tr>
+    <tr><td class="mono">Set-Cookie / Cookie</td><td>Resp. / Req.</td><td>Cookie setzen bzw. mitsenden (z. B. Sitzungs-ID)</td></tr>
+    <tr><td class="mono">User-Agent</td><td>Request</td><td>Name und Version der Client-Software</td></tr>
+  </table>
+
+  <h4>Aufbau einer URL</h4>
+  <figure>
+    <svg viewBox="0 0 720 112" width="720" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <g font-family="Consolas, Courier New, monospace" font-size="14">
+        <text x="30" y="24" textLength="42" lengthAdjust="spacingAndGlyphs">https</text>
+        <text x="72" y="24" textLength="25.2" lengthAdjust="spacingAndGlyphs">://</text>
+        <text x="97.2" y="24" textLength="226.8" lengthAdjust="spacingAndGlyphs">api.stadtbibliothek.example</text>
+        <text x="324" y="24" textLength="33.6" lengthAdjust="spacingAndGlyphs">:443</text>
+        <text x="357.6" y="24" textLength="84" lengthAdjust="spacingAndGlyphs">/v2/medien</text>
+        <text x="441.6" y="24" textLength="159.6" lengthAdjust="spacingAndGlyphs">?titel=Momo&amp;seite=2</text>
+        <text x="601.2" y="24" textLength="67.2" lengthAdjust="spacingAndGlyphs">#treffer</text>
+      </g>
+      <g stroke="#222" fill="none">
+        <path d="M31,32 v8 h40 v-8"/>
+        <path d="M98,32 v8 h225 v-8"/>
+        <path d="M325,32 v8 h32 v-8"/>
+        <path d="M359,32 v8 h82 v-8"/>
+        <path d="M443,32 v8 h157 v-8"/>
+        <path d="M602,32 v8 h66 v-8"/>
+      </g>
+      <g text-anchor="middle" font-size="12.5" font-weight="bold">
+        <text x="51" y="58">Schema</text>
+        <text x="210.6" y="58">Host (Domain)</text>
+        <text x="340.8" y="58">Port</text>
+        <text x="399.6" y="58">Pfad</text>
+        <text x="521.4" y="58">Query-String</text>
+        <text x="634.8" y="58">Fragment</text>
+      </g>
+      <g text-anchor="middle" font-size="11.5" fill="#444">
+        <text x="51" y="76">Protokoll</text>
+        <text x="210.6" y="76">Server</text>
+        <text x="340.8" y="76">optional</text>
+        <text x="521.4" y="76">Parameter titel und seite</text>
+        <text x="399.6" y="94">Version + Ressource</text>
+        <text x="634.8" y="94">Sprungmarke, nicht an Server</text>
+      </g>
+    </svg>
+    <figcaption>Abb. A-7: Bestandteile einer URL (Port 443 ist bei https Standard und wird meist weggelassen)</figcaption>
+  </figure>
+  <ul>
+    <li>Der <strong>Query-String</strong> beginnt mit <code>?</code>; Parameter haben die Form <code>name=wert</code> und werden durch <code>&amp;</code> getrennt. Die Reihenfolge ist egal.</li>
+    <li>Sonderzeichen werden <strong>URL-kodiert</strong> (Prozentkodierung): Leerzeichen → <code>%20</code> (oder <code>+</code>), <code>ä</code> → <code>%C3%A4</code>, <code>&amp;</code> im Wert → <code>%26</code>.</li>
+    <li><strong>So beschreibst du einen Parameter</strong> (S26): Name, was er für die Anfrage bedeutet und was der Wert bewirkt – z. B. „<code>titel=Momo</code>: Suchbegriff; es werden nur Medien geliefert, deren Titel ‚Momo‘ enthält“ oder „<code>seite=2</code>: Bei seitenweiser Ausgabe (Paginierung) wird die zweite Seite der Treffer geliefert“.</li>
+  </ul>
+
+  <h4>API-Schlüssel</h4>
+  <p>Ein <strong>API-Schlüssel</strong> (<em>API key</em>) ist eine eindeutige, geheime Zeichenfolge, mit der sich eine <strong>Anwendung</strong> (nicht eine Person) gegenüber einer API ausweist. Zweck: nur registrierte Clients erhalten Zugriff, Anfragen lassen sich einem Kunden zuordnen (Abrechnung, Statistik), und die Anzahl der Anfragen lässt sich begrenzen (<em>Rate-Limiting</em>, Überschreitung → <code>429 Too Many Requests</code>). Übertragung immer über HTTPS, besser im Header als in der URL, und nie im öffentlich einsehbaren Quellcode ablegen. Ein API-Schlüssel ersetzt keine Benutzeranmeldung – dafür gibt es Tokens (z. B. OAuth 2.0).</p>
+
+  <div class="zusammen">
+  <h4>Statuscodes</h4>
+  <div class="zweispaltig">
+    <table class="kompakt">
+      <tr><th style="width:16%">Klasse</th><th>Bedeutung</th></tr>
+      <tr><td>1xx</td><td><strong>Information</strong> – Anfrage erhalten, Verarbeitung läuft</td></tr>
+      <tr><td>2xx</td><td><strong>Erfolg</strong> – Anfrage erfolgreich verarbeitet</td></tr>
+      <tr><td>3xx</td><td><strong>Umleitung</strong> – der Client muss eine andere URL aufrufen bzw. seinen Cache verwenden</td></tr>
+      <tr><td>4xx</td><td><strong>Client-Fehler</strong> – die Anfrage ist fehlerhaft oder nicht erlaubt; unverändert wiederholt scheitert sie erneut</td></tr>
+      <tr><td>5xx</td><td><strong>Server-Fehler</strong> – die Anfrage war in Ordnung, der Server konnte sie aber nicht ausführen</td></tr>
+    </table>
+    <table class="kompakt">
+      <tr><th style="width:14%">Code</th><th>Name</th></tr>
+      <tr><td>200</td><td>OK</td></tr>
+      <tr><td>201</td><td>Created</td></tr>
+      <tr><td>204</td><td>No Content</td></tr>
+      <tr><td>301 / 302</td><td>Moved Permanently / Found</td></tr>
+      <tr><td>304</td><td>Not Modified</td></tr>
+      <tr><td>400 / 401</td><td>Bad Request / Unauthorized</td></tr>
+      <tr><td>403 / 404</td><td>Forbidden / Not Found</td></tr>
+      <tr><td>405 / 409</td><td>Method Not Allowed / Conflict</td></tr>
+      <tr><td>415 / 429</td><td>Unsupported Media Type / Too Many Requests</td></tr>
+      <tr><td>500 / 503</td><td>Internal Server Error / Service Unavailable</td></tr>
+    </table>
+  </div>
+  </div>
+  <table class="kompakt">
+    <tr><th style="width:9%">Code</th><th>wann (am Beispiel der Bibliotheks-API)</th></tr>
+    <tr><td>200</td><td>GET liefert das Medium; PUT/PATCH erfolgreich und die geänderte Ressource steht im Body</td></tr>
+    <tr><td>201</td><td>POST hat eine Vormerkung angelegt; der Header <code>Location</code> nennt ihre URI</td></tr>
+    <tr><td>204</td><td>erfolgreich, aber bewusst ohne Body, z. B. nach dem Löschen einer Vormerkung</td></tr>
+    <tr><td>301</td><td>Die Ressource liegt dauerhaft unter einer neuen URL (steht in <code>Location</code>); Clients sollen künftig die neue URL nutzen. 302/307: nur vorübergehend</td></tr>
+    <tr><td>400</td><td>Anfrage formal oder inhaltlich ungültig: kaputtes JSON, Pflichtfeld fehlt, Datum im falschen Format</td></tr>
+    <tr><td>401</td><td>nicht authentifiziert: Token bzw. API-Schlüssel fehlt, ist abgelaufen oder falsch – „Wer bist du?“</td></tr>
+    <tr><td>403</td><td>authentifiziert, aber nicht berechtigt: Leser 4711 will die Ausleihen von Leser 4712 sehen – „Ich weiß, wer du bist, aber das darfst du nicht.“</td></tr>
+    <tr><td>404</td><td>unter dieser URL gibt es keine Ressource: unbekannte Mediennummer, falscher Pfad</td></tr>
+    <tr><td>405</td><td>Methode für diese Ressource nicht erlaubt, z. B. <code>DELETE /medien</code></td></tr>
+    <tr><td>409</td><td>Widerspruch zum aktuellen Zustand: Medium ist bereits vom selben Leser vorgemerkt</td></tr>
+    <tr><td>500</td><td>unerwarteter Fehler im Server (z. B. nicht abgefangene Exception)</td></tr>
+    <tr><td>503</td><td>Dienst vorübergehend nicht verfügbar (Wartung, Überlastung, Datenbank nicht erreichbar); oft mit Header <code>Retry-After</code></td></tr>
+  </table>
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>
+    <ul>
+      <li><strong>401 und 403</strong> verwechseln: 401 = Authentifizierung fehlt/ungültig, 403 = Berechtigung fehlt.</li>
+      <li><strong>404 ist ein Client-Fehler</strong> (4xx): Die angefragte URL führt zu nichts – auch dann, wenn die eigentliche Ursache auf dem Server liegt (z. B. eine gelöschte Seite). Ein 5xx-Code bedeutet dagegen, dass der Server eine an sich gültige Anfrage nicht ausführen konnte.</li>
+      <li>Validierungsfehler nie mit 500 beantworten und Fehler nie mit 200 plus Fehlertext im Body – sonst kann der Client nicht automatisch reagieren.</li>
+    </ul>
+  </div>
+
+  <h4>Content-Length zählt Bytes, nicht Zeichen</h4>
+  <p>In UTF-8 belegen ASCII-Zeichen (A–Z, a–z, Ziffern, Leerzeichen, <code>{ } " :</code> usw.) je <strong>1 Byte</strong>, <code>ä ö ü Ä Ö Ü ß</code> je <strong>2 Bytes</strong>, das Eurozeichen <code>€</code> <strong>3 Bytes</strong>, Emojis 4 Bytes. Gezählt wird nur der Body, nicht die Header.</p>
+  <table class="kompakt" style="width:auto">
+    <tr><th>Body</th><th>Zeichen</th><th>Bytes = Content-Length</th></tr>
+    <tr><td class="mono">Bücherei geöffnet</td><td>17</td><td>19 (ü und ö je +1)</td></tr>
+    <tr><td class="mono">Gebühr: 2,50 €</td><td>14</td><td>17 (ü +1, € +2)</td></tr>
+  </table>
+
+  <h4>Eine HTTP-Antwort im Code zusammenbauen</h4>
+  <p>In W24 T2 A2a war eine Klasse <code>HttpResponse</code> vorgegeben und eine Methode zu schreiben, die eine vollständige Antwort mit Statuscode, <code>Content-Type</code>, <code>Content-Length</code> (in Bytes) und Body erzeugt. Das Muster an einem einfachen Beispiel – ein „Lebenszeichen“-Endpunkt der Bibliotheks-API, der immer mit einem kurzen Text antwortet (Methoden wie in der Klasse <code>HttpResponse</code> des Belegsatzes):</p>
+  <pre class="pseudo">funktion createPingResponse() : HttpResponse
+  body : string := "Bücherei-API läuft"
+  antwort : HttpResponse := new HttpResponse()
+  antwort.setStatus(200)
+  antwort.setHeader("Content-Type", "text/plain; charset=utf-8")
+  antwort.setHeader("Content-Length", body.byteLength().toString())   // 20, nicht 18!
+  antwort.setBody(body)
+  rückgabe antwort
+Ende funktion</pre>
+  <pre class="http">HTTP/1.1 200 OK
+Content-Type: text/plain; charset=utf-8
+Content-Length: 20
+
+Bücherei-API läuft</pre>
+  <p><strong>Prüfreihenfolge in einem Endpunkt.</strong> Ein Endpunkt prüft der Reihe nach und kehrt beim ersten Problem sofort mit dem passenden Code zurück („frühes Return“):</p>
+  <ol>
+    <li>Ist der Client authentifiziert (Token/API-Schlüssel vorhanden und gültig)? sonst <strong>401</strong></li>
+    <li>Darf er diese Ressource bzw. Aktion nutzen? sonst <strong>403</strong></li>
+    <li>Sind die Eingaben gültig (Pflichtfelder, Formate)? sonst <strong>400</strong></li>
+    <li>Gibt es die Ressource? sonst <strong>404</strong> · Widerspricht die Aktion dem aktuellen Zustand? <strong>409</strong></li>
+    <li>Aktion ausführen → <strong>200</strong>, <strong>201</strong> oder <strong>204</strong>; ist ein benötigter Dienst nicht erreichbar → <strong>503</strong>; unerwarteter Fehler → <strong>500</strong></li>
+  </ol>
+
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li><strong>W24 T2 A2a (10 P):</strong> Methode <code>createErrorResponse(nachricht, statusCode) : HttpResponse</code> implementieren; Antwort mit übergebenem Statuscode, <code>Content-Type: text/plain</code>, <code>Content-Length</code> = Anzahl der Bytes des Bodys, Body = Nachricht. Vorgegeben waren Konstruktor <code>HttpResponse(code)</code>, <code>addHeader(name, value)</code> und <code>setBody(content)</code> – Namen können also variieren, das Muster bleibt.</li>
+      <li><strong>S24 T1 A2c (3 P):</strong> In einer Tabelle zu gegebenen Bestandteilen (URL, Methode PUT, Header-Zeilen, JSON-Body) die Bedeutung angeben. <strong>A2d (3 P):</strong> Bedeutung der Klassen 2xx, 4xx, 5xx.</li>
+      <li><strong>S26 T1 A2bb (3 P):</strong> Parameter einer GET-URL einer Wetter-API beschreiben (Ort, Einheiten, API-Schlüssel); der Pfad war als Beispiel ausgefüllt.</li>
+      <li><strong>W21 T1 A3c (2 P):</strong> Ursache für einen HTTP-Fehler 404 nennen.</li>
+    </ul>
+  </div>
+
+  <!-- ===================== SD-05 ===================== -->
+  <h3 id="e-05">SD-05 · eRechnung <span class="badge k-sonstige">Sonstige ⚠</span></h3>
+  <p class="klein">Vorkommen: 1/9, aber in der vorletzten Prüfung: W25 T1 A2b (9 P: englischer Text – Hauptziel, Aspekte einer digitalen Rechnung) und A3 (Transportverschlüsselung 4 P, Konformität sicherstellen 3 P, Online-Prüfseite 6 P, XSD-Validierung reicht nicht 6 P). Wegen der neuen gesetzlichen Pflicht ein naheliegendes Thema für weitere Prüfungen.</p>
+
+  <h4>Was ist eine eRechnung?</h4>
+  <p>Nach der EU-Richtlinie 2014/55/EU und § 14 UStG ist eine elektronische Rechnung (eRechnung, <em>e-invoice</em>) eine Rechnung, die in einem <strong>strukturierten elektronischen Format ausgestellt, übermittelt und empfangen</strong> wird und eine <strong>automatische und elektronische Verarbeitung</strong> ermöglicht. In Deutschland muss das Format der europäischen Norm <strong>EN 16931</strong> entsprechen (oder mit ihr kompatibel sein).</p>
+  <div class="merke"><span class="kastentitel">Merke</span>
+    Das <strong>Hauptziel</strong> der eRechnung ist die <strong>automatische Verarbeitung</strong>: Die Rechnungsdaten werden ohne Abtippen direkt in die Software des Empfängers (Buchhaltung, ERP) übernommen und geprüft. Eine für Menschen lesbare Darstellung ist zweitrangig.<br>
+    Eine <strong>PDF-Rechnung</strong> ist deshalb <strong>keine</strong> eRechnung (sondern eine „sonstige Rechnung“) – ebenso wenig ein Scan oder ein Foto einer Papierrechnung.
+  </div>
+  <p><strong>Zwei Aspekte einer digitalen Rechnung:</strong> Der <strong>visuelle Aspekt</strong> erlaubt einem Menschen, den Inhalt zu sehen und zu lesen (z. B. als PDF). Der <strong>Datenaspekt</strong> erlaubt einem Computer, die enthaltenen Informationen strukturiert zu verarbeiten (z. B. als XML mit festgelegten Feldern für Rechnungsnummer, Beträge, Steuersätze). Eine PDF hat nur den visuellen Aspekt, eine XRechnung nur den Datenaspekt, ZUGFeRD beide.</p>
+  <p><strong>Vorteile:</strong> keine manuelle Erfassung, dadurch weniger Fehler und schnellere Bearbeitung und Zahlung; geringere Kosten für Druck, Porto und Erfassung; einfache, durchsuchbare Archivierung; automatische Prüfung (Pflichtangaben, Rechenwerte); Grundlage für digitale Meldeverfahren der Steuerverwaltung. <strong>Herausforderungen:</strong> Software muss eRechnungen erzeugen, prüfen, anzeigen und revisionssicher im Originalformat archivieren; Abläufe und Stammdaten müssen angepasst werden.</p>
+
+  <h4>Pflicht in Deutschland (Stand 2026)</h4>
+  <table class="kompakt">
+    <tr><th style="width:22%">Zeitpunkt</th><th>Regelung</th></tr>
+    <tr><td>seit 27.11.2020</td><td><strong>B2G</strong> (an öffentliche Auftraggeber): Lieferanten des Bundes müssen eRechnungen senden; die Länder haben eigene, ähnliche Regelungen.</td></tr>
+    <tr><td>seit 01.01.2025</td><td><strong>B2B</strong>: Alle inländischen Unternehmen müssen eRechnungen <strong>empfangen</strong> können.</td></tr>
+    <tr><td>bis 31.12.2026</td><td>Übergang beim <strong>Versand</strong>: Papierrechnungen und sonstige elektronische Formate sind noch erlaubt; eine PDF nur mit Zustimmung des Empfängers.</td></tr>
+    <tr><td>bis 31.12.2027</td><td>Übergang nur noch für Unternehmen mit einem Gesamtumsatz im Vorjahr von höchstens 800.000 € (außerdem für vereinbarte EDI-Verfahren).</td></tr>
+    <tr><td>ab 01.01.2028</td><td>Alle Unternehmen müssen im B2B-Bereich eRechnungen <strong>ausstellen</strong>.</td></tr>
+  </table>
+  <p><strong>Ausnahmen:</strong> Kleinbetragsrechnungen bis 250 € (brutto) und Fahrausweise. Rechnungen an Privatkunden (<strong>B2C</strong>) sind nicht betroffen. eRechnungen müssen im <strong>Originalformat</strong> (also als XML) aufbewahrt werden (GoBD) – ein ausgedrucktes Bild reicht nicht.</p>
+
+  <h4>Formate</h4>
+  <p>Die <strong>EN 16931</strong> legt ein semantisches Datenmodell der „Kernrechnung“ fest (welche Angaben es gibt und was sie bedeuten, z. B. BT-1 Rechnungsnummer) und lässt zwei XML-Syntaxen zu: <strong>UBL</strong> (Universal Business Language) und <strong>UN/CEFACT CII</strong> (Cross Industry Invoice). In Deutschland sind zwei Formate verbreitet:</p>
+  <table class="kompakt">
+    <tr><th style="width:17%"></th><th>XRechnung</th><th>ZUGFeRD</th><th style="width:18%">PDF / Scan</th></tr>
+    <tr><td>Art</td><td>reines XML (UBL oder CII); deutsche Ausprägung (CIUS) der EN 16931, gepflegt von der KoSIT</td><td><strong>hybrid:</strong> PDF/A-3-Dokument mit eingebetteter XML-Datei (CII); baugleich mit dem französischen Factur-X</td><td>Bild bzw. Text ohne Datenstruktur</td></tr>
+    <tr><td>für Menschen</td><td>nur mit Viewer/Visualisierung lesbar</td><td>PDF direkt lesbar</td><td>lesbar</td></tr>
+    <tr><td>für Software</td><td>direkt verarbeitbar</td><td>XML-Teil direkt verarbeitbar</td><td>nur per Abtippen/Texterkennung</td></tr>
+    <tr><td>Einsatz</td><td>öffentliche Auftraggeber (B2G), zunehmend B2B; öffentliche Empfänger verlangen meist die <strong>Leitweg-ID</strong></td><td>B2B, vor allem wenn der Empfänger die Rechnung auch ohne Spezialsoftware lesen soll</td><td>B2B nur in der Übergangszeit</td></tr>
+    <tr><td>eRechnung?</td><td>ja</td><td>ja, ab Profil EN 16931 (nicht die Profile MINIMUM und BASIC WL)</td><td>nein</td></tr>
+  </table>
+  <p>Bei ZUGFeRD ist der <strong>XML-Teil maßgeblich</strong>: Weichen PDF und XML voneinander ab, gelten die XML-Daten. Die <strong>Leitweg-ID</strong> ist eine Kennung des öffentlichen Rechnungsempfängers (z. B. einer bestimmten Behörde oder Einrichtung). Sie wird vom Auftraggeber mitgeteilt, steht in der XRechnung im Feld „Käuferreferenz“ (BT-10) und sorgt dafür, dass die Rechnung automatisch an die zuständige Stelle weitergeleitet wird.</p>
+
+  <figure>
+    <svg viewBox="0 0 740 236" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <!-- Spalte 1: PDF -->
+      <text x="123" y="18" text-anchor="middle" font-weight="bold">PDF / Scan</text>
+      <path d="M78,30 H152 L168,46 V140 H78 Z" fill="#fff" stroke="#222"/>
+      <path d="M152,30 V46 H168" fill="none" stroke="#222"/>
+      <text x="90" y="52" font-size="9" font-weight="bold">RECHNUNG</text>
+      <g stroke="#999" stroke-width="3">
+        <line x1="90" y1="66" x2="156" y2="66"/><line x1="90" y1="78" x2="140" y2="78"/>
+        <line x1="90" y1="96" x2="156" y2="96"/><line x1="90" y1="108" x2="156" y2="108"/>
+        <line x1="90" y1="120" x2="130" y2="120"/>
+      </g>
+      <g text-anchor="middle" font-size="12">
+        <text x="123" y="164">nur visueller Aspekt</text>
+        <text x="123" y="181">Daten nur durch Abtippen</text>
+        <text x="123" y="198">oder Texterkennung</text>
+        <text x="123" y="222" font-weight="bold">keine eRechnung</text>
+      </g>
+      <!-- Spalte 2: XRechnung -->
+      <text x="370" y="18" text-anchor="middle" font-weight="bold">XRechnung</text>
+      <path d="M318,30 H404 L420,46 V140 H318 Z" fill="#eef3fa" stroke="#222"/>
+      <path d="M404,30 V46 H420" fill="none" stroke="#222"/>
+      <g font-family="Consolas, Courier New, monospace" font-size="8.5">
+        <text x="324" y="56">&lt;Invoice&gt;</text>
+        <text x="330" y="70">&lt;cbc:ID&gt;…</text>
+        <text x="330" y="84">&lt;cbc:IssueDate&gt;…</text>
+        <text x="330" y="98">&lt;cac:InvoiceLine&gt;</text>
+        <text x="342" y="112">…</text>
+        <text x="324" y="126">&lt;/Invoice&gt;</text>
+      </g>
+      <g text-anchor="middle" font-size="12">
+        <text x="370" y="164">nur Datenaspekt</text>
+        <text x="370" y="181">(XML in UBL oder CII)</text>
+        <text x="370" y="198">Anzeige über einen Viewer</text>
+        <text x="370" y="222" font-weight="bold">eRechnung</text>
+      </g>
+      <!-- Spalte 3: ZUGFeRD -->
+      <text x="617" y="18" text-anchor="middle" font-weight="bold">ZUGFeRD</text>
+      <path d="M560,30 H644 L660,46 V140 H560 Z" fill="#fff" stroke="#222"/>
+      <path d="M644,30 V46 H660" fill="none" stroke="#222"/>
+      <text x="570" y="52" font-size="9" font-weight="bold">RECHNUNG</text>
+      <g stroke="#999" stroke-width="3">
+        <line x1="570" y1="66" x2="648" y2="66"/><line x1="570" y1="78" x2="630" y2="78"/>
+        <line x1="570" y1="92" x2="610" y2="92"/>
+      </g>
+      <rect x="596" y="100" width="56" height="32" rx="3" fill="#eef3fa" stroke="#222" stroke-dasharray="4,3"/>
+      <text x="624" y="121" text-anchor="middle" font-size="11" font-family="Consolas, Courier New, monospace">XML</text>
+      <text x="676" y="96" font-size="11">PDF/A-3</text>
+      <text x="664" y="128" font-size="11">eingebettet</text>
+      <g text-anchor="middle" font-size="12">
+        <text x="617" y="164">visuell (PDF) + Daten (XML)</text>
+        <text x="617" y="181">XML-Teil ist maßgeblich</text>
+        <text x="617" y="198">Profil mind. EN 16931</text>
+        <text x="617" y="222" font-weight="bold">eRechnung</text>
+      </g>
+    </svg>
+    <figcaption>Abb. A-8: PDF, XRechnung und ZUGFeRD – nur strukturierte Daten machen eine eRechnung</figcaption>
+  </figure>
+
+  <p>So sieht der Anfang einer echten XRechnung im UBL-Format aus (Auszug, Beispiel einer Tischlerei an eine Behörde; <code>cbc</code> und <code>cac</code> sind Namensraum-Präfixe):</p>
+  <pre class="xml klein">&lt;ubl:Invoice xmlns:ubl="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"&gt;
+  &lt;cbc:CustomizationID&gt;urn:cen.eu:en16931:2017#compliant#…:xrechnung_3.0&lt;/cbc:CustomizationID&gt;
+  &lt;cbc:ID&gt;TB-2026-0815&lt;/cbc:ID&gt;                              &lt;!-- Rechnungsnummer (BT-1) --&gt;
+  &lt;cbc:IssueDate&gt;2026-10-02&lt;/cbc:IssueDate&gt;                 &lt;!-- Rechnungsdatum --&gt;
+  &lt;cbc:DueDate&gt;2026-11-01&lt;/cbc:DueDate&gt;                     &lt;!-- Fälligkeit --&gt;
+  &lt;cbc:InvoiceTypeCode&gt;380&lt;/cbc:InvoiceTypeCode&gt;            &lt;!-- 380 = Handelsrechnung --&gt;
+  &lt;cbc:DocumentCurrencyCode&gt;EUR&lt;/cbc:DocumentCurrencyCode&gt;
+  &lt;cbc:BuyerReference&gt;04011000-1234512345-06&lt;/cbc:BuyerReference&gt;  &lt;!-- Leitweg-ID --&gt;
+  &lt;!-- … Verkäufer, Käufer, Zahlungsangaben, Steuern … --&gt;
+  &lt;cac:LegalMonetaryTotal&gt;                &lt;!-- Summen: Positionen, netto, brutto, Zahlbetrag --&gt;
+    &lt;cbc:LineExtensionAmount currencyID="EUR"&gt;1200.00&lt;/cbc:LineExtensionAmount&gt;
+    &lt;cbc:TaxExclusiveAmount currencyID="EUR"&gt;1200.00&lt;/cbc:TaxExclusiveAmount&gt;
+    &lt;cbc:TaxInclusiveAmount currencyID="EUR"&gt;1428.00&lt;/cbc:TaxInclusiveAmount&gt;
+    &lt;cbc:PayableAmount currencyID="EUR"&gt;1428.00&lt;/cbc:PayableAmount&gt;
+  &lt;/cac:LegalMonetaryTotal&gt;
+  &lt;!-- … Rechnungspositionen (cac:InvoiceLine) … --&gt;
+&lt;/ubl:Invoice&gt;</pre>
+
+  <h4>Übertragungswege</h4>
+  <p>Das Gesetz schreibt keinen bestimmten Weg vor. Üblich sind:</p>
+  <ul>
+    <li><strong>E-Mail</strong> mit der XML- bzw. ZUGFeRD-Datei als Anhang (an eine eigens eingerichtete Rechnungsadresse),</li>
+    <li><strong>Upload in ein Portal</strong> – z. B. die Rechnungseingangsplattformen von Bund und Ländern (ZRE, OZG-RE) oder ein Lieferantenportal,</li>
+    <li><strong>Peppol</strong>: europäisches Netzwerk für den Austausch von Geschäftsdokumenten; Sender und Empfänger sind über zertifizierte Zugangspunkte (<em>Access Points</em>) angebunden, die Zustellung ist sicher und nachweisbar,</li>
+    <li><strong>EDI</strong> oder eine <strong>Web-API</strong> zwischen den Systemen großer Geschäftspartner.</li>
+  </ul>
+  <figure>
+    <svg viewBox="0 0 740 172" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+      <defs>
+        <marker id="e05a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+          <path d="M0,0 L10,5 L0,10" fill="none" stroke="#222" stroke-width="1.5"/>
+        </marker>
+      </defs>
+      <rect x="10" y="30" width="120" height="64" rx="6" fill="#fff" stroke="#222"/>
+      <text x="70" y="57" text-anchor="middle" font-weight="bold">Rechnungssteller</text>
+      <text x="70" y="74" text-anchor="middle">(Software, ERP)</text>
+      <rect x="160" y="30" width="120" height="64" rx="6" fill="#fff" stroke="#222"/>
+      <text x="220" y="57" text-anchor="middle" font-weight="bold">eRechnung</text>
+      <text x="220" y="74" text-anchor="middle">erzeugen (XML)</text>
+      <rect x="310" y="30" width="120" height="64" rx="6" fill="#eef3fa" stroke="#222" stroke-width="1.5"/>
+      <text x="370" y="50" text-anchor="middle" font-weight="bold">prüfen</text>
+      <text x="370" y="67" text-anchor="middle">XSD + Schematron</text>
+      <text x="370" y="84" text-anchor="middle">(Validator)</text>
+      <rect x="460" y="30" width="120" height="64" rx="6" fill="#fff" stroke="#222"/>
+      <text x="520" y="66" text-anchor="middle" font-weight="bold">übermitteln</text>
+      <rect x="610" y="30" width="120" height="64" rx="6" fill="#fff" stroke="#222"/>
+      <text x="670" y="50" text-anchor="middle" font-weight="bold">Empfänger</text>
+      <text x="670" y="67" text-anchor="middle">prüft und bucht</text>
+      <text x="670" y="84" text-anchor="middle">automatisch</text>
+      <g stroke="#222" stroke-width="1.3">
+        <line x1="130" y1="62" x2="158" y2="62" marker-end="url(#e05a-pfeil)"/>
+        <line x1="280" y1="62" x2="308" y2="62" marker-end="url(#e05a-pfeil)"/>
+        <line x1="430" y1="62" x2="458" y2="62" marker-end="url(#e05a-pfeil)"/>
+        <line x1="580" y1="62" x2="608" y2="62" marker-end="url(#e05a-pfeil)"/>
+      </g>
+      <line x1="520" y1="94" x2="520" y2="104" stroke="#222"/>
+      <g text-anchor="middle">
+        <text x="520" y="118">E-Mail (Anhang)</text>
+        <text x="520" y="134">Portal (z. B. ZRE, OZG-RE)</text>
+        <text x="520" y="150">Peppol-Netzwerk</text>
+        <text x="520" y="166">EDI / Web-API</text>
+        <text x="370" y="118" fill="#555">vor jedem Versand</text>
+        <text x="70" y="118" fill="#555">archiviert im</text>
+        <text x="70" y="134" fill="#555">Originalformat</text>
+      </g>
+    </svg>
+    <figcaption>Abb. A-9: Weg einer eRechnung vom Rechnungssteller zum Empfänger</figcaption>
+  </figure>
+
+  <h4>Validierung: Entspricht die Rechnung der Spezifikation?</h4>
+  <p>Eine eRechnung wird in zwei Stufen geprüft:</p>
+  <ol>
+    <li><strong>Schema-Validierung (XSD von UBL bzw. CII):</strong> Struktur, Pflichtelemente, Reihenfolge, Datentypen (Datum, Dezimalzahl, Codes). Sie stellt die formale Korrektheit sicher.</li>
+    <li><strong>Schematron-Prüfung:</strong> Geschäftsregeln der EN 16931 und der XRechnung, die sich mit einem Schema nicht ausdrücken lassen – z. B. „Summe der Positionsnettobeträge = Nettogesamtbetrag“, „Bruttobetrag = Nettobetrag + Umsatzsteuer“, „bei XRechnung ist die Käuferreferenz (Leitweg-ID) anzugeben“.</li>
+  </ol>
+  <p>Beides erledigt der <strong>KoSIT-Validator</strong>, das offizielle Prüfwerkzeug: frei verfügbar (Open Source), lokal ausführbar und auch in automatisierte Tests einbindbar; er erstellt einen Prüfbericht. Bei der Entwicklung einer Rechnungssoftware sichern außerdem ab: die verbindlichen Anforderungen der Spezifikation konsequent umsetzen, erprobte Bibliotheken nutzen, automatisierte Tests mit den offiziellen Testrechnungen, Testläufe mit Empfängern bzw. deren Portalen (Interoperabilität) und die Validierung als festen Schritt vor jedem Versand.</p>
+
+  <h4>Datenschutz und Sicherheit</h4>
+  <ul>
+    <li><strong>Online-Prüfseiten:</strong> Rechnungen enthalten personenbezogene Daten (Namen, Anschriften, Bankverbindungen) und Geschäftsgeheimnisse (Preise, Mengen, Kundenbeziehungen). Wer eine Rechnung auf eine fremde Website hochlädt, übermittelt diese Daten an Dritte – nach DSGVO braucht das eine Rechtsgrundlage. Deshalb: keine echten Rechnungen hochladen, nur Test- oder anonymisierte Daten; den Anbieter prüfen (Impressum, Sitz bzw. Serverstandort, Datenschutzerklärung, Löschung); bedenken, dass das Ergebnis einer unbekannten Seite falsch oder veraltet sein kann (welche Regeln und welche Version werden geprüft?); im Zweifel den Validator lokal betreiben.</li>
+    <li><strong>Transport:</strong> Beim E-Mail-Versand verschlüsselt <strong>TLS</strong> die Verbindung zwischen den Mailservern (Transportverschlüsselung). TLS ist ein <strong>hybrides</strong> Verfahren: asymmetrische Verschlüsselung für den sicheren Austausch eines Sitzungsschlüssels, symmetrische Verschlüsselung für die schnelle Übertragung der Daten. Die Transportverschlüsselung schützt nur die einzelnen Teilstrecken; auf den beteiligten Servern liegt die Nachricht unverschlüsselt. Ende-zu-Ende schützen S/MIME oder PGP bzw. die Übermittlung über Peppol oder ein Portal per HTTPS. (Kryptografie im Detail: Block 07.)</li>
+  </ul>
+
+  <h4>Englischer Fachtext: so gehst du vor</h4>
+  <p>In W25 kam die eRechnung als englischer Text. Gefragt wird nicht nach einer Übersetzung, sondern nach dem <strong>Inhalt in eigenen Worten auf Deutsch</strong>. Erst die Frage lesen, dann im Text die passende Stelle suchen (Schlüsselwörter wie <em>main objective</em>, <em>aspects</em>, <em>from … until</em>), dann in ganzen Sätzen antworten. Hilfreiche Vokabeln:</p>
+  <table class="kompakt">
+    <tr><th>Englisch</th><th>Deutsch</th><th>Englisch</th><th>Deutsch</th></tr>
+    <tr><td><em>invoice / to issue</em></td><td>Rechnung / ausstellen</td><td><em>recipient / consent</em></td><td>Empfänger / Zustimmung</td></tr>
+    <tr><td><em>structured format</em></td><td>strukturiertes Format</td><td><em>turnover / threshold</em></td><td>Umsatz / Grenzwert</td></tr>
+    <tr><td><em>transmission channel</em></td><td>Übertragungsweg</td><td><em>transition period</em></td><td>Übergangsfrist</td></tr>
+    <tr><td><em>to comply with</em></td><td>einhalten, entsprechen</td><td><em>to be exempt</em></td><td>ausgenommen sein</td></tr>
+    <tr><td><em>embedded</em></td><td>eingebettet</td><td><em>to prevail</em></td><td>Vorrang haben, maßgeblich sein</td></tr>
+    <tr><td><em>public authority</em></td><td>Behörde</td><td><em>routing ID</em></td><td>Leitweg-ID</td></tr>
+  </table>
+
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li><strong>W25 T1 A2b:</strong> englischer Auszug zur EU-Richtlinie. ba) Hauptziel von eRechnungen erläutern (3 P) – Kern: automatische Verarbeitung, menschenlesbare Darstellung zweitrangig. bb) Zwei Aspekte einer digitalen Rechnung erläutern (6 P) – visueller Aspekt und Datenaspekt.</li>
+      <li><strong>W25 T1 A3:</strong> aa/ab) Art der Transportverschlüsselung bei E-Mail (hybrid) und ihr Vorteil (1 + 3 P). ba) Drei Möglichkeiten, die Konformität zur Spezifikation sicherzustellen (3 P). bb) Zwei Punkte, die bei einer Online-Prüfseite für eRechnungen zu beachten sind (6 P) – v. a. keine echten Daten, Ergebnis kritisch sehen. bc) Warum eine reine XSD-Validierung nicht reicht (6 P).</li>
+      <li>Die Lösungen verlangen jeweils eine kurze Begründung – Stichworte allein bringen bei „erläutern“ nur Teilpunkte.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== TEIL B: BELEGSATZ ===================== -->
+<section class="teil" id="belegsatz">
+  <h2>B · Belegsatz</h2>
+  <p class="klein">Für diesen Block legt die IHK keine Notationshilfen bei. Der Belegsatz enthält deshalb nur die Anlagen zur Ausgangssituation (Szenario, API-Dokumentation, Beispielnachrichten, Klassen, XML- und JSON-Daten, englischer Text). Keine Erklärungen.</p>
+
+  <div class="anlage" id="anlage-1">
+    <h4>Anlage 1 · Ausgangssituation</h4>
+    <p><strong>Die Aufgaben dieses Blocks beziehen sich auf die folgende Ausgangssituation:</strong></p>
+    <p>Die <strong>FrischeKiste Nordheide GmbH</strong> mit Sitz in Heidmoor beliefert Haushalte, Firmen und Einrichtungen mit Obst- und Gemüsekisten aus der Region. Rund 2.400 Privatkunden haben ein Abonnement, dazu kommen etwa 60 Geschäftskunden, darunter Büros, Kantinen sowie die Kitas und Schulen der Stadt Heidmoor. Die Ware stammt von 28 Erzeugerbetrieben. Ausgeliefert wird dienstags bis freitags mit sechs Transportern. Der Umsatz betrug 2025 rund 4,3 Mio. €, für 2026 werden rund 4,6 Mio. € erwartet.</p>
+    <p>Die bisherige Lösung aus Webshop, Tabellenkalkulation und E-Mail soll durch die Plattform <strong>„KistenPortal“</strong> ersetzt werden:</p>
+    <ul>
+      <li>Kunden-App und Webshop greifen über eine <strong>REST-API</strong> (JSON) auf die Daten zu (Anlagen 2 und 3). Auch die Erzeugerbetriebe erhalten einen Partnerzugang.</li>
+      <li>Die Erzeugerbetriebe senden ihr <strong>Wochenangebot als XML-Datei</strong>, die gegen eine DTD geprüft wird (Anlage 5). Lieferscheine werden ebenfalls als XML erzeugt (Anlage 6).</li>
+      <li>Kisten-, Kunden- und Tourendaten werden in einer <strong>dokumentenorientierten Datenbank</strong> als JSON-Dokumente gespeichert (Anlagen 7 bis 10).</li>
+      <li>Die Fahrer erhalten ihre Touren in einer <strong>Fahrer-App</strong>; die Routen berechnet ein externer Kartendienst über dessen Web-API.</li>
+      <li>Rechnungen an Geschäftskunden und an die Stadt Heidmoor sollen künftig als <strong>eRechnung</strong> erstellt werden (Anlagen 11 und 12).</li>
+    </ul>
+    <p>Sie sind Auszubildende/r zum Fachinformatiker/zur Fachinformatikerin Anwendungsentwicklung bei der <strong>Kranich Softwarehaus GmbH</strong> in Lüneburg, die das KistenPortal entwickelt.</p>
+  </div>
+
+  <div class="anlage" id="anlage-2">
+    <h4>Anlage 2 · API-Dokumentation „KistenPortal-API“ (Auszug)</h4>
+    <p><strong>Basis-URL:</strong> <code>https://api.frischekiste.example/v1</code></p>
+    <ul>
+      <li>Daten werden als JSON (UTF-8) übertragen. Requests mit Body enthalten den Header <code>Content-Type: application/json</code>.</li>
+      <li>Jeder Request muss den Header <code>X-API-Key</code> mit dem Schlüssel der aufrufenden Anwendung enthalten (Kunden-App, Webshop, Fahrer-App oder Partnerzugang). <strong>Partnerzugänge</strong> der Erzeugerbetriebe dürfen Kisten nur lesen.</li>
+      <li>Datumswerte haben das Format <code>JJJJ-MM-TT</code>.</li>
+      <li>Fehler werden mit dem passenden Statuscode und einem JSON-Objekt der Form <code>{"status": &lt;Statuscode&gt;, "fehler": "&lt;Meldung&gt;"}</code> beantwortet.</li>
+      <li>Listen-Endpunkte können über Query-Parameter gefiltert werden; der Parametername entspricht dem Attributnamen der Ressource.</li>
+    </ul>
+    <table class="kompakt">
+      <caption>Ressourcen</caption>
+      <tr><th>Ressource</th><th>Schlüssel</th><th>Beschreibung</th></tr>
+      <tr><td class="mono">kisten</td><td class="mono">kisteId</td><td>Kistenarten (Obst-, Gemüse-, Mischkisten), siehe Anlage 7</td></tr>
+      <tr><td class="mono">kunden</td><td class="mono">kundenNr</td><td>Kundenkonten, siehe Anlage 8</td></tr>
+      <tr><td class="mono">abos</td><td class="mono">aboId</td><td>Abonnements eines Kunden (Unterressource von <code>kunden</code>)</td></tr>
+      <tr><td class="mono">lieferadressen</td><td class="mono">adrId</td><td>Lieferadressen eines Kunden (Unterressource von <code>kunden</code>)</td></tr>
+      <tr><td class="mono">bestellungen</td><td class="mono">bestellNr</td><td>Bestellungen und Lieferungen; Attribut <code>datum</code></td></tr>
+      <tr><td class="mono">reklamationen</td><td class="mono">reklaId</td><td>Reklamationen zu einer Bestellung (Unterressource von <code>bestellungen</code>)</td></tr>
+      <tr><td class="mono">touren</td><td class="mono">tourNr</td><td>Liefertouren eines Tages</td></tr>
+    </table>
+    <table class="kompakt">
+      <caption>Endpunkte (Auszug)</caption>
+      <tr><th style="width:10%">Methode</th><th style="width:36%">Endpunkt</th><th>Beschreibung</th><th style="width:20%">bei Erfolg</th></tr>
+      <tr><td>GET</td><td class="mono">/kisten</td><td>alle Kistenarten</td><td>200 OK</td></tr>
+      <tr><td>GET</td><td class="mono">/kisten/{kisteId}</td><td>eine Kistenart</td><td>200 OK</td></tr>
+      <tr><td>GET</td><td class="mono">/kunden/{kundenNr}/abos</td><td>alle Abos eines Kunden</td><td>200 OK</td></tr>
+      <tr><td>GET</td><td class="mono">/kunden/{kundenNr}/abos/{aboId}</td><td>ein Abo</td><td>200 OK</td></tr>
+      <tr><td>POST</td><td class="mono">/kunden/{kundenNr}/abos</td><td>neues Abo anlegen</td><td>201 Created, Header Location</td></tr>
+      <tr><td>GET</td><td class="mono">/touren/{datum}/{tourNr}/stopps</td><td>Stopps einer Tour (Fahrer-App)</td><td>200 OK</td></tr>
+    </table>
+    <p><strong>Repräsentation eines Abos</strong> (Antwort auf <code>GET /v1/kunden/10427/abos/5531</code>):</p>
+    <pre class="json">{
+  "aboId": 5531,
+  "kundenNr": 10427,
+  "kisteId": "K-OBST-M",
+  "rhythmus": "woechentlich",
+  "liefertag": "DI",
+  "lieferadresseId": 1,
+  "status": "aktiv",
+  "pausiertBis": null
+}</pre>
+    <p class="klein">Erlaubte Werte: <code>rhythmus</code>: <code>woechentlich</code> | <code>14-taegig</code> · <code>liefertag</code>: <code>DI</code> | <code>MI</code> | <code>DO</code> | <code>FR</code> · <code>status</code>: <code>aktiv</code> | <code>pausiert</code> | <code>gekuendigt</code> · <code>pausiertBis</code>: Datum oder <code>null</code></p>
+  </div>
+
+  <div class="anlage" id="anlage-3">
+    <h4>Anlage 3 · Beispiel: Abo über die Kunden-App anlegen</h4>
+    <p class="codelabel">Request</p>
+    <pre class="http">POST /v1/kunden/10427/abos HTTP/1.1
+Host: api.frischekiste.example
+Content-Type: application/json
+Accept: application/json
+X-API-Key: app-7Fq2-Lx91
+Content-Length: 88
+
+{"kisteId": "K-GEM-L", "rhythmus": "14-taegig", "liefertag": "FR", "lieferadresseId": 2}</pre>
+    <p class="codelabel">Response</p>
+    <pre class="http">HTTP/1.1 201 Created
+Content-Type: application/json; charset=utf-8
+Location: /v1/kunden/10427/abos/5547
+Content-Length: 162
+
+{"aboId": 5547, "kundenNr": 10427, "kisteId": "K-GEM-L", "rhythmus": "14-taegig", "liefertag": "FR", "lieferadresseId": 2, "status": "aktiv", "pausiertBis": null}</pre>
+  </div>
+
+  <div class="anlage" id="anlage-4">
+    <h4>Anlage 4 · Klassen und Methoden für die Programmieraufgaben (Auszug)</h4>
+    <figure>
+      <svg viewBox="0 0 760 506" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+        <!-- KistenController -->
+        <rect x="10" y="10" width="740" height="106" fill="#fff" stroke="#222"/>
+        <text x="380" y="27" text-anchor="middle" font-weight="bold" font-size="13">KistenController</text>
+        <line x1="10" y1="34" x2="750" y2="34" stroke="#222"/>
+        <text x="18" y="50">- katalog : KistenKatalog</text>
+        <text x="18" y="67">- schluessel : ApiSchluessel</text>
+        <line x1="10" y1="75" x2="750" y2="75" stroke="#222"/>
+        <text x="18" y="91">+ handleGetKiste(request : HttpRequest) : HttpResponse</text>
+        <text x="18" y="108">- createErrorResponse(statusCode : integer, meldung : string) : HttpResponse</text>
+        <!-- HttpRequest -->
+        <rect x="10" y="136" width="360" height="107" fill="#fff" stroke="#222"/>
+        <text x="190" y="153" text-anchor="middle" font-weight="bold" font-size="13">HttpRequest</text>
+        <line x1="10" y1="160" x2="370" y2="160" stroke="#222"/>
+        <line x1="10" y1="168" x2="370" y2="168" stroke="#222"/>
+        <text x="18" y="184">+ getMethode() : string</text>
+        <text x="18" y="201">+ getPfadParameter(name : string) : string</text>
+        <text x="18" y="218">+ getHeader(name : string) : string</text>
+        <text x="18" y="235">+ getQueryParameter(name : string) : string</text>
+        <!-- HttpResponse -->
+        <rect x="390" y="136" width="360" height="107" fill="#fff" stroke="#222"/>
+        <text x="570" y="153" text-anchor="middle" font-weight="bold" font-size="13">HttpResponse</text>
+        <line x1="390" y1="160" x2="750" y2="160" stroke="#222"/>
+        <line x1="390" y1="168" x2="750" y2="168" stroke="#222"/>
+        <text x="398" y="184">+ HttpResponse()</text>
+        <text x="398" y="201">+ setStatus(code : integer) : void</text>
+        <text x="398" y="218">+ setHeader(name : string, wert : string) : void</text>
+        <text x="398" y="235">+ setBody(inhalt : string) : void</text>
+        <!-- KistenKatalog -->
+        <rect x="10" y="263" width="360" height="73" fill="#fff" stroke="#222"/>
+        <text x="190" y="280" text-anchor="middle" font-weight="bold" font-size="13">KistenKatalog</text>
+        <line x1="10" y1="287" x2="370" y2="287" stroke="#222"/>
+        <line x1="10" y1="295" x2="370" y2="295" stroke="#222"/>
+        <text x="18" y="311">+ istVerfuegbar() : boolean</text>
+        <text x="18" y="328">+ findeKiste(kisteId : string) : Kiste</text>
+        <!-- ApiSchluessel -->
+        <rect x="390" y="263" width="360" height="73" fill="#fff" stroke="#222"/>
+        <text x="570" y="280" text-anchor="middle" font-weight="bold" font-size="13">ApiSchluessel</text>
+        <line x1="390" y1="287" x2="750" y2="287" stroke="#222"/>
+        <line x1="390" y1="295" x2="750" y2="295" stroke="#222"/>
+        <text x="398" y="311">+ istGueltig(schluessel : string) : boolean</text>
+        <!-- Kiste -->
+        <rect x="10" y="356" width="240" height="140" fill="#fff" stroke="#222"/>
+        <text x="130" y="373" text-anchor="middle" font-weight="bold" font-size="13">Kiste</text>
+        <line x1="10" y1="380" x2="250" y2="380" stroke="#222"/>
+        <text x="18" y="396">- kisteId : string</text>
+        <text x="18" y="413">- bezeichnung : string</text>
+        <text x="18" y="430">- groesse : string</text>
+        <text x="18" y="447">- preis : double</text>
+        <text x="18" y="464">- bio : boolean</text>
+        <line x1="10" y1="472" x2="250" y2="472" stroke="#222"/>
+        <text x="18" y="488">+ toJson() : string</text>
+        <!-- Stopp -->
+        <rect x="260" y="356" width="240" height="140" fill="#fff" stroke="#222"/>
+        <text x="380" y="373" text-anchor="middle" font-weight="bold" font-size="13">Stopp</text>
+        <line x1="260" y1="380" x2="500" y2="380" stroke="#222"/>
+        <text x="268" y="396">- position : integer</text>
+        <text x="268" y="413">- kundenNr : integer</text>
+        <text x="268" y="430">- ort : string</text>
+        <text x="268" y="447">- anzahlKisten : integer</text>
+        <text x="268" y="464">- zugestellt : boolean</text>
+        <line x1="260" y1="472" x2="500" y2="472" stroke="#222"/>
+        <text x="268" y="488">+ isZugestellt() : boolean</text>
+        <!-- List<T> -->
+        <rect x="510" y="356" width="240" height="90" fill="#fff" stroke="#222"/>
+        <text x="630" y="373" text-anchor="middle" font-weight="bold" font-size="13">List&lt;T&gt;</text>
+        <line x1="510" y1="380" x2="750" y2="380" stroke="#222"/>
+        <line x1="510" y1="388" x2="750" y2="388" stroke="#222"/>
+        <text x="518" y="404">+ add(t : T) : void</text>
+        <text x="518" y="421">+ get(i : integer) : T</text>
+        <text x="518" y="438">+ size() : integer</text>
+      </svg>
+    </figure>
+    <div class="zusammen">
+    <p><strong>Hinweise:</strong></p>
+    <ul>
+      <li>Für alle Attribute existieren Get-Methoden (z. B. <code>getOrt()</code>, <code>getAnzahlKisten()</code>; bei <code>boolean</code>: <code>isBio()</code>, <code>isZugestellt()</code>).</li>
+      <li><code>getPfadParameter</code>, <code>getHeader</code> und <code>getQueryParameter</code> liefern <code>null</code>, wenn der Parameter bzw. Header nicht vorhanden ist. <code>findeKiste</code> liefert <code>null</code>, wenn es keine Kiste mit dieser ID gibt.</li>
+      <li><code>Kiste.toJson()</code> liefert die JSON-Repräsentation der Kiste, z. B. <code>{"kisteId": "K-GEM-L", "bezeichnung": "Gemüsekiste groß", …}</code>.</li>
+      <li>Zeichenketten (<code>string</code>): <code>text.length()</code> liefert die Anzahl der Zeichen, <code>text.byteLength()</code> die Anzahl der Bytes in UTF-8-Kodierung. Zeichenketten werden mit <code>+</code> verkettet; Zahlen werden dabei automatisch in Text umgewandelt. <code>zahl.toString()</code> wandelt eine Zahl in eine Zeichenkette um. Ein Anführungszeichen innerhalb einer Zeichenkette wird als <code>\"</code> geschrieben.</li>
+    </ul>
+    </div>
+  </div>
+
+  <div class="anlage" id="anlage-5">
+    <h4>Anlage 5 · Wochenangebot des Erzeugerbetriebs „Hof Brammer“ (KW 46) mit DTD</h4>
+    <p class="codelabel">XML-Dokument wochenangebot_kw46.xml</p>
+    <pre class="xml"><span class="zn"> 1</span>  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<span class="zn"> 2</span>  &lt;!DOCTYPE wochenangebot SYSTEM "wochenangebot.dtd"&gt;
+<span class="zn"> 3</span>  &lt;wochenangebot kw="46"&gt;
+<span class="zn"> 4</span>    &lt;erzeuger erzeugerId="E07"&gt;
+<span class="zn"> 5</span>      &lt;name&gt;Hof Brammer&lt;/name&gt;
+<span class="zn"> 6</span>      &lt;ort&gt;Wiesede&lt;/ort&gt;
+<span class="zn"> 7</span>      &lt;biozertifikat&gt;DE-ÖKO-006&lt;/biozertifikat&gt;
+<span class="zn"> 8</span>    &lt;/erzeuger&gt;
+<span class="zn"> 9</span>    &lt;artikel artNr="A-101" einheit="kg"&gt;
+<span class="zn">10</span>      &lt;bezeichnung&gt;Möhren, lose&lt;/bezeichnung&gt;
+<span class="zn">11</span>      &lt;menge&gt;120&lt;/menge&gt;
+<span class="zn">12</span>      &lt;preis&gt;1.40&lt;/preis&gt;
+<span class="zn">13</span>    &lt;/artikel&gt;
+<span class="zn">14</span>    &lt;artikel artNr="A-102" einheit="stueck"&gt;
+<span class="zn">15</span>      &lt;bezeichnung&gt;Kürbis Hokkaido&lt;/Bezeichnung&gt;
+<span class="zn">16</span>      &lt;menge&gt;40&lt;/menge&gt;
+<span class="zn">17</span>      &lt;preis&gt;2.10&lt;/preis&gt;
+<span class="zn">18</span>      &lt;hinweis&gt;nur bis KW 48 lieferbar&lt;/hinweis&gt;
+<span class="zn">19</span>    &lt;/artikel&gt;
+<span class="zn">20</span>    &lt;artikel artNr="A-103" einheit="bund"&gt;
+<span class="zn">21</span>      &lt;bezeichnung&gt;Lauchzwiebeln&lt;/bezeichnung&gt;
+<span class="zn">22</span>      &lt;preis&gt;0.90&lt;/preis&gt;
+<span class="zn">23</span>      &lt;menge&gt;60&lt;/menge&gt;
+<span class="zn">24</span>    &lt;/artikel&gt;
+<span class="zn">25</span>    &lt;artikel artNr="A-101" einheit="Kilo"&gt;
+<span class="zn">26</span>      &lt;bezeichnung&gt;Rote Bete&lt;/bezeichnung&gt;
+<span class="zn">27</span>      &lt;menge&gt;35&lt;menge&gt;
+<span class="zn">28</span>      &lt;preis&gt;1.80&lt;/preis&gt;
+<span class="zn">29</span>      &lt;lieferant&gt;Hof Brammer&lt;/lieferant&gt;
+<span class="zn">30</span>    &lt;/artikel&gt;
+<span class="zn">31</span>    &lt;artikel artNr=A-105&gt;
+<span class="zn">32</span>      &lt;bezeichnung&gt;Feldsalat&lt;/bezeichnung&gt;
+<span class="zn">33</span>      &lt;menge&gt;15&lt;/menge&gt;
+<span class="zn">34</span>      &lt;preis&gt;7.50&lt;/preis&gt;
+<span class="zn">35</span>    &lt;/artikel&gt;
+<span class="zn">36</span>  &lt;/wochenangebot&gt;</pre>
+    <p class="codelabel">Externe DTD wochenangebot.dtd</p>
+    <pre class="xml"><span class="zn"> 1</span>  &lt;!ELEMENT wochenangebot (erzeuger, artikel+)&gt;
+<span class="zn"> 2</span>  &lt;!ATTLIST wochenangebot kw   CDATA #REQUIRED
+<span class="zn"> 3</span>                          jahr CDATA #REQUIRED&gt;
+<span class="zn"> 4</span>  &lt;!ELEMENT erzeuger (name, ort, biozertifikat?)&gt;
+<span class="zn"> 5</span>  &lt;!ATTLIST erzeuger erzeugerId ID #REQUIRED&gt;
+<span class="zn"> 6</span>  &lt;!ELEMENT name (#PCDATA)&gt;
+<span class="zn"> 7</span>  &lt;!ELEMENT ort (#PCDATA)&gt;
+<span class="zn"> 8</span>  &lt;!ELEMENT biozertifikat (#PCDATA)&gt;
+<span class="zn"> 9</span>  &lt;!ELEMENT artikel (bezeichnung, menge, preis, hinweis*)&gt;
+<span class="zn">10</span>  &lt;!ATTLIST artikel artNr   ID              #REQUIRED
+<span class="zn">11</span>                    einheit (kg|stueck|bund) "kg"&gt;
+<span class="zn">12</span>  &lt;!ELEMENT bezeichnung (#PCDATA)&gt;
+<span class="zn">13</span>  &lt;!ELEMENT menge (#PCDATA)&gt;
+<span class="zn">14</span>  &lt;!ELEMENT preis (#PCDATA)&gt;
+<span class="zn">15</span>  &lt;!ELEMENT hinweis (#PCDATA)&gt;</pre>
+  </div>
+
+  <div class="anlage" id="anlage-6">
+    <h4>Anlage 6 · Lieferschein (XML)</h4>
+    <pre class="xml"><span class="zn"> 1</span>  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<span class="zn"> 2</span>  &lt;!DOCTYPE lieferschein SYSTEM "lieferschein.dtd"&gt;
+<span class="zn"> 3</span>  &lt;lieferschein nr="LS-2026-1187" datum="2026-11-10"&gt;
+<span class="zn"> 4</span>    &lt;kunde kundenNr="20015"&gt;
+<span class="zn"> 5</span>      &lt;name&gt;Kita Sonnenblume&lt;/name&gt;
+<span class="zn"> 6</span>      &lt;adresse&gt;Am Mühlenbach 3, 21391 Heidmoor&lt;/adresse&gt;
+<span class="zn"> 7</span>    &lt;/kunde&gt;
+<span class="zn"> 8</span>    &lt;position&gt;
+<span class="zn"> 9</span>      &lt;kiste&gt;K-OBST-M&lt;/kiste&gt;
+<span class="zn">10</span>      &lt;anzahl&gt;4&lt;/anzahl&gt;
+<span class="zn">11</span>    &lt;/position&gt;
+<span class="zn">12</span>    &lt;position&gt;
+<span class="zn">13</span>      &lt;kiste&gt;K-GEM-L&lt;/kiste&gt;
+<span class="zn">14</span>      &lt;anzahl&gt;2&lt;/anzahl&gt;
+<span class="zn">15</span>      &lt;bemerkung&gt;ohne Sellerie&lt;/bemerkung&gt;
+<span class="zn">16</span>      &lt;bemerkung&gt;Kühlware zuerst ausladen&lt;/bemerkung&gt;
+<span class="zn">17</span>    &lt;/position&gt;
+<span class="zn">18</span>    &lt;fahrer&gt;T. Ohlsen&lt;/fahrer&gt;
+<span class="zn">19</span>  &lt;/lieferschein&gt;</pre>
+  </div>
+
+  <div class="anlage" id="anlage-7">
+    <h4>Anlage 7 · Tabellen der Kistenarten (bisherige Datenhaltung)</h4>
+    <table class="daten">
+      <caption>Kiste</caption>
+      <tr><th>kisteId</th><th>bezeichnung</th><th>groesse</th><th>preis</th><th>bio</th><th>gewichtKg</th><th>saisonEnde</th></tr>
+      <tr><td>K-OBST-M</td><td>Obstkiste mittel</td><td>M</td><td>18.50</td><td>ja</td><td>4.5</td><td></td></tr>
+      <tr><td>K-GEM-L</td><td>Gemüsekiste groß</td><td>L</td><td>27.90</td><td>ja</td><td>8.0</td><td>2027-03-31</td></tr>
+      <tr><td>K-MIX-S</td><td>Mischkiste klein</td><td>S</td><td>14.20</td><td>nein</td><td>3.0</td><td></td></tr>
+    </table>
+    <table class="daten" style="width:auto">
+      <caption>Kisteninhalt (Auszug)</caption>
+      <tr><th>kisteId</th><th>artikel</th><th>menge</th><th>einheit</th></tr>
+      <tr><td>K-OBST-M</td><td>Äpfel Elstar</td><td>1.5</td><td>kg</td></tr>
+      <tr><td>K-OBST-M</td><td>Birnen Conference</td><td>1</td><td>kg</td></tr>
+      <tr><td>K-OBST-M</td><td>Bananen</td><td>6</td><td>Stück</td></tr>
+      <tr><td>K-GEM-L</td><td>Möhren</td><td>2</td><td>kg</td></tr>
+      <tr><td>K-GEM-L</td><td>Kürbis Hokkaido</td><td>1</td><td>Stück</td></tr>
+      <tr><td>…</td><td>…</td><td>…</td><td>…</td></tr>
+    </table>
+    <p class="klein">Eine leere Zelle bedeutet: kein Wert vorhanden.</p>
+  </div>
+
+  <div class="anlage" id="anlage-8">
+    <h4>Anlage 8 · Tabellen der Kunden und Lieferadressen (Auszug)</h4>
+    <table class="daten">
+      <caption>Kunde</caption>
+      <tr><th>kundenNr</th><th>name</th><th>kundentyp</th><th>email</th><th>newsletter</th></tr>
+      <tr><td>10427</td><td>Jana Petersen</td><td>privat</td><td>j.petersen@mail.example</td><td>ja</td></tr>
+      <tr><td>20015</td><td>Kita Sonnenblume</td><td>oeffentlich</td><td>verwaltung@kita-sonnenblume.example</td><td>nein</td></tr>
+    </table>
+    <table class="daten">
+      <caption>Lieferadresse</caption>
+      <tr><th>adrId</th><th>kundenNr</th><th>strasse</th><th>plz</th><th>ort</th><th>ablageort</th></tr>
+      <tr><td>1</td><td>10427</td><td>Lindenweg 4</td><td>21391</td><td>Heidmoor</td><td>Garage</td></tr>
+      <tr><td>2</td><td>10427</td><td>Hafenstraße 18</td><td>21423</td><td>Kleinmoor</td><td></td></tr>
+      <tr><td>3</td><td>20015</td><td>Am Mühlenbach 3</td><td>21391</td><td>Heidmoor</td><td>Küche, Hintereingang</td></tr>
+    </table>
+    <p class="klein">Eine leere Zelle bedeutet: kein Wert vorhanden.</p>
+  </div>
+
+  <div class="anlage" id="anlage-9">
+    <h4>Anlage 9 · Stopps der Tour T3 am 10.11.2026 (Testdaten)</h4>
+    <table class="daten" style="width:auto">
+      <tr><th>position</th><th>kundenNr</th><th>ort</th><th>anzahlKisten</th><th>zugestellt</th></tr>
+      <tr><td>1</td><td>10427</td><td>Heidmoor</td><td>2</td><td>true</td></tr>
+      <tr><td>2</td><td>20015</td><td>Heidmoor</td><td>6</td><td>false</td></tr>
+      <tr><td>3</td><td>10533</td><td>Wiesede</td><td>1</td><td>false</td></tr>
+      <tr><td>4</td><td>10871</td><td>Kleinmoor</td><td>3</td><td>true</td></tr>
+      <tr><td>5</td><td>20022</td><td>Wiesede</td><td>4</td><td>false</td></tr>
+    </table>
+    <p class="klein">Die Stopps liegen in einer Liste <code>List&lt;Stopp&gt;</code> in der Reihenfolge der Tabelle vor (Klasse <code>Stopp</code> siehe Anlage 4).</p>
+  </div>
+
+  <div class="anlage" id="anlage-10">
+    <h4>Anlage 10 · JSON-Syntaxbeschreibung</h4>
+    <pre class="json">// JSON-Syntaxbeschreibung
+// wert kann sein: "zeichenkette", zahl, true, false, null, objekt, array
+{
+    "attributname": wert,
+    ...,
+    "objektname": {
+        "attributname": wert,
+        ...
+    },
+    "arrayname": [
+        wert,
+        ...
+    ]
+}</pre>
+  </div>
+
+  <div class="anlage" id="anlage-11">
+    <h4>Anlage 11 · Fachtext zur eRechnung</h4>
+    <div class="englisch">
+      <p><strong>E-invoicing in Germany: what businesses need to know</strong></p>
+      <p>Since 1 January 2025, every business in Germany has to be able to receive electronic invoices from other businesses (B2B). Under the new rules, an e-invoice is an invoice that is issued, transmitted and received in a structured electronic format which complies with the European standard EN 16931 and allows the data to be processed automatically. A PDF file attached to an e-mail is therefore no longer regarded as an e-invoice but as an “other invoice”. Invoices to private consumers (B2C) are not affected by the new rules.</p>
+      <p>For issuing e-invoices, the law provides transition periods. Until 31 December 2026, businesses may still send paper invoices or invoices in other electronic formats such as PDF; sending a PDF, however, requires the consent of the recipient. During 2027, this option is only available to businesses whose total turnover in the previous year did not exceed EUR 800,000. From 1 January 2028, all businesses must issue e-invoices. Invoices for small amounts of up to EUR 250 and travel tickets are exempt.</p>
+      <p>Two formats are widely used. XRechnung is a purely XML-based format; it is required by many public authorities, which use a routing ID (“Leitweg-ID”) to forward each invoice to the responsible department. ZUGFeRD is a hybrid format: a PDF/A-3 document that contains the invoice data as an embedded XML file. People can read the PDF, while software processes the XML. If the two parts differ, the XML data prevail.</p>
+      <p>The law does not prescribe a specific transmission channel. E-invoices can be sent by e-mail, uploaded to a portal, exchanged via an API or delivered through the Peppol network. In any case, they must be stored in their original format.</p>
+    </div>
+    <p class="klein">Selbst verfasster Text auf Grundlage der Rechtslage 2026.</p>
+  </div>
+
+  <div class="anlage" id="anlage-12">
+    <h4>Anlage 12 · Auszug aus einer erzeugten Rechnung (vereinfachtes XML-Format)</h4>
+    <pre class="xml"><span class="zn"> 1</span>  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<span class="zn"> 2</span>  &lt;rechnung xmlns="urn:kranich:frischekiste:rechnung:1.0"&gt;
+<span class="zn"> 3</span>    &lt;rechnungsnummer&gt;RE-2026-04711&lt;/rechnungsnummer&gt;
+<span class="zn"> 4</span>    &lt;rechnungsdatum&gt;2026-11-30&lt;/rechnungsdatum&gt;
+<span class="zn"> 5</span>    &lt;faelligAm&gt;2026-11-16&lt;/faelligAm&gt;
+<span class="zn"> 6</span>    &lt;leitwegId&gt;03359012-4711-08&lt;/leitwegId&gt;
+<span class="zn"> 7</span>    &lt;verkaeufer&gt;
+<span class="zn"> 8</span>      &lt;name&gt;FrischeKiste Nordheide GmbH&lt;/name&gt;
+<span class="zn"> 9</span>      &lt;ustId&gt;DE123456789&lt;/ustId&gt;
+<span class="zn">10</span>    &lt;/verkaeufer&gt;
+<span class="zn">11</span>    &lt;kaeufer&gt;
+<span class="zn">12</span>      &lt;name&gt;Stadt Heidmoor, Kita Sonnenblume&lt;/name&gt;
+<span class="zn">13</span>    &lt;/kaeufer&gt;
+<span class="zn">14</span>    &lt;position nr="1"&gt;
+<span class="zn">15</span>      &lt;bezeichnung&gt;Obstkiste mittel&lt;/bezeichnung&gt;
+<span class="zn">16</span>      &lt;menge&gt;8&lt;/menge&gt;
+<span class="zn">17</span>      &lt;einzelpreis&gt;18.50&lt;/einzelpreis&gt;
+<span class="zn">18</span>      &lt;nettobetrag&gt;148.00&lt;/nettobetrag&gt;
+<span class="zn">19</span>      &lt;steuersatz&gt;7&lt;/steuersatz&gt;
+<span class="zn">20</span>    &lt;/position&gt;
+<span class="zn">21</span>    &lt;position nr="2"&gt;
+<span class="zn">22</span>      &lt;bezeichnung&gt;Gemüsekiste groß&lt;/bezeichnung&gt;
+<span class="zn">23</span>      &lt;menge&gt;4&lt;/menge&gt;
+<span class="zn">24</span>      &lt;einzelpreis&gt;27.90&lt;/einzelpreis&gt;
+<span class="zn">25</span>      &lt;nettobetrag&gt;101.60&lt;/nettobetrag&gt;
+<span class="zn">26</span>      &lt;steuersatz&gt;7&lt;/steuersatz&gt;
+<span class="zn">27</span>    &lt;/position&gt;
+<span class="zn">28</span>    &lt;summen&gt;
+<span class="zn">29</span>      &lt;nettogesamt&gt;259.60&lt;/nettogesamt&gt;
+<span class="zn">30</span>      &lt;umsatzsteuer&gt;18.17&lt;/umsatzsteuer&gt;
+<span class="zn">31</span>      &lt;bruttogesamt&gt;278.77&lt;/bruttogesamt&gt;
+<span class="zn">32</span>    &lt;/summen&gt;
+<span class="zn">33</span>  &lt;/rechnung&gt;</pre>
+    <p class="klein">Das Dokument wurde erfolgreich gegen das zugehörige XML-Schema <code>rechnung.xsd</code> validiert (Datentypen: Datumsangaben <code>xs:date</code>, Mengen und Beträge <code>xs:decimal</code>). Beträge in Euro, <code>steuersatz</code> in Prozent; für Lebensmittel gilt der ermäßigte Steuersatz von 7 %.</p>
+  </div>
+</section>
+
+<!-- ===================== TEIL C: AUFGABEN ===================== -->
+<section class="teil" id="aufgaben">
+  <h2>C · Aufgaben</h2>
+  <p class="klein">Alle Aufgaben beziehen sich auf die Ausgangssituation in Anlage 1. Algorithmen sind in Pseudocode zu entwickeln; eine Programmiersprache (z. B. Java) ist ebenfalls zulässig. Für alle Attribute stehen Get-Methoden zur Verfügung (Anlage 4).</p>
+
+  <!-- ===================== SD-01 ===================== -->
+  <h3 id="a-01">SD-01 · XML</h3>
+
+  <div class="aufgabe" id="SD-01-1">
+    <div class="einheit">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SD-01.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Die Fahrer-App meldet nach jeder Lieferung den Status an den Server. Ein Kollege zeigt Ihnen eine solche Statusmeldung:</p>
+    <pre class="xml"><span class="zn"> 1</span>  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<span class="zn"> 2</span>  &lt;lieferung nr="88120"&gt;
+<span class="zn"> 3</span>    &lt;status&gt;zugestellt&lt;/status&gt;
+<span class="zn"> 4</span>    &lt;zeit&gt;2026-11-10T09:42:00&lt;/zeit&gt;
+<span class="zn"> 5</span>    &lt;ablage hinweis="Garage"/&gt;
+<span class="zn"> 6</span>  &lt;/lieferung&gt;</pre>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Benennen Sie die folgenden Bestandteile der Statusmeldung.</div>
+    <table class="leer kompakt">
+      <tr><th style="width:42%">Bestandteil</th><th>Bezeichnung</th></tr>
+      <tr><td class="mono vorgabe">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</td><td></td></tr>
+      <tr><td class="vorgabe">das Element <code>lieferung</code> (Zeilen 2–6)</td><td></td></tr>
+      <tr><td class="mono vorgabe">nr="88120"</td><td></td></tr>
+      <tr><td class="mono vorgabe">&lt;ablage hinweis="Garage"/&gt;</td><td></td></tr>
+    </table>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Erläutern Sie die Eigenschaften „wohlgeformt“ und „gültig“ eines XML-Dokuments. Geben Sie jeweils an, ob die Statusmeldung diese Eigenschaft besitzt. Zu der Statusmeldung existiert bisher keine DTD und kein XML-Schema.</div>
+    <table class="leer sehrhoch kompakt">
+      <tr><th style="width:18%">Eigenschaft</th><th>Erläuterung</th><th style="width:26%">trifft auf die Statusmeldung zu?</th></tr>
+      <tr><td class="vorgabe">wohlgeformt</td><td></td><td></td></tr>
+      <tr><td class="vorgabe">gültig</td><td></td><td></td></tr>
+    </table>
+    <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 3cb</p>
+    </div>
+  </div>
+
+  <div class="aufgabe" id="SD-01-2">
+    <div class="einheit">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SD-01.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Für die Stammdaten der Erzeugerbetriebe und für die Lieferscheine werden Strukturbeschreibungen benötigt.</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Erläutern Sie die Bedeutung der folgenden Deklarationen aus der Strukturbeschreibung der Erzeuger-Stammdaten.</div>
+    <table class="leer hoch kompakt">
+      <tr><th style="width:52%">Deklaration</th><th>Bedeutung</th></tr>
+      <tr><td class="mono">&lt;!ELEMENT erzeuger (name, telefon?, email+, hof)&gt;</td><td></td></tr>
+      <tr><td class="mono">&lt;!ELEMENT hof (adresse | koordinaten)&gt;</td><td></td></tr>
+      <tr><td class="mono">&lt;!ATTLIST erzeuger id     ID              #REQUIRED<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status (aktiv|pausiert) "aktiv"&gt;</td><td></td></tr>
+      <tr><td class="mono">&lt;xs:element name="zertifikat" type="xs:string"<br>&nbsp;&nbsp;&nbsp;&nbsp;minOccurs="0" maxOccurs="unbounded"/&gt;</td><td></td></tr>
+    </table>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">6 P</span>b) Erstellen Sie die externe DTD <code>lieferschein.dtd</code> für den Lieferschein in Anlage 6. Es gelten folgende Regeln:
+      <ul>
+        <li>Ein Lieferschein enthält genau einen Kunden, danach mindestens eine Position und am Ende optional den Namen des Fahrers.</li>
+        <li>Lieferscheinnummer (<code>nr</code>) und Datum (<code>datum</code>) sind Pflichtattribute des Lieferscheins, die Kundennummer (<code>kundenNr</code>) ist Pflichtattribut des Kunden.</li>
+        <li>Ein Kunde hat genau einen Namen und eine Adresse.</li>
+        <li>Eine Position enthält genau eine Kiste und eine Anzahl, danach beliebig viele Bemerkungen (auch keine).</li>
+        <li>Alle übrigen Elemente enthalten nur Text.</li>
+      </ul>
+    </div>
+    <div class="antwort z12"></div>
+    <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 3c (DTD lesen)</p>
+    </div>
+  </div>
+
+  <div class="aufgabe" id="SD-01-3">
+    <div class="einheit">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SD-01.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">16 Punkte</span>
+    </div>
+    <p>Die Erzeugerbetriebe laden ihr Wochenangebot als XML-Datei im KistenPortal hoch. Bevor die Daten importiert werden, prüft das KistenPortal jede Datei gegen die externe DTD <code>wochenangebot.dtd</code> (Anlage 5).</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Erläutern Sie, wofür die DTD in diesem Zusammenhang benötigt wird.</div>
+    <div class="antwort z3"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">8 P</span>b) Das Wochenangebot von Hof Brammer für KW 46 (Anlage 5) enthält acht Fehler. Einer davon ist bereits in die Tabelle eingetragen.<br>Ermitteln Sie vier weitere Fehler. Geben Sie jeweils die Zeile, eine Beschreibung des Fehlers und die verletzte Eigenschaft (Wohlgeformtheit oder Gültigkeit) an.</div>
+    <table class="leer hoch kompakt">
+      <tr><th style="width:9%">Zeile</th><th>Beschreibung</th><th style="width:20%">Eigenschaft</th></tr>
+      <tr><td class="vorgabe">29</td><td class="vorgabe">Das Element <code>lieferant</code> ist in der DTD nicht deklariert.</td><td class="vorgabe">Gültigkeit</td></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+    </table>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Für KW 47 lädt Hof Brammer eine Datei hoch, die gegen die DTD gültig ist. Sie enthält unter anderem folgenden Artikel:
+      <pre class="xml">&lt;artikel artNr="A-110" einheit="kg"&gt;
+  &lt;bezeichnung&gt;Grünkohl&lt;/bezeichnung&gt;
+  &lt;menge&gt;ca. 80&lt;/menge&gt;
+  &lt;preis&gt;-1.90&lt;/preis&gt;
+&lt;/artikel&gt;</pre>
+      Erläutern Sie, warum diese Werte die Prüfung gegen die DTD bestehen, und beschreiben Sie zwei Maßnahmen, mit denen solche Fehler vor dem Import erkannt werden können.</div>
+    <div class="antwort z8"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">2 P</span>d) Nennen Sie zwei Vorteile eines XML-Schemas (XSD) gegenüber einer DTD.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 3c (Fehler anhand einer DTD finden) und W25 Teil 1, Aufgabe 3bc (Grenzen der Schema-Validierung)</p>
+    </div>
+  </div>
+
+  <!-- ===================== SD-02 ===================== -->
+  <h3 id="a-02">SD-02 · JSON</h3>
+
+  <div class="aufgabe" id="SD-02-1">
+    <div class="einheit">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SD-02.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Beschreiben Sie den Unterschied zwischen einem JSON-Objekt und einem JSON-Array.</div>
+    <div class="antwort z3"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Ein Kollege hat für einen Test das folgende Dokument geschrieben. Der JSON-Parser lehnt es ab. Das Dokument enthält vier Fehler. Geben Sie die Fehler an und korrigieren Sie sie.</div>
+    <pre class="json"><span class="zn">1</span>  {
+<span class="zn">2</span>    'kisteId': "K-MIX-S",
+<span class="zn">3</span>    "preis": 14,20,
+<span class="zn">4</span>    "bio": False,
+<span class="zn">5</span>    "inhalt": ["Äpfel", "Möhren", "Kartoffeln",]
+<span class="zn">6</span>  }</pre>
+    <table class="leer kompakt">
+      <tr><th style="width:9%">Zeile</th><th>Fehler</th><th style="width:34%">Korrektur</th></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="aufgabe" id="SD-02-2">
+    <div class="einheit">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SD-02.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Die Kistenarten sollen aus den bisherigen Tabellen (Anlage 7) in die dokumentenorientierte Datenbank übernommen und über die API an die App geliefert werden.</p>
+    <div class="teilaufgabe"><span class="tp">5 P</span>a) Überführen Sie die Tabelle <code>Kiste</code> in ein JSON-Dokument mit einem Array <code>kisten</code>. Wählen Sie für jeden Wert einen passenden JSON-Datentyp. Nutzen Sie die Syntaxbeschreibung in Anlage 10.</div>
+    <div class="antwort z18"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Die App soll mit einer Kiste auch deren Inhalt erhalten. Geben Sie für die Kiste <code>K-OBST-M</code> das Array <code>inhalt</code> an, das mit den Einträgen der Tabelle <code>Kisteninhalt</code> in das Objekt aus a) eingebettet wird.</div>
+    <div class="antwort z8"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Nennen Sie zwei Gründe, warum für die Kommunikation zwischen App und Server JSON statt XML verwendet wird.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 3ca</p>
+    </div>
+  </div>
+
+  <div class="aufgabe" id="SD-02-3">
+    <div class="einheit">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SD-02.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">20 Punkte</span>
+    </div>
+    <p>Auch die Kundendaten werden in die dokumentenorientierte Datenbank übernommen. Außerdem soll die Fahrer-App die offenen Stopps einer Tour als JSON erhalten.</p>
+    <div class="teilaufgabe"><span class="tp">5 P</span>a) Überführen Sie die Tabellen <code>Kunde</code> und <code>Lieferadresse</code> (Anlage 8) in ein JSON-Dokument mit den Arrays <code>kunden</code> und <code>lieferadressen</code>. Die Zuordnung einer Lieferadresse zu ihrem Kunden erfolgt wie bisher über die Kundennummer (Referenz).</div>
+    <div class="antwort z18"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Alternativ sollen die Lieferadressen in das Kundendokument eingebettet werden. Erstellen Sie das JSON-Dokument der Kundin 10427 mit eingebetteten Lieferadressen.</div>
+    <div class="antwort z12"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Für zwei weitere Datenbestände ist zu entscheiden, ob sie eingebettet oder referenziert werden. Entscheiden Sie jeweils begründet.</div>
+    <table class="leer sehrhoch kompakt">
+      <tr><th style="width:44%">Datenbestand</th><th style="width:18%">Embedding oder Referenz?</th><th>Begründung</th></tr>
+      <tr><td class="vorgabe">(1) die <strong>Bestellungen</strong> eines Kunden: Ein Abo-Kunde sammelt über die Jahre mehrere Hundert Bestellungen; beim Öffnen des Kundenkontos zeigt die App nur Name und Lieferadressen.</td><td></td><td></td></tr>
+      <tr><td class="vorgabe">(2) die <strong>Positionen</strong> einer Bestellung (Kiste, Anzahl, Preis zum Bestellzeitpunkt): Eine Bestellung hat ein bis fünf Positionen, sie werden immer mit der Bestellung angezeigt und ändern sich danach nicht mehr.</td><td></td><td></td></tr>
+    </table>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">8 P</span>d) Entwickeln Sie die Methode <code>offeneStoppsAlsJson(stopps : List&lt;Stopp&gt;) : string</code>. Sie liefert alle noch <strong>nicht zugestellten</strong> Stopps als JSON-Array in der Reihenfolge der Liste. Jedes Objekt enthält die Schlüssel <code>position</code>, <code>kundenNr</code>, <code>ort</code> und <code>kisten</code> (Anzahl der Kisten). Gibt es keine offenen Stopps, wird <code>[]</code> zurückgegeben. Zeilenumbrüche und Einrückungen sind nicht erforderlich. Klasse <code>Stopp</code> und Hinweise zu Zeichenketten: Anlage 4.<br>Für die Testdaten aus Anlage 9 ergibt sich (in einer Zeile):
+      <pre class="json">[{"position": 2, "kundenNr": 20015, "ort": "Heidmoor", "kisten": 6}, {"position": 3, "kundenNr": 10533, "ort": "Wiesede", "kisten": 1}, {"position": 5, "kundenNr": 20022, "ort": "Wiesede", "kisten": 4}]</pre>
+    </div>
+    <div class="antwort z18"></div>
+    <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 3c (Tabellen in JSON, Embedding) und W24 Teil 1, Aufgabe 2c (Skript mit JSON-Ausgabe)</p>
+    </div>
+  </div>
+
+  <!-- ===================== SD-03 ===================== -->
+  <h3 id="a-03">SD-03 · REST-Grundlagen &amp; HTTP-Methoden</h3>
+
+  <div class="aufgabe" id="SD-03-1">
+    <div class="einheit">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SD-03.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Die KistenPortal-API (Anlage 2) bildet die vier Grundoperationen auf Daten (CRUD) auf HTTP-Methoden ab.</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Ergänzen Sie die Tabelle um je ein Beispiel aus dem KistenPortal und die passende HTTP-Methode.</div>
+    <table class="leer hoch kompakt">
+      <tr><th style="width:22%">Operation</th><th>Beispiel im KistenPortal</th><th style="width:22%">HTTP-Methode</th></tr>
+      <tr><td class="vorgabe">C – Create</td><td></td><td></td></tr>
+      <tr><td class="vorgabe">R – Read</td><td></td><td></td></tr>
+      <tr><td class="vorgabe">U – Update</td><td></td><td></td></tr>
+      <tr><td class="vorgabe">D – Delete</td><td></td><td></td></tr>
+    </table>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Die API ist zustandslos. Erläutern Sie, was das für die Requests der Kunden-App bedeutet.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: S24 Teil 1, Aufgabe 2b</p>
+    </div>
+  </div>
+
+  <div class="aufgabe" id="SD-03-2">
+    <div class="einheit">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SD-03.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Für die nächste Version der Kunden-App werden weitere Endpunkte benötigt. Halten Sie sich an die Konventionen der API-Dokumentation (Anlage 2).</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Geben Sie für jede Anforderung die HTTP-Methode und den Endpunkt (relativ zur Basis-URL, mit konkreten Werten) an.</div>
+    <table class="leer kompakt">
+      <tr><th style="width:4%">Nr.</th><th style="width:46%">Anforderung</th><th style="width:11%">Methode</th><th>Endpunkt</th></tr>
+      <tr><td class="vorgabe">1</td><td class="vorgabe">alle Bio-Kisten der Größe L anzeigen</td><td></td><td></td></tr>
+      <tr><td class="vorgabe">2</td><td class="vorgabe">das Abo 5531 der Kundin 10427 bis zum 24.11.2026 pausieren (nur Status und Datum ändern)</td><td></td><td></td></tr>
+      <tr><td class="vorgabe">3</td><td class="vorgabe">die Lieferadresse 2 der Kundin 10427 löschen</td><td></td><td></td></tr>
+      <tr><td class="vorgabe">4</td><td class="vorgabe">eine Reklamation zur Bestellung 88120 erfassen</td><td></td><td></td></tr>
+      <tr><td class="vorgabe">5</td><td class="vorgabe">die Lieferadresse 1 der Kundin 10427 vollständig durch neue Daten ersetzen</td><td></td><td></td></tr>
+      <tr><td class="vorgabe">6</td><td class="vorgabe">alle Bestellungen der Kundin 10427 aus dem November 2026 anzeigen</td><td></td><td></td></tr>
+    </table>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Erläutern Sie an einem Beispiel aus a) den Unterschied zwischen Pfad- und Query-Parametern.</div>
+    <div class="antwort z5"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Die Basis-URL enthält die Angabe <code>/v1</code>. Erläutern Sie den Zweck dieser Angabe.</div>
+    <div class="antwort z3"></div>
+    </div>
+  </div>
+
+  <div class="aufgabe" id="SD-03-3">
+    <div class="einheit">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SD-03.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">18 Punkte</span>
+    </div>
+    <p>Die Geschäftsführung der FrischeKiste möchte die API künftig auch weiteren Partnern anbieten und lässt sich das Konzept erklären. Gleichzeitig melden Testkunden Auffälligkeiten in der App.</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Erläutern Sie das Konzept einer REST-API (Representational State Transfer Application Programming Interface).</div>
+    <div class="antwort z5"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">5 P</span>b) Geben Sie für die folgenden Requests an, ob sie <em>sicher</em> und ob sie <em>idempotent</em> sind, und begründen Sie kurz.</div>
+    <table class="leer hoch kompakt">
+      <tr><th style="width:38%">Request</th><th style="width:9%">sicher</th><th style="width:11%">idempotent</th><th>Begründung</th></tr>
+      <tr><td class="mono">GET /v1/kisten?bio=true</td><td></td><td></td><td></td></tr>
+      <tr><td class="mono">POST /v1/kunden/10427/abos<br>(Body wie in Anlage 3)</td><td></td><td></td><td></td></tr>
+      <tr><td class="mono">PUT /v1/kunden/10427/abos/5531<br>(vollständige Repräsentation)</td><td></td><td></td><td></td></tr>
+      <tr><td class="mono">PATCH /v1/kunden/10427/abos/5531<br>{"status": "pausiert",<br>&nbsp;"pausiertBis": "2026-11-24"}</td><td></td><td></td><td></td></tr>
+      <tr><td class="mono">DELETE /v1/kunden/10427/lieferadressen/2</td><td></td><td></td><td></td></tr>
+    </table>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Eine Testkundin tippt bei schlechtem Mobilfunkempfang auf „Abo abschließen“, erhält keine Rückmeldung und tippt erneut. Danach hat sie zwei identische Abos. Erläutern Sie die Ursache und beschreiben Sie eine Lösung.</div>
+    <div class="antwort z8"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">4 P</span>d) Beim Abo 5531 (Anlage 2) soll der Liefertag auf Donnerstag geändert werden. Geben Sie je einen Request mit <code>PUT</code> und mit <code>PATCH</code> an (Request-Zeile und Body; Header dürfen entfallen).</div>
+    <div class="antwort z12"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">2 P</span>e) Nennen Sie zwei Unterschiede zwischen REST und SOAP.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S24 Teil 1, Aufgabe 2a/2b und S26 Teil 1, Aufgabe 2ba/2bc</p>
+    </div>
+  </div>
+
+  <!-- ===================== SD-04 ===================== -->
+  <h3 id="a-04">SD-04 · HTTP-Request/Response &amp; Statuscodes</h3>
+
+  <div class="aufgabe" id="SD-04-1">
+    <div class="einheit">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SD-04.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Erläutern Sie die Bedeutung der folgenden Klassen von HTTP-Statuscodes.</div>
+    <table class="leer hoch kompakt">
+      <tr><th style="width:12%">Code</th><th>Bedeutung</th></tr>
+      <tr><td class="vorgabe">2xx</td><td></td></tr>
+      <tr><td class="vorgabe">4xx</td><td></td></tr>
+      <tr><td class="vorgabe">5xx</td><td></td></tr>
+    </table>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Eine Testkundin meldet, dass die App beim Öffnen von „Meine Abos“ die Meldung „Fehler 404“ anzeigt. Nennen Sie zwei mögliche Ursachen.</div>
+    <div class="antwort z3"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">1 P</span>c) Während eines Datenbank-Updates ist die API für 20 Minuten nicht nutzbar. Nennen Sie den Statuscode, den die API in dieser Zeit senden sollte.</div>
+    <div class="antwort"></div>
+    <p class="quelle">Angelehnt an: S24 Teil 1, Aufgabe 2d und W21 Teil 1, Aufgabe 3c</p>
+    </div>
+  </div>
+
+  <div class="aufgabe" id="SD-04-2">
+    <div class="einheit">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SD-04.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">12 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Beschreiben Sie die Bedeutung der folgenden Bestandteile des Requests aus Anlage 3. Die erste Zeile ist als Beispiel ausgefüllt.</div>
+    <table class="leer hoch kompakt">
+      <tr><th style="width:40%">Bestandteil</th><th>Bedeutung</th></tr>
+      <tr><td class="mono vorgabe">POST</td><td class="vorgabe">HTTP-Methode: legt eine neue Ressource an – hier ein neues Abo in der Sammlung der Abos der Kundin</td></tr>
+      <tr><td class="mono">/v1/kunden/10427/abos</td><td></td></tr>
+      <tr><td class="mono">Content-Type: application/json<br>Accept: application/json</td><td></td></tr>
+      <tr><td class="mono">X-API-Key: app-7Fq2-Lx91</td><td></td></tr>
+      <tr><td class="mono">{"kisteId": "K-GEM-L", "rhythmus": …}</td><td></td></tr>
+    </table>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe">b) Für die Tourenplanung ruft das KistenPortal die Web-API eines Kartendienstes auf:
+      <pre class="http">GET https://api.geodienst.example/v2/route?start=53.3297,9.8722&amp;ziel=53.2464,10.4115&amp;profil=transporter&amp;apikey=GD-55K2-ZZ81</pre>
+    </div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>ba) Beschreiben Sie die Parameter der URL. Ein Beispiel ist angegeben.</div>
+    <table class="leer hoch kompakt">
+      <tr><th style="width:40%">Parameter</th><th>Beschreibung</th></tr>
+      <tr><td class="mono vorgabe">/v2/route</td><td class="vorgabe">die angefragte Ressource (eine Route) in Version 2 der API</td></tr>
+      <tr><td class="mono">start=53.3297,9.8722<br>ziel=53.2464,10.4115</td><td></td></tr>
+      <tr><td class="mono">profil=transporter</td><td></td></tr>
+      <tr><td class="mono">apikey=GD-55K2-ZZ81</td><td></td></tr>
+    </table>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">1 P</span>bb) Nennen Sie einen Nachteil, wenn der API-Schlüssel als Query-Parameter in der URL übertragen wird.</div>
+    <div class="antwort z3"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Geben Sie für die folgenden Situationen den passenden Statuscode an und begründen Sie Ihre Wahl.</div>
+    <table class="leer hoch kompakt">
+      <tr><th style="width:46%">Situation</th><th style="width:12%">Code</th><th>Begründung</th></tr>
+      <tr><td class="vorgabe">(1) Die App sendet <code>POST /v1/kunden/10427/abos</code>; im JSON-Body fehlt das Pflichtfeld <code>kisteId</code>.</td><td></td><td></td></tr>
+      <tr><td class="vorgabe">(2) Ein Erzeugerbetrieb sendet mit seinem gültigen Partnerschlüssel <code>DELETE /v1/kisten/K-MIX-S</code>.</td><td></td><td></td></tr>
+      <tr><td class="vorgabe">(3) Die Kundin löscht ihre Lieferadresse 2 erfolgreich; die Antwort enthält bewusst keinen Body.</td><td></td><td></td></tr>
+      <tr><td class="vorgabe">(4) Eine veraltete App ruft <code>/v0/kisten</code> auf; diese Adresse wurde dauerhaft durch <code>/v1/kisten</code> ersetzt.</td><td></td><td></td></tr>
+    </table>
+    <p class="quelle">Angelehnt an: S24 Teil 1, Aufgabe 2c und S26 Teil 1, Aufgabe 2bb</p>
+    </div>
+  </div>
+
+  <div class="aufgabe" id="SD-04-3">
+    <div class="einheit">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SD-04.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">20 Punkte</span>
+    </div>
+    <p>Sie implementieren in der Klasse <code>KistenController</code> (Anlage 4) den Endpunkt <code>GET /v1/kisten/{kisteId}</code>. Der Pfadparameter heißt <code>kisteId</code>.</p>
+    <div class="teilaufgabe"><span class="tp">8 P</span>a) Entwickeln Sie die Methode <code>createErrorResponse(statusCode : integer, meldung : string) : HttpResponse</code>. Die erzeugte Antwort enthält
+      <ul>
+        <li>den übergebenen Statuscode,</li>
+        <li>den Header <code>Content-Type</code> mit dem Wert <code>application/json; charset=utf-8</code>,</li>
+        <li>den Header <code>Content-Length</code> mit der Anzahl der Bytes des Bodys,</li>
+        <li>als Body: <code>{"status": &lt;statusCode&gt;, "fehler": "&lt;meldung&gt;"}</code> – genau in dieser Schreibweise, also mit je einem Leerzeichen nach Doppelpunkt und Komma.</li>
+      </ul>
+      Beispiel für Statuscode 404 und die Meldung „Kiste K-XXL-Z nicht gefunden“:
+      <pre class="http">HTTP/1.1 404 Not Found
+Content-Type: application/json; charset=utf-8
+Content-Length: 57
+
+{"status": 404, "fehler": "Kiste K-XXL-Z nicht gefunden"}</pre>
+    </div>
+    <div class="antwort z12"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Ein Kollege berechnet den Wert von <code>Content-Length</code> mit <code>body.length()</code>. Erläutern Sie, warum das zu falschen Werten führen kann. Geben Sie für die Fehlerantwort mit dem Statuscode 503 und der Meldung „Katalog vorübergehend nicht verfügbar“ die Anzahl der Zeichen des Bodys und den korrekten Wert von <code>Content-Length</code> an.</div>
+    <div class="antwort z5"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">9 P</span>c) Entwickeln Sie die Methode <code>handleGetKiste(request : HttpRequest) : HttpResponse</code>. Sie prüft in dieser Reihenfolge:
+      <ol>
+        <li>Fehlt der Header <code>X-API-Key</code> oder ist der Schlüssel ungültig: Statuscode 401, Meldung „API-Schlüssel fehlt oder ist ungültig“.</li>
+        <li>Ist der Katalog nicht verfügbar: Statuscode 503, Meldung „Katalog vorübergehend nicht verfügbar“.</li>
+        <li>Gibt es keine Kiste mit der <code>kisteId</code> aus dem Pfad: Statuscode 404, Meldung „Kiste &lt;kisteId&gt; nicht gefunden“.</li>
+        <li>Andernfalls: Statuscode 200, Body = JSON-Repräsentation der Kiste, Header <code>Content-Type</code> und <code>Content-Length</code> wie in a).</li>
+      </ol>
+      Verwenden Sie für die Fehlerfälle die Methode aus a).</div>
+    <div class="antwort z18"></div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W24 Teil 2, Aufgabe 2a (HTTP-Antwort mit Statuscode, Content-Type und Content-Length bauen)</p>
+    </div>
+  </div>
+
+  <!-- ===================== SD-05 ===================== -->
+  <h3 id="a-05">SD-05 · eRechnung</h3>
+
+  <div class="aufgabe" id="SD-05-1">
+    <div class="einheit">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SD-05.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Erläutern Sie das Hauptziel einer eRechnung.</div>
+    <div class="antwort z3"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Entscheiden Sie für die folgenden Rechnungen der FrischeKiste, ob es sich um eine eRechnung im Sinne der EN 16931 handelt, und begründen Sie kurz.</div>
+    <table class="leer hoch kompakt">
+      <tr><th style="width:44%">Rechnung</th><th style="width:12%">eRechnung?</th><th>Begründung</th></tr>
+      <tr><td class="vorgabe">(1) in der Textverarbeitung geschrieben, als PDF per E-Mail an eine Kantine geschickt</td><td></td><td></td></tr>
+      <tr><td class="vorgabe">(2) XRechnung im UBL-Format, im Rechnungsportal der Stadt Heidmoor hochgeladen</td><td></td><td></td></tr>
+      <tr><td class="vorgabe">(3) Papierrechnung, eingescannt und als JPG-Bild per E-Mail verschickt</td><td></td><td></td></tr>
+      <tr><td class="vorgabe">(4) ZUGFeRD-Rechnung im Profil EN 16931, per E-Mail an ein Büro geschickt</td><td></td><td></td></tr>
+    </table>
+    <p class="quelle">Angelehnt an: W25 Teil 1, Aufgabe 2ba</p>
+    </div>
+  </div>
+
+  <div class="aufgabe" id="SD-05-2">
+    <div class="einheit">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SD-05.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Die Geschäftsführung der FrischeKiste möchte wissen, was die eRechnungspflicht für das Unternehmen bedeutet. Sie haben den englischen Text in Anlage 11 gefunden. Beantworten Sie die Fragen auf Deutsch.</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Beschreiben Sie anhand des Textes, ab wann Unternehmen in Deutschland eRechnungen empfangen und ab wann sie eRechnungen ausstellen müssen.</div>
+    <div class="antwort z5"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Erläutern Sie den Unterschied zwischen den Formaten XRechnung und ZUGFeRD.</div>
+    <div class="antwort z5"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Die FrischeKiste verschickt ihre Rechnungen bisher an Geschäfts- und an Privatkunden als PDF per E-Mail. Beurteilen Sie mithilfe des Textes und der Angaben in Anlage 1, ob das im Jahr 2027 noch zulässig ist.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W25 Teil 1, Aufgabe 2b (englischer Fachtext zur eRechnung)</p>
+    </div>
+  </div>
+
+  <div class="aufgabe" id="SD-05-3">
+    <div class="einheit">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SD-05.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">18 Punkte</span>
+    </div>
+    <p>Die Kranich Softwarehaus GmbH entwickelt das Modul, das aus den Bestellungen eRechnungen erzeugt. Die Stadt Heidmoor verlangt für ihre Kitas und Schulen XRechnungen mit Leitweg-ID. Die Rechnungen an Geschäftskunden sollen per E-Mail versendet werden.</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Damit die Empfänger die Rechnungen zuverlässig verarbeiten können, müssen die erzeugten Dateien der Spezifikation entsprechen. Nennen Sie drei Möglichkeiten, wie Sie dies sicherstellen können.</div>
+    <div class="antwort z5"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Ein Kollege möchte die ersten echten Rechnungen auf der kostenlosen Website <code>www.erechnung-check.example</code> prüfen lassen. Dort lädt man eine Rechnung hoch und erhält ein Prüfergebnis. Erläutern Sie zwei Punkte, die bei der Nutzung zu beachten sind.</div>
+    <div class="antwort z8"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">6 P</span>c) Die Rechnung in Anlage 12 wurde erfolgreich gegen das XML-Schema validiert. Erläutern Sie anhand von zwei Fehlern in Anlage 12 (mit Zeilenangabe), warum eine ausschließliche Schema-Validierung nicht ausreicht.</div>
+    <div class="antwort z8"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe">d) Für den Versand per E-Mail nutzen die beteiligten Mailserver eine Transportverschlüsselung mit TLS.</div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>da) Nennen Sie die Art des Verschlüsselungsverfahrens, auf der TLS beruht.</div>
+    <div class="antwort"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">2 P</span>db) Erläutern Sie, warum die Rechnung trotz TLS nicht Ende-zu-Ende geschützt ist, und nennen Sie eine Alternative.</div>
+    <div class="antwort z3"></div>
+    </div>
+    <div class="einheit">
+    <div class="teilaufgabe"><span class="tp">2 P</span>e) Erläutern Sie den Zweck der Leitweg-ID (Anlage 12, Zeile 6).</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W25 Teil 1, Aufgabe 3a und 3b</p>
+    </div>
+  </div>
+
+  <!-- ===================== ORIGINALAUFGABEN ===================== -->
+  <h3 id="originale">Originalaufgaben zum Üben</h3>
+  <p>Diese echten Prüfungsaufgaben passen zu diesem Block (Dateien im Ordner <code>Prüfungsvorbereitung</code>). Lösungen gibt es nur für 2023 Sommer, 2023 Winter, 2024 Sommer und 2025 Winter (dort vom u-form-Verlag).</p>
+  <table class="kompakt" style="break-inside:auto">
+    <tr><th style="width:13%">Prüfung</th><th style="width:13%">Aufgabe</th><th>Thema</th><th style="width:36%">Datei · Lösung</th></tr>
+    <tr><td>Winter 2021</td><td>T1 A3c (2 P)</td><td>Ursache für HTTP-Fehler 404</td><td><code>2021/winter/AE 2021 Winter Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Winter 2022</td><td>T1 A3c (13 P)</td><td>XML: Zweck der DTD, wohlgeformt/gültig, Fehler anhand der DTD finden</td><td><code>2022/winter/AE 2022 Winter Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Sommer 2023</td><td>T1 A4cb (13 P)</td><td>Relationenmodell in 3NF inkl. JSON-Sensordaten</td><td><code>2023/sommer/AE Sommer 2023 Teil 1.pdf</code> · Lösung: <code>AE Sommer 2023 Teil 1+2 Lösungen.pdf</code></td></tr>
+    <tr><td>Winter 2023</td><td>T1 A3c (14 P)</td><td>Tabellen in JSON überführen, Verkaufsstellen als Array einbetten</td><td><code>2023/winter/AE Winter 2023 Teil 1.pdf</code> · Lösung: <code>AE Winter 2023 Teil 1 Lösungen.pdf</code></td></tr>
+    <tr><td>Sommer 2024</td><td>T1 A2 (25 P)</td><td>REST-Konzept, CRUD/HTTP-Methoden, Request-Bestandteile, Statuscodes, Sequenzdiagramm App/WebService/DB</td><td><code>2024/sommer/AE Sommer 2024 Teil 1+2+3.pdf</code> · Lösung: <code>AE Sommer 2024 Teil 1 Lösungen.pdf</code></td></tr>
+    <tr><td>Winter 2024</td><td>T1 A2c (8 P)</td><td>Skript: Subnetz durchlaufen, Ergebnis als JSON-Array</td><td><code>2024/winter/AE Winter 2024 Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Winter 2024</td><td>T2 A2a (10 P)</td><td>HttpResponse mit Statuscode, Content-Type und Content-Length bauen</td><td><code>2024/winter/AE Winter 2024 Teil 2.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Winter 2025</td><td>T1 A2b (9 P)</td><td>eRechnung: englischer Text, Hauptziel, Aspekte einer digitalen Rechnung</td><td><code>2025/winter/AE Winter 2025 Teil 1.pdf</code> · Lösung: <code>AE Winter 2025 Lösungserleuterungen.pdf</code> (u-form)</td></tr>
+    <tr><td>Winter 2025</td><td>T1 A3a, A3b (19 P)</td><td>Transportverschlüsselung, Konformität, Online-Prüfseite, XSD-Validierung reicht nicht</td><td>wie oben</td></tr>
+    <tr><td>Sommer 2026</td><td>T1 A2b (12 P)</td><td>REST-Konzept, Parameter einer GET-URL, weitere HTTP-Methoden</td><td><code>2026/sommer/AE Sommer 2026 Teil 1.pdf</code> · keine Lösung</td></tr>
+  </table>
+</section>
+
+</body>
+</html>

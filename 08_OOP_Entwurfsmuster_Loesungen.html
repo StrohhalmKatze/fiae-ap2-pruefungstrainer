@@ -1,0 +1,1095 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>08 Objektorientierung &amp; Entwurfsmuster – Lösungen</title>
+<link rel="stylesheet" href="style.css">
+<script src="uebungen.js"></script>
+<style>
+  /* Zusatzregeln Block 08 (Lösungen) */
+  nav.toc ol { columns: 3; column-gap: 24px; }
+  table.kompakt td, table.kompakt th { padding: 2px 6px; }
+  td.mono, th.mono { font-family: Consolas, "Courier New", monospace; font-size: 13px; }
+  pre { font-size: 12px; }
+  pre.ausgabe { background: #fff; border-style: dashed; }
+  pre.java, pre.ausgabe, pre.pseudo { break-inside: auto; }
+  .codelabel { break-after: avoid; }
+  .loesung .kopf { font-size: 16px; margin-bottom: 4px; break-after: avoid; page-break-after: avoid; }
+  .loesung h4 { margin: 12px 0 4px; font-size: 15px; }
+  .datei { font-size: 12px; color: var(--muted); }
+  @media print { pre { font-size: 8.8pt; orphans: 5; widows: 5; } }
+</style>
+</head>
+<body>
+
+<header class="blockkopf">
+  <h1>Block 08 · Objektorientierung &amp; Entwurfsmuster – Lösungen</h1>
+  <div class="unter">
+    Lösungssatz zu <a href="08_OOP_Entwurfsmuster.html">08_OOP_Entwurfsmuster.html</a>
+    · Pseudocode im IHK-Stil, dazu lauffähige Java-Dateien im Ordner <code>java\08_OOP_Entwurfsmuster\</code> (Start mit <code>java Aufgabe_OOP_NN_k.java</code>)
+  </div>
+</header>
+
+<nav class="toc">
+  <strong>Inhalt</strong>
+  <ol>
+    <li><a href="#l-01">OOP-01 Grundkonzepte</a></li>
+    <li><a href="#l-02">OOP-02 Vererbung, Interfaces</a></li>
+    <li><a href="#l-03">OOP-03 Polymorphie, Generics</a></li>
+    <li><a href="#l-04">OOP-04 Erzeugungsmuster</a></li>
+    <li><a href="#l-05">OOP-05 Verhaltens-/Strukturmuster</a></li>
+  </ol>
+</nav>
+
+<div class="info">
+  <span class="kastentitel">Hinweise zur Bewertung</span>
+  Wie in den IHK-Lösungshinweisen gilt: Andere sach- und fachgerechte Lösungen (andere Schleifenart, Java- oder C#-Syntax, Struktogramm, andere sinnvolle Bezeichner) werden mit voller Punktzahl bewertet. Syntaxfehler kosten in der Regel keine Punkte, Logikfehler schon. Bei Klassendiagrammen zählen die geforderten Elemente; die Anordnung der Kästen ist frei. Alle Java-Ausgaben unten stammen aus einem echten Programmlauf (JDK 21). Punkte gesamt: 178.
+</div>
+
+<section class="teil" id="loesungen">
+  <h2>Lösungen</h2>
+
+  <!-- ===================== OOP-01 ===================== -->
+  <h3 id="l-01">OOP-01 · Grundkonzepte: Klasse, Objekt, Kapselung</h3>
+
+  <div class="loesung" id="L-OOP-01-1">
+    <div class="kopf">Aufgabe OOP-01.1 · 6 Punkte</div>
+    <h4>a) Klasse und Objekt (2 P)</h4>
+    <p>Die <strong>Klasse</strong> <code>Paketfach</code> ist der Bauplan (Datentyp): Sie legt fest, welche Attribute (Fachnummer, Größe, Inhalt, Abholcode) und welche Methoden (<code>einlegen</code>, <code>entnehmen</code>, <code>istFrei</code> …) <em>jedes</em> Paketfach hat. Ein <strong>Objekt</strong> ist ein konkretes Paketfach, das zur Laufzeit mit <code>new</code> erzeugt wird und eigene Attributwerte hat, z. B. Fach 7 der Station Hafenstraße, Größe "M", belegt mit Sendung KT-1001. Für die Station gibt es also <strong>eine</strong> Klasse, aber <strong>24</strong> Paketfach-Objekte.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> 1 P Klasse als Bauplan/Typ mit Attributen und Methoden, 1 P Objekt als konkrete Instanz mit eigenem Zustand; ohne Bezug zum Beispiel höchstens 1 P.</div>
+
+    <h4>b) Datenkapselung (3 P)</h4>
+    <p>Die Attribute eines Paketfachs (<code>fachNr</code>, <code>groesse</code>, <code>inhalt</code>, <code>abholcode</code>) werden nach außen verborgen (Sichtbarkeit <code>private</code>). Andere Objekte, z. B. die Steuerung der Paketstation, können den Zustand nur über die öffentlichen Methoden lesen oder ändern (<code>getGroesse()</code>, <code>istFrei()</code>, <code>einlegen</code>, <code>entnehmen</code>). Niemand kann von außen direkt <code>inhalt</code> überschreiben oder den Abholcode auslesen.</p>
+    <p>Vorteile (zwei davon):</p>
+    <ul>
+      <li><strong>Gültige Daten:</strong> Die Methoden prüfen jede Änderung – eine Sendung kann z. B. nur in ein freies, ausreichend großes Fach gelegt werden.</li>
+      <li><strong>Wartbarkeit:</strong> Die interne Darstellung (z. B. Größe als Zahl statt Text) kann geändert werden, ohne dass andere Klassen angepasst werden müssen.</li>
+      <li><strong>Geringe Kopplung:</strong> Andere Klassen hängen nur von der öffentlichen Schnittstelle ab.</li>
+      <li><strong>Fehlersuche:</strong> Nur die Klasse selbst ändert ihre Attribute; Fehler lassen sich leichter eingrenzen.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> 1 P für das Prinzip (private Attribute, Zugriff nur über Methoden), je 1 P pro erläutertem Vorteil (max. 2).</div>
+
+    <h4>c) Aufgabe eines Konstruktors (1 P)</h4>
+    <p>Der Konstruktor wird beim Erzeugen eines Objekts (<code>new</code>) automatisch aufgerufen und <strong>initialisiert</strong> das neue Objekt, d. h. er setzt die Anfangswerte der Attribute.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> 1 P.</div>
+  </div>
+
+  <div class="loesung" id="L-OOP-01-2">
+    <div class="kopf">Aufgabe OOP-01.2 · 10 Punkte</div>
+    <h4>a) Ausgaben (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:8%">Nr.</th><th style="width:30%">Ausgabe</th><th>Begründung</th></tr>
+      <tr><td>(1)</td><td class="mono">1000 | Ahrens | 4.0 kg</td><td><code>e3 = e1</code> kopiert nur die Referenz. <code>e3.setGewicht(4.0)</code> ändert also dasselbe Objekt, auf das <code>e1</code> zeigt.</td></tr>
+      <tr><td>(2)</td><td class="mono">1001 | Bode | 1.0 kg</td><td>Zweiter Konstruktor ruft <code>this("Bode", 1.0)</code> auf. <code>setGewicht(40.0)</code> wird abgelehnt (über 31,5 kg), das Gewicht bleibt 1.0.</td></tr>
+      <tr><td>(3)</td><td class="mono">true</td><td><code>e1</code> und <code>e3</code> verweisen auf dasselbe Objekt.</td></tr>
+      <tr><td>(4)</td><td class="mono">false</td><td><code>e4</code> ist ein eigenes Objekt (Nummer 1002) – andere Identität.</td></tr>
+      <tr><td>(5)</td><td class="mono">true</td><td><code>equals</code> vergleicht Empfänger und Gewicht: beide "Ahrens" und 4.0.</td></tr>
+      <tr><td>(6)</td><td class="mono">4</td><td>Es wurden vier Objekte erzeugt (1000 bis 1003). Auch <code>e5</code> zählt: Die Nummer wird vergeben, bevor das ungültige Gewicht 0.0 abgelehnt wird.</td></tr>
+    </table>
+    <p class="codelabel">Ausgabe · Aufgabe_OOP_01_2.java</p>
+<pre class="ausgabe">1000 | Ahrens | 4.0 kg
+1001 | Bode | 1.0 kg
+true
+false
+true
+4</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> je richtige Ausgabe 1 P. Bei (1) ist der Kern das Aliasing (4.0 statt 2.5), bei (6) das Mitzählen von <code>e5</code> (3 ist falsch). Die genaue Darstellung der Zahl (4.0 oder 4) ist unerheblich.</div>
+
+    <h4>b) == gegenüber equals (2 P)</h4>
+    <p><code>==</code> vergleicht bei Objekten die <strong>Referenzen</strong> (Identität): <code>e1</code> und <code>e4</code> sind zwei verschiedene Objekte im Speicher, daher <code>false</code>. Die Klasse <code>Etikett</code> überschreibt <code>equals</code> so, dass <strong>inhaltlich</strong> verglichen wird (Empfänger und Gewicht) – beide Objekte haben gleiche Werte, daher <code>true</code>.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> 1 P für == als Identitäts-/Referenzvergleich, 1 P für equals als inhaltlichen Vergleich (überschrieben).</div>
+
+    <h4>c) static (2 P)</h4>
+    <p><code>naechsteNr</code> gehört als statisches Attribut zur <strong>Klasse</strong> und existiert nur <strong>einmal</strong> für alle Etiketten. Jeder Konstruktoraufruf liest und erhöht denselben Zähler – so entstehen fortlaufende, eindeutige Nummern, und die statische Methode <code>getAnzahl()</code> kann ohne Objekt aufgerufen werden.</p>
+    <p>Als normales Attribut hätte jedes Objekt eine eigene Kopie mit dem Startwert 1000: Alle Etiketten bekämen die Nummer 1000, die Nummern wären nicht mehr eindeutig. Außerdem dürfte die statische Methode <code>getAnzahl()</code> nicht mehr auf das Attribut zugreifen (Compilerfehler).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> 1 P Begründung (ein Zähler für alle Objekte), 1 P Folge ohne static (jedes Objekt beginnt bei 1000, keine eindeutigen Nummern).</div>
+    <p class="datei">Datei: <code>java\08_OOP_Entwurfsmuster\Aufgabe_OOP_01_2.java</code> (enthält zusätzlich ein Beispiel für die <code>NullPointerException</code>)</p>
+  </div>
+
+  <div class="loesung" id="L-OOP-01-3">
+    <div class="kopf">Aufgabe OOP-01.3 · 16 Punkte</div>
+    <h4>a) Klassendiagramm (7 P)</h4>
+    <figure>
+      <svg viewBox="0 0 700 302" width="700" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><rect x="10" y="10" width="345" height="284" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="182.5" y="28" text-anchor="middle" font-weight="bold">Paketfach</text><line x1="10" y1="36" x2="355" y2="36" stroke="#222" stroke-width="1.2"/><text x="19" y="54" text-decoration="underline">- anzahlFaecher : integer</text><text x="19" y="71">- fachNr : integer {final}</text><text x="19" y="88">- groesse : string {final}</text><text x="19" y="105">- inhalt : Sendung</text><text x="19" y="122">- abholcode : string</text><line x1="10" y1="131" x2="355" y2="131" stroke="#222" stroke-width="1.2"/><text x="19" y="149">+ Paketfach(fachNr : integer, groesse : string)</text><text x="19" y="166">+ Paketfach(fachNr : integer)</text><text x="19" y="183" text-decoration="underline">+ getAnzahlFaecher() : integer</text><text x="19" y="200">+ getFachNr() : integer</text><text x="19" y="217">+ getGroesse() : string</text><text x="19" y="234">+ istFrei() : boolean</text><text x="19" y="251">+ einlegen(s : Sendung, code : string) : boolean</text><text x="19" y="268">+ entnehmen(code : string) : Sendung</text><text x="19" y="285">- rang(groesse : string) : integer</text><rect x="520" y="60" width="130" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="585" y="78" text-anchor="middle" font-weight="bold">Sendung</text><polyline points="355,73 520,73" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="509,79 520,73 509,67" fill="none" stroke="#222" stroke-width="1.3"/><text x="365" y="67" font-size="12">inhalt</text><text x="514" y="90" text-anchor="end" font-size="12">0..1</text><text x="365" y="90" font-size="12">1</text></svg>
+      <figcaption>Lösung OOP-01.3a: Klasse <code>Paketfach</code> mit statischem Zähler (unterstrichen) und gerichteter Assoziation zu <code>Sendung</code></figcaption>
+    </figure>
+    <div class="bewertung"><strong>Bewertung:</strong> Attribute mit Datentyp und <code>-</code> (2 P); statisches Attribut <code>anzahlFaecher</code> unterstrichen oder mit <code>{static}</code> (1 P); beide Konstruktoren (1 P); Methoden <code>getFachNr</code>, <code>getGroesse</code>, <code>istFrei</code>, <code>einlegen</code>, <code>entnehmen</code> mit vollständiger Signatur (1 P); <code>getAnzahlFaecher</code> statisch und <code>rang</code> privat (1 P); Beziehung zu <code>Sendung</code> (1 P).<br>
+    Ebenfalls richtig: <code>inhalt</code> nur als Rollenname an der Assoziation statt im Attributfach; Multiplizität <code>1</code> statt <code>0..1</code> (der Belegsatz kennt nur 1 und *); Aggregation (ein Fach „enthält“ eine Sendung). <strong>Keine</strong> Komposition: Die Sendung existiert unabhängig vom Fach weiter. <code>{final}</code> ist nicht gefordert.</div>
+    <p><strong>Erklärung:</strong> Die Anzahl aller Fächer soll ohne Paketfach-Objekt abrufbar sein – das verlangt ein statisches Attribut <em>und</em> eine statische Methode. Fachnummer und Größe sind nach der Erzeugung unveränderlich, also gibt es nur Getter und keine Setter. <code>rang</code> ist eine interne Hilfsmethode und deshalb privat.</p>
+
+    <h4>b) Konstruktoren (3 P)</h4>
+<pre class="pseudo">konstruktor Paketfach(fachNr : integer, groesse : string)
+  this.fachNr := fachNr
+  this.groesse := groesse
+  inhalt := null
+  abholcode := null
+  anzahlFaecher := anzahlFaecher + 1
+Ende konstruktor
+
+konstruktor Paketfach(fachNr : integer)
+  this(fachNr, "M")
+Ende konstruktor</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> Zuweisung von Fachnummer und Größe mit <code>this</code> (1 P), Zähler erhöhen (1 P), zweiter Konstruktor ruft <code>this(fachNr, "M")</code> auf (1 P). Die Zuweisung von <code>null</code> ist optional (Standardwert). Wer im zweiten Konstruktor den Code kopiert statt <code>this(…)</code> zu verwenden, verliert den dritten Punkt.</div>
+
+    <h4>c) einlegen (3 P)</h4>
+<pre class="pseudo">methode einlegen(s : Sendung, code : string) : boolean
+  wenn istFrei() und rang(s.getGroesse()) &lt;= rang(groesse) dann
+    inhalt := s
+    abholcode := code
+    rückgabe true
+  Ende wenn
+  rückgabe false
+Ende methode</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> Prüfung „Fach frei“ (1 P), Größenvergleich über <code>rang</code> mit <code>&lt;=</code> (1 P), Sendung und Code speichern und passende Rückgaben (1 P). <code>istFrei()</code> darf durch <code>inhalt = null</code> ersetzt werden.</div>
+
+    <h4>d) entnehmen (3 P)</h4>
+<pre class="pseudo">methode entnehmen(code : string) : Sendung
+  wenn nicht istFrei() und abholcode = code dann
+    s : Sendung := inhalt
+    inhalt := null
+    abholcode := null
+    rückgabe s
+  Ende wenn
+  rückgabe null
+Ende methode</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> Prüfung auf belegtes Fach und richtigen Code (1 P), Sendung zwischenspeichern und Fach leeren (1 P), Rückgabe der Sendung bzw. <code>null</code> (1 P).</div>
+    <p><strong>Typischer Fehler:</strong> erst <code>inhalt := null</code> und danach <code>rückgabe inhalt</code> – dann wird immer <code>null</code> zurückgegeben. Deshalb die Sendung vorher in einer lokalen Variablen merken. Ohne die Prüfung „Fach belegt“ würde bei leerem Fach <code>null = code</code> verglichen; in Java wäre <code>abholcode.equals(code)</code> dann sogar eine <code>NullPointerException</code>.</p>
+    <p class="codelabel">Java · Aufgabe_OOP_01_3.java (Klasse Paketfach)</p>
+<pre class="java">class Paketfach {
+    private static int anzahlFaecher = 0;
+    private final int fachNr;
+    private final String groesse;
+    private Sendung inhalt;
+    private String abholcode;
+
+    public Paketfach(int fachNr, String groesse) {
+        this.fachNr = fachNr;
+        this.groesse = groesse;
+        this.inhalt = null;
+        this.abholcode = null;
+        anzahlFaecher = anzahlFaecher + 1;
+    }
+
+    public Paketfach(int fachNr) {
+        this(fachNr, "M");
+    }
+
+    public static int getAnzahlFaecher() {
+        return anzahlFaecher;
+    }
+
+    public int getFachNr() {
+        return fachNr;
+    }
+
+    public String getGroesse() {
+        return groesse;
+    }
+
+    public boolean istFrei() {
+        return inhalt == null;
+    }
+
+    public boolean einlegen(Sendung s, String code) {
+        if (s != null &amp;&amp; istFrei() &amp;&amp; rang(s.getGroesse()) &lt;= rang(groesse)) {
+            inhalt = s;
+            abholcode = code;
+            return true;
+        }
+        return false;
+    }
+
+    public Sendung entnehmen(String code) {
+        if (!istFrei() &amp;&amp; abholcode.equals(code)) {
+            Sendung s = inhalt;
+            inhalt = null;
+            abholcode = null;
+            return s;
+        }
+        return null;
+    }
+
+    private int rang(String groesse) {
+        if (groesse.equals("S")) {
+            return 1;
+        } else if (groesse.equals("M")) {
+            return 2;
+        } else if (groesse.equals("L")) {
+            return 3;
+        }
+        return 0;
+    }
+}</pre>
+    <p class="codelabel">Ausgabe des Testprogramms</p>
+<pre class="ausgabe">Erzeugte Fächer: 3
+Fach 2 hat die Größe M
+f1.einlegen(KT-1001 [M]) -&gt; false  (Sendung zu groß für S)
+f2.einlegen(KT-1001 [M]) -&gt; true
+f2.einlegen(KT-1003 [S]) -&gt; false  (Fach belegt)
+f3.einlegen(KT-1002 [L]) -&gt; true
+f1.einlegen(KT-1003 [S]) -&gt; true
+f2.entnehmen("000000") -&gt; null  (falscher Code)
+f2.entnehmen("482913") -&gt; KT-1001
+f2.istFrei() -&gt; true
+f2.entnehmen("482913") -&gt; null  (Fach leer)</pre>
+  </div>
+
+  <!-- ===================== OOP-02 ===================== -->
+  <h3 id="l-02">OOP-02 · Vererbung, abstrakte Klassen und Interfaces</h3>
+
+  <div class="loesung" id="L-OOP-02-1">
+    <div class="kopf">Aufgabe OOP-02.1 · 6 Punkte</div>
+    <h4>a) Zuordnung (3 P)</h4>
+    <table class="kompakt">
+      <tr><th>Aussage</th><th>trifft zu auf</th><th>Begründung</th></tr>
+      <tr><td>1. Mit <code>new</code> direkt Objekte erzeugen</td><td><strong>keines</strong></td><td>Weder abstrakte Klassen noch Interfaces sind instanziierbar.</td></tr>
+      <tr><td>2. Attribute mit Werten je Objekt</td><td><strong>abstrakte Klasse</strong></td><td>Interfaces haben nur Konstanten.</td></tr>
+      <tr><td>3. Eine Klasse kann mehrere davon erweitern/implementieren</td><td><strong>Interface</strong></td><td>Nur eine Oberklasse (<code>extends</code>), beliebig viele Interfaces (<code>implements</code>).</td></tr>
+      <tr><td>4. Als Datentyp verwendbar</td><td><strong>beide</strong></td><td>z. B. <code>List&lt;Fahrzeug&gt;</code> oder <code>Kuehlbar k</code></td></tr>
+      <tr><td>5. Konstruktor, Aufruf mit <code>super(…)</code></td><td><strong>abstrakte Klasse</strong></td><td>Interfaces haben keinen Konstruktor.</td></tr>
+      <tr><td>6. Methoden ohne Rumpf, die implementiert werden müssen</td><td><strong>beide</strong></td><td>abstrakte Methoden bzw. Interface-Methoden</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je richtige Zeile ½ P.</div>
+
+    <h4>b) Abstrakte Klasse oder Interface? (3 P)</h4>
+    <p><strong>Entscheidung: Interface <code>Druckbar</code>.</strong></p>
+    <ul>
+      <li><code>Abholschein</code> erbt bereits von <code>Dokument</code>. Java erlaubt nur <strong>eine</strong> Oberklasse – eine abstrakte Klasse <code>Druckbar</code> könnte <code>Abholschein</code> nicht zusätzlich erweitern. Interfaces kann eine Klasse dagegen beliebig viele implementieren.</li>
+      <li>Die Klassen haben keine gemeinsamen Attribute und keinen gemeinsamen Code; es wird nur eine gemeinsame <strong>Fähigkeit</strong> („kann gedruckt werden“) vereinbart. Genau dafür ist ein Interface gedacht; eine ist-ein-Beziehung zu einem gemeinsamen Oberbegriff besteht nicht.</li>
+      <li>(weiteres mögliches Argument) Ein Druckdienst kann mit einer <code>List&lt;Druckbar&gt;</code> arbeiten und kennt die konkreten Klassen nicht (lose Kopplung).</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> 1 P Entscheidung, je 1 P pro stichhaltigem Argument (max. 2). Die Entscheidung für eine abstrakte Klasse ist wegen der bestehenden Vererbung von <code>Abholschein</code> falsch (0 P für die Entscheidung).</div>
+  </div>
+
+  <div class="loesung" id="L-OOP-02-2">
+    <div class="kopf">Aufgabe OOP-02.2 · 10 Punkte</div>
+    <h4>a) Ausgaben (4 P)</h4>
+<pre class="ausgabe">Fahrzeug LR-07 angelegt
+Lastenrad LR-07 bereit
+Fahrzeug KT-02 angelegt
+Kuehlung auf 20 Grad</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> je richtige Zeile in richtiger Reihenfolge 1 P.</div>
+    <p><strong>Erklärung:</strong> Jeder Unterklassen-Konstruktor ruft als erste Anweisung <code>super(…)</code> auf. Der Konstruktor von <code>Fahrzeug</code> läuft deshalb vollständig durch (erste Zeile), erst danach der Rest des Unterklassen-Konstruktors. Beim Kühltransporter wird <code>temperatur</code> erst nach dem <code>super</code>-Aufruf auf 20 gesetzt.</p>
+
+    <h4>b) Fehler in der Klasse EScooter (5 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:8%">Zeile</th><th style="width:46%">Fehler</th><th>Korrektur</th></tr>
+      <tr><td>1</td><td><code>EScooter</code> ist nicht abstrakt, implementiert aber die abstrakte Methode <code>kostenProKm()</code> nicht.</td><td><code>public double kostenProKm() { return 0.03; }</code> ergänzen</td></tr>
+      <tr><td>2/3</td><td>Kein Aufruf des Oberklassen-Konstruktors. Das automatische <code>super()</code> scheitert, weil <code>Fahrzeug</code> keinen parameterlosen Konstruktor hat.</td><td>erste Anweisung <code>super(kennung, 35);</code> (Zeile 3 entfällt)</td></tr>
+      <tr><td>8</td><td><code>info()</code> ist in <code>Fahrzeug</code> <code>final</code> und darf nicht überschrieben werden.</td><td>Methode entfernen oder unter anderem Namen anlegen, z. B. <code>beschreibung()</code> (ohne <code>@Override</code>)</td></tr>
+      <tr><td>9</td><td><code>kennung</code> ist in <code>Fahrzeug</code> <code>private</code> und in der Unterklasse nicht sichtbar.</td><td><code>getKennung()</code> verwenden (oder Attribut <code>protected</code> machen)</td></tr>
+      <tr><td>14</td><td><code>Fahrzeug</code> ist abstrakt und kann nicht mit <code>new</code> instanziiert werden.</td><td>eine konkrete Unterklasse erzeugen, z. B. <code>Fahrzeug reserve = new Lastenrad("RES-1");</code></td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je Fehler 1 P (½ P Fehler, ½ P Korrektur). Kleine Abweichungen bei der Zeilenangabe (z. B. 7 statt 8) sind unerheblich.</div>
+    <p class="codelabel">Meldungen von javac 21 für die fehlerhafte Fassung (gekürzt)</p>
+<pre class="ausgabe">Fehler: Fahrzeug ist abstrakt, kann nicht instanziiert werden
+Fehler: EScooter ist nicht abstrakt und setzt die abstrakte Methode kostenProKm() in Fahrzeug nicht außer Kraft
+Fehler: Konstruktor Fahrzeug in Klasse Fahrzeug kann nicht auf die angegebenen Typen angewendet werden.
+        Erforderlich: String,int  Ermittelt: keine Argumente
+Fehler: info() in EScooter kann nicht info() in Fahrzeug außer Kraft setzen. Außer Kraft gesetzte Methode ist final
+Fehler: kennung hat private-Zugriff in Fahrzeug
+5 Fehler</pre>
+    <p class="codelabel">Java · korrigierte Klasse (Aufgabe_OOP_02_2.java)</p>
+<pre class="java">class EScooter extends Fahrzeug {
+    public EScooter(String kennung) {
+        super(kennung, 35);                       // Fehler 1 behoben
+        System.out.println("E-Scooter bereit");
+    }
+
+    @Override
+    public double kostenProKm() {                 // Fehler 2 behoben
+        return 0.03;
+    }
+
+    public String beschreibung() {                // Fehler 3 behoben (info() ist final)
+        return "E-Scooter " + getKennung();       // Fehler 4 behoben (kennung ist private)
+    }
+}
+// Fehler 5: new Fahrzeug(...) ist nicht erlaubt -&gt; konkrete Unterklasse instanziieren</pre>
+
+    <h4>c) Ein Objekt, zwei Typen (1 P)</h4>
+    <p><code>Kuehltransporter</code> erbt von <code>Fahrzeug</code> (ein Kühltransporter <em>ist ein</em> Fahrzeug) und realisiert <code>Kuehlbar</code>. Ein Objekt einer Klasse ist mit allen Oberklassen und allen implementierten Interfaces typkompatibel (Upcast). Über die <code>Fahrzeug</code>-Variable sind dann nur die Fahrzeug-Methoden aufrufbar, über die <code>Kuehlbar</code>-Variable nur <code>kuehlen</code>.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> 1 P für Vererbung <em>und</em> Realisierung als Grund.</div>
+    <p class="codelabel">Ausgabe des gesamten Testprogramms</p>
+<pre class="ausgabe">--- a) Konstruktorverkettung ---
+Fahrzeug LR-07 angelegt
+Lastenrad LR-07 bereit
+Fahrzeug KT-02 angelegt
+Kuehlung auf 20 Grad
+--- b) korrigierte Klasse EScooter ---
+Fahrzeug ES-11 angelegt
+E-Scooter bereit
+ES-11 (35 km), Kosten/km: 0.03
+E-Scooter ES-11
+Fahrzeug RES-1 angelegt
+Lastenrad RES-1 bereit
+RES-1 (60 km)
+--- c) ein Objekt, zwei Typen ---
+Fahrzeug KT-03 angelegt
+Kuehlung auf 20 Grad
+KT-03 (220 km) / kuehlen(-18): true
+f1 instanceof Kuehlbar: false, f2 instanceof Kuehlbar: true</pre>
+  </div>
+
+  <div class="loesung" id="L-OOP-02-3">
+    <div class="kopf">Aufgabe OOP-02.3 · 22 Punkte</div>
+    <h4>a) Nachteile der bisherigen Umsetzung (4 P)</h4>
+    <ul>
+      <li><strong>Schlechte Erweiterbarkeit:</strong> Für eine neue Sendungsart (z. B. Sperrgut) muss die bestehende, bereits getestete Klasse an vier Stellen geändert werden – in jeder Fallunterscheidung. Wird eine Stelle vergessen, entsteht ein Fehler (z. B. Porto 0 im Sonst-Zweig). Hoher Änderungs- und Testaufwand.</li>
+      <li><strong>Redundanz und Unübersichtlichkeit:</strong> Dieselbe Fallunterscheidung wiederholt sich in jeder Methode, die Methoden werden lang, und die Regeln einer Sendungsart sind über die ganze Klasse verstreut.</li>
+      <li>(weitere mögliche Antworten) Fehleranfälliger Typ als freier Text ("Paket", "PAKET", Tippfehler fallen erst zur Laufzeit auf); unpassendes Verhalten (ein Brief hat eine Versicherungsmethode, die nur 0 liefert).</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> je erläutertem Nachteil 2 P (max. 4). Nur genannt, ohne Erläuterung: je 1 P.</div>
+
+    <h4>b) Klassendiagramm (9 P)</h4>
+    <figure>
+      <svg viewBox="0 0 760 646" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><rect x="10" y="10" width="360" height="198" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="190" y="28" text-anchor="middle" font-weight="bold" font-style="italic">Postsendung</text><text x="190" y="44" text-anchor="middle" font-size="12">{abstract}</text><line x1="10" y1="52" x2="370" y2="52" stroke="#222" stroke-width="1.2"/><text x="19" y="70">- sendungsNr : string</text><text x="19" y="87">- gewicht : double</text><line x1="10" y1="96" x2="370" y2="96" stroke="#222" stroke-width="1.2"/><text x="19" y="114">+ Postsendung(sendungsNr : string, gewicht : double)</text><text x="19" y="131">+ getSendungsNr() : string</text><text x="19" y="148">+ getGewicht() : double</text><text x="19" y="165" font-style="italic">+ berechnePorto() : double {abstract}</text><text x="19" y="182" font-style="italic">+ maxGewicht() : double {abstract}</text><text x="19" y="199" font-style="italic">+ istStationsfaehig() : boolean {abstract}</text><rect x="395" y="10" width="355" height="69" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="572.5" y="28" text-anchor="middle" font-size="12">«interface»</text><text x="572.5" y="44" text-anchor="middle" font-weight="bold">Versicherbar</text><line x1="395" y1="52" x2="750" y2="52" stroke="#222" stroke-width="1.2"/><text x="404" y="70">+ berechneVersicherung(warenwert : double) : double</text><rect x="80" y="248" width="360" height="104" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="260" y="266" text-anchor="middle" font-weight="bold">Brief</text><line x1="80" y1="274" x2="440" y2="274" stroke="#222" stroke-width="1.2"/><text x="89" y="292">+ Brief(sendungsNr : string, gewicht : double)</text><text x="89" y="309">+ berechnePorto() : double</text><text x="89" y="326">+ maxGewicht() : double</text><text x="89" y="343">+ istStationsfaehig() : boolean</text><rect x="80" y="374" width="360" height="121" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="260" y="392" text-anchor="middle" font-weight="bold">Paket</text><line x1="80" y1="400" x2="440" y2="400" stroke="#222" stroke-width="1.2"/><text x="89" y="418">+ Paket(sendungsNr : string, gewicht : double)</text><text x="89" y="435">+ berechnePorto() : double</text><text x="89" y="452">+ maxGewicht() : double</text><text x="89" y="469">+ istStationsfaehig() : boolean</text><text x="89" y="486">+ berechneVersicherung(warenwert : double) : double</text><rect x="80" y="517" width="360" height="121" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="260" y="535" text-anchor="middle" font-weight="bold">Expresssendung</text><line x1="80" y1="543" x2="440" y2="543" stroke="#222" stroke-width="1.2"/><text x="89" y="561">+ Expresssendung(sendungsNr : string, gewicht : double)</text><text x="89" y="578">+ berechnePorto() : double</text><text x="89" y="595">+ maxGewicht() : double</text><text x="89" y="612">+ istStationsfaehig() : boolean</text><text x="89" y="629">+ berechneVersicherung(warenwert : double) : double</text><polyline points="45,268 80,268" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="45,394 80,394" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="45,537 80,537" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="45,537 45,208" fill="none" stroke="#222" stroke-width="1.2"/><polygon points="45,208 53,223 37,223" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="440,537 590,537 590,394" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="440,394 590,394 590,79" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polygon points="590,79 598,94 582,94" fill="#fff" stroke="#222" stroke-width="1.2"/></svg>
+      <figcaption>Lösung OOP-02.3b: abstrakte Oberklasse, drei Unterklassen, Interface <code>Versicherbar</code> nur für versicherbare Sendungsarten</figcaption>
+    </figure>
+    <div class="bewertung"><strong>Bewertung:</strong> <code>Postsendung</code> abstrakt gekennzeichnet und ohne <code>typ</code> (1 P); gemeinsame Attribute, Konstruktor und Getter nur in der Oberklasse (1 P); drei abstrakte Methoden kursiv bzw. <code>{abstract}</code> (1 P); drei Unterklassen mit Vererbungspfeil (Dreieck an <code>Postsendung</code>) (2 P); überschreibende Methoden in allen Unterklassen (1 P); Konstruktoren der Unterklassen (1 P); Interface <code>Versicherbar</code> mit Methode (1 P); Realisierung nur durch <code>Paket</code> und <code>Expresssendung</code>, gestrichelt mit Dreieck (1 P).<br>
+    Ebenfalls richtig: Attribute <code>#</code> statt <code>-</code> mit Gettern; <code>istStationsfaehig()</code> als normale Methode in <code>Postsendung</code> (Rückgabe false), die nur <code>Paket</code> überschreibt. <strong>Nicht</strong> richtig: <code>berechneVersicherung</code> zusätzlich in <code>Postsendung</code> – dann hätte auch <code>Brief</code> diese Methode, und das Interface wäre überflüssig.</div>
+
+    <h4>c) Klasse Paket (5 P)</h4>
+<pre class="pseudo">klasse Paket erbt von Postsendung implementiert Versicherbar
+
+  konstruktor Paket(sendungsNr : string, gewicht : double)
+    super(sendungsNr, gewicht)
+  Ende konstruktor
+
+  methode berechnePorto() : double
+    wenn getGewicht() &lt;= 5.0 dann
+      rückgabe 5.49
+    Ende wenn
+    rückgabe 8.99
+  Ende methode
+
+  methode maxGewicht() : double
+    rückgabe 31.5
+  Ende methode
+
+  methode istStationsfaehig() : boolean
+    rückgabe true
+  Ende methode
+
+  methode berechneVersicherung(warenwert : double) : double
+    betrag : double := warenwert * 0.01
+    wenn betrag &lt; 2.00 dann
+      betrag := 2.00
+    Ende wenn
+    rückgabe betrag
+  Ende methode
+Ende klasse</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> Klassenkopf mit Vererbung und Interface (½ P); Konstruktor mit <code>super</code> (1 P); <code>berechnePorto</code> mit Grenze „bis einschließlich 5 kg“ (1 P); <code>maxGewicht</code> und <code>istStationsfaehig</code> (1 P); <code>berechneVersicherung</code> mit Mindestbetrag 2,00 (1½ P). Gleichwertig: Zugriff auf ein <code>protected</code>-Attribut <code>gewicht</code> statt <code>getGewicht()</code>.</div>
+    <p class="codelabel">Java · Aufgabe_OOP_02_3.java (Klasse Paket)</p>
+<pre class="java">class Paket extends Postsendung implements Versicherbar {
+    public Paket(String sendungsNr, double gewicht) {
+        super(sendungsNr, gewicht);
+    }
+
+    @Override
+    public double berechnePorto() {
+        if (getGewicht() &lt;= 5.0) {
+            return 5.49;
+        }
+        return 8.99;
+    }
+
+    @Override
+    public double maxGewicht() {
+        return 31.5;
+    }
+
+    @Override
+    public boolean istStationsfaehig() {
+        return true;
+    }
+
+    @Override
+    public double berechneVersicherung(double warenwert) {
+        double betrag = warenwert * 0.01;
+        if (betrag &lt; 2.00) {
+            betrag = 2.00;
+        }
+        return betrag;
+    }
+}</pre>
+    <p class="codelabel">Ausgabe des Testprogramms (alle Sendungsarten, polymorph über List&lt;Postsendung&gt;)</p>
+<pre class="ausgabe">Nr    Art             Gewicht  Porto   max.kg  Station
+B-1   Brief            0,02    0,95     1,0  nein
+B-2   Brief            0,40    1,80     1,0  nein
+P-1   Paket            3,00    5,49    31,5  ja
+P-2   Paket           12,00    8,99    31,5  ja
+E-1   Expresssendung   2,50   14,90    20,0  nein
+Versicherung (nur Objekte, die Versicherbar realisieren):
+  P-1  Warenwert  150,00 -&gt; Versicherung  2,00
+  P-2  Warenwert  600,00 -&gt; Versicherung  6,00
+  E-1  Warenwert  400,00 -&gt; Versicherung  2,00
+Gegenprobe mit der bisherigen Klasse (Fallunterscheidung nach typ):
+  E-1 alt: Porto 14,90, Versicherung(400) 2,00</pre>
+
+    <h4>d) Eine Oberklasse, aber mehrere Interfaces (4 P)</h4>
+    <p>Java erlaubt bei Klassen nur <strong>Einfachvererbung</strong>. Würde eine Klasse von zwei Klassen erben, die beide eine Methode mit gleicher Signatur implementieren oder gleichnamige Attribute haben, wäre nicht eindeutig, welche Implementierung bzw. welches Attribut gilt; erben beide Klassen außerdem von einer gemeinsamen Oberklasse, wären deren Attribute doppelt vorhanden (<strong>Diamond-Problem</strong>).</p>
+    <p>Ein <strong>Interface</strong> enthält dagegen keine Instanzattribute und (in der klassischen Form) nur Methodensignaturen ohne Implementierung. <code>Paket</code> implementiert <code>berechneVersicherung</code> selbst – es gibt genau eine Implementierung und damit keinen Konflikt. Deshalb darf eine Klasse eine Oberklasse haben (<code>Postsendung</code>, „ist ein“) und zusätzlich beliebig viele Interfaces realisieren (<code>Versicherbar</code>, „kann versichert werden“).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> 2 P für die Begründung des Verbots (Mehrdeutigkeit/Diamond-Problem), 2 P dafür, warum Interfaces unproblematisch sind (kein Zustand, keine konkurrierende Implementierung).</div>
+  </div>
+
+  <!-- ===================== OOP-03 ===================== -->
+  <h3 id="l-03">OOP-03 · Polymorphie, Überladen/Überschreiben, Generics</h3>
+
+  <div class="loesung" id="L-OOP-03-1">
+    <div class="kopf">Aufgabe OOP-03.1 · 6 Punkte</div>
+    <h4>a) Polymorphie (3 P)</h4>
+    <p>Polymorphie (Vielgestaltigkeit) bedeutet, dass eine Variable vom Typ einer Oberklasse oder eines Interfaces auf Objekte <strong>verschiedener Unterklassen</strong> verweisen kann. Derselbe Methodenaufruf führt je nach Objekt zu <strong>unterschiedlichem Verhalten</strong>, weil die Unterklassen die Methode überschreiben. Welche Implementierung ausgeführt wird, wird erst <strong>zur Laufzeit</strong> anhand der tatsächlichen Klasse des Objekts entschieden (dynamische bzw. späte Bindung). Beispiel: <code>Zustellung z := new Expresszustellung()</code> – der Aufruf <code>z.gebuehr()</code> führt die Methode von <code>Expresszustellung</code> aus.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> 1 P Oberklassen-Referenz auf Objekte verschiedener Unterklassen, 1 P gleicher Aufruf – unterschiedliches Verhalten durch Überschreiben, 1 P Entscheidung zur Laufzeit/dynamische Bindung. Ohne Bezug zu den Klassen aus Anlage 7 höchstens 2 P. Auch akzeptiert: Hinweis auf statische Polymorphie durch Überladen als Ergänzung.</div>
+
+    <h4>b) Überladen oder Überschreiben? (3 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:8%">Nr.</th><th style="width:18%">Ergebnis</th><th>Begründung</th></tr>
+      <tr><td>1</td><td><strong>Überladen</strong></td><td>gleiche Klasse, gleicher Name, unterschiedliche Parameterliste (<code>integer</code> bzw. <code>string</code>)</td></tr>
+      <tr><td>2</td><td><strong>Überschreiben</strong></td><td>Unterklasse definiert die geerbte Methode mit gleicher Signatur neu und ersetzt ihre Implementierung</td></tr>
+      <tr><td>3</td><td><strong>Überladen</strong></td><td>andere Parameterliste (zusätzlicher Parameter). Die geerbte <code>planeTour(km)</code> bleibt im <code>Kuehltransporter</code> unverändert erhalten; es kommt nur eine weitere Variante hinzu.</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je Zeile 1 P (½ P Ergebnis, ½ P Begründung). Zeile 3 ist die Fangfrage: Obwohl die Methoden in Ober- und Unterklasse stehen, liegt kein Überschreiben vor.</div>
+  </div>
+
+  <div class="loesung" id="L-OOP-03-2">
+    <div class="kopf">Aufgabe OOP-03.2 · 10 Punkte</div>
+    <h4>a) Ausgaben (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:8%">Nr.</th><th style="width:28%">Ausgabe</th><th>Begründung</th></tr>
+      <tr><td>(1)</td><td class="mono">Express</td><td><code>b</code> zeigt auf eine <code>Expresszustellung</code> → deren überschriebene <code>beschreibung()</code> (dynamische Bindung).</td></tr>
+      <tr><td>(2)</td><td class="mono">Express: 10.0 EUR</td><td><code>quittung()</code> ist geerbt; darin werden <code>beschreibung()</code> und <code>gebuehr()</code> dynamisch gebunden → Express-Versionen; <code>gebuehr()</code> = <code>super.gebuehr()</code> + 6.00 = 4.00 + 6.00.</td></tr>
+      <tr><td>(3)</td><td class="mono">Nacht-Express: 10.0 EUR</td><td><code>Nachtzustellung</code> überschreibt nur <code>beschreibung()</code>: "Nacht-" + <code>super.beschreibung()</code> (= "Express"). <code>gebuehr()</code> wird von <code>Expresszustellung</code> geerbt.</td></tr>
+      <tr><td>(4)</td><td class="mono">Zustellung: 4.0 EUR</td><td>reines <code>Zustellung</code>-Objekt</td></tr>
+      <tr><td>(5)</td><td class="mono">Standardbuchung</td><td><strong>Überladen</strong> wird beim Übersetzen nach dem <strong>statischen</strong> Typ des Arguments ausgewählt: <code>b</code> ist als <code>Zustellung</code> deklariert → <code>buche(Zustellung)</code>.</td></tr>
+      <tr><td>(6)</td><td class="mono">Expressbuchung</td><td>statischer Typ von <code>d</code> ist <code>Expresszustellung</code> → die spezifischere Variante <code>buche(Expresszustellung)</code>.</td></tr>
+    </table>
+    <p class="codelabel">Ausgabe · Aufgabe_OOP_03_2.java</p>
+<pre class="ausgabe">Express
+Express: 10.0 EUR
+Nacht-Express: 10.0 EUR
+Zustellung: 4.0 EUR
+Standardbuchung
+Expressbuchung</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> je richtige Ausgabe 1 P. Schreibweise des Betrags (10.0, 10,00) ist unerheblich. Bei (5) ist „Expressbuchung“ der typische Fehler.</div>
+
+    <h4>b) Aufruf von zeitfenster() über b (2 P)</h4>
+    <p>Der Compiler prüft anhand des <strong>statischen Typs</strong>, welche Methoden aufgerufen werden dürfen. <code>b</code> ist als <code>Zustellung</code> deklariert, und <code>Zustellung</code> hat keine Methode <code>zeitfenster()</code> – dass das Objekt zur Laufzeit eine <code>Expresszustellung</code> ist, spielt für den Compiler keine Rolle. Lösung: Typ prüfen und explizit umwandeln (Downcast):</p>
+<pre class="java">if (b instanceof Expresszustellung) {
+    Expresszustellung e = (Expresszustellung) b;
+    System.out.println(e.zeitfenster());
+}</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> 1 P Begründung (statischer Typ), 1 P Anweisungen mit <code>instanceof</code> und Cast. Ohne <code>instanceof</code>-Prüfung ½ P. Auch akzeptiert: Variable gleich als <code>Expresszustellung</code> deklarieren.</div>
+
+    <h4>c) Downcast auf ein Objekt der Oberklasse (2 P)</h4>
+    <p><strong>Übersetzen:</strong> Der Compiler akzeptiert die Anweisung, weil <code>Expresszustellung</code> eine Unterklasse von <code>Zustellung</code> ist und ein Downcast grundsätzlich möglich ist. <strong>Ausführen:</strong> <code>a</code> verweist auf ein reines <code>Zustellung</code>-Objekt, das keine <code>Expresszustellung</code> ist. Die Umwandlung schlägt fehl, es wird eine <code>ClassCastException</code> ausgelöst (ohne Behandlung bricht das Programm ab). Vermeiden lässt sich das mit einer Prüfung durch <code>instanceof</code>.</p>
+<pre class="ausgabe">ClassCastException: class Zustellung cannot be cast to class Expresszustellung (Zustellung and Expresszustellung are in unnamed module of loader 'app')
+a instanceof Expresszustellung: false</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> 1 P Übersetzen erlaubt, 1 P <code>ClassCastException</code> zur Laufzeit.</div>
+    <p class="datei">Datei: <code>java\08_OOP_Entwurfsmuster\Aufgabe_OOP_03_2.java</code> – Die Datei enthält die Klassen aus Anlage 7, den Programmausschnitt der Aufgabe sowie b) und c) zum Ausprobieren.</p>
+  </div>
+
+  <div class="loesung" id="L-OOP-03-3">
+    <div class="kopf">Aufgabe OOP-03.3 · 18 Punkte</div>
+    <h4>a) Generische Klasse (3 P)</h4>
+    <p>Eine generische Klasse hat einen <strong>Typparameter</strong> (hier <code>T</code>), der als Platzhalter für den Datentyp der Elemente steht. Der konkrete Typ wird erst bei der Verwendung festgelegt, z. B. <code>Ablage&lt;Lagerposten&gt;</code> oder später <code>Ablage&lt;Rollcontainer&gt;</code>; die Klasse wird nur einmal programmiert.</p>
+    <p>Vorteil gegenüber <code>Object</code>: <strong>Typsicherheit beim Übersetzen</strong> – in eine <code>Ablage&lt;Lagerposten&gt;</code> lässt der Compiler nur Lagerposten hinein, beim Herauslesen ist kein Cast nötig, und Typfehler fallen nicht erst zur Laufzeit (<code>ClassCastException</code>) auf. (Auch akzeptiert: Wiederverwendbarkeit ohne Codekopie, bessere Lesbarkeit.)</p>
+    <div class="bewertung"><strong>Bewertung:</strong> 2 P Erläuterung (Typparameter, Festlegung bei Verwendung), 1 P Vorteil.</div>
+
+    <h4>b) Konstruktor und ablegen (4 P)</h4>
+<pre class="pseudo">konstruktor Ablage(bezeichnung : string, kapazitaet : integer)
+  this.bezeichnung := bezeichnung
+  this.kapazitaet := kapazitaet
+  elemente := new List&lt;T&gt;()
+Ende konstruktor
+
+methode ablegen(element : T) : boolean
+  wenn elemente.size() &lt; kapazitaet und nicht elemente.contains(element) dann
+    elemente.add(element)
+    rückgabe true
+  Ende wenn
+  rückgabe false
+Ende methode</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> Konstruktor mit Zuweisungen und Erzeugen der leeren Liste (1½ P); Kapazitätsprüfung mit <code>&lt;</code> (1 P); Prüfung mit <code>contains</code> (½ P); <code>add</code> und beide Rückgaben (1 P). Typischer Fehler: Liste im Konstruktor nicht erzeugen – dann führt das erste <code>ablegen</code> zu einer <code>NullPointerException</code>.</div>
+
+    <h4>c) faelligePosten (4 P)</h4>
+<pre class="pseudo">methode faelligePosten(ablage : Ablage&lt;Lagerposten&gt;, heute : Datum) : List&lt;Lagerposten&gt;
+  ergebnis : List&lt;Lagerposten&gt; := new List&lt;Lagerposten&gt;()
+  posten : List&lt;Lagerposten&gt; := ablage.getElemente()
+  zähle i von 0 bis posten.size() - 1
+    p : Lagerposten := posten.get(i)
+    wenn p.istFaellig(heute) dann
+      ergebnis.add(p)
+    Ende wenn
+  Ende zähle
+  rückgabe ergebnis
+Ende methode</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> neue Ergebnisliste (1 P); Durchlauf über <code>getElemente()</code> mit richtigen Grenzen (1 P); Aufruf von <code>istFaellig(heute)</code> ohne Fallunterscheidung nach der Klasse (1 P); <code>add</code> und Rückgabe (1 P). Eine Lösung, die mit <code>instanceof</code> die drei Regeln selbst nachprogrammiert, verfehlt den Sinn der Aufgabe (höchstens 2 P).</div>
+    <p><strong>Testdaten:</strong> R-101 (Eingang 20.09. + 14 Tage = 04.10. ≤ 10.10.), Z-201 (freigegeben) und L-301 (Abholtermin = heute) sind fällig; R-102 erst ab 15.10., Z-202 nicht freigegeben, L-302 erst am 12.10.</p>
+
+    <h4>d) Mechanismus (3 P)</h4>
+    <p><strong>Polymorphie durch dynamische (späte) Bindung.</strong> <code>Lagerposten</code> deklariert <code>istFaellig</code> als abstrakte Methode, und jede Unterklasse (<code>Retoure</code>, <code>Zollposten</code>, <code>Lagerauftrag</code>) überschreibt sie mit ihrer eigenen Regel. Die Variable <code>p</code> hat den statischen Typ <code>Lagerposten</code>; welche Implementierung ausgeführt wird, entscheidet die Laufzeitumgebung erst beim Aufruf anhand der tatsächlichen Klasse des Objekts (dynamischer Typ).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> 1 P Begriff (Polymorphie/dynamische Bindung), 1 P Überschreiben der abstrakten Methode in den Unterklassen, 1 P Entscheidung zur Laufzeit nach dem tatsächlichen Objekt.</div>
+
+    <h4>e) maximum (4 P)</h4>
+<pre class="pseudo">methode maximum(v : Vergleicher&lt;T&gt;) : T
+  wenn elemente.size() = 0 dann
+    rückgabe null
+  Ende wenn
+  max : T := elemente.get(0)
+  zähle i von 1 bis elemente.size() - 1
+    wenn v.vergleiche(elemente.get(i), max) &gt; 0 dann
+      max := elemente.get(i)
+    Ende wenn
+  Ende zähle
+  rückgabe max
+Ende methode</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> leere Ablage → <code>null</code> (1 P); Startwert = erstes Element (1 P); Vergleich über <code>v.vergleiche</code> in richtiger Richtung (<code>&gt; 0</code> heißt „größer als das bisherige Maximum“) (1 P); Ersetzen und Rückgabe (1 P). Ein Startwert wie <code>0</code> oder <code>null</code> ist falsch, weil <code>T</code> ein beliebiger Typ ist und mit <code>null</code> nicht verglichen werden kann.</div>
+    <p class="codelabel">Java · Aufgabe_OOP_03_3.java (Ablage&lt;T&gt;, Vergleicher&lt;T&gt;, Lagerverwaltung)</p>
+<pre class="java">class Ablage&lt;T&gt; {
+    private String bezeichnung;
+    private int kapazitaet;
+    private List&lt;T&gt; elemente;
+
+    public Ablage(String bezeichnung, int kapazitaet) {
+        this.bezeichnung = bezeichnung;
+        this.kapazitaet = kapazitaet;
+        this.elemente = new ArrayList&lt;&gt;();
+    }
+
+    public boolean ablegen(T element) {
+        if (elemente.size() &lt; kapazitaet &amp;&amp; !elemente.contains(element)) {
+            elemente.add(element);
+            return true;
+        }
+        return false;
+    }
+
+    public int anzahl() {
+        return elemente.size();
+    }
+
+    public List&lt;T&gt; getElemente() {
+        return elemente;
+    }
+
+    public T maximum(Vergleicher&lt;T&gt; v) {
+        if (elemente.size() == 0) {
+            return null;
+        }
+        T max = elemente.get(0);
+        for (int i = 1; i &lt; elemente.size(); i++) {
+            if (v.vergleiche(elemente.get(i), max) &gt; 0) {
+                max = elemente.get(i);
+            }
+        }
+        return max;
+    }
+}
+
+interface Vergleicher&lt;T&gt; {
+    int vergleiche(T a, T b);
+}
+
+class Lagerverwaltung {
+    public List&lt;Lagerposten&gt; faelligePosten(Ablage&lt;Lagerposten&gt; ablage, Datum heute) {
+        List&lt;Lagerposten&gt; ergebnis = new ArrayList&lt;&gt;();
+        List&lt;Lagerposten&gt; posten = ablage.getElemente();
+        for (int i = 0; i &lt; posten.size(); i++) {
+            Lagerposten p = posten.get(i);
+            if (p.istFaellig(heute)) {          // dynamische Bindung
+                ergebnis.add(p);
+            }
+        }
+        return ergebnis;
+    }
+}</pre>
+    <p class="codelabel">Ausgabe des Testprogramms (Testdaten aus Anlage 8, heute = 10.10.2026)</p>
+<pre class="ausgabe">ablegen(R-101) -&gt; true
+ablegen(R-102) -&gt; true
+ablegen(Z-201) -&gt; true
+ablegen(Z-202) -&gt; true
+ablegen(L-301) -&gt; true
+ablegen(L-302) -&gt; true
+ablegen(R-101) erneut -&gt; false  (schon enthalten)
+ablegen(R-103) -&gt; false  (Kapazität 6 erreicht)
+anzahl() = 6
+c) faelligePosten(regalA, 10.10.2026): R-101 Z-201 L-301 
+e) maximum(GewichtVergleicher) = L-301 (18.0 kg)
+Ablage&lt;String&gt;.maximum(nach Länge) = "Zoll ruft zurück"
+maximum einer leeren Ablage = null</pre>
+    <p class="klein">Die letzten Zeilen zeigen die Wiederverwendung: dieselbe Klasse als <code>Ablage&lt;String&gt;</code>, der Vergleicher als Lambda-Ausdruck, und <code>null</code> bei leerer Ablage.</p>
+  </div>
+
+  <!-- ===================== OOP-04 ===================== -->
+  <h3 id="l-04">OOP-04 · Entwurfsmuster: Grundlagen, Kategorien, Erzeugungsmuster</h3>
+
+  <div class="loesung" id="L-OOP-04-1">
+    <div class="kopf">Aufgabe OOP-04.1 · 6 Punkte</div>
+    <h4>a) Vorteile von Entwurfsmustern (4 P)</h4>
+    <ul>
+      <li><strong>Bewährte Lösungen:</strong> Entwurfsmuster sind vielfach erprobte Lösungen für wiederkehrende Entwurfsprobleme. Das Team muss die Lösung nicht neu erfinden und vermeidet typische Entwurfsfehler – die Qualität von KraniTrack steigt, die Entwicklung geht schneller.</li>
+      <li><strong>Gemeinsames Vokabular:</strong> Ein Mustername („hier ein Observer“) beschreibt eine ganze Struktur. Das erleichtert die Kommunikation im Team, die Dokumentation und die Einarbeitung neuer Entwickler.</li>
+      <li>(weitere mögliche Antworten) <strong>Wartbarkeit und Erweiterbarkeit</strong> durch lose Kopplung (z. B. neue Anzeigen ohne Änderung bestehender Klassen); <strong>Wiederverwendbarkeit</strong> des Entwurfs in anderen Projekten.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> je beschriebenem Vorteil 2 P (max. 4). Nur ein Schlagwort ohne Beschreibung: 1 P.</div>
+
+    <h4>b) Kategorien (2 P)</h4>
+    <table class="kompakt">
+      <tr><th>Entwurfsmuster</th><th>Kategorie</th></tr>
+      <tr><td>Singleton</td><td>Erzeugungsmuster</td></tr>
+      <tr><td>Fassade</td><td>Strukturmuster</td></tr>
+      <tr><td>Strategie</td><td>Verhaltensmuster</td></tr>
+      <tr><td>Fabrikmethode</td><td>Erzeugungsmuster</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je richtige Zuordnung ½ P.</div>
+  </div>
+
+  <div class="loesung" id="L-OOP-04-2">
+    <div class="kopf">Aufgabe OOP-04.2 · 10 Punkte</div>
+    <h4>a) Zweck des Singleton-Musters (2 P)</h4>
+    <p>Das Singleton-Muster stellt sicher, dass es von der Klasse <code>Tarifkonfiguration</code> <strong>genau ein Objekt</strong> gibt, und bietet über die statische Methode <code>getInstanz()</code> einen <strong>globalen Zugriffspunkt</strong> darauf. So wird die Datei <code>tarife.properties</code> nur einmal gelesen, und alle Programmteile verwenden garantiert dieselben Tarifwerte.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> 1 P genau eine Instanz, 1 P globaler Zugriff bzw. Nutzen im Beispiel (einmal laden, einheitliche Werte).</div>
+
+    <h4>b) Vier Fehler (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:8%">Zeile</th><th style="width:44%">Fehler</th><th>Korrektur</th></tr>
+      <tr><td>2</td><td><code>instanz</code> ist ein Instanzattribut – die einzige Instanz muss aber zur Klasse gehören, damit die statische Methode darauf zugreifen kann.</td><td class="mono">private static Tarifkonfiguration instanz = null;</td></tr>
+      <tr><td>6</td><td>Der Konstruktor ist <code>public</code> – jede Klasse kann mit <code>new</code> beliebig viele Objekte erzeugen.</td><td class="mono">private Tarifkonfiguration() { … }</td></tr>
+      <tr><td>11</td><td><code>getInstanz()</code> ist nicht statisch – man bräuchte bereits ein Objekt, um an das Objekt zu kommen.</td><td class="mono">public static Tarifkonfiguration getInstanz()</td></tr>
+      <tr><td>12</td><td>Bei jedem Aufruf wird ein neues Objekt erzeugt und die Datei erneut gelesen.</td><td class="mono">if (instanz == null) {<br>&nbsp;&nbsp;instanz = new Tarifkonfiguration();<br>}</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je Fehler 1½ P (½ P Fehler mit Zeile, 1 P Korrektur). In Pseudocode genügt z. B. „<code>- instanz : Tarifkonfiguration {static}</code>“ bzw. „<code>wenn instanz = null dann instanz := new Tarifkonfiguration()</code>“.</div>
+    <figure>
+      <svg viewBox="0 0 460 200" width="460" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><rect x="40" y="10" width="360" height="182" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="220" y="28" text-anchor="middle" font-weight="bold">Tarifkonfiguration</text><line x1="40" y1="36" x2="400" y2="36" stroke="#222" stroke-width="1.2"/><text x="49" y="54" text-decoration="underline">- instanz : Tarifkonfiguration</text><text x="49" y="71">- grundpreisPaket : double</text><text x="49" y="88">- kgZuschlag : double</text><line x1="40" y1="97" x2="400" y2="97" stroke="#222" stroke-width="1.2"/><text x="49" y="115">- Tarifkonfiguration()</text><text x="49" y="132" text-decoration="underline">+ getInstanz() : Tarifkonfiguration</text><text x="49" y="149">+ getGrundpreisPaket() : double</text><text x="49" y="166">+ getKgZuschlag() : double</text><text x="49" y="183">- ladeWert(schluessel : string) : double</text></svg>
+      <figcaption>Korrigierte Klasse als Klassendiagramm: privater Konstruktor, statische Elemente unterstrichen</figcaption>
+    </figure>
+    <p class="codelabel">Java · Aufgabe_OOP_04_2.java (korrigierte Klasse, threadsicher)</p>
+<pre class="java">class Tarifkonfiguration {
+    private static Tarifkonfiguration instanz = null;      // Fehler 1: static
+    private double grundpreisPaket;
+    private double kgZuschlag;
+
+    private Tarifkonfiguration() {                         // Fehler 2: private
+        grundpreisPaket = ladeWert("paket.grundpreis");
+        kgZuschlag = ladeWert("paket.kgzuschlag");
+    }
+
+    public static synchronized Tarifkonfiguration getInstanz() {   // Fehler 3: static
+        if (instanz == null) {                                     // Fehler 4: nur einmal erzeugen
+            instanz = new Tarifkonfiguration();
+        }
+        return instanz;
+    }
+
+    public double getGrundpreisPaket() {
+        return grundpreisPaket;
+    }
+
+    public double getKgZuschlag() {
+        return kgZuschlag;
+    }
+
+    // ladeWert(...) wie bisher
+}</pre>
+
+    <h4>c) Mehrere Threads (2 P)</h4>
+    <p><strong>Problem:</strong> Rufen zwei Threads <code>getInstanz()</code> gleichzeitig zum ersten Mal auf, können beide die Bedingung <code>instanz == null</code> als erfüllt sehen, bevor einer von ihnen das neue Objekt zugewiesen hat (Race Condition). Dann werden <strong>zwei</strong> Objekte erzeugt, die Datei wird zweimal gelesen, und Programmteile arbeiten eventuell mit unterschiedlichen Instanzen – das Singleton ist verletzt.</p>
+    <p><strong>Lösung (eine genügt):</strong> <code>getInstanz()</code> als <code>synchronized</code> deklarieren (nur ein Thread gleichzeitig in der Methode); oder die Instanz gleich beim Laden der Klasse erzeugen (<code>private static final Tarifkonfiguration INSTANZ = new Tarifkonfiguration();</code>); oder in Java ein <code>enum</code> mit genau einem Wert verwenden.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> 1 P Problem (gleichzeitige Prüfung auf null → mehrere Instanzen), 1 P Lösung.</div>
+    <p class="codelabel">Ausgabe des Testprogramms (10 Threads rufen gleichzeitig getInstanz() auf)</p>
+<pre class="ausgabe">t1 == t2: true
+Grundpreis Paket: 4,20 EUR, Zuschlag je kg: 0,35 EUR
+Verschiedene Instanzen bei 10 Threads: 1
+Anzahl Ladevorgänge der Datei: 1</pre>
+  </div>
+
+  <div class="loesung" id="L-OOP-04-3">
+    <div class="kopf">Aufgabe OOP-04.3 · 16 Punkte</div>
+    <h4>a) Vorteile der Fabrikmethode (3 P)</h4>
+    <ul>
+      <li><strong>Erzeugung an einer Stelle:</strong> Kommt ein neuer Kanal hinzu (z. B. Messenger), werden nur die neue Unterklasse und die Fabrikmethode angepasst – nicht fünf verstreute Stellen. Keine Stelle kann vergessen werden.</li>
+      <li><strong>Lose Kopplung:</strong> Der <code>Zustellservice</code> und andere Aufrufer kennen nur die abstrakte Klasse <code>Benachrichtigung</code>, nicht die konkreten Unterklassen. Sie bleiben bei Erweiterungen unverändert und sind leichter testbar.</li>
+      <li>(weitere mögliche Antwort) Weniger redundanter Code; einheitliche Behandlung unbekannter Kanäle.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> je erläutertem Vorteil 1½ P (max. 3).</div>
+
+    <h4>b) Klassendiagramm (7 P)</h4>
+    <figure>
+      <svg viewBox="0 0 760 315" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><rect x="10" y="10" width="400" height="53" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="210" y="28" text-anchor="middle" font-weight="bold">Zustellservice</text><line x1="10" y1="36" x2="410" y2="36" stroke="#222" stroke-width="1.2"/><text x="19" y="54">+ informiereEmpfaenger(k : Kunde, text : string) : double</text><rect x="10" y="120" width="400" height="147" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="210" y="138" text-anchor="middle" font-weight="bold" font-style="italic">Benachrichtigung</text><text x="210" y="154" text-anchor="middle" font-size="12">{abstract}</text><line x1="10" y1="162" x2="410" y2="162" stroke="#222" stroke-width="1.2"/><text x="19" y="180"># ziel : string</text><line x1="10" y1="189" x2="410" y2="189" stroke="#222" stroke-width="1.2"/><text x="19" y="207">+ Benachrichtigung(ziel : string)</text><text x="19" y="224" font-style="italic">+ senden(text : string) : boolean {abstract}</text><text x="19" y="241" font-style="italic">+ kostenProNachricht() : double {abstract}</text><text x="19" y="258" text-decoration="underline">+ erzeuge(kanal : string, ziel : string) : Benachrichtigung</text><polyline points="210,63 210,120" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="204,109 210,120 216,109" fill="none" stroke="#222" stroke-width="1.3"/><text x="218" y="95.5" font-size="12">«use»</text><rect x="470" y="10" width="280" height="87" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="610" y="28" text-anchor="middle" font-weight="bold">EmailBenachrichtigung</text><line x1="470" y1="36" x2="750" y2="36" stroke="#222" stroke-width="1.2"/><text x="479" y="54">+ EmailBenachrichtigung(ziel : string)</text><text x="479" y="71">+ senden(text : string) : boolean</text><text x="479" y="88">+ kostenProNachricht() : double</text><rect x="470" y="115" width="280" height="87" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="610" y="133" text-anchor="middle" font-weight="bold">SmsBenachrichtigung</text><line x1="470" y1="141" x2="750" y2="141" stroke="#222" stroke-width="1.2"/><text x="479" y="159">+ SmsBenachrichtigung(ziel : string)</text><text x="479" y="176">+ senden(text : string) : boolean</text><text x="479" y="193">+ kostenProNachricht() : double</text><rect x="470" y="220" width="280" height="87" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="610" y="238" text-anchor="middle" font-weight="bold">PushBenachrichtigung</text><line x1="470" y1="246" x2="750" y2="246" stroke="#222" stroke-width="1.2"/><text x="479" y="264">+ PushBenachrichtigung(ziel : string)</text><text x="479" y="281">+ senden(text : string) : boolean</text><text x="479" y="298">+ kostenProNachricht() : double</text><polyline points="470,28 440,28" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="470,133 440,133" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="470,238 440,238" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="440,28 440,238" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="440,190 410,190" fill="none" stroke="#222" stroke-width="1.2"/><polygon points="410,190 425,182 425,198" fill="#fff" stroke="#222" stroke-width="1.2"/></svg>
+      <figcaption>Lösung OOP-04.3b: abstrakte Klasse mit statischer Fabrikmethode (unterstrichen), drei Unterklassen, Zustellservice nutzt nur die Abstraktion</figcaption>
+    </figure>
+    <div class="bewertung"><strong>Bewertung:</strong> <code>Benachrichtigung</code> abstrakt mit <code>#&nbsp;ziel : string</code> und Konstruktor (1½ P); abstrakte Methoden <code>senden</code> und <code>kostenProNachricht</code> gekennzeichnet (1 P); statische Fabrikmethode mit beiden Parametern und Rückgabetyp <code>Benachrichtigung</code>, unterstrichen oder <code>{static}</code> (1½ P); drei Unterklassen mit Vererbungspfeil (1 P); Konstruktor und überschreibende Methoden in den Unterklassen (1 P); <code>Zustellservice</code> mit Methode und Beziehung zu <code>Benachrichtigung</code> (Abhängigkeit oder gerichtete Assoziation) (1 P). Zusätzliche Abhängigkeiten «create» von der Fabrikmethode zu den Unterklassen sind richtig, aber nicht gefordert.</div>
+
+    <h4>c) Fabrikmethode (4 P)</h4>
+<pre class="pseudo">methode erzeuge(kanal : string, ziel : string) : Benachrichtigung   {static}
+  wenn kanal = "EMAIL" dann
+    rückgabe new EmailBenachrichtigung(ziel)
+  sonst wenn kanal = "SMS" dann
+    rückgabe new SmsBenachrichtigung(ziel)
+  sonst wenn kanal = "PUSH" dann
+    rückgabe new PushBenachrichtigung(ziel)
+  Ende wenn
+  rückgabe null      // unbekannter Kanal
+Ende methode
+
+// Verwendung im Zustellservice – keine Fallunterscheidung mehr:
+methode informiereEmpfaenger(k : Kunde, text : string) : double
+  b : Benachrichtigung := Benachrichtigung.erzeuge(k.getKanal(), k.getKontakt())
+  wenn b = null dann
+    rückgabe 0.0
+  Ende wenn
+  b.senden(text)
+  rückgabe b.kostenProNachricht()
+Ende methode</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> je Kanal 1 P (Vergleich, Erzeugung mit <code>ziel</code>, Rückgabe), 1 P für <code>null</code> bei unbekanntem Kanal. Die Methode <code>informiereEmpfaenger</code> ist nicht gefordert und dient nur der Veranschaulichung.</div>
+    <p class="codelabel">Java · Aufgabe_OOP_04_3.java</p>
+<pre class="java">abstract class Benachrichtigung {
+    protected String ziel;
+
+    public Benachrichtigung(String ziel) {
+        this.ziel = ziel;
+    }
+
+    public abstract boolean senden(String text);
+
+    public abstract double kostenProNachricht();
+
+    public static Benachrichtigung erzeuge(String kanal, String ziel) {
+        if (kanal.equals("EMAIL")) {
+            return new EmailBenachrichtigung(ziel);
+        } else if (kanal.equals("SMS")) {
+            return new SmsBenachrichtigung(ziel);
+        } else if (kanal.equals("PUSH")) {
+            return new PushBenachrichtigung(ziel);
+        }
+        return null;
+    }
+}
+
+class Zustellservice {
+    /** Liefert die Kosten der Benachrichtigung (0, wenn keine gesendet wurde). */
+    public double informiereEmpfaenger(Kunde k, String text) {
+        Benachrichtigung b = Benachrichtigung.erzeuge(k.getKanal(), k.getKontakt());
+        if (b == null) {
+            System.out.println("  Kanal " + k.getKanal() + " von " + k.getName() + " unbekannt - keine Nachricht");
+            return 0.0;
+        }
+        b.senden(text);
+        return b.kostenProNachricht();
+    }
+}</pre>
+    <p class="codelabel">Ausgabe (vier Kunden, der Kanal "FAX" ist unbekannt)</p>
+<pre class="ausgabe">  E-Mail an ahrens@example.org: 183 Zeichen
+  SMS an +49 151 0000001: 160 Zeichen (gekürzt auf max. 160)
+  Push an Gerät geraet-7f3a: 183 Zeichen
+  Kanal FAX von Dahl unbekannt - keine Nachricht
+Kosten der Benachrichtigungen: 0,07 EUR</pre>
+
+    <h4>d) Builder (2 P)</h4>
+    <p>Ein Konstruktor mit allen Angaben hätte viele, überwiegend optionale Parameter: Aufrufe wie <code>new Etikett("KT-1", null, 0.0, null, "Garage", null)</code> sind unlesbar und fehleranfällig (Reihenfolge, viele <code>null</code>-Werte), oder man bräuchte sehr viele überladene Konstruktoren. Ein Builder setzt nur die benötigten Angaben Schritt für Schritt über sprechende Methoden (<code>.ablageort("Garage").wunschtag(…)</code>) und erzeugt mit <code>build()</code> ein vollständiges, geprüftes Etikett. Der Code wird lesbarer, flexibler, und die Prüfung der Angaben steht an einer Stelle.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> 1 P Problem des Konstruktors mit vielen optionalen Parametern, 1 P Arbeitsweise/Vorteil des Builders.</div>
+  </div>
+
+  <!-- ===================== OOP-05 ===================== -->
+  <h3 id="l-05">OOP-05 · Verhaltens- und Strukturmuster</h3>
+
+  <div class="loesung" id="L-OOP-05-1">
+    <div class="kopf">Aufgabe OOP-05.1 · 6 Punkte</div>
+    <h4>a) Passende Entwurfsmuster (3 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:8%">Nr.</th><th style="width:18%">Muster</th><th>Begründung</th></tr>
+      <tr><td>1</td><td><strong>Adapter</strong></td><td>Eine vorhandene, nicht änderbare Klasse (<code>SpeditionApi</code>) wird über eine Adapterklasse an die erwartete Schnittstelle <code>Statusquelle</code> angepasst; der Adapter ruft <code>holeStatusXml</code> auf und übersetzt das Ergebnis.</td></tr>
+      <tr><td>2</td><td><strong>Fassade</strong></td><td>Eine Klasse bietet eine einfache Methode <code>einliefern(…)</code> und koordiniert intern die fünf Teilsysteme.</td></tr>
+      <tr><td>3</td><td><strong>Decorator</strong></td><td>Jede Zusatzleistung umhüllt die Sendung, hat dieselbe Schnittstelle und erhöht den Preis; Kombinationen entstehen durch Verschachteln statt durch Unterklassen.</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je richtigem Muster 1 P. Bei 3 ist „Dekorierer“ gleichwertig.</div>
+
+    <h4>b) MVC im Kundenportal (3 P)</h4>
+    <ul>
+      <li><strong>Model:</strong> Daten und Geschäftslogik des Portals (Sendungen, Sendungsstatus, Tarife, Datenbankzugriff), unabhängig von der Darstellung. Es informiert die Views über Änderungen.</li>
+      <li><strong>View:</strong> Darstellung der Daten für den Kunden (z. B. Seite mit Sendungsliste und Statusanzeige); sie nimmt Eingaben entgegen und leitet sie an den Controller weiter.</li>
+      <li><strong>Controller:</strong> Steuerung – verarbeitet Benutzeraktionen (z. B. „Sendung verfolgen“ mit eingegebener Sendungsnummer), prüft sie, ruft die passenden Methoden des Models auf und wählt die anzuzeigende View.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> je Komponente 1 P.</div>
+  </div>
+
+  <div class="loesung" id="L-OOP-05-2">
+    <div class="kopf">Aufgabe OOP-05.2 · 10 Punkte</div>
+    <h4>a) Ergänztes Klassendiagramm (4 P)</h4>
+    <figure>
+      <svg viewBox="0 0 760 301" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><rect x="10" y="10" width="368" height="131" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="194" y="28" text-anchor="middle" font-weight="bold">Paketauftrag</text><line x1="10" y1="36" x2="378" y2="36" stroke="#222" stroke-width="1.2"/><text x="19" y="54">- gewicht : double</text><text x="19" y="71">- strategie : Preisstrategie</text><line x1="10" y1="80" x2="378" y2="80" stroke="#222" stroke-width="1.2"/><text x="19" y="98">+ Paketauftrag(gewicht : double, strategie : Preisstrategie)</text><text x="19" y="115">+ setStrategie(s : Preisstrategie) : void</text><text x="19" y="132">+ berechnePreis() : double</text><rect x="510" y="10" width="240" height="69" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="630" y="28" text-anchor="middle" font-size="12">«interface»</text><text x="630" y="44" text-anchor="middle" font-weight="bold">Preisstrategie</text><line x1="510" y1="52" x2="750" y2="52" stroke="#222" stroke-width="1.2"/><text x="519" y="70">+ preis(gewicht : double) : double</text><rect x="10" y="240" width="238" height="53" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="129" y="258" text-anchor="middle" font-weight="bold">Privattarif</text><line x1="10" y1="266" x2="248" y2="266" stroke="#222" stroke-width="1.2"/><text x="19" y="284">+ preis(gewicht : double) : double</text><rect x="262" y="240" width="238" height="53" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="381" y="258" text-anchor="middle" font-weight="bold">Geschaeftstarif</text><line x1="262" y1="266" x2="500" y2="266" stroke="#222" stroke-width="1.2"/><text x="271" y="284">+ preis(gewicht : double) : double</text><rect x="514" y="240" width="238" height="53" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="633" y="258" text-anchor="middle" font-weight="bold">Aktionstarif</text><line x1="514" y1="266" x2="752" y2="266" stroke="#222" stroke-width="1.2"/><text x="523" y="284">+ preis(gewicht : double) : double</text><polyline points="378,55 510,55" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="499,61 510,55 499,49" fill="none" stroke="#222" stroke-width="1.3"/><text x="386" y="49" font-size="12">strategie</text><text x="502" y="72" text-anchor="end" font-size="12">1</text><polyline points="129,240 129,205" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="381,240 381,205" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="633,240 633,205" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="129,205 633,205" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="630,205 630,79" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polygon points="630,79 638,94 622,94" fill="#fff" stroke="#222" stroke-width="1.2"/></svg>
+      <figcaption>Lösung OOP-05.2a: Der Kontext <code>Paketauftrag</code> kennt nur das Interface; drei austauschbare Strategien</figcaption>
+    </figure>
+    <div class="bewertung"><strong>Bewertung:</strong> Methode <code>+ preis(gewicht : double) : double</code> im Interface (1 P); Realisierung durch alle drei Tarifklassen, gestrichelt mit Dreieck am Interface (2 P, je fehlender Realisierung −1 P); gerichtete Assoziation <code>Paketauftrag</code> → <code>Preisstrategie</code> (1 P; Aggregation oder ungerichtete Assoziation ebenfalls akzeptiert).</div>
+
+    <h4>b) Methoden preis und berechnePreis (4 P)</h4>
+<pre class="pseudo">// Klasse Privattarif
+methode preis(gewicht : double) : double
+  wenn gewicht &lt;= 2.0 dann
+    rückgabe 4.99
+  sonst wenn gewicht &lt;= 10.0 dann
+    rückgabe 7.49
+  Ende wenn
+  rückgabe 11.99
+Ende methode
+
+// Klasse Paketauftrag
+methode berechnePreis() : double
+  rückgabe strategie.preis(gewicht)
+Ende methode</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> <code>preis</code>: Grenzen 2 und 10 kg jeweils einschließlich (2 P), drei richtige Rückgaben (1 P); <code>berechnePreis</code>: Delegation an das Strategie-Objekt ohne Fallunterscheidung (1 P).</div>
+    <p class="codelabel">Java · Aufgabe_OOP_05_2.java</p>
+<pre class="java">interface Preisstrategie {
+    double preis(double gewicht);
+}
+
+class Privattarif implements Preisstrategie {
+    @Override
+    public double preis(double gewicht) {
+        if (gewicht &lt;= 2.0) {
+            return 4.99;
+        } else if (gewicht &lt;= 10.0) {
+            return 7.49;
+        }
+        return 11.99;
+    }
+}
+
+class Geschaeftstarif implements Preisstrategie {
+    @Override
+    public double preis(double gewicht) {
+        return 3.20 + 0.25 * gewicht;
+    }
+}
+
+class Aktionstarif implements Preisstrategie {
+    @Override
+    public double preis(double gewicht) {
+        return 3.99;
+    }
+}
+
+class Paketauftrag {
+    private double gewicht;
+    private Preisstrategie strategie;
+
+    public Paketauftrag(double gewicht, Preisstrategie strategie) {
+        this.gewicht = gewicht;
+        this.strategie = strategie;
+    }
+
+    public void setStrategie(Preisstrategie strategie) {
+        this.strategie = strategie;
+    }
+
+    public double berechnePreis() {
+        return strategie.preis(gewicht);
+    }
+}</pre>
+    <p class="codelabel">Ausgabe (Preise je Tarif, Wechsel zur Laufzeit)</p>
+<pre class="ausgabe">Gewicht      Privattarif Geschaeftstarif    Aktionstarif
+  1,5 kg            4,99            3,58            3,99
+  2,0 kg            4,99            3,70            3,99
+  6,0 kg            7,49            4,70            3,99
+ 14,0 kg           11,99            6,70            3,99
+Strategie zur Laufzeit wechseln:
+  6 kg, Privattarif:  7,49 EUR
+  6 kg, Aktionstarif: 3,99 EUR</pre>
+
+    <h4>c) Vorteil gegenüber Unterklassen je Tarif (2 P)</h4>
+    <p>Mit dem Strategie-Muster kann der Tarif eines bestehenden Auftrags <strong>zur Laufzeit gewechselt</strong> werden (<code>setStrategie</code>), z. B. wenn ein Kunde ein Geschäftskonto eröffnet. Bei Unterklassen müsste ein neues Objekt einer anderen Klasse erzeugt und alle Daten müssten übertragen werden. Außerdem bleiben die Tarife unabhängig von <code>Paketauftrag</code>: Neue Tarife erfordern keine Änderung am Auftrag, und es entsteht keine „Klassenexplosion“, wenn weitere Merkmale (z. B. Expressaufträge) mit allen Tarifen kombiniert werden müssen.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> 2 P für einen erläuterten Vorteil (Laufzeitwechsel, keine Klassenexplosion, Wiederverwendbarkeit/Testbarkeit der Tarife, Komposition statt Vererbung).</div>
+  </div>
+
+  <div class="loesung" id="L-OOP-05-3">
+    <div class="kopf">Aufgabe OOP-05.3 · 26 Punkte</div>
+    <h4>a) Funktionsweise und Begründung (4 P)</h4>
+    <p><strong>Funktionsweise:</strong> Ein Subject (hier <code>Sendungsstatus</code>) verwaltet eine Liste angemeldeter Observer. Interessierte Objekte (KundenApp, Hallenanzeige) melden sich mit <code>addObserver</code> an. Ändert sich der Zustand des Subjects, ruft es <code>notifyObservers()</code> auf; diese Methode ruft bei jedem angemeldeten Observer <code>update()</code> auf, und jeder Observer aktualisiert sich daraufhin selbst.</p>
+    <p><strong>Begründung:</strong> Eine Statusänderung muss sofort und automatisch an mehrere, unterschiedliche Anzeigen weitergegeben werden. Weil das Subject nur das Interface <code>Observer</code> kennt, können später weitere Anzeigen (Kundenportal) ergänzt werden, ohne <code>Sendungsstatus</code> zu ändern – genau das fordert Anlage 12. Anzeigen müssen den Status nicht ständig abfragen (kein Polling).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> 2 P Funktionsweise (Anmelden, Benachrichtigen aller Observer bei Änderung), 2 P Begründung mit Bezug zur Situation (mehrere Anzeigen, automatische Aktualisierung, Erweiterbarkeit ohne Änderung des Subjects).</div>
+
+    <h4>b) Ergänztes Klassendiagramm (5 P)</h4>
+    <figure>
+      <svg viewBox="0 0 760 486" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><rect x="10" y="10" width="290" height="103" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="155" y="28" text-anchor="middle" font-size="12">«interface»</text><text x="155" y="44" text-anchor="middle" font-weight="bold">Subject</text><line x1="10" y1="52" x2="300" y2="52" stroke="#222" stroke-width="1.2"/><text x="19" y="70">+ addObserver(o : Observer) : void</text><text x="19" y="87">+ removeObserver(o : Observer) : void</text><text x="19" y="104">+ notifyObservers() : void</text><rect x="470" y="10" width="170" height="69" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="555" y="28" text-anchor="middle" font-size="12">«interface»</text><text x="555" y="44" text-anchor="middle" font-weight="bold">Observer</text><line x1="470" y1="52" x2="640" y2="52" stroke="#222" stroke-width="1.2"/><text x="479" y="70">+ update() : void</text><rect x="10" y="200" width="290" height="216" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="155" y="218" text-anchor="middle" font-weight="bold">Sendungsstatus</text><line x1="10" y1="226" x2="300" y2="226" stroke="#222" stroke-width="1.2"/><text x="19" y="244">- sendungsNr : string</text><text x="19" y="261">- status : string</text><text x="19" y="278">- observers : List&lt;Observer&gt;</text><line x1="10" y1="287" x2="300" y2="287" stroke="#222" stroke-width="1.2"/><text x="19" y="305">+ Sendungsstatus(sendungsNr : string)</text><text x="19" y="322">+ getSendungsNr() : string</text><text x="19" y="339">+ getStatus() : string</text><text x="19" y="356">+ setStatus(status : string) : void</text><text x="19" y="373">+ addObserver(o : Observer) : void</text><text x="19" y="390">+ removeObserver(o : Observer) : void</text><text x="19" y="407">+ notifyObservers() : void</text><rect x="350" y="170" width="270" height="131" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="485" y="188" text-anchor="middle" font-weight="bold">KundenApp</text><line x1="350" y1="196" x2="620" y2="196" stroke="#222" stroke-width="1.2"/><text x="359" y="214">- quelle : Sendungsstatus</text><text x="359" y="231">- letzteMeldung : string</text><line x1="350" y1="240" x2="620" y2="240" stroke="#222" stroke-width="1.2"/><text x="359" y="258">+ KundenApp(quelle : Sendungsstatus)</text><text x="359" y="275">+ anzeigen() : void</text><text x="359" y="292">+ update() : void</text><rect x="350" y="330" width="405" height="148" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="552.5" y="348" text-anchor="middle" font-weight="bold">Hallenanzeige</text><line x1="350" y1="356" x2="755" y2="356" stroke="#222" stroke-width="1.2"/><text x="359" y="374">- quelle : Sendungsstatus</text><text x="359" y="391">- hallenNr : integer</text><text x="359" y="408">- zeile : string</text><line x1="350" y1="417" x2="755" y2="417" stroke="#222" stroke-width="1.2"/><text x="359" y="435">+ Hallenanzeige(quelle : Sendungsstatus, hallenNr : integer)</text><text x="359" y="452">+ anzeigen() : void</text><text x="359" y="469">+ update() : void</text><polyline points="155,200 155,113" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polygon points="155,113 163,128 147,128" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="725,330 725,140 520,140" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="520,170 520,79" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polygon points="520,79 528,94 512,94" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="270,200 270,160 330,160 330,50 470,50" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="459,56 470,50 459,44" fill="none" stroke="#222" stroke-width="1.3"/><text x="338" y="44" font-size="12">observers</text><text x="462" y="68" text-anchor="end" font-size="14">*</text><polyline points="350,220 300,220" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="311,214 300,220 311,226" fill="none" stroke="#222" stroke-width="1.3"/><text x="325" y="214" text-anchor="middle" font-size="12">quelle</text><text x="305" y="236" font-size="12">1</text><polyline points="350,380 300,380" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="311,374 300,380 311,386" fill="none" stroke="#222" stroke-width="1.3"/><text x="325" y="374" text-anchor="middle" font-size="12">quelle</text><text x="305" y="396" font-size="12">1</text></svg>
+      <figcaption>Lösung OOP-05.3b: Realisierungen, Assoziation zum Observer-Interface mit Multiplizität *, Rückverweis <code>quelle</code> für die Pull-Variante</figcaption>
+    </figure>
+    <div class="bewertung"><strong>Bewertung:</strong> Realisierung <code>Sendungsstatus</code> → <code>Subject</code> (1 P); Realisierung <code>KundenApp</code> und <code>Hallenanzeige</code> → <code>Observer</code> (1 P); gerichtete Assoziation (oder Aggregation) <code>Sendungsstatus</code> → <code>Observer</code> mit <code>*</code> (1 P); Assoziation von <code>KundenApp</code> und <code>Hallenanzeige</code> zu <code>Sendungsstatus</code> (Attribut <code>quelle</code>) (1 P); ergänzte Methoden <code>addObserver</code>, <code>removeObserver</code>, <code>notifyObservers</code> in <code>Sendungsstatus</code> und <code>update()</code> in beiden Anzeigen (1 P).</div>
+
+    <h4>c) Vorteil der Kopplung über das Interface (3 P)</h4>
+    <ul>
+      <li><strong>Lose Kopplung:</strong> <code>Sendungsstatus</code> hängt nur vom Interface ab, nicht von den konkreten Anzeigeklassen. Änderungen an <code>KundenApp</code> oder <code>Hallenanzeige</code> wirken sich nicht auf <code>Sendungsstatus</code> aus.</li>
+      <li><strong>Erweiterbarkeit:</strong> Neue Anzeigen (Kundenportal, Kunden-Mail) implementieren nur <code>Observer</code> und melden sich an – <code>Sendungsstatus</code> muss weder geändert noch neu getestet werden.</li>
+      <li><strong>Flexibilität/Polymorphie:</strong> Die Liste <code>List&lt;Observer&gt;</code> kann beliebige, verschiedene Observer enthalten; sie lassen sich zur Laufzeit an- und abmelden. <code>Sendungsstatus</code> ist ohne die Anzeigen test- und wiederverwendbar.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> je erläutertem Aspekt 1 P (max. 3).</div>
+
+    <h4>d) Sequenzdiagramm (8 P)</h4>
+    <figure>
+      <svg viewBox="0 0 760 698" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><rect x="15" y="10" width="90" height="32" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="60" y="31" text-anchor="middle" font-weight="bold">Client</text><line x1="60" y1="42" x2="60" y2="690" stroke="#222" stroke-width="1" stroke-dasharray="6,4"/><rect x="55" y="50" width="10" height="626" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="65,70 158,70" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="147,76 158,70 147,64" fill="none" stroke="#222" stroke-width="1.3"/><text x="111.5" y="65" text-anchor="middle" font-size="12">create</text><rect x="155.5" y="54" width="169" height="32" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="240" y="75" text-anchor="middle" font-weight="bold">status : Sendungsstatus</text><line x1="240" y1="86" x2="240" y2="690" stroke="#222" stroke-width="1" stroke-dasharray="6,4"/><polyline points="65,125 388,125" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="377,131 388,125 377,119" fill="none" stroke="#222" stroke-width="1.3"/><text x="80" y="120" font-size="12">new KundenApp(status)</text><rect x="387.5" y="109" width="125" height="32" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="450" y="130" text-anchor="middle" font-weight="bold">app : KundenApp</text><line x1="450" y1="141" x2="450" y2="690" stroke="#222" stroke-width="1" stroke-dasharray="6,4"/><rect x="445" y="145" width="10" height="55" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="445,165 245,165" fill="none" stroke="#222" stroke-width="1.2"/><polygon points="245,165 256,160 256,170" fill="#222" stroke="#222" stroke-width="1.2"/><text x="345" y="160" text-anchor="middle" font-size="12">addObserver(app)</text><rect x="235" y="165" width="10" height="17" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="245,182 445,182" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="434,188 445,182 434,176" fill="none" stroke="#222" stroke-width="1.3"/><polyline points="445,200 65,200" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="76,194 65,200 76,206" fill="none" stroke="#222" stroke-width="1.3"/><polyline points="65,240 568,240" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="557,246 568,240 557,234" fill="none" stroke="#222" stroke-width="1.3"/><text x="80" y="235" font-size="12">new Hallenanzeige(status, 3)</text><rect x="564.5" y="224" width="151" height="32" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="640" y="245" text-anchor="middle" font-weight="bold">halle : Hallenanzeige</text><line x1="640" y1="256" x2="640" y2="690" stroke="#222" stroke-width="1" stroke-dasharray="6,4"/><rect x="635" y="260" width="10" height="58" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="635,280 245,280" fill="none" stroke="#222" stroke-width="1.2"/><polygon points="245,280 256,275 256,285" fill="#222" stroke="#222" stroke-width="1.2"/><text x="548" y="275" text-anchor="middle" font-size="12">addObserver(halle)</text><rect x="235" y="280" width="10" height="18" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="245,298 635,298" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="624,304 635,298 624,292" fill="none" stroke="#222" stroke-width="1.3"/><polyline points="635,318 65,318" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="76,312 65,318 76,324" fill="none" stroke="#222" stroke-width="1.3"/><polyline points="65,360 235,360" fill="none" stroke="#222" stroke-width="1.2"/><polygon points="235,360 224,365 224,355" fill="#222" stroke="#222" stroke-width="1.2"/><text x="150" y="355" text-anchor="middle" font-size="12">setStatus("In Zustellung")</text><rect x="235" y="360" width="10" height="302" fill="#fff" stroke="#222" stroke-width="1.2"/><rect x="241" y="386" width="10" height="262" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="245,376 275,376 275,386 251,386" fill="none" stroke="#222" stroke-width="1.2"/><polygon points="251,386 262,381 262,391" fill="#222" stroke="#222" stroke-width="1.2"/><text x="279" y="380" font-size="12">notifyObservers()</text><polyline points="251,418 445,418" fill="none" stroke="#222" stroke-width="1.2"/><polygon points="445,418 434,423 434,413" fill="#222" stroke="#222" stroke-width="1.2"/><text x="348" y="413" text-anchor="middle" font-size="12">update()</text><rect x="445" y="418" width="10" height="98" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="445,440 257,440" fill="none" stroke="#222" stroke-width="1.2"/><polygon points="257,440 268,435 268,445" fill="#222" stroke="#222" stroke-width="1.2"/><text x="351" y="435" text-anchor="middle" font-size="12">getStatus()</text><rect x="247" y="440" width="10" height="22" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="257,462 445,462" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="434,468 445,462 434,456" fill="none" stroke="#222" stroke-width="1.3"/><text x="351" y="457" text-anchor="middle" font-size="12">"In Zustellung"</text><rect x="451" y="488" width="10" height="16" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="455,478 485,478 485,488 461,488" fill="none" stroke="#222" stroke-width="1.2"/><polygon points="461,488 472,483 472,493" fill="#222" stroke="#222" stroke-width="1.2"/><text x="489" y="482" font-size="12">anzeigen()</text><polyline points="445,516 251,516" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="262,510 251,516 262,522" fill="none" stroke="#222" stroke-width="1.3"/><polyline points="251,538 635,538" fill="none" stroke="#222" stroke-width="1.2"/><polygon points="635,538 624,543 624,533" fill="#222" stroke="#222" stroke-width="1.2"/><text x="545" y="533" text-anchor="middle" font-size="12">update()</text><rect x="635" y="538" width="10" height="98" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="635,560 257,560" fill="none" stroke="#222" stroke-width="1.2"/><polygon points="257,560 268,555 268,565" fill="#222" stroke="#222" stroke-width="1.2"/><text x="545" y="555" text-anchor="middle" font-size="12">getStatus()</text><rect x="247" y="560" width="10" height="22" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="257,582 635,582" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="624,588 635,582 624,576" fill="none" stroke="#222" stroke-width="1.3"/><text x="545" y="577" text-anchor="middle" font-size="12">"In Zustellung"</text><rect x="641" y="608" width="10" height="16" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="645,598 675,598 675,608 651,608" fill="none" stroke="#222" stroke-width="1.2"/><polygon points="651,608 662,603 662,613" fill="#222" stroke="#222" stroke-width="1.2"/><text x="679" y="602" font-size="12">anzeigen()</text><polyline points="635,636 251,636" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="262,630 251,636 262,642" fill="none" stroke="#222" stroke-width="1.3"/><polyline points="235,662 65,662" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="76,656 65,662 76,668" fill="none" stroke="#222" stroke-width="1.3"/></svg>
+      <figcaption>Lösung OOP-05.3d: Schritte 4 bis 8 – setStatus, notifyObservers als Selbstaufruf, update mit getStatus (Pull) und anzeigen bei beiden Observern, Rückantworten</figcaption>
+    </figure>
+    <div class="bewertung"><strong>Bewertung:</strong> <code>setStatus("In Zustellung")</code> vom Client an <code>status</code> (1 P); Selbstaufruf <code>notifyObservers()</code> mit eigenem Aktivierungsbalken (1 P); <code>update()</code> an <code>app</code> (1 P); <code>getStatus()</code> von <code>app</code> an <code>status</code> mit Antwort (1 P); <code>anzeigen()</code> als Selbstaufruf von <code>app</code> (1 P); danach <code>update()</code> an <code>halle</code> (1 P); <code>getStatus()</code> mit Antwort und <code>anzeigen()</code> bei <code>halle</code> (1 P); Rückantworten von <code>update</code> und <code>setStatus</code> bis zum Client (1 P).<br>
+    Ebenfalls akzeptiert: ein <code>loop</code>-Fragment „[für alle Observer]“ um <em>einen</em> update-Aufruf, wenn erkennbar ist, dass beide Observer benachrichtigt werden; fehlende geschachtelte Aktivierungsbalken bei <code>getStatus</code> kosten keine Punkte.</div>
+
+    <h4>e) setStatus, notifyObservers und update (4 P)</h4>
+<pre class="pseudo">// Klasse Sendungsstatus
+methode setStatus(status : string) : void
+  this.status := status
+  notifyObservers()
+Ende methode
+
+methode notifyObservers() : void
+  zähle i von 0 bis observers.size() - 1
+    observers.get(i).update()
+  Ende zähle
+Ende methode
+
+// Klasse KundenApp
+methode update() : void
+  letzteMeldung := quelle.getStatus()
+  anzeigen()
+Ende methode</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> <code>setStatus</code>: Status speichern und danach <code>notifyObservers()</code> aufrufen (1 P); <code>notifyObservers</code>: Schleife über alle Observer mit richtigen Grenzen (1 P) und Aufruf von <code>update()</code> (1 P); <code>update</code>: Status über <code>quelle.getStatus()</code> holen und <code>anzeigen()</code> aufrufen (1 P).</div>
+    <p class="codelabel">Java · Aufgabe_OOP_05_3.java (Interfaces, Subject, Observer)</p>
+<pre class="java">interface Subject {
+    void addObserver(Observer o);
+    void removeObserver(Observer o);
+    void notifyObservers();
+}
+
+interface Observer {
+    void update();
+}
+
+class Sendungsstatus implements Subject {
+    private String sendungsNr;
+    private String status;
+    private List&lt;Observer&gt; observers;
+
+    public Sendungsstatus(String sendungsNr) {
+        this.sendungsNr = sendungsNr;
+        this.status = "Angekündigt";
+        this.observers = new ArrayList&lt;&gt;();
+    }
+
+    public String getSendungsNr() {
+        return sendungsNr;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+        notifyObservers();
+    }
+
+    @Override
+    public void addObserver(Observer o) {
+        observers.add(o);
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+        observers.remove(o);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (int i = 0; i &lt; observers.size(); i++) {
+            observers.get(i).update();
+        }
+    }
+}
+
+class KundenApp implements Observer {
+    private Sendungsstatus quelle;
+    private String letzteMeldung;
+
+    public KundenApp(Sendungsstatus quelle) {
+        this.quelle = quelle;
+        quelle.addObserver(this);
+    }
+
+    @Override
+    public void update() {
+        letzteMeldung = quelle.getStatus();     // Pull: Daten selbst abholen
+        anzeigen();
+    }
+
+    public void anzeigen() {
+        System.out.println("  KundenApp:       " + letzteMeldung);
+    }
+
+    public String getLetzteMeldung() {
+        return letzteMeldung;
+    }
+}
+
+class Hallenanzeige implements Observer {
+    private Sendungsstatus quelle;
+    private int hallenNr;
+    private String zeile;
+
+    public Hallenanzeige(Sendungsstatus quelle, int hallenNr) {
+        this.quelle = quelle;
+        this.hallenNr = hallenNr;
+        quelle.addObserver(this);
+    }
+
+    @Override
+    public void update() {
+        zeile = quelle.getStatus();             // Pull
+        anzeigen();
+    }
+
+    public void anzeigen() {
+        System.out.println("  Hallenanzeige " + hallenNr + ": " + zeile);
+    }
+}</pre>
+    <p class="codelabel">Ausgabe (zwei Statusänderungen, Abmelden der Hallenanzeige, dritte Änderung, Push-Vergleich)</p>
+<pre class="ausgabe">  KundenApp:       In Zustellung
+  Hallenanzeige 3: In Zustellung
+  KundenApp:       In Paketstation eingelegt
+  Hallenanzeige 3: In Paketstation eingelegt
+-- Hallenanzeige meldet sich ab --
+  KundenApp:       Abgeholt
+Letzte Meldung in der App: Abgeholt
+-- f) Push-Variante zum Vergleich --
+  Push-Observer erhält: KT-4712 -&gt; Im Sortierzentrum</pre>
+
+    <h4>f) Push-Variante (2 P)</h4>
+    <p>Bei der Push-Variante schickt das Subject die geänderten Daten gleich mit: Die Methode erhält Parameter, z. B. <code>update(sendungsNr : string, status : string)</code>, und <code>notifyObservers()</code> ruft <code>observers.get(i).update(sendungsNr, status)</code> auf. Der Observer muss den Status nicht mehr mit <code>getStatus()</code> abholen (der Rückaufruf im Sequenzdiagramm entfällt) und braucht keine Referenz <code>quelle</code> mehr. Nachteil: Alle Observer erhalten alle Daten, und bei zusätzlichen Daten ändert sich die Schnittstelle.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> 1 P geänderte Signatur/Daten als Parameter, 1 P Wegfall von <code>getStatus()</code> bzw. der Referenz auf das Subject.</div>
+<pre class="java">interface PushObserver {
+    void update(String sendungsNr, String status);   // Daten werden mitgeschickt
+}
+
+class StatusQuellePush {
+    private String sendungsNr;
+    private String status;
+    private List&lt;PushObserver&gt; observers = new ArrayList&lt;&gt;();
+
+    public StatusQuellePush(String sendungsNr) {
+        this.sendungsNr = sendungsNr;
+    }
+
+    public void addObserver(PushObserver o) {
+        observers.add(o);
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+        for (int i = 0; i &lt; observers.size(); i++) {
+            observers.get(i).update(sendungsNr, status);
+        }
+    }
+}</pre>
+  </div>
+</section>
+
+</body>
+</html>

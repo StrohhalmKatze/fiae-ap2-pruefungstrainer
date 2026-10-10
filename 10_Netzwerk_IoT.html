@@ -1,0 +1,1617 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10 Netzwerk, IoT &amp; Infrastruktur – Übungen</title>
+<link rel="stylesheet" href="style.css">
+<script src="uebungen.js"></script>
+<style>
+  /* Zusatzregeln Block 10 */
+  nav.toc ol ol { columns: 2; column-gap: 24px; font-size: 13px; }
+  table.kompakt td, table.kompakt th { padding: 2px 6px; }
+  table.leer td { height: 34px; }
+  table.leer.hoch td { height: 74px; }
+  table.leer.sehrhoch td { height: 112px; }
+  table.leer.h96 td { height: 96px; }
+  table.leer.h60 td { height: 60px; }
+  td.mono, th.mono { font-family: Consolas, "Courier New", monospace; font-size: 13px; }
+  td.mitte, th.mitte { text-align: center; }
+  .zweispaltig { display: flex; gap: 16px; flex-wrap: wrap; }
+  .zweispaltig > * { flex: 1 1 300px; min-width: 0; }
+  .englisch { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-size: 14.5px; line-height: 1.5;
+              border-left: 3px solid #888; padding: 2px 0 2px 12px; margin: 8px 0; }
+  .englisch p { margin: 6px 0; }
+  pre.hex { font-size: 13.5px; letter-spacing: .02em; }
+  table.eng td, table.eng th { font-size: 13px; }
+  @media print { .englisch { font-size: 10.5pt; } }
+</style>
+</head>
+<body>
+
+<!-- ===================== KOPF ===================== -->
+<header class="blockkopf">
+  <h1>Block 10 · Netzwerk, IoT &amp; Infrastruktur</h1>
+  <div class="unter">
+    <span class="badge k-oft">Oft</span> 4/9 Prüfungen (W22, S23, W24, S26) · Ø 13 von 200 Punkten · nur Teil 1 · W24 allein 26 Punkte
+    · Lösungen: <a href="10_Netzwerk_IoT_Loesungen.html">10_Netzwerk_IoT_Loesungen.html</a>
+  </div>
+</header>
+
+<nav class="toc">
+  <strong>Inhalt</strong>
+  <ol>
+    <li><a href="#erklaerung">Erklärungssatz</a>
+      <ol>
+        <li><a href="#e-01">NET-01 IoT / Sensorik / Funk</a></li>
+        <li><a href="#e-02">NET-02 Netzwerkkonzepte</a></li>
+        <li><a href="#e-03">NET-03 Adressierung, Frames, Protokolle</a></li>
+        <li><a href="#e-04">NET-04 Infrastruktur, Virtualisierung, Cloud</a></li>
+      </ol>
+    </li>
+    <li><a href="#belegsatz">Belegsatz</a> (Anlagen 1–8: Ausgangssituation, Netzwerkplan, Funktechniken, englischer Fachtext, Messwerte, Bestandsaufnahme, Hilfsfunktionen, Ethernet-Frame)</li>
+    <li><a href="#aufgaben">Aufgaben</a>
+      <ol>
+        <li><a href="#a-01">NET-01 (3 Aufgaben)</a></li>
+        <li><a href="#a-02">NET-02 (3 Aufgaben)</a></li>
+        <li><a href="#a-03">NET-03 (3 Aufgaben)</a></li>
+        <li><a href="#a-04">NET-04 (3 Aufgaben)</a></li>
+        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+
+<div class="info no-print">
+  <span class="kastentitel">So arbeitest du mit diesem Block</span>
+  Erst den Erklärungssatz lesen, dann die Aufgaben mit dem Belegsatz daneben lösen (Belegsatz am besten separat ausdrucken und neben die Aufgaben legen). Zeitrichtwert: 1 Punkt ≈ 0,9 Minuten.
+  Lösungen erst danach in der separaten Lösungsdatei nachsehen. Zur Skriptaufgabe (NET-03.3) gibt es dort Pseudocode <em>und</em> eine lauffähige Java-Datei im Ordner <code>java\10_Netzwerk_IoT\</code>.
+  Du schreibst AE, nicht FISI: Gefragt sind Begriffe, Zuordnungen mit Begründung, einfache Rechnungen und ein kleines Skript – keine Router-Konfiguration.
+</div>
+
+<!-- ===================== TEIL A: ERKLÄRUNGSSATZ ===================== -->
+<section class="teil" id="erklaerung">
+  <h2>A · Erklärungssatz</h2>
+
+  <p>Netzwerkthemen stehen nur in <strong>Teil 1</strong> und kamen in 4 von 9 Prüfungen vor – dann aber teils mit vielen Punkten (W24: 26 Punkte am Stück). Die Szenarien werden immer IoT-lastiger: Sensoren im Park (S23), Messstellen und Drohnen im Weinberg (W23, ohne eigene Netzwerkaufgabe), Bodensensoren auf dem Acker (S26). Typisch sind <strong>Zuordnen und Begründen</strong> (welche Funk- oder Netzart passt wozu?), <strong>Begriffe erläutern</strong> (MAC-Adresse, Ethernet-Frame), ein <strong>englischer Fachtext</strong> und einmal ein <strong>kleines Skript</strong>, das ein Netz durchläuft und JSON ausgibt.</p>
+
+  <table class="kompakt">
+    <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
+    <tr><td>NET-01 IoT / Sensorik / Funk</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>4–9 je Teilaufgabe</td><td>Funktechnik passend zur Situation wählen und begründen; Sicherheit auf schwachen Geräten</td></tr>
+    <tr><td>NET-02 Netzwerkkonzepte</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>9</td><td>LAN, WAN, SAN, LPWAN, VPN zuordnen und begründen</td></tr>
+    <tr><td>NET-03 Adressierung, Frames, Protokolle</td><td><span class="badge k-sonstige">Sonstige</span></td><td>3–8</td><td>MAC-Adresse, Ethernet-Frame, IPv4-Netz berechnen, Skript über alle Hosts</td></tr>
+    <tr><td>NET-04 Infrastruktur, Virtualisierung, Cloud</td><td><span class="badge k-sonstige">Sonstige</span></td><td>4–8</td><td>Schwachstellen und Anforderungen beschreiben, Backup, Cloud-Modelle</td></tr>
+  </table>
+
+  <div class="merke"><span class="kastentitel">Merke: Begründen heißt immer „mit Bezug auf die Situation“</span>
+    Fast jede Netzwerkfrage verlangt eine Begründung. Punkte gibt es nicht für das Lehrbuchmerkmal allein („LoRa hat eine große Reichweite“), sondern für die Verbindung zur Ausgangssituation: „LoRa hat eine große Reichweite von mehreren Kilometern; <em>dadurch genügen wenige Gateways für die weit verteilten Sensoren auf dem Gelände</em>.“ Merkmal + Folge für das Projekt = volle Punkte.
+  </div>
+
+  <!-- ===================== NET-01 ===================== -->
+  <h3 id="e-01">NET-01 · IoT / Sensorik / Funk <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
+  <p class="klein">Vorkommen: 3/9 · Prüfungen: S23 (T1 A4a: Verschlüsselung für batteriebetriebene Sensoren), W24 (T1 A2a: LPWAN für IoT), S26 (T1 A3a: LoRa aus englischem Fachtext, A3bd: RSA im IoT-Projekt) · dazu IoT als Kulisse in W23</p>
+
+  <h4>Was ist das Internet der Dinge (IoT)?</h4>
+  <p>Beim <strong>Internet of Things</strong> werden physische Gegenstände (Zähler, Maschinen, Container, Parkplätze …) mit <strong>Sensoren</strong>, <strong>Aktoren</strong>, einem kleinen Rechner und einer Netzwerkanbindung ausgestattet. Sie sind <strong>eindeutig adressierbar</strong> (z. B. über eine Geräte-ID wie die 64-Bit-<em>DevEUI</em>), erfassen Daten <strong>selbstständig</strong> und übertragen sie ohne menschliches Zutun an eine zentrale Plattform. Dort werden die Daten gespeichert, ausgewertet und gegebenenfalls Befehle an Aktoren zurückgeschickt.</p>
+
+  <table class="kompakt">
+    <tr><th style="width:18%">Begriff</th><th>Bedeutung</th><th style="width:32%">Beispiele</th></tr>
+    <tr><td><strong>Sensor</strong></td><td>Erfasst eine physikalische Größe und wandelt sie in ein elektrisches Signal bzw. einen Messwert um. <em>Liest</em> die Umwelt.</td><td>Temperatur, Feuchte, Druck, Füllstand (Ultraschall, Radar), Bewegung, GPS-Position, Magnetfeld</td></tr>
+    <tr><td><strong>Aktor</strong></td><td>Setzt ein elektrisches Signal in eine Aktion um. <em>Verändert</em> die Umwelt.</td><td>Ventil, Motor, Pumpe, Relais/Schalter, Sirene, Leuchte, Anzeigetafel</td></tr>
+    <tr><td><strong>Gateway</strong></td><td>Verbindet zwei unterschiedliche Netze und setzt die Protokolle um, z. B. Funk (LoRa, Zigbee, BLE) auf IP. Sammelt die Daten vieler Geräte und leitet sie weiter.</td><td>LoRaWAN-Gateway auf einem Dach, Zigbee-Bridge, Smart-Home-Zentrale</td></tr>
+    <tr><td><strong>Plattform / Backend</strong></td><td>Zentrale Software im Rechenzentrum oder in der Cloud: nimmt Nachrichten an, verwaltet Geräte, speichert Messwerte, wertet Regeln aus.</td><td>LoRaWAN-Network-Server, MQTT-Broker, Zeitreihen-Datenbank, Regel-Engine</td></tr>
+    <tr><td><strong>Anwendung</strong></td><td>Oberfläche bzw. Fachlogik für die Nutzer.</td><td>Dashboard, App, E-Mail/SMS-Alarm, Prognose</td></tr>
+  </table>
+
+  <figure>
+    <svg viewBox="0 0 760 270" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e01a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#222"/>
+        </marker>
+      </defs>
+      <!-- Box 1 -->
+      <rect x="5" y="20" width="165" height="125" rx="6" fill="#fff" stroke="#222"/>
+      <text x="87" y="42" text-anchor="middle" font-weight="bold">1 · Geräteebene</text>
+      <text x="14" y="66" font-size="12">Sensor: misst Zustand</text>
+      <text x="14" y="84" font-size="12">Aktor: greift ein</text>
+      <text x="14" y="102" font-size="12">Mikrocontroller</text>
+      <text x="14" y="120" font-size="12">Funkmodul + Batterie</text>
+      <!-- Box 2 -->
+      <rect x="200" y="20" width="165" height="125" rx="6" fill="#fff" stroke="#222"/>
+      <text x="282" y="42" text-anchor="middle" font-weight="bold">2 · Konnektivität</text>
+      <text x="209" y="66" font-size="12">Gateway bzw. Funkzelle</text>
+      <text x="209" y="84" font-size="12">setzt Funk auf IP um</text>
+      <text x="209" y="102" font-size="12">bündelt viele Geräte</text>
+      <text x="209" y="120" font-size="12">(LoRaWAN, NB-IoT …)</text>
+      <!-- Box 3 -->
+      <rect x="395" y="20" width="165" height="125" rx="6" fill="#fff" stroke="#222"/>
+      <text x="477" y="42" text-anchor="middle" font-weight="bold">3 · Plattform</text>
+      <text x="404" y="66" font-size="12">Network Server</text>
+      <text x="404" y="84" font-size="12">MQTT-Broker</text>
+      <text x="404" y="102" font-size="12">Datenbank, Regeln</text>
+      <text x="404" y="120" font-size="12">Rechenzentrum / Cloud</text>
+      <!-- Box 4 -->
+      <rect x="590" y="20" width="165" height="125" rx="6" fill="#fff" stroke="#222"/>
+      <text x="672" y="42" text-anchor="middle" font-weight="bold">4 · Anwendung</text>
+      <text x="599" y="66" font-size="12">Dashboard, App</text>
+      <text x="599" y="84" font-size="12">Alarmierung</text>
+      <text x="599" y="102" font-size="12">Auswertung, Prognose</text>
+      <text x="599" y="120" font-size="12">Steuerbefehle</text>
+      <!-- Pfeile zwischen den Boxen -->
+      <line x1="171" y1="72" x2="199" y2="72" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="171" y1="100" x2="199" y2="100" stroke="#222" marker-start="url(#e01a-pfeil)"/>
+      <line x1="366" y1="72" x2="394" y2="72" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="366" y1="100" x2="394" y2="100" stroke="#222" marker-start="url(#e01a-pfeil)"/>
+      <line x1="561" y1="72" x2="589" y2="72" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="561" y1="100" x2="589" y2="100" stroke="#222" marker-start="url(#e01a-pfeil)"/>
+      <!-- Beispielzeile -->
+      <text x="5" y="170" font-weight="bold" font-size="12">Beispiel Smart Parking:</text>
+      <text x="87" y="190" text-anchor="middle" font-size="12">Bodensensor im</text>
+      <text x="87" y="205" text-anchor="middle" font-size="12">Parkplatz (belegt/frei)</text>
+      <text x="282" y="190" text-anchor="middle" font-size="12">Gateway auf dem</text>
+      <text x="282" y="205" text-anchor="middle" font-size="12">Rathausdach</text>
+      <text x="477" y="190" text-anchor="middle" font-size="12">Parkdaten-Server</text>
+      <text x="477" y="205" text-anchor="middle" font-size="12">des Stadtwerks</text>
+      <text x="672" y="190" text-anchor="middle" font-size="12">Parkleit-App für</text>
+      <text x="672" y="205" text-anchor="middle" font-size="12">Autofahrer</text>
+      <!-- Uplink / Downlink -->
+      <text x="5" y="236" font-size="12">Uplink: Messwerte</text>
+      <line x1="140" y1="232" x2="750" y2="232" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <text x="5" y="262" font-size="12">Downlink: Befehle</text>
+      <line x1="140" y1="258" x2="750" y2="258" stroke="#222" stroke-dasharray="6 4" marker-start="url(#e01a-pfeil)"/>
+    </svg>
+    <figcaption>Abb. A-1: Die vier Ebenen einer IoT-Architektur am Beispiel „Smart Parking“ (Anzeigetafeln an der Straße wären Aktoren der Geräteebene)</figcaption>
+  </figure>
+
+  <div class="falle"><span class="kastentitel">Typische Falle: Gateway ≠ Router</span>
+    Ein Router verbindet IP-Netze und bleibt dabei bei IP. Ein <strong>IoT-Gateway</strong> setzt zwischen <em>verschiedenen</em> Protokollen um (z. B. LoRa-Funk → IP/Ethernet) und kann Daten zusätzlich puffern, filtern oder vorverarbeiten. Ein LoRaWAN-Gateway entschlüsselt die Nutzdaten übrigens <em>nicht</em>, es leitet die Pakete nur weiter.
+  </div>
+
+  <h4>Funktechniken im Vergleich</h4>
+  <p>Welche Funktechnik passt, hängt von wenigen Kriterien ab: <strong>Reichweite</strong>, <strong>Datenrate</strong>, <strong>Energiebedarf</strong> (Batterie oder Netzteil?), <strong>Kosten</strong> (Hardware, eigene Infrastruktur, laufende Gebühren), <strong>Latenz</strong> und ob eine <strong>Infrastruktur</strong> vorhanden ist (Mobilfunknetz) oder selbst aufgebaut werden muss (Gateways, Access Points). Die Werte sind typische Richtwerte; in der Prüfung genügen Größenordnungen.</p>
+
+  <table class="kompakt eng">
+    <tr><th>Technik</th><th>Frequenz / Lizenz</th><th>Reichweite</th><th>Datenrate</th><th>Energiebedarf</th><th>Kosten / Infrastruktur</th><th>Typischer Einsatz</th></tr>
+    <tr><td><strong>LoRaWAN</strong> (LPWAN)</td><td>868 MHz (EU), lizenzfrei, Duty Cycle</td><td>2–5 km Stadt, 10–15 km Land</td><td>ca. 0,3–5,5 kbit/s (max. 50)</td><td>sehr gering, Batterie bis ca. 10 Jahre</td><td>günstige Module; eigene Gateways möglich, keine Funkgebühren</td><td>verteilte Sensoren ohne Strom: Pegel, Boden, Zähler</td></tr>
+    <tr><td><strong>NB-IoT</strong> (LPWAN, Mobilfunk)</td><td>lizenzierte LTE-Bänder</td><td>Funkzelle, km-Bereich; sehr gute Gebäudedurchdringung</td><td>ca. 20–250 kbit/s</td><td>gering, Jahre (Schlafmodi)</td><td>SIM und Vertrag je Gerät; Netz des Betreibers, keine eigene Infrastruktur</td><td>Zähler im Keller, Geräte in Schächten, Paket-Tracker</td></tr>
+    <tr><td><strong>Sigfox</strong> (LPWAN)</td><td>868 MHz, lizenzfrei</td><td>bis 10 km Stadt, 40 km Land</td><td>ca. 0,1 kbit/s, max. 140 Nachrichten à 12 Byte/Tag</td><td>sehr gering</td><td>Abo je Gerät; nur Netz des Betreibers</td><td>sehr seltene Kurzmeldungen (Alarm, Status)</td></tr>
+    <tr><td><strong>Zigbee</strong></td><td>2,4 GHz (auch 868 MHz)</td><td>10–100 m, Mesh verlängert</td><td>250 kbit/s</td><td>gering</td><td>günstig; Koordinator/Bridge nötig</td><td>Gebäude- und Hausautomation (Licht, Heizung)</td></tr>
+    <tr><td><strong>Bluetooth LE</strong></td><td>2,4 GHz</td><td>ca. 10–50 m</td><td>1–2 Mbit/s</td><td>sehr gering (Knopfzelle)</td><td>sehr günstig; Smartphone als Gegenstelle</td><td>Wearables, Beacons, Geräte vor Ort per App auslesen</td></tr>
+    <tr><td><strong>WLAN</strong> (Wi-Fi 6)</td><td>2,4 / 5 / 6 GHz</td><td>ca. 30–100 m je Access Point</td><td>bis in den Gbit/s-Bereich</td><td>hoch (Netzteil oder Akku)</td><td>Access Points nötig</td><td>Laptops, Tablets, Kameras im Gebäude</td></tr>
+    <tr><td><strong>5G</strong> (Mobilfunk)</td><td>lizenziert (z. B. 3,6 GHz)</td><td>Funkzelle, 0,1 bis einige km</td><td>bis Gbit/s, Latenz &lt; 10 ms</td><td>hoch</td><td>Datentarif je Gerät oder eigenes Campusnetz (teuer)</td><td>Video, Drohnen, Fahrzeuge, Industrie 4.0</td></tr>
+  </table>
+
+  <figure>
+    <svg viewBox="0 0 520 320" width="450" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <polygon points="260,40 90,250 430,250" fill="#fff" stroke="#222" stroke-width="1.5"/>
+      <circle cx="260" cy="40" r="5" fill="#222"/>
+      <circle cx="90" cy="250" r="5" fill="#222"/>
+      <circle cx="430" cy="250" r="5" fill="#222"/>
+      <text x="260" y="26" text-anchor="middle" font-weight="bold">große Reichweite</text>
+      <text x="90" y="274" text-anchor="middle" font-weight="bold">hohe Datenrate</text>
+      <text x="430" y="274" text-anchor="middle" font-weight="bold">geringer Energiebedarf</text>
+      <!-- Kanten-Beschriftungen -->
+      <text x="150" y="140" text-anchor="end">Mobilfunk</text>
+      <text x="150" y="156" text-anchor="end" font-size="12">(LTE, 5G)</text>
+      <text x="382" y="140" font-weight="bold">LPWAN</text>
+      <text x="382" y="156" font-size="12">LoRaWAN, NB-IoT,</text>
+      <text x="382" y="171" font-size="12">Sigfox</text>
+      <text x="260" y="302" text-anchor="middle">Bluetooth LE, Zigbee</text>
+      <text x="260" y="170" text-anchor="middle" font-size="12" fill="#555">jede Technik erfüllt</text>
+      <text x="260" y="186" text-anchor="middle" font-size="12" fill="#555">höchstens zwei Ziele gut</text>
+    </svg>
+    <figcaption>Abb. A-2: Zielkonflikt bei Funktechniken – WLAN liegt nahe der Ecke „hohe Datenrate“ (kurze Reichweite, hoher Energiebedarf)</figcaption>
+  </figure>
+
+  <h4>Warum LPWAN für verteilte, batteriebetriebene Sensoren?</h4>
+  <p><strong>LPWAN</strong> (<em>Low Power Wide Area Network</em>) ist der Oberbegriff für Funknetze, die mit <strong>sehr wenig Energie</strong> über <strong>große Entfernungen</strong> funken – auf Kosten der Datenrate. Für Sensoren, die über ein großes Gebiet verteilt sind und keinen Stromanschluss haben, ist das genau die richtige Abwägung:</p>
+  <ul>
+    <li><strong>Geringer Energiebedarf:</strong> Das Gerät schläft fast immer und wacht nur zum Senden kurz auf → Batterie hält mehrere Jahre, kein Stromanschluss und seltene Wartungsfahrten.</li>
+    <li><strong>Große Reichweite:</strong> Ein Gateway bzw. eine Funkzelle deckt viele Quadratkilometer ab → wenige Gateways genügen, keine Verkabelung im Gelände.</li>
+    <li><strong>Kleine Datenmengen genügen:</strong> Ein Messwert umfasst nur wenige Byte und wird einige Male pro Stunde gesendet → die geringe Datenrate reicht völlig.</li>
+    <li><strong>Geringe Kosten:</strong> günstige Funkmodule; bei LoRaWAN keine Funkgebühren (lizenzfreies Band), bei NB-IoT kein eigener Netzaufbau.</li>
+    <li><strong>Viele Geräte je Gateway:</strong> Tausende Endgeräte können über ein Gateway kommunizieren.</li>
+  </ul>
+  <p><strong>Nicht geeignet</strong> ist LPWAN für Bilder, Audio, Video, große Firmware-Updates oder Echtzeitsteuerung mit sehr kurzer Reaktionszeit.</p>
+
+  <h4>LoRa und LoRaWAN</h4>
+  <ul>
+    <li><strong>LoRa</strong> (<em>Long Range</em>) ist die <strong>Funkmodulation</strong> (physikalische Schicht). Sie nutzt das <em>Chirp Spread Spectrum</em> (CSS): Das Signal wird über eine breitere Frequenz „gestreckt“ und ist dadurch sehr störfest und auch noch knapp über dem Rauschen empfangbar.</li>
+    <li><strong>LoRaWAN</strong> ist das darauf aufbauende <strong>Netzwerkprotokoll</strong> (offener Standard der LoRa Alliance): Adressierung, Verschlüsselung, Gerätemanagement.</li>
+    <li><strong>Topologie „Stern von Sternen“:</strong> Endgeräte senden per Funk an <em>alle</em> Gateways in Reichweite (kein festes Gateway, kein Mesh, Endgeräte sprechen nicht untereinander). Die Gateways leiten die Pakete per IP an den <strong>Network Server</strong> weiter. Dieser entfernt Duplikate (dasselbe Paket kam über mehrere Gateways), prüft die Integrität und gibt die Nutzdaten an den <strong>Application Server</strong>.</li>
+    <li><strong>Spreading Factor (SF7 … SF12):</strong> Je höher der SF, desto größer Reichweite und Störfestigkeit, aber desto <em>langsamer</em> die Übertragung, desto länger die Sendezeit (<em>Airtime</em>) und desto höher der Energiebedarf. Mit <em>Adaptive Data Rate</em> (ADR) stellt der Network Server für jedes Gerät den kleinsten noch funktionierenden SF ein.</li>
+    <li><strong>Duty Cycle:</strong> Im lizenzfreien 868-MHz-Band darf ein Gerät in den meisten Teilbändern höchstens <strong>1 % der Zeit</strong> senden, also 36 s pro Stunde.</li>
+    <li><strong>Geräteklassen:</strong> A (Standard, sparsamste: Empfang nur kurz nach eigenem Senden), B (zusätzlich geplante Empfangsfenster), C (empfängt dauernd, braucht Netzstrom – z. B. für Aktoren).</li>
+    <li><strong>Nutzdaten:</strong> je Nachricht nur ca. 51 bis 222 Byte (abhängig vom SF).</li>
+    <li><strong>Sicherheit eingebaut:</strong> symmetrische Verschlüsselung mit <strong>AES-128</strong>; ein Netzwerk-Sitzungsschlüssel sichert die Integrität (MIC), ein Anwendungs-Sitzungsschlüssel verschlüsselt die Nutzdaten Ende-zu-Ende bis zum Application Server.</li>
+  </ul>
+
+  <figure>
+    <svg viewBox="0 0 760 230" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e01b-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#222"/>
+        </marker>
+      </defs>
+      <text x="70" y="14" text-anchor="middle" font-weight="bold" font-size="12">Endgeräte</text>
+      <text x="302" y="14" text-anchor="middle" font-weight="bold" font-size="12">Gateways</text>
+      <!-- Endgeräte -->
+      <circle cx="70" cy="40" r="15" fill="#fff" stroke="#222"/><text x="70" y="45" text-anchor="middle" font-size="12">S1</text>
+      <circle cx="70" cy="88" r="15" fill="#fff" stroke="#222"/><text x="70" y="93" text-anchor="middle" font-size="12">S2</text>
+      <circle cx="70" cy="136" r="15" fill="#fff" stroke="#222"/><text x="70" y="141" text-anchor="middle" font-size="12">S3</text>
+      <circle cx="70" cy="184" r="15" fill="#fff" stroke="#222"/><text x="70" y="189" text-anchor="middle" font-size="12">S4</text>
+      <!-- Gateways -->
+      <rect x="280" y="40" width="44" height="34" fill="#fff" stroke="#222"/><text x="302" y="62" text-anchor="middle" font-size="12">GW1</text>
+      <rect x="280" y="100" width="44" height="34" fill="#fff" stroke="#222"/><text x="302" y="122" text-anchor="middle" font-size="12">GW2</text>
+      <rect x="280" y="160" width="44" height="34" fill="#fff" stroke="#222"/><text x="302" y="182" text-anchor="middle" font-size="12">GW3</text>
+      <!-- Funkstrecken (gestrichelt) -->
+      <g stroke="#222" stroke-dasharray="5 4">
+        <line x1="85" y1="40" x2="280" y2="57"/>
+        <line x1="85" y1="42" x2="280" y2="113"/>
+        <line x1="85" y1="88" x2="280" y2="60"/>
+        <line x1="85" y1="90" x2="280" y2="117"/>
+        <line x1="85" y1="136" x2="280" y2="120"/>
+        <line x1="85" y1="138" x2="280" y2="175"/>
+        <line x1="85" y1="184" x2="280" y2="178"/>
+      </g>
+      <!-- IP-Verbindungen -->
+      <line x1="324" y1="57" x2="430" y2="110" stroke="#222"/>
+      <line x1="324" y1="117" x2="430" y2="118" stroke="#222"/>
+      <line x1="324" y1="177" x2="430" y2="126" stroke="#222"/>
+      <!-- Network Server -->
+      <rect x="430" y="85" width="165" height="66" fill="#fff" stroke="#222"/>
+      <text x="512" y="104" text-anchor="middle" font-weight="bold">Network Server</text>
+      <text x="512" y="122" text-anchor="middle" font-size="12">Duplikate entfernen,</text>
+      <text x="512" y="139" text-anchor="middle" font-size="12">Integrität (MIC) prüfen</text>
+      <line x1="595" y1="118" x2="622" y2="118" stroke="#222" marker-end="url(#e01b-pfeil)"/>
+      <!-- Application Server -->
+      <rect x="623" y="85" width="132" height="66" fill="#fff" stroke="#222"/>
+      <text x="689" y="104" text-anchor="middle" font-weight="bold">App-Server</text>
+      <text x="689" y="122" text-anchor="middle" font-size="12">entschlüsselt die</text>
+      <text x="689" y="139" text-anchor="middle" font-size="12">Nutzdaten</text>
+      <!-- Legende -->
+      <line x1="40" y1="218" x2="80" y2="218" stroke="#222" stroke-dasharray="5 4"/>
+      <text x="88" y="222" font-size="12">Funk (LoRa, 868 MHz)</text>
+      <line x1="300" y1="218" x2="340" y2="218" stroke="#222"/>
+      <text x="348" y="222" font-size="12">IP-Verbindung (LAN, Glasfaser, Mobilfunk)</text>
+    </svg>
+    <figcaption>Abb. A-3: LoRaWAN als „Stern von Sternen“ – S1, S2 und S3 werden von je zwei Gateways empfangen, der Network Server verwirft die Duplikate</figcaption>
+  </figure>
+
+  <h4>Rechnen mit dem Duty Cycle</h4>
+  <p><strong>So gehst du vor:</strong> (1) erlaubte Sendezeit pro Stunde: 1 % von 3600 s = <strong>36 s</strong>. (2) benötigte Sendezeit = Nachrichten pro Stunde × Airtime je Nachricht. (3) vergleichen. (4) ggf. maximale Nachrichtenzahl = 36 s ÷ Airtime (abrunden).</p>
+  <p><em>Beispiel:</em> Ein Parkplatzsensor sendet bei SF11 (Airtime laut Datenblatt 0,66 s) einmal pro Minute: 60 × 0,66 s = 39,6 s &gt; 36 s → <strong>nicht zulässig</strong>. Maximal 36 s ÷ 0,66 s = 54,5 → 54 Nachrichten pro Stunde, also etwa alle 67 s. Lösung: seltener senden, nur bei Zustandswechsel senden oder mit kleinerem SF senden (kürzere Airtime, geht aber nur bei gutem Empfang).</p>
+
+  <h4>NB-IoT, Sigfox und 5G kurz eingeordnet</h4>
+  <ul>
+    <li><strong>NB-IoT</strong> (<em>Narrowband IoT</em>) ist ein Mobilfunkstandard für IoT-Geräte im LTE-Netz. Vorteile: vorhandenes Netz, sehr gute Durchdringung von Kellern und Schächten, höhere Datenrate als LoRaWAN, Downlink jederzeit möglich. Nachteile: SIM-Karte und Vertrag je Gerät (laufende Kosten), Abhängigkeit vom Netzbetreiber und dessen Abdeckung. Verwandt: <strong>LTE-M</strong> (mehr Datenrate, auch für bewegte Geräte).</li>
+    <li><strong>Sigfox</strong> ist ein Betreibernetz mit extrem kleiner Datenrate und streng begrenzter Nachrichtenzahl – nur für seltene Kurzmeldungen.</li>
+    <li><strong>5G</strong> hat drei Ausprägungen: hohe Datenraten (Video, Drohnen), sehr kurze Latenz (Steuerung in Echtzeit) und sehr viele IoT-Geräte pro Fläche (dazu zählen NB-IoT und LTE-M). Unternehmen können ein eigenes <strong>5G-Campusnetz</strong> betreiben.</li>
+  </ul>
+
+  <h4>Englischer Fachtext: Merkmale herausziehen</h4>
+  <p>In S26 musste man aus einem englischen Text drei Merkmale von LoRa nennen und zwei Gründe für den Einsatz erläutern. <strong>So gehst du vor:</strong> (1) Text einmal ganz lesen, (2) jede Aussage über die Technik unterstreichen (<em>is, uses, allows, can, is ideal for</em>), (3) auf Deutsch stichpunktartig notieren, (4) bei „Gründe erläutern“ jedes Merkmal mit der Situation verbinden. Wörtlich übersetzen ist nicht nötig. Übungsbeispiel (selbst geschrieben):</p>
+  <div class="englisch">
+    <p>NB-IoT is a cellular technology standardised by 3GPP. It reuses the existing LTE infrastructure, so operators can activate it with a software update on their base stations. Its narrow bandwidth of 180 kHz improves coverage deep inside buildings and underground. Devices can enter a power saving mode in which they remain registered in the network but do not listen to it, which allows a battery life of more than ten years.</p>
+  </div>
+  <table class="kompakt">
+    <tr><th style="width:48%">Aussage im Text</th><th>Merkmal (deutsch, stichpunktartig)</th></tr>
+    <tr><td><em>cellular technology … reuses the existing LTE infrastructure</em></td><td>Mobilfunktechnik, nutzt vorhandenes LTE-Netz → kein eigener Netzaufbau</td></tr>
+    <tr><td><em>narrow bandwidth … improves coverage deep inside buildings</em></td><td>schmalbandig, sehr gute Gebäudedurchdringung (Keller, Schächte)</td></tr>
+    <tr><td><em>power saving mode … battery life of more than ten years</em></td><td>Energiesparmodus, Batterielaufzeit über 10 Jahre</td></tr>
+  </table>
+
+  <h4>Messwerte als JSON und das Protokoll MQTT</h4>
+  <p>Die Plattform erhält die Messwerte meist als <strong>JSON</strong> (Querverweis Block 06). Typische Felder: eine eindeutige Geräte-ID (z. B. <code>DevEUI</code>, 64 Bit in Hex-Schreibweise), der Messwert, ein <strong>Zeitstempel im ISO-8601-Format</strong> mit Zeitzone und oft der Batteriestand. Beispiel Parkplatzsensor:</p>
+  <pre>{
+  "devEUI": "0004A30B001C2F51",
+  "stellplatz": "Marktplatz-12",
+  "belegt": true,
+  "zeitpunkt": "2026-03-14T08:42:10+01:00",
+  "batterie": 91
+}</pre>
+  <ul>
+    <li>Zahlen und Wahrheitswerte <strong>ohne</strong> Anführungszeichen (<code>91</code>, <code>true</code>), Texte und Zeitstempel <strong>mit</strong>.</li>
+    <li>Mehrere Datensätze werden zu einem <strong>Array</strong> <code>[ {…}, {…} ]</code> – zwischen den Objekten steht ein Komma, nach dem letzten <em>keines</em>.</li>
+    <li>Einheiten gehören in den Schlüsselnamen oder in die Dokumentation (<code>"temperatur_c": 7.5</code>), nicht in den Wert (<code>"7,5 °C"</code> wäre ein String und schlecht auswertbar). Dezimaltrenner ist der Punkt.</li>
+  </ul>
+  <p><strong>MQTT</strong> ist das verbreitetste Protokoll zwischen IoT-Plattform-Komponenten: Ein zentraler <strong>Broker</strong> nimmt Nachrichten von <em>Publishern</em> entgegen und verteilt sie an alle <em>Subscriber</em> eines <strong>Topics</strong> (z. B. <code>stadt/parken/marktplatz/12</code>). Vorteile: sehr kleiner Protokoll-Overhead, Sender und Empfänger kennen sich nicht (lose Kopplung), drei Zustellgarantien (QoS 0, 1, 2). MQTT läuft über TCP, Port <strong>1883</strong>, verschlüsselt mit TLS über Port <strong>8883</strong>.</p>
+
+  <h4>Sicherheit auf schwachen Geräten (Querverweis Block 07)</h4>
+  <p>IoT-Sensoren haben einen kleinen Mikrocontroller, wenig Speicher und eine Batterie. Daraus folgt:</p>
+  <ul>
+    <li><strong>Symmetrische Verschlüsselung</strong> (z. B. <strong>AES-128</strong>) statt asymmetrischer: AES ist schnell, oft in Hardware vorhanden und verbraucht wenig Energie. Bei LoRaWAN ist AES-128 bereits eingebaut.</li>
+    <li><strong>Asymmetrische Verfahren wie RSA</strong> sind rechenintensiv (lange Rechenzeit = Energie) und erzeugen große Schlüssel und Chiffrate: Ein mit RSA-2048 verschlüsselter Block ist immer 256 Byte groß – mehr, als eine einzelne LoRaWAN- oder Sigfox-Nachricht transportieren kann. RSA ist auf dem Sensor deshalb in der Regel <strong>nicht sinnvoll</strong>. Wenn asymmetrisch nötig (z. B. für Schlüsselaustausch oder Signaturen), dann eher <strong>elliptische Kurven</strong> (ECC: kürzere Schlüssel bei gleicher Sicherheit).</li>
+    <li><strong>Integrität</strong> sichert man mit einem <strong>Message Authentication Code</strong> (MAC, bei LoRaWAN „MIC“ genannt) oder einer Signatur – Verschlüsselung allein schützt <em>nicht</em> vor unbemerkter Veränderung.</li>
+    <li>Weitere Maßnahmen: eigener Schlüssel je Gerät (nicht ein Schlüssel für alle), keine Standardpasswörter, signierte Firmware-Updates, Schutz vor physischem Zugriff (Gehäuse, Plombe), Segmentierung des IoT-Netzes.</li>
+  </ul>
+  <div class="falle"><span class="kastentitel">Typische Falle: Zweimal „MAC“</span>
+    <strong>MAC-Adresse</strong> = <em>Media Access Control</em>, die Hardware-Adresse im LAN (NET-03). <strong>MAC</strong> in der Kryptografie = <em>Message Authentication Code</em>, eine Prüfsumme mit geheimem Schlüssel zum Integritätsschutz. Im Zusammenhang „Manipulation erkennen“ ist immer der Message Authentication Code gemeint.
+  </div>
+
+  <h4>Edge oder Cloud?</h4>
+  <table class="kompakt">
+    <tr><th style="width:20%"></th><th>Edge Computing (am Rand, nah am Gerät)</th><th>Cloud Computing (zentral)</th></tr>
+    <tr><td>Wo?</td><td>auf dem Gerät, dem Gateway oder einer lokalen Steuerung vor Ort</td><td>im Rechenzentrum bzw. bei einem Cloud-Anbieter</td></tr>
+    <tr><td>Stärken</td><td>sehr kurze Reaktionszeit; funktioniert <strong>auch ohne Internetverbindung</strong>; weniger Datenvolumen (nur Ergebnisse senden); sensible Daten bleiben vor Ort</td><td>viel Rechenleistung und Speicher; Langzeitarchiv; Auswertungen über alle Standorte; zentrale Pflege, leicht skalierbar</td></tr>
+    <tr><td>Schwächen</td><td>begrenzte Ressourcen; Software auf vielen Geräten verteilt (Updates)</td><td>Latenz; abhängig von der Verbindung; laufende Kosten</td></tr>
+  </table>
+  <p><em>Beispiel:</em> Ein Kühlhaus schaltet bei Übertemperatur sofort lokal die Notkühlung ein (Edge) – das darf nicht davon abhängen, ob das Internet gerade funktioniert. Die Temperaturverläufe aller Filialen werden in der Cloud gespeichert und monatlich ausgewertet. In der Praxis ist fast immer eine <strong>Kombination</strong> sinnvoll.</p>
+
+  <h4>So gehst du vor: Funktechnik begründet auswählen</h4>
+  <ol>
+    <li><strong>Anforderungen aus dem Text ziehen:</strong> Entfernung/Fläche? Stromanschluss oder Batterie? Datenmenge und Sendeintervall? Reaktionszeit? Gebäude oder Gelände? Mobilfunkabdeckung? Budget (einmalig/laufend)?</li>
+    <li><strong>Ausschlusskriterien zuerst:</strong> Video → nur WLAN oder Mobilfunk (4G/5G). Batterie über Jahre → kein WLAN, kein 5G. Mehrere Kilometer → kein BLE, kein Zigbee, kein WLAN.</li>
+    <li><strong>Unter den verbleibenden Techniken abwägen</strong> (z. B. LoRaWAN vs. NB-IoT: eigene Gateways und keine laufenden Gebühren vs. vorhandenes Netz, Kosten je SIM und bessere Gebäudedurchdringung).</li>
+    <li><strong>Antwort formulieren:</strong> Technik + zwei Merkmale + jeweils Bezug zur Situation.</li>
+  </ol>
+
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul style="margin:0">
+      <li><strong>S26 T1 A3a</strong> (9 P): Englischer Fachartikel zu LoRa; aa) drei Merkmale nennen (3 P), ab) zwei Gründe erläutern, warum LoRa für weit verteilte Bodensensoren ohne Stromversorgung sinnvoll ist (6 P).</li>
+      <li><strong>S26 T1 A3bd</strong> (3 P): Ist RSA im IoT-Projekt sinnvoll? → Nein, zu rechen- und energieaufwendig für die Sensoren, symmetrisch verschlüsseln.</li>
+      <li><strong>S23 T1 A4a</strong> (4 P): Batteriebetriebene Sensoren mit geringer Rechenleistung, Daten sollen verschlüsselt werden → geeignetes Verfahren vorschlagen und begründen. A4b (4 P): Stellung nehmen zu „signieren statt verschlüsseln“ (Signatur schützt Integrität und Authentizität, aber nicht die Vertraulichkeit). A4cb: Sensor-Messwerte als JSON mit <code>DevEUI</code>, <code>Value</code>, <code>Timestamp</code> in ein Relationenmodell übernehmen.</li>
+      <li><strong>W24 T1 A2a</strong>: „Internet der Dinge“ dem Konzept LPWAN zuordnen und begründen (siehe NET-02).</li>
+    </ul>
+  </div>
+
+  <!-- ===================== NET-02 ===================== -->
+  <h3 id="e-02">NET-02 · Netzwerkkonzepte <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
+  <p class="klein">Vorkommen: 2/9 · Prüfungen: W24 (T1 A2a: LAN, SAN, LPWAN den Gebieten IoT, Unternehmensnetz, Rechenzentrum zuordnen und begründen, 9 P), S26 (T1 A3a: LoRa als Netzkonzept)</p>
+
+  <h4>Netzarten nach Ausdehnung</h4>
+  <table class="kompakt">
+    <tr><th style="width:16%">Netz</th><th style="width:26%">Ausgeschrieben</th><th style="width:18%">Ausdehnung</th><th>Merkmale / Beispiel</th></tr>
+    <tr><td><strong>PAN</strong></td><td>Personal Area Network</td><td>wenige Meter</td><td>Geräte einer Person: Smartwatch ↔ Smartphone per Bluetooth</td></tr>
+    <tr><td><strong>LAN</strong></td><td>Local Area Network</td><td>Gebäude, Gelände</td><td>Netz eines Standorts in eigener Verantwortung; meist Ethernet über Switches, hohe Datenrate (1–10 Gbit/s), geringe Latenz, keine laufenden Gebühren</td></tr>
+    <tr><td><strong>WLAN</strong></td><td>Wireless LAN</td><td>Gebäude, Gelände</td><td>LAN per Funk (IEEE 802.11) über Access Points; mobil, aber geteiltes Medium, geringere Reichweite</td></tr>
+    <tr><td><strong>MAN</strong></td><td>Metropolitan Area Network</td><td>Stadt, Region</td><td>verbindet Standorte innerhalb einer Stadt, z. B. Glasfaserring eines Stadtwerks</td></tr>
+    <tr><td><strong>WAN</strong></td><td>Wide Area Network</td><td>Land, weltweit</td><td>verbindet entfernte Standorte bzw. LANs; Leitungen eines Providers; das Internet ist das größte WAN (manchmal „GAN“, Global Area Network)</td></tr>
+  </table>
+
+  <h4>Netze nach Zweck</h4>
+  <table class="kompakt">
+    <tr><th style="width:16%">Netz</th><th style="width:26%">Ausgeschrieben</th><th>Merkmale und typischer Einsatz</th></tr>
+    <tr><td><strong>SAN</strong></td><td>Storage Area Network</td><td>Eigenes, sehr schnelles Netz <strong>nur für Speicher</strong>, typisch im <strong>Rechenzentrum</strong>. Server greifen <em>blockbasiert</em> auf ein zentrales Speichersystem zu, als wäre es eine lokale Festplatte (Fibre Channel oder iSCSI). Mehrere Server (z. B. ein Virtualisierungscluster) nutzen denselben Speicher; redundante Pfade; der Speicherverkehr belastet das normale LAN nicht.</td></tr>
+    <tr><td><strong>LPWAN</strong></td><td>Low Power Wide Area Network</td><td>Funknetz für <strong>IoT</strong>: große Reichweite, sehr geringer Energiebedarf, kleine Datenrate (LoRaWAN, NB-IoT, Sigfox; Details in NET-01).</td></tr>
+    <tr><td><strong>VPN</strong></td><td>Virtual Private Network</td><td>Logisches, privates Netz <strong>über ein öffentliches Netz</strong> (Internet). Die Daten laufen durch einen <strong>verschlüsselten Tunnel</strong> (z. B. IPsec, WireGuard, TLS) → Vertraulichkeit, Integrität und Authentifizierung der Gegenstelle. <em>Site-to-Site-VPN</em>: verbindet ganze Standorte (Router zu Router). <em>Remote-Access-VPN</em>: einzelne Mitarbeiter (Laptop, Smartphone) wählen sich von unterwegs ins Firmennetz ein. Günstiger als eine eigene Standleitung.</td></tr>
+    <tr><td><strong>VLAN</strong></td><td>Virtual LAN</td><td>Teilt ein physisches LAN logisch in getrennte Netze (z. B. Büro, Telefonie, Gäste) – ohne eigene Switches pro Netz.</td></tr>
+  </table>
+
+  <div class="falle"><span class="kastentitel">Typische Falle: SAN ≠ NAS</span>
+    Ein <strong>NAS</strong> (<em>Network Attached Storage</em>) ist ein <em>Speichergerät</em>, das im normalen LAN hängt und Dateien freigibt (dateibasiert, z. B. SMB). Ein <strong>SAN</strong> ist ein eigenes <em>Netz</em> für Speicher im Rechenzentrum mit blockbasiertem Zugriff. Auch nicht verwechseln: <strong>WAN</strong> (Weitverkehrsnetz) und <strong>WLAN</strong> (Funk-LAN).
+  </div>
+
+  <h4>Topologien</h4>
+  <figure>
+    <svg viewBox="0 0 760 180" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <!-- Stern -->
+      <g stroke="#222">
+        <line x1="95" y1="80" x2="30" y2="35"/><line x1="95" y1="80" x2="160" y2="35"/>
+        <line x1="95" y1="80" x2="30" y2="125"/><line x1="95" y1="80" x2="160" y2="125"/>
+        <line x1="95" y1="80" x2="95" y2="140"/>
+      </g>
+      <rect x="72" y="69" width="46" height="22" fill="#fff" stroke="#222"/>
+      <text x="95" y="84" text-anchor="middle" font-size="11">Switch</text>
+      <g fill="#fff" stroke="#222">
+        <circle cx="30" cy="35" r="10"/><circle cx="160" cy="35" r="10"/><circle cx="30" cy="125" r="10"/>
+        <circle cx="160" cy="125" r="10"/><circle cx="95" cy="140" r="10"/>
+      </g>
+      <text x="95" y="172" text-anchor="middle" font-weight="bold">Stern</text>
+      <!-- Bus -->
+      <line x1="205" y1="80" x2="365" y2="80" stroke="#222" stroke-width="2.5"/>
+      <rect x="200" y="74" width="5" height="12" fill="#222"/><rect x="365" y="74" width="5" height="12" fill="#222"/>
+      <g stroke="#222">
+        <line x1="225" y1="50" x2="225" y2="80"/><line x1="285" y1="50" x2="285" y2="80"/><line x1="345" y1="50" x2="345" y2="80"/>
+        <line x1="255" y1="80" x2="255" y2="110"/><line x1="315" y1="80" x2="315" y2="110"/>
+      </g>
+      <g fill="#fff" stroke="#222">
+        <circle cx="225" cy="40" r="10"/><circle cx="285" cy="40" r="10"/><circle cx="345" cy="40" r="10"/>
+        <circle cx="255" cy="120" r="10"/><circle cx="315" cy="120" r="10"/>
+      </g>
+      <text x="285" y="172" text-anchor="middle" font-weight="bold">Bus</text>
+      <!-- Ring -->
+      <polygon points="475,25 527,63 507,124 443,124 423,63" fill="none" stroke="#222"/>
+      <g fill="#fff" stroke="#222">
+        <circle cx="475" cy="25" r="10"/><circle cx="527" cy="63" r="10"/><circle cx="507" cy="124" r="10"/>
+        <circle cx="443" cy="124" r="10"/><circle cx="423" cy="63" r="10"/>
+      </g>
+      <text x="475" y="172" text-anchor="middle" font-weight="bold">Ring</text>
+      <!-- Vermascht -->
+      <g stroke="#222">
+        <line x1="600" y1="35" x2="720" y2="35"/><line x1="600" y1="35" x2="600" y2="130"/><line x1="600" y1="35" x2="720" y2="130"/>
+        <line x1="600" y1="35" x2="660" y2="82"/><line x1="720" y1="35" x2="600" y2="130"/><line x1="720" y1="35" x2="720" y2="130"/>
+        <line x1="720" y1="35" x2="660" y2="82"/><line x1="600" y1="130" x2="720" y2="130"/><line x1="600" y1="130" x2="660" y2="82"/>
+        <line x1="720" y1="130" x2="660" y2="82"/>
+      </g>
+      <g fill="#fff" stroke="#222">
+        <circle cx="600" cy="35" r="10"/><circle cx="720" cy="35" r="10"/><circle cx="600" cy="130" r="10"/>
+        <circle cx="720" cy="130" r="10"/><circle cx="660" cy="82" r="10"/>
+      </g>
+      <text x="660" y="172" text-anchor="middle" font-weight="bold">Vermascht (Mesh)</text>
+    </svg>
+    <figcaption>Abb. A-4: Grundtopologien – rechts vollvermascht (jeder mit jedem); in der Praxis meist teilvermascht (mehrere, aber nicht alle Verbindungen)</figcaption>
+  </figure>
+
+  <table class="kompakt">
+    <tr><th style="width:13%">Topologie</th><th style="width:22%">Aufbau</th><th>Vorteile</th><th>Nachteile</th><th style="width:21%">Heute z. B.</th></tr>
+    <tr><td><strong>Stern</strong></td><td>alle Geräte an einem zentralen Knoten (Switch, Access Point)</td><td>einfach erweiterbar; Ausfall eines Kabels/Endgeräts betrifft nur dieses; einfache Fehlersuche</td><td>zentraler Knoten = <strong>Single Point of Failure</strong>; viel Kabel</td><td>Ethernet-LAN, WLAN, LoRaWAN („Stern von Sternen“)</td></tr>
+    <tr><td><strong>Bus</strong></td><td>alle an einem gemeinsamen Kabel</td><td>wenig Kabel, günstig</td><td>Kabelbruch legt alles lahm; Kollisionen; schlecht skalierbar</td><td>Feldbusse in Maschinen und Fahrzeugen (CAN); früher Koax-Ethernet</td></tr>
+    <tr><td><strong>Ring</strong></td><td>jedes Gerät mit zwei Nachbarn, Daten laufen im Kreis</td><td>gleichberechtigter Zugriff; als Doppelring ausfallsicher</td><td>einfacher Ring: ein Ausfall unterbricht alles</td><td>Glasfaserringe von Providern, Industrie-Ethernet mit Ringredundanz</td></tr>
+    <tr><td><strong>Vermascht</strong></td><td>Knoten über mehrere Wege verbunden</td><td>sehr ausfallsicher (Umwege), Lastverteilung</td><td>teuer, aufwendig, komplexere Wegewahl</td><td>Internet-Backbone, WLAN-Mesh, Zigbee, Bluetooth Mesh</td></tr>
+    <tr><td><strong>Baum</strong></td><td>hierarchisch verbundene Sterne</td><td>gut strukturierbar, für große Gebäude</td><td>Ausfall eines Verteilers trennt einen ganzen Teilbaum</td><td>Gebäudeverkabelung: Kern-Switch → Etagen-Switches</td></tr>
+  </table>
+
+  <h4>Client-Server und Peer-to-Peer</h4>
+  <table class="kompakt">
+    <tr><th style="width:15%"></th><th>Client-Server</th><th>Peer-to-Peer (P2P)</th></tr>
+    <tr><td>Prinzip</td><td>Ein <strong>Server</strong> stellt Dienste zentral bereit, viele <strong>Clients</strong> nutzen sie (Anfrage → Antwort).</td><td>Alle Rechner sind <strong>gleichberechtigt</strong>; jeder ist zugleich Anbieter und Nutzer.</td></tr>
+    <tr><td>Vorteile</td><td>zentrale Datenhaltung (eine aktuelle Version); zentrale Rechteverwaltung und Datensicherung; leistungsfähige, redundante Server-Hardware; einfache Administration</td><td>kein teurer Server nötig; kein zentraler Ausfallpunkt; für wenige Rechner schnell eingerichtet</td></tr>
+    <tr><td>Nachteile</td><td>Server ist Single Point of Failure (→ Redundanz nötig); Anschaffungs- und Betriebskosten</td><td>Daten verstreut, Versionen uneinheitlich; Rechte und Sicherung kaum kontrollierbar; Daten fehlen, wenn ein PC ausgeschaltet ist; skaliert schlecht</td></tr>
+    <tr><td>Beispiele</td><td>Dateiserver, Webserver, Datenbankserver, MQTT-Broker</td><td>Dateifreigaben zwischen Arbeitsplatz-PCs, Tauschbörsen, Blockchain</td></tr>
+  </table>
+
+  <h4>Aktive Netzwerkkomponenten</h4>
+  <table class="kompakt">
+    <tr><th style="width:17%">Komponente</th><th style="width:12%">OSI-Schicht</th><th>Aufgabe</th></tr>
+    <tr><td><strong>Repeater / Hub</strong></td><td>1</td><td>verstärkt das Signal bzw. verteilt es an alle Anschlüsse (heute veraltet)</td></tr>
+    <tr><td><strong>Switch</strong></td><td>2</td><td>verbindet Geräte <strong>innerhalb eines LAN</strong>; lernt die MAC-Adressen der angeschlossenen Geräte und leitet jeden Frame gezielt nur an den Port des Empfängers weiter; kann VLANs bilden</td></tr>
+    <tr><td><strong>Access Point</strong></td><td>2</td><td>bindet WLAN-Geräte an das kabelgebundene LAN an (Brücke Funk ↔ Ethernet), verschlüsselt die Funkstrecke (WPA2/WPA3)</td></tr>
+    <tr><td><strong>Router</strong></td><td>3</td><td>verbindet <strong>unterschiedliche IP-Netze</strong> (z. B. LAN ↔ Internet), wählt anhand der Ziel-IP-Adresse den Weg (Routingtabelle); oft zusätzlich NAT, DHCP, VPN-Endpunkt</td></tr>
+    <tr><td><strong>Firewall</strong></td><td>3–7</td><td>filtert den Verkehr zwischen Netzen nach Regeln: Paketfilter (IP-Adressen, Ports), zustandsorientiert (erlaubt nur Antworten auf eigene Anfragen), Application Gateway/Proxy (prüft Inhalte)</td></tr>
+    <tr><td><strong>Gateway</strong></td><td>bis 7</td><td>setzt zwischen verschiedenen Protokollen bzw. Netzarten um, z. B. IoT-Gateway (Funk → IP)</td></tr>
+    <tr><td><strong>Modem / ONT</strong></td><td>1</td><td>wandelt die Signale für die Anschlussleitung des Providers (DSL, Kabel, Glasfaser)</td></tr>
+  </table>
+  <p>In kleinen Standorten stecken Router, Firewall, VPN-Endpunkt, Switch und Access Point oft in <em>einem</em> Gerät. In der Prüfung trotzdem die einzelnen <em>Funktionen</em> nennen.</p>
+
+  <h4>So gehst du vor: Netzkonzept zuordnen und begründen</h4>
+  <ol>
+    <li>Für jedes Anwendungsgebiet die prägenden Merkmale aus dem Text herausziehen: <em>Wer</em> kommuniziert (Sensoren, PCs, Server, Standorte)? <em>Wie weit</em>? <em>Wie viele Daten</em>? <em>Strom vorhanden</em>? <em>Über welches Medium</em> (eigenes Kabel, Funk, Internet)?</li>
+    <li>Konzept zuordnen (meist passt jedes Konzept genau einmal – trotzdem nicht nach dem Ausschlussprinzip raten, sondern prüfen).</li>
+    <li>Begründung: <strong>zwei</strong> Merkmale des Konzepts, jeweils mit Folge für das Gebiet (in W24: 3 Punkte je Zeile, davon ca. 1 für die Zuordnung und 2 für die Begründung).</li>
+  </ol>
+  <p><em>Beispiel</em> (Hotelkette mit zwölf Häusern, anderes Szenario als in den Aufgaben):</p>
+  <table class="kompakt">
+    <tr><th style="width:30%">Anwendungsgebiet</th><th style="width:12%">Konzept</th><th>Begründung</th></tr>
+    <tr><td>Gäste surfen in Zimmern und Lobby mit eigenen Smartphones</td><td>WLAN</td><td>Gäste-Geräte haben keinen Kabelanschluss und sind mobil; Access Points versorgen Zimmer und Lobby per Funk. Ein eigenes Gäste-WLAN (eigenes VLAN) trennt Gäste vom internen Netz.</td></tr>
+    <tr><td>Alle Häuser greifen auf das zentrale Buchungssystem in der Zentrale zu</td><td>VPN über das Internet (WAN)</td><td>Die Häuser liegen in verschiedenen Städten und sind nur über das Internet verbunden; der verschlüsselte Tunnel schützt Buchungs- und Gästedaten, eine teure Standleitung ist nicht nötig.</td></tr>
+    <tr><td>Füllstandssensoren in den Flüssiggastanks abgelegener Ferienhäuser</td><td>LPWAN</td><td>Die Tanks liegen verstreut und haben keinen Netzwerk- und oft keinen Stromanschluss; ein Füllstand ist nur wenige Byte groß und wird selten gesendet, die Batterie hält jahrelang.</td></tr>
+  </table>
+
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <strong>W24 T1 A2a</strong> (9 P): Drei Konzepte (LAN, SAN, LPWAN) den Anwendungsgebieten „Internet der Dinge“, „Unternehmensnetzwerk“ und „Rechenzentrum“ in einer Tabelle zuordnen und jeweils begründen. Erwartet werden je Zeile die passende Zuordnung und eine Begründung mit zwei Merkmalen, die zum Anwendungsgebiet passen. Danach ging es in derselben Aufgabe mit Ethernet-Frame, MAC-Adresse und einem Skript weiter (NET-03).
+  </div>
+
+  <!-- ===================== NET-03 ===================== -->
+  <h3 id="e-03">NET-03 · Adressierung, Frames &amp; Protokolle <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfung: W24 (T1 A2ba: Felder des Ethernet-Frames zuordnen, 6 P · A2bb: Aufbau einer MAC-Adresse, 3 P · A2c: Skript, das alle Geräte im Netz 192.168.0.0/24 abfragt und als JSON-Array ausgibt, 8 P)</p>
+
+  <h4>Schichtenmodelle: OSI und TCP/IP</h4>
+  <p>Schichtenmodelle teilen die Kommunikation in Aufgaben auf. Jede Schicht nutzt die Dienste der darunterliegenden und bietet der darüberliegenden Dienste an; beim Senden packt jede Schicht ihren Kopf (Header) um die Daten (Kapselung). Merksatz von oben (7) nach unten (1): „<strong>A</strong>lle <strong>d</strong>eutschen <strong>S</strong>tudenten <strong>t</strong>rinken <strong>v</strong>erschiedene <strong>S</strong>orten <strong>B</strong>ier“.</p>
+  <table class="kompakt">
+    <tr><th>OSI-Schicht</th><th>TCP/IP-Modell</th><th>Dateneinheit</th><th>Protokolle / Beispiele</th><th>Geräte</th></tr>
+    <tr><td>7 Anwendung</td><td rowspan="3">Anwendung</td><td rowspan="3">Daten / Nachricht</td><td rowspan="3">HTTP(S), DNS, DHCP, SSH, FTP, SMTP, MQTT, CoAP; Datenformate (JSON); Verschlüsselung mit TLS (je nach Quelle Schicht 5/6)</td><td rowspan="3">Gateway, Proxy, Application-Firewall</td></tr>
+    <tr><td>6 Darstellung</td></tr>
+    <tr><td>5 Sitzung</td></tr>
+    <tr><td>4 Transport</td><td>Transport</td><td>Segment (TCP) / Datagramm (UDP)</td><td>TCP, UDP – <strong>Ports</strong> adressieren die Anwendung</td><td>(Firewall mit Portregeln)</td></tr>
+    <tr><td>3 Vermittlung</td><td>Internet</td><td>Paket</td><td>IPv4, IPv6, ICMP (ping) – <strong>IP-Adressen</strong>, Wegewahl</td><td>Router</td></tr>
+    <tr><td>2 Sicherung</td><td rowspan="2">Netzzugang</td><td>Frame (Rahmen)</td><td>Ethernet, WLAN (802.11) – <strong>MAC-Adressen</strong>, Prüfsumme; ARP verbindet Schicht 2 und 3</td><td>Switch, Access Point, Bridge</td></tr>
+    <tr><td>1 Bitübertragung</td><td>Bit</td><td>Kabel, Glasfaser, Funk, Stecker, Signalpegel</td><td>Hub, Repeater, Modem</td></tr>
+  </table>
+
+  <h4>MAC-Adresse</h4>
+  <p>Die <strong>MAC-Adresse</strong> (<em>Media Access Control</em>) ist die Hardware-Adresse einer Netzwerkschnittstelle auf <strong>Schicht 2</strong>. Sie ist <strong>48 Bit = 6 Byte</strong> lang und wird als 12 Hexadezimalziffern geschrieben, paarweise getrennt: <code>00:80:41:AE:FD:7E</code> (Linux), <code>00-80-41-AE-FD-7E</code> (Windows).</p>
+  <figure>
+    <svg viewBox="0 0 520 140" width="520" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <g fill="#fff" stroke="#222">
+        <rect x="40" y="20" width="70" height="36"/><rect x="110" y="20" width="70" height="36"/><rect x="180" y="20" width="70" height="36"/>
+        <rect x="250" y="20" width="70" height="36"/><rect x="320" y="20" width="70" height="36"/><rect x="390" y="20" width="70" height="36"/>
+      </g>
+      <g font-family="Consolas, Courier New, monospace" font-size="16" text-anchor="middle">
+        <text x="75" y="44">00</text><text x="145" y="44">80</text><text x="215" y="44">41</text>
+        <text x="285" y="44">AE</text><text x="355" y="44">FD</text><text x="425" y="44">7E</text>
+      </g>
+      <line x1="250" y1="14" x2="250" y2="62" stroke="#222" stroke-width="2.5"/>
+      <path d="M42,66 Q42,74 60,74 L130,74 Q145,74 145,84 Q145,74 160,74 L230,74 Q248,74 248,66" fill="none" stroke="#222"/>
+      <path d="M252,66 Q252,74 270,74 L340,74 Q355,74 355,84 Q355,74 370,74 L440,74 Q458,74 458,66" fill="none" stroke="#222"/>
+      <text x="145" y="100" text-anchor="middle" font-weight="bold">OUI (24 Bit)</text>
+      <text x="145" y="117" text-anchor="middle" font-size="12">Herstellerkennung,</text>
+      <text x="145" y="133" text-anchor="middle" font-size="12">vom IEEE vergeben</text>
+      <text x="355" y="100" text-anchor="middle" font-weight="bold">Gerätekennung (24 Bit)</text>
+      <text x="355" y="117" text-anchor="middle" font-size="12">vom Hersteller</text>
+      <text x="355" y="133" text-anchor="middle" font-size="12">fortlaufend vergeben</text>
+    </svg>
+    <figcaption>Abb. A-5: Aufbau einer MAC-Adresse</figcaption>
+  </figure>
+  <ul>
+    <li><strong>Erste 3 Byte: OUI</strong> (<em>Organizationally Unique Identifier</em>): Kennung des Herstellers, vom IEEE zugeteilt. Daran kann man den Hersteller eines Geräts erkennen (Herstellerlisten).</li>
+    <li><strong>Letzte 3 Byte: Gerätekennung</strong>, vom Hersteller selbst eindeutig vergeben. Zusammen ist die Adresse (theoretisch) <strong>weltweit eindeutig</strong>; sie ist bei der Herstellung fest hinterlegt („burned-in“), lässt sich per Software aber überschreiben.</li>
+    <li>Zwei Bits im ersten Byte haben Sonderbedeutung: Das niederwertigste Bit kennzeichnet Gruppenadressen (Multicast), das zweitniederwertigste <strong>lokal vergebene</strong> Adressen. Smartphones nutzen im WLAN oft solche <strong>zufälligen</strong> MAC-Adressen (zweite Hex-Ziffer 2, 6, A oder E) – dann ist kein Hersteller erkennbar.</li>
+    <li><strong>Broadcast-Adresse:</strong> <code>FF:FF:FF:FF:FF:FF</code> – der Frame geht an alle Geräte im LAN.</li>
+    <li>MAC-Adressen gelten nur im <strong>lokalen Netz</strong>. Ein Router packt jedes Paket in einen neuen Frame mit neuen MAC-Adressen; die IP-Adressen bleiben Ende-zu-Ende gleich.</li>
+    <li><strong>ARP</strong> (<em>Address Resolution Protocol</em>) ermittelt zu einer IPv4-Adresse die MAC-Adresse: Anfrage als Broadcast („Wer hat 192.168.50.1?“), Antwort als Unicast vom betreffenden Gerät. Bei IPv6 übernimmt das NDP.</li>
+  </ul>
+  <table class="kompakt">
+    <tr><th style="width:22%"></th><th>MAC-Adresse</th><th>IPv4-Adresse</th></tr>
+    <tr><td>OSI-Schicht</td><td>2 (Sicherung)</td><td>3 (Vermittlung)</td></tr>
+    <tr><td>Länge</td><td>48 Bit, hexadezimal</td><td>32 Bit, 4 Dezimalzahlen 0–255</td></tr>
+    <tr><td>Vergabe</td><td>Hersteller (fest im Gerät)</td><td>Administrator oder DHCP (logisch, je nach Netz)</td></tr>
+    <tr><td>Gültigkeit</td><td>nur im lokalen Netzsegment</td><td>netzübergreifend, Grundlage des Routings</td></tr>
+  </table>
+
+  <h4>Ethernet-Frame</h4>
+  <p>Auf Schicht 2 werden die Daten in <strong>Frames</strong> (Rahmen) verpackt. Aufbau eines Ethernet-II-Frames in Übertragungsreihenfolge:</p>
+  <figure>
+    <svg viewBox="0 0 760 155" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e03b-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#222"/>
+        </marker>
+      </defs>
+      <text x="5" y="18" font-size="12">Übertragungsrichtung</text>
+      <line x1="130" y1="14" x2="230" y2="14" stroke="#222" marker-end="url(#e03b-pfeil)"/>
+      <g fill="#fff" stroke="#222">
+        <rect x="5" y="30" width="110" height="56" fill="#eee"/>
+        <rect x="115" y="30" width="105" height="56"/>
+        <rect x="220" y="30" width="105" height="56"/>
+        <rect x="325" y="30" width="70" height="56"/>
+        <rect x="395" y="30" width="270" height="56"/>
+        <rect x="665" y="30" width="90" height="56"/>
+      </g>
+      <g text-anchor="middle" font-weight="bold">
+        <text x="60" y="54">Präambel + SFD</text>
+        <text x="167" y="54">Ziel-MAC</text>
+        <text x="272" y="54">Quell-MAC</text>
+        <text x="360" y="54">Typ</text>
+        <text x="530" y="54">Nutzdaten (Payload)</text>
+        <text x="710" y="54">FCS</text>
+      </g>
+      <g text-anchor="middle" font-size="11.5" fill="#444">
+        <text x="60" y="73">Synchronisation</text>
+        <text x="167" y="73">Empfänger</text>
+        <text x="272" y="73">Absender</text>
+        <text x="360" y="73">z. B. 0x0800</text>
+        <text x="530" y="73">z. B. ein IP-Paket, ggf. aufgefüllt</text>
+        <text x="710" y="73">CRC-32</text>
+      </g>
+      <g text-anchor="middle" font-size="12">
+        <text x="60" y="104">7 + 1 = 8 Byte</text>
+        <text x="167" y="104">6 Byte</text>
+        <text x="272" y="104">6 Byte</text>
+        <text x="360" y="104">2 Byte</text>
+        <text x="530" y="104">46 bis 1500 Byte</text>
+        <text x="710" y="104">4 Byte</text>
+      </g>
+      <line x1="115" y1="118" x2="755" y2="118" stroke="#222"/>
+      <line x1="115" y1="112" x2="115" y2="124" stroke="#222"/>
+      <line x1="755" y1="112" x2="755" y2="124" stroke="#222"/>
+      <text x="435" y="140" text-anchor="middle" font-size="12">eigentlicher Frame: 6 + 6 + 2 + 46 … 1500 + 4 = 64 bis 1518 Byte</text>
+    </svg>
+    <figcaption>Abb. A-6: Ethernet-II-Frame (ohne optionales VLAN-Tag von 4 Byte)</figcaption>
+  </figure>
+  <table class="kompakt">
+    <tr><th style="width:24%">Feld</th><th style="width:10%">Größe</th><th>Zweck</th></tr>
+    <tr><td>Präambel + SFD (<em>Preamble, Start Frame Delimiter</em>)</td><td>7 + 1 Byte</td><td>Bitfolge 1010…, damit sich der Empfänger auf den Takt synchronisiert; das SFD (10101011) markiert den Beginn des Frames. Wird von der Netzwerkkarte erzeugt und entfernt.</td></tr>
+    <tr><td>Ziel-MAC (<em>Destination Address</em>)</td><td>6 Byte</td><td>MAC-Adresse des Empfängers. Steht <strong>vorn</strong>, damit ein Switch sofort entscheiden kann, wohin er weiterleitet.</td></tr>
+    <tr><td>Quell-MAC (<em>Source Address</em>)</td><td>6 Byte</td><td>MAC-Adresse des Absenders; daraus lernt der Switch, an welchem Port welches Gerät hängt.</td></tr>
+    <tr><td>Typ (<em>EtherType</em>)</td><td>2 Byte</td><td>Welches Protokoll steckt in den Nutzdaten? <code>0x0800</code> = IPv4, <code>0x86DD</code> = IPv6, <code>0x0806</code> = ARP.</td></tr>
+    <tr><td>Nutzdaten (<em>Payload</em>)</td><td>46–1500 Byte</td><td>Das Paket der Schicht 3. Weniger als 46 Byte werden mit Füllbytes (<em>Padding</em>) aufgefüllt; 1500 Byte = MTU.</td></tr>
+    <tr><td>FCS (<em>Frame Check Sequence</em>)</td><td>4 Byte</td><td>CRC-32-Prüfsumme über den Frame. Stimmt sie beim Empfänger nicht, wird der Frame <strong>verworfen</strong> (nur Fehlererkennung, keine Korrektur).</td></tr>
+  </table>
+  <p><em>Mitschnitt lesen (Beispiel):</em> Die ersten 14 Byte nach dem SFD lauten <code>00 80 41 ae fd 7e  3c 07 54 12 9a 01  08 00</code> → Ziel-MAC <code>00:80:41:AE:FD:7E</code>, Quell-MAC <code>3C:07:54:12:9A:01</code>, Typ <code>0x0800</code> → in den Nutzdaten folgt ein IPv4-Paket. Die Ziel-MAC ist keine Broadcast-Adresse, der Frame ist also an genau ein Gerät gerichtet (Unicast).</p>
+
+  <h4>IPv4-Adressen und Subnetze</h4>
+  <p>Eine IPv4-Adresse ist <strong>32 Bit</strong> lang, geschrieben als vier Dezimalzahlen (Oktette, je 0–255). Sie besteht aus einem <strong>Netzanteil</strong> (welches Netz?) und einem <strong>Hostanteil</strong> (welches Gerät im Netz?). Wo die Grenze liegt, sagt die <strong>Subnetzmaske</strong> bzw. die <strong>CIDR-Präfixlänge</strong>: <code>/24</code> bedeutet „die ersten 24 Bit sind Netzanteil“ = Maske <code>255.255.255.0</code>.</p>
+  <ul>
+    <li><strong>Netzadresse:</strong> alle Hostbits 0 – bezeichnet das Netz, nicht an Geräte vergeben.</li>
+    <li><strong>Broadcastadresse:</strong> alle Hostbits 1 – erreicht alle Geräte im Netz, nicht an Geräte vergeben.</li>
+    <li><strong>Nutzbare Hostadressen:</strong> 2<sup>Hostbits</sup> − 2 (minus Netz- und Broadcastadresse). Eine davon bekommt meist der Router (<strong>Standardgateway</strong>).</li>
+    <li><strong>Private Bereiche</strong> (im Internet nicht geroutet, per NAT ins Internet): <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>. Sonderadressen: <code>127.0.0.1</code> (Loopback, der eigene Rechner), <code>169.254.x.x</code> (selbst vergeben, wenn kein DHCP-Server antwortet).</li>
+  </ul>
+
+  <table class="kompakt" style="width:auto">
+    <tr><th>Präfix</th><th>Subnetzmaske</th><th>Hostbits</th><th>nutzbare Hosts</th><th>Blockgröße im letzten Oktett</th></tr>
+    <tr><td>/8</td><td class="mono">255.0.0.0</td><td>24</td><td>16.777.214</td><td>–</td></tr>
+    <tr><td>/16</td><td class="mono">255.255.0.0</td><td>16</td><td>65.534</td><td>–</td></tr>
+    <tr><td>/24</td><td class="mono">255.255.255.0</td><td>8</td><td>254</td><td>256</td></tr>
+    <tr><td>/25</td><td class="mono">255.255.255.128</td><td>7</td><td>126</td><td>128</td></tr>
+    <tr><td>/26</td><td class="mono">255.255.255.192</td><td>6</td><td>62</td><td>64</td></tr>
+    <tr><td>/27</td><td class="mono">255.255.255.224</td><td>5</td><td>30</td><td>32</td></tr>
+    <tr><td>/28</td><td class="mono">255.255.255.240</td><td>4</td><td>14</td><td>16</td></tr>
+    <tr><td>/30</td><td class="mono">255.255.255.252</td><td>2</td><td>2</td><td>4</td></tr>
+  </table>
+
+  <p><strong>So gehst du vor</strong> (Netz- und Broadcastadresse zu einer Adresse mit Präfix):</p>
+  <ol>
+    <li>Hostbits bestimmen: 32 − Präfix.</li>
+    <li><em>Bei /24, /16, /8</em> ist es einfach: Die vollen Oktette des Netzanteils bleiben, der Rest wird 0 (Netzadresse) bzw. 255 (Broadcast).</li>
+    <li><em>Sonst</em> das „angeschnittene“ Oktett betrachten: Blockgröße = 256 − Maskenwert dieses Oktetts. Die Netze beginnen bei Vielfachen der Blockgröße. Das Vielfache direkt unter (oder gleich) der Adresse ist die Netzadresse, die nächste Netzadresse minus 1 ist der Broadcast.</li>
+    <li>Kontrolle binär: Adresse UND Maske = Netzadresse.</li>
+    <li>Hosts: 2<sup>Hostbits</sup> − 2; erster Host = Netzadresse + 1, letzter Host = Broadcast − 1.</li>
+  </ol>
+  <div class="zweispaltig">
+    <div>
+      <p><em>Beispiel 1:</em> <code>192.168.50.17/24</code></p>
+      <ul>
+        <li>Maske 255.255.255.0, 8 Hostbits</li>
+        <li>Netzadresse <code>192.168.50.0</code></li>
+        <li>Broadcast <code>192.168.50.255</code></li>
+        <li>Hosts .1 bis .254 → <strong>254</strong></li>
+      </ul>
+    </div>
+    <div>
+      <p><em>Beispiel 2:</em> <code>172.16.8.200/27</code></p>
+      <ul>
+        <li>Maske 255.255.255.224, 5 Hostbits, Blockgröße 256 − 224 = 32</li>
+        <li>Netze: .0, .32, …, .160, <strong>.192</strong>, .224 → 200 liegt im Block ab 192</li>
+        <li>Netzadresse <code>172.16.8.192</code>, Broadcast <code>172.16.8.223</code></li>
+        <li>Hosts .193 bis .222 → <strong>30</strong></li>
+      </ul>
+    </div>
+  </div>
+  <pre>Binär (letztes Oktett):   200 = 1100 1000
+Maske /27:                224 = 1110 0000
+UND  → Netzanteil:              1100 0000 = 192   (Netzadresse 172.16.8.192)
+Hostbits auf 1 → Broadcast:     1101 1111 = 223   (Broadcast   172.16.8.223)</pre>
+  <p><em>Netz aufteilen:</em> Ein /24 lässt sich durch Verlängern des Präfixes in gleich große Subnetze teilen: 1 Bit mehr → 2 Subnetze (/25), 2 Bit → 4 (/26), 3 Bit → 8 (/27). Beispiel: <code>172.16.8.0/24</code> in acht /27-Netze: <code>.0–.31</code>, <code>.32–.63</code>, <code>.64–.95</code>, … , <code>.224–.255</code> (jeweils erste Adresse = Netz, letzte = Broadcast, je 30 Hosts).</p>
+  <p><em>Gleiches Netz?</em> Zwei Geräte können nur direkt (über einen Switch) miteinander sprechen, wenn ihr Netzanteil gleich ist. <code>192.168.50.17/24</code> und <code>192.168.51.3/24</code> liegen in verschiedenen Netzen (drittes Oktett 50 ≠ 51) → die Kommunikation muss über einen <strong>Router</strong> laufen.</p>
+
+  <div class="falle"><span class="kastentitel">Typische Fallen beim Subnetting</span>
+    <ul style="margin:0">
+      <li>„/24 hat 256 Hosts“ – falsch: 256 <em>Adressen</em>, aber nur <strong>254</strong> nutzbare Hosts.</li>
+      <li>Eine Schleife über „alle Hosts“ eines /24 läuft von <strong>1 bis 254</strong>, nicht von 0 bis 255.</li>
+      <li>Die Netzadresse eines /26 ist nicht immer „.0“ – sie ist ein Vielfaches von 64.</li>
+    </ul>
+  </div>
+
+  <h4>IPv6 in Kürze</h4>
+  <ul>
+    <li><strong>128 Bit</strong>, geschrieben als 8 Blöcke à 16 Bit in Hexadezimal: <code>2001:0db8:0000:0000:0000:ff00:0042:8329</code>.</li>
+    <li>Kürzen: führende Nullen eines Blocks weglassen, <strong>eine</strong> zusammenhängende Folge von Null-Blöcken durch <code>::</code> ersetzen → <code>2001:db8::ff00:42:8329</code>.</li>
+    <li>Typisch: 64 Bit Präfix (Netz) + 64 Bit Interface-ID (Gerät). Kein Broadcast mehr (Multicast stattdessen), Loopback <code>::1</code>, Link-Local-Adressen beginnen mit <code>fe80::</code>.</li>
+    <li>Grund für IPv6: Der IPv4-Adressraum (ca. 4,3 Mrd.) ist erschöpft; IPv6 bietet ca. 3,4 · 10<sup>38</sup> Adressen – genug für jedes IoT-Gerät eine eigene Adresse, ohne NAT.</li>
+  </ul>
+
+  <h4>Wichtige Protokolle und Ports</h4>
+  <p>Auf der Transportschicht adressiert die <strong>Portnummer</strong> den Dienst bzw. die Anwendung auf einem Rechner (0–65535; bis 1023 „well-known ports“). IP-Adresse + Port = <em>Socket</em>.</p>
+  <table class="kompakt">
+    <tr><th>Protokoll</th><th>Zweck</th><th>Transport</th><th>Port(s)</th></tr>
+    <tr><td>HTTP</td><td>Webseiten, REST-APIs (unverschlüsselt)</td><td>TCP</td><td>80</td></tr>
+    <tr><td>HTTPS</td><td>HTTP über TLS (verschlüsselt)</td><td>TCP</td><td>443</td></tr>
+    <tr><td>DNS</td><td>Namensauflösung (Name → IP-Adresse)</td><td>UDP (große Antworten TCP)</td><td>53</td></tr>
+    <tr><td>DHCP</td><td>automatische Vergabe von IP-Adresse, Maske, Gateway, DNS-Server</td><td>UDP</td><td>67 (Server), 68 (Client)</td></tr>
+    <tr><td>SSH</td><td>verschlüsselte Fernwartung (Konsole), Dateitransfer (SFTP)</td><td>TCP</td><td>22</td></tr>
+    <tr><td>FTP</td><td>Dateiübertragung (unverschlüsselt)</td><td>TCP</td><td>21 (Steuerung), 20 (Daten)</td></tr>
+    <tr><td>SMTP / IMAP</td><td>E-Mail senden / abrufen</td><td>TCP</td><td>25 bzw. 587 / 143 bzw. 993 (TLS)</td></tr>
+    <tr><td>NTP</td><td>Zeitsynchronisation</td><td>UDP</td><td>123</td></tr>
+    <tr><td>RDP</td><td>Remote-Desktop</td><td>TCP</td><td>3389</td></tr>
+    <tr><td><strong>MQTT</strong></td><td>IoT-Nachrichten über Broker (Publish/Subscribe)</td><td>TCP</td><td><strong>1883</strong>, mit TLS <strong>8883</strong></td></tr>
+    <tr><td>CoAP</td><td>REST-ähnliches IoT-Protokoll für sehr kleine Geräte</td><td>UDP</td><td>5683</td></tr>
+  </table>
+  <p>Ohne Port, weil unterhalb der Transportschicht: <strong>IP</strong>, <strong>ICMP</strong> (z. B. <code>ping</code>) und <strong>ARP</strong>. <em>DHCP-Ablauf</em> („DORA“): Discover (Broadcast) → Offer → Request → Acknowledge.</p>
+
+  <h4>TCP und UDP</h4>
+  <table class="kompakt">
+    <tr><th style="width:20%"></th><th>TCP (Transmission Control Protocol)</th><th>UDP (User Datagram Protocol)</th></tr>
+    <tr><td>Verbindung</td><td>verbindungsorientiert: Aufbau per Drei-Wege-Handschlag (SYN, SYN-ACK, ACK)</td><td>verbindungslos: Datagramm wird einfach gesendet</td></tr>
+    <tr><td>Zuverlässigkeit</td><td>Bestätigungen (ACK), Neuübertragung verlorener Segmente, richtige Reihenfolge, Flusskontrolle</td><td>keine Garantie für Ankunft oder Reihenfolge</td></tr>
+    <tr><td>Overhead / Tempo</td><td>Header ≥ 20 Byte, mehr Verzögerung</td><td>Header 8 Byte, schnell, wenig Last</td></tr>
+    <tr><td>Einsatz</td><td>wenn jedes Byte ankommen muss: HTTP(S), SSH, E-Mail, Dateiübertragung, MQTT, Datenbankzugriff</td><td>wenn Tempo wichtiger ist oder kleine Einzelanfragen: DNS, DHCP, NTP, VoIP, Live-Video, Online-Spiele, CoAP</td></tr>
+  </table>
+
+  <h4>Skript-Muster: Netz durchlaufen und JSON erzeugen</h4>
+  <p>In W24 sollte ein Skript alle Geräte eines /24-Netzes abfragen und das Ergebnis als JSON-Array ausgeben. Das Muster (hier mit anderer Hilfsfunktion: <code>isReachable(ip : string) : boolean</code> liefert <code>true</code>, wenn ein Gerät auf <code>ping</code> antwortet) erzeugt ein JSON-Array aller erreichbaren Adressen:</p>
+  <pre class="pseudo">funktion erreichbareHosts(netz : string) : string
+  json : string := "["
+  anzahl : integer := 0
+  zähle i von 1 bis 254                        // .0 = Netzadresse, .255 = Broadcast
+    ip : string := netz + "." + i              // z. B. "192.168.5" + "." + 7
+    wenn isReachable(ip) dann
+      wenn anzahl &gt; 0 dann
+        json := json + ", "                    // Komma nur VOR jedem weiteren Element
+      Ende wenn
+      json := json + '"' + ip + '"'            // '…' darf " enthalten
+      anzahl := anzahl + 1
+    Ende wenn
+  Ende zähle
+  json := json + "]"
+  rückgabe json
+Ende funktion</pre>
+  <p>Aufruf <code>ausgabe(erreichbareHosts("192.168.5"))</code> liefert z. B. <code>["192.168.5.1", "192.168.5.20", "192.168.5.31"]</code>. Die drei Knackpunkte: <strong>Schleifengrenzen</strong> 1 bis 254, <strong>Komma-Logik</strong> (kein Komma vor dem ersten und nach dem letzten Element) und <strong>Anführungszeichen</strong> um Zeichenketten im JSON. Liefert eine Hilfsfunktion statt <code>boolean</code> einen Wert oder <code>null</code>, prüft man entsprechend <code>wenn wert &lt;&gt; null dann</code>. In Java schreibt man Anführungszeichen im String mit Backslash: <code>"\"" + ip + "\""</code>.</p>
+
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <strong>W24 T1 A2</strong> (insgesamt 26 P): ba) sechs Bezeichner (englisch: <em>Source Address, Data Payload, Preamble, Frame Check Sequence, Type, Destination Address</em>) den Feldern eines Frame-Diagramms zuordnen, von dem nur die Bytegrößen vorgegeben waren (6 P); bb) Aufbau einer MAC-Adresse erläutern (3 P); c) Skript in Pseudocode oder Skriptsprache: IP- und MAC-Adressen aller Geräte im Netz 192.168.0.0/24 mit einer gegebenen Funktion <code>getMacAddress(…)</code> abfragen (liefert NULL, wenn kein Gerät antwortet) und als JSON-Array ausgeben (8 P). Die englischen Feldnamen solltest du deshalb ebenfalls kennen.
+  </div>
+
+  <!-- ===================== NET-04 ===================== -->
+  <h3 id="e-04">NET-04 · IT-Infrastruktur, Virtualisierung &amp; Cloud <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfung: W22 (T1 A1a: zwei Schwachstellen der veralteten, inhomogenen IT-Infrastruktur beschreiben, 4 P · A1b: eine funktionale und eine nicht-funktionale Anforderung an die neue IT-Infrastruktur, 4 P) · Cloud-Datenbank als Kulisse in W23</p>
+
+  <h4>Schwachstellen veralteter und uneinheitlicher Infrastruktur</h4>
+  <p>„Veraltet“ heißt: alte Hardware, Betriebssysteme ohne Herstellerunterstützung. „Inhomogen“ (uneinheitlich) heißt: viele verschiedene Hersteller, Modelle und Versionen. Beides gefährdet vor allem die <strong>Verfügbarkeit</strong> (Schutzziel, Querverweis Block 07). <em>Beispiel:</em> Eine Steuerberaterkanzlei mit drei Büros hat in jedem Büro einen eigenen Server (Baujahre 2012–2019, drei verschiedene Betriebssysteme), gesichert wird auf eine USB-Festplatte, die im Serverschrank liegt.</p>
+  <table class="kompakt">
+    <tr><th style="width:15%">Bereich</th><th>Schwachstelle</th><th>Folge</th></tr>
+    <tr><td>Verfügbarkeit</td><td>Altgeräte ohne Redundanz (ein Netzteil, eine Festplatte), Ersatzteile nicht mehr lieferbar</td><td>Ausfall eines Geräts legt einen Dienst lange lahm (<strong>Single Point of Failure</strong>)</td></tr>
+    <tr><td>Sicherheit</td><td>Betriebssystem ohne Sicherheitsupdates (<em>End of Life</em>)</td><td>bekannte Lücken bleiben offen, Schadsoftware kann eindringen und Systeme lahmlegen</td></tr>
+    <tr><td>Datensicherung</td><td>Sicherung im selben Raum bzw. dauerhaft angeschlossen, unregelmäßig, nie getestet</td><td>Brand, Wasser, Diebstahl oder Ransomware vernichten Original <em>und</em> Kopie</td></tr>
+    <tr><td>Wartung</td><td>viele Hersteller und Versionen, keine zentrale Verwaltung, Wissen bei Einzelpersonen</td><td>hoher Aufwand, Fehler bei Updates, lange Fehlersuche</td></tr>
+    <tr><td>Umgebung</td><td>keine USV, keine Klimatisierung, ungesicherter Zugang</td><td>Abstürze und Datenverlust bei Stromschwankungen, Hitzeschäden, Manipulation</td></tr>
+    <tr><td>Leistung</td><td>zu wenig Arbeitsspeicher, langsame Platten, neue Software läuft nicht mehr</td><td>lange Antwortzeiten, Projekte verzögern sich</td></tr>
+  </table>
+  <p>„Beschreiben“ heißt in der Prüfung: <strong>Schwachstelle + Auswirkung</strong> nennen, möglichst mit einem Beleg aus der Situation („Server S3 hat nur ein Netzteil; fällt es aus, steht der Dateiserver still“).</p>
+
+  <h4>Anforderungen an eine Infrastruktur</h4>
+  <div class="merke"><span class="kastentitel">Merke: funktional = WAS, nicht-funktional = WIE GUT</span>
+    <strong>Funktionale</strong> Anforderungen beschreiben, welche Dienste/Funktionen die Infrastruktur bereitstellen muss. <strong>Nicht-funktionale</strong> Anforderungen beschreiben Qualitätseigenschaften: Verfügbarkeit, Leistung, Sicherheit, Skalierbarkeit, Wartbarkeit, Energieeffizienz – möglichst <strong>messbar</strong> formuliert.
+  </div>
+  <table class="kompakt">
+    <tr><th style="width:50%">funktional (Beispiel Kanzlei)</th><th>nicht-funktional (Beispiel Kanzlei)</th></tr>
+    <tr><td>Alle Mitarbeiter können von jedem der drei Büros auf die Mandantenakten zugreifen.</td><td>Der Dateiserver ist während der Bürozeiten zu mindestens 99,5 % verfügbar.</td></tr>
+    <tr><td>Die Daten werden jede Nacht automatisch gesichert, eine Kopie wird außer Haus gelagert.</td><td>Nach einem Serverausfall ist der Betrieb spätestens nach 4 Stunden wiederhergestellt.</td></tr>
+    <tr><td>Mitarbeiter melden sich mit einem zentralen Benutzerkonto an jedem PC an.</td><td>Die Infrastruktur lässt sich ohne Hardwaretausch auf 60 Arbeitsplätze erweitern.</td></tr>
+  </table>
+  <div class="falle"><span class="kastentitel">Typische Falle</span>
+    „Das System soll sicher und schnell sein“ ist zu ungenau und wird kaum bepunktet. Besser: „Die Verbindung zwischen den Büros ist durchgängig verschlüsselt“ oder „Das Öffnen einer Akte dauert höchstens 2 Sekunden“. Und: „Es wird eine Datensicherung durchgeführt“ ist <em>funktional</em>; „Es dürfen höchstens 24 Stunden Daten verloren gehen“ ist <em>nicht-funktional</em>.
+  </div>
+
+  <h4>Rechenzentrum, Redundanz und Hochverfügbarkeit</h4>
+  <p>Ein <strong>Rechenzentrum</strong> bündelt Server, Speichersysteme und Netzwerktechnik in einer geschützten Umgebung: unterbrechungsfreie Stromversorgung (<strong>USV</strong>) und Notstromaggregat, Klimatisierung, Brandfrüherkennung und Löschanlage, Zutrittskontrolle, redundante Internetanbindung. Statt eines eigenen Rechenzentrums kann man Fläche bei einem Dienstleister mieten (<em>Colocation</em>) oder Dienste aus der Cloud beziehen.</p>
+  <p><strong>Redundanz</strong> heißt, kritische Komponenten mehrfach vorzuhalten, damit kein <strong>Single Point of Failure</strong> (SPOF) bleibt:</p>
+  <table class="kompakt">
+    <tr><th style="width:24%">Maßnahme</th><th>schützt vor</th><th>Prinzip</th></tr>
+    <tr><td><strong>RAID</strong> (1, 5, 6, 10)</td><td>Ausfall einzelner Festplatten</td><td>Daten werden gespiegelt oder mit Paritätsinformation auf mehrere Platten verteilt; eine defekte Platte wird im laufenden Betrieb getauscht</td></tr>
+    <tr><td><strong>USV</strong></td><td>kurzen Stromausfällen, Spannungsspitzen</td><td>Akku überbrückt Minuten; reicht für kontrolliertes Herunterfahren oder bis das Notstromaggregat läuft</td></tr>
+    <tr><td><strong>Cluster</strong></td><td>Ausfall eines ganzen Servers</td><td>mehrere Server (Knoten) teilen sich die Arbeit bzw. übernehmen bei Ausfall (<em>Failover</em>); bei Virtualisierung starten die VMs automatisch auf einem anderen Host</td></tr>
+    <tr><td>redundante Netzteile, Switches, Leitungen</td><td>Ausfall einzelner Bauteile, Kabel, Provider</td><td>zweiter Pfad, zweiter Internetanschluss über anderen Provider</td></tr>
+    <tr><td>zweiter Standort (Geo-Redundanz)</td><td>Brand, Hochwasser, Katastrophe</td><td>Daten und Systeme werden in ein entferntes Rechenzentrum repliziert</td></tr>
+  </table>
+  <table class="kompakt">
+    <tr><th style="width:9%">RAID</th><th style="width:31%">Prinzip</th><th>min. Platten</th><th>nutzbare Kapazität</th><th>verkraftet</th></tr>
+    <tr><td>0</td><td>Striping: Daten verteilt, nur schneller</td><td>2</td><td>100 %</td><td><strong>keinen</strong> Ausfall – eine Platte defekt = alles weg</td></tr>
+    <tr><td>1</td><td>Spiegelung</td><td>2</td><td>50 %</td><td>1 Platte</td></tr>
+    <tr><td>5</td><td>Striping mit verteilter Parität</td><td>3</td><td>(n − 1) Platten</td><td>1 Platte</td></tr>
+    <tr><td>6</td><td>doppelte Parität</td><td>4</td><td>(n − 2) Platten</td><td>2 Platten</td></tr>
+    <tr><td>10</td><td>Spiegelung + Striping</td><td>4</td><td>50 %</td><td>1 Platte je Spiegelpaar</td></tr>
+  </table>
+  <p><em>Verfügbarkeit in Zahlen:</em> erlaubte Ausfallzeit pro Jahr = (1 − Verfügbarkeit) × 8760 h. 99 % → 87,6 h · 99,9 % → 8,76 h · 99,99 % → ca. 53 min · 99,999 % → ca. 5 min.</p>
+
+  <h4>Datensicherung (Backup)</h4>
+  <table class="kompakt">
+    <tr><th style="width:16%">Art</th><th>sichert</th><th>Vorteil</th><th>Nachteil / Wiederherstellung</th></tr>
+    <tr><td><strong>Vollsicherung</strong></td><td>alle Daten</td><td>einfachste Wiederherstellung (nur 1 Sicherung)</td><td>dauert lange, braucht viel Speicher</td></tr>
+    <tr><td><strong>inkrementell</strong></td><td>nur Änderungen seit der <strong>letzten Sicherung</strong> (egal welcher Art)</td><td>schnell, wenig Speicher</td><td>Wiederherstellung braucht Vollsicherung + <strong>alle</strong> Inkremente seitdem (in Reihenfolge); fehlt eines, ist die Kette unterbrochen</td></tr>
+    <tr><td><strong>differenziell</strong></td><td>alle Änderungen seit der <strong>letzten Vollsicherung</strong></td><td>Wiederherstellung mit nur 2 Sicherungen</td><td>wächst von Tag zu Tag, mehr Speicher als inkrementell</td></tr>
+  </table>
+  <figure>
+    <svg viewBox="0 0 760 205" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <g text-anchor="middle" font-weight="bold">
+        <text x="187" y="22">Mo</text><text x="312" y="22">Di</text><text x="437" y="22">Mi</text><text x="562" y="22">Do</text><text x="687" y="22">Fr</text>
+      </g>
+      <text x="10" y="58" font-weight="bold">inkrementell</text>
+      <text x="10" y="76" font-size="12">Summe 240 GB</text>
+      <text x="10" y="138" font-weight="bold">differenziell</text>
+      <text x="10" y="156" font-size="12">Summe 300 GB</text>
+      <!-- Zeile inkrementell: alle nötig (dick) -->
+      <g stroke="#222" stroke-width="3">
+        <rect x="130" y="35" width="115" height="50" fill="#ddd"/>
+        <rect x="255" y="35" width="115" height="50" fill="#fff"/>
+        <rect x="380" y="35" width="115" height="50" fill="#fff"/>
+        <rect x="505" y="35" width="115" height="50" fill="#fff"/>
+        <rect x="630" y="35" width="115" height="50" fill="#fff"/>
+      </g>
+      <g text-anchor="middle" font-size="12">
+        <text x="187" y="56">Vollsicherung</text><text x="187" y="74">200 GB</text>
+        <text x="312" y="56">Änderung seit Mo</text><text x="312" y="74">10 GB</text>
+        <text x="437" y="56">Änderung seit Di</text><text x="437" y="74">10 GB</text>
+        <text x="562" y="56">Änderung seit Mi</text><text x="562" y="74">10 GB</text>
+        <text x="687" y="56">Änderung seit Do</text><text x="687" y="74">10 GB</text>
+      </g>
+      <!-- Zeile differenziell: nur Mo und Fr nötig -->
+      <rect x="130" y="115" width="115" height="50" fill="#ddd" stroke="#222" stroke-width="3"/>
+      <rect x="255" y="115" width="115" height="50" fill="#fff" stroke="#222"/>
+      <rect x="380" y="115" width="115" height="50" fill="#fff" stroke="#222"/>
+      <rect x="505" y="115" width="115" height="50" fill="#fff" stroke="#222"/>
+      <rect x="630" y="115" width="115" height="50" fill="#fff" stroke="#222" stroke-width="3"/>
+      <g text-anchor="middle" font-size="12">
+        <text x="187" y="136">Vollsicherung</text><text x="187" y="154">200 GB</text>
+        <text x="312" y="136">Änderung seit Mo</text><text x="312" y="154">10 GB</text>
+        <text x="437" y="136">Änderung seit Mo</text><text x="437" y="154">20 GB</text>
+        <text x="562" y="136">Änderung seit Mo</text><text x="562" y="154">30 GB</text>
+        <text x="687" y="136">Änderung seit Mo</text><text x="687" y="154">40 GB</text>
+      </g>
+      <text x="10" y="195" font-size="12">Dick umrandet: nötig, um nach einem Ausfall am Samstag den Stand von Freitagabend wiederherzustellen.</text>
+    </svg>
+    <figcaption>Abb. A-7: Beispiel Dateiserver mit 200 GB, Vollsicherung montags, täglich 10 GB neue bzw. geänderte Daten</figcaption>
+  </figure>
+  <ul>
+    <li><strong>3-2-1-Regel:</strong> mindestens <strong>3</strong> Kopien der Daten (Original + 2 Sicherungen), auf <strong>2</strong> verschiedenen Speichermedien bzw. -systemen, davon <strong>1</strong> Kopie an einem anderen Ort (außer Haus, offline oder unveränderbar). So überlebt mindestens eine Kopie Hardwaredefekt, Brand, Diebstahl und Ransomware.</li>
+    <li><strong>Generationenprinzip</strong> (Großvater-Vater-Sohn): z. B. tägliche, wöchentliche und monatliche Sicherungen werden unterschiedlich lange aufbewahrt → auch ältere Stände sind wiederherstellbar.</li>
+    <li><strong>RPO</strong> (<em>Recovery Point Objective</em>): wie viel Datenverlust ist maximal tolerierbar (bestimmt das Sicherungsintervall)? <strong>RTO</strong> (<em>Recovery Time Objective</em>): wie schnell muss der Betrieb wieder laufen?</li>
+    <li>Sicherungen regelmäßig per <strong>Wiederherstellungstest</strong> prüfen, verschlüsseln, automatisieren.</li>
+  </ul>
+  <div class="falle"><span class="kastentitel">Typische Falle: RAID ist kein Backup</span>
+    RAID schützt nur vor dem Ausfall einer Festplatte. Löscht jemand eine Datei, verschlüsselt Ransomware die Daten oder brennt der Serverraum, ist der Fehler sofort auf allen Platten des RAID – es gibt keinen älteren Stand. Dasselbe gilt für eine reine Synchronisation in einen Cloud-Ordner.
+  </div>
+
+  <h4>Virtualisierung: virtuelle Maschine und Container</h4>
+  <p>Bei der <strong>Virtualisierung</strong> laufen mehrere logische Server auf einer physischen Hardware. Der <strong>Hypervisor</strong> teilt CPU, RAM, Speicher und Netz zu. <em>Typ 1</em> („bare metal“) läuft direkt auf der Hardware (Server-Virtualisierung im Rechenzentrum), <em>Typ 2</em> läuft als Programm auf einem normalen Betriebssystem (Test-VMs auf dem Entwickler-PC).</p>
+  <figure>
+    <svg viewBox="0 0 760 235" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <text x="190" y="18" text-anchor="middle" font-weight="bold">Virtuelle Maschinen</text>
+      <text x="570" y="18" text-anchor="middle" font-weight="bold">Container</text>
+      <!-- links: VMs -->
+      <g fill="#fff" stroke="#222">
+        <rect x="15" y="30" width="110" height="122" rx="4" stroke-dasharray="4 3"/>
+        <rect x="135" y="30" width="110" height="122" rx="4" stroke-dasharray="4 3"/>
+        <rect x="255" y="30" width="110" height="122" rx="4" stroke-dasharray="4 3"/>
+        <rect x="22" y="38" width="96" height="28"/><rect x="142" y="38" width="96" height="28"/><rect x="262" y="38" width="96" height="28"/>
+        <rect x="22" y="72" width="96" height="28"/><rect x="142" y="72" width="96" height="28"/><rect x="262" y="72" width="96" height="28"/>
+        <rect x="22" y="106" width="96" height="38" fill="#e6e6e6"/><rect x="142" y="106" width="96" height="38" fill="#e6e6e6"/><rect x="262" y="106" width="96" height="38" fill="#e6e6e6"/>
+        <rect x="15" y="158" width="350" height="30" fill="#e6e6e6"/>
+        <rect x="15" y="194" width="350" height="30" fill="#ccc"/>
+      </g>
+      <g text-anchor="middle" font-size="12">
+        <text x="70" y="57">App A</text><text x="190" y="57">App B</text><text x="310" y="57">App C</text>
+        <text x="70" y="91">Bibliotheken</text><text x="190" y="91">Bibliotheken</text><text x="310" y="91">Bibliotheken</text>
+        <text x="70" y="123">Gast-</text><text x="70" y="138">Betriebssystem</text>
+        <text x="190" y="123">Gast-</text><text x="190" y="138">Betriebssystem</text>
+        <text x="310" y="123">Gast-</text><text x="310" y="138">Betriebssystem</text>
+        <text x="190" y="178">Hypervisor (Typ 1)</text>
+        <text x="190" y="214">Hardware (physischer Server)</text>
+      </g>
+      <!-- rechts: Container -->
+      <g fill="#fff" stroke="#222">
+        <rect x="395" y="64" width="110" height="80" rx="4" stroke-dasharray="4 3"/>
+        <rect x="515" y="64" width="110" height="80" rx="4" stroke-dasharray="4 3"/>
+        <rect x="635" y="64" width="110" height="80" rx="4" stroke-dasharray="4 3"/>
+        <rect x="402" y="72" width="96" height="28"/><rect x="522" y="72" width="96" height="28"/><rect x="642" y="72" width="96" height="28"/>
+        <rect x="402" y="106" width="96" height="28"/><rect x="522" y="106" width="96" height="28"/><rect x="642" y="106" width="96" height="28"/>
+        <rect x="395" y="150" width="350" height="22" fill="#fff"/>
+        <rect x="395" y="176" width="350" height="22" fill="#e6e6e6"/>
+        <rect x="395" y="202" width="350" height="22" fill="#ccc"/>
+      </g>
+      <g text-anchor="middle" font-size="12">
+        <text x="450" y="91">App A</text><text x="570" y="91">App B</text><text x="690" y="91">App C</text>
+        <text x="450" y="125">Bibliotheken</text><text x="570" y="125">Bibliotheken</text><text x="690" y="125">Bibliotheken</text>
+        <text x="570" y="166">Container-Laufzeit (z. B. Docker)</text>
+        <text x="570" y="192">Host-Betriebssystem (gemeinsamer Kernel)</text>
+        <text x="570" y="218">Hardware (physischer Server)</text>
+      </g>
+    </svg>
+    <figcaption>Abb. A-8: Jede VM bringt ein eigenes Betriebssystem mit, Container teilen sich den Kernel des Host-Betriebssystems</figcaption>
+  </figure>
+  <table class="kompakt">
+    <tr><th style="width:20%"></th><th>Virtuelle Maschine (VM)</th><th>Container</th></tr>
+    <tr><td>Inhalt</td><td>komplettes Gast-Betriebssystem + Anwendung</td><td>nur Anwendung + Bibliotheken, nutzt Kernel des Hosts</td></tr>
+    <tr><td>Größe / Start</td><td>mehrere GB, Start in Minuten</td><td>wenige MB bis einige 100 MB, Start in Sekunden</td></tr>
+    <tr><td>Isolation</td><td>stark (eigener Kernel)</td><td>schwächer (gemeinsamer Kernel)</td></tr>
+    <tr><td>Betriebssystem</td><td>beliebig (Windows-VM auf Linux-Host möglich)</td><td>an den Host-Kernel gebunden (Linux-Container brauchen Linux-Kernel)</td></tr>
+    <tr><td>Typischer Einsatz</td><td>klassische Server konsolidieren, unterschiedliche Betriebssysteme</td><td>Microservices, gleiche Umgebung von Entwicklung bis Betrieb, schnelles Skalieren (Orchestrierung z. B. mit Kubernetes)</td></tr>
+  </table>
+  <p><strong>Vorteile der Virtualisierung:</strong> bessere Auslastung der Hardware (Konsolidierung: weniger Geräte, weniger Strom und Platz) · neue Server in Minuten bereitstellen · Snapshots vor Updates · Live-Migration im laufenden Betrieb (Wartung ohne Ausfall) · im Cluster hohe Verfügbarkeit · Hardwareunabhängigkeit (VM läuft auf jedem Host) · einheitliche Verwaltung. <strong>Nachteile:</strong> Ausfall eines Hosts trifft viele VMs gleichzeitig (deshalb Cluster), Lizenzkosten, zusätzliches Know-how, geringer Leistungsverlust.</p>
+
+  <h4>Cloud Computing</h4>
+  <p><strong>Cloud Computing</strong> heißt: IT-Ressourcen (Rechenleistung, Speicher, Plattformen, Software) werden über das Netz <strong>bei Bedarf</strong> bereitgestellt, vom Kunden selbst angefordert, <strong>elastisch skaliert</strong> und <strong>nach Verbrauch</strong> abgerechnet. Die Ressourcen vieler Kunden liegen gemeinsam in den Rechenzentren des Anbieters.</p>
+  <figure>
+    <svg viewBox="0 0 760 300" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <g text-anchor="middle" font-weight="bold">
+        <text x="95" y="24">Eigenbetrieb</text><text x="285" y="24">IaaS</text><text x="475" y="24">PaaS</text><text x="665" y="24">SaaS</text>
+      </g>
+      <!-- Spalte 1: alles Kunde -->
+      <g stroke="#222" fill="#fff">
+        <rect x="10" y="35" width="170" height="30"/><rect x="10" y="65" width="170" height="30"/><rect x="10" y="95" width="170" height="30"/>
+        <rect x="10" y="125" width="170" height="30"/><rect x="10" y="155" width="170" height="30"/><rect x="10" y="185" width="170" height="30"/><rect x="10" y="215" width="170" height="30"/>
+      </g>
+      <!-- Spalte 2: IaaS -->
+      <g stroke="#222" fill="#fff">
+        <rect x="200" y="35" width="170" height="30"/><rect x="200" y="65" width="170" height="30"/><rect x="200" y="95" width="170" height="30"/><rect x="200" y="125" width="170" height="30"/>
+      </g>
+      <g stroke="#222" fill="#cfcfcf">
+        <rect x="200" y="155" width="170" height="30"/><rect x="200" y="185" width="170" height="30"/><rect x="200" y="215" width="170" height="30"/>
+      </g>
+      <!-- Spalte 3: PaaS -->
+      <g stroke="#222" fill="#fff">
+        <rect x="390" y="35" width="170" height="30"/><rect x="390" y="65" width="170" height="30"/>
+      </g>
+      <g stroke="#222" fill="#cfcfcf">
+        <rect x="390" y="95" width="170" height="30"/><rect x="390" y="125" width="170" height="30"/><rect x="390" y="155" width="170" height="30"/><rect x="390" y="185" width="170" height="30"/><rect x="390" y="215" width="170" height="30"/>
+      </g>
+      <!-- Spalte 4: SaaS -->
+      <g stroke="#222" fill="#cfcfcf">
+        <rect x="580" y="35" width="170" height="30"/><rect x="580" y="65" width="170" height="30"/><rect x="580" y="95" width="170" height="30"/>
+        <rect x="580" y="125" width="170" height="30"/><rect x="580" y="155" width="170" height="30"/><rect x="580" y="185" width="170" height="30"/><rect x="580" y="215" width="170" height="30"/>
+      </g>
+      <!-- Ebenenbeschriftungen in allen Spalten -->
+      <g text-anchor="middle" font-size="12">
+        <text x="95" y="55">Anwendung</text><text x="285" y="55">Anwendung</text><text x="475" y="55">Anwendung</text><text x="665" y="55">Anwendung</text>
+        <text x="95" y="85">Daten</text><text x="285" y="85">Daten</text><text x="475" y="85">Daten</text><text x="665" y="85">Daten</text>
+        <text x="95" y="115">Laufzeit, Middleware</text><text x="285" y="115">Laufzeit, Middleware</text><text x="475" y="115">Laufzeit, Middleware</text><text x="665" y="115">Laufzeit, Middleware</text>
+        <text x="95" y="145">Betriebssystem</text><text x="285" y="145">Betriebssystem</text><text x="475" y="145">Betriebssystem</text><text x="665" y="145">Betriebssystem</text>
+        <text x="95" y="175">Virtualisierung</text><text x="285" y="175">Virtualisierung</text><text x="475" y="175">Virtualisierung</text><text x="665" y="175">Virtualisierung</text>
+        <text x="95" y="205">Server, Speicher</text><text x="285" y="205">Server, Speicher</text><text x="475" y="205">Server, Speicher</text><text x="665" y="205">Server, Speicher</text>
+        <text x="95" y="235">Netzwerk, Gebäude</text><text x="285" y="235">Netzwerk, Gebäude</text><text x="475" y="235">Netzwerk, Gebäude</text><text x="665" y="235">Netzwerk, Gebäude</text>
+      </g>
+      <!-- Legende -->
+      <rect x="10" y="266" width="26" height="16" fill="#fff" stroke="#222"/>
+      <text x="44" y="279" font-size="12">verwaltet der Kunde</text>
+      <rect x="200" y="266" width="26" height="16" fill="#cfcfcf" stroke="#222"/>
+      <text x="234" y="279" font-size="12">verwaltet der Anbieter</text>
+    </svg>
+    <figcaption>Abb. A-9: Wer verwaltet was? Je weiter rechts, desto mehr übernimmt der Cloud-Anbieter – für seine Daten und Zugänge bleibt der Kunde immer verantwortlich</figcaption>
+  </figure>
+  <table class="kompakt">
+    <tr><th style="width:12%">Modell</th><th>Der Kunde erhält …</th><th style="width:36%">Beispiel</th></tr>
+    <tr><td><strong>IaaS</strong><br><span class="klein">Infrastructure as a Service</span></td><td>virtuelle Hardware: VMs, Speicher, Netze. Betriebssystem, Updates und Software installiert und pflegt er selbst.</td><td>Ein Ingenieurbüro mietet für eine Simulation stundenweise 64 CPU-Kerne und richtet das System selbst ein.</td></tr>
+    <tr><td><strong>PaaS</strong><br><span class="klein">Platform as a Service</span></td><td>eine fertige Laufzeit- bzw. Entwicklungsplattform (z. B. Webserver-Umgebung, verwaltete Datenbank). Er bringt nur seine Anwendung und Daten mit.</td><td>Ein Start-up lädt seine Webanwendung hoch; Laufzeitumgebung, Skalierung und Patches übernimmt der Anbieter.</td></tr>
+    <tr><td><strong>SaaS</strong><br><span class="klein">Software as a Service</span></td><td>eine fertige Anwendung, meist im Browser, im Abo.</td><td>Ein Handwerksbetrieb nutzt ein Online-Programm für Angebote und Rechnungen.</td></tr>
+  </table>
+  <p><strong>Bereitstellungsmodelle:</strong> <em>Public Cloud</em> (Anbieter betreibt die Infrastruktur für viele Kunden, über das Internet erreichbar) · <em>Private Cloud</em> (nur für eine Organisation, im eigenen oder einem dedizierten Rechenzentrum) · <em>Hybrid Cloud</em> (Kombination: z. B. kritische oder sensible Systeme privat, Standarddienste und Lastspitzen in der Public Cloud) · <em>Community Cloud</em> (mehrere Organisationen mit gleichen Anforderungen, z. B. Kommunen, teilen sich eine Cloud).</p>
+  <table class="kompakt">
+    <tr><th style="width:50%">Vorteile der (Public) Cloud</th><th>Nachteile / Risiken</th></tr>
+    <tr><td>
+      <ul style="margin:0">
+        <li><strong>Skalierbarkeit:</strong> Ressourcen bei Lastspitzen in Minuten erweitern, danach wieder reduzieren</li>
+        <li><strong>Kosten:</strong> keine Anschaffung (laufende statt einmalige Kosten), Bezahlung nach Verbrauch</li>
+        <li><strong>Verfügbarkeit:</strong> redundante Rechenzentren des Anbieters, oft vertraglich zugesichert (SLA)</li>
+        <li>Wartung, Updates, Hardwaretausch übernimmt der Anbieter → eigene IT wird entlastet</li>
+        <li>ortsunabhängiger Zugriff, schnelle Bereitstellung</li>
+      </ul></td><td>
+      <ul style="margin:0">
+        <li><strong>Datenschutz (DSGVO):</strong> bei personenbezogenen Daten Auftragsverarbeitungsvertrag nötig; Serverstandort prüfen (EU?); bei Anbietern aus Drittländern (z. B. USA) ist die Datenübermittlung rechtlich zu prüfen</li>
+        <li><strong>Abhängigkeit</strong> vom Anbieter (Preise, Formate, schwieriger Wechsel: <em>Vendor-Lock-in</em>)</li>
+        <li><strong>Internetverbindung</strong> wird zum kritischen Faktor (Ausfall = kein Zugriff)</li>
+        <li>laufende Kosten können langfristig höher sein; Kosten schwer planbar bei starker Nutzung</li>
+        <li>weniger Kontrolle über Sicherheit, Standort und Zeitpunkt von Änderungen</li>
+      </ul></td></tr>
+  </table>
+
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <strong>W22 T1 A1</strong>: Ein Bildungsträger mit mehreren Standorten hat häufige Ausfälle; Ursache ist eine veraltete und inhomogene Infrastruktur an den Standorten und in den Rechenzentren. a) Zwei mögliche Schwachstellen beschreiben (4 P), b) eine funktionale und eine nicht-funktionale Anforderung an die neue IT-Infrastruktur beschreiben (4 P). Weiter ging es mit automatisierter Bereitstellung (CI/CD) und TLS – die Infrastrukturfragen sind also Einstiegsfragen mit je 2 Punkten pro gut beschriebenem Punkt.
+  </div>
+</section>
+
+<!-- ===================== TEIL B: BELEGSATZ ===================== -->
+<section class="teil" id="belegsatz">
+  <h2>B · Belegsatz</h2>
+  <p class="klein">Enthält nur, was dir auch die IHK beilegen würde. Für Netzwerkthemen legt die IHK keine eigene Notationshilfe bei; für die Skriptaufgabe gelten die Pseudocode-Konventionen aus dem Belegsatz von Block 02. Alles, was die Aufgaben brauchen, steht in den Anlagen 1–8.</p>
+
+  <div class="anlage" id="anlage-1">
+    <h4>Anlage 1 · Ausgangssituation</h4>
+    <p><strong>Die Aufgaben dieses Blocks beziehen sich auf die folgende Ausgangssituation:</strong></p>
+    <p>Der <strong>Wasserverband Aue-Lindtal (WAL)</strong> versorgt rund 85.000 Einwohnerinnen und Einwohner in 23 Gemeinden mit Trinkwasser und reinigt deren Abwasser. Das Verbandsgebiet ist ländlich, hügelig und teilweise bewaldet; es umfasst etwa 420 km². Der WAL hat folgende Standorte:</p>
+    <ul>
+      <li><strong>Verwaltung Lindtal</strong> (Hauptsitz): 45 Büroarbeitsplätze, Serverraum im Keller (Bestandsaufnahme in Anlage 6).</li>
+      <li><strong>Klärwerk Auwiesen</strong> (6 km entfernt): Leitwarte mit zwei PCs, Prozesssteuerung über speicherprogrammierbare Steuerungen (SPS), Labor, Werkstatt; die Mitarbeiter nutzen im Gelände Tablets im WLAN.</li>
+      <li><strong>Wasserwerk Hohenbruch</strong> (11 km entfernt): Brunnen und Aufbereitung, sechs Arbeitsplätze.</li>
+      <li><strong>Rechenzentrum:</strong> Der WAL mietet Fläche (Colocation) im Rechenzentrum eines kommunalen IT-Dienstleisters. Dort wird ein Virtualisierungscluster aus drei Hosts aufgebaut, die ihre Daten auf einem gemeinsamen Speichersystem ablegen. Die Server aus dem Serverraum der Verwaltung sollen bis Mitte 2027 dorthin umziehen.</li>
+    </ul>
+    <p>Im Projekt <strong>„AuePuls“</strong> soll ein Mess- und Frühwarnsystem entstehen:</p>
+    <ul>
+      <li><strong>38 Pegelmessstellen</strong> an Bächen und Flüssen messen Wasserstand und Wassertemperatur (Hochwasserfrühwarnung). Sie haben <strong>keinen Strom- und keinen Netzwerkanschluss</strong>, arbeiten mit Batterie und liegen bis zu 14 km vom nächsten Standort entfernt. Im Normalbetrieb wird alle 15 Minuten gesendet, bei Hochwasser häufiger. Eine Nachricht umfasst 11 Byte Nutzdaten.</li>
+      <li><strong>14 Hochbehälter</strong> (Trinkwasserspeicher) haben Stromanschluss, aber keinen Netzwerkanschluss. Gemessen werden Füllstand und Durchfluss; ein motorgetriebener Schieber (Ventil) steuert den Zulauf.</li>
+      <li><strong>6 Abwasser-Pumpstationen</strong> mit Stromanschluss melden Füllstand und Störungen; die Pumpen sollen aus der Leitwarte geschaltet werden können.</li>
+      <li>Die Sensoren funken per <strong>LoRaWAN</strong> zu drei Gateways (GW1–GW3). Network Server, MQTT-Broker, Messwert-Datenbank, Web-Dashboard und App-Server laufen als virtuelle Maschinen im Rechenzentrum. Der <strong>Bereitschaftsdienst</strong> greift nachts und am Wochenende mit Smartphones von unterwegs zu.</li>
+      <li>Für die Inspektion von Deichen und Leitungstrassen wird eine <strong>Drohne</strong> beschafft, die ein Live-Video an die Leitwarte übertragen soll.</li>
+    </ul>
+    <p>Sie sind Auszubildende/r zum Fachinformatiker/zur Fachinformatikerin Anwendungsentwicklung bei der <strong>Brückner &amp; Vogt Software GmbH</strong>, die AuePuls entwickelt. Sie arbeiten bei der Auswahl der Funktechnik, der Messwert-Schnittstelle, der Inventarisierung der Netzwerkgeräte vor dem Umzug und beim Konzept für die neue IT-Infrastruktur mit.</p>
+  </div>
+
+  <div class="anlage" id="anlage-2">
+    <h4>Anlage 2 · Netzwerkplan des WAL (vereinfacht; Serverraum der Verwaltung noch im Ist-Zustand)</h4>
+    <figure>
+      <svg viewBox="0 0 760 680" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <!-- ===== Standortrahmen ===== -->
+        <g fill="none" stroke="#222" stroke-dasharray="7 4">
+          <rect x="10" y="10" width="310" height="190" rx="8"/>
+          <rect x="440" y="10" width="310" height="280" rx="8"/>
+          <rect x="10" y="310" width="310" height="190" rx="8"/>
+          <rect x="440" y="310" width="310" height="190" rx="8"/>
+          <rect x="10" y="515" width="740" height="128" rx="8"/>
+        </g>
+        <!-- ===== Internet ===== -->
+        <ellipse cx="370" cy="250" rx="60" ry="30" fill="#f2f2f2" stroke="#222"/>
+        <text x="370" y="255" text-anchor="middle" font-weight="bold">Internet</text>
+
+        <!-- ===== Verwaltung ===== -->
+        <text x="22" y="32" font-weight="bold">Verwaltung Lindtal</text>
+        <text x="22" y="49" font-size="12">LAN 10.10.10.0/24</text>
+        <g fill="#fff" stroke="#222">
+          <rect x="180" y="22" width="130" height="30"/>
+          <rect x="180" y="80" width="130" height="30"/>
+          <rect x="22" y="64" width="140" height="44"/>
+          <rect x="22" y="124" width="140" height="44"/>
+          <rect x="180" y="140" width="130" height="44"/>
+        </g>
+        <g font-size="12" text-anchor="middle">
+          <text x="245" y="42">Router/Firewall R1</text>
+          <text x="245" y="100">Switch SW1</text>
+          <text x="92" y="82">45 Arbeitsplatz-PCs</text>
+          <text x="92" y="99">6 Drucker, WLAN-AP</text>
+          <text x="92" y="142">Serverraum S1–S5</text>
+          <text x="92" y="159">(siehe Anlage 6)</text>
+          <text x="245" y="158">LoRaWAN-Gateway</text>
+          <text x="245" y="175">GW1 (Wasserturm)</text>
+        </g>
+        <g stroke="#222">
+          <line x1="245" y1="52" x2="245" y2="80"/>
+          <line x1="180" y1="92" x2="162" y2="86"/>
+          <line x1="180" y1="102" x2="162" y2="146"/>
+          <line x1="245" y1="110" x2="245" y2="140"/>
+          <polyline points="310,37 345,37 345,223" fill="none"/>
+        </g>
+
+        <!-- ===== Rechenzentrum ===== -->
+        <text x="452" y="32" font-weight="bold">Rechenzentrum (Colocation)</text>
+        <text x="452" y="49" font-size="12">Server-LAN 10.10.100.0/24</text>
+        <g fill="#fff" stroke="#222">
+          <rect x="452" y="62" width="130" height="30"/>
+          <rect x="608" y="62" width="130" height="30"/>
+          <rect x="452" y="114" width="84" height="30"/>
+          <rect x="553" y="114" width="84" height="30"/>
+          <rect x="654" y="114" width="84" height="30"/>
+          <rect x="525" y="188" width="140" height="32" fill="#f2f2f2"/>
+        </g>
+        <g font-size="12" text-anchor="middle">
+          <text x="517" y="82">Router/Firewall R4</text>
+          <text x="673" y="82">Switch SW4</text>
+          <text x="494" y="134">Host 1</text>
+          <text x="595" y="134">Host 2</text>
+          <text x="696" y="134">Host 3</text>
+          <text x="595" y="209">Speichersystem</text>
+        </g>
+        <g stroke="#222">
+          <line x1="582" y1="77" x2="608" y2="77"/>
+          <line x1="673" y1="92" x2="673" y2="104"/>
+          <line x1="494" y1="104" x2="696" y2="104"/>
+          <line x1="494" y1="104" x2="494" y2="114"/>
+          <line x1="595" y1="104" x2="595" y2="114"/>
+          <line x1="696" y1="104" x2="696" y2="114"/>
+          <polyline points="452,77 400,77 400,224" fill="none"/>
+        </g>
+        <g stroke="#222" stroke-width="3.5">
+          <line x1="494" y1="144" x2="560" y2="188"/>
+          <line x1="595" y1="144" x2="595" y2="188"/>
+          <line x1="696" y1="144" x2="630" y2="188"/>
+        </g>
+        <text x="672" y="208" font-size="11">Fibre Channel</text>
+        <g font-size="11.5">
+          <text x="452" y="244">Virtuelle Maschinen (VMs) auf Host 1–3:</text>
+          <text x="452" y="261">LoRaWAN-Network-Server, MQTT-Broker,</text>
+          <text x="452" y="278">Messwert-DB, Web-/App-Server, Inventar-API</text>
+        </g>
+
+        <!-- ===== Klärwerk ===== -->
+        <text x="22" y="332" font-weight="bold">Klärwerk Auwiesen</text>
+        <text x="22" y="349" font-size="12">LAN 10.10.20.0/24</text>
+        <g fill="#fff" stroke="#222">
+          <rect x="180" y="322" width="130" height="30"/>
+          <rect x="180" y="380" width="130" height="30"/>
+          <rect x="22" y="364" width="140" height="62"/>
+          <rect x="22" y="440" width="140" height="44"/>
+          <rect x="180" y="440" width="130" height="44"/>
+        </g>
+        <g font-size="12" text-anchor="middle">
+          <text x="245" y="342">Router/Firewall R2</text>
+          <text x="245" y="400">Switch SW2</text>
+          <text x="92" y="382">2 Leitwarten-PCs</text>
+          <text x="92" y="399">2 SPS, 1 Kamera</text>
+          <text x="92" y="416">1 Labor-PC</text>
+          <text x="92" y="458">WLAN-AP AP2</text>
+          <text x="92" y="475">(Tablets)</text>
+          <text x="245" y="458">LoRaWAN-Gateway</text>
+          <text x="245" y="475">GW2 (Dach)</text>
+        </g>
+        <g stroke="#222">
+          <line x1="245" y1="352" x2="245" y2="380"/>
+          <line x1="180" y1="392" x2="162" y2="392"/>
+          <line x1="180" y1="404" x2="162" y2="456"/>
+          <line x1="245" y1="410" x2="245" y2="440"/>
+          <polyline points="310,337 345,337 345,277" fill="none"/>
+        </g>
+
+        <!-- ===== Wasserwerk ===== -->
+        <text x="452" y="332" font-weight="bold">Wasserwerk Hohenbruch</text>
+        <text x="452" y="349" font-size="12">LAN 10.10.30.0/24</text>
+        <g fill="#fff" stroke="#222">
+          <rect x="452" y="362" width="130" height="30"/>
+          <rect x="608" y="362" width="130" height="30"/>
+          <rect x="452" y="420" width="130" height="44"/>
+          <rect x="608" y="420" width="130" height="44"/>
+        </g>
+        <g font-size="12" text-anchor="middle">
+          <text x="517" y="382">Router/Firewall R3</text>
+          <text x="673" y="382">Switch SW3</text>
+          <text x="517" y="438">6 Arbeitsplatz-PCs</text>
+          <text x="517" y="455">2 SPS (Brunnen)</text>
+          <text x="673" y="438">LoRaWAN-Gateway</text>
+          <text x="673" y="455">GW3 (Wasserwerk)</text>
+        </g>
+        <g stroke="#222">
+          <line x1="582" y1="377" x2="608" y2="377"/>
+          <line x1="673" y1="392" x2="673" y2="420"/>
+          <line x1="640" y1="392" x2="560" y2="420"/>
+          <polyline points="452,377 400,377 400,276" fill="none"/>
+        </g>
+
+        <!-- ===== Bereitschaftsdienst ===== -->
+        <rect x="325" y="398" width="110" height="58" rx="6" fill="#fff" stroke="#222"/>
+        <g font-size="12" text-anchor="middle">
+          <text x="380" y="416">Smartphones</text>
+          <text x="380" y="432">Bereitschafts-</text>
+          <text x="380" y="448">dienst</text>
+        </g>
+        <line x1="372" y1="398" x2="372" y2="280" stroke="#222" stroke-dasharray="2 3"/>
+        <text x="378" y="300" font-size="11">Mobilfunk</text>
+
+        <!-- ===== Außenanlagen ===== -->
+        <g stroke="#222" stroke-dasharray="5 4">
+          <line x1="60" y1="557" x2="232" y2="484"/>
+          <line x1="110" y1="579" x2="242" y2="484"/>
+          <line x1="160" y1="553" x2="252" y2="484"/>
+          <line x1="262" y1="567" x2="268" y2="484"/>
+          <line x1="312" y1="553" x2="640" y2="464"/>
+          <line x1="420" y1="571" x2="660" y2="464"/>
+          <line x1="470" y1="555" x2="690" y2="464"/>
+        </g>
+        <g fill="#fff" stroke="#222">
+          <circle cx="60" cy="570" r="13"/><circle cx="110" cy="592" r="13"/><circle cx="160" cy="566" r="13"/>
+          <circle cx="262" cy="580" r="13"/><circle cx="312" cy="566" r="13"/>
+          <circle cx="420" cy="584" r="13"/><circle cx="470" cy="568" r="13"/>
+        </g>
+        <g font-size="12" text-anchor="middle" font-weight="bold">
+          <text x="60" y="575">P</text><text x="110" y="597">P</text><text x="160" y="571">P</text>
+          <text x="262" y="585">H</text><text x="312" y="571">H</text>
+          <text x="420" y="589">A</text><text x="470" y="573">A</text>
+        </g>
+        <text x="22" y="630" font-weight="bold">Außenanlagen im Verbandsgebiet (ca. 420 km²)</text>
+        <g font-size="12">
+          <text x="520" y="560">P = Pegelmessstelle (38, Batterie)</text>
+          <text x="520" y="578">H = Hochbehälter (14, Netzstrom)</text>
+          <text x="520" y="596">A = Abwasser-Pumpstation (6)</text>
+          <text x="520" y="614">alle funken zu GW1, GW2 oder GW3</text>
+        </g>
+
+        <!-- ===== Legende ===== -->
+        <line x1="20" y1="666" x2="60" y2="666" stroke="#222"/>
+        <text x="66" y="670" font-size="12">Kabel (Ethernet, Internetanschluss)</text>
+        <line x1="290" y1="666" x2="330" y2="666" stroke="#222" stroke-width="3.5"/>
+        <text x="336" y="670" font-size="12">Fibre Channel</text>
+        <line x1="440" y1="666" x2="480" y2="666" stroke="#222" stroke-dasharray="5 4"/>
+        <text x="486" y="670" font-size="12">Funk (LoRaWAN)</text>
+        <line x1="600" y1="666" x2="640" y2="666" stroke="#222" stroke-dasharray="2 3"/>
+        <text x="646" y="670" font-size="12">Mobilfunk</text>
+      </svg>
+      <figcaption>Netzwerkplan: Alle Standorte und das Rechenzentrum sind nur über das Internet miteinander verbunden.</figcaption>
+    </figure>
+  </div>
+
+  <div class="anlage" id="anlage-3">
+    <h4>Anlage 3 · Marktrecherche Funktechniken (Herstellerangaben und Angebote, Auszug)</h4>
+    <table class="kompakt eng">
+      <tr><th>Technik</th><th>Reichweite</th><th>Datenrate</th><th>Energie / Laufzeit</th><th>Kosten Hardware</th><th>laufende Kosten</th><th>Hinweise</th></tr>
+      <tr><td><strong>LoRaWAN</strong> 868 MHz</td><td>bei freier Sicht bis 15 km, im bewaldeten Tal 2–5 km</td><td>0,3–5,5 kbit/s</td><td>Batterie 8–10 Jahre (bei 4 Nachrichten/h)</td><td>Sensormodul 18 €; Gateways GW1–GW3 bereits vorhanden</td><td>keine Funkgebühren</td><td>Duty Cycle 1 %; je Nachricht max. 51–222 Byte; Airtime bei 11 Byte Nutzdaten: SF7 0,06 s · SF9 0,21 s · SF12 1,48 s</td></tr>
+      <tr><td><strong>NB-IoT</strong></td><td>Funkzelle 1–10 km, sehr gute Gebäude- und Schachtdurchdringung</td><td>bis ca. 250 kbit/s</td><td>Batterie 5–8 Jahre</td><td>Modul 24 €</td><td>SIM-Tarif 1,50 € je Gerät und Monat</td><td>Netz eines Mobilfunkbetreibers; LTE-Abdeckung im Verbandsgebiet gut, in einzelnen Tälern lückenhaft</td></tr>
+      <tr><td><strong>Sigfox</strong></td><td>bis 40 km (ländlich)</td><td>0,1 kbit/s, max. 140 Nachrichten à 12 Byte je Tag</td><td>Batterie bis 10 Jahre</td><td>Modul 12 €</td><td>Abo 12 € je Gerät und Jahr</td><td>Betreibernetz; im Verbandsgebiet nur teilweise verfügbar</td></tr>
+      <tr><td><strong>Zigbee</strong></td><td>10–100 m, per Mesh erweiterbar</td><td>250 kbit/s</td><td>Batterie 2–5 Jahre</td><td>Modul 8 €; Koordinator 120 € je Standort</td><td>keine</td><td>für Gebäude und Anlagen auf einem Gelände</td></tr>
+      <tr><td><strong>Bluetooth LE</strong></td><td>10–50 m</td><td>1–2 Mbit/s</td><td>Knopfzelle 1–3 Jahre</td><td>Modul 5 €</td><td>keine</td><td>Auslesen per App mit Smartphone oder Tablet vor Ort</td></tr>
+      <tr><td><strong>WLAN</strong> (Wi-Fi 6)</td><td>30–100 m je Access Point</td><td>bis mehrere 100 Mbit/s</td><td>Netzteil nötig (Akku nur Stunden bis Tage)</td><td>Access Point 300 €</td><td>keine</td><td>auf dem Klärwerksgelände vorhanden (AP2)</td></tr>
+      <tr><td><strong>5G</strong> (Mobilfunk)</td><td>Funkzelle 0,2–5 km</td><td>bis über 1 Gbit/s, Latenz unter 10 ms</td><td>hoch (Netzteil oder Akku des Fahrzeugs/der Drohne)</td><td>5G-Modem 180 €</td><td>Datentarif 30 € je Monat</td><td>5G-Abdeckung an Klärwerk, Deich und Hauptstraßen vorhanden</td></tr>
+    </table>
+  </div>
+
+  <div class="anlage" id="anlage-4">
+    <h4>Anlage 4 · Fachtext zu LoRaWAN</h4>
+    <div class="englisch">
+      <p><strong>LoRaWAN – connecting sensors over long distances</strong></p>
+      <p>LoRaWAN (Long Range Wide Area Network) is an open networking protocol for low-power wide-area networks (LPWAN). It is designed to connect battery-operated devices to applications on the internet. The protocol is based on LoRa, a radio modulation technique that spreads each signal over a wider frequency band (chirp spread spectrum). This makes the signal very robust against interference and allows it to be received even when it is weaker than the background noise.</p>
+      <p>In rural areas a single gateway can receive messages from devices that are more than 10 km away; in towns and in hilly or wooded terrain the typical range is 2 to 5 km. The network uses a star-of-stars topology: end devices do not communicate with each other and are not assigned to a particular gateway. Every message is received by all gateways in range. The gateways forward the packets over a normal IP connection to a central network server, which removes duplicate packets and checks their integrity before passing the data on to the application server.</p>
+      <p>LoRaWAN uses unlicensed frequency bands (868 MHz in Europe), so no fees have to be paid for the radio spectrum. However, in most sub-bands each device may only transmit for 1 % of the time (duty cycle).</p>
+      <p>The data rate is low – from about 0.3 to 50 kbit/s – and a single message can carry only between 51 and 222 bytes of user data. LoRaWAN is therefore not suitable for images, audio or video, but it is ideal for small sensor readings that are sent a few times per hour. As devices sleep most of the time, a battery can last up to ten years.</p>
+      <p>All messages are secured with AES-128: a network session key protects the integrity of each message, and an application session key encrypts the payload end-to-end, so not even the network operator can read the sensor values.</p>
+    </div>
+    <p class="klein">Quelle: eigener Text für dieses Übungsmaterial, angelehnt an öffentliche Beschreibungen der LoRa Alliance.</p>
+  </div>
+
+  <div class="anlage" id="anlage-5">
+    <h4>Anlage 5 · Empfangene Messwerte der Pegelmessstellen (Auszug, 08.10.2026)</h4>
+    <table class="kompakt eng">
+      <tr><th>DevEUI</th><th>Messstelle</th><th>Zeitstempel (UTC)</th><th>Wasserstand in cm</th><th>Wasser&shy;temperatur in °C</th><th>Batterie in %</th></tr>
+      <tr><td class="mono nowrap">4D:57:41:00:00:00:01:17</td><td>P-17 Lindbach, Mühlenweg</td><td class="mono nowrap">2026-10-08T06:15:00Z</td><td>142</td><td>9,8</td><td>87</td></tr>
+      <tr><td class="mono nowrap">4D:57:41:00:00:00:02:03</td><td>P-23 Aue, Wehr Kleinfeld</td><td class="mono nowrap">2026-10-08T06:15:00Z</td><td>311</td><td>10,4</td><td>34</td></tr>
+      <tr><td class="mono nowrap">4D:57:41:00:00:00:01:17</td><td>P-17 Lindbach, Mühlenweg</td><td class="mono nowrap">2026-10-08T06:30:00Z</td><td>145</td><td>9,7</td><td>87</td></tr>
+      <tr><td class="mono nowrap">4D:57:41:00:00:00:02:03</td><td>P-23 Aue, Wehr Kleinfeld</td><td class="mono nowrap">2026-10-08T06:30:00Z</td><td>318</td><td>10,3</td><td>34</td></tr>
+    </table>
+  </div>
+
+  <div class="anlage" id="anlage-6">
+    <h4>Anlage 6 · Bestandsaufnahme Serverraum der Verwaltung (Stand: Oktober 2026)</h4>
+    <table class="kompakt eng">
+      <tr><th>Nr.</th><th>Gerät</th><th>Baujahr</th><th>Betriebssystem / Firmware</th><th>Dienste</th><th>Bemerkungen</th></tr>
+      <tr><td>S1</td><td>Tower-Server, Hersteller A</td><td>2013</td><td>Windows Server 2012 R2 (Herstellersupport seit 10/2023 beendet)</td><td>Dateiserver, Druckserver</td><td>ein Netzteil; RAID 1</td></tr>
+      <tr><td>S2</td><td>Rack-Server, Hersteller B</td><td>2016</td><td>Windows Server 2016 (Support endet 01/2027)</td><td>zentrale Anmeldung (Verzeichnisdienst), DNS, DHCP</td><td>einziger Anmeldeserver</td></tr>
+      <tr><td>S3</td><td>Rack-Server, Hersteller C</td><td>2015</td><td>Linux CentOS 7 (Support seit 06/2024 beendet)</td><td>Messwert-Datenbank (Altsystem), Webportal Pegelstände</td><td>RAID 0 aus 2 Festplatten</td></tr>
+      <tr><td>S4</td><td>Büro-PC, Hersteller D</td><td>2018</td><td>Windows 10 Pro (Support seit 10/2025 beendet)</td><td>Fernzugriff auf die Leitwarte des Klärwerks</td><td>Router R1 leitet Port 3389 (RDP) aus dem Internet auf S4 weiter</td></tr>
+      <tr><td>S5</td><td>NAS, Hersteller E</td><td>2014</td><td>Firmware von 2019</td><td>Datensicherung von S1 und S3, wöchentlich, manuell gestartet</td><td>steht im selben Raum, dauerhaft im Netz</td></tr>
+    </table>
+    <p><strong>Raum:</strong> Kellerraum ohne Klimaanlage (im Sommer bis 34 °C), keine USV, Wasser- und Heizungsrohre unter der Decke, Tür mit dem normalen Büroschlüssel zu öffnen. Ein Administrator betreut alle Geräte; eine Dokumentation fehlt.</p>
+    <p><strong>Störungsprotokoll der letzten sechs Monate:</strong></p>
+    <table class="kompakt">
+      <tr><th style="width:14%">Datum</th><th>Störung</th></tr>
+      <tr><td>14.05.2026</td><td>S3 schaltet sich bei Hitze ab, Pegelportal 6 Stunden nicht erreichbar – während eines Starkregens.</td></tr>
+      <tr><td>02.07.2026</td><td>Stromausfall im Ortsteil (20 Minuten); S1 und S3 mit Dateisystemfehlern, Dateiserver erst nach 1,5 Tagen wieder verfügbar.</td></tr>
+      <tr><td>19.09.2026</td><td>Festplatte in S3 defekt; alle Messwerte seit der letzten Sicherung (11 Tage zuvor) verloren.</td></tr>
+    </table>
+  </div>
+
+  <div class="anlage" id="anlage-7">
+    <h4>Anlage 7 · Hilfsfunktionen für Skripte</h4>
+    <table class="kompakt">
+      <tr><th style="width:44%">Funktion / Operator</th><th>Beschreibung</th></tr>
+      <tr><td class="mono">getMacAddress(ip : string) : string</td><td>Liefert die MAC-Adresse des Geräts mit der IP-Adresse <code>ip</code> im Format <code>"XX:XX:XX:XX:XX:XX"</code> (Großbuchstaben) oder <code>null</code>, wenn unter dieser Adresse kein Gerät antwortet.</td></tr>
+      <tr><td class="mono">getVendor(oui : string) : string</td><td>Liefert zu den ersten drei Byte einer MAC-Adresse im Format <code>"XX:XX:XX"</code> den Namen des Herstellers oder <code>null</code>, wenn der Hersteller unbekannt ist.</td></tr>
+      <tr><td class="mono">text.substring(start : integer, ende : integer) : string</td><td>Liefert den Teil von <code>text</code> ab Index <code>start</code> (einschließlich) bis Index <code>ende</code> (ausschließlich). Das erste Zeichen hat den Index 0.<br>Beispiel: <code>"ABCDEF".substring(1, 4)</code> → <code>"BCD"</code></td></tr>
+      <tr><td class="mono">text.length() : integer</td><td>Anzahl der Zeichen von <code>text</code></td></tr>
+      <tr><td class="mono">ausgabe(text : string)</td><td>Gibt <code>text</code> auf der Konsole aus.</td></tr>
+      <tr><td class="mono">+</td><td>Verkettet Zeichenketten, auch mit Zahlen: <code>"10.10.20" + "." + 5</code> → <code>"10.10.20.5"</code></td></tr>
+      <tr><td class="mono">"…" bzw. '…'</td><td>Zeichenkettenliterale. Innerhalb von <code>'…'</code> dürfen doppelte Anführungszeichen stehen: <code>'{"ip": "'</code></td></tr>
+    </table>
+    <p>Gewünschtes Ausgabeformat (JSON-Array, Beispiel mit zwei Geräten; Zeilenumbrüche und Einrückungen sind nicht erforderlich):</p>
+    <pre>[
+  {"ip": "10.10.20.1", "mac": "5C:F2:86:00:14:01"},
+  {"ip": "10.10.20.2", "mac": "5C:F2:86:00:14:02"}
+]</pre>
+  </div>
+
+  <div class="anlage" id="anlage-8">
+    <h4>Anlage 8 · Ethernet-Frame und Mitschnitt aus dem Netz des Klärwerks</h4>
+    <p>Aufbau eines Ethernet-Frames (Felder A bis F in Übertragungsreihenfolge):</p>
+    <figure>
+      <svg viewBox="0 0 760 120" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <g fill="#fff" stroke="#222">
+          <rect x="5" y="10" width="110" height="95"/>
+          <rect x="115" y="10" width="105" height="95"/>
+          <rect x="220" y="10" width="105" height="95"/>
+          <rect x="325" y="10" width="70" height="95"/>
+          <rect x="395" y="10" width="270" height="95"/>
+          <rect x="665" y="10" width="90" height="95"/>
+          <circle cx="60" cy="52" r="20"/>
+          <circle cx="167" cy="52" r="20"/>
+          <circle cx="272" cy="52" r="20"/>
+          <circle cx="360" cy="52" r="20"/>
+          <circle cx="530" cy="52" r="20"/>
+          <circle cx="710" cy="52" r="20"/>
+        </g>
+        <g font-weight="bold">
+          <text x="12" y="28">A</text><text x="122" y="28">B</text><text x="227" y="28">C</text>
+          <text x="332" y="28">D</text><text x="402" y="28">E</text><text x="672" y="28">F</text>
+        </g>
+        <g text-anchor="middle" font-size="12">
+          <text x="60" y="95">(8 Byte)</text>
+          <text x="167" y="95">(6 Byte)</text>
+          <text x="272" y="95">(6 Byte)</text>
+          <text x="360" y="95">(2 Byte)</text>
+          <text x="530" y="95">(46 – 1.500 Byte)</text>
+          <text x="710" y="95">(4 Byte)</text>
+        </g>
+      </svg>
+    </figure>
+    <p>Mitschnitt eines Frames im Netz 10.10.20.0/24 (hexadezimal, ohne Präambel/SFD; links der Versatz in Byte, hexadezimal):</p>
+    <pre class="hex">0000   ff ff ff ff ff ff 3c 52 82 5e 90 31 08 06 00 01
+0010   08 00 06 04 00 01 3c 52 82 5e 90 31 0a 0a 14 1f
+0020   00 00 00 00 00 00 0a 0a 14 32 00 00 00 00 00 00
+0030   00 00 00 00 00 00 00 00 00 00 00 00 …</pre>
+  </div>
+</section>
+
+<!-- ===================== TEIL C: AUFGABEN ===================== -->
+<section class="teil" id="aufgaben">
+  <h2>C · Aufgaben</h2>
+  <p class="klein">Alle Aufgaben beziehen sich auf die Ausgangssituation in Anlage 1. Stichwortartige Antworten sind zulässig, sofern nicht ausdrücklich ganze Sätze verlangt werden. Skripte sind in Pseudocode (Konventionen wie in Block 02) oder in einer Ihnen bekannten Programmier- bzw. Skriptsprache zu entwickeln.</p>
+
+  <!-- ===================== NET-01 ===================== -->
+  <h3 id="a-01">NET-01 · IoT / Sensorik / Funk</h3>
+
+  <div class="aufgabe" id="NET-01-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe NET-01.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">5 Punkte</span>
+    </div>
+    <p>Im Projekt AuePuls werden zahlreiche Komponenten eingesetzt (Anlagen 1 und 2).</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Ordnen Sie jede Komponente einer Ebene der IoT-Architektur zu, indem Sie ein Kreuz setzen.</div>
+    <table class="leer kompakt">
+      <tr><th>Komponente</th><th class="mitte" style="width:11%">Sensor</th><th class="mitte" style="width:11%">Aktor</th><th class="mitte" style="width:11%">Gateway</th><th class="mitte" style="width:14%">Plattform / Backend</th></tr>
+      <tr><td>Ultraschallsonde, die den Wasserstand eines Bachs misst</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>motorgetriebener Schieber am Zulauf eines Hochbehälters</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>LoRaWAN-Gateway GW1 auf dem Wasserturm</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>MQTT-Broker im Rechenzentrum</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Abwasserpumpe in einer Pumpstation</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Durchflussmesser in der Zulaufleitung eines Hochbehälters</td><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Beschreiben Sie zwei Aufgaben, die die LoRaWAN-Gateways GW1 bis GW3 im Projekt AuePuls übernehmen.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Grundlagen zu S23 T1 A4 und S26 T1 A3 (IoT-Szenarien mit Sensoren und Funk)</p>
+  </div>
+
+  <div class="aufgabe" id="NET-01-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe NET-01.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Neben den Pegelmessstellen gibt es weitere Anwendungsfälle, für die jeweils eine Funktechnik aus der Marktrecherche (Anlage 3) gewählt werden soll.</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Wählen Sie für jeden Anwendungsfall eine geeignete Funktechnik aus Anlage 3 und begründen Sie Ihre Wahl mit zwei Merkmalen.</div>
+    <table class="leer sehrhoch kompakt">
+      <tr><th style="width:42%">Anwendungsfall</th><th style="width:16%">Funktechnik</th><th>Begründung</th></tr>
+      <tr><td>(1) Hochbehälter „Waldhöhe“: liegt hinter einem Bergrücken, kein Empfang zu GW1–GW3 (nächstes Gateway 9 km entfernt); Stromanschluss vorhanden; gute LTE-Abdeckung; sendet alle 5 Minuten 6 Byte (Füllstand, Durchfluss).</td><td></td><td></td></tr>
+      <tr><td>(2) Inspektionsdrohne: überträgt ein Live-Video (ca. 8 Mbit/s) vom Deich in bis zu 3 km Entfernung an die Leitwarte im Klärwerk.</td><td></td><td></td></tr>
+      <tr><td>(3) Temperatur und Luftfeuchte in den Schaltschränken der sechs Pumpstationen: Ein Techniker liest die Werte bei der monatlichen Wartung vor Ort mit seinem Tablet aus; die Sensoren sollen ohne Verkabelung mit Batterie arbeiten.</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Bei Hochwasser sollen die Pegelmessstellen alle <strong>2 Minuten</strong> senden. Prüfen Sie rechnerisch mithilfe von Anlage 3, ob eine Messstelle, die mit dem Spreading Factor SF12 sendet, dabei den Duty Cycle einhält.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>c) Nennen Sie eine Maßnahme, mit der die Messstelle aus b) die Vorgabe dennoch einhalten kann.</div>
+    <div class="antwort"></div>
+    <p class="quelle">Angelehnt an: S26 T1 A3ab (Funktechnik für das Projekt begründen) und W24 T1 A2a (LPWAN für IoT)</p>
+  </div>
+
+  <div class="aufgabe" id="NET-01-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe NET-01.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">20 Punkte</span>
+    </div>
+    <p>Für die 38 Pegelmessstellen hat sich das Projektteam für LoRaWAN entschieden. Sie bereiten eine Präsentation für die Verbandsversammlung vor und finden dazu den Fachtext in Anlage 4.</p>
+    <div class="teilaufgabe">a) Werten Sie den Fachtext in Anlage 4 aus.</div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>aa) Nennen Sie drei Merkmale von LoRaWAN, die im Text beschrieben werden.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>ab) Erläutern Sie zwei Gründe, weshalb LoRaWAN für die Pegelmessstellen des WAL geeignet ist.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>ac) Laut Text sind Endgeräte keinem bestimmten Gateway zugeordnet. Eine Nachricht der Messstelle P-17 wird von GW1 und GW2 empfangen. Erläutern Sie, welche Folge das hat und welche Komponente damit umgeht.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Der App-Server übergibt die Messwerte im JSON-Format an das Web-Dashboard. Je Messstelle wird ein JSON-Objekt erzeugt, das die DevEUI, den Namen der Messstelle, den Batteriestand und ein Array aller Messwerte enthält. Jeder Messwert besteht aus Zeitstempel, Wasserstand in cm und Wassertemperatur in °C. Zahlen sind als Zahlen zu übertragen.<br>Erstellen Sie dieses JSON-Objekt für die Messstelle <strong>P-23</strong> mit den Daten aus Anlage 5.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Ein Kollege schlägt vor, jeden Messwert auf der Messstelle zusätzlich mit RSA (Schlüssellänge 2048 Bit) zu verschlüsseln. Die Messstellen verwenden einen stromsparenden Mikrocontroller mit 48 MHz Takt und 32 KB Arbeitsspeicher.<br>Nehmen Sie Stellung zu diesem Vorschlag.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>d) Die Hochbehälter sollen ihren Zulaufschieber bei drohender Überfüllung auch dann schließen, wenn die Verbindung zum Rechenzentrum gestört ist. Erläutern Sie, wie Edge Computing dieses Problem löst.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: S26 T1 A3a (LoRa aus englischem Fachtext, 9 P) und A3bd (RSA im IoT-Projekt); S23 T1 A4a und A4cb (Verschlüsselung auf schwachen Sensoren, Messwerte als JSON)</p>
+  </div>
+
+  <!-- ===================== NET-02 ===================== -->
+  <h3 id="a-02">NET-02 · Netzwerkkonzepte</h3>
+
+  <div class="aufgabe" id="NET-02-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe NET-02.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Ergänzen Sie die Tabelle. Nennen Sie als Beispiel jeweils eine Stelle aus Anlage 1 oder 2, an der das Netz beim WAL vorkommt bzw. sinnvoll eingesetzt wird.</div>
+    <table class="leer hoch kompakt">
+      <tr><th style="width:14%">Abkürzung</th><th style="width:36%">ausgeschriebene Bezeichnung</th><th>Beispiel beim WAL</th></tr>
+      <tr><td>WAN</td><td></td><td></td></tr>
+      <tr><td>WLAN</td><td></td><td></td></tr>
+      <tr><td>VPN</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Nennen Sie
+      <br>ba) die Topologie des LANs im Klärwerk (Anlage 2),
+      <br>bb) die Topologie des LoRaWAN-Netzes (Anlage 4) und
+      <br>bc) einen Nachteil der Topologie aus ba).</div>
+    <div class="antwort z5"></div>
+  </div>
+
+  <div class="aufgabe" id="NET-02-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe NET-02.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Der WAL eröffnet einen neuen Betriebshof in Kleinfeld (nicht in Anlage 2). Dort gibt es 8 Arbeitsplatz-PCs, einen Netzwerkdrucker und WLAN für 10 Tablets des Außendienstes. Der Standort erhält einen Glasfaser-Internetanschluss. Die Mitarbeiter sollen wie an den anderen Standorten auf die Server im Rechenzentrum zugreifen.</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Ergänzen Sie die Tabelle um die drei aktiven Netzwerkkomponenten, die im Betriebshof mindestens benötigt werden (ohne Endgeräte und ohne Glasfaser-Modem). Beschreiben Sie jeweils die Aufgabe im Betriebshof und geben Sie die OSI-Schicht an, auf der die Komponente hauptsächlich arbeitet.</div>
+    <table class="leer sehrhoch kompakt">
+      <tr><th style="width:24%">Komponente</th><th>Aufgabe im Betriebshof</th><th style="width:13%">OSI-Schicht</th></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Bisher speichern die Mitarbeiter im Klärwerk ihre Schichtberichte jeweils auf dem eigenen PC und geben Ordner für die Kollegen frei (Peer-to-Peer). Künftig sollen alle Berichte auf einem Dateiserver im Rechenzentrum liegen (Client-Server). Erläutern Sie zwei Vorteile dieser Umstellung für den WAL.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: W24 T1 A2 (Netze und Komponenten eines Verkehrsbetriebs) und W22 T1 (Client-Server-Umgebung eines Bildungsträgers)</p>
+  </div>
+
+  <div class="aufgabe" id="NET-02-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe NET-02.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">18 Punkte</span>
+    </div>
+    <p>Der WAL betreibt je nach Anforderung unterschiedliche Datennetze (Anlagen 1 und 2).</p>
+    <div class="teilaufgabe"><span class="tp">12 P</span>a) Ordnen Sie jedem Anwendungsgebiet eines der Netzwerkkonzepte <strong>LAN</strong>, <strong>SAN</strong>, <strong>LPWAN</strong> und <strong>VPN</strong> zu und begründen Sie die Zuordnung. Jedes Konzept ist genau einmal zu verwenden.</div>
+    <table class="leer h96 kompakt">
+      <tr><th style="width:34%">Anwendungsgebiet</th><th style="width:15%">Netzwerk&shy;konzept</th><th>Begründung</th></tr>
+      <tr><td>Übertragung der Messwerte der 38 Pegelmessstellen im Verbandsgebiet</td><td></td><td></td></tr>
+      <tr><td>Vernetzung der Arbeitsplätze, Drucker und des Gateways GW1 in der Verwaltung</td><td></td><td></td></tr>
+      <tr><td>Zugriff der Hosts 1–3 auf das gemeinsame Speichersystem im Rechenzentrum</td><td></td><td></td></tr>
+      <tr><td>Verbindung der Standorte Klärwerk und Wasserwerk mit dem Rechenzentrum</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Derzeit greift der Bereitschaftsdienst über den PC S4 auf die Leitwarte zu; dazu leitet der Router R1 den Port 3389 aus dem Internet an S4 weiter (Anlage 6). Künftig sollen die Smartphones ein Remote-Access-VPN zur Firewall R4 aufbauen. Erläutern Sie, warum diese Lösung sicherer ist.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Das LAN im Klärwerk ist sternförmig über den einzigen Switch SW2 aufgebaut. Erläutern Sie das Risiko für die Leitwarte und beschreiben Sie eine Maßnahme, die es verringert.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W24 T1 A2a (LAN, SAN und LPWAN den Gebieten IoT, Unternehmensnetzwerk und Rechenzentrum zuordnen und begründen, 9 P)</p>
+  </div>
+
+  <!-- ===================== NET-03 ===================== -->
+  <h3 id="a-03">NET-03 · Adressierung, Frames &amp; Protokolle</h3>
+
+  <div class="aufgabe" id="NET-03-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe NET-03.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Das LoRaWAN-Gateway GW2 im Klärwerk hat die MAC-Adresse <code>7C:4F:B5:3A:07:D1</code>. Erläutern Sie den Aufbau einer MAC-Adresse an diesem Beispiel.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Ordnen Sie jedem Begriff die Schicht des OSI-Modells (Nummer 1 bis 7) zu, der er hauptsächlich angehört.</div>
+    <table class="leer kompakt" style="width:auto">
+      <tr><th style="width:220px">Begriff</th><th style="width:120px">OSI-Schicht</th></tr>
+      <tr><td>HTTP</td><td></td></tr>
+      <tr><td>TCP</td><td></td></tr>
+      <tr><td>IPv4</td><td></td></tr>
+      <tr><td>MAC-Adresse</td><td></td></tr>
+      <tr><td>Glasfaserkabel</td><td></td></tr>
+      <tr><td>MQTT</td><td></td></tr>
+    </table>
+    <p class="quelle">Angelehnt an: W24 T1 A2bb (Aufbau einer MAC-Adresse erläutern, 3 P)</p>
+  </div>
+
+  <div class="aufgabe" id="NET-03-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe NET-03.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">12 Punkte</span>
+    </div>
+    <p>Vor dem Umzug ins Rechenzentrum analysiert das Projektteam den Datenverkehr im Netz des Klärwerks (Anlage 8).</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Ordnen Sie den Feldern A bis F des Ethernet-Frames in Anlage 8 die Nummer des passenden Bezeichners zu. Zwei Bezeichner bleiben übrig.</div>
+    <div class="zweispaltig">
+      <table class="kompakt">
+        <tr><th style="width:18%">Nr.</th><th>Bezeichner</th></tr>
+        <tr><td>1</td><td>Data Payload</td></tr>
+        <tr><td>2</td><td>Destination MAC Address</td></tr>
+        <tr><td>3</td><td>Time to Live</td></tr>
+        <tr><td>4</td><td>Frame Check Sequence</td></tr>
+        <tr><td>5</td><td>Preamble + Start Frame Delimiter</td></tr>
+        <tr><td>6</td><td>Source Port</td></tr>
+        <tr><td>7</td><td>Source MAC Address</td></tr>
+        <tr><td>8</td><td>EtherType</td></tr>
+      </table>
+      <table class="leer kompakt">
+        <tr><th style="width:30%">Feld</th><th>Nummer</th></tr>
+        <tr><td>A</td><td></td></tr>
+        <tr><td>B</td><td></td></tr>
+        <tr><td>C</td><td></td></tr>
+        <tr><td>D</td><td></td></tr>
+        <tr><td>E</td><td></td></tr>
+        <tr><td>F</td><td></td></tr>
+      </table>
+    </div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Werten Sie den Mitschnitt in Anlage 8 aus: Geben Sie die Quell-MAC-Adresse an, erläutern Sie, an wen der Frame gerichtet ist, und nennen Sie das Protokoll, das in den Nutzdaten transportiert wird.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Ein Leitwarten-PC hat die Adresse <code>10.10.20.31/24</code>.
+      <br>ca) Geben Sie die Netzadresse und die Broadcastadresse seines Netzes an. (1 P)
+      <br>cb) Berechnen Sie die Anzahl der nutzbaren Hostadressen dieses Netzes. (1 P)
+      <br>cc) Ein Techniker hat einem neuen Messrechner im Labor die Adresse <code>10.10.21.40</code> mit der Subnetzmaske <code>255.255.255.0</code> gegeben. Begründen Sie, warum der Messrechner den Leitwarten-PC nicht direkt über den Switch erreicht. (1 P)</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: W24 T1 A2ba (Felder des Ethernet-Frames zuordnen, 6 P)</p>
+  </div>
+
+  <div class="aufgabe" id="NET-03-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe NET-03.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">24 Punkte</span>
+    </div>
+    <p>Vor dem Umzug sollen alle Geräte im Netz des Klärwerks (<code>10.10.20.0/24</code>, Anlage 2) inventarisiert werden. Das Ergebnis wird als JSON-Array an die Inventar-API im Rechenzentrum übergeben. Verwenden Sie die Hilfsfunktionen aus Anlage 7.</p>
+    <div class="teilaufgabe"><span class="tp">10 P</span>a) Entwickeln Sie eine Funktion <code>inventarisiere(netz : string) : string</code>. Sie erhält die ersten drei Oktette eines /24-Netzes (z. B. <code>"10.10.20"</code>), fragt für jede mögliche Hostadresse des Netzes mit <code>getMacAddress</code> die MAC-Adresse ab und liefert ein JSON-Array im Format aus Anlage 7, das <strong>nur</strong> die Geräte enthält, die geantwortet haben.</div>
+    <div class="antwort z18"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Erweitern Sie Ihre Funktion so, dass jedes JSON-Objekt zusätzlich das Feld <code>"hersteller"</code> enthält. Der Hersteller wird mit <code>getVendor</code> anhand der ersten drei Byte der MAC-Adresse ermittelt; ist er unbekannt, wird <code>"unbekannt"</code> eingetragen. Geben Sie nur die geänderten bzw. neuen Zeilen an.<br>
+      Beispiel für ein Objekt: <code>{"ip": "10.10.20.1", "mac": "5C:F2:86:00:14:01", "hersteller": "Nordwerk Netzwerktechnik"}</code></div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Nach dem Umzug soll das Netz <code>10.10.20.0/24</code> in vier gleich große Subnetze aufgeteilt werden – in dieser Reihenfolge: Büro, Leittechnik, Kameras, WLAN. Ergänzen Sie die Tabelle und geben Sie die Anzahl der nutzbaren Hostadressen je Subnetz an.</div>
+    <table class="leer kompakt">
+      <tr><th style="width:16%">Subnetz</th><th>Netzadresse / Präfix</th><th>erste Hostadresse</th><th>letzte Hostadresse</th><th>Broadcastadresse</th></tr>
+      <tr><td>Büro</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Leittechnik</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Kameras</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>WLAN</td><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <p>Nutzbare Hostadressen je Subnetz: ______________</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>d) Nach der Aufteilung soll Ihre Funktion aus a) nur noch das Subnetz Leittechnik durchsuchen. Geben Sie an, welche Zeile Ihrer Funktion wie geändert werden muss.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>e) Ergänzen Sie für die Kommunikation im Projekt das Protokoll, das Transportprotokoll (TCP oder UDP) und den Standardport.</div>
+    <table class="leer kompakt">
+      <tr><th style="width:46%">Verwendung</th><th>Protokoll</th><th style="width:14%">TCP / UDP</th><th style="width:14%">Port</th></tr>
+      <tr><td>verschlüsselte Übergabe des JSON-Arrays an die Inventar-API (Web-Schnittstelle)</td><td></td><td></td><td></td></tr>
+      <tr><td>verschlüsselte Übermittlung der Sensorwerte vom Network Server an den MQTT-Broker</td><td></td><td></td><td></td></tr>
+      <tr><td>Auflösung des Namens <code>inventar.wal.local</code> in eine IP-Adresse</td><td></td><td></td><td></td></tr>
+      <tr><td>verschlüsselte Fernwartung der Linux-VMs über die Kommandozeile</td><td></td><td></td><td></td></tr>
+    </table>
+    <p class="quelle">Angelehnt an: W24 T1 A2c (Skript: alle Geräte im Netz 192.168.0.0/24 mit getMacAddress abfragen, JSON-Array ausgeben, 8 P)</p>
+  </div>
+
+  <!-- ===================== NET-04 ===================== -->
+  <h3 id="a-04">NET-04 · IT-Infrastruktur, Virtualisierung &amp; Cloud</h3>
+
+  <div class="aufgabe" id="NET-04-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe NET-04.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Ordnen Sie jedem Cloud-Dienst das passende Servicemodell zu (IaaS, PaaS oder SaaS).</div>
+    <table class="leer kompakt">
+      <tr><th>Cloud-Dienst</th><th style="width:18%">Servicemodell</th></tr>
+      <tr><td>Die Verwaltung plant die Einsätze des Bereitschaftsdienstes mit einem Online-Programm im Browser, für das eine monatliche Gebühr je Benutzer gezahlt wird.</td><td></td></tr>
+      <tr><td>Brückner &amp; Vogt mietet für Lasttests von AuePuls zwei Wochen lang zehn virtuelle Server und installiert darauf selbst Linux und die Testwerkzeuge.</td><td></td></tr>
+      <tr><td>Die Messwert-Datenbank wird als verwalteter Datenbankdienst gebucht; Installation, Updates und Sicherung der Datenbanksoftware übernimmt der Anbieter, der WAL legt nur Tabellen und Daten an.</td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Erläutern Sie die 3-2-1-Regel der Datensicherung und zeigen Sie anhand von Anlage 6, dass der WAL sie derzeit nicht einhält.</div>
+    <div class="antwort z5"></div>
+  </div>
+
+  <div class="aufgabe" id="NET-04-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe NET-04.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Für die neue Messwert-Datenbank (aktuell 400 GB) wird eine Sicherungsstrategie festgelegt. Jeden Sonntag um 22 Uhr wird eine Vollsicherung erstellt, montags bis samstags jeweils um 22 Uhr eine weitere Sicherung. Täglich kommen etwa 20 GB neue Messdaten hinzu; bereits gespeicherte Messwerte werden nicht mehr verändert.</p>
+    <div class="teilaufgabe">a) Vergleichen Sie inkrementelle und differenzielle Sicherung.</div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>aa) Berechnen Sie den Speicherbedarf aller Sicherungen einer Woche (Sonntag bis Samstag), wenn montags bis samstags (1) inkrementell bzw. (2) differenziell gesichert wird.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>ab) Am Donnerstag um 14 Uhr fällt der Datenbankserver aus. Geben Sie für beide Varianten an, welche Sicherungen in welcher Reihenfolge zurückgespielt werden müssen.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>ac) Nennen Sie die Daten, die in beiden Varianten trotz Sicherung verloren sind.</div>
+    <div class="antwort"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Nennen Sie für jede Gefahr eine geeignete Maßnahme und beschreiben Sie deren Wirkung.</div>
+    <table class="leer h60 kompakt">
+      <tr><th style="width:34%">Gefahr</th><th style="width:22%">Maßnahme</th><th>Wirkung</th></tr>
+      <tr><td>Eine Festplatte im Speichersystem fällt aus.</td><td></td><td></td></tr>
+      <tr><td>Im Rechenzentrum fällt für zwei Minuten der Strom aus.</td><td></td><td></td></tr>
+      <tr><td>Host 2 fällt durch einen Mainboard-Defekt komplett aus.</td><td></td><td></td></tr>
+      <tr><td>Ransomware verschlüsselt alle Dateien, auf die sie im Netz zugreifen kann.</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">1 P</span>c) Ein Kollege meint: „Das Speichersystem hat RAID 6, eine Datensicherung brauchen wir nicht.“ Widerlegen Sie diese Aussage mit einem Beispiel.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Ergänzung zu W22 T1 A1 (Verfügbarkeit einer veralteten Infrastruktur)</p>
+  </div>
+
+  <div class="aufgabe" id="NET-04-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe NET-04.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">20 Punkte</span>
+    </div>
+    <p>In den letzten Monaten ist es beim WAL zu mehreren Ausfällen gekommen (Anlage 6). Die Geschäftsführung beauftragt Sie, das Konzept für die neue IT-Infrastruktur vorzubereiten.</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Beschreiben Sie zwei Schwachstellen der aktuellen IT-Infrastruktur, die die Verfügbarkeit der Dienste gefährden. Beziehen Sie sich auf Anlage 6.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Beschreiben Sie eine funktionale und eine nicht-funktionale Anforderung an die neue IT-Infrastruktur des WAL.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe">c) Die Server sollen virtualisiert werden.</div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>ca) Die Server S1 bis S4 sollen als virtuelle Maschinen auf dem Cluster im Rechenzentrum betrieben werden. Erläutern Sie zwei Vorteile dieser Virtualisierung für den WAL.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>cb) Das Entwicklerteam möchte den neuen Messwert-Dienst nicht als virtuelle Maschine, sondern als Container ausliefern. Erläutern Sie den wesentlichen Unterschied zwischen einer virtuellen Maschine und einem Container.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">6 P</span>d) Ein Berater schlägt vor, die AuePuls-Plattform (Network Server, Datenbank, Dashboard) nicht im gemieteten Rechenzentrum, sondern als PaaS in einer Public Cloud zu betreiben. Erläutern Sie zwei Vorteile und zwei Nachteile bzw. Risiken dieses Vorschlags für den WAL. Berücksichtigen Sie, dass die Wasserversorgung zu den kritischen Infrastrukturen gehört und die App personenbezogene Daten des Bereitschaftsdienstes verarbeitet.</div>
+    <div class="antwort z12"></div>
+    <p class="quelle">Angelehnt an: W22 T1 A1a und A1b (Schwachstellen einer veralteten, inhomogenen IT-Infrastruktur; funktionale und nicht-funktionale Anforderung, je 4 P)</p>
+  </div>
+
+  <!-- ===================== ORIGINALAUFGABEN ===================== -->
+  <h3 id="originale">Originalaufgaben zum Üben</h3>
+  <p>Diese echten Prüfungsaufgaben passen zu diesem Block (Dateien im Ordner <code>Prüfungsvorbereitung</code>). Lösungen gibt es nur für 2023 Sommer, 2023 Winter, 2024 Sommer und 2025 Winter (dort vom u-form-Verlag) – für die meisten Netzwerkaufgaben also leider nicht; nutze dann die Musterlösungen dieses Blocks zum Vergleich.</p>
+  <table class="kompakt" style="break-inside:auto">
+    <tr><th>Prüfung</th><th>Aufgabe</th><th>Thema</th><th>Datei · Lösung</th></tr>
+    <tr><td>Winter 2022</td><td>T1 A1a (4 P), A1b (4 P)</td><td>Schwachstellen veralteter, inhomogener IT-Infrastruktur; funktionale und nicht-funktionale Anforderung an die neue Infrastruktur</td><td><code>2022/winter/AE 2022 Winter Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Sommer 2023</td><td>T1 A4a (4 P), A4b (4 P)</td><td>Verschlüsselung für batteriebetriebene IoT-Sensoren mit wenig Rechenleistung; signieren statt verschlüsseln?</td><td><code>2023/sommer/AE Sommer 2023 Teil 1.pdf</code> · Lösung: <code>AE Sommer 2023 Teil 1+2 Lösungen.pdf</code></td></tr>
+    <tr><td>Sommer 2023</td><td>T1 A4cb (13 P)</td><td>Relationenmodell in 3NF inkl. JSON-Sensordaten (DevEUI, Value, Timestamp) – Schwerpunkt Datenbank (Block 01)</td><td>wie oben</td></tr>
+    <tr><td>Winter 2024</td><td>T1 A2a (9 P)</td><td>LAN, SAN, LPWAN den Gebieten IoT, Unternehmensnetzwerk, Rechenzentrum zuordnen und begründen</td><td><code>2024/winter/AE Winter 2024 Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Winter 2024</td><td>T1 A2ba (6 P), A2bb (3 P)</td><td>Felder des Ethernet-Frames zuordnen; Aufbau einer MAC-Adresse</td><td>wie oben</td></tr>
+    <tr><td>Winter 2024</td><td>T1 A2c (8 P)</td><td>Skript: alle Geräte im Netz 192.168.0.0/24 abfragen, JSON-Array ausgeben</td><td>wie oben</td></tr>
+    <tr><td>Sommer 2026</td><td>T1 A3aa (3 P), A3ab (6 P)</td><td>LoRa-Merkmale aus englischem Fachtext; Gründe für LoRa bei verteilten Bodensensoren ohne Stromversorgung</td><td><code>2026/sommer/AE Sommer 2026 Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Sommer 2026</td><td>T1 A3b (13 P, v. a. A3bd)</td><td>Integrität der Sensordaten (BSI), Hash/MAC/Signatur, RSA im IoT-Projekt sinnvoll? – Schwerpunkt Block 07</td><td>wie oben</td></tr>
+    <tr><td>Winter 2023</td><td>T1 Ausgangssituation</td><td>Kulisse mit Messstellen, Drohnen und Cloud-Datenbank (keine eigene Netzwerkaufgabe) – gut, um IoT-Szenarien zu lesen</td><td><code>2023/winter/AE Winter 2023 Teil 1.pdf</code> · Lösung: <code>AE Winter 2023 Teil 1 Lösungen.pdf</code></td></tr>
+  </table>
+</section>
+
+</body>
+</html>

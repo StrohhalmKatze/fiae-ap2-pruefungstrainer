@@ -1,0 +1,1745 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>05 Testen &amp; Qualitätssicherung – Übungen</title>
+<link rel="stylesheet" href="style.css">
+<script src="uebungen.js"></script>
+<style>
+  /* Zusatzregeln Block 05 */
+  nav.toc ol ol { columns: 2; column-gap: 24px; font-size: 13px; }
+  table.kompakt td, table.kompakt th { padding: 2px 6px; }
+  table.leer td { height: 30px; }
+  table.leer.hoch td { height: 46px; }
+  td.mono, th.mono { font-family: Consolas, "Courier New", monospace; font-size: 13px; }
+  td.mitte, th.mitte { text-align: center; }
+  .zweispaltig { display: flex; gap: 16px; flex-wrap: wrap; }
+  .zweispaltig > * { flex: 1 1 300px; min-width: 0; }
+  pre.listing { line-height: 1.4; }
+  .codelabel { break-after: avoid; page-break-after: avoid; }
+  .aufgabe pre { margin: 8px 0; }
+  .englisch { font-family: Georgia, "Times New Roman", serif; font-size: 14.5px; line-height: 1.55; }
+  .englisch p { margin: 6px 0; text-align: justify; }
+  .ausgabebox { font-family: Consolas, "Courier New", monospace; font-size: 13px; border: 2px solid #222; padding: 6px 10px; display: inline-block; white-space: pre; line-height: 1.45; }
+</style>
+</head>
+<body>
+
+<!-- ===================== KOPF ===================== -->
+<header class="blockkopf">
+  <h1>Block 05 · Testen &amp; Qualitätssicherung</h1>
+  <div class="unter">
+    <span class="badge k-immer">Immer</span> 8/9 Prüfungen · Ø 21 von 200 Punkten · Teil 1 (7×) + Teil 2 (6×) · in Teil 2 oft eine ganze 20–25-Punkte-Aufgabe (S23, S24, W25)
+    · Lösungen: <a href="05_Testen_QS_Loesungen.html">05_Testen_QS_Loesungen.html</a>
+  </div>
+</header>
+
+<nav class="toc">
+  <strong>Inhalt</strong>
+  <ol>
+    <li><a href="#erklaerung">Erklärungssatz</a>
+      <ol>
+        <li><a href="#e-01">TQ-01 Testarten</a></li>
+        <li><a href="#e-02">TQ-02 Code analysieren, Fehler finden</a></li>
+        <li><a href="#e-03">TQ-03 Unit-Test, Überdeckungsmaße</a></li>
+        <li><a href="#e-04">TQ-04 Qualitätsmerkmale ISO/IEC 25010</a></li>
+        <li><a href="#e-05">TQ-05 Schreibtischtest</a></li>
+        <li><a href="#e-06">TQ-06 Äquivalenzklassen, Testfälle</a></li>
+        <li><a href="#e-07">TQ-07 Codequalität, Reviews</a></li>
+      </ol>
+    </li>
+    <li><a href="#belegsatz">Belegsatz</a> (Pseudocode-Konventionen, Anlagen 1–8)</li>
+    <li><a href="#aufgaben">Aufgaben</a>
+      <ol>
+        <li><a href="#a-01">TQ-01 (3 Aufgaben)</a></li>
+        <li><a href="#a-02">TQ-02 (3 Aufgaben)</a></li>
+        <li><a href="#a-03">TQ-03 (3 Aufgaben)</a></li>
+        <li><a href="#a-04">TQ-04 (3 Aufgaben)</a></li>
+        <li><a href="#a-05">TQ-05 (3 Aufgaben)</a></li>
+        <li><a href="#a-06">TQ-06 (3 Aufgaben)</a></li>
+        <li><a href="#a-07">TQ-07 (3 Aufgaben)</a></li>
+        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+
+<div class="info no-print">
+  <span class="kastentitel">So arbeitest du mit diesem Block</span>
+  Erst den Erklärungssatz lesen, dann die Aufgaben mit dem Belegsatz daneben lösen (Belegsatz am besten separat ausdrucken und neben die Aufgaben legen – dort stehen die Code-Listings, die Spezifikationen und der englische Fachtext). Zeitrichtwert: 1 Punkt ≈ 0,9 Minuten.
+  Lösungen erst danach in der separaten Lösungsdatei nachsehen. Zu jeder Code- und Unit-Test-Aufgabe gibt es dort den JUnit-5-Code und eine lauffähige Java-Datei im Ordner <code>java\05_Testen_QS\</code>.
+</div>
+
+<!-- ===================== TEIL A: ERKLÄRUNGSSATZ ===================== -->
+<section class="teil" id="erklaerung">
+  <h2>A · Erklärungssatz</h2>
+
+  <p>Testen und Qualitätssicherung kommen in <strong>8 von 9</strong> Prüfungen vor, und zwar auf zwei Arten: In <strong>Teil 1</strong> sind es meist Wissensfragen mit 3–6 Punkten (Testarten, Testkonzept, Qualitätsmerkmale, QS-Maßnahmen). In <strong>Teil 2</strong> gibt es immer wieder eine <strong>komplette Aufgabe mit 20–25 Punkten</strong>, die nach demselben Drehbuch abläuft: Gegeben ist eine (fehlerhafte) Methode mit Zeilennummern und eine Spezifikation → Schreibtischtest mit Testdaten → Fehler mit Zeilennummer nennen → korrigieren → Fragen zu Unit-Test und Überdeckung (S22 T2 A2, S23 T2 A3, S24 T2 A3, W25 T2 A3). Diese Punkte sind gut planbar, weil das Vorgehen immer gleich ist.</p>
+
+  <table class="kompakt">
+    <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
+    <tr><td>TQ-01 Testarten</td><td><span class="badge k-meistens">Meistens</span></td><td>3–8 je Frage</td><td>Teststufen, Black-/White-Box, Regressionstest, Testkonzept</td></tr>
+    <tr><td>TQ-02 Code analysieren, Fehler finden</td><td><span class="badge k-meistens">Meistens</span></td><td>4–15</td><td>Fehler mit Zeilennummer benennen und korrigieren</td></tr>
+    <tr><td>TQ-03 Unit-Test, Überdeckungsmaße</td><td><span class="badge k-oft">Oft</span></td><td>3–12</td><td>assertEquals auswerten, C0/C1/C2, Mindestzahl Testfälle</td></tr>
+    <tr><td>TQ-04 Qualitätsmerkmale ISO/IEC 25010</td><td><span class="badge k-oft">Oft</span></td><td>4–5</td><td>Merkmale beschreiben und auf ein Szenario anwenden</td></tr>
+    <tr><td>TQ-05 Schreibtischtest</td><td><span class="badge k-oft">Oft</span></td><td>2–10</td><td>Wertetabelle sauber und vollständig führen</td></tr>
+    <tr><td>TQ-06 Äquivalenzklassen, Testfälle</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>4–10</td><td>gültige/ungültige Klassen, Grenzwerte, Testfalltabelle</td></tr>
+    <tr><td>TQ-07 Codequalität, Reviews</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>5–6</td><td>QS-Maßnahmen erläutern, Code-Review, Clean Code</td></tr>
+  </table>
+
+  <!-- ===================== TQ-01 ===================== -->
+  <h3 id="e-01">TQ-01 · Testarten <span class="badge k-meistens">Meistens</span></h3>
+  <p class="klein">Vorkommen: 7/9 · Prüfungen: W21, S22, W22, S23, W23, S24, W25 (fehlte nur in W24 und S26) · Teil 1 und Teil 2, meist 3–6 Punkte je Teilaufgabe</p>
+
+  <h4>Warum testen? Grundbegriffe</h4>
+  <p>Testen ist die <strong>geplante, nachvollziehbare Ausführung bzw. Prüfung eines Programms mit dem Ziel, Fehler zu finden</strong> und nachzuweisen, dass die Anforderungen erfüllt sind. Ein Test kann die Anwesenheit von Fehlern zeigen, aber nie ihre Abwesenheit beweisen (sinngemäß nach E. W. Dijkstra) – deshalb kommt es auf <em>gut gewählte</em> Testfälle an.</p>
+  <ul>
+    <li><strong>Fehlhandlung</strong> (Irrtum des Entwicklers) → <strong>Fehlerzustand</strong> (der Defekt im Code, „Bug“) → <strong>Fehlerwirkung</strong> (das sichtbare Fehlverhalten beim Ausführen, „Failure“).</li>
+    <li><strong>Testen ≠ Debuggen:</strong> Testen deckt Fehlerwirkungen auf, Debuggen sucht und behebt die Ursache im Code.</li>
+    <li><strong>Testfall</strong> = Vorbedingungen + Eingabedaten + <strong>erwartetes Ergebnis</strong> (+ Nachbedingungen). Ohne vorher festgelegtes erwartetes Ergebnis ist es kein Test, sondern Ausprobieren.</li>
+    <li><strong>Verifikation</strong> („Bauen wir das Produkt richtig?“ – entspricht es der Spezifikation?) vs. <strong>Validierung</strong> („Bauen wir das richtige Produkt?“ – erfüllt es den tatsächlichen Zweck des Kunden?).</li>
+  </ul>
+
+  <h4>Teststufen und das V-Modell</h4>
+  <p>Das V-Modell ordnet jeder Entwurfsphase (linker Ast) eine Teststufe (rechter Ast) zu. Die Testfälle einer Stufe werden aus dem Dokument derselben Ebene abgeleitet und prüfen gegen dieses Dokument.</p>
+  <figure>
+    <svg viewBox="0 0 720 330" width="720" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e01a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#222"/>
+        </marker>
+      </defs>
+      <!-- linker Ast -->
+      <rect x="10" y="15" width="220" height="44" fill="#fff" stroke="#222"/>
+      <text x="120" y="33" text-anchor="middle" font-weight="bold">Anforderungsdefinition</text>
+      <text x="120" y="51" text-anchor="middle" font-size="12">(Lastenheft)</text>
+      <rect x="45" y="80" width="220" height="44" fill="#fff" stroke="#222"/>
+      <text x="155" y="98" text-anchor="middle" font-weight="bold">Funktionaler Systementwurf</text>
+      <text x="155" y="116" text-anchor="middle" font-size="12">(Pflichtenheft)</text>
+      <rect x="80" y="145" width="220" height="44" fill="#fff" stroke="#222"/>
+      <text x="190" y="163" text-anchor="middle" font-weight="bold">Technischer Systementwurf</text>
+      <text x="190" y="181" text-anchor="middle" font-size="12">(Architektur, Schnittstellen)</text>
+      <rect x="115" y="210" width="220" height="44" fill="#fff" stroke="#222"/>
+      <text x="225" y="228" text-anchor="middle" font-weight="bold">Komponentenspezifikation</text>
+      <text x="225" y="246" text-anchor="middle" font-size="12">(Modul-/Methodenentwurf)</text>
+      <!-- Spitze -->
+      <rect x="250" y="275" width="220" height="44" fill="#eef3fa" stroke="#222"/>
+      <text x="360" y="302" text-anchor="middle" font-weight="bold">Implementierung</text>
+      <!-- rechter Ast -->
+      <rect x="385" y="210" width="220" height="44" fill="#fff" stroke="#222"/>
+      <text x="495" y="228" text-anchor="middle" font-weight="bold">Komponententest</text>
+      <text x="495" y="246" text-anchor="middle" font-size="12">(Unit-Test, Modultest)</text>
+      <rect x="420" y="145" width="220" height="44" fill="#fff" stroke="#222"/>
+      <text x="530" y="163" text-anchor="middle" font-weight="bold">Integrationstest</text>
+      <text x="530" y="181" text-anchor="middle" font-size="12">(Zusammenspiel, Schnittstellen)</text>
+      <rect x="455" y="80" width="220" height="44" fill="#fff" stroke="#222"/>
+      <text x="565" y="98" text-anchor="middle" font-weight="bold">Systemtest</text>
+      <text x="565" y="116" text-anchor="middle" font-size="12">(Gesamtsystem, Testumgebung)</text>
+      <rect x="490" y="15" width="220" height="44" fill="#fff" stroke="#222"/>
+      <text x="600" y="33" text-anchor="middle" font-weight="bold">Abnahmetest</text>
+      <text x="600" y="51" text-anchor="middle" font-size="12">(durch den Auftraggeber)</text>
+      <!-- Ablauf -->
+      <line x1="120" y1="59" x2="140" y2="80" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="155" y1="124" x2="175" y2="145" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="190" y1="189" x2="210" y2="210" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="225" y1="254" x2="255" y2="275" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="465" y1="275" x2="490" y2="254" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="510" y1="210" x2="525" y2="189" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="545" y1="145" x2="560" y2="124" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="580" y1="80" x2="595" y2="59" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <!-- prüft gegen -->
+      <line x1="230" y1="37" x2="490" y2="37" stroke="#222" stroke-dasharray="6,4"/>
+      <line x1="265" y1="102" x2="455" y2="102" stroke="#222" stroke-dasharray="6,4"/>
+      <line x1="300" y1="167" x2="420" y2="167" stroke="#222" stroke-dasharray="6,4"/>
+      <line x1="335" y1="232" x2="385" y2="232" stroke="#222" stroke-dasharray="6,4"/>
+      <text x="360" y="31" text-anchor="middle" font-size="12" font-style="italic">prüft gegen</text>
+      <text x="360" y="96" text-anchor="middle" font-size="12" font-style="italic">prüft gegen</text>
+    </svg>
+    <figcaption>Abb. A-1: V-Modell – links wird entworfen, rechts geprüft; gestrichelt: Die Teststufe prüft gegen das Ergebnis derselben Ebene</figcaption>
+  </figure>
+
+  <table class="kompakt">
+    <tr><th style="width:15%">Teststufe</th><th>Was wird geprüft?</th><th style="width:20%">Prüfgrundlage</th><th style="width:20%">Wer? Wo?</th></tr>
+    <tr><td><strong>Komponententest</strong> (Unit-, Modultest)</td><td>einzelne Methode/Klasse isoliert; Abhängigkeiten werden durch Platzhalter (Stub, Mock) ersetzt</td><td>Komponentenspezifikation</td><td>Entwickler, Entwicklungsumgebung, automatisiert</td></tr>
+    <tr><td><strong>Integrationstest</strong></td><td>Zusammenspiel mehrerer Komponenten, Schnittstellen (z. B. App ↔ REST-API ↔ Datenbank)</td><td>technischer Entwurf, Schnittstellenbeschreibung</td><td>Entwickler/Tester, Integrationsumgebung</td></tr>
+    <tr><td><strong>Systemtest</strong></td><td>das vollständige System gegen alle funktionalen <em>und</em> nicht-funktionalen Anforderungen (Last, Sicherheit, Usability)</td><td>Pflichtenheft</td><td>unabhängiges Testteam, produktionsnahe Testumgebung</td></tr>
+    <tr><td><strong>Abnahmetest</strong></td><td>Erfüllt das System den Vertrag, ist es für den Einsatz beim Kunden geeignet? Ergebnis: Abnahmeprotokoll, ggf. Freigabe</td><td>Lastenheft, Vertrag</td><td>Auftraggeber bzw. spätere Nutzer, beim Kunden</td></tr>
+  </table>
+  <p>Varianten des Abnahmetests: <strong>Alpha-Test</strong> (künftige Nutzer testen beim Hersteller), <strong>Beta-Test</strong> (ausgewählte Nutzer testen in ihrer eigenen Umgebung vor der allgemeinen Freigabe).</p>
+
+  <h4>Statisch und dynamisch, Black-Box und White-Box</h4>
+  <table class="kompakt">
+    <tr><th style="width:18%"></th><th>Statischer Test</th><th>Dynamischer Test</th></tr>
+    <tr><td>Prinzip</td><td>Prüfobjekt wird <strong>nicht ausgeführt</strong>, sondern untersucht</td><td>Prüfobjekt wird mit Testdaten <strong>ausgeführt</strong>, Ist- und Soll-Ergebnis werden verglichen</td></tr>
+    <tr><td>Beispiele</td><td>Code-Review, Inspektion, Walkthrough, statische Codeanalyse (Linter), Schreibtischtest, Review von Anforderungsdokumenten</td><td>Unit-Test, Integrations-, System-, Last-, Abnahmetest</td></tr>
+    <tr><td>Vorteil</td><td>schon vor der Ausführbarkeit möglich, findet Fehlerursachen direkt (auch in Dokumenten)</td><td>zeigt das tatsächliche Verhalten, auch Laufzeit- und Umgebungsprobleme</td></tr>
+  </table>
+
+  <table class="kompakt">
+    <tr><th style="width:18%"></th><th>Black-Box-Test (funktional)</th><th>White-Box-Test (strukturell, Glass-Box)</th></tr>
+    <tr><td>Grundlage</td><td>nur die <strong>Spezifikation</strong> (Ein-/Ausgabeverhalten); der Code ist unbekannt bzw. wird nicht betrachtet</td><td>der <strong>Quellcode</strong> und seine Kontrollstruktur</td></tr>
+    <tr><td>Verfahren</td><td>Äquivalenzklassen, Grenzwertanalyse, Entscheidungstabellen, Zustandsübergänge, Anwendungsfälle</td><td>Anweisungs-, Zweig-, Pfad-, Bedingungsüberdeckung</td></tr>
+    <tr><td>Vorteile</td><td>prüft, ob die Anforderungen erfüllt sind; findet <strong>fehlende Funktionen</strong>; Tester braucht keine Programmierkenntnisse; Testfälle früh aus der Spezifikation ableitbar; unabhängig von der Implementierung</td><td>alle Programmteile werden geprüft, auch solche, die die Spezifikation nicht erfasst; <strong>Testabdeckung messbar</strong>; Fehler lassen sich <strong>genau lokalisieren</strong>; findet toten oder unnötigen Code; unterstützt die Optimierung des Codes</td></tr>
+    <tr><td>Nachteile</td><td>keine Aussage, welche Codeteile getestet wurden; unnötiger oder versteckter Code bleibt unentdeckt</td><td>fehlende Funktionen werden nicht erkannt (was nicht programmiert ist, kann nicht überdeckt werden); Codekenntnis nötig; aufwendig</td></tr>
+  </table>
+  <p><strong>Grey-Box-Test:</strong> Mischform – Testfälle aus der Spezifikation, aber mit Wissen über die innere Struktur (z. B. beim Integrationstest die Schnittstellen kennen).</p>
+
+  <h4>Weitere Testarten</h4>
+  <table class="kompakt">
+    <tr><th style="width:24%">Testart</th><th>Zweck und Vorgehen</th></tr>
+    <tr><td><strong>Regressionstest</strong></td><td>Nach jeder Änderung (neue Funktion, Fehlerkorrektur, Optimierung) werden die <strong>bereits bestehenden Testfälle erneut ausgeführt</strong>, um sicherzustellen, dass die vorhandene Funktionalität nicht beeinträchtigt wurde (keine „Seiteneffekte“). Wird wegen der häufigen Wiederholung automatisiert (CI-Pipeline).</td></tr>
+    <tr><td><strong>Fehlernachtest</strong> (Re-Test)</td><td>prüft gezielt, ob ein gemeldeter und behobener Fehler wirklich beseitigt ist (gleicher Testfall wie bei der Fehlerentdeckung).</td></tr>
+    <tr><td><strong>Smoke-Test</strong></td><td>kurzer, oberflächlicher Test der wichtigsten Grundfunktionen nach einem Build/Deployment („Startet das System, kann man sich anmelden, antwortet die Datenbank?“). Schlägt er fehl, lohnen sich weitere Tests nicht.</td></tr>
+    <tr><td><strong>Lasttest</strong></td><td>Verhalten unter der <strong>erwarteten</strong> (auch Spitzen-)Last: Antwortzeiten, Durchsatz, Ressourcen. Mit Lastgeneratoren werden viele gleichzeitige Benutzer simuliert (z. B. JMeter, Gatling).</td></tr>
+    <tr><td><strong>Stresstest</strong></td><td>Last <strong>über</strong> die Spezifikation hinaus steigern, bis das System an seine Grenzen kommt: Wo bricht es ein, verhält es sich dann kontrolliert, erholt es sich danach?</td></tr>
+    <tr><td><strong>Performancetest</strong></td><td>Oberbegriff: Antwortzeiten und Ressourcenverbrauch messen (z. B. 95 % der Anfragen unter 1 s).</td></tr>
+    <tr><td><strong>Usability-Test</strong></td><td>echte Nutzer der Zielgruppe lösen typische Aufgaben, man beobachtet Probleme. Methoden: <strong>Thinking Aloud</strong> (Testperson spricht ihre Gedanken laut aus), <strong>aufgabenbasierter Test</strong> mit Messung von Zeit, Fehlern und Erfolgsquote, <strong>Eye-Tracking</strong> (Blickverlauf), <strong>Fragebogen/Interview</strong> nach dem Test (z. B. SUS), <strong>A/B-Test</strong> (zwei Varianten im Vergleich), <strong>heuristische Evaluation</strong> durch Experten anhand von Regeln (z. B. DIN EN ISO 9241-110).</td></tr>
+    <tr><td><strong>Sicherheitstest</strong></td><td>Schwachstellen suchen, z. B. Penetrationstest (simulierter Angriff), Prüfung auf SQL-Injection, Rechteprüfung.</td></tr>
+    <tr><td><strong>Kompatibilitätstest</strong></td><td>verschiedene Browser, Betriebssystemversionen, Geräte, Bildschirmgrößen.</td></tr>
+  </table>
+  <p><strong>Funktionale Tests</strong> prüfen, <em>was</em> das System tut (Ergebnisse). <strong>Nicht-funktionale Tests</strong> prüfen, <em>wie gut</em> es das tut (Last, Usability, Sicherheit, Kompatibilität) – das sind genau die Qualitätsmerkmale aus TQ-04.</p>
+
+  <h4>Manuell oder automatisiert?</h4>
+  <div class="zweispaltig">
+    <div>
+      <table class="kompakt">
+        <tr><th></th><th>Automatisiert</th><th>Manuell</th></tr>
+        <tr><td>Stärken</td><td>schnell, beliebig oft wiederholbar, gleiche Bedingungen, ideal für Regressionstests und CI</td><td>flexibel, findet Unerwartetes (explorativ), beurteilt Bedienbarkeit und Optik</td></tr>
+        <tr><td>Schwächen</td><td>Erstellung und Pflege der Skripte kostet Zeit; prüft nur, was programmiert wurde</td><td>langsam, teuer bei Wiederholung, fehleranfällig, schlecht reproduzierbar</td></tr>
+      </table>
+    </div>
+    <figure style="margin:0">
+      <svg viewBox="0 0 400 210" width="400" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="15">
+        <defs>
+          <marker id="e01p-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#222"/>
+          </marker>
+        </defs>
+        <polygon points="140,8 275,200 5,200" fill="#fff" stroke="#222"/>
+        <line x1="95" y1="72" x2="185" y2="72" stroke="#222"/>
+        <line x1="50" y1="136" x2="230" y2="136" stroke="#222"/>
+        <text x="140" y="58" text-anchor="middle">UI/E2E</text>
+        <text x="140" y="112" text-anchor="middle">Integration</text>
+        <text x="140" y="178" text-anchor="middle" font-weight="bold">Unit-Tests</text>
+        <text x="290" y="30">wenige,</text>
+        <text x="290" y="48">langsam, teuer</text>
+        <text x="290" y="178">viele, schnell,</text>
+        <text x="290" y="196">billig</text>
+        <line x1="305" y1="155" x2="305" y2="62" stroke="#222" marker-end="url(#e01p-pfeil)"/>
+      </svg>
+      <figcaption>Abb. A-2: Testpyramide (automatisierte Tests)</figcaption>
+    </figure>
+  </div>
+
+  <h4>Testkonzept / Testplan</h4>
+  <p>Das <strong>Testkonzept</strong> (Testplan, vgl. IEEE 829 bzw. ISO/IEC/IEEE 29119) legt <em>vor</em> dem Testen fest, was, wie, womit, von wem und wann getestet wird. Typische Inhalte:</p>
+  <ul>
+    <li><strong>Testobjekte und Testumfang:</strong> welche Komponenten/Funktionen getestet werden – und welche ausdrücklich nicht.</li>
+    <li><strong>Testziele und Teststrategie:</strong> welche Teststufen, welche Testmethoden (Black-/White-Box, Überdeckungsgrad z. B. 80 % Zweigüberdeckung), Priorisierung nach Risiko.</li>
+    <li><strong>Testumgebung:</strong> Hardware, Software, Testdatenbank, Geräte, Netz; Art und Umfang der <strong>Testautomatisierung</strong> und der Werkzeuge.</li>
+    <li><strong>Testdaten:</strong> Herkunft, Anonymisierung (keine echten personenbezogenen Daten!), Bereitstellung.</li>
+    <li><strong>Rollen und Verantwortlichkeiten:</strong> wer testet was (Testplan: wer, was, wann, in welchem Umfang).</li>
+    <li><strong>Zeitplan, Aufwands- und Kostenschätzung</strong>, Abstimmung mit den übrigen Projektaktivitäten.</li>
+    <li><strong>Eingangs- und Endekriterien</strong> (wann darf der Test beginnen, wann ist genug getestet, z. B. „keine offenen Fehler der Klasse 1“), Abbruch- und Wiederaufnahmekriterien.</li>
+    <li><strong>Fehlermanagement:</strong> Fehlerklassen (kritisch/schwer/leicht), Meldeweg, Werkzeug (Ticketsystem).</li>
+    <li><strong>Testdokumentation:</strong> Testfallbeschreibungen, Testprotokolle, Testbericht; Vorlagen (Templates); wie die Ergebnisse ausgewertet werden.</li>
+    <li><strong>Risiken</strong> des Testprojekts und Gegenmaßnahmen.</li>
+  </ul>
+  <p><strong>Aufbau eines Testfalls</strong> (z. B. im Testprotokoll): ID · Testobjekt · Vorbedingung · Eingabe/Testschritte · erwartetes Ergebnis · tatsächliches Ergebnis · Status (bestanden/fehlgeschlagen) · Tester, Datum.</p>
+
+  <h4>Konformität zu einer Spezifikation prüfen</h4>
+  <p>Wenn ein System eine fremde, vorgegebene Spezifikation erfüllen muss (Datenformat, Norm, Schnittstelle eines Partners, z. B. die eRechnung in W25), reicht es nicht, „irgendwie“ zu testen:</p>
+  <ul>
+    <li><strong>Formale Validierung</strong> gegen das maschinenlesbare Schema (XSD bei XML, JSON-Schema bei JSON) – automatisiert bei jeder erzeugten Datei.</li>
+    <li><strong>Testfälle systematisch aus der Spezifikation ableiten</strong> (Black-Box) – jede Regel, jedes Pflichtfeld, jeder Sonderfall bekommt einen Testfall; Rückverfolgbarkeit Anforderung ↔ Testfall.</li>
+    <li><strong>Offizielle Prüfwerkzeuge, Referenz- und Beispieldateien</strong> des Herausgebers nutzen (Validatoren, Testsuiten); Ausgaben mit Referenzausgaben vergleichen.</li>
+    <li><strong>Integrationstest mit der Gegenstelle</strong> in deren Testumgebung, ggf. Zertifizierung/Abnahme durch den Partner.</li>
+  </ul>
+  <div class="falle"><span class="kastentitel">Typische Falle: „Schema-valide = korrekt“</span>Ein Schema prüft nur <strong>Struktur und Datentypen</strong> (Pflichtfelder vorhanden, Datum im richtigen Format, Zahl statt Text). Es prüft <strong>nicht die inhaltliche Richtigkeit</strong>: ob Summen stimmen, ob Werte plausibel sind, ob fachliche Regeln (Geschäftsregeln) eingehalten werden, ob die richtigen Daten des richtigen Kunden übertragen werden. Dafür braucht man zusätzlich fachliche Prüfungen (z. B. Schematron-Regeln bei XML, eigene Plausibilitätstests) und Ende-zu-Ende-Tests mit der Gegenstelle.</div>
+
+  <div class="merke"><span class="kastentitel">Merke</span>Teststufe = <em>wie groß</em> ist das Testobjekt (Komponente → Integration → System → Abnahme). Testmethode = <em>woraus</em> leite ich Testfälle ab (Black-Box: Spezifikation, White-Box: Code). Testart = <em>wozu</em> teste ich (Regression, Last, Usability, Smoke …). Diese drei Ebenen nicht verwechseln.</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <strong>W21 T1 A4d (4 P):</strong> Black- und White-Box-Test beschreiben. · <strong>W21 T1 A3ac (4 P):</strong> Usability-Tests beschreiben. · <strong>S24 T2 A3aa/ab (je 4 P):</strong> Vorteile des White-Box- gegenüber dem Black-Box-Test; Zweck des Regressionstests. · <strong>W23 T1 A1d (6 P):</strong> Inhalte eines Testkonzepts beschreiben – die Lösung erwartete z. B. Teststrategie, Testumgebung/Automatisierung, Zusammenspiel der Teststufen, Testplan (wer/was/wann), Aufwandsschätzung. · <strong>W25 T1 A3ba/bc (3 + 6 P):</strong> Konformität zu einer Spezifikation sicherstellen; begründen, warum eine XSD-Validierung allein nicht reicht. · Operator „beschreiben/erläutern“: nicht nur den Begriff nennen, sondern Zweck und Vorgehen in ganzen Sätzen, möglichst mit Bezug zum Szenario.</div>
+
+  <!-- ===================== TQ-02 ===================== -->
+  <h3 id="e-02">TQ-02 · Code analysieren / Fehler finden <span class="badge k-meistens">Meistens</span></h3>
+  <p class="klein">Vorkommen: 6/9 · Prüfungen: W21 (Struktogramm checkPassword, 3 Fehler), S22 (fehlerhafte Bedingungen), W22 (rekursive Funktion), S23 (Monatsstatistik, 13 P Korrektur), S24 (Pfade notieren), W25 (fehlerhafte Minimum-Funktion) · meist Teil 2</p>
+
+  <h4>Fehlerarten</h4>
+  <table class="kompakt">
+    <tr><th style="width:18%">Fehlerart</th><th>Wann fällt er auf?</th><th>Beispiele</th></tr>
+    <tr><td><strong>Syntaxfehler</strong></td><td>beim Übersetzen (Compiler, IDE markiert rot) – Programm startet gar nicht</td><td>fehlendes Semikolon oder Klammer, Schlüsselwort falsch geschrieben, nicht deklarierte Variable, Typfehler (<code>int x = "drei";</code>)</td></tr>
+    <tr><td><strong>Laufzeitfehler</strong></td><td>während der Ausführung, meist <strong>Programmabbruch</strong> mit Exception</td><td>Indexüberschreitung (<code>ArrayIndexOutOfBoundsException</code>), Zugriff auf <code>null</code> (<code>NullPointerException</code>), Ganzzahldivision durch 0, Datei nicht vorhanden</td></tr>
+    <tr><td><strong>Logikfehler</strong> (semantischer Fehler)</td><td>gar nicht von selbst: Das Programm läuft, liefert aber <strong>falsche Ergebnisse</strong> – nur durch Tests mit bekanntem Sollergebnis oder Reviews zu finden</td><td>falsche Initialisierung, falscher Vergleichsoperator, falsche Schleifengrenze, falsche Formel, Endlosschleife, vergessener Sonderfall</td></tr>
+  </table>
+  <p>Das Wort „semantisch“ (W25 T2 A3bb: „zwei semantische Fehler“) meint genau diese Logikfehler: Der Code ist syntaktisch korrekt, <em>bedeutet</em> aber etwas anderes, als gemeint war.</p>
+
+  <h4>Katalog der typischen Fehler in Prüfungsaufgaben</h4>
+  <table class="kompakt">
+    <tr><th style="width:4%">#</th><th style="width:30%">Fehler</th><th>Erkennungszeichen und Korrektur</th></tr>
+    <tr><td>1</td><td><strong>Falsche Initialisierung</strong></td><td><code>min := 0</code> bzw. <code>max := 0</code>, obwohl alle Werte positiv bzw. auch negativ sein können → mit dem <strong>ersten Element</strong> (<code>werte[0]</code>) initialisieren. Zähler/Summe nicht auf 0 gesetzt oder <strong>in der falschen Schleife</strong> initialisiert (innerhalb statt außerhalb bzw. umgekehrt).</td></tr>
+    <tr><td>2</td><td><strong>Off-by-one</strong> bei Schleifengrenzen</td><td><code>bis werte.length</code> statt <code>bis werte.length - 1</code> (Laufzeitfehler), Java <code>i &lt;= length</code>; oder umgekehrt <code>i &lt; length - 1</code> → <strong>letztes Element fehlt</strong>; Start bei 1 statt 0 → <strong>erstes Element fehlt</strong> (nur richtig, wenn Element 0 bewusst als Startwert verwendet wurde).</td></tr>
+    <tr><td>3</td><td><strong>Falscher Vergleichsoperator</strong></td><td><code>&gt;</code> statt <code>&gt;=</code> bei „mindestens“, „ab“; <code>&lt;</code> statt <code>&lt;=</code> bei „höchstens“, „bis einschließlich“; <code>&lt;</code> und <code>&gt;</code> vertauscht (Minimum ↔ Maximum).</td></tr>
+    <tr><td>4</td><td><strong>Falscher Divisor / falsche Formel</strong></td><td>Durchschnitt durch die Gesamtzahl statt durch die Anzahl der <em>gezählten</em> Werte; durch eine Gruppen- statt Gesamtzahl; <strong>Ganzzahldivision</strong> in Java (<code>7 / 2 = 3</code>) → <code>(double) summe / anzahl</code>; Division durch 0 bei leerer Menge nicht abgefangen.</td></tr>
+    <tr><td>5</td><td><strong>Letzte Gruppe / letztes Element nicht ausgewertet</strong></td><td>typisch beim <strong>Gruppenwechsel</strong> (Daten sortiert, Auswertung jeweils beim Wechsel des Gruppenbegriffs): Die letzte Gruppe erlebt keinen Wechsel mehr → nach der Schleife fehlt die Auswertung. Ebenso bei „Serien“: Die Auswertung erfolgt nur, wenn die Serie endet – endet sie mit dem letzten Element, wird sie vergessen.</td></tr>
+    <tr><td>6</td><td><strong>Gruppenvariablen nicht zurückgesetzt</strong></td><td>beim Gruppenwechsel werden Zähler und Summe zurückgesetzt, aber <strong>Minimum/Maximum</strong> nicht → Wert „wandert“ in die nächste Gruppe.</td></tr>
+    <tr><td>7</td><td><strong>Rückgabe an falscher Stelle</strong></td><td><code>rückgabe</code> innerhalb der Schleife → Abbruch nach dem ersten Durchlauf; Rückgabe der falschen Variable (Index statt Wert).</td></tr>
+    <tr><td>8</td><td><strong>Endlosschleife</strong></td><td>in einer <code>solange</code>-Schleife wird die Laufvariable nicht verändert oder in die falsche Richtung; Abbruchbedingung nie erreichbar.</td></tr>
+    <tr><td>9</td><td><strong>Logische Verknüpfung falsch</strong></td><td><code>und</code> statt <code>oder</code>; Negation falsch umgeformt (De Morgan: <code>nicht (a und b)</code> = <code>nicht a oder nicht b</code>); Klammerung.</td></tr>
+    <tr><td>10</td><td><strong>Sonderfall nicht behandelt</strong></td><td><code>null</code>, leeres Array/leere Liste, ein einziges Element, alle Werte gleich, negative Werte – Spezifikation genau lesen, was dann passieren soll (Exception? 0? leere Liste?).</td></tr>
+  </table>
+
+  <h4>So gehst du vor</h4>
+  <ol>
+    <li><strong>Spezifikation lesen</strong> und für die gegebenen Testdaten das <strong>erwartete Ergebnis selbst ausrechnen</strong> (ohne auf den Code zu schauen).</li>
+    <li><strong>Schreibtischtest</strong> (TQ-05) mit denselben Testdaten: Code Zeile für Zeile durchspielen, Variablenwerte notieren → <strong>tatsächliches Ergebnis</strong>.</li>
+    <li>Abweichung? Die Stelle finden, an der die Werte zum ersten Mal von deiner Erwartung abweichen.</li>
+    <li>Den Katalog oben durchgehen: Initialisierung, Schleifengrenzen, Vergleiche, Formel, Rückgabe, Sonderfälle, Gruppenwechsel.</li>
+    <li>Jeden Fehler <strong>mit Zeilennummer, Ursache und Auswirkung</strong> benennen und die <strong>korrigierte Zeile vollständig</strong> hinschreiben (bei fehlenden Anweisungen: „nach Zeile 18 einfügen: …“).</li>
+    <li>Korrektur mit den Testdaten <strong>erneut prüfen</strong> (gedanklicher Fehlernachtest) und an einen Randfall denken (leer, ein Element, negativ).</li>
+  </ol>
+
+  <p><strong>Beispiel</strong> (Wetterstation): Die Funktion soll die <strong>höchste Temperatur</strong> eines Tages liefern. Es gibt mindestens einen Messwert, Werte können negativ sein.</p>
+  <div class="zweispaltig">
+    <pre class="pseudo listing" style="flex:1 1 400px">01 funktion hoechstwert(werte : double[]) : double
+02   max : double := 0
+03   zähle i von 0 bis werte.length
+04     wenn werte[i] &gt; max dann
+05       max := werte[i]
+06     Ende wenn
+07     rückgabe max
+08   Ende zähle
+09 Ende funktion</pre>
+    <div style="flex:1 1 220px">
+      <p>Testdaten (Wintertag): <code>[-3.5, -1.2, -4.0]</code></p>
+      <p>Erwartet: <code>-1.2</code></p>
+      <p>Tatsächlich: <code>0</code> – im ersten Durchlauf ist <code>-3.5 &gt; 0</code> falsch, dann wird sofort <code>max = 0</code> zurückgegeben.</p>
+    </div>
+  </div>
+  <table class="kompakt">
+    <tr><th style="width:8%">Zeile</th><th>Fehler (Ursache → Auswirkung)</th><th style="width:34%">Korrektur</th></tr>
+    <tr><td>02</td><td>Startwert 0 ist kein Messwert → bei nur negativen Werten wird 0 geliefert</td><td><code>max : double := werte[0]</code></td></tr>
+    <tr><td>03</td><td>Endwert <code>werte.length</code> ist kein gültiger Index → Laufzeitfehler im letzten Durchlauf</td><td><code>zähle i von 1 bis werte.length - 1</code> (oder von 0)</td></tr>
+    <tr><td>07</td><td><code>rückgabe</code> innerhalb der Schleife → nur das erste Element wird ausgewertet</td><td>Zeile 07 hinter <code>Ende zähle</code> verschieben</td></tr>
+  </table>
+  <p>Hinweis: Der Fehler in Zeile 03 fällt mit diesen Testdaten gar nicht auf, weil Zeile 07 die Schleife vorher beendet. Fehler können sich gegenseitig <strong>verdecken</strong> – nach jeder Korrektur erneut testen.</p>
+
+  <h4>Gruppenwechsel erkennen</h4>
+  <p>Viele Auswertungen (Statistik je Monat, je Filiale, je Kurs) laufen über eine <strong>nach dem Gruppenbegriff sortierte</strong> Liste. Das Muster: Gruppenbegriff des ersten Elements merken; in der Schleife bei einem <strong>Wechsel</strong> die bisherige Gruppe auswerten, Gesamtwerte fortschreiben, <strong>alle</strong> Gruppenvariablen zurücksetzen und den neuen Gruppenbegriff merken; danach das aktuelle Element verarbeiten; <strong>nach der Schleife die letzte Gruppe auswerten</strong>. Beim Prüfen eines solchen Codes gezielt fragen: Wird jede Gruppenvariable zurückgesetzt? Wird die letzte Gruppe ausgegeben? Werden die Gesamtwerte durch die richtige (Gesamt-)Anzahl geteilt? Was passiert bei leerer Liste (Zugriff auf das erste Element)?</p>
+
+  <div class="falle"><span class="kastentitel">Typische Fehler beim Antworten</span>
+    Nur das Symptom nennen („Ergebnis ist falsch“) statt Zeile + Ursache. · Die ganze Funktion neu schreiben, obwohl „Korrigieren Sie die fehlerhaften Zeilen“ gefragt ist (kostet Zeit, und neue Fehler kosten Punkte). · Einen Fehler „finden“, der keiner ist (z. B. <code>zähle i von 1</code>, wenn vorher <code>max := werte[0]</code> gesetzt wurde – das ist korrekt). · Java-Ganzzahldivision übersehen. · Bei „Nennen Sie zwei Fehler“ denselben Fehler zweimal in anderen Worten nennen.</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <strong>S23 T2 A3a (15 P):</strong> Statistik je Monat und Jahr (Gruppenwechsel) mit Datenverlaufstabelle prüfen, zwei Fehler nennen (2 P), Änderungen/Erweiterungen angeben, sodass die vorgegebene Ausgabe entsteht (13 P) – Fehler waren u. a. die nicht ausgegebene letzte Gruppe und ein falscher Divisor. · <strong>W25 T2 A3b (14 P):</strong> Minimum-Funktion mit Exception für <code>null</code>/leer: erwartetes und tatsächliches Ergebnis für fünf Testdaten eintragen, dann zwei semantische Fehler (Startwert 0, Schleifengrenze <code>length-1</code>) korrigieren. · <strong>S22 T2 A2bb (4 P):</strong> fehlerhafte Bedingungen so anpassen, dass der Unit-Test erfolgreich ist. · <strong>W21 T2 A1c (6 P):</strong> drei Fehler in einem Struktogramm zur Passwortprüfung finden.</div>
+
+  <!-- ===================== TQ-03 ===================== -->
+  <h3 id="e-03">TQ-03 · Unit-Test / Überdeckungsmaße <span class="badge k-oft">Oft</span></h3>
+  <p class="klein">Vorkommen: 5/9 · Prüfungen: S22, W22, S23, S24, W25 · fast immer Teil 2, oft als Teil einer 20–25-Punkte-Testaufgabe</p>
+
+  <h4>Was ist ein Unit-Test?</h4>
+  <p>Ein <strong>Unit-Test</strong> (Komponenten-, Modultest) ist ein <strong>automatisierter Test der kleinsten testbaren Einheit</strong> eines Programms – meist einer Methode oder Klasse – <strong>isoliert</strong> vom Rest des Systems. Er ruft die Einheit mit festgelegten Eingaben auf und <strong>vergleicht das tatsächliche mit dem erwarteten Ergebnis</strong>. Unit-Tests werden von den Entwicklern selbst geschrieben, meist mit einem Framework (Java: JUnit, C#: NUnit/xUnit, Python: unittest/pytest).</p>
+  <p><strong>Wozu?</strong> Fehler früh und genau lokalisiert finden (man weiß, welche Methode fehlschlägt) · bei jeder Änderung automatisch erneut ausführen (<strong>Regressionstest</strong>, z. B. in der CI-Pipeline) · Absicherung beim Refactoring · ausführbare Dokumentation, wie eine Methode benutzt wird · zwingt zu testbarem, lose gekoppeltem Design.</p>
+
+  <table class="kompakt">
+    <tr><th style="width:24%">Eigenschaft (FIRST)</th><th>Bedeutung</th></tr>
+    <tr><td><strong>F</strong>ast – schnell</td><td>läuft in Millisekunden, damit man tausende Tests bei jeder Änderung ausführen kann</td></tr>
+    <tr><td><strong>I</strong>ndependent/Isolated – unabhängig</td><td>hängt nicht von anderen Tests, ihrer Reihenfolge, einer echten Datenbank, dem Netz oder der Uhrzeit ab; Abhängigkeiten werden durch <strong>Stubs/Mocks</strong> ersetzt</td></tr>
+    <tr><td><strong>R</strong>epeatable – wiederholbar</td><td>liefert bei jeder Ausführung und auf jedem Rechner dasselbe Ergebnis (deterministisch)</td></tr>
+    <tr><td><strong>S</strong>elf-validating – selbstprüfend</td><td>entscheidet selbst über bestanden/fehlgeschlagen (Assertion), niemand muss Ausgaben ansehen</td></tr>
+    <tr><td><strong>T</strong>imely – zeitnah</td><td>wird zusammen mit (oder vor) dem Code geschrieben, nicht Wochen später</td></tr>
+  </table>
+  <p>Weitere Merkmale guter Unit-Tests: <strong>ein Test prüft genau einen Sachverhalt</strong> (aussagekräftiger Name wie <code>leererWarenkorbKostetNichts</code>), lesbar, wartbar, deckt Normal-, Grenz- und Fehlerfälle ab.</p>
+  <p><strong>Stub</strong> = Platzhalter, der feste Antworten liefert (z. B. statt der Datenbank immer drei Testkunden). <strong>Mock</strong> = Platzhalter, der zusätzlich prüft, <em>ob und wie</em> er aufgerufen wurde. <strong>Testtreiber</strong> = Code, der die zu testende Einheit aufruft (bei JUnit: die Testklasse).</p>
+
+  <h4>Aufbau: Arrange – Act – Assert</h4>
+  <p>Jede Testmethode folgt demselben Dreischritt: <strong>Arrange</strong> (Vorbereiten: Objekte anlegen, Ausgangszustand und Testdaten herstellen) → <strong>Act</strong> (Ausführen: genau die zu testende Methode aufrufen) → <strong>Assert</strong> (Prüfen: tatsächliches mit erwartetem Ergebnis vergleichen). Beispiel aus einem Bank-Szenario:</p>
+  <pre class="java">import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class KontoTest {
+
+    @Test
+    void einzahlungErhoehtKontostand() {
+        Konto konto = new Konto(100.00);                  // Arrange
+        konto.einzahlen(50.00);                           // Act
+        assertEquals(150.00, konto.getStand(), 0.001);    // Assert (Delta bei double)
+    }
+
+    @Test
+    void negativeAbhebungWirdAbgelehnt() {
+        Konto konto = new Konto(100.00);                  // Arrange
+        assertThrows(IllegalArgumentException.class,      // Act + Assert:
+                     () -&gt; konto.abheben(-20.00));        // erwartete Exception
+    }
+}</pre>
+  <table class="kompakt">
+    <tr><th style="width:42%">JUnit 5 (Auszug)</th><th>Bedeutung</th></tr>
+    <tr><td><code>@Test</code></td><td>markiert eine Testmethode</td></tr>
+    <tr><td><code>@BeforeEach</code></td><td>Methode läuft vor jedem Test (gemeinsames Arrange, z. B. Objekt neu anlegen)</td></tr>
+    <tr><td><code>assertEquals(expected, actual)</code></td><td>bestanden, wenn erwarteter und tatsächlicher Wert gleich sind – <strong>Reihenfolge: erst erwartet, dann tatsächlich</strong></td></tr>
+    <tr><td><code>assertEquals(expected, actual, delta)</code></td><td>für <code>double</code>: gleich bis auf die Toleranz <code>delta</code> (Rundungsfehler bei Kommazahlen)</td></tr>
+    <tr><td><code>assertTrue(b)</code>, <code>assertFalse(b)</code>, <code>assertNull(o)</code></td><td>Bedingung wahr/falsch, Objekt <code>null</code></td></tr>
+    <tr><td><code>assertThrows(Typ.class, () -&gt; aufruf)</code></td><td>bestanden, wenn der Aufruf eine Exception <strong>dieses Typs</strong> (oder einer Unterklasse) wirft; wird keine oder eine andere Exception geworfen, schlägt der Test fehl</td></tr>
+    <tr><td><code>assertAll(() -&gt; …, () -&gt; …)</code></td><td>führt alle Prüfungen aus und meldet alle Fehlschläge gemeinsam</td></tr>
+    <tr><td><code>@ParameterizedTest</code> + <code>@CsvSource({"20, 15, 5", …})</code></td><td>eine Testmethode, mehrfach mit verschiedenen Datenzeilen ausgeführt – jede Zeile erscheint als eigener Testfall</td></tr>
+  </table>
+
+  <div class="merke"><span class="kastentitel">Merke: assertEquals auswerten</span>Für jeden Testfall den Methodenaufruf mit dem <strong>gegebenen</strong> (ggf. fehlerhaften) Code selbst ausrechnen → tatsächlicher Wert. Stimmt er mit dem ersten Parameter (expected) überein: <strong>OK</strong>, sonst <strong>Fehler</strong>. Wichtig für die Praxis: Eine JUnit-Testmethode <strong>bricht beim ersten fehlgeschlagenen assert ab</strong>; die folgenden asserts derselben Methode werden nicht mehr ausgeführt. In Prüfungstabellen (S22) wird trotzdem jede Zeile einzeln bewertet – das ist dort ausdrücklich so gemeint.</div>
+
+  <h4>Test-Driven Development (TDD)</h4>
+  <figure>
+    <svg viewBox="0 0 640 200" width="640" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e03t-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#222"/>
+        </marker>
+      </defs>
+      <rect x="10" y="20" width="180" height="70" rx="10" fill="#fdecec" stroke="#222"/>
+      <text x="100" y="45" text-anchor="middle" font-weight="bold">1 · Red</text>
+      <text x="100" y="64" text-anchor="middle" font-size="12">Test schreiben,</text>
+      <text x="100" y="80" text-anchor="middle" font-size="12">der fehlschlägt</text>
+      <rect x="230" y="20" width="180" height="70" rx="10" fill="#eaf6ea" stroke="#222"/>
+      <text x="320" y="45" text-anchor="middle" font-weight="bold">2 · Green</text>
+      <text x="320" y="64" text-anchor="middle" font-size="12">gerade so viel Code,</text>
+      <text x="320" y="80" text-anchor="middle" font-size="12">dass der Test besteht</text>
+      <rect x="450" y="20" width="180" height="70" rx="10" fill="#eef3fa" stroke="#222"/>
+      <text x="540" y="45" text-anchor="middle" font-weight="bold">3 · Refactor</text>
+      <text x="540" y="64" text-anchor="middle" font-size="12">Code aufräumen,</text>
+      <text x="540" y="80" text-anchor="middle" font-size="12">Tests bleiben grün</text>
+      <line x1="190" y1="55" x2="228" y2="55" stroke="#222" marker-end="url(#e03t-pfeil)"/>
+      <line x1="410" y1="55" x2="448" y2="55" stroke="#222" marker-end="url(#e03t-pfeil)"/>
+      <path d="M540,90 L540,150 L100,150 L100,92" fill="none" stroke="#222" marker-end="url(#e03t-pfeil)"/>
+      <text x="320" y="170" text-anchor="middle" font-size="12">nächste kleine Anforderung</text>
+    </svg>
+    <figcaption>Abb. A-3: TDD-Zyklus „Red – Green – Refactor“: Der Test entsteht vor dem Produktivcode</figcaption>
+  </figure>
+  <p>Vorteile: jede Zeile Code ist durch einen Test begründet (hohe Abdeckung), Anforderungen werden vorab präzisiert, kleine Schritte, sicheres Refactoring. Nachteile: anfangs mehr Aufwand, Disziplin nötig, bei unklaren Anforderungen oder GUI-lastigem Code schwierig.</p>
+
+  <h4>Kontrollflussgraph</h4>
+  <p>White-Box-Überdeckungsmaße werden am <strong>Kontrollflussgraphen</strong> erklärt: <strong>Knoten</strong> = Anweisungen bzw. Bedingungen (oft mit Zeilennummer beschriftet), <strong>Kanten</strong> = mögliche Übergänge. Eine Bedingung hat zwei ausgehende Kanten (wahr/falsch) – auch ein <code>wenn</code> <em>ohne</em> <code>sonst</code>: Seine falsch-Kante führt direkt hinter das <code>Ende wenn</code>.</p>
+  <div class="zweispaltig">
+    <pre class="pseudo listing" style="flex:1 1 360px">01 funktion versandkosten(gewicht : double,
+         express : boolean) : double
+02   kosten : double := 4.90
+03   wenn gewicht &gt; 10 dann
+04     kosten := kosten + 6.00
+05   Ende wenn
+06   wenn express dann
+07     kosten := kosten + 8.00
+08   Ende wenn
+09   rückgabe kosten
+10 Ende funktion</pre>
+    <figure style="margin:0; flex:0 0 300px">
+      <svg viewBox="0 0 330 360" width="300" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <defs>
+          <marker id="e03k-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#222"/>
+          </marker>
+        </defs>
+        <circle cx="120" cy="25" r="17" fill="#fff" stroke="#222"/><text x="120" y="30" text-anchor="middle">02</text>
+        <circle cx="120" cy="85" r="17" fill="#eef3fa" stroke="#222"/><text x="120" y="90" text-anchor="middle">03</text>
+        <circle cx="60" cy="145" r="17" fill="#fff" stroke="#222"/><text x="60" y="150" text-anchor="middle">04</text>
+        <circle cx="120" cy="205" r="17" fill="#eef3fa" stroke="#222"/><text x="120" y="210" text-anchor="middle">06</text>
+        <circle cx="60" cy="265" r="17" fill="#fff" stroke="#222"/><text x="60" y="270" text-anchor="middle">07</text>
+        <circle cx="120" cy="325" r="17" fill="#fff" stroke="#222"/><text x="120" y="330" text-anchor="middle">09</text>
+        <line x1="120" y1="42" x2="120" y2="68" stroke="#222" marker-end="url(#e03k-pfeil)"/>
+        <line x1="108" y1="97" x2="72" y2="133" stroke="#222" marker-end="url(#e03k-pfeil)"/>
+        <text x="66" y="110" font-size="12">wahr</text>
+        <path d="M137,85 Q190,145 135,196" fill="none" stroke="#222" marker-end="url(#e03k-pfeil)"/>
+        <text x="172" y="150" font-size="12">falsch</text>
+        <line x1="72" y1="157" x2="108" y2="193" stroke="#222" marker-end="url(#e03k-pfeil)"/>
+        <line x1="108" y1="217" x2="72" y2="253" stroke="#222" marker-end="url(#e03k-pfeil)"/>
+        <text x="66" y="230" font-size="12">wahr</text>
+        <path d="M137,205 Q190,265 135,316" fill="none" stroke="#222" marker-end="url(#e03k-pfeil)"/>
+        <text x="172" y="270" font-size="12">falsch</text>
+        <line x1="72" y1="277" x2="108" y2="313" stroke="#222" marker-end="url(#e03k-pfeil)"/>
+        <text x="215" y="80" font-size="12">Pfade:</text>
+        <text x="215" y="98" font-size="12">P1: 2-3-4-6-7-9</text>
+        <text x="215" y="116" font-size="12">P2: 2-3-4-6-9</text>
+        <text x="215" y="134" font-size="12">P3: 2-3-6-7-9</text>
+        <text x="215" y="152" font-size="12">P4: 2-3-6-9</text>
+      </svg>
+      <figcaption>Abb. A-4: Kontrollflussgraph zu <code>versandkosten</code></figcaption>
+    </figure>
+  </div>
+
+  <h4>Die drei Überdeckungsmaße</h4>
+  <table class="kompakt">
+    <tr><th style="width:22%">Maß</th><th>Forderung</th><th style="width:30%">Beispiel <code>versandkosten</code></th></tr>
+    <tr><td><strong>Anweisungsüberdeckung</strong><br>(C0, statement coverage)</td><td>Jede <strong>Anweisung</strong> wird mindestens einmal ausgeführt. Maß: ausgeführte Anweisungen ÷ alle Anweisungen · 100 %.</td><td><strong>1 Testfall</strong> genügt: gewicht = 12, express = wahr (Pfad P1 führt alle Anweisungen aus)</td></tr>
+    <tr><td><strong>Zweigüberdeckung</strong><br>(C1, branch/decision coverage)</td><td>Jeder <strong>Zweig</strong> (jede Kante, jedes Ergebnis wahr <em>und</em> falsch jeder Bedingung) wird mindestens einmal durchlaufen. Schließt C0 ein.</td><td><strong>2 Testfälle</strong>: (12, wahr) und (5, falsch) – die falsch-Kanten 03→06 und 06→09 fehlen sonst</td></tr>
+    <tr><td><strong>Pfadüberdeckung</strong><br>(C2, path coverage)</td><td>Jeder mögliche <strong>Pfad</strong> vom Eintritt bis zum Austritt wird mindestens einmal durchlaufen. Schließt C1 und C0 ein.</td><td><strong>4 Testfälle</strong>: (12, wahr), (12, falsch), (5, wahr), (5, falsch)</td></tr>
+  </table>
+  <figure>
+    <svg viewBox="0 0 560 170" width="560" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <rect x="10" y="10" width="540" height="150" rx="14" fill="#fff" stroke="#222"/>
+      <text x="24" y="32" font-weight="bold">Pfadüberdeckung (C2) – stärkstes Maß, meist sehr viele Testfälle</text>
+      <rect x="40" y="45" width="480" height="100" rx="12" fill="#f3f4f6" stroke="#222"/>
+      <text x="54" y="67" font-weight="bold">Zweigüberdeckung (C1) – in der Praxis üblicher Mindeststandard</text>
+      <rect x="70" y="80" width="420" height="52" rx="10" fill="#eef3fa" stroke="#222"/>
+      <text x="280" y="102" text-anchor="middle" font-weight="bold">Anweisungsüberdeckung (C0)</text>
+      <text x="280" y="121" text-anchor="middle" font-size="12">schwächstes Maß, findet z. B. nicht ausführbaren („toten“) Code</text>
+    </svg>
+    <figcaption>Abb. A-5: 100 % C2 ⇒ 100 % C1 ⇒ 100 % C0 – die Umkehrung gilt nicht</figcaption>
+  </figure>
+  <p>Ergänzend gibt es die <strong>Bedingungsüberdeckung</strong> (condition coverage): Bei zusammengesetzten Bedingungen wie <code>a &gt; 0 und b &gt; 0</code> muss jede <em>Teil</em>bedingung einmal wahr und einmal falsch werden (Mehrfachbedingungsüberdeckung: alle Kombinationen). Achtung Bezeichnung: In deutschen Lehrbüchern steht C2 meist für Pfad-, C3 für Bedingungsüberdeckung; manche englischen Quellen nummerieren anders. In der Prüfung werden die Begriffe ausgeschrieben.</p>
+
+  <h4>So bestimmst du die Mindestanzahl der Testfälle</h4>
+  <ol>
+    <li>Kontrollflussgraph skizzieren oder im Code jede Bedingung (B1, B2 …) und jede Anweisung im Zweig (A1, A2 …) markieren – so macht es auch die IHK (S24 T2 A3c).</li>
+    <li><strong>C0:</strong> Welche Anweisungen schließen sich gegenseitig aus (z. B. <code>dann</code>- und <code>sonst</code>-Teil derselben Bedingung, oder ein Zweig, in dem man früh mit <code>rückgabe</code>/Exception aussteigt)? Mindestens so viele Testfälle wie sich gegenseitig ausschließende Anweisungsgruppen; dann so kombinieren, dass jeder Testfall möglichst viele Anweisungen mitnimmt.</li>
+    <li><strong>C1:</strong> Zusätzlich muss jede Bedingung auch ihren „leeren“ falsch-Zweig nehmen. Gezielt prüfen, ob die bisherigen Testfälle jede Bedingung einmal wahr und einmal falsch machen.</li>
+    <li><strong>C2:</strong> Pfade zählen. Faustregel ohne Schleifen: <strong>nacheinander</strong> stehende, unabhängige Verzweigungen → Pfadzahlen <strong>multiplizieren</strong> (2 · 2 = 4); <strong>alternative</strong> Zweige (dann/sonst, verschachtelt) → Pfadzahlen der Zweige <strong>addieren</strong>. Danach die Pfade einzeln aufschreiben und zählen.</li>
+    <li>Testdaten angeben, die genau diesen Pfad erzwingen, und prüfen, ob der Pfad überhaupt möglich ist (manche Kombinationen sind logisch unmöglich).</li>
+  </ol>
+  <p><strong>Schleifen:</strong> Jede weitere Wiederholung erzeugt einen neuen Pfad – vollständige Pfadüberdeckung ist dann praktisch unmöglich. Man begrenzt sich z. B. auf <strong>Schleife 0-mal, 1-mal und mehrmals</strong> durchlaufen (Boundary-Interior-Test). Für C0 und C1 reicht oft ein Testfall, der die Schleife mehrmals durchläuft, plus einer, der sie nicht betritt.</p>
+  <p><strong>Englische Begriffe</strong> (kommen im Fachtext vor, S24): statement coverage, branch coverage / decision coverage, path coverage, condition coverage, test case, test suite, assertion, expected/actual result, coverage tool, executed / not executed.</p>
+
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>
+    100 % Überdeckung heißt <strong>nicht</strong> fehlerfrei: Überdeckung misst nur, welcher Code <em>ausgeführt</em> wurde – nicht, ob das Ergebnis mit einer sinnvollen Assertion geprüft wurde, und schon gar nicht, ob <strong>Funktionalität fehlt</strong> (fehlender Code kann nicht „nicht überdeckt“ sein). Der Minimum-Fehler „Startwert 0“ wird mit voller Anweisungsüberdeckung oft nicht gefunden. · Bei der Mindestanzahl für C0 die „leere“ falsch-Kante vergessen ist richtig (C0 braucht sie nicht), bei C1 ein Fehler. · Bei C2 Pfade vergessen, die ohne <code>sonst</code> entstehen. · „Mindestanzahl“ immer mit kurzer Begründung bzw. konkreten Testdaten angeben.</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <strong>S22 T2 A2a (7 P):</strong> Unit-Test beschreiben (3 P) und zwei Eigenschaften nennen und beschreiben (4 P); <strong>A2ba (5 P):</strong> fünf <code>assertEquals</code>-Zeilen mit OK/Fehler auswerten. · <strong>W25 T2 A3a (6 P):</strong> Unit-Test beschreiben, Testabdeckung bezogen auf Anweisungen erläutern. · <strong>W22 T2 A2ac (3 P), S23 T2 A3b (10 P):</strong> Anweisungsüberdeckung erläutern, Mindestzahl Testfälle, nicht durchlaufene Anweisungen nennen, Testdaten für volle Überdeckung anpassen. · <strong>S24 T2 A3b/c (12 + 5 P):</strong> Anweisungs-, Zweig- und Pfadüberdeckung anhand eines <strong>englischen Fachtextes</strong> erläutern (je 4 P) und alle Pfade eines Login-Algorithmus in der Notation „B1, A1, B2, …“ notieren.</div>
+
+  <!-- ===================== TQ-04 ===================== -->
+  <h3 id="e-04">TQ-04 · Qualitätsmerkmale ISO/IEC 25010 <span class="badge k-oft">Oft</span></h3>
+  <p class="klein">Vorkommen: 4/9 · Prüfungen: W21 (Effizienz und Änderbarkeit), S23 (Qualitätsmerkmale nach ISO 9126!), S24 (Qualität/QS-Maßnahmen), S26 (Zuverlässigkeit + weiteres Merkmal) · Teil 1, 4–5 Punkte</p>
+
+  <p>Die Norm <strong>ISO/IEC 25010</strong> („SQuaRE“, Nachfolger der ISO/IEC 9126) beschreibt ein <strong>Produktqualitätsmodell</strong>: Software-Qualität wird in Merkmale und Untermerkmale zerlegt, damit man sie <strong>beschreiben, als nicht-funktionale Anforderung festlegen und prüfen</strong> kann. Die Fassung von 2011 hat <strong>8 Merkmale</strong>:</p>
+  <table class="kompakt">
+    <tr><th style="width:19%">Merkmal</th><th style="width:31%">Untermerkmale</th><th style="width:22%">Leitfrage</th><th>Beispiel (Online-Banking-App)</th></tr>
+    <tr><td><strong>Funktionale Eignung</strong> (functional suitability)</td><td>funktionale Vollständigkeit, Korrektheit, Angemessenheit</td><td>Tut die Software das Richtige, vollständig und richtig?</td><td>Überweisungen werden mit korrektem Betrag ausgeführt; alle im Lastenheft geforderten Funktionen sind vorhanden.</td></tr>
+    <tr><td><strong>Leistungseffizienz</strong> (performance efficiency)</td><td>Zeitverhalten, Ressourcennutzung (Verbrauchsverhalten), Kapazität</td><td>Wie schnell und sparsam?</td><td>Kontostand erscheint in &lt; 2 s; die App braucht &lt; 150 MB Speicher; 20 000 gleichzeitige Nutzer.</td></tr>
+    <tr><td><strong>Kompatibilität</strong> (compatibility)</td><td>Koexistenz, Interoperabilität</td><td>Arbeitet sie mit anderen Systemen zusammen?</td><td>Datenaustausch mit dem Kernbankensystem über eine Standardschnittstelle; läuft neben anderen Apps ohne Störung.</td></tr>
+    <tr><td><strong>Benutzbarkeit</strong> (usability)</td><td>Erkennbarkeit der Eignung, Erlernbarkeit, Bedienbarkeit, Schutz vor Fehlbedienung, Ästhetik der Oberfläche, Zugänglichkeit (Barrierefreiheit)</td><td>Können die Nutzer sie leicht, effektiv und zufrieden nutzen?</td><td>Sicherheitsabfrage vor dem Löschen einer Vorlage; Bedienung mit Screenreader möglich.</td></tr>
+    <tr><td><strong>Zuverlässigkeit</strong> (reliability)</td><td>Reife, Verfügbarkeit, Fehlertoleranz, Wiederherstellbarkeit</td><td>Funktioniert sie dauerhaft und auch bei Störungen?</td><td>Verfügbarkeit 99,9 %; bei Verbindungsabbruch wird keine Überweisung doppelt ausgeführt; nach Absturz in 15 min wieder verfügbar.</td></tr>
+    <tr><td><strong>Sicherheit</strong> (security)</td><td>Vertraulichkeit, Integrität, Nichtabstreitbarkeit, Verantwortlichkeit (Zurechenbarkeit), Authentizität</td><td>Sind Daten und Funktionen vor unbefugtem Zugriff geschützt?</td><td>Zwei-Faktor-Anmeldung; verschlüsselte Übertragung; jede Transaktion ist einem Nutzer zugeordnet und protokolliert.</td></tr>
+    <tr><td><strong>Wartbarkeit</strong> (maintainability)</td><td>Modularität, Wiederverwendbarkeit, Analysierbarkeit, Modifizierbarkeit (Änderbarkeit), Testbarkeit (Prüfbarkeit)</td><td>Wie leicht lässt sie sich ändern, korrigieren, erweitern?</td><td>Neue Zahlungsart als eigenes Modul ergänzbar; Fehlerursachen über Logdateien schnell auffindbar.</td></tr>
+    <tr><td><strong>Übertragbarkeit</strong> (portability)</td><td>Anpassbarkeit, Installierbarkeit, Austauschbarkeit</td><td>Lässt sie sich in eine andere Umgebung bringen?</td><td>läuft auf Android und iOS, verschiedenen Bildschirmgrößen; Update ohne Datenverlust installierbar.</td></tr>
+  </table>
+  <p>Neben dem Produktqualitätsmodell definiert die Norm die <strong>Nutzungsqualität</strong> (quality in use): Effektivität, Effizienz, Zufriedenheit, Freiheit von Risiken, Kontextabdeckung – also die Qualität, die der Nutzer im tatsächlichen Einsatz erlebt.</p>
+
+  <h4>Ältere Norm ISO/IEC 9126 und Neufassung 2023</h4>
+  <table class="kompakt">
+    <tr><th style="width:22%">ISO/IEC 9126 (6 Merkmale)</th><th style="width:38%">Untermerkmale 9126</th><th>wird in ISO/IEC 25010 (2011) zu …</th></tr>
+    <tr><td><strong>Funktionalität</strong></td><td>Angemessenheit, Richtigkeit, Interoperabilität, Sicherheit, Ordnungsmäßigkeit</td><td>Funktionale Eignung; <strong>Sicherheit</strong> wird eigenes Merkmal; Interoperabilität wandert zur neuen <strong>Kompatibilität</strong></td></tr>
+    <tr><td><strong>Zuverlässigkeit</strong></td><td>Reife, Fehlertoleranz, Wiederherstellbarkeit</td><td>Zuverlässigkeit (+ Verfügbarkeit)</td></tr>
+    <tr><td><strong>Benutzbarkeit</strong></td><td>Verständlichkeit, Erlernbarkeit, Bedienbarkeit, Attraktivität</td><td>Benutzbarkeit (+ Schutz vor Fehlbedienung, Zugänglichkeit)</td></tr>
+    <tr><td><strong>Effizienz</strong></td><td>Zeitverhalten, Verbrauchsverhalten</td><td>Leistungseffizienz (+ Kapazität)</td></tr>
+    <tr><td><strong>Änderbarkeit</strong></td><td>Analysierbarkeit, Modifizierbarkeit, Stabilität, Prüfbarkeit</td><td>Wartbarkeit (+ Modularität, Wiederverwendbarkeit)</td></tr>
+    <tr><td><strong>Übertragbarkeit</strong></td><td>Anpassbarkeit, Installierbarkeit, Koexistenz, Austauschbarkeit</td><td>Übertragbarkeit; Koexistenz wandert zur Kompatibilität</td></tr>
+  </table>
+  <p>Jedes 9126-Merkmal hat zusätzlich das Untermerkmal „Konformität“ (Einhaltung von Normen). <strong>Neu als eigene Hauptmerkmale in 25010:</strong> Sicherheit und Kompatibilität.</p>
+  <p><strong>ISO/IEC 25010:2023</strong> erweitert auf <strong>9 Merkmale</strong>: Benutzbarkeit heißt nun <strong>Interaktionsfähigkeit</strong> (interaction capability, u. a. mit Inklusivität und Selbstbeschreibungsfähigkeit), Übertragbarkeit heißt <strong>Flexibilität</strong> (neu mit Skalierbarkeit), Reife heißt Fehlerfreiheit (faultlessness), Sicherheit erhält „Widerstandsfähigkeit“ (resistance), und neu ist <strong>Safety</strong> (Betriebssicherheit: Schutz von Menschen und Umwelt, z. B. sicherer Zustand bei Ausfall, Gefahrenwarnung). Die bisherigen Prüfungen haben die Begriffe der Fassung 2011 (bzw. sogar der ISO 9126) verwendet – lerne diese sicher und kenne die Umbenennungen.</p>
+
+  <h4>Qualitätsanforderungen messbar machen</h4>
+  <p>„Die App soll schnell und zuverlässig sein“ ist nicht prüfbar. Eine Qualitätsanforderung braucht eine <strong>Messgröße, einen Zielwert und Messbedingungen</strong>:</p>
+  <table class="kompakt">
+    <tr><th style="width:20%">Merkmal</th><th style="width:38%">Messgröße</th><th>messbare Formulierung (Beispiel Online-Banking)</th></tr>
+    <tr><td>Leistungseffizienz</td><td>Antwortzeit (Perzentil), Durchsatz, Speicher-/CPU-Bedarf</td><td>„Bei 5 000 gleichzeitigen Nutzern werden 95 % der Kontoabfragen in höchstens 2 s beantwortet.“</td></tr>
+    <tr><td>Zuverlässigkeit</td><td>Verfügbarkeit in %, MTBF (mittlere Zeit zwischen Ausfällen), MTTR (mittlere Reparaturzeit), Wiederherstellungszeit</td><td>„Verfügbarkeit mindestens 99,9 % pro Monat (= höchstens 43,2 min Ausfall bei 30 Tagen); nach einem Serverausfall ist der Dienst in höchstens 15 min wiederhergestellt.“</td></tr>
+    <tr><td>Benutzbarkeit</td><td>Zeit/Fehlerquote/Erfolgsquote bei Aufgaben, Zufriedenheitswert (Fragebogen)</td><td>„8 von 10 Erstnutzern führen ohne Hilfe eine Überweisung in höchstens 3 Minuten aus.“</td></tr>
+    <tr><td>Wartbarkeit</td><td>Zweigüberdeckung der Unit-Tests, zyklomatische Komplexität je Methode, Aufwand für Änderungen</td><td>„Zweigüberdeckung mindestens 80 %; keine Methode mit Komplexität über 10.“</td></tr>
+    <tr><td>Sicherheit</td><td>Befunde im Penetrationstest, Verschlüsselungsstandard, Sperrregeln</td><td>„Nach 3 falschen PIN-Eingaben wird der Zugang 30 min gesperrt; keine kritischen Befunde im Penetrationstest.“</td></tr>
+    <tr><td>Übertragbarkeit</td><td>unterstützte Plattformen/Versionen, Installationsdauer</td><td>„Lauffähig auf Android ab Version 12 und iOS ab Version 16.“</td></tr>
+  </table>
+  <p>Verfügbarkeit = MTBF ÷ (MTBF + MTTR). Rechenbeispiel: 99,5 % pro Monat mit 30 Tagen erlaubt 0,5 % · 30 · 24 h = 3,6 h Ausfall.</p>
+  <p><strong>Zielkonflikte</strong> zwischen Merkmalen sind typisch und müssen abgewogen werden: <em>Sicherheit ↔ Benutzbarkeit</em> (Zwei-Faktor-Anmeldung ist sicherer, aber umständlicher), <em>Leistungseffizienz ↔ Wartbarkeit</em> (hoch optimierter Code ist schwerer verständlich), <em>Übertragbarkeit ↔ Leistung</em> (plattformübergreifendes Framework statt nativer App), <em>Sicherheit ↔ Leistung</em> (Verschlüsselung kostet Rechenzeit).</p>
+
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>
+    „Sicherheit“ in 25010 meint <strong>Informationssicherheit</strong> (security), nicht Betriebssicherheit/Unfallschutz (safety – erst in der Fassung 2023). · Funktionale Anforderungen („Das System soll Rechnungen erstellen“) sind <em>kein</em> Qualitätsmerkmal – die Merkmale beschreiben, <em>wie gut</em> etwas funktioniert. · Beim „Beschreiben“ nicht nur den Namen nennen, sondern die Bedeutung erklären und ein konkretes Beispiel aus dem Szenario geben. · Zuverlässigkeit (funktioniert dauerhaft) nicht mit funktionaler Korrektheit (rechnet richtig) verwechseln.</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <strong>W21 T1 A4ca (4 P):</strong> die Qualitätsmerkmale Effizienz und Änderbarkeit beschreiben. · <strong>S23 T1 A2a (4 P):</strong> Qualitätsmerkmale nach <strong>ISO 9126</strong> nennen bzw. beschreiben – deshalb die alten Begriffe kennen. · <strong>S26 T1 A4a (5 P):</strong> Zuverlässigkeit erläutern und ein weiteres Merkmal mit Beispiel aus dem Szenario. · Erwartet wird jeweils: Begriff + Bedeutung + Bezug zur Situation (z. B. Sensoren auf dem Feld, Fahrplan-App).</div>
+
+  <!-- ===================== TQ-05 ===================== -->
+  <h3 id="e-05">TQ-05 · Schreibtischtest <span class="badge k-oft">Oft</span></h3>
+  <p class="klein">Vorkommen: 4/9 · Prüfungen: S22 (assertEquals-Fälle durchrechnen), W22 (rekursive Umwandlung Dezimal → Binär), S23 (Datenverlaufstabelle zur Monatsstatistik), W25 (erwartetes und tatsächliches Ergebnis für fünf Testdaten, 10 P) · Teil 2</p>
+
+  <p>Beim <strong>Schreibtischtest</strong> (Trockentest, „dry run“) spielt man einen Algorithmus <strong>von Hand ohne Computer</strong> mit konkreten Testdaten durch und notiert nach jedem Schritt die Werte aller Variablen in einer Tabelle. Weil das Programm dabei nicht ausgeführt wird, zählt er zu den <strong>statischen</strong> Prüfverfahren. Er dient dazu, die Arbeitsweise zu verstehen, das tatsächliche Ergebnis zu ermitteln und so Logikfehler zu finden.</p>
+
+  <h4>Drei Tabellenformen, die in Prüfungen vorkommen</h4>
+  <ol>
+    <li><strong>Trace-Tabelle</strong> (am häufigsten): eine Spalte je Variable bzw. Bedingung, eine Zeile je Schritt oder Schleifendurchlauf.</li>
+    <li><strong>Datenverlaufstabelle</strong> (S23): eine <em>Zeile</em> je Variable, in der Spalte „Werteverlauf“ alle Werte nacheinander, durch Kommas getrennt.</li>
+    <li><strong>Testtabelle</strong> (W25): je Zeile ein Satz Testdaten mit <em>erwartetem</em> (aus der Spezifikation) und <em>tatsächlichem</em> Ergebnis (aus dem Code).</li>
+  </ol>
+
+  <h4>So gehst du vor</h4>
+  <ol>
+    <li>Alle Variablen (auch Laufvariablen) als Spalten anlegen; bei Bedarf eine Spalte für das Ergebnis jeder Bedingung (wahr/falsch).</li>
+    <li>Erste Zeile: Anfangswerte nach der Initialisierung.</li>
+    <li>Den Code <strong>Zeile für Zeile</strong> ausführen – nicht „im Kopf abkürzen“. Bei jeder Zuweisung den neuen Wert eintragen; unveränderte Werte darf man in der Trace-Tabelle wiederholen oder leer lassen (Hauptsache eindeutig).</li>
+    <li>Schleifen: Bedingung <strong>vor</strong> jedem Durchlauf prüfen (bei <code>zähle</code>: ist der Endwert erreicht?). Die Laufvariable ändert sich erst am Ende des Durchlaufs.</li>
+    <li>Integer-Rechnung beachten (<code>7 div 2 = 3</code>, <code>7 mod 2 = 1</code>, in Java <code>7 / 2 = 3</code>).</li>
+    <li>Am Ende Rückgabewert/Ausgabe angeben und mit dem erwarteten Ergebnis vergleichen.</li>
+  </ol>
+
+  <p><strong>Beispiel Schleife</strong> – Anzahl der Anstiege in einer Messreihe:</p>
+  <div class="zweispaltig">
+    <pre class="pseudo listing" style="flex:1 1 420px">01 funktion zaehleAnstiege(werte : integer[]) : integer
+02   anzahl : integer := 0
+03   zähle i von 1 bis werte.length - 1
+04     wenn werte[i] &gt; werte[i - 1] dann
+05       anzahl := anzahl + 1
+06     Ende wenn
+07   Ende zähle
+08   rückgabe anzahl
+09 Ende funktion</pre>
+    <table class="kompakt" style="width:auto">
+      <caption>Trace für werte = [3, 5, 5, 8, 2, 4]</caption>
+      <tr><th>i</th><th>werte[i-1]</th><th>werte[i]</th><th>Z. 04</th><th>anzahl</th></tr>
+      <tr><td>–</td><td>–</td><td>–</td><td>–</td><td>0</td></tr>
+      <tr><td>1</td><td>3</td><td>5</td><td>wahr</td><td>1</td></tr>
+      <tr><td>2</td><td>5</td><td>5</td><td>falsch</td><td>1</td></tr>
+      <tr><td>3</td><td>5</td><td>8</td><td>wahr</td><td>2</td></tr>
+      <tr><td>4</td><td>8</td><td>2</td><td>falsch</td><td>2</td></tr>
+      <tr><td>5</td><td>2</td><td>4</td><td>wahr</td><td>3</td></tr>
+    </table>
+  </div>
+  <p>Rückgabe: 3. Dieselbe Rechnung als <strong>Datenverlaufstabelle</strong>:</p>
+  <table class="kompakt">
+    <tr><th style="width:12%">Typ</th><th style="width:18%">Variable</th><th>Werteverlauf</th></tr>
+    <tr><td>integer</td><td>i</td><td>1, 2, 3, 4, 5</td></tr>
+    <tr><td>integer</td><td>anzahl</td><td>0, 1, 2, 3</td></tr>
+  </table>
+
+  <p><strong>Beispiel verschachtelte Schleifen:</strong> Die innere Schleife läuft bei <em>jedem</em> Durchlauf der äußeren vollständig ab. Variablen, die in der äußeren Schleife initialisiert werden, beginnen bei jedem äußeren Durchlauf neu.</p>
+  <div class="zweispaltig">
+    <pre class="pseudo listing">01 summe : integer := 0
+02 zähle i von 0 bis 2
+03   zähle j von i bis 2
+04     summe := summe + j
+05   Ende zähle
+06 Ende zähle</pre>
+    <table class="kompakt" style="width:auto">
+      <tr><th>i</th><th>j</th><th>summe</th></tr>
+      <tr><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>0</td><td>1</td><td>1</td></tr>
+      <tr><td>0</td><td>2</td><td>3</td></tr>
+      <tr><td>1</td><td>1</td><td>4</td></tr>
+      <tr><td>1</td><td>2</td><td>6</td></tr>
+      <tr><td>2</td><td>2</td><td>8</td></tr>
+    </table>
+  </div>
+
+  <p><strong>Beispiel Rekursion:</strong> eine Zeile je Aufruf; erst alle Aufrufe nach unten bis zum Basisfall notieren, dann die Rückgabewerte von unten nach oben einsetzen. Euklidischer Algorithmus <code>ggT(a, b)</code>: <code>wenn b = 0 dann rückgabe a sonst rückgabe ggT(b, a mod b)</code>.</p>
+  <table class="kompakt" style="width:auto">
+    <tr><th>Aufruf</th><th>a</th><th>b</th><th>b = 0?</th><th>a mod b</th><th>Rückgabe</th></tr>
+    <tr><td>1</td><td>84</td><td>36</td><td>nein</td><td>12</td><td>Ergebnis von Aufruf 2 = 12</td></tr>
+    <tr><td>2</td><td>36</td><td>12</td><td>nein</td><td>0</td><td>Ergebnis von Aufruf 3 = 12</td></tr>
+    <tr><td>3</td><td>12</td><td>0</td><td>ja (Basisfall)</td><td>–</td><td>12</td></tr>
+  </table>
+
+  <div class="falle"><span class="kastentitel">Typische Fehler</span>
+    Werte nur am Ende statt nach jeder Zuweisung notieren (dann sieht man nicht, <em>wo</em> es schiefgeht). · Den Code so durchspielen, wie er <em>gemeint</em> ist, statt wie er <em>dasteht</em> – im Schreibtischtest wird der gegebene, ggf. fehlerhafte Code exakt befolgt. · Laufvariable einen Durchlauf zu weit oder zu kurz führen. · Bei verschachtelten Schleifen vergessen, dass die Initialisierung vor der inneren Schleife bei jedem äußeren Durchlauf erneut ausgeführt wird (oder eben gerade nicht, wenn sie außerhalb steht). · Kurzschlussauswertung übersehen: Bei <code>a oder b</code> wird <code>b</code> nicht mehr ausgewertet, wenn <code>a</code> schon wahr ist (so schützt z. B. <code>i &gt;= n oder werte[i] = 0</code> vor einem Indexfehler).</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <strong>S23 T2 A3a:</strong> Den Code mit vorgegebenen Testdaten überprüfen und dazu eine Datenverlaufstabelle ausfüllen – vorgegeben waren Typ und Variablenname, einzutragen der Werteverlauf. · <strong>W25 T2 A3ba (10 P):</strong> Tabelle mit fünf Testdaten (darunter negative Werte, ein Element, <code>null</code>) – je erwartetes und tatsächliches Ergebnis. · <strong>W22 T2 A2aa (4 P):</strong> rekursive Funktion mit einem Startwert durchspielen. · <strong>S22 T2 A2ba (5 P):</strong> für jede <code>assertEquals</code>-Zeile den Rückgabewert ausrechnen.</div>
+
+  <!-- ===================== TQ-06 ===================== -->
+  <h3 id="e-06">TQ-06 · Äquivalenzklassen / Testfälle <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
+  <p class="klein">Vorkommen: 3/9 · Prüfungen: S22 (Testdaten aus zwei weiteren Äquivalenzklassen), S23 (Testdaten für volle Anweisungsüberdeckung anpassen), W25 (Testdaten mit Sonderfällen) · Teil 2, 4–10 Punkte</p>
+
+  <p>Alle möglichen Eingaben zu testen ist unmöglich (schon ein <code>int</code>-Parameter hat über 4 Milliarden Werte). Man braucht deshalb <strong>wenige, aber gut gewählte</strong> Testfälle. Die beiden wichtigsten Black-Box-Verfahren:</p>
+
+  <h4>Äquivalenzklassenbildung</h4>
+  <p>Der Wertebereich jeder Eingabe wird in <strong>Äquivalenzklassen (ÄK)</strong> zerlegt: Mengen von Werten, für die sich das Programm laut Spezifikation <strong>gleich verhält</strong>. Man nimmt an: Findet ein Wert der Klasse einen Fehler, finden ihn alle; findet einer keinen, findet ihn keiner. Deshalb genügt <strong>ein Repräsentant</strong> je Klasse.</p>
+  <ul>
+    <li><strong>Gültige ÄK:</strong> zulässige Eingaben, die zu einem regulären Ergebnis führen – je unterschiedlichem Verhalten (z. B. je Tarifstufe) eine eigene Klasse.</li>
+    <li><strong>Ungültige ÄK:</strong> unzulässige Eingaben, die abgewiesen werden müssen (Fehlermeldung, Exception, Rückgabe −1).</li>
+    <li>Regeln: <em>Wertebereich</em> (z. B. 1–99) → 1 gültige + 2 ungültige (zu klein, zu groß). <em>Aufzählung</em> (z. B. Land ∈ {DE, AT, CH}) → je Wert mit eigenem Verhalten eine gültige + 1 ungültige (anderer Wert). <em>Formale Fehler</em>: falscher Typ (Text statt Zahl, Kommazahl statt Ganzzahl), leere Eingabe, <code>null</code> → je eine ungültige Klasse.</li>
+  </ul>
+  <div class="merke"><span class="kastentitel">Merke: Testfälle aus Äquivalenzklassen zusammenstellen</span><strong>Gültige</strong> Klassen verschiedener Parameter dürfen in <strong>einem</strong> Testfall kombiniert werden (so wenige Testfälle wie möglich, bis jede gültige Klasse einmal vorkam). <strong>Ungültige</strong> Klassen werden <strong>einzeln</strong> getestet, jeweils kombiniert mit gültigen Werten für alle anderen Parameter – sonst verdeckt die erste Fehlermeldung den zweiten Fehler (Fehlermaskierung) und man weiß nicht, welche Prüfung gegriffen hat.</div>
+
+  <h4>Grenzwertanalyse</h4>
+  <p>Fehler sitzen besonders oft an den <strong>Rändern</strong> der Klassen (<code>&lt;</code> statt <code>&lt;=</code>, Off-by-one). Deshalb testet man zusätzlich die <strong>Grenzwerte</strong>: den Wert genau auf der Grenze und den direkt benachbarten Wert auf der anderen Seite (bei Ganzzahlen ±1, bei Beträgen ±0,01). Für den Bereich 1–99: <strong>0, 1, 99, 100</strong> (strenge Variante zusätzlich 2 und 98).</p>
+
+  <p><strong>Beispiel: Notenschlüssel</strong> – eine Funktion <code>note(punkte : integer) : integer</code> rechnet 0–100 Punkte in eine Note um (1: 92–100, 2: 81–91, 3: 67–80, 4: 50–66, 5: 30–49, 6: 0–29), sonst Fehlermeldung.</p>
+  <figure>
+    <svg viewBox="0 0 740 130" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <text x="38" y="22" text-anchor="middle" font-size="12" font-style="italic">ungültig</text>
+      <text x="370" y="22" text-anchor="middle" font-size="12" font-style="italic">gültige Äquivalenzklassen (je Note eine)</text>
+      <text x="703" y="22" text-anchor="middle" font-size="12" font-style="italic">ungültig</text>
+      <rect x="10" y="32" width="57" height="36" fill="#f3f4f6" stroke="#222" stroke-dasharray="5,3"/>
+      <text x="38" y="55" text-anchor="middle">&lt; 0</text>
+      <rect x="67" y="32" width="180" height="36" fill="#fff" stroke="#222"/>
+      <text x="157" y="55" text-anchor="middle" font-weight="bold">Note 6</text>
+      <rect x="247" y="32" width="120" height="36" fill="#fff" stroke="#222"/>
+      <text x="307" y="55" text-anchor="middle" font-weight="bold">5</text>
+      <rect x="367" y="32" width="102" height="36" fill="#fff" stroke="#222"/>
+      <text x="418" y="55" text-anchor="middle" font-weight="bold">4</text>
+      <rect x="469" y="32" width="84" height="36" fill="#fff" stroke="#222"/>
+      <text x="511" y="55" text-anchor="middle" font-weight="bold">3</text>
+      <rect x="553" y="32" width="66" height="36" fill="#fff" stroke="#222"/>
+      <text x="586" y="55" text-anchor="middle" font-weight="bold">2</text>
+      <rect x="619" y="32" width="54" height="36" fill="#fff" stroke="#222"/>
+      <text x="646" y="55" text-anchor="middle" font-weight="bold">1</text>
+      <rect x="673" y="32" width="60" height="36" fill="#f3f4f6" stroke="#222" stroke-dasharray="5,3"/>
+      <text x="703" y="55" text-anchor="middle">&gt; 100</text>
+      <text x="157" y="88" text-anchor="middle" font-size="12">0 – 29</text>
+      <text x="307" y="88" text-anchor="middle" font-size="12">30 – 49</text>
+      <text x="418" y="88" text-anchor="middle" font-size="12">50 – 66</text>
+      <text x="511" y="88" text-anchor="middle" font-size="12">67 – 80</text>
+      <text x="586" y="88" text-anchor="middle" font-size="12">81 – 91</text>
+      <text x="646" y="88" text-anchor="middle" font-size="12">92 – 100</text>
+      <text x="370" y="118" text-anchor="middle" font-size="12">Grenzwertpaare: −1/0 · 29/30 · 49/50 · 66/67 · 80/81 · 91/92 · 100/101</text>
+    </svg>
+    <figcaption>Abb. A-6: Äquivalenzklassen und Grenzwerte des Notenschlüssels</figcaption>
+  </figure>
+  <table class="kompakt">
+    <tr><th style="width:9%">Nr.</th><th style="width:28%">Äquivalenzklasse</th><th style="width:14%">Repräsentant</th><th>erwartetes Ergebnis</th></tr>
+    <tr><td>ÄK1</td><td>gültig: 92–100</td><td>95</td><td>1</td></tr>
+    <tr><td>ÄK2 … ÄK6</td><td>gültig: 81–91, 67–80, 50–66, 30–49, 0–29</td><td>85, 70, 60, 40, 10</td><td>2, 3, 4, 5, 6</td></tr>
+    <tr><td>ÄK7</td><td>ungültig: &lt; 0</td><td>−5</td><td>Fehlermeldung</td></tr>
+    <tr><td>ÄK8</td><td>ungültig: &gt; 100</td><td>120</td><td>Fehlermeldung</td></tr>
+    <tr><td>ÄK9</td><td>ungültig: keine ganze Zahl (Text, leer)</td><td>„abc“</td><td>Fehlermeldung (bei Eingabe über ein Textfeld)</td></tr>
+  </table>
+  <p>Ergebnis: 9 Testfälle aus Äquivalenzklassen plus 14 Grenzwerte (einige fallen zusammen, z. B. 0 und 100 sind gleichzeitig Repräsentanten).</p>
+
+  <p><strong>Mehrere Parameter</strong> – Beispiel Online-Shop <code>versandpreis(gewichtKg : double, land : string)</code>: Gewicht &gt; 0 bis 31,5 kg in drei Preisstufen (bis 2 kg, bis 10 kg, darüber), Land ∈ {„DE“, „AT“, „CH“}. Testfalltabelle nach der Regel „gültige kombinieren, ungültige einzeln“:</p>
+  <table class="kompakt">
+    <tr><th>Nr.</th><th>gewichtKg</th><th>land</th><th>abgedeckte Klassen</th><th>erwartet</th></tr>
+    <tr><td>1</td><td>1,5</td><td>„DE“</td><td>Gewicht Stufe 1, DE</td><td>Preis Stufe 1 DE</td></tr>
+    <tr><td>2</td><td>5,0</td><td>„AT“</td><td>Gewicht Stufe 2, AT</td><td>Preis Stufe 2 AT</td></tr>
+    <tr><td>3</td><td>20,0</td><td>„CH“</td><td>Gewicht Stufe 3, CH</td><td>Preis Stufe 3 CH</td></tr>
+    <tr><td>4</td><td>0,0</td><td>„DE“</td><td>ungültig: Gewicht ≤ 0</td><td>Fehler</td></tr>
+    <tr><td>5</td><td>40,0</td><td>„DE“</td><td>ungültig: Gewicht &gt; 31,5</td><td>Fehler</td></tr>
+    <tr><td>6</td><td>5,0</td><td>„FR“</td><td>ungültig: anderes Land</td><td>Fehler</td></tr>
+    <tr><td>7</td><td>5,0</td><td><code>null</code></td><td>ungültig: Land fehlt</td><td>Fehler</td></tr>
+  </table>
+
+  <h4>Weitere Hinweise zur Testfallauswahl</h4>
+  <ul>
+    <li><strong>Sonderfälle</strong> immer mitdenken: <code>null</code>, leeres Array/leere Liste/leerer Text, genau ein Element, alle Werte gleich, Maximum am Anfang oder Ende, negative Werte, sehr große Werte, Sonderzeichen und Umlaute.</li>
+    <li><strong>Entscheidungstabelle:</strong> Wenn das Ergebnis von <em>Kombinationen</em> mehrerer Bedingungen abhängt, werden alle Kombinationen (Regeln) als Spalten aufgelistet; jede Regel ergibt einen Testfall.</li>
+    <li><strong>Testdaten für eine Überdeckung</strong> (White-Box, S23): Für jede noch nicht ausgeführte Anweisung überlegen, welche Bedingung dafür wahr bzw. falsch sein muss, und einen Datensatz so ändern oder ergänzen, dass genau dieser Fall eintritt. Die Änderung begründen („damit die Bedingung in Zeile … erfüllt ist“).</li>
+    <li>Ein Testfall ist nur vollständig mit <strong>erwartetem Ergebnis</strong>, das aus der Spezifikation stammt – nicht aus dem (vielleicht fehlerhaften) Code.</li>
+  </ul>
+  <div class="falle"><span class="kastentitel">Typische Fehler</span>
+    Nur gültige Klassen bilden. · Zwei ungültige Werte in einem Testfall kombinieren. · Für jede gültige Klasse jedes Parameters einen eigenen Testfall anlegen, obwohl nach „möglichst wenigen“ gefragt ist. · Grenzwerte nur auf einer Seite der Grenze testen. · Erwartetes Ergebnis weglassen. · „Zahl außerhalb“ als nur eine ungültige Klasse statt zwei (zu klein / zu groß).</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <strong>S22 T2 A2bc (4 P):</strong> Weil im Unit-Test noch Testfälle fehlen, sollen Testdaten aus zwei weiteren Äquivalenzklassen angegeben werden, für die die Methode −1 liefern muss – also ungültige Klassen, die die vorhandenen Testfälle noch nicht abdecken. · <strong>S23 T2 A3bc (4 P):</strong> Testdaten so anpassen, dass alle Anweisungen durchlaufen werden, und die Änderungen begründen. · <strong>W25 T2 A3ba:</strong> Testdaten mit Sonderfällen (negative Zahlen, ein Element, <code>null</code>) auswerten.</div>
+
+  <!-- ===================== TQ-07 ===================== -->
+  <h3 id="e-07">TQ-07 · Codequalität / Reviews <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
+  <p class="klein">Vorkommen: 2/9 · Prüfungen: W21 (Dokumentation einer Bibliothekserweiterung; Bewertung „nur automatische Code-Reviews und Unit-Tests“), S24 (drei qualitätssichernde Maßnahmen) · dazu S23 T1 A1e (QS-Maßnahmen) · Teil 1, 4–6 Punkte</p>
+
+  <h4>Qualitätssicherung im Entwicklungsprozess</h4>
+  <table class="kompakt">
+    <tr><th style="width:18%"></th><th>Konstruktive QS (Fehler vermeiden)</th><th>Analytische QS (Fehler finden)</th></tr>
+    <tr><td>Idee</td><td>Rahmenbedingungen so setzen, dass Fehler gar nicht erst entstehen</td><td>vorhandene Ergebnisse prüfen und bewerten</td></tr>
+    <tr><td>Beispiele</td><td>definiertes Vorgehensmodell (z. B. Scrum mit Definition of Done), Coding-Richtlinien und Namenskonventionen, Entwurfsmuster und Architekturvorgaben, geeignete Werkzeuge (IDE, Versionsverwaltung, CI/CD-Pipeline), Vorlagen und Verfahrensanweisungen zur Dokumentation, Schulung/Zertifizierung der Entwickler und Tester, Pair Programming, TDD</td><td>Code-Reviews und Inspektionen, statische Codeanalyse, Tests aller Stufen (Unit bis Abnahme) mit standardisierten Testumgebungen, -verfahren und -daten, Messung von Metriken (Testabdeckung, Komplexität), Audits</td></tr>
+  </table>
+  <p>Für die Prüfung gilt: Eine Maßnahme <strong>erläutern</strong> heißt, sie zu benennen <em>und</em> zu beschreiben, wie sie die Qualität verbessert (z. B. „Code-Reviews: Jede Änderung wird vor dem Zusammenführen von einem zweiten Entwickler geprüft; so werden Logikfehler und Verstöße gegen Richtlinien früh gefunden und das Wissen im Team verteilt“).</p>
+
+  <h4>Code-Review</h4>
+  <p>Beim <strong>Code-Review</strong> lesen und bewerten andere Entwickler den Code, bevor er übernommen wird (Vier-Augen-Prinzip). Heute meist als <strong>Pull-Request-/Merge-Request-Review</strong> im Git-Workflow.</p>
+  <table class="kompakt">
+    <tr><th style="width:22%">Reviewart</th><th>Merkmale (vom informellsten zum formalsten)</th></tr>
+    <tr><td>Informelles Review</td><td>Kollege schaut drüber („Schulterblick“), keine Dokumentation</td></tr>
+    <tr><td>Walkthrough</td><td>Autor stellt den Code vor und führt durch, Teilnehmer stellen Fragen; dient auch dem Wissenstransfer</td></tr>
+    <tr><td>Technisches Review</td><td>Fachleute prüfen gegen Vorgaben/Checkliste, Ergebnisse werden protokolliert, Entscheidung über Freigabe</td></tr>
+    <tr><td>Inspektion</td><td>formalstes Verfahren mit Rollen (Moderator, Autor, Gutachter, Protokollant), Checklisten, Metriken und Nachkontrolle</td></tr>
+  </table>
+  <figure>
+    <svg viewBox="0 0 760 150" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+      <defs>
+        <marker id="e07r-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#222"/>
+        </marker>
+      </defs>
+      <rect x="2" y="10" width="132" height="92" rx="6" fill="#fff" stroke="#222"/>
+      <text x="68" y="30" text-anchor="middle" font-weight="bold" font-size="13">1 · Planung</text>
+      <text x="68" y="52" text-anchor="middle">Umfang, Reviewer</text>
+      <text x="68" y="68" text-anchor="middle">und Checkliste</text>
+      <text x="68" y="84" text-anchor="middle">festlegen</text>
+      <rect x="158" y="10" width="132" height="92" rx="6" fill="#fff" stroke="#222"/>
+      <text x="224" y="30" text-anchor="middle" font-weight="bold" font-size="13">2 · Vorbereitung</text>
+      <text x="224" y="52" text-anchor="middle">Reviewer prüfen</text>
+      <text x="224" y="68" text-anchor="middle">den Code einzeln</text>
+      <text x="224" y="84" text-anchor="middle">(mit Checkliste)</text>
+      <rect x="314" y="10" width="132" height="92" rx="6" fill="#fff" stroke="#222"/>
+      <text x="380" y="30" text-anchor="middle" font-weight="bold" font-size="13">3 · Review</text>
+      <text x="380" y="52" text-anchor="middle">Befunde besprechen</text>
+      <text x="380" y="68" text-anchor="middle">bzw. als Kommentar</text>
+      <text x="380" y="84" text-anchor="middle">im Pull-Request</text>
+      <rect x="470" y="10" width="132" height="92" rx="6" fill="#fff" stroke="#222"/>
+      <text x="536" y="30" text-anchor="middle" font-weight="bold" font-size="13">4 · Nacharbeit</text>
+      <text x="536" y="52" text-anchor="middle">Autor behebt</text>
+      <text x="536" y="68" text-anchor="middle">die Befunde und</text>
+      <text x="536" y="84" text-anchor="middle">lädt Änderung hoch</text>
+      <rect x="626" y="10" width="132" height="92" rx="6" fill="#eef3fa" stroke="#222"/>
+      <text x="692" y="30" text-anchor="middle" font-weight="bold" font-size="13">5 · Abschluss</text>
+      <text x="692" y="52" text-anchor="middle">Kontrolle der</text>
+      <text x="692" y="68" text-anchor="middle">Nacharbeit, dann</text>
+      <text x="692" y="84" text-anchor="middle">Freigabe (Merge)</text>
+      <line x1="134" y1="56" x2="156" y2="56" stroke="#222" marker-end="url(#e07r-pfeil)"/>
+      <line x1="290" y1="56" x2="312" y2="56" stroke="#222" marker-end="url(#e07r-pfeil)"/>
+      <line x1="446" y1="56" x2="468" y2="56" stroke="#222" marker-end="url(#e07r-pfeil)"/>
+      <line x1="602" y1="56" x2="624" y2="56" stroke="#222" marker-end="url(#e07r-pfeil)"/>
+      <path d="M692,102 L692,128 L380,128 L380,104" fill="none" stroke="#222" stroke-dasharray="5,4" marker-end="url(#e07r-pfeil)"/>
+      <text x="536" y="143" text-anchor="middle" font-style="italic">bei größeren Änderungen erneut prüfen</text>
+    </svg>
+    <figcaption>Abb. A-7: Ablauf eines Code-Reviews</figcaption>
+  </figure>
+  <div class="zweispaltig">
+    <div>
+      <p><strong>Vorteile:</strong> findet Logik- und Designfehler früh und günstig (bevor getestet wird) · prüft Verständlichkeit, Wartbarkeit und Einhaltung der Richtlinien – das kann kein Test · Wissenstransfer, mehrere kennen den Code (weniger Abhängigkeit von Einzelnen) · Lerneffekt für Einsteiger · einheitlicher Stil · findet auch Sicherheitslücken und fehlende Fehlerbehandlung.</p>
+    </div>
+    <div>
+      <p><strong>Nachteile/Grenzen:</strong> kostet Zeit von erfahrenen Entwicklern · Ergebnis hängt von Sorgfalt und Erfahrung der Reviewer ab · bei sehr großen Änderungen oberflächlich · kann als Kontrolle/Kritik empfunden werden (konstruktive Feedbackkultur nötig) · kann das tatsächliche Laufzeitverhalten nicht nachweisen.</p>
+    </div>
+  </div>
+  <p><strong>Pair Programming:</strong> Zwei Entwickler arbeiten an einem Rechner; der <em>Driver</em> schreibt den Code, der <em>Navigator</em> prüft laufend, denkt voraus und achtet auf Fehler; die Rollen wechseln regelmäßig. Es ist damit ein „Review in Echtzeit“. Vorteile: weniger Fehler, besseres Design, Wissensverteilung, schnelle Einarbeitung neuer Kollegen. Nachteile: zwei Personen für eine Aufgabe (höherer Personalaufwand), anstrengend, Paare müssen harmonieren.</p>
+
+  <h4>Statische Codeanalyse und Metriken</h4>
+  <p>Werkzeuge wie SonarQube, Checkstyle, SpotBugs oder ESLint („Linter“) untersuchen den Quelltext automatisch – meist in der IDE und in der CI-Pipeline bei jedem Commit.</p>
+  <div class="zweispaltig">
+    <div>
+      <p><strong>Findet automatisch:</strong> Verstöße gegen Coding-Konventionen (Namen, Formatierung) · ungenutzte Variablen und toten Code · mögliche <code>NullPointerException</code>s, nicht geschlossene Ressourcen · doppelten Code · zu hohe Komplexität, zu lange Methoden · bekannte Sicherheitsmuster (z. B. SQL-Abfrage per String-Verkettung) · fehlende Kommentare an öffentlichen Methoden.</p>
+    </div>
+    <div>
+      <p><strong>Findet nicht:</strong> ob der Code die <strong>fachlichen Anforderungen</strong> erfüllt (falsche Formel, falscher Grenzwert laut Spezifikation) · fehlende Funktionen · ob Namen und Struktur wirklich verständlich und das Design sinnvoll sind · Performance unter realer Last · Bedienbarkeit.</p>
+    </div>
+  </div>
+  <p><strong>Metriken:</strong> Codezeilen (LOC) · <strong>zyklomatische Komplexität nach McCabe</strong> = Anzahl der binären Entscheidungen + 1 (bzw. Kanten − Knoten + 2 im Kontrollflussgraphen); Werte über 10 gelten als schwer test- und wartbar; die Zahl ist zugleich eine obere Grenze für die Testfälle, die man für vollständige Zweigüberdeckung braucht · Testabdeckung · Anteil duplizierten Codes · Kopplung zwischen Klassen.</p>
+
+  <h4>Konventionen und Dokumentation</h4>
+  <ul>
+    <li><strong>Java-Namenskonventionen:</strong> Klassen <code>PascalCase</code> (<code>Kunde</code>), Methoden und Variablen <code>camelCase</code> (<code>berechneSumme</code>, <code>anzahlKunden</code>), Konstanten <code>UPPER_SNAKE_CASE</code> (<code>MAX_VERSUCHE</code>), Pakete klein. Methoden mit Verb, boolesche Methoden mit <code>ist…</code>/<code>hat…</code>.</li>
+    <li>Einheitliche Einrückung, geschweifte Klammern auch bei einzeiligen <code>if</code>s, eine Anweisung pro Zeile, begrenzte Zeilenlänge.</li>
+    <li><strong>Kommentare</strong> erklären das <em>Warum</em> (Grund einer Entscheidung, fachliche Regel), nicht das <em>Was</em>, das schon im Code steht. Veraltete Kommentare sind schlimmer als keine.</li>
+    <li><strong>Javadoc</strong> für öffentliche Klassen und Methoden; daraus wird eine HTML-API-Dokumentation erzeugt. Wichtige Tags: <code>@param</code> (Parameter), <code>@return</code> (Rückgabewert), <code>@throws</code> (ausgelöste Exception), <code>@author</code>, <code>@version</code>, <code>@since</code>, <code>@see</code>, <code>@deprecated</code>.</li>
+    <li>Zur Dokumentation einer <strong>Bibliothek bzw. Bibliothekserweiterung</strong> (W21) gehören außerdem: README mit Zweck, Installation und Einbindung, Anwendungsbeispiele, Beschreibung der Schnittstellen (API-Doku), Änderungshistorie (Changelog) mit Versionsnummern, Hinweise zu Abhängigkeiten und Lizenz.</li>
+  </ul>
+  <pre class="java">/**
+ * Prüft, ob ein Jahr nach dem gregorianischen Kalender ein Schaltjahr ist.
+ *
+ * @param jahr Jahreszahl, muss größer als 1582 sein
+ * @return true, wenn das Jahr ein Schaltjahr ist, sonst false
+ * @throws IllegalArgumentException wenn jahr kleiner oder gleich 1582 ist
+ * @since 1.2
+ */
+public static boolean istSchaltjahr(int jahr) { … }</pre>
+
+  <h4>Clean Code</h4>
+  <table class="kompakt">
+    <tr><th style="width:28%">Regel</th><th>Bedeutung</th></tr>
+    <tr><td>Sprechende Namen</td><td>Name verrät Zweck und Einheit: <code>restlaufzeitTage</code> statt <code>r</code> oder <code>tmp2</code>.</td></tr>
+    <tr><td>Keine „Magic Numbers“</td><td>feste Werte als benannte Konstanten (<code>MWST_SATZ</code>) – an einer Stelle änderbar und selbsterklärend.</td></tr>
+    <tr><td>DRY (Don't Repeat Yourself)</td><td>keine kopierten Codeblöcke; Gemeinsames in eine Methode/Variable auslagern, sonst müssen Änderungen mehrfach gemacht werden.</td></tr>
+    <tr><td>Kurze Methoden, eine Aufgabe (SRP)</td><td>jede Methode/Klasse hat genau eine Verantwortung; lieber mehrere kleine, gut benannte Methoden.</td></tr>
+    <tr><td>KISS, YAGNI</td><td>so einfach wie möglich; nichts „auf Vorrat“ programmieren.</td></tr>
+    <tr><td>Flache Verschachtelung</td><td>Sonderfälle früh abfangen (Guard Clause) statt tief verschachtelter <code>if</code>s.</td></tr>
+    <tr><td>Wenige Parameter, keine Seiteneffekte</td><td>eine Methode <code>berechne…</code> rechnet nur und ändert nicht nebenbei Daten.</td></tr>
+    <tr><td>Fehlerbehandlung mit Exceptions</td><td>statt geheimer Rückgabecodes; Fehler nicht stillschweigend verschlucken.</td></tr>
+    <tr><td>Pfadfinderregel</td><td>Code etwas sauberer hinterlassen, als man ihn vorgefunden hat (kontinuierliches Refactoring, abgesichert durch Tests).</td></tr>
+  </table>
+  <p class="codelabel">Vorher</p>
+  <pre class="java">// berechnet
+double b(double n) {
+    return n + n * 0.19;   // n plus 19 %
+}</pre>
+  <p class="codelabel">Nachher</p>
+  <pre class="java">private static final double MWST_SATZ = 0.19;
+
+/** Liefert den Bruttobetrag zum Nettobetrag (Regelsteuersatz). */
+double bruttoBetrag(double nettoBetrag) {
+    return nettoBetrag * (1 + MWST_SATZ);
+}</pre>
+  <p><strong>Refactoring</strong> = Struktur verbessern, <em>ohne das Verhalten zu ändern</em>. Voraussetzung sind Tests (Regressionstest), die vorher und nachher grün sind.</p>
+
+  <h4>Automatische Prüfungen allein – reicht das?</h4>
+  <p>Jedes Verfahren hat einen „blinden Fleck“: Statische Analyse prüft Form und bekannte Muster, aber keine Fachlogik. Unit-Tests prüfen nur, was jemand als Testfall formuliert hat, und nur einzelne Einheiten – nicht das Zusammenspiel, nicht Last, Bedienbarkeit oder die Anforderungen des Kunden. Eine hohe Testabdeckung sagt nichts über die Qualität der Assertions. Menschliche Reviews erkennen Verständlichkeit, Design- und Anforderungsfehler, verteilen Wissen – sind aber langsamer und nicht vollständig. In der Praxis werden die Verfahren deshalb <strong>kombiniert</strong>: Automatik als schnelles, lückenloses Sicherheitsnetz in der CI-Pipeline, Reviews und höhere Teststufen für das, was Automatik nicht sieht.</p>
+
+  <div class="falle"><span class="kastentitel">Typische Fehler</span>
+    Bei „Erläutern Sie drei QS-Maßnahmen“ drei Testarten nennen – das ist einseitig; besser Maßnahmen aus verschiedenen Bereichen (Prozess, Werkzeuge, Prüfungen). · Bei „Beurteilen Sie …“ nur Ja/Nein ohne Abwägung: Erwartet werden Argumente <em>für und gegen</em> und ein begründetes Fazit. · Kommentare, die nur den Code wiederholen, als „gute Dokumentation“ verkaufen.</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <strong>S24 T1 A1b (6 P):</strong> drei qualitätssichernde Maßnahmen für die Entwicklung erläutern – die Lösung nannte z. B. standardisiertes Vorgehensmodell, übliche Entwicklungswerkzeuge (IDE, CI/CD), standardisierte Testumgebungen/-verfahren/-daten, Zertifizierung der Mitarbeiter, Verfahrensanweisungen zur Dokumentation, Code-Reviews. · <strong>S23 T1 A1e (4 P):</strong> QS-Maßnahmen. · <strong>W21 T1 A4cb (5 P):</strong> Aussage bewerten, dass automatische Code-Reviews und Unit-Tests zur Qualitätssicherung genügen. · <strong>W21 T1 A1bb (6 P):</strong> Dokumentation einer Erweiterung einer Klassenbibliothek beschreiben.</div>
+</section>
+
+<!-- ===================== TEIL B: BELEGSATZ ===================== -->
+<section class="teil" id="belegsatz">
+  <h2>B · Belegsatz</h2>
+  <p class="klein">Enthält nur, was dir auch die IHK beilegen würde bzw. was in der Prüfung auf einem heraustrennbaren Blatt stünde: die Pseudocode-Konventionen (wie im Belegsatz S24) und die Anlagen zur Ausgangssituation (Spezifikationen, Code-Listings mit Zeilennummern, Testdaten, englischer Fachtext). Eine Notationshilfe speziell zum Testen legt die IHK nicht bei. Keine Erklärungen.</p>
+
+  <h3>Pseudocode, prozedurale Programmierung</h3>
+  <table>
+    <tr><th style="width:55%">Pseudocode</th><th>Beschreibung</th></tr>
+    <tr><td><pre style="margin:0;border:none;background:none;padding:0">wenn [ Bedingung ] dann
+   [ Anweisung ]
+sonst
+   [ Anweisung ]
+Ende wenn</pre></td><td>Verzweigung</td></tr>
+    <tr><td><pre style="margin:0;border:none;background:none;padding:0">zähle [ Variable ] von [ Startwert ] bis [ Endwert ]
+   [ Schleifeninhalt ]
+Ende zähle</pre></td><td>Zählschleife (Iteration)</td></tr>
+    <tr><td><pre style="margin:0;border:none;background:none;padding:0">solange [ Bedingung ]
+   [ Schleifeninhalt ]
+Ende solange</pre></td><td>Kopfgesteuerte Schleife</td></tr>
+    <tr><td><pre style="margin:0;border:none;background:none;padding:0">wiederhole
+   [ Schleifeninhalt ]
+solange [ Bedingung ]</pre></td><td>Fußgesteuerte Schleife</td></tr>
+    <tr><td><pre style="margin:0;border:none;background:none;padding:0">:=</pre></td><td>Zuweisung</td></tr>
+    <tr><td><pre style="margin:0;border:none;background:none;padding:0">=; &lt;; &gt;; &lt;=; &gt;=; &lt;&gt;</pre></td><td>Vergleiche</td></tr>
+    <tr><td><pre style="margin:0;border:none;background:none;padding:0">integer
+double
+string
+boolean
+array</pre></td><td>Datentypen</td></tr>
+  </table>
+  <p class="klein">In den Listings dieses Blocks gilt außerdem: <code>und</code>, <code>oder</code>, <code>nicht</code> sind logische Operatoren (Auswertung von links nach rechts; steht das Ergebnis fest, wird der Rest nicht mehr ausgewertet); <code>/</code> ist die normale Division (Ergebnis Kommazahl); <code>ausgabe(text)</code> gibt eine Zeile aus, <code>+</code> verkettet dabei Zeichenketten; <code>rückgabe</code> beendet die Funktion. Die Zeilennummern gehören nicht zum Code.</p>
+
+  <!-- Anlage 1 -->
+  <div class="anlage" id="anlage-1">
+    <h4>Anlage 1 · Ausgangssituation</h4>
+    <p><strong>Die Aufgaben dieses Blocks beziehen sich auf die folgende Ausgangssituation:</strong></p>
+    <p>Die <strong>VitaPark Fitness GmbH</strong> betreibt in Lüneburg und Umgebung fünf Fitnessstudios mit rund 9.000 Mitgliedern. Verträge, Kursbuchungen und der Zutritt werden bisher mit verschiedenen, teilweise veralteten Programmen verwaltet. Ab dem 1. März 2027 soll die neue Plattform <strong>„VitaPark Connect“</strong> in Betrieb gehen. Sie besteht aus</p>
+    <ul>
+      <li>einer <strong>App für Mitglieder</strong> (Android und iOS): Kurse buchen, aktuelle Auslastung der Studios ansehen, Trainingsdaten von Fitnessarmbändern auswerten (Puls, Trainingstage), digitale Mitgliedskarte als QR-Code,</li>
+      <li>einer <strong>Weboberfläche</strong> für Studioleitungen und Trainer (Kursplanung, Mitgliederverwaltung, Statistiken),</li>
+      <li>einem <strong>zentralen Server</strong> mit REST-Schnittstelle und relationaler Datenbank sowie der Steuerung der <strong>Drehkreuze</strong> am Eingang und vor der Sauna,</li>
+      <li>einer <strong>Schnittstelle zum Bonusprogramm „GesundPlus“</strong> einer Krankenkasse, das Mitglieder für regelmäßiges Training belohnt. Die Trainingsdaten werden im JSON-Format nach einer von der Krankenkasse vorgegebenen Spezifikation übertragen.</li>
+    </ul>
+    <p>Sie sind Auszubildende/r zum Fachinformatiker/zur Fachinformatikerin Anwendungsentwicklung bei der <strong>Brückner Digital GmbH</strong> in Hannover, die VitaPark Connect entwickelt. Das Team besteht aus sechs Entwicklerinnen und Entwicklern, einer Testerin und einem Product Owner. Der Server wird in Java entwickelt; gearbeitet wird mit Git, Pull-Requests und einer CI-Pipeline, die bei jedem Commit baut und die automatisierten Tests ausführt. Sie sind in die <strong>Qualitätssicherung</strong> eingebunden: Sie planen Tests, prüfen und korrigieren Code, schreiben Unit-Tests und arbeiten an den Qualitätsanforderungen mit.</p>
+    <p><strong>Rahmenbedingungen:</strong></p>
+    <ul>
+      <li>In den Abendstunden (17–21 Uhr) checken in allen Studios zusammen bis zu 50 Mitglieder pro Minute ein.</li>
+      <li>Viele Mitglieder sind über 60 Jahre alt und nutzen zum ersten Mal eine solche App.</li>
+      <li>Gesundheitsdaten (Puls, Trainingszeiten) sind besonders schützenswert.</li>
+      <li>Die Abnahme durch die Geschäftsführung der VitaPark Fitness GmbH ist für den 15. Februar 2027 geplant.</li>
+    </ul>
+  </div>
+
+  <!-- Anlage 2 -->
+  <div class="anlage" id="anlage-2">
+    <h4>Anlage 2 · Klassen und Spezifikationen der zu testenden Methoden (Auszug)</h4>
+    <figure>
+      <svg viewBox="0 0 760 245" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <!-- Mitglied -->
+        <rect x="2" y="10" width="220" height="228" fill="#fff" stroke="#222"/>
+        <text x="112" y="28" text-anchor="middle" font-weight="bold">Mitglied</text>
+        <line x1="2" y1="36" x2="222" y2="36" stroke="#222"/>
+        <text x="10" y="54">- mitgliedNr : integer</text>
+        <text x="10" y="72">- name : string</text>
+        <text x="10" y="90">- alter : integer</text>
+        <text x="10" y="108">- tarif : string</text>
+        <text x="10" y="126">- vertragAktiv : boolean</text>
+        <text x="10" y="144">- premium : boolean</text>
+        <text x="10" y="162">- offenerBetrag : double</text>
+        <line x1="2" y1="172" x2="222" y2="172" stroke="#222"/>
+        <text x="10" y="190">+ istVertragAktiv() : boolean</text>
+        <text x="10" y="208">+ hatPremium() : boolean</text>
+        <text x="10" y="226">+ getOffenerBetrag() : double</text>
+        <!-- Kurs -->
+        <rect x="232" y="10" width="310" height="174" fill="#fff" stroke="#222"/>
+        <text x="387" y="28" text-anchor="middle" font-weight="bold">Kurs</text>
+        <line x1="232" y1="36" x2="542" y2="36" stroke="#222"/>
+        <text x="240" y="54">- name : string</text>
+        <text x="240" y="72">- kapazitaet : integer</text>
+        <text x="240" y="90">- gebucht : integer</text>
+        <line x1="232" y1="100" x2="542" y2="100" stroke="#222"/>
+        <text x="240" y="118">+ Kurs(name : string, kapazitaet : integer)</text>
+        <text x="240" y="136">+ buchen(anzahl : integer) : boolean</text>
+        <text x="240" y="154">+ getFreiePlaetze() : integer</text>
+        <text x="240" y="172" font-size="12" font-style="italic">(neuer Kurs: gebucht = 0)</text>
+        <!-- Termin -->
+        <rect x="552" y="10" width="206" height="174" fill="#fff" stroke="#222"/>
+        <text x="655" y="28" text-anchor="middle" font-weight="bold">Termin</text>
+        <line x1="552" y1="36" x2="758" y2="36" stroke="#222"/>
+        <text x="560" y="54">- kurs : string</text>
+        <text x="560" y="72">- datum : string</text>
+        <text x="560" y="90">- teilnehmer : integer</text>
+        <line x1="552" y1="100" x2="758" y2="100" stroke="#222"/>
+        <text x="560" y="118">+ getKurs() : string</text>
+        <text x="560" y="136">+ getDatum() : string</text>
+        <text x="560" y="154">+ getTeilnehmer() : integer</text>
+      </svg>
+      <figcaption>Abb. B-1: Klassen der Plattform VitaPark Connect (Auszug); für alle Attribute existieren Get-Methoden</figcaption>
+    </figure>
+    <table class="kompakt">
+      <tr><th style="width:40%">Methode</th><th>Spezifikation</th></tr>
+      <tr><td class="mono">freiePlaetze(kapazitaet : integer,<br>&nbsp;&nbsp;gebucht : integer) : integer</td><td>Liefert die Anzahl freier Plätze eines Kurses (<code>kapazitaet − gebucht</code>). Voraussetzungen: <code>kapazitaet &gt; 0</code> und <code>0 ≤ gebucht ≤ kapazitaet</code>. Ist eine Voraussetzung verletzt, wird −1 geliefert.</td></tr>
+      <tr><td class="mono">belastungsDurchschnitt(puls : integer[],<br>&nbsp;&nbsp;grenze : integer) : double</td><td>Liefert den Durchschnitt aller Pulswerte einer Trainingseinheit, die <strong>mindestens</strong> <code>grenze</code> betragen (Belastungsbereich). Liegt kein Wert im Belastungsbereich, wird 0.0 geliefert.</td></tr>
+      <tr><td class="mono">laengsteSerie(trainiert : boolean[]) : integer</td><td><code>trainiert[i]</code> ist <code>true</code>, wenn das Mitglied am Tag i trainiert hat. Liefert die größte Anzahl unmittelbar aufeinanderfolgender Trainingstage. Ist das Array <code>null</code> oder leer, wird eine <code>IllegalArgumentException</code> ausgelöst.</td></tr>
+      <tr><td class="mono">spitzenphasen(besucher : integer[][],<br>&nbsp;&nbsp;grenze : integer) : integer</td><td><code>besucher[tag][std]</code> enthält die Anzahl anwesender Mitglieder eines Studios am Tag <code>tag</code> in der Öffnungsstunde <code>std</code> (17, 18, 19, 20 Uhr → Index 0 bis 3). Eine <strong>Spitzenphase</strong> liegt vor, wenn an <strong>einem</strong> Tag in mindestens zwei unmittelbar aufeinanderfolgenden Stunden <strong>mehr als</strong> <code>grenze</code> Mitglieder anwesend sind. Jede Spitzenphase wird genau einmal gezählt. Zwischen zwei Tagen liegt die Nacht – eine Spitzenphase reicht nie über das Tagesende hinaus. Geliefert wird die Anzahl der Spitzenphasen.</td></tr>
+      <tr><td class="mono">beitrag(alter : integer, tarif : string) : double</td><td>siehe Anlage 3 (Beitragsordnung) und Anlage 4 (Listing)</td></tr>
+      <tr><td class="mono">bonuspunkte(minuten : integer[]) : integer</td><td>siehe Anlage 3 (Bonusprogramm)</td></tr>
+      <tr><td class="mono">kursStatistik(termine : List&lt;Termin&gt;)</td><td>siehe Anlage 5</td></tr>
+      <tr><td class="mono">zugangPruefen(m : Mitglied,<br>&nbsp;&nbsp;bereich : string) : string</td><td>siehe Anlage 6</td></tr>
+    </table>
+  </div>
+
+  <!-- Anlage 3 -->
+  <div class="anlage" id="anlage-3">
+    <h4>Anlage 3 · Beitrags- und Preisordnung der VitaPark Fitness GmbH (Auszug)</h4>
+    <table class="kompakt">
+      <caption>Monatsbeiträge</caption>
+      <tr><th style="width:18%">Tarif</th><th style="width:20%">Monatsbeitrag</th><th>Leistungen</th></tr>
+      <tr><td>„BASIC“</td><td>29,90 €</td><td>Trainingsbereich, Kurse</td></tr>
+      <tr><td>„PREMIUM“</td><td>49,90 €</td><td>zusätzlich Sauna und Getränke</td></tr>
+    </table>
+    <table class="kompakt">
+      <caption>Altersermäßigung auf den Monatsbeitrag</caption>
+      <tr><th style="width:38%">Alter (in vollen Jahren)</th><th>Ermäßigung</th></tr>
+      <tr><td>14 bis 17 Jahre</td><td>50 %</td></tr>
+      <tr><td>18 bis 64 Jahre</td><td>keine</td></tr>
+      <tr><td>ab 65 Jahre</td><td>20 %</td></tr>
+    </table>
+    <p>Mitglied kann man ab 14 Jahren werden. Altersangaben über 120 Jahre gelten als Eingabefehler.</p>
+    <p><strong>Methode <code>beitrag(alter : integer, tarif : string) : double</code>:</strong> liefert den Monatsbeitrag in Euro nach den obigen Tabellen. Bei einem Alter unter 14 oder über 120 sowie bei einem unbekannten oder fehlenden Tarif (<code>null</code>, leere Zeichenkette, jeder andere Wert als „BASIC“ oder „PREMIUM“ in genau dieser Schreibweise) löst die Methode eine <code>IllegalArgumentException</code> aus.</p>
+    <table class="kompakt">
+      <caption>Gast-Tageskarten (für Nichtmitglieder)</caption>
+      <tr><th style="width:50%">Leistung</th><th>Preis</th></tr>
+      <tr><td>Tageskarte</td><td>15,00 € je Karte</td></tr>
+      <tr><td>Tageskarte ermäßigt (Schüler, Studierende)</td><td>10,00 € je Karte</td></tr>
+      <tr><td>Mengenrabatt ab 10 gleichzeitig gekauften Karten</td><td>10 % auf den Kartenpreis</td></tr>
+      <tr><td>Sauna-Zuschlag</td><td>5,00 € je Karte (wird nicht rabattiert)</td></tr>
+    </table>
+    <p><strong>Kursbuchung mit Gästen:</strong> Bei jeder Kursbuchung kann ein Mitglied zusätzlich <strong>0 bis 3 Gäste</strong> anmelden.</p>
+    <p><strong>Bonusprogramm GesundPlus:</strong> Für jede Trainingseinheit ab 60 Minuten gibt es 3 Bonuspunkte, für jede Trainingseinheit ab 30 Minuten (aber unter 60 Minuten) 1 Bonuspunkt, für kürzere Einheiten keine Punkte. Die Methode <code>bonuspunkte(minuten : integer[]) : integer</code> erhält die Dauer aller Trainingseinheiten eines Monats in Minuten und liefert die Summe der Bonuspunkte.</p>
+  </div>
+
+  <!-- Anlage 4 -->
+  <div class="anlage" id="anlage-4">
+    <h4>Anlage 4 · Listing der Methode <code>beitrag</code> (Java)</h4>
+    <pre class="java listing">01 public double beitrag(int alter, String tarif) {
+02     if (alter &lt; 14 || alter &gt; 120) {
+03         throw new IllegalArgumentException("Alter ungültig");
+04     }
+05     double grundbeitrag;
+06     if (tarif.equals("BASIC")) {
+07         grundbeitrag = 29.90;
+08     } else if (tarif.equals("PREMIUM")) {
+09         grundbeitrag = 49.90;
+10     } else {
+11         throw new IllegalArgumentException("Tarif unbekannt");
+12     }
+13     if (alter &lt;= 17) {
+14         return grundbeitrag * 0.5;
+15     }
+16     if (alter &gt; 65) {
+17         return grundbeitrag * 0.8;
+18     }
+19     return grundbeitrag;
+20 }</pre>
+  </div>
+
+  <!-- Anlage 5 -->
+  <div class="anlage" id="anlage-5">
+    <h4>Anlage 5 · Prozedur <code>kursStatistik</code> mit Testdaten</h4>
+    <p>Die Studioleitung erhält eine Statistik, wie gut die Kurse besucht waren. Die Termine liegen in einer Liste <code>termine : List&lt;Termin&gt;</code> (Klasse <code>Termin</code> siehe Anlage 2), <strong>aufsteigend sortiert nach Kursname</strong>. Für jeden Kurs sollen die Anzahl der Termine, die höchste Teilnehmerzahl eines Termins und die durchschnittliche Teilnehmerzahl ausgegeben werden, zum Schluss die Anzahl aller Termine und die durchschnittliche Teilnehmerzahl über alle Termine. Ist die Liste leer, wird nach der Überschrift nur die Zeile „Keine Termine vorhanden“ ausgegeben. Kommazahlen werden mit einer Nachkommastelle ausgegeben.</p>
+    <pre class="pseudo listing">01 prozedur kursStatistik(termine : List&lt;Termin&gt;)
+02   ausgabe("Kursstatistik")
+03   kurs : string := termine.get(0).getKurs()
+04   anzahl : integer := 0
+05   summe : integer := 0
+06   max : integer := 0
+07   anzahlGesamt : integer := 0
+08   summeGesamt : integer := 0
+09   zähle i von 0 bis termine.size() - 1
+10     t : Termin := termine.get(i)
+11     wenn t.getKurs() &lt;&gt; kurs dann
+12       ausgabe(kurs + ": " + anzahl + " Termine, max. " + max
+13               + ", Ø " + summe / anzahl)
+14       anzahlGesamt := anzahlGesamt + anzahl
+15       summeGesamt := summeGesamt + summe
+16       kurs := t.getKurs()
+17       anzahl := 0
+18       summe := 0
+19     Ende wenn
+20     anzahl := anzahl + 1
+21     summe := summe + t.getTeilnehmer()
+22     wenn t.getTeilnehmer() &gt; max dann
+23       max := t.getTeilnehmer()
+24     Ende wenn
+25   Ende zähle
+26   ausgabe("Gesamt: " + anzahlGesamt + " Termine, Ø "
+27           + summeGesamt / anzahl)
+28 Ende prozedur</pre>
+    <div class="zweispaltig">
+      <table class="daten kompakt">
+        <caption>Testdaten (Liste termine)</caption>
+        <tr><th>Index</th><th>kurs</th><th>datum</th><th>teilnehmer</th></tr>
+        <tr><td>0</td><td>Aqua-Fitness</td><td>03.11.2026</td><td>14</td></tr>
+        <tr><td>1</td><td>Aqua-Fitness</td><td>10.11.2026</td><td>18</td></tr>
+        <tr><td>2</td><td>Rückenfit</td><td>04.11.2026</td><td>10</td></tr>
+        <tr><td>3</td><td>Rückenfit</td><td>11.11.2026</td><td>12</td></tr>
+        <tr><td>4</td><td>Rückenfit</td><td>18.11.2026</td><td>8</td></tr>
+        <tr><td>5</td><td>Yoga</td><td>05.11.2026</td><td>16</td></tr>
+        <tr><td>6</td><td>Yoga</td><td>12.11.2026</td><td>13</td></tr>
+      </table>
+      <div>
+        <p style="margin-top:4px"><strong>Erwartete Ausgabe für diese Testdaten:</strong></p>
+        <div class="ausgabebox">Kursstatistik
+Aqua-Fitness: 2 Termine, max. 18, Ø 16.0
+Rückenfit: 3 Termine, max. 12, Ø 10.0
+Yoga: 2 Termine, max. 16, Ø 14.5
+Gesamt: 7 Termine, Ø 13.0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Anlage 6 -->
+  <div class="anlage" id="anlage-6">
+    <h4>Anlage 6 · Listing der Methode <code>zugangPruefen</code> (Java)</h4>
+    <p>Die Methode wird aufgerufen, wenn ein Mitglied an einem Drehkreuz seinen QR-Code scannt. <code>bereich</code> ist „Trainingsbereich“ (Drehkreuz am Eingang) oder „Sauna“. Die Rückgabe wird auf dem Display des Drehkreuzes angezeigt; das Drehkreuz öffnet, wenn die Meldung mit „Zutritt“ beginnt. Mitglieder mit offenem Betrag erhalten Zutritt, aber einen Hinweis. Versuche ohne aktiven Vertrag werden protokolliert. Die Kommentare B1 … B4 kennzeichnen Bedingungen, A1 … A5 Anweisungen.</p>
+    <pre class="java listing">01 public String zugangPruefen(Mitglied m, String bereich) {
+02     String meldung = "Kein Zutritt";
+03     if (m.istVertragAktiv()) {                          // B1
+04         meldung = "Zutritt Trainingsbereich";           // A1
+05         if (bereich.equals("Sauna")) {                  // B2
+06             if (m.hatPremium()) {                       // B3
+07                 meldung = "Zutritt Sauna";              // A2
+08             } else {
+09                 meldung = "Sauna nur mit Premium";      // A3
+10             }
+11         }
+12         if (m.getOffenerBetrag() &gt; 0) {                 // B4
+13             meldung = meldung + " (Zahlung offen)";     // A4
+14         }
+15     } else {
+16         protokolliereVersuch(m);                        // A5
+17     }
+18     return meldung;
+19 }</pre>
+  </div>
+
+  <!-- Anlage 7 -->
+  <div class="anlage" id="anlage-7">
+    <h4>Anlage 7 · Englischer Fachtext (Auszug aus dem Testhandbuch von Brückner Digital)</h4>
+    <div class="englisch">
+      <p><strong>Measuring test coverage</strong></p>
+      <p>Code coverage tells a development team how much of its source code is actually executed while the test suite is running. It is usually reported as a percentage and measured automatically by coverage tools such as JaCoCo for Java.</p>
+      <p><em>Statement coverage</em> is the simplest metric. It counts how many of the executable statements have been run at least once. A test suite that reaches 100 % statement coverage has executed every line of code – but not necessarily every outcome of every decision. An if statement without an else part, for example, can be fully covered by a single test in which the condition is true.</p>
+      <p><em>Branch coverage</em>, also called decision coverage, is stricter. Each possible outcome of every decision, true as well as false, has to be taken at least once. Complete branch coverage therefore always includes complete statement coverage, whereas the reverse is not true.</p>
+      <p><em>Path coverage</em> is the strongest of the three metrics. A path is a sequence of statements that starts at the entry point of a method and ends at one of its exit points. Full path coverage requires every possible path to be executed at least once, which in turn guarantees full branch coverage. The number of paths grows very quickly: every independent decision doubles it, and a loop can in theory produce an unlimited number of paths. In practice, path coverage is therefore only achievable for small methods, or the number of loop iterations has to be limited.</p>
+      <p>Keep in mind that high coverage does not prove that the code is correct. Coverage only shows which code was executed, not whether the results were checked by meaningful assertions – and it can never reveal functionality that is missing completely.</p>
+    </div>
+  </div>
+
+  <!-- Anlage 8 -->
+  <div class="anlage" id="anlage-8">
+    <h4>Anlage 8 · Auszug aus dem Testframework JUnit 5</h4>
+    <table class="kompakt">
+      <tr><th style="width:46%">Anweisung</th><th>Beschreibung</th></tr>
+      <tr><td class="mono">@Test</td><td>kennzeichnet eine Methode als Testmethode</td></tr>
+      <tr><td class="mono">assertEquals(expected, actual)</td><td>Prüft, ob die Werte für <code>expected</code> (erwartet) und <code>actual</code> (tatsächlich) gleich sind. Ist dies nicht der Fall, schlägt der Test fehl.</td></tr>
+      <tr><td class="mono">assertEquals(expected, actual, delta)</td><td>wie oben für Kommazahlen; die Werte gelten als gleich, wenn sie sich höchstens um <code>delta</code> unterscheiden</td></tr>
+      <tr><td class="mono">assertTrue(bedingung)<br>assertFalse(bedingung)</td><td>Prüft, ob die Bedingung wahr bzw. falsch ist. Ist dies nicht der Fall, schlägt der Test fehl.</td></tr>
+      <tr><td class="mono">assertThrows(Ausnahme.class,<br>&nbsp;&nbsp;() -&gt; aufruf)</td><td>Führt den Aufruf aus. Der Test ist erfolgreich, wenn dabei eine Ausnahme vom angegebenen Typ ausgelöst wird; sonst schlägt er fehl.</td></tr>
+    </table>
+    <p class="klein">Benötigte Importe: <code>import org.junit.jupiter.api.Test;</code> und <code>import static org.junit.jupiter.api.Assertions.*;</code></p>
+  </div>
+</section>
+
+<!-- ===================== TEIL C: AUFGABEN ===================== -->
+<section class="teil" id="aufgaben">
+  <h2>C · Aufgaben</h2>
+  <p class="klein">Alle Aufgaben beziehen sich auf die Ausgangssituation in Anlage 1. Spezifikationen, Listings und Testdaten stehen in den Anlagen 2 bis 8. Algorithmen und Korrekturen dürfen in Pseudocode nach den Konventionen des Belegsatzes oder in Java formuliert werden.</p>
+
+  <!-- ===================== TQ-01 ===================== -->
+  <h3 id="a-01">TQ-01 · Testarten</h3>
+
+  <div class="aufgabe" id="TQ-01-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-01.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Im Projekt VitaPark Connect werden Tests auf verschiedenen Stufen durchgeführt.</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Ordnen Sie den folgenden Situationen jeweils die Teststufe zu und geben Sie an, gegen welches Dokument bzw. welche Entwurfsphase des V-Modells dabei geprüft wird.</div>
+    <table class="leer hoch kompakt">
+      <tr><th style="width:5%">Nr.</th><th style="width:55%">Situation</th><th style="width:18%">Teststufe</th><th>Prüfgrundlage</th></tr>
+      <tr><td>1</td><td>Eine Entwicklerin prüft die Methode <code>beitrag</code> (Anlage 4) isoliert mit eigenen Testdaten, bevor sie den Code in das gemeinsame Repository übernimmt.</td><td></td><td></td></tr>
+      <tr><td>2</td><td>Es wird geprüft, ob die App eine Kursbuchung korrekt über die REST-Schnittstelle an den Server überträgt und der Server sie in der Datenbank speichert.</td><td></td><td></td></tr>
+      <tr><td>3</td><td>Die Testerin prüft das vollständig installierte System in einer produktionsnahen Testumgebung gegen alle Anforderungen des Pflichtenhefts, einschließlich der Antwortzeiten.</td><td></td><td></td></tr>
+      <tr><td>4</td><td>Die Geschäftsführung der VitaPark Fitness GmbH spielt am 15.02.2027 typische Abläufe aus dem Studioalltag durch und entscheidet über die Freigabe.</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Erläutern Sie den Unterschied zwischen statischem und dynamischem Testen und nennen Sie je ein Beispiel aus dem Projekt.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 1d (Zusammenspiel der Teststufen) und W21 Teil 1, Aufgabe 4</p>
+  </div>
+
+  <div class="aufgabe" id="TQ-01-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-01.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Für die Methode <code>zugangPruefen</code> (Anlage 6) sollen Testfälle entworfen werden. Erläutern Sie den Unterschied zwischen einem Black-Box- und einem White-Box-Test und nennen Sie zwei Vorteile des White-Box-Tests gegenüber dem Black-Box-Test.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Nach einer Änderung an der Beitragsberechnung meldet eine Studioleitung, dass die bereits abgenommene Kursbuchung plötzlich mit einer Fehlermeldung abbricht. Erläutern Sie, mit welcher Testart dieser Fehler vor der Auslieferung hätte entdeckt werden können, und begründen Sie, warum diese Testart automatisiert werden sollte.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Zu Spitzenzeiten werden bis zu 50 Check-ins pro Minute erwartet (Anlage 1). Nennen Sie eine geeignete Testart, um das Verhalten des Servers unter dieser Belastung zu prüfen, und beschreiben Sie das Vorgehen.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: S24 Teil 2, Aufgabe 3a (Vorteile White-Box, Regressionstest) und W21 Teil 1, Aufgabe 4d</p>
+  </div>
+
+  <div class="aufgabe" id="TQ-01-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-01.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">20 Punkte</span>
+    </div>
+    <p>Bis zur Abnahme am 15.02.2027 bleiben nur wenige Monate. Der Product Owner beauftragt Sie, die Tests für VitaPark Connect zu planen und ein Testkonzept zu erstellen.</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Beschreiben Sie drei Inhalte, die in einem Testkonzept für VitaPark Connect festgelegt werden sollten.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Da viele Mitglieder über 60 Jahre alt sind und erstmals eine solche App nutzen, soll die App einem Usability-Test unterzogen werden. Beschreiben Sie zwei Methoden, mit denen ein Usability-Test durchgeführt werden kann.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Nach jedem nächtlichen Deployment auf die Testumgebung soll automatisch ein Smoke-Test laufen. Erläutern Sie den Begriff Smoke-Test und nennen Sie zwei Prüfungen, die dieser Smoke-Test für VitaPark Connect enthalten sollte.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe">d) Die Trainingsdaten werden im JSON-Format an das Bonusprogramm „GesundPlus“ übertragen (Anlage 1). Die Krankenkasse hat dafür eine Schnittstellenspezifikation mit einem JSON-Schema veröffentlicht.</div>
+    <div class="teilaufgabe" style="margin-left:18px"><span class="tp">3 P</span>da) Beschreiben Sie zwei Maßnahmen, mit denen sichergestellt werden kann, dass die Schnittstelle der Spezifikation entspricht.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe" style="margin-left:18px"><span class="tp">4 P</span>db) Ein Kollege meint: „Wenn jede erzeugte Datei erfolgreich gegen das JSON-Schema validiert wird, ist die Schnittstelle ausreichend getestet.“ Nehmen Sie begründet Stellung.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 1d (Testkonzept), W21 Teil 1, Aufgabe 3ac (Usability-Test) und W25 Teil 1, Aufgabe 3b (Konformität zur Spezifikation, XSD-Validierung)</p>
+  </div>
+
+  <!-- ===================== TQ-02 ===================== -->
+  <h3 id="a-02">TQ-02 · Code analysieren / Fehler finden</h3>
+
+  <div class="aufgabe" id="TQ-02-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-02.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">5 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Ordnen Sie die folgenden Fehler im Java-Code von VitaPark Connect jeweils der richtigen Fehlerart zu (Kreuz setzen).</div>
+    <table class="leer kompakt">
+      <tr><th style="width:5%">Nr.</th><th>Fehler</th><th class="mitte" style="width:13%">Syntax&shy;fehler</th><th class="mitte" style="width:13%">Laufzeit&shy;fehler</th><th class="mitte" style="width:13%">Logik&shy;fehler</th></tr>
+      <tr><td>1</td><td>In der Zeile <code>int anzahl = 0</code> fehlt das Semikolon.</td><td></td><td></td><td></td></tr>
+      <tr><td>2</td><td>In einer Schleife wird auf <code>puls[puls.length]</code> zugegriffen.</td><td></td><td></td><td></td></tr>
+      <tr><td>3</td><td>Die Summe der Teilnehmer wird mit <code>summe = summe - t.getTeilnehmer()</code> gebildet.</td><td></td><td></td><td></td></tr>
+      <tr><td>4</td><td>Ein Rabatt von 20 % wird als <code>preis * 0.2</code> statt <code>preis * 0.8</code> berechnet.</td><td></td><td></td><td></td></tr>
+      <tr><td>5</td><td>Statt <code>return</code> wurde <code>retrun</code> geschrieben.</td><td></td><td></td><td></td></tr>
+      <tr><td>6</td><td>Eine Methode erhält <code>null</code> statt einer Liste und ruft <code>termine.size()</code> auf.</td><td></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Beschreiben Sie, warum Logikfehler weder beim Übersetzen noch durch einen Programmabbruch auffallen, und wie man sie trotzdem findet.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W25 Teil 2, Aufgabe 3bb (semantische Fehler)</p>
+  </div>
+
+  <div class="aufgabe" id="TQ-02-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-02.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Für die Trainingsauswertung in der App wurde die Methode <code>belastungsDurchschnitt</code> implementiert (Spezifikation in Anlage 2: Durchschnitt aller Pulswerte, die <strong>mindestens</strong> <code>grenze</code> betragen; kein solcher Wert → 0.0).</p>
+    <pre class="java listing">01 public double belastungsDurchschnitt(int[] puls, int grenze) {
+02     int summe = 0;
+03     int anzahl = 0;
+04     for (int i = 1; i &lt; puls.length; i++) {
+05         if (puls[i] &gt; grenze) {
+06             summe = summe + puls[i];
+07             anzahl++;
+08         }
+09     }
+10     if (anzahl == 0) {
+11         return 0.0;
+12     }
+13     return (double) summe / puls.length;
+14 }</pre>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Führen Sie einen Schreibtischtest mit <code>puls = {150, 120, 140, 160, 135}</code> und <code>grenze = 140</code> durch. Geben Sie das tatsächliche und das laut Spezifikation erwartete Ergebnis an. Nicht benötigte Zeilen bleiben leer.</div>
+    <table class="leer kompakt">
+      <tr><th style="width:12%">i</th><th style="width:18%">puls[i]</th><th style="width:26%">Bedingung Zeile 05</th><th style="width:22%">summe</th><th>anzahl</th></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Nennen Sie die drei Fehler der Methode mit Zeilennummer und beschreiben Sie jeweils ihre Auswirkung.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Geben Sie die korrigierten Zeilen an.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>d) Geben Sie Testdaten an, mit denen die fehlerhafte Methode trotzdem das richtige Ergebnis liefert, und erläutern Sie, was daraus für das Testen folgt.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W25 Teil 2, Aufgabe 3b (fehlerhafte Funktion durchspielen und korrigieren)</p>
+  </div>
+
+  <div class="aufgabe" id="TQ-02-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-02.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">25 Punkte</span>
+    </div>
+    <p>Die Prozedur <code>kursStatistik</code> (Anlage 5) wurde von einem Praktikanten geschrieben und soll vor der Freigabe getestet werden. Verwenden Sie die Testdaten und die erwartete Ausgabe aus Anlage 5.</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Überprüfen Sie die Prozedur mit den Testdaten. Tragen Sie den Werteverlauf in die Datenverlaufstabelle ein und geben Sie die tatsächliche Ausgabe an.</div>
+    <table class="leer kompakt">
+      <tr><th style="width:12%">Typ</th><th style="width:20%">Variable</th><th>Werteverlauf</th></tr>
+      <tr><td>integer</td><td>i</td><td></td></tr>
+      <tr><td>string</td><td>kurs</td><td></td></tr>
+      <tr><td>integer</td><td>anzahl</td><td></td></tr>
+      <tr><td>integer</td><td>summe</td><td></td></tr>
+      <tr><td>integer</td><td>max</td><td></td></tr>
+      <tr><td>integer</td><td>anzahlGesamt</td><td></td></tr>
+      <tr><td>integer</td><td>summeGesamt</td><td></td></tr>
+    </table>
+    <p class="klein">Tatsächliche Ausgabe:</p>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">6 P</span>b) Nennen Sie drei Fehler mit Zeilennummer und beschreiben Sie jeweils ihre Auswirkung auf die Ausgabe.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">8 P</span>c) Geben Sie Korrekturen an, sodass für die Testdaten die erwartete Ausgabe aus Anlage 5 erzeugt wird. Geben Sie jeweils an, welche Zeile Sie ersetzen bzw. nach welcher Zeile Sie Anweisungen einfügen.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>d) Beschreiben Sie, was beim Aufruf mit einer leeren Liste geschieht, und ergänzen Sie die Prozedur so, dass sie sich dann wie in Anlage 5 gefordert verhält.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>e) Nennen Sie zwei Testarten, die nach der Korrektur durchgeführt werden sollten, und begründen Sie jeweils kurz.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S23 Teil 2, Aufgabe 3a (Jahresstatistik mit Datenverlaufstabelle, Fehler nennen, Code korrigieren und erweitern)</p>
+  </div>
+
+  <!-- ===================== TQ-03 ===================== -->
+  <h3 id="a-03">TQ-03 · Unit-Test / Überdeckungsmaße</h3>
+
+  <div class="aufgabe" id="TQ-03-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-03.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Die Methoden der Klasse <code>Kurs</code> (Anlage 2) sollen mit Unit-Tests geprüft werden.</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Beschreiben Sie, was ein Unit-Test ist und wozu er verwendet wird.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Nennen und beschreiben Sie zwei Eigenschaften, die ein Unit-Test erfüllen sollte.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Ordnen Sie den mit (1) bis (3) markierten Zeilen des folgenden Tests die Phasen des Arrange-Act-Assert-Musters zu und beschreiben Sie kurz die Aufgabe jeder Phase.</div>
+    <pre class="java">@Test
+void buchungVerringertFreiePlaetze() {
+    Kurs kurs = new Kurs("Yoga", 12);          // (1)
+    kurs.buchen(3);                            // (2)
+    assertEquals(9, kurs.getFreiePlaetze());   // (3)
+}</pre>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S22 Teil 2, Aufgabe 2a und W25 Teil 2, Aufgabe 3aa</p>
+  </div>
+
+  <div class="aufgabe" id="TQ-03-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-03.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">12 Punkte</span>
+    </div>
+    <p>Für die Kursbuchung wurde die Methode <code>freiePlaetze</code> implementiert (Spezifikation in Anlage 2). Ein Kollege hat dazu einen Unit-Test geschrieben (JUnit-Auszug in Anlage 8).</p>
+    <pre class="java listing">01 public int freiePlaetze(int kapazitaet, int gebucht) {
+02     int frei = -1;
+03     if (kapazitaet &gt; 0 &amp;&amp; gebucht &gt; 0) {
+04         if (gebucht &lt; kapazitaet) {
+05             frei = kapazitaet - gebucht;
+06         }
+07     }
+08     return frei;
+09 }</pre>
+    <pre class="java">@Test
+void testeFreiePlaetze() {
+    assertEquals(5, freiePlaetze(20, 15));      // Testfall 1
+    assertEquals(20, freiePlaetze(20, 0));      // Testfall 2
+    assertEquals(0, freiePlaetze(20, 20));      // Testfall 3
+    assertEquals(-1, freiePlaetze(20, 21));     // Testfall 4
+    assertEquals(-1, freiePlaetze(0, 0));       // Testfall 5
+    assertEquals(19, freiePlaetze(20, 1));      // Testfall 6
+}</pre>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Ermitteln Sie für jeden Testfall den Rückgabewert der Methode und ob der Testfall erfolgreich ist (OK) oder fehlschlägt (Fehler). Betrachten Sie dabei jeden Testfall für sich.</div>
+    <table class="leer kompakt">
+      <tr><th style="width:14%">Testfall</th><th style="width:40%">Rückgabewert der Methode</th><th>Ergebnis des Tests (OK / Fehler)</th></tr>
+      <tr><td>1</td><td></td><td></td></tr>
+      <tr><td>2</td><td></td><td></td></tr>
+      <tr><td>3</td><td></td><td></td></tr>
+      <tr><td>4</td><td></td><td></td></tr>
+      <tr><td>5</td><td></td><td></td></tr>
+      <tr><td>6</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Korrigieren Sie die Methode so, dass sie der Spezifikation entspricht und alle Testfälle erfolgreich sind.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Beim Ausführen der Testmethode <code>testeFreiePlaetze</code> mit der ursprünglichen Methode meldet JUnit nur einen einzigen fehlgeschlagenen Testfall. Erläutern Sie die Ursache und beschreiben Sie, wie der Test besser aufgebaut werden kann.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: S22 Teil 2, Aufgabe 2b (assertEquals-Testfälle auswerten, Bedingungen korrigieren)</p>
+  </div>
+
+  <div class="aufgabe" id="TQ-03-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-03.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">25 Punkte</span>
+    </div>
+    <p>Die Methode <code>zugangPruefen</code> (Anlage 6) steuert die Drehkreuze und ist damit sicherheitsrelevant. Laut Testkonzept soll für sie eine möglichst hohe Testabdeckung erreicht werden. Im Testhandbuch von Brückner Digital werden die Überdeckungsmaße auf Englisch beschrieben (Anlage 7).</p>
+    <div class="teilaufgabe"><span class="tp">9 P</span>a) Erläutern Sie mithilfe des Fachtextes (Anlage 7) die Anweisungsüberdeckung, die Zweigüberdeckung und die Pfadüberdeckung. Gehen Sie jeweils auch auf das Verhältnis zu den anderen Überdeckungsmaßen ein.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>b) Zeichnen Sie den Kontrollflussgraphen der Methode <code>zugangPruefen</code>. Beschriften Sie die Knoten mit B1 … B4 bzw. A1 … A5 (Anfangs- und Rückgabeanweisung dürfen als „Start“ und „Ende“ bezeichnet werden) und die Kanten an den Bedingungen mit w (wahr) bzw. f (falsch).</div>
+    <div class="zeichenflaeche"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Geben Sie die minimale Anzahl der Testfälle für eine vollständige Anweisungsüberdeckung und für eine vollständige Zweigüberdeckung an. Geben Sie für die Zweigüberdeckung die Testfälle an (Werte für Vertrag aktiv, Premium, offener Betrag, Bereich).</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>d) Notieren Sie alle Pfade, die durchlaufen werden müssen, um eine vollständige Pfadüberdeckung zu erreichen. Geben Sie dazu je Pfad alle durchlaufenen Bedingungen (B) und Anweisungen (A) in der Reihenfolge ihrer Abarbeitung an. Beispiel für die Schreibweise: B1, A1, B2, … (das Beispiel ist kein möglicher Pfad). Nicht benötigte Zeilen bleiben leer.</div>
+    <table class="leer kompakt">
+      <tr><th style="width:12%">Nummer</th><th>Pfad</th></tr>
+      <tr><td>1</td><td></td></tr><tr><td>2</td><td></td></tr><tr><td>3</td><td></td></tr><tr><td>4</td><td></td></tr>
+      <tr><td>5</td><td></td></tr><tr><td>6</td><td></td></tr><tr><td>7</td><td></td></tr><tr><td>8</td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">2 P</span>e) Laut Fachtext beweist eine hohe Überdeckung nicht, dass der Code korrekt ist. Erläutern Sie dies an einem Beispiel zur Methode <code>zugangPruefen</code>.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S24 Teil 2, Aufgabe 3b/3c (Überdeckungsmaße aus englischem Fachtext, alle Pfade notieren) und W22 Teil 2, Aufgabe 2ac</p>
+  </div>
+
+  <!-- ===================== TQ-04 ===================== -->
+  <h3 id="a-04">TQ-04 · Qualitätsmerkmale ISO/IEC 25010</h3>
+
+  <div class="aufgabe" id="TQ-04-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-04.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Im Pflichtenheft von VitaPark Connect stehen unter anderem die folgenden nicht-funktionalen Anforderungen.</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>Ordnen Sie jeder Anforderung das passende Qualitätsmerkmal nach ISO/IEC 25010 zu.</div>
+    <table class="leer hoch kompakt">
+      <tr><th style="width:5%">Nr.</th><th style="width:62%">Anforderung</th><th>Qualitätsmerkmal</th></tr>
+      <tr><td>1</td><td>Die Auslastungsanzeige der App wird nach dem Antippen in höchstens 2 Sekunden aktualisiert.</td><td></td></tr>
+      <tr><td>2</td><td>Fällt die Verbindung zum Server aus, kann das Drehkreuz die Mitgliedskarten der letzten 24 Stunden weiterhin offline prüfen.</td><td></td></tr>
+      <tr><td>3</td><td>Neue Trainer können nach einer 15-minütigen Einweisung selbstständig Kurse anlegen.</td><td></td></tr>
+      <tr><td>4</td><td>Trainingsdaten können von Fitnessarmbändern verschiedener Hersteller übernommen werden.</td><td></td></tr>
+      <tr><td>5</td><td>Ein neuer Tarif kann ergänzt werden, indem nur das Modul „Beitragsberechnung“ geändert wird.</td><td></td></tr>
+      <tr><td>6</td><td>Pulsdaten eines Mitglieds können nur von ihm selbst und seinem Trainer eingesehen werden.</td><td></td></tr>
+    </table>
+    <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 4ca und S26 Teil 1, Aufgabe 4a</p>
+  </div>
+
+  <div class="aufgabe" id="TQ-04-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-04.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">8 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Beschreiben Sie das Qualitätsmerkmal Zuverlässigkeit nach ISO/IEC 25010 und erläutern Sie zwei Untermerkmale am Beispiel des Check-ins am Drehkreuz.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Beschreiben Sie das Qualitätsmerkmal Wartbarkeit, nennen Sie zwei Untermerkmale und begründen Sie, warum dieses Merkmal für Brückner Digital bei VitaPark Connect besonders wichtig ist.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Im Lastenheft steht: „Die App soll schnell und einfach zu bedienen sein.“ Formulieren Sie daraus zwei messbare und damit prüfbare Anforderungen.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S26 Teil 1, Aufgabe 4a (Zuverlässigkeit) und W21 Teil 1, Aufgabe 4ca (Effizienz, Änderbarkeit)</p>
+  </div>
+
+  <div class="aufgabe" id="TQ-04-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-04.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">17 Punkte</span>
+    </div>
+    <p>Die VitaPark Fitness GmbH möchte die Qualitätsanforderungen an das Teilsystem <strong>„Check-in am Drehkreuz“</strong> vertraglich festlegen: Das Mitglied hält den QR-Code der App an den Scanner, der Server prüft den Zugang mit <code>zugangPruefen</code> (Anlage 6), das Drehkreuz öffnet. Ein Mitarbeiter der VitaPark legt dazu eine ältere Checkliste vor, die auf der Norm ISO/IEC 9126 beruht.</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Nennen Sie die sechs Qualitätsmerkmale der ISO/IEC 9126.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Nennen Sie die zwei Qualitätsmerkmale, die in der Nachfolgenorm ISO/IEC 25010 (Fassung 2011) als eigenständige Hauptmerkmale hinzugekommen sind.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">9 P</span>c) Ergänzen Sie die Tabelle für das Teilsystem „Check-in am Drehkreuz“. Geben Sie je Merkmal eine konkrete Anforderung, ein messbares Abnahmekriterium und die Art der Prüfung (Testart, Vorgehen) an.</div>
+    <table class="kompakt">
+      <tr><th style="width:16%">Merkmal</th><th style="width:28%">konkrete Anforderung</th><th style="width:28%">messbares Abnahmekriterium</th><th>Prüfung</th></tr>
+      <tr><td style="height:78px">Zuverlässigkeit</td><td></td><td></td><td></td></tr>
+      <tr><td style="height:78px">Leistungs&shy;effizienz</td><td></td><td></td><td></td></tr>
+      <tr><td style="height:78px">Sicherheit</td><td></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">3 P</span>d) Erläutern Sie an einem Beispiel aus VitaPark Connect einen Zielkonflikt zwischen zwei Qualitätsmerkmalen.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: S23 Teil 1, Aufgabe 2a (Qualitätsmerkmale nach ISO 9126) und S26 Teil 1, Aufgabe 4a</p>
+  </div>
+
+  <!-- ===================== TQ-05 ===================== -->
+  <h3 id="a-05">TQ-05 · Schreibtischtest</h3>
+
+  <div class="aufgabe" id="TQ-05-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-05.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">5 Punkte</span>
+    </div>
+    <p>Die Bonuspunkte für das Programm GesundPlus (Anlage 3) werden mit folgender Funktion berechnet:</p>
+    <pre class="pseudo listing">01 funktion bonuspunkte(minuten : integer[]) : integer
+02   punkte : integer := 0
+03   zähle i von 0 bis minuten.length - 1
+04     wenn minuten[i] &gt;= 60 dann
+05       punkte := punkte + 3
+06     sonst
+07       wenn minuten[i] &gt;= 30 dann
+08         punkte := punkte + 1
+09       Ende wenn
+10     Ende wenn
+11   Ende zähle
+12   rückgabe punkte
+13 Ende funktion</pre>
+    <div class="teilaufgabe"><span class="tp">1 P</span>a) Erläutern Sie, was man unter einem Schreibtischtest versteht.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Führen Sie einen Schreibtischtest für <code>minuten = [45, 70, 20, 60, 30]</code> durch. Tragen Sie das Ergebnis der Bedingungen als wahr/falsch ein; wird eine Bedingung nicht geprüft, tragen Sie „–“ ein.</div>
+    <table class="leer kompakt">
+      <tr><th style="width:10%">i</th><th style="width:16%">minuten[i]</th><th style="width:24%">Bedingung Zeile 04</th><th style="width:24%">Bedingung Zeile 07</th><th>punkte</th></tr>
+      <tr><td>–</td><td>–</td><td>–</td><td>–</td><td>0</td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">1 P</span>c) Geben Sie den Rückgabewert an und prüfen Sie, ob er der Regel in Anlage 3 entspricht.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W22 Teil 2, Aufgabe 2aa und S23 Teil 2, Aufgabe 3a (Schreibtischtest)</p>
+  </div>
+
+  <div class="aufgabe" id="TQ-05-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-05.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Für die Personalplanung zählt die Funktion <code>spitzenphasen</code> (Spezifikation in Anlage 2), wie oft ein Studio stark ausgelastet war.</p>
+    <pre class="pseudo listing">01 funktion spitzenphasen(besucher : integer[][], grenze : integer) : integer
+02   anzahl : integer := 0
+03   folge : integer := 0
+04   zähle tag von 0 bis besucher.length - 1
+05     zähle std von 0 bis besucher[tag].length - 1
+06       wenn besucher[tag][std] &gt; grenze dann
+07         folge := folge + 1
+08         wenn folge = 2 dann
+09           anzahl := anzahl + 1
+10         Ende wenn
+11       sonst
+12         folge := 0
+13       Ende wenn
+14     Ende zähle
+15   Ende zähle
+16   rückgabe anzahl
+17 Ende funktion</pre>
+    <table class="daten kompakt" style="width:auto">
+      <caption>Testdaten besucher (Studio Lüneburg-Mitte), grenze = 80</caption>
+      <tr><th>tag</th><th>std 0 (17 Uhr)</th><th>std 1 (18 Uhr)</th><th>std 2 (19 Uhr)</th><th>std 3 (20 Uhr)</th></tr>
+      <tr><td>0 (Mo)</td><td>40</td><td>85</td><td>90</td><td>95</td></tr>
+      <tr><td>1 (Di)</td><td>70</td><td>82</td><td>60</td><td>88</td></tr>
+      <tr><td>2 (Mi)</td><td>91</td><td>50</td><td>96</td><td>97</td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Führen Sie einen Schreibtischtest mit den Testdaten durch. Notieren Sie je Durchlauf der inneren Schleife eine Zeile.</div>
+    <table class="leer kompakt">
+      <tr><th style="width:10%">tag</th><th style="width:10%">std</th><th style="width:22%">besucher[tag][std]</th><th style="width:22%">Bedingung Zeile 06</th><th style="width:16%">folge</th><th>anzahl</th></tr>
+      <tr><td>–</td><td>–</td><td>–</td><td>–</td><td>0</td><td>0</td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Geben Sie das tatsächliche Ergebnis und das laut Spezifikation erwartete Ergebnis an. Begründen Sie die Abweichung.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Nennen Sie den Fehler mit Zeilennummer und korrigieren Sie die Funktion.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S23 Teil 2, Aufgabe 3a (Schreibtischtest über verschachtelte Daten, Fehler finden)</p>
+  </div>
+
+  <div class="aufgabe" id="TQ-05-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-05.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">20 Punkte</span>
+    </div>
+    <p>Die App zeigt Mitgliedern an, wie viele Tage sie höchstens am Stück trainiert haben. Dafür wurde die Methode <code>laengsteSerie</code> implementiert (Spezifikation in Anlage 2).</p>
+    <pre class="java listing">01 public int laengsteSerie(boolean[] trainiert) {
+02     if (trainiert == null) {
+03         throw new IllegalArgumentException("keine Daten");
+04     }
+05     int serie = 0;
+06     int max = 0;
+07     for (int i = 0; i &lt; trainiert.length; i++) {
+08         if (trainiert[i]) {
+09             serie++;
+10         } else {
+11             if (serie &gt; max) {
+12                 max = serie;
+13             }
+14             serie = 0;
+15         }
+16     }
+17     return max;
+18 }</pre>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Testen Sie die Methode mit den folgenden Testdaten (W = <code>true</code>, F = <code>false</code>). Tragen Sie das laut Spezifikation erwartete und das tatsächliche Ergebnis ein.</div>
+    <table class="leer kompakt">
+      <tr><th style="width:6%">TF</th><th style="width:34%">Testdaten <code>trainiert</code></th><th style="width:30%">erwartetes Ergebnis</th><th>tatsächliches Ergebnis</th></tr>
+      <tr><td>1</td><td class="mono">{W, W, F, W, W, W, F}</td><td></td><td></td></tr>
+      <tr><td>2</td><td class="mono">{W, F, W, W, W, W}</td><td></td><td></td></tr>
+      <tr><td>3</td><td class="mono">{F, F, F}</td><td></td><td></td></tr>
+      <tr><td>4</td><td class="mono">{W, W, W}</td><td></td><td></td></tr>
+      <tr><td>5</td><td class="mono">{} (leeres Array)</td><td></td><td></td></tr>
+      <tr><td>6</td><td class="mono">null</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">5 P</span>b) Für die Anzeige „aktuelle Serie ab Tag i“ gibt es eine rekursive Hilfsfunktion. Führen Sie einen Schreibtischtest für den Aufruf <code>serieAb(t, 3)</code> mit <code>t = {F, W, F, W, W, W}</code> durch. Tragen Sie jeden Aufruf (auch die rekursiven) in eine eigene Zeile ein und geben Sie das Ergebnis an. Nicht benötigte Zeilen bleiben leer.</div>
+    <pre class="pseudo listing">01 funktion serieAb(t : boolean[], i : integer) : integer
+02   wenn i &gt;= t.length oder nicht t[i] dann
+03     rückgabe 0
+04   Ende wenn
+05   rückgabe 1 + serieAb(t, i + 1)
+06 Ende funktion</pre>
+    <table class="leer kompakt">
+      <tr><th style="width:12%">Aufruf</th><th style="width:12%">i</th><th style="width:22%">i &gt;= t.length</th><th style="width:20%">t[i]</th><th>Rückgabewert</th></tr>
+      <tr><td>1</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>2</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>3</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>4</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>5</td><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>c) Nennen Sie die beiden Fehler der Methode <code>laengsteSerie</code> mit Zeilennummer und korrigieren Sie die Methode.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>d) Geben Sie an, welche Testfälle aus a) mindestens nötig sind, damit jede Anweisung der <strong>gegebenen</strong> Methode mindestens einmal ausgeführt wird. Begründen Sie Ihre Auswahl.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W25 Teil 2, Aufgabe 3b (erwartetes und tatsächliches Testergebnis, zwei Fehler korrigieren), W22 Teil 2, Aufgabe 2a (Schreibtischtest einer Rekursion) und S23 Teil 2, Aufgabe 3b</p>
+  </div>
+
+  <!-- ===================== TQ-06 ===================== -->
+  <h3 id="a-06">TQ-06 · Äquivalenzklassen / Testfälle</h3>
+
+  <div class="aufgabe" id="TQ-06-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-06.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">5 Punkte</span>
+    </div>
+    <p>Bei einer Kursbuchung kann ein Mitglied zusätzlich 0 bis 3 Gäste anmelden (Anlage 3). Die Anzahl wird in der App in ein Textfeld eingegeben.</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Bilden Sie die gültigen und ungültigen Äquivalenzklassen für diese Eingabe und geben Sie je einen Repräsentanten an.</div>
+    <table class="leer kompakt">
+      <tr><th style="width:10%">ÄK</th><th style="width:20%">gültig / ungültig</th><th style="width:45%">Beschreibung</th><th>Repräsentant</th></tr>
+      <tr><td>1</td><td></td><td></td><td></td></tr>
+      <tr><td>2</td><td></td><td></td><td></td></tr>
+      <tr><td>3</td><td></td><td></td><td></td></tr>
+      <tr><td>4</td><td></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Geben Sie die Testwerte an, die sich aus der Grenzwertanalyse ergeben, und begründen Sie, warum Grenzwerte zusätzlich getestet werden.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S22 Teil 2, Aufgabe 2bc (Testdaten aus Äquivalenzklassen)</p>
+  </div>
+
+  <div class="aufgabe" id="TQ-06-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-06.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">12 Punkte</span>
+    </div>
+    <p>Die Methode <code>beitrag(alter : integer, tarif : string) : double</code> berechnet den Monatsbeitrag nach der Beitragsordnung (Anlage 3). Bevor der Code geprüft wird, sollen Black-Box-Testfälle aus der Spezifikation abgeleitet werden.</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Bilden Sie für beide Parameter die gültigen und ungültigen Äquivalenzklassen.</div>
+    <table class="kompakt">
+      <tr><th style="width:14%">Parameter</th><th style="width:43%">gültige Äquivalenzklassen</th><th>ungültige Äquivalenzklassen</th></tr>
+      <tr><td style="height:85px">alter</td><td></td><td></td></tr>
+      <tr><td style="height:85px">tarif</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">5 P</span>b) Erstellen Sie eine Testfalltabelle mit möglichst wenigen Testfällen, in der jede Äquivalenzklasse mindestens einmal vorkommt. Geben Sie jeweils das erwartete Ergebnis an. Nicht benötigte Zeilen bleiben leer.</div>
+    <table class="leer kompakt">
+      <tr><th style="width:7%">Nr.</th><th style="width:12%">alter</th><th style="width:16%">tarif</th><th style="width:38%">abgedeckte Äquivalenzklassen</th><th>erwartetes Ergebnis</th></tr>
+      <tr><td>1</td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>3</td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>5</td><td></td><td></td><td></td><td></td></tr><tr><td>6</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>7</td><td></td><td></td><td></td><td></td></tr><tr><td>8</td><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Ergänzen Sie die Testfälle, die sich aus der Grenzwertanalyse für den Parameter <code>alter</code> ergeben (Tarif jeweils „BASIC“), mit dem erwarteten Ergebnis.</div>
+    <table class="leer kompakt">
+      <tr><th style="width:20%">alter</th><th>erwartetes Ergebnis</th><th style="width:20%">alter</th><th>erwartetes Ergebnis</th></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <p class="quelle">Angelehnt an: S22 Teil 2, Aufgabe 2bc (Äquivalenzklassen) und W25 Teil 2, Aufgabe 3ba (Testdaten mit Sonderfällen)</p>
+  </div>
+
+  <div class="aufgabe" id="TQ-06-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-06.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">18 Punkte</span>
+    </div>
+    <p>Die Methode <code>beitrag</code> wurde implementiert (Anlage 4). Sie gehört zur Klasse <code>Beitragsrechner</code>, die einen parameterlosen Konstruktor hat. Die Testerin hat folgende Testfälle festgelegt:</p>
+    <table class="kompakt">
+      <tr><th style="width:8%">TF</th><th style="width:12%">alter</th><th style="width:18%">tarif</th><th>erwartetes Ergebnis</th></tr>
+      <tr><td>TF1</td><td>16</td><td>„PREMIUM“</td><td>24.95</td></tr>
+      <tr><td>TF2</td><td>40</td><td>„BASIC“</td><td>29.90</td></tr>
+      <tr><td>TF3</td><td>65</td><td>„BASIC“</td><td>23.92</td></tr>
+      <tr><td>TF4</td><td>13</td><td>„BASIC“</td><td><code>IllegalArgumentException</code></td></tr>
+      <tr><td>TF5</td><td>30</td><td>„GOLD“</td><td><code>IllegalArgumentException</code></td></tr>
+      <tr><td>TF6</td><td>30</td><td><code>null</code></td><td><code>IllegalArgumentException</code></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Setzen Sie die Testfälle TF1 bis TF6 als JUnit-5-Testklasse um (Anlage 8). Verwenden Sie für Kommazahlen eine Toleranz von 0.001.</div>
+    <div class="antwort z18"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Ermitteln Sie, welche Testfälle mit der Methode aus Anlage 4 fehlschlagen. Begründen Sie jeweils mit Angabe der Zeile, was die Methode stattdessen tut.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Korrigieren Sie die betroffenen Zeilen.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>d) Für die <strong>korrigierte</strong> Methode soll eine vollständige Anweisungsüberdeckung erreicht werden. Ermitteln Sie die kleinste Teilmenge von TF1 bis TF6, die dafür genügt, und begründen Sie Ihre Auswahl.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>e) Ein Kollege schlägt vor, statt ausgewählter Testfälle automatisiert alle Alterswerte von 0 bis 130 mit beiden Tarifen zu testen. Beurteilen Sie den Vorschlag.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: S22 Teil 2, Aufgabe 2b (Unit-Test, Bedingungen korrigieren, Äquivalenzklassen) und S23 Teil 2, Aufgabe 3bc (Testdaten für volle Anweisungsüberdeckung)</p>
+  </div>
+
+  <!-- ===================== TQ-07 ===================== -->
+  <h3 id="a-07">TQ-07 · Codequalität / Reviews</h3>
+
+  <div class="aufgabe" id="TQ-07-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-07.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Die Geschäftsführung der VitaPark Fitness GmbH fragt, wie Brückner Digital die Qualität der Software schon während der Entwicklung sicherstellt.</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>Erläutern Sie drei qualitätssichernde Maßnahmen im Entwicklungsprozess.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: S24 Teil 1, Aufgabe 1b und S23 Teil 1, Aufgabe 1e</p>
+  </div>
+
+  <div class="aufgabe" id="TQ-07-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-07.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Die folgende Methode berechnet den Preis für Gast-Tageskarten nach der Preisliste in Anlage 3 (<code>n</code> = Anzahl Karten, <code>e</code> = ermäßigt, <code>s</code> = mit Sauna). Sie liefert korrekte Ergebnisse, fiel aber im Code-Review negativ auf.</p>
+    <pre class="java listing">01 // Preis
+02 public double p(int n, boolean e, boolean s) {
+03     double x = 0;
+04     if (e == true) {
+05         x = 10.0 * n;
+06         if (n &gt;= 10) {
+07             x = 10.0 * n - 10.0 * n * 0.1;
+08         }
+09     } else {
+10         x = 15.0 * n;
+11         if (n &gt;= 10) {
+12             x = 15.0 * n - 15.0 * n * 0.1;
+13         }
+14     }
+15     if (s == true) x = x + 5.0 * n;   // plus 5 mal n
+16     return x;
+17 }</pre>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Nennen Sie vier Verstöße gegen Clean-Code-Regeln bzw. Coding-Konventionen mit Zeilenangabe.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Überarbeiten Sie die Methode nach Clean-Code-Regeln. Das Verhalten soll unverändert bleiben.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Ergänzen Sie für die überarbeitete Methode einen Javadoc-Kommentar mit Beschreibung, Parametern und Rückgabewert.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 1bb (Dokumentation) und S24 Teil 1, Aufgabe 1b (Code-Reviews, Dokumentationsrichtlinien)</p>
+  </div>
+
+  <div class="aufgabe" id="TQ-07-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe TQ-07.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">18 Punkte</span>
+    </div>
+    <p>Wegen des Zeitdrucks vor der Abnahme schlägt der Teamleiter von Brückner Digital vor, die manuellen Code-Reviews abzuschaffen: „Wir haben eine statische Codeanalyse in der CI-Pipeline und eine Testabdeckung von 85 % durch Unit-Tests. Das reicht völlig.“</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Beschreiben Sie den Ablauf eines Code-Reviews über einen Pull-Request in vier Schritten.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Nennen Sie drei Vorteile von Code-Reviews.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Nennen Sie zwei Probleme, die eine statische Codeanalyse automatisch findet, und eines, das sie nicht finden kann.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>d) Beurteilen Sie den Vorschlag des Teamleiters.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>e) Als Kompromiss wird vorgeschlagen, für die sicherheitsrelevanten Teile (Zugangsprüfung) Pair Programming einzusetzen. Beschreiben Sie das Verfahren und nennen Sie je einen Vor- und einen Nachteil.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 4cb (nur automatische Code-Reviews und Unit-Tests bewerten) und S24 Teil 1, Aufgabe 1b</p>
+  </div>
+
+  <!-- ===================== ORIGINALAUFGABEN ===================== -->
+  <h3 id="originale">Originalaufgaben zum Üben</h3>
+  <p>Diese echten Prüfungsaufgaben passen zu diesem Block (Dateien im Ordner <code>Prüfungsvorbereitung</code>). Lösungen gibt es nur für 2023 Sommer, 2023 Winter, 2024 Sommer und 2025 Winter (dort vom u-form-Verlag). Testen fehlte in Winter 2024 ganz; Sommer 2026 fragte nur ISO 25010.</p>
+  <table class="kompakt" style="break-inside:auto">
+    <tr><th>Prüfung</th><th>Aufgabe</th><th>Thema</th><th>Datei · Lösung</th></tr>
+    <tr><td>Winter 2021</td><td>T1 A1bb (6 P), A3ac (4 P), A4ca (4 P), A4cb (5 P), A4d (4 P)</td><td>Dokumentation einer Bibliothekserweiterung; Usability-Tests; Effizienz/Änderbarkeit (ISO 25010); „nur automatische Code-Reviews + Unit-Tests“ bewerten; Black-/White-Box</td><td><code>2021/winter/AE 2021 Winter Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Winter 2021</td><td>T2 A1c (6 P)</td><td>drei Fehler in einem Struktogramm (Passwortprüfung) finden</td><td><code>2021/winter/AE 2021 Winter Teil 2.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Sommer 2022</td><td>T2 A2 (20 P)</td><td>Unit-Test beschreiben, Eigenschaften, assertEquals-Testfälle auswerten, Bedingungen korrigieren, Äquivalenzklassen</td><td><code>2022/sommer/AE 2022 Sommer Teil 2.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Winter 2022</td><td>T2 A2a (11 P)</td><td>Schreibtischtest einer rekursiven Umwandlung Dezimal → Binär, Fehler korrigieren, Anweisungsüberdeckung/Mindestzahl Testfälle</td><td><code>2022/winter/AE 2022 Winter Teil 2.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Sommer 2023</td><td>T1 A1e (4 P), A2a (4 P)</td><td>QS-Maßnahmen; Qualitätsmerkmale nach ISO 9126</td><td><code>2023/sommer/AE Sommer 2023 Teil 1.pdf</code> · Lösung: <code>AE Sommer 2023 Teil 1+2 Lösungen.pdf</code></td></tr>
+    <tr><td>Sommer 2023</td><td>T2 A3 (25 P)</td><td>Ticketstatistik (Gruppenwechsel): Datenverlaufstabelle, Fehler nennen, Code korrigieren/erweitern, Anweisungsüberdeckung, Testdaten anpassen</td><td><code>2023/sommer/AE Sommer 2023 Teil 2.pdf</code> · Lösung wie oben</td></tr>
+    <tr><td>Winter 2023</td><td>T1 A1d (6 P)</td><td>Inhalte eines Testkonzepts</td><td><code>2023/winter/AE Winter 2023 Teil 1.pdf</code> · Lösung: <code>AE Winter 2023 Teil 1 Lösungen.pdf</code></td></tr>
+    <tr><td>Sommer 2024</td><td>T1 A1b (6 P)</td><td>drei qualitätssichernde Maßnahmen</td><td><code>2024/sommer/AE Sommer 2024 Teil 1+2+3.pdf</code> · Lösung: <code>AE Sommer 2024 Teil 1 Lösungen.pdf</code></td></tr>
+    <tr><td>Sommer 2024</td><td>T2 A3 (25 P)</td><td>Vorteile White-Box, Regressionstest, Anweisungs-/Zweig-/Pfadüberdeckung aus englischem Fachtext, alle Pfade notieren</td><td>wie oben · Lösung: <code>AE Sommer 2024 Teil 2 Lösungen.pdf</code></td></tr>
+    <tr><td>Winter 2025</td><td>T1 A3ba (3 P), A3bc (6 P)</td><td>Konformität zur Spezifikation (eRechnung) sicherstellen; warum XSD-Validierung nicht reicht</td><td><code>2025/winter/AE Winter 2025 Teil 1.pdf</code> · Lösung: <code>AE Winter 2025 Lösungserleuterungen.pdf</code> (u-form)</td></tr>
+    <tr><td>Winter 2025</td><td>T2 A3 (20 P)</td><td>Unit-Test, Testabdeckung, fehlerhafte Minimum-Funktion: erwartetes/tatsächliches Ergebnis, zwei semantische Fehler korrigieren</td><td><code>2025/winter/AE Winter 2025 Teil 2.pdf</code> · Lösung wie oben</td></tr>
+    <tr><td>Sommer 2026</td><td>T1 A4a (5 P)</td><td>ISO 25010: Zuverlässigkeit und ein weiteres Merkmal</td><td><code>2026/sommer/AE Sommer 2026 Teil 1.pdf</code> · keine Lösung</td></tr>
+  </table>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,1605 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>09 Benutzeroberfläche – Übungen</title>
+<link rel="stylesheet" href="style.css">
+<script src="uebungen.js"></script>
+<style>
+  /* Zusatzregeln Block 09 */
+  nav.toc ol ol { columns: 2; column-gap: 24px; font-size: 13px; }
+  table.kompakt td, table.kompakt th { padding: 3px 6px; }
+  table.leer td { height: 34px; }
+  table.leer.hoch td { height: 74px; }
+  table.leer.mittel td { height: 54px; }
+  .zweispaltig { display: flex; gap: 16px; flex-wrap: wrap; }
+  .zweispaltig > * { flex: 1 1 300px; min-width: 0; }
+  td.nr, th.nr { width: 46px; text-align: center; }
+  .anlage figure { margin: 10px 0 6px; }
+  .anlage ul.hinweise { font-size: 13px; margin: 4px 0; }
+  .zitat { font-style: italic; }
+  .kontrast td { font-size: 14px; }
+  .seitenumbruch { break-before: page; }
+  h3 + p.klein { break-after: avoid; }
+  .codelabel { break-after: avoid; }
+  @media print {
+    .anlage { break-inside: avoid; }
+    .anlage.lang { break-inside: auto; }
+    table { break-inside: auto; }
+    tr { break-inside: avoid; }
+    table.kurz { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== KOPF ===================== -->
+<header class="blockkopf">
+  <h1>Block 09 · Benutzeroberfläche</h1>
+  <div class="unter">
+    <span class="badge k-oft">Oft</span> 5/9 Prüfungen (W21, W22, W23, S24, S26) · Ø 12 von 200 Punkten · nur Teil 1
+    · Lösungen: <a href="09_Benutzeroberflaeche_Loesungen.html">09_Benutzeroberflaeche_Loesungen.html</a>
+  </div>
+</header>
+
+<nav class="toc">
+  <strong>Inhalt</strong>
+  <ol>
+    <li><a href="#erklaerung">Erklärungssatz</a>
+      <ol>
+        <li><a href="#e-01">GUI-01 Mockup, Wireframe &amp; GUI-Elemente</a></li>
+        <li><a href="#e-02">GUI-02 Barrierefreiheit</a></li>
+        <li><a href="#e-03">GUI-03 Usability &amp; Software-Ergonomie</a></li>
+      </ol>
+    </li>
+    <li><a href="#belegsatz">Belegsatz</a> (keine Notationshilfe, Anlagen 1–5)</li>
+    <li><a href="#aufgaben">Aufgaben</a>
+      <ol>
+        <li><a href="#a-01">GUI-01 (3 Aufgaben)</a></li>
+        <li><a href="#a-02">GUI-02 (3 Aufgaben)</a></li>
+        <li><a href="#a-03">GUI-03 (3 Aufgaben)</a></li>
+        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+
+<div class="info no-print">
+  <span class="kastentitel">So arbeitest du mit diesem Block</span>
+  Erst den Erklärungssatz lesen, dann die Aufgaben mit dem Belegsatz daneben lösen (Belegsatz am besten separat ausdrucken und neben die Aufgaben legen). Zeitrichtwert: 1 Punkt ≈ 0,9 Minuten.
+  Skizzen mit Bleistift und Lineal in die vorgedruckten Rahmen zeichnen. Lösungen erst danach in der separaten Lösungsdatei nachsehen – dort findest du die Musterskizzen als Wireframes.
+</div>
+
+<!-- ===================== TEIL A: ERKLÄRUNGSSATZ ===================== -->
+<section class="teil" id="erklaerung">
+  <h2>A · Erklärungssatz</h2>
+
+  <p>Aufgaben zur Benutzeroberfläche standen in 5 der 9 ausgewerteten Prüfungen, und zwar immer in <strong>Teil 1</strong>. Meist sind sie Teil einer größeren Aufgabe und bringen zusammen 7–18 Punkte. Typisch sind vier Aufgabenarten: ein <strong>Mockup skizzieren oder ergänzen</strong> (oft in einem vorgedruckten Smartphone- oder Browserrahmen), die <strong>Mängel eines Entwurfs</strong> finden und ihn verbessern, <strong>Barrierefreiheit</strong> (Anforderungen und Maßnahmen) und <strong>Usability</strong> (Begriffe, Tests). Der Belegsatz enthält zu diesem Block nichts – alles hier musst du selbst können.</p>
+
+  <table class="kompakt">
+    <thead><tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr></thead>
+    <tr><td>GUI-01 Mockup, Wireframe &amp; GUI-Elemente</td><td><span class="badge k-oft">Oft</span> 4/9</td><td>3–10</td><td>Anforderungen vollständig in eine beschriftete Skizze übertragen, passende Elemente und Darstellungsformen wählen</td></tr>
+    <tr><td>GUI-02 Barrierefreiheit</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span> 3/9</td><td>4–8</td><td>Anforderung und dazu passende, konkrete Maßnahme nennen</td></tr>
+    <tr><td>GUI-03 Usability &amp; Software-Ergonomie</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span> 2/9</td><td>6–16</td><td>Mängel erkennen, mit den Grundsätzen der DIN EN ISO 9241-110 begründen und beheben</td></tr>
+  </table>
+  <p class="klein">In der Themenanalyse bilden die drei Unterthemen zusammen das Thema „GUI / Mockup / Barrierefreiheit“ (Oft, 5/9). Damit genug geübt wird, ist es hier aufgeteilt. Die Kategorien der Teilthemen sind nach denselben Regeln berechnet (Wahrscheinlich = 2–3 von 9, davon mindestens einmal in S24–S26).</p>
+
+  <!-- ===================== GUI-01 ===================== -->
+  <h3 id="e-01">GUI-01 · Mockup, Wireframe &amp; GUI-Elemente <span class="badge k-oft">Oft</span></h3>
+  <p class="klein">Vorkommen: 4/9 · Prüfungen: W22 (T1 A3a, Gestaltungselemente), W23 (T1 A4b, Darstellungsform + Skizze), S24 (T1 A4bb, verbessertes Mockup), S26 (T1 A4c, Vorteile von Mockups + Smartphone-Mockup ergänzen)</p>
+
+  <h4>So sieht die Aufgabe aus</h4>
+  <ul>
+    <li><strong>Mockup ergänzen:</strong> Ein leerer Smartphone- oder Browserrahmen ist vorgedruckt, oft schon mit Titelzeile, Zurück-Pfeil oder Menüleiste. Dazu stehen zwei bis fünf Anforderungen im Text („Auf der Seite sollen … angezeigt werden“). Du zeichnest die Elemente ein (S26: 6 P, S24: 7 P).</li>
+    <li><strong>Darstellungsform wählen:</strong> Zwei Darstellungsformen für bestimmte Daten nennen, sich für eine entscheiden, begründen und dann mit Beispieldatensätzen skizzieren (W23: 2 + 2 + 4 P).</li>
+    <li><strong>Wissensfragen:</strong> Vorteile von Mockups beschreiben (S26: 4 P), Gestaltungselemente beschreiben (W22: 3 P).</li>
+  </ul>
+
+  <h4>Wireframe, Mockup und Prototyp</h4>
+  <p>Alle drei sind Entwürfe der Benutzeroberfläche, bevor programmiert wird. Sie unterscheiden sich im <strong>Detailgrad</strong> (englisch <em>Fidelity</em>: Low-Fidelity = grob, High-Fidelity = nah am Endprodukt) und darin, ob man sie <strong>bedienen</strong> kann.</p>
+  <table class="kompakt">
+    <thead><tr><th></th><th>Wireframe</th><th>Mockup</th><th>Prototyp</th></tr></thead>
+    <tr><td><strong>Frage</strong></td><td>Was steht wo? (Struktur, Anordnung, Inhalte)</td><td>Wie sieht es aus? (visuelles Design)</td><td>Wie funktioniert es? (Bedienung, Ablauf)</td></tr>
+    <tr><td><strong>Detailgrad</strong></td><td>Low-Fidelity: graue Kästen, Platzhalter, Kreuz für Bilder, kaum Text</td><td>High-Fidelity: echte Texte, Farben, Schriften, Icons, Bilder</td><td>Low- bis High-Fidelity (vom Papierprototyp bis zum Klick-Dummy)</td></tr>
+    <tr><td><strong>Interaktion</strong></td><td>keine (statisch)</td><td>keine (statisch)</td><td>klickbar, teilweise funktionsfähig</td></tr>
+    <tr><td><strong>Aufwand, Zeitpunkt</strong></td><td>sehr gering, ganz am Anfang</td><td>mittel, nachdem die Struktur abgestimmt ist</td><td>höher, vor oder parallel zur Umsetzung</td></tr>
+    <tr><td><strong>Werkzeuge</strong></td><td>Papier, Whiteboard, Balsamiq</td><td>Figma, Sketch, Penpot</td><td>Figma (Prototyp-Modus), Axure; HTML-Klick-Dummy</td></tr>
+  </table>
+
+  <figure>
+    <svg viewBox="0 0 760 442" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="a1-pfeil" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#222"/>
+        </marker>
+      </defs>
+      <text x="130" y="26" text-anchor="middle" font-weight="bold">Wireframe</text>
+      <text x="380" y="26" text-anchor="middle" font-weight="bold">Mockup</text>
+      <text x="630" y="26" text-anchor="middle" font-weight="bold">Prototyp</text>
+      <!-- Wireframe -->
+      <rect x="40" y="40" width="180" height="340" rx="22" fill="#fff" stroke="#222" stroke-width="2.5"/>
+      <rect x="110" y="46" width="40" height="7" rx="3.5" fill="#222"/>
+      <rect x="105" y="368" width="50" height="4" rx="2" fill="#222"/>
+      <rect x="52" y="62" width="156" height="18" fill="#e5e5e5"/>
+      <rect x="56" y="66" width="10" height="10" fill="#c8c8c8"/>
+      <text x="130" y="75" text-anchor="middle" font-size="10" fill="#888">Titel</text>
+      <rect x="90" y="90" width="80" height="104" fill="#fff" stroke="#999"/>
+      <line x1="90" y1="90" x2="170" y2="194" stroke="#bbb"/>
+      <line x1="170" y1="90" x2="90" y2="194" stroke="#bbb"/>
+      <rect x="60" y="204" width="140" height="9" fill="#cfcfcf"/>
+      <rect x="80" y="219" width="100" height="7" fill="#dedede"/>
+      <rect x="60" y="236" width="120" height="6" fill="#e5e5e5"/>
+      <rect x="60" y="248" width="135" height="6" fill="#e5e5e5"/>
+      <rect x="60" y="260" width="95" height="6" fill="#e5e5e5"/>
+      <rect x="60" y="276" width="140" height="28" rx="3" fill="#fff" stroke="#999"/>
+      <text x="130" y="294" text-anchor="middle" font-size="11" fill="#888">Button</text>
+      <rect x="50" y="330" width="160" height="26" fill="#eee"/>
+      <rect x="60" y="337" width="12" height="12" fill="#ccc"/>
+      <rect x="100" y="337" width="12" height="12" fill="#ccc"/>
+      <rect x="140" y="337" width="12" height="12" fill="#ccc"/>
+      <rect x="180" y="337" width="12" height="12" fill="#ccc"/>
+      <!-- Mockup -->
+      <rect x="290" y="40" width="180" height="340" rx="22" fill="#fff" stroke="#222" stroke-width="2.5"/>
+      <rect x="360" y="46" width="40" height="7" rx="3.5" fill="#222"/>
+      <rect x="355" y="368" width="50" height="4" rx="2" fill="#222"/>
+      <text x="302" y="77" font-size="16" fill="#1f4e79">‹</text>
+      <text x="380" y="76" text-anchor="middle" font-size="12" font-weight="bold">Medium</text>
+      <line x1="292" y1="84" x2="468" y2="84" stroke="#ddd"/>
+      <rect x="340" y="92" width="80" height="104" fill="#dbe7f3" stroke="#1f4e79"/>
+      <text x="380" y="112" text-anchor="middle" font-size="8" font-weight="bold" fill="#1f4e79">DER SCHWARM</text>
+      <path d="M344,166 q9,-8 18,0 t18,0 t18,0 t18,0" stroke="#1f4e79" stroke-width="2" fill="none"/>
+      <path d="M344,180 q9,-8 18,0 t18,0 t18,0 t18,0" stroke="#1f4e79" stroke-width="2" fill="none"/>
+      <text x="380" y="214" text-anchor="middle" font-weight="bold">Der Schwarm</text>
+      <text x="380" y="229" text-anchor="middle" font-size="10" fill="#555">Frank Schätzing · Roman</text>
+      <text x="380" y="248" text-anchor="middle" font-size="11" fill="#15803d">✓ 2 von 3 verfügbar</text>
+      <text x="380" y="263" text-anchor="middle" font-size="10" fill="#555">2. OG · Regal R 14</text>
+      <rect x="310" y="276" width="140" height="30" rx="6" fill="#1f4e79"/>
+      <text x="380" y="296" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">Vormerken</text>
+      <line x1="292" y1="330" x2="468" y2="330" stroke="#ddd"/>
+      <text x="312" y="350" text-anchor="middle" font-size="9" font-weight="bold" fill="#1f4e79">Start</text>
+      <text x="357" y="350" text-anchor="middle" font-size="9" fill="#555">Suche</text>
+      <text x="402" y="350" text-anchor="middle" font-size="9" fill="#555">Ausleihen</text>
+      <text x="447" y="350" text-anchor="middle" font-size="9" fill="#555">Konto</text>
+      <!-- Prototyp -->
+      <rect x="540" y="40" width="180" height="340" rx="22" fill="#fff" stroke="#222" stroke-width="2.5"/>
+      <rect x="610" y="46" width="40" height="7" rx="3.5" fill="#222"/>
+      <rect x="605" y="368" width="50" height="4" rx="2" fill="#222"/>
+      <text x="552" y="77" font-size="16" fill="#1f4e79">‹</text>
+      <text x="630" y="76" text-anchor="middle" font-size="12" font-weight="bold">Medium</text>
+      <line x1="542" y1="84" x2="718" y2="84" stroke="#ddd"/>
+      <rect x="590" y="92" width="80" height="104" fill="#dbe7f3" stroke="#1f4e79"/>
+      <text x="630" y="112" text-anchor="middle" font-size="8" font-weight="bold" fill="#1f4e79">DER SCHWARM</text>
+      <path d="M594,166 q9,-8 18,0 t18,0 t18,0 t18,0" stroke="#1f4e79" stroke-width="2" fill="none"/>
+      <path d="M594,180 q9,-8 18,0 t18,0 t18,0 t18,0" stroke="#1f4e79" stroke-width="2" fill="none"/>
+      <text x="630" y="214" text-anchor="middle" font-weight="bold">Der Schwarm</text>
+      <text x="630" y="229" text-anchor="middle" font-size="10" fill="#555">Frank Schätzing · Roman</text>
+      <text x="630" y="248" text-anchor="middle" font-size="11" fill="#15803d">✓ 2 von 3 verfügbar</text>
+      <text x="630" y="263" text-anchor="middle" font-size="10" fill="#555">2. OG · Regal R 14</text>
+      <rect x="560" y="276" width="140" height="30" rx="6" fill="#1f4e79"/>
+      <text x="630" y="296" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">Vormerken</text>
+      <circle cx="684" cy="291" r="12" fill="none" stroke="#c2410c" stroke-width="2" stroke-dasharray="3 2"/>
+      <circle cx="684" cy="291" r="3.5" fill="#c2410c"/>
+      <rect x="552" y="309" width="156" height="19" rx="4" fill="#333"/>
+      <text x="630" y="322" text-anchor="middle" font-size="9" fill="#fff">✓ Vorgemerkt – Abholung ab 20.05.</text>
+      <line x1="542" y1="332" x2="718" y2="332" stroke="#ddd"/>
+      <text x="562" y="351" text-anchor="middle" font-size="9" font-weight="bold" fill="#1f4e79">Start</text>
+      <text x="607" y="351" text-anchor="middle" font-size="9" fill="#555">Suche</text>
+      <text x="652" y="351" text-anchor="middle" font-size="9" fill="#555">Ausleihen</text>
+      <text x="697" y="351" text-anchor="middle" font-size="9" fill="#555">Konto</text>
+      <!-- Pfeile -->
+      <line x1="226" y1="210" x2="282" y2="210" stroke="#222" stroke-width="1.5" marker-end="url(#a1-pfeil)"/>
+      <line x1="476" y1="210" x2="532" y2="210" stroke="#222" stroke-width="1.5" marker-end="url(#a1-pfeil)"/>
+      <!-- Beschreibungen -->
+      <text x="130" y="400" text-anchor="middle" font-size="12" font-weight="bold">Low-Fidelity</text>
+      <text x="130" y="416" text-anchor="middle" font-size="12">Struktur und Anordnung</text>
+      <text x="130" y="432" text-anchor="middle" font-size="12">Platzhalter, keine Farben</text>
+      <text x="380" y="400" text-anchor="middle" font-size="12" font-weight="bold">High-Fidelity, statisch</text>
+      <text x="380" y="416" text-anchor="middle" font-size="12">Aussehen (visuelles Design)</text>
+      <text x="380" y="432" text-anchor="middle" font-size="12">echte Texte, Farben, Schrift</text>
+      <text x="630" y="400" text-anchor="middle" font-size="12" font-weight="bold">interaktiv (klickbar)</text>
+      <text x="630" y="416" text-anchor="middle" font-size="12">Bedienung und Ablauf</text>
+      <text x="630" y="432" text-anchor="middle" font-size="12">Tippen zeigt den nächsten Zustand</text>
+    </svg>
+    <figcaption>Abb. A-1: Dieselbe Seite einer Bibliotheks-App als Wireframe, Mockup und Prototyp</figcaption>
+  </figure>
+
+  <div class="merke"><span class="kastentitel">Merke</span>Wireframe = <em>Was steht wo?</em> · Mockup = <em>Wie sieht es aus?</em> · Prototyp = <em>Wie fühlt es sich an, wie läuft es ab?</em><br>
+  In den Prüfungen wird „Mockup“ meist für jede Skizze einer Bildschirmseite verwendet („Skizzieren Sie ein Mockup …“). Eine saubere, beschriftete Bleistiftskizze ohne Farben reicht dafür völlig aus.</div>
+
+  <p>Zwei Begriffe aus dem Prototyping solltest du einordnen können: Ein <strong>horizontaler Prototyp</strong> zeigt viele Masken der Oberfläche, aber ohne Logik dahinter. Ein <strong>vertikaler Prototyp</strong> setzt eine einzelne Funktion vollständig durch alle Schichten um (Oberfläche, Logik, Datenbank). Ein <strong>Wegwerf-Prototyp</strong> dient nur zur Klärung und wird danach verworfen, ein <strong>evolutionärer Prototyp</strong> wird zum Produkt weiterentwickelt.</p>
+
+  <h4>Vorteile und Grenzen von Mockups</h4>
+  <table class="kompakt">
+    <thead><tr><th style="width:38%">Vorteil</th><th>Begründung bzw. Auswirkung</th></tr></thead>
+    <tr><td>Anforderungen werden sichtbar und überprüfbar</td><td>Missverständnisse zwischen Auftraggeber und Entwicklung fallen auf, bevor programmiert wird. Fehlende oder überflüssige Funktionen werden erkannt.</td></tr>
+    <tr><td>Frühes Feedback, günstige Änderungen</td><td>Eine Änderung am Entwurf kostet Minuten, eine Änderung am fertigen Programm Tage. Fehlerkosten steigen mit jeder Projektphase.</td></tr>
+    <tr><td>Gemeinsame Diskussions- und Abnahmegrundlage</td><td>Kunde, Design, Entwicklung und Test sprechen über dasselbe Bild. Das abgestimmte Mockup kann Teil des Pflichtenhefts werden.</td></tr>
+    <tr><td>Grundlage für frühe Usability-Tests</td><td>Mit Papier- oder Klickprototyp lassen sich Testpersonen aus der Zielgruppe einbeziehen, ohne dass Code existiert.</td></tr>
+    <tr><td>Bessere Planung und klare Vorgabe</td><td>Anzahl der Masken und Elemente ist bekannt, dadurch genauere Aufwandsschätzung; Entwickler setzen ein einheitliches Design mit weniger Rückfragen um.</td></tr>
+  </table>
+  <p><strong>Grenzen:</strong> zusätzlicher Aufwand; der Kunde hält einen realistisch aussehenden Entwurf leicht für „fast fertig“ (Erwartungen klären); Mockups zeigen weder Ladezeiten noch Logik; es droht eine Diskussion über Farben statt über Funktionen.</p>
+
+  <div class="falle"><span class="kastentitel">Typische Falle</span>„Beschreiben Sie zwei Vorteile“ heißt: <strong>Vorteil + Auswirkung</strong>. „Mockups sind schnell erstellt“ allein bringt kaum Punkte. Besser: „Der Kunde sieht früh, wie die Seite aussehen wird, und kann fehlende Angaben noch vor der Programmierung nachfordern – Änderungen sind dann deutlich günstiger.“</div>
+
+  <h4>GUI-Elemente und ihr Einsatz</h4>
+  <p>Für Skizzen und für Fragen wie „Welches Element eignet sich?“ brauchst du einen festen Baukasten. Abbildung A-2 zeigt die wichtigsten Elemente so, wie du sie in der Prüfung schnell zeichnen kannst.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 458" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <pattern id="a2-kal" x="128" y="222" width="7.5" height="9" patternUnits="userSpaceOnUse">
+          <rect x="0" y="0" width="5.5" height="6" fill="#d5d5d5"/>
+        </pattern>
+      </defs>
+      <!-- Zellrahmen -->
+      <g fill="#fff" stroke="#ccc">
+        <rect x="6" y="6" width="180" height="84" rx="4"/><rect x="192" y="6" width="180" height="84" rx="4"/><rect x="378" y="6" width="180" height="84" rx="4"/><rect x="564" y="6" width="180" height="84" rx="4"/>
+        <rect x="6" y="96" width="180" height="84" rx="4"/><rect x="192" y="96" width="180" height="84" rx="4"/><rect x="378" y="96" width="180" height="84" rx="4"/><rect x="564" y="96" width="180" height="84" rx="4"/>
+        <rect x="6" y="186" width="180" height="84" rx="4"/><rect x="192" y="186" width="180" height="84" rx="4"/><rect x="378" y="186" width="180" height="84" rx="4"/><rect x="564" y="186" width="180" height="84" rx="4"/>
+        <rect x="6" y="276" width="180" height="84" rx="4"/><rect x="192" y="276" width="180" height="84" rx="4"/><rect x="378" y="276" width="180" height="84" rx="4"/><rect x="564" y="276" width="180" height="84" rx="4"/>
+        <rect x="6" y="366" width="180" height="84" rx="4"/><rect x="192" y="366" width="180" height="84" rx="4"/><rect x="378" y="366" width="180" height="84" rx="4"/><rect x="564" y="366" width="180" height="84" rx="4"/>
+      </g>
+      <g font-size="12" font-weight="bold" fill="#1f4e79">
+        <text x="14" y="23">Button (primär/sekundär)</text>
+        <text x="200" y="23">Textfeld mit Label</text>
+        <text x="386" y="23">Dropdown / Auswahlliste</text>
+        <text x="572" y="23">Radiobuttons (genau 1)</text>
+        <text x="14" y="113">Checkboxen (0 bis n)</text>
+        <text x="200" y="113">Toggle-Switch (ein/aus)</text>
+        <text x="386" y="113">Slider (Wertebereich)</text>
+        <text x="572" y="113">Stepper (kleine Zahl)</text>
+        <text x="14" y="203">Datumsauswahl</text>
+        <text x="200" y="203">Suchfeld mit Vorschlägen</text>
+        <text x="386" y="203">Tabs / Registerkarten</text>
+        <text x="572" y="203">Breadcrumb (Pfadnavigation)</text>
+        <text x="14" y="293">Hamburger-Menü</text>
+        <text x="200" y="293">Tab-Bar (App-Navigation)</text>
+        <text x="386" y="293">Modal-Dialog (Rückfrage)</text>
+        <text x="572" y="293">Toast / Snackbar</text>
+        <text x="14" y="383">Tabelle (sortierbar)</text>
+        <text x="200" y="383">Kacheln / Cards</text>
+        <text x="386" y="383">Schrittanzeige / Fortschritt</text>
+        <text x="572" y="383">Akkordeon (ausklappbar)</text>
+      </g>
+      <!-- Reihe 1 -->
+      <rect x="14" y="40" width="76" height="28" rx="4" fill="#1f4e79"/>
+      <text x="52" y="59" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">Buchen</text>
+      <rect x="98" y="40" width="80" height="28" rx="4" fill="#fff" stroke="#222"/>
+      <text x="138" y="59" text-anchor="middle" font-size="12">Abbrechen</text>
+      <text x="200" y="42" font-size="11">E-Mail-Adresse *</text>
+      <rect x="200" y="48" width="164" height="26" rx="3" fill="#fff" stroke="#555"/>
+      <text x="207" y="66" font-size="11">erika@beispiel.de</text>
+      <text x="386" y="42" font-size="11">Sprache</text>
+      <rect x="386" y="48" width="164" height="26" rx="3" fill="#fff" stroke="#555"/>
+      <text x="393" y="66" font-size="12">Deutsch</text>
+      <text x="542" y="66" text-anchor="end" font-size="13">▾</text>
+      <circle cx="578" cy="46" r="6" fill="#fff" stroke="#222"/><circle cx="578" cy="46" r="3" fill="#222"/>
+      <text x="590" y="50" font-size="12">Abholen in der Filiale</text>
+      <circle cx="578" cy="70" r="6" fill="#fff" stroke="#222"/>
+      <text x="590" y="74" font-size="12">Zustellung per Post</text>
+      <!-- Reihe 2 -->
+      <rect x="14" y="128" width="12" height="12" fill="#1f4e79" stroke="#222"/>
+      <path d="M16,134 l3,3 l6,-7" stroke="#fff" stroke-width="2" fill="none"/>
+      <text x="32" y="139" font-size="12">Newsletter</text>
+      <rect x="14" y="152" width="12" height="12" fill="#fff" stroke="#222"/>
+      <text x="32" y="163" font-size="12">SMS-Erinnerung</text>
+      <rect x="200" y="124" width="40" height="22" rx="11" fill="#1f4e79"/>
+      <circle cx="229" cy="135" r="8" fill="#fff"/>
+      <text x="250" y="140" font-size="12">Dunkelmodus</text>
+      <rect x="200" y="152" width="40" height="20" rx="10" fill="#fff" stroke="#888"/>
+      <circle cx="211" cy="162" r="7" fill="#fff" stroke="#888"/>
+      <text x="250" y="166" font-size="12">Push-Mitteilungen</text>
+      <text x="386" y="132" font-size="11">Umkreis: 20 km</text>
+      <line x1="390" y1="148" x2="546" y2="148" stroke="#c8c8c8" stroke-width="4" stroke-linecap="round"/>
+      <line x1="390" y1="148" x2="450" y2="148" stroke="#1f4e79" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="450" cy="148" r="8" fill="#fff" stroke="#1f4e79" stroke-width="2"/>
+      <text x="386" y="170" font-size="10" fill="#555">0 km</text>
+      <text x="550" y="170" text-anchor="end" font-size="10" fill="#555">50 km</text>
+      <rect x="572" y="128" width="30" height="30" rx="4" fill="#fff" stroke="#222"/>
+      <text x="587" y="148" text-anchor="middle" font-size="16">−</text>
+      <rect x="602" y="128" width="40" height="30" fill="#fff" stroke="#222"/>
+      <text x="622" y="148" text-anchor="middle" font-size="14">2</text>
+      <rect x="642" y="128" width="30" height="30" rx="4" fill="#fff" stroke="#222"/>
+      <text x="657" y="148" text-anchor="middle" font-size="16">+</text>
+      <text x="680" y="148" font-size="11">Personen</text>
+      <!-- Reihe 3 -->
+      <rect x="14" y="214" width="100" height="26" rx="3" fill="#fff" stroke="#555"/>
+      <text x="20" y="232" font-size="11">12.05.2027</text>
+      <rect x="94" y="220" width="13" height="12" fill="#fff" stroke="#222"/>
+      <line x1="94" y1="224" x2="107" y2="224" stroke="#222"/>
+      <rect x="122" y="206" width="58" height="56" fill="#fff" stroke="#555"/>
+      <text x="151" y="217" text-anchor="middle" font-size="8">Mai 2027</text>
+      <rect x="128" y="222" width="52" height="36" fill="url(#a2-kal)"/>
+      <rect x="150.5" y="231" width="5.5" height="6" fill="#1f4e79"/>
+      <rect x="200" y="210" width="164" height="26" rx="13" fill="#fff" stroke="#555"/>
+      <circle cx="214" cy="222" r="5" fill="none" stroke="#222" stroke-width="1.5"/>
+      <line x1="218" y1="226" x2="222" y2="230" stroke="#222" stroke-width="2"/>
+      <text x="228" y="227" font-size="12">Schätz|</text>
+      <rect x="200" y="238" width="164" height="38" fill="#fff" stroke="#bbb"/>
+      <text x="208" y="253" font-size="11">Schätzing, Frank</text>
+      <text x="208" y="269" font-size="11">Schatzinsel, Die</text>
+      <text x="386" y="226" font-size="12" font-weight="bold" fill="#1f4e79">Übersicht</text>
+      <text x="462" y="226" font-size="12" fill="#555">Details</text>
+      <text x="508" y="226" font-size="12" fill="#555">Leser</text>
+      <line x1="386" y1="234" x2="550" y2="234" stroke="#ccc"/>
+      <line x1="386" y1="234" x2="446" y2="234" stroke="#1f4e79" stroke-width="3"/>
+      <rect x="386" y="244" width="150" height="6" fill="#ddd"/>
+      <rect x="386" y="256" width="120" height="6" fill="#ddd"/>
+      <text x="572" y="230" font-size="12"><tspan fill="#1f4e79" text-decoration="underline">Start</tspan> › <tspan fill="#1f4e79" text-decoration="underline">Katalog</tspan> › <tspan font-weight="bold">Romane</tspan></text>
+      <text x="572" y="254" font-size="10" fill="#555" font-style="italic">beantwortet: Wo bin ich?</text>
+      <!-- Reihe 4 -->
+      <line x1="16" y1="306" x2="34" y2="306" stroke="#222" stroke-width="2.5"/>
+      <line x1="16" y1="312" x2="34" y2="312" stroke="#222" stroke-width="2.5"/>
+      <line x1="16" y1="318" x2="34" y2="318" stroke="#222" stroke-width="2.5"/>
+      <rect x="44" y="298" width="90" height="56" fill="#fff" stroke="#555"/>
+      <text x="52" y="313" font-size="11">Start</text>
+      <text x="52" y="329" font-size="11">Katalog</text>
+      <text x="52" y="345" font-size="11">Konto</text>
+      <rect x="134" y="298" width="44" height="56" fill="#ccc" opacity="0.5"/>
+      <rect x="200" y="314" width="164" height="38" fill="#fff" stroke="#555"/>
+      <rect x="215" y="320" width="10" height="10" fill="#1f4e79"/>
+      <rect x="256" y="320" width="10" height="10" fill="none" stroke="#555"/>
+      <rect x="297" y="320" width="10" height="10" fill="none" stroke="#555"/>
+      <rect x="338" y="320" width="10" height="10" fill="none" stroke="#555"/>
+      <text x="220" y="346" text-anchor="middle" font-size="9" font-weight="bold" fill="#1f4e79">Start</text>
+      <text x="261" y="346" text-anchor="middle" font-size="9">Suche</text>
+      <text x="302" y="346" text-anchor="middle" font-size="9">Ausleihen</text>
+      <text x="343" y="346" text-anchor="middle" font-size="9">Konto</text>
+      <rect x="386" y="298" width="164" height="56" fill="#999" opacity="0.35"/>
+      <rect x="398" y="302" width="140" height="48" rx="4" fill="#fff" stroke="#222"/>
+      <text x="468" y="317" text-anchor="middle" font-size="10" font-weight="bold">Medium zurückgeben?</text>
+      <rect x="404" y="324" width="48" height="20" rx="3" fill="#fff" stroke="#222"/>
+      <text x="428" y="338" text-anchor="middle" font-size="10">Nein</text>
+      <rect x="458" y="324" width="74" height="20" rx="3" fill="#1f4e79"/>
+      <text x="495" y="338" text-anchor="middle" font-size="10" fill="#fff">Zurückgeben</text>
+      <rect x="572" y="302" width="164" height="30" rx="6" fill="#333"/>
+      <text x="582" y="321" font-size="11" fill="#fff">✓ Gespeichert</text>
+      <text x="728" y="321" text-anchor="end" font-size="10" fill="#9ecbff">Rückgängig</text>
+      <text x="572" y="348" font-size="10" fill="#555">verschwindet nach wenigen Sekunden</text>
+      <!-- Reihe 5 -->
+      <rect x="14" y="390" width="164" height="18" fill="#e8ecf1" stroke="#999"/>
+      <text x="20" y="403" font-size="10" font-weight="bold">Titel ▾</text>
+      <text x="100" y="403" font-size="10" font-weight="bold">Rückgabe</text>
+      <rect x="14" y="408" width="164" height="16" fill="#fff" stroke="#999"/>
+      <text x="20" y="420" font-size="10">Der Schwarm</text><text x="100" y="420" font-size="10">14.05.</text>
+      <rect x="14" y="424" width="164" height="16" fill="#fff" stroke="#999"/>
+      <text x="20" y="436" font-size="10">Momo</text><text x="100" y="436" font-size="10">21.05.</text>
+      <line x1="94" y1="390" x2="94" y2="440" stroke="#999"/>
+      <g font-size="9" text-anchor="middle">
+        <rect x="200" y="390" width="50" height="56" rx="4" fill="#fff" stroke="#555"/>
+        <rect x="204" y="394" width="42" height="26" fill="#f3f4f6" stroke="#bbb"/>
+        <line x1="204" y1="394" x2="246" y2="420" stroke="#ccc"/><line x1="246" y1="394" x2="204" y2="420" stroke="#ccc"/>
+        <text x="225" y="433">Romane</text><text x="225" y="443" fill="#555">412</text>
+        <rect x="257" y="390" width="50" height="56" rx="4" fill="#fff" stroke="#555"/>
+        <rect x="261" y="394" width="42" height="26" fill="#f3f4f6" stroke="#bbb"/>
+        <line x1="261" y1="394" x2="303" y2="420" stroke="#ccc"/><line x1="303" y1="394" x2="261" y2="420" stroke="#ccc"/>
+        <text x="282" y="433">Krimis</text><text x="282" y="443" fill="#555">268</text>
+        <rect x="314" y="390" width="50" height="56" rx="4" fill="#fff" stroke="#555"/>
+        <rect x="318" y="394" width="42" height="26" fill="#f3f4f6" stroke="#bbb"/>
+        <line x1="318" y1="394" x2="360" y2="420" stroke="#ccc"/><line x1="360" y1="394" x2="318" y2="420" stroke="#ccc"/>
+        <text x="339" y="433">Comics</text><text x="339" y="443" fill="#555">97</text>
+      </g>
+      <circle cx="398" cy="403" r="9" fill="#1f4e79"/><text x="398" y="407" text-anchor="middle" font-size="10" fill="#fff">1</text>
+      <line x1="407" y1="403" x2="459" y2="403" stroke="#1f4e79" stroke-width="2"/>
+      <circle cx="468" cy="403" r="9" fill="#1f4e79"/><text x="468" y="407" text-anchor="middle" font-size="10" fill="#fff">2</text>
+      <line x1="477" y1="403" x2="529" y2="403" stroke="#bbb" stroke-width="2"/>
+      <circle cx="538" cy="403" r="9" fill="#fff" stroke="#bbb"/><text x="538" y="407" text-anchor="middle" font-size="10" fill="#888">3</text>
+      <text x="398" y="426" text-anchor="middle" font-size="9">Medium</text>
+      <text x="468" y="426" text-anchor="middle" font-size="9">Abholort</text>
+      <text x="538" y="426" text-anchor="middle" font-size="9">Prüfen</text>
+      <rect x="386" y="434" width="164" height="8" rx="4" fill="#e5e5e5"/>
+      <rect x="386" y="434" width="98" height="8" rx="4" fill="#1f4e79"/>
+      <rect x="572" y="388" width="164" height="18" fill="#fff" stroke="#999"/>
+      <text x="578" y="401" font-size="11">▸ Öffnungszeiten</text>
+      <rect x="572" y="406" width="164" height="40" fill="#fff" stroke="#999"/>
+      <text x="578" y="419" font-size="11" font-weight="bold">▾ Gebühren</text>
+      <rect x="588" y="426" width="120" height="5" fill="#ddd"/>
+      <rect x="588" y="436" width="100" height="5" fill="#ddd"/>
+    </svg>
+    <figcaption>Abb. A-2: Baukasten der wichtigsten GUI-Elemente (Beispiele aus einer Bibliotheks-App) – so lassen sie sich schnell skizzieren</figcaption>
+  </figure>
+
+  <table class="kompakt">
+    <thead><tr><th style="width:21%">Element</th><th style="width:44%">Wofür?</th><th>Achtung</th></tr></thead>
+    <tr><td>Button (Schaltfläche)</td><td>löst eine Aktion aus; <strong>Primärbutton</strong> (Hauptaktion, hervorgehoben) und <strong>Sekundärbutton</strong> (z. B. Abbrechen)</td><td>als Verb beschriften („Buchen“, „Speichern“), nicht „OK“ oder „Submit“; pro Seite nur eine Primäraktion</td></tr>
+    <tr><td>Textfeld, Textbereich</td><td>freie Eingabe (Name, E-Mail, Bemerkung)</td><td>immer mit sichtbarem Label; wo feste Werte möglich sind, lieber eine Auswahl</td></tr>
+    <tr><td>Dropdown (Auswahlliste)</td><td>genau eine Option aus vielen (ab ca. 6), platzsparend</td><td>Optionen sind nicht sichtbar; bei 2–5 Optionen sind Radiobuttons besser</td></tr>
+    <tr><td>Radiobuttons, Segmented Control</td><td>genau eine Option aus wenigen; alle Optionen auf einen Blick</td><td>sinnvolle Option vorauswählen</td></tr>
+    <tr><td>Checkbox</td><td>unabhängige Ja/Nein-Auswahl, mehrere gleichzeitig möglich</td><td>Einwilligungen (Newsletter) nie vorausgewählt (DSGVO)</td></tr>
+    <tr><td>Toggle-Switch</td><td>Einstellung ein/aus mit <em>sofortiger</em> Wirkung (Dunkelmodus, Mitteilungen)</td><td>nicht in Formularen, die erst mit „Speichern“ wirken</td></tr>
+    <tr><td>Slider (Schieberegler)</td><td>ungefährer Wert aus einem Bereich (Lautstärke, Umkreis, Preisspanne)</td><td>ungenau, für motorisch eingeschränkte Menschen schwierig; eingestellten Wert anzeigen</td></tr>
+    <tr><td>Stepper (− 2 +)</td><td>kleine ganze Zahl (Anzahl Personen, Tickets)</td><td>Grenzen (min./max.) erzwingen, große Tippflächen</td></tr>
+    <tr><td>Datumsauswahl (Datepicker)</td><td>Datum oder Zeitraum per Kalender; ungültige Tage lassen sich sperren</td><td>Zeitraum = zwei Felder (von/bis) oder Bereichsauswahl</td></tr>
+    <tr><td>Suchfeld</td><td>schnelles Finden in großen Datenmengen, oft mit Vorschlägen (Autovervollständigung)</td><td>Treffer und „keine Treffer“ klar anzeigen</td></tr>
+    <tr><td>Tabelle, Liste</td><td>viele gleichartige Datensätze; sortier- und filterbar</td><td>am Smartphone nur wenige Spalten</td></tr>
+    <tr><td>Kacheln (Cards)</td><td>überschaubare Zahl von Objekten, oft mit Bild oder Status; touchfreundlich</td><td>weniger Datensätze pro Bildschirm</td></tr>
+    <tr><td>Karte (Map), Diagramm</td><td>Daten mit Ortsbezug bzw. Zahlen, Verläufe, Vergleiche (siehe Darstellungsformen)</td><td>Achsen und Einheiten beschriften</td></tr>
+    <tr><td>Tabs (Registerkarten)</td><td>zwischen gleichrangigen Bereichen einer Seite umschalten</td><td>aktiven Tab deutlich markieren</td></tr>
+    <tr><td>Breadcrumb (Pfadnavigation)</td><td>zeigt die Position in der Hierarchie (Start › Katalog › Romane); Elternebenen sind anklickbar</td><td>vor allem bei Websites mit mehreren Ebenen</td></tr>
+    <tr><td>Hamburger-Menü (☰)</td><td>Navigation eingeklappt, spart Platz auf kleinen Bildschirmen</td><td>versteckt die Bereiche; wichtige Bereiche besser in eine Tab-Bar</td></tr>
+    <tr><td>Tab-Bar (Bottom Navigation)</td><td>3–5 Hauptbereiche einer App, immer sichtbar, mit dem Daumen erreichbar</td><td>Symbol <em>und</em> Text</td></tr>
+    <tr><td>Modal-Dialog</td><td>unterbricht den Ablauf und erzwingt eine Entscheidung (z. B. Löschen bestätigen)</td><td>sparsam einsetzen; Buttons eindeutig beschriften („Löschen“ / „Behalten“)</td></tr>
+    <tr><td>Toast (Snackbar)</td><td>kurze Rückmeldung, die nicht blockiert und von selbst verschwindet („Gespeichert“), evtl. mit „Rückgängig“</td><td>nicht für wichtige Fehlermeldungen</td></tr>
+    <tr><td>Tooltip</td><td>Zusatzinformation beim Darüberfahren mit der Maus</td><td>auf Touchgeräten gibt es kein Hover</td></tr>
+    <tr><td>Fortschrittsbalken, Schrittanzeige</td><td>Status eines Vorgangs („Schritt 2 von 3“, Upload 60 %)</td><td>–</td></tr>
+    <tr><td>Akkordeon, Pagination, Karussell</td><td>ausklappbare Abschnitte (FAQ); lange Listen seitenweise; mehrere Inhalte nacheinander</td><td>Karussells werden kaum beachtet – kein automatisches Weiterschalten</td></tr>
+  </table>
+
+  <div class="merke"><span class="kastentitel">Merke – welches Auswahl-Element?</span>
+    <ul style="margin:4px 0">
+      <li>genau <strong>eine</strong> Option aus <strong>wenigen</strong> (2–5) → Radiobuttons bzw. Segmented Control</li>
+      <li>genau <strong>eine</strong> Option aus <strong>vielen</strong> → Dropdown, bei sehr vielen ein Suchfeld mit Vorschlägen</li>
+      <li><strong>mehrere</strong> Optionen gleichzeitig → Checkboxen</li>
+      <li>Ein/Aus mit sofortiger Wirkung → Toggle-Switch</li>
+      <li><strong>exakte</strong> kleine Zahl → Stepper (oder Dropdown); <strong>ungefährer</strong> Wert aus einem Bereich → Slider</li>
+      <li>Datum → Datumsauswahl statt Freitext; Rückfrage → Modal-Dialog; kurze Erfolgsmeldung → Toast</li>
+    </ul>
+  </div>
+
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>W22 T1 A3a: In einer Tabelle ist ein Gestaltungselement (eine Pfadnavigation) beschrieben, drei weitere sollen ergänzt werden (3 P). Schreibe pro Zeile <strong>Name + Zweck</strong>, z. B. „Akkordeon: Abschnitte, die sich per Klick auf die Überschrift auf- und zuklappen lassen; lange Seiten (FAQ) bleiben übersichtlich.“</div>
+
+  <h4>Darstellungsform für Daten wählen</h4>
+  <p>Bevor du dich entscheidest, beantworte drei Fragen: <strong>Welche Daten</strong> (Anzahl, Text oder Zahl, Zeitbezug, Ortsbezug, Bilder)? <strong>Was will der Nutzer damit tun</strong> (Überblick, vergleichen, suchen, Lage erkennen, Entwicklung verfolgen)? <strong>Auf welchem Gerät</strong>?</p>
+  <table class="kompakt">
+    <thead><tr><th style="width:20%">Darstellungsform</th><th style="width:27%">geeignet für</th><th style="width:30%">Vorteil (Begründung)</th><th>Nachteil</th></tr></thead>
+    <tr><td>Tabelle / Liste</td><td>viele gleichartige Datensätze mit mehreren Merkmalen</td><td>übersichtlich, schnell erfassbar, sortier- und filterbar</td><td>wenig anschaulich; auf kleinen Bildschirmen eng</td></tr>
+    <tr><td>Kacheln (Cards)</td><td>überschaubare Anzahl von Objekten, oft mit Bild oder Status</td><td>modern, Fokus auf das Wesentliche, gut für Touch und kleine Bildschirme</td><td>weniger Einträge pro Bildschirm, Vergleich schwerer</td></tr>
+    <tr><td>Karte</td><td>Daten mit Ortsbezug (Standorte, Gebiete, Routen)</td><td>räumliche Lage und Entfernungen sofort erkennbar</td><td>Detailwerte erst nach Antippen; Geodaten nötig</td></tr>
+    <tr><td>Liniendiagramm</td><td>Verlauf über die Zeit, Trend</td><td>Entwicklung auf einen Blick</td><td>exakte Werte schwer ablesbar</td></tr>
+    <tr><td>Säulen-/Balkendiagramm</td><td>Vergleich von Kategorien oder Zeitabschnitten</td><td>Größenunterschiede intuitiv erkennbar</td><td>bei vielen Kategorien unübersichtlich</td></tr>
+    <tr><td>Kreis-/Ringdiagramm</td><td>Anteile an einem Ganzen (wenige Kategorien)</td><td>Anteil sofort sichtbar</td><td>kein Zeitverlauf, ungenau bei vielen Anteilen</td></tr>
+    <tr><td>Kennzahl, Tacho, Ampel</td><td>ein aktueller Wert, ggf. mit Grenzwert</td><td>in einer Sekunde erfasst</td><td>keine Historie</td></tr>
+    <tr><td>Kalender, Zeitleiste</td><td>Termine, Belegungen</td><td>zeitliche Einordnung</td><td>braucht viel Platz</td></tr>
+    <tr><td>Baum</td><td>Hierarchien (Ordner, Organigramm)</td><td>Struktur sichtbar</td><td>tiefe Ebenen unübersichtlich</td></tr>
+  </table>
+
+  <p><strong>Beispiel:</strong> Der Lieferdienst „Blitzkurier“ hat 40 E-Transporter. Die Disposition will wissen, wo die Fahrzeuge sind, welchen Status sie haben und wie voll ihr Akku ist. Abb. A-3 zeigt dieselben vier Fahrzeuge in vier Darstellungsformen.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 250" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <g font-size="12" font-weight="bold" text-anchor="middle">
+        <text x="96" y="18">Tabelle / Liste</text>
+        <text x="284" y="18">Kacheln</text>
+        <text x="472" y="18">Karte</text>
+        <text x="660" y="18">Balkendiagramm</text>
+      </g>
+      <rect x="8" y="26" width="176" height="214" rx="4" fill="none" stroke="#ccc"/>
+      <rect x="196" y="26" width="176" height="214" rx="4" fill="none" stroke="#ccc"/>
+      <rect x="572" y="26" width="176" height="214" rx="4" fill="none" stroke="#ccc"/>
+      <!-- Tabelle -->
+      <rect x="14" y="34" width="164" height="22" fill="#e8ecf1" stroke="#999"/>
+      <g font-size="11" font-weight="bold"><text x="20" y="49">Fzg.</text><text x="66" y="49">Status</text><text x="140" y="49">Akku</text></g>
+      <g fill="#fff" stroke="#999">
+        <rect x="14" y="56" width="164" height="22"/><rect x="14" y="78" width="164" height="22"/><rect x="14" y="100" width="164" height="22"/><rect x="14" y="122" width="164" height="22"/>
+      </g>
+      <line x1="60" y1="34" x2="60" y2="144" stroke="#999"/><line x1="134" y1="34" x2="134" y2="144" stroke="#999"/>
+      <g font-size="11">
+        <text x="20" y="71">E-101</text><text x="66" y="71">unterwegs</text><text x="140" y="71">64 %</text>
+        <text x="20" y="93">E-102</text><text x="66" y="93">lädt</text><text x="140" y="93">23 %</text>
+        <text x="20" y="115">E-103</text><text x="66" y="115">frei</text><text x="140" y="115">91 %</text>
+        <text x="20" y="137">E-104</text><text x="66" y="137">frei</text><text x="140" y="137">47 %</text>
+      </g>
+      <text x="20" y="168" font-size="10" fill="#555">▲▼ nach jeder Spalte sortierbar</text>
+      <text x="20" y="184" font-size="10" fill="#555">Filter: Status, Akkustand</text>
+      <!-- Kacheln -->
+      <g>
+        <rect x="204" y="34" width="78" height="88" rx="6" fill="#fff" stroke="#888"/>
+        <rect x="290" y="34" width="78" height="88" rx="6" fill="#fff" stroke="#888"/>
+        <rect x="204" y="130" width="78" height="88" rx="6" fill="#fff" stroke="#888"/>
+        <rect x="290" y="130" width="78" height="88" rx="6" fill="#fff" stroke="#888"/>
+        <g fill="#e8ecf1" stroke="#555">
+          <rect x="224" y="44" width="30" height="16" rx="2"/><rect x="254" y="49" width="10" height="11"/>
+          <rect x="310" y="44" width="30" height="16" rx="2"/><rect x="340" y="49" width="10" height="11"/>
+          <rect x="224" y="140" width="30" height="16" rx="2"/><rect x="254" y="145" width="10" height="11"/>
+          <rect x="310" y="140" width="30" height="16" rx="2"/><rect x="340" y="145" width="10" height="11"/>
+        </g>
+        <g fill="#555">
+          <circle cx="232" cy="62" r="3"/><circle cx="256" cy="62" r="3"/><circle cx="318" cy="62" r="3"/><circle cx="342" cy="62" r="3"/>
+          <circle cx="232" cy="158" r="3"/><circle cx="256" cy="158" r="3"/><circle cx="318" cy="158" r="3"/><circle cx="342" cy="158" r="3"/>
+        </g>
+        <g text-anchor="middle">
+          <text x="243" y="86" font-size="11" font-weight="bold">E-101</text><text x="243" y="101" font-size="10">64 %</text><text x="243" y="114" font-size="9" fill="#555">unterwegs</text>
+          <text x="329" y="86" font-size="11" font-weight="bold">E-102</text><text x="329" y="101" font-size="10">23 %</text><text x="329" y="114" font-size="9" fill="#555">lädt</text>
+          <text x="243" y="182" font-size="11" font-weight="bold">E-103</text><text x="243" y="197" font-size="10">91 %</text><text x="243" y="210" font-size="9" fill="#555">frei</text>
+          <text x="329" y="182" font-size="11" font-weight="bold">E-104</text><text x="329" y="197" font-size="10">47 %</text><text x="329" y="210" font-size="9" fill="#555">frei</text>
+        </g>
+      </g>
+      <!-- Karte -->
+      <rect x="384" y="26" width="176" height="214" rx="4" fill="#f3f4f6" stroke="#ccc"/>
+      <rect x="498" y="38" width="52" height="36" rx="4" fill="#dfe9d8"/>
+      <g fill="none" stroke="#c8c8c8" stroke-width="10">
+        <path d="M385,96 H559"/><path d="M450,27 V239"/><path d="M385,206 L559,130"/>
+      </g>
+      <g fill="none" stroke="#fff" stroke-width="7">
+        <path d="M385,96 H559"/><path d="M450,27 V239"/><path d="M385,206 L559,130"/>
+      </g>
+      <rect x="398" y="150" width="22" height="18" fill="#fff" stroke="#222"/>
+      <text x="409" y="163" text-anchor="middle" font-size="10" font-weight="bold">D</text>
+      <g fill="#1f4e79">
+        <path d="M486,90 c-6,-9 -9,-13 -9,-17 a9,9 0 1 1 18,0 c0,4 -3,8 -9,17 z"/>
+        <path d="M428,148 c-6,-9 -9,-13 -9,-17 a9,9 0 1 1 18,0 c0,4 -3,8 -9,17 z"/>
+        <path d="M522,186 c-6,-9 -9,-13 -9,-17 a9,9 0 1 1 18,0 c0,4 -3,8 -9,17 z"/>
+        <path d="M478,230 c-6,-9 -9,-13 -9,-17 a9,9 0 1 1 18,0 c0,4 -3,8 -9,17 z"/>
+      </g>
+      <g fill="#fff"><circle cx="486" cy="73" r="3"/><circle cx="428" cy="131" r="3"/><circle cx="522" cy="169" r="3"/><circle cx="478" cy="213" r="3"/></g>
+      <g font-size="10" font-weight="bold">
+        <text x="498" y="78">101</text><text x="440" y="136">102</text><text x="534" y="174">103</text><text x="490" y="218">104</text>
+      </g>
+      <!-- Balkendiagramm -->
+      <text x="660" y="44" text-anchor="middle" font-size="10" fill="#555">Akkustand in %</text>
+      <line x1="620" y1="52" x2="620" y2="186" stroke="#222"/>
+      <line x1="620" y1="186" x2="724" y2="186" stroke="#222"/>
+      <g font-size="10" text-anchor="end"><text x="614" y="76">E-101</text><text x="614" y="106">E-102</text><text x="614" y="136">E-103</text><text x="614" y="166">E-104</text></g>
+      <g fill="#1f4e79"><rect x="620" y="65" width="64" height="14"/><rect x="620" y="95" width="23" height="14"/><rect x="620" y="125" width="91" height="14"/><rect x="620" y="155" width="47" height="14"/></g>
+      <g font-size="10"><text x="688" y="76">64</text><text x="647" y="106">23</text><text x="715" y="136">91</text><text x="671" y="166">47</text></g>
+      <g stroke="#222"><line x1="670" y1="186" x2="670" y2="190"/><line x1="720" y1="186" x2="720" y2="190"/></g>
+      <g font-size="9" text-anchor="middle"><text x="620" y="200">0</text><text x="670" y="200">50</text><text x="720" y="200">100</text></g>
+    </svg>
+    <figcaption>Abb. A-3: Dieselben Fahrzeugdaten als Tabelle, Kacheln, Karte und Diagramm</figcaption>
+  </figure>
+
+  <p>Welche Form richtig ist, hängt von der <strong>Aufgabe</strong> ab: Soll die Disposition entscheiden, welches freie Fahrzeug einem Abholort am nächsten ist, ist die <strong>Karte</strong> richtig – Entfernungen sieht man sofort, Status und Akku erscheinen beim Antippen des Pins. Sollen dagegen alle Fahrzeuge mit niedrigem Akku gefunden werden, ist eine nach Akkustand <strong>sortierbare Tabelle</strong> besser. Das Diagramm eignet sich für den schnellen Vergleich weniger Werte, die Kacheln für eine App, in der der Fahrer „sein“ Fahrzeug antippt.</p>
+
+  <div class="merke"><span class="kastentitel">Merke</span>Die Begründung muss sich auf die <strong>Aufgabe des Nutzers und die Art der Daten</strong> beziehen. „Ist übersichtlich“ allein ist keine Begründung. Gut: „Die Karte zeigt die räumliche Lage der Fahrzeuge, sodass die Disposition das nächstgelegene freie Fahrzeug ohne Suchen erkennt.“</div>
+
+  <div class="falle"><span class="kastentitel">Typische Falle</span>Kreisdiagramm für einen zeitlichen Verlauf (falsch – das ist ein Linien- oder Säulendiagramm); Diagramm ohne Achsenbeschriftung und Einheit; Tabelle und Liste als „zwei verschiedene Darstellungsformen“ nennen (zählt meist nur einmal).</div>
+
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>W23 T1 A4b: zwei Darstellungsformen für eine Übersicht nennen (2 P), eine auswählen und begründen (2 P), dann mit zwei Beispieldatensätzen skizzieren (4 P). Laut Lösungshinweisen wurden u. a. Liste/Tabelle, Kacheln und Karte akzeptiert – entscheidend ist die passende Begründung. In der Skizze die Beispieldatensätze wirklich eintragen.</div>
+
+  <h4>Responsive Design und Mobile First</h4>
+  <p><strong>Responsive Design</strong> heißt: Eine Oberfläche passt ihr Layout automatisch an Bildschirmgröße und Ausrichtung an – mit denselben Inhalten und einer Codebasis für Smartphone, Tablet und Desktop. Typische Techniken und Anpassungen:</p>
+  <ul>
+    <li>flexible Raster (CSS Grid/Flexbox) mit relativen Breiten statt fester Pixelmaße; <strong>Breakpoints</strong> per Media Query (z. B. unter 600 px, 600–1023 px, ab 1024 px)</li>
+    <li>relative Schriftgrößen (<code>rem</code>), Bilder skalieren mit (<code>max-width: 100%</code>)</li>
+    <li>mehrspaltige Layouts werden einspaltig; die Menüleiste wird zum Hamburger-Menü oder zur Tab-Bar</li>
+    <li>Tabellen zeigen nur die wichtigsten Spalten oder werden zu einer Liste von Karten</li>
+    <li>Filter und Zusatzinfos werden eingeklappt; Touch-Ziele werden größer; Hover-Funktionen erhalten eine Alternative</li>
+  </ul>
+  <p><strong>Mobile First</strong> heißt: Der Entwurf beginnt beim kleinsten Bildschirm. Weil dort nur das Wichtigste Platz hat, muss man priorisieren. Größere Bildschirme werden danach schrittweise ergänzt (Progressive Enhancement). Vorteile: Fokus auf die Kernfunktionen, gute Ladezeiten auf Mobilgeräten – und die meisten Nutzer sind mobil unterwegs. Davon abzugrenzen ist <strong>Adaptive Design</strong>: feste Layouts für einige wenige Gerätegrößen.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 306" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <g font-size="12" font-weight="bold" text-anchor="middle">
+        <text x="175" y="16">Desktop (ab 1024 px)</text>
+        <text x="475" y="16">Tablet (600–1023 px)</text>
+        <text x="670" y="16">Smartphone (unter 600 px)</text>
+      </g>
+      <!-- Desktop -->
+      <rect x="10" y="26" width="330" height="206" rx="6" fill="#fff" stroke="#222" stroke-width="2"/>
+      <rect x="18" y="34" width="314" height="22" fill="#e8ecf1"/>
+      <text x="26" y="49" font-size="11" font-weight="bold">Stadtbibliothek</text>
+      <text x="326" y="49" text-anchor="end" font-size="10">Katalog     Konto     Hilfe</text>
+      <g stroke="#999" fill="#fff">
+        <rect x="22" y="64" width="98" height="74"/><rect x="126" y="64" width="98" height="74"/><rect x="230" y="64" width="98" height="74"/>
+        <rect x="22" y="144" width="98" height="74"/><rect x="126" y="144" width="98" height="74"/><rect x="230" y="144" width="98" height="74"/>
+      </g>
+      <g fill="#f3f4f6" stroke="#bbb">
+        <rect x="28" y="70" width="86" height="40"/><rect x="132" y="70" width="86" height="40"/><rect x="236" y="70" width="86" height="40"/>
+        <rect x="28" y="150" width="86" height="40"/><rect x="132" y="150" width="86" height="40"/><rect x="236" y="150" width="86" height="40"/>
+      </g>
+      <g fill="#ccc">
+        <rect x="28" y="116" width="70" height="6"/><rect x="132" y="116" width="70" height="6"/><rect x="236" y="116" width="70" height="6"/>
+        <rect x="28" y="196" width="70" height="6"/><rect x="132" y="196" width="70" height="6"/><rect x="236" y="196" width="70" height="6"/>
+      </g>
+      <path d="M160,232 L190,232 L196,248 L154,248 Z" fill="#ddd" stroke="#222"/>
+      <rect x="125" y="248" width="100" height="6" rx="3" fill="#222"/>
+      <!-- Tablet -->
+      <rect x="380" y="26" width="190" height="256" rx="14" fill="#fff" stroke="#222" stroke-width="2"/>
+      <rect x="390" y="40" width="170" height="22" fill="#e8ecf1"/>
+      <g stroke="#222" stroke-width="2"><line x1="396" y1="46" x2="408" y2="46"/><line x1="396" y1="51" x2="408" y2="51"/><line x1="396" y1="56" x2="408" y2="56"/></g>
+      <text x="416" y="55" font-size="10" font-weight="bold">Stadtbibliothek</text>
+      <g stroke="#999" fill="#fff">
+        <rect x="392" y="70" width="80" height="72"/><rect x="478" y="70" width="80" height="72"/>
+        <rect x="392" y="148" width="80" height="72"/><rect x="478" y="148" width="80" height="72"/>
+      </g>
+      <g fill="#f3f4f6" stroke="#bbb">
+        <rect x="397" y="75" width="70" height="38"/><rect x="483" y="75" width="70" height="38"/>
+        <rect x="397" y="153" width="70" height="38"/><rect x="483" y="153" width="70" height="38"/>
+      </g>
+      <g fill="#ccc"><rect x="397" y="120" width="55" height="6"/><rect x="483" y="120" width="55" height="6"/><rect x="397" y="198" width="55" height="6"/><rect x="483" y="198" width="55" height="6"/></g>
+      <text x="475" y="244" text-anchor="middle" font-size="10" fill="#555">⋮ weiterscrollen</text>
+      <!-- Smartphone -->
+      <rect x="610" y="40" width="120" height="236" rx="16" fill="#fff" stroke="#222" stroke-width="2"/>
+      <rect x="650" y="44" width="40" height="6" rx="3" fill="#222"/>
+      <rect x="618" y="56" width="104" height="20" fill="#e8ecf1"/>
+      <g stroke="#222" stroke-width="1.6"><line x1="622" y1="61" x2="632" y2="61"/><line x1="622" y1="66" x2="632" y2="66"/><line x1="622" y1="71" x2="632" y2="71"/></g>
+      <text x="638" y="70" font-size="9" font-weight="bold">Bibliothek</text>
+      <g stroke="#999" fill="#fff"><rect x="618" y="82" width="104" height="72"/><rect x="618" y="160" width="104" height="72"/></g>
+      <g fill="#f3f4f6" stroke="#bbb"><rect x="624" y="88" width="92" height="38"/><rect x="624" y="166" width="92" height="38"/></g>
+      <g fill="#ccc"><rect x="624" y="134" width="60" height="6"/><rect x="624" y="212" width="60" height="6"/></g>
+      <rect x="618" y="240" width="104" height="26" fill="#fff" stroke="#bbb"/>
+      <g fill="none" stroke="#555"><rect x="627" y="248" width="10" height="10"/><rect x="651" y="248" width="10" height="10"/><rect x="675" y="248" width="10" height="10"/><rect x="699" y="248" width="10" height="10"/></g>
+      <g font-size="11" text-anchor="middle" fill="#333">
+        <text x="175" y="300">3 Spalten · Menüleiste</text>
+        <text x="475" y="300">2 Spalten · Hamburger-Menü</text>
+        <text x="670" y="300">1 Spalte · Tab-Bar</text>
+      </g>
+    </svg>
+    <figcaption>Abb. A-4: Responsive Design – derselbe Bibliothekskatalog an drei Breakpoints</figcaption>
+  </figure>
+
+  <div class="falle"><span class="kastentitel">Typische Falle</span>„Responsive Design = für jedes Gerät eine eigene App“ ist falsch, ebenso „die Desktop-Seite wird einfach kleiner gezoomt“. Responsive bedeutet <em>ein</em> Inhalt, dessen <em>Anordnung</em> sich anpasst.</div>
+
+  <h4>So skizzierst du ein Mockup in der Prüfung</h4>
+  <ol>
+    <li><strong>Anforderungen markieren:</strong> Jede geforderte Information und Funktion im Aufgabentext unterstreichen und nummerieren. Für jede gibt es Punkte – also muss jede als sichtbares Element in der Skizze vorkommen.</li>
+    <li><strong>Vorgaben übernehmen:</strong> Vorgedruckte Teile (Titel, Zurück-Pfeil, Menüleiste) nicht ändern, sondern im gleichen Stil weiterzeichnen.</li>
+    <li><strong>Grob aufteilen:</strong> oben Orientierung und Auswahl (Titel, Filter), in der Mitte der Inhalt (das Wichtigste zuerst und groß), unten die Aktion (Primärbutton, beim Smartphone im Daumenbereich).</li>
+    <li><strong>Passende Elemente wählen</strong> (Baukasten oben) und sauber als Kästen zeichnen: Bilder als Kasten mit Kreuz, Diagramme mit beschrifteten Achsen.</li>
+    <li><strong>Beispieldaten eintragen</strong> („Rückgabe bis 14.05.“ statt „Text Text“) – so sieht der Prüfer, dass du die Daten verstanden hast.</li>
+    <li><strong>Am Rand beschriften:</strong> Was nicht selbsterklärend ist, mit Pfeil erläutern („Tippen öffnet Kalender“, „Liste scrollbar“).</li>
+    <li><strong>Kontrolle:</strong> Alle Anforderungen abgehakt? Klare Beschriftungen, Rückmeldung, Abbrechen möglich? Status als Text statt nur als Farbe, große Schaltflächen?</li>
+  </ol>
+
+  <figure>
+    <svg viewBox="0 0 760 560" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <rect x="20" y="10" width="270" height="540" rx="30" fill="#fff" stroke="#222" stroke-width="3"/>
+      <rect x="125" y="18" width="60" height="14" rx="7" fill="#222"/>
+      <text x="44" y="40" font-size="11">9:41</text>
+      <rect x="246" y="31" width="20" height="10" rx="2" fill="none" stroke="#222"/>
+      <rect x="248" y="33" width="14" height="6" fill="#222"/>
+      <text x="40" y="73" font-size="18">←</text>
+      <text x="155" y="72" text-anchor="middle" font-size="15" font-weight="bold">Meine Ausleihen</text>
+      <line x1="24" y1="86" x2="286" y2="86" stroke="#ccc"/>
+      <rect x="40" y="96" width="230" height="40" rx="6" fill="#eef3fa" stroke="#c9d6e6"/>
+      <text x="52" y="112" font-size="12" font-weight="bold">3 Medien ausgeliehen</text>
+      <text x="52" y="128" font-size="11" fill="#b91c1c">⚠ 1 Medium überfällig</text>
+      <!-- Karte 1 -->
+      <rect x="40" y="146" width="230" height="82" rx="6" fill="#fff" stroke="#bbb"/>
+      <rect x="48" y="154" width="40" height="58" fill="#f3f4f6" stroke="#999"/>
+      <line x1="48" y1="154" x2="88" y2="212" stroke="#bbb"/><line x1="88" y1="154" x2="48" y2="212" stroke="#bbb"/>
+      <text x="96" y="168" font-size="12" font-weight="bold">Der Schwarm</text>
+      <text x="96" y="183" font-size="10" fill="#555">F. Schätzing</text>
+      <text x="96" y="199" font-size="11" fill="#b91c1c">⚠ überfällig seit 02.05.</text>
+      <rect x="196" y="204" width="66" height="20" rx="4" fill="#fff" stroke="#1f4e79"/>
+      <text x="229" y="218" text-anchor="middle" font-size="10" fill="#1f4e79">Verlängern</text>
+      <!-- Karte 2 -->
+      <rect x="40" y="236" width="230" height="82" rx="6" fill="#fff" stroke="#bbb"/>
+      <rect x="48" y="244" width="40" height="58" fill="#f3f4f6" stroke="#999"/>
+      <line x1="48" y1="244" x2="88" y2="302" stroke="#bbb"/><line x1="88" y1="244" x2="48" y2="302" stroke="#bbb"/>
+      <text x="96" y="258" font-size="12" font-weight="bold">Momo</text>
+      <text x="96" y="273" font-size="10" fill="#555">M. Ende</text>
+      <text x="96" y="289" font-size="11">Rückgabe bis 14.05.</text>
+      <rect x="196" y="294" width="66" height="20" rx="4" fill="#fff" stroke="#1f4e79"/>
+      <text x="229" y="308" text-anchor="middle" font-size="10" fill="#1f4e79">Verlängern</text>
+      <!-- Karte 3 -->
+      <rect x="40" y="326" width="230" height="82" rx="6" fill="#fff" stroke="#bbb"/>
+      <rect x="48" y="334" width="40" height="58" fill="#f3f4f6" stroke="#999"/>
+      <line x1="48" y1="334" x2="88" y2="392" stroke="#bbb"/><line x1="88" y1="334" x2="48" y2="392" stroke="#bbb"/>
+      <text x="96" y="348" font-size="12" font-weight="bold">Die Känguru-Chroniken</text>
+      <text x="96" y="363" font-size="10" fill="#555">M.-U. Kling</text>
+      <text x="96" y="379" font-size="11">Rückgabe bis 21.05.</text>
+      <rect x="196" y="384" width="66" height="20" rx="4" fill="#fff" stroke="#1f4e79"/>
+      <text x="229" y="398" text-anchor="middle" font-size="10" fill="#1f4e79">Verlängern</text>
+      <!-- Primäraktion -->
+      <rect x="40" y="420" width="230" height="40" rx="8" fill="#1f4e79"/>
+      <text x="155" y="445" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">Alle verlängern</text>
+      <!-- Tab-Bar -->
+      <line x1="24" y1="486" x2="286" y2="486" stroke="#ccc"/>
+      <rect x="59" y="494" width="10" height="10" fill="none" stroke="#555"/>
+      <rect x="119" y="494" width="10" height="10" fill="none" stroke="#555"/>
+      <rect x="185" y="494" width="10" height="10" fill="#1f4e79"/>
+      <rect x="247" y="494" width="10" height="10" fill="none" stroke="#555"/>
+      <g font-size="10" text-anchor="middle">
+        <text x="64" y="518">Start</text><text x="124" y="518">Suche</text>
+        <text x="190" y="518" font-weight="bold" fill="#1f4e79">Ausleihen</text><text x="252" y="518">Konto</text>
+      </g>
+      <!-- Randbeschriftungen -->
+      <g stroke="#c2410c" stroke-width="1.2">
+        <line x1="224" y1="68" x2="326" y2="68"/><line x1="270" y1="116" x2="326" y2="116"/>
+        <line x1="270" y1="170" x2="326" y2="170"/><line x1="244" y1="195" x2="326" y2="195"/>
+        <line x1="262" y1="304" x2="326" y2="304"/><line x1="270" y1="440" x2="326" y2="440"/>
+        <line x1="286" y1="505" x2="326" y2="505"/>
+      </g>
+      <g fill="#c2410c">
+        <circle cx="224" cy="68" r="2.5"/><circle cx="270" cy="116" r="2.5"/><circle cx="270" cy="170" r="2.5"/>
+        <circle cx="244" cy="195" r="2.5"/><circle cx="262" cy="304" r="2.5"/><circle cx="270" cy="440" r="2.5"/><circle cx="286" cy="505" r="2.5"/>
+      </g>
+      <g font-size="12">
+        <text x="332" y="72">Titel + Zurück-Pfeil: Wo bin ich? (Orientierung)</text>
+        <text x="332" y="120">Zusammenfassung zuerst – das Wichtigste oben</text>
+        <text x="332" y="174">Liste: je Medium Bild, Titel, Frist – mit Beispieldaten</text>
+        <text x="332" y="199">Status als Text + Symbol, nicht nur als rote Farbe</text>
+        <text x="332" y="308">Aktion direkt am Eintrag, klar beschriftet</text>
+        <text x="332" y="444">Primäraktion groß und im Daumenbereich</text>
+        <text x="332" y="509">Tab-Bar: Hauptbereiche jederzeit erreichbar</text>
+      </g>
+    </svg>
+    <figcaption>Abb. A-5: So sieht eine gute Prüfungsskizze aus – Kästen, Beispieldaten und Randbeschriftungen (Bibliotheks-App „Meine Ausleihen“)</figcaption>
+  </figure>
+
+  <div class="merke"><span class="kastentitel">Merke</span>Bewertet werden <strong>Vollständigkeit</strong> (jede Anforderung als Element), <strong>Eignung der Elemente</strong> und <strong>Übersichtlichkeit</strong> – nicht die Zeichenkunst. Ein vergessenes Element kostet mehr als eine krumme Linie.</div>
+
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>S26 T1 A4cb: Ein Smartphone-Rahmen mit Titelzeile und Zurück-Pfeil ist vorgegeben, ergänzt werden sollen ein aktueller Messwert und ein Verlaufsdiagramm mit wählbarem Start- und Enddatum (6 P). Wer nur das Diagramm zeichnet und die Datumsauswahl vergisst, verschenkt Punkte. S24 T1 A4bb: Ein Browserfenster mit Menüleiste ist vorgegeben, darin ein verbessertes Mockup mit allen geforderten Funktionen skizzieren (7 P).</div>
+
+  <!-- ===================== GUI-02 ===================== -->
+  <h3 id="e-02">GUI-02 · Barrierefreiheit <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
+  <p class="klein">Vorkommen: 3/9 · Prüfungen: W21 (T1 A3ab, Begriff erläutern), W22 (T1 A3b, inklusives Design: Schrift und Farbe), S26 (T1 A4b, zwei Anforderungen + Maßnahmen in einer Tabelle)</p>
+
+  <h4>Begriff</h4>
+  <p>Software ist <strong>barrierefrei</strong>, wenn Menschen mit Behinderungen sie in der allgemein üblichen Weise, ohne besondere Erschwernis und grundsätzlich ohne fremde Hilfe finden, wahrnehmen, verstehen und bedienen können (angelehnt an § 4 Behindertengleichstellungsgesetz, BGG). Dazu nutzen viele Menschen <strong>Hilfsmittel</strong>: Screenreader (liest den Bildschirm vor), Braillezeile, Bildschirmlupe, Spracheingabe, Spezialtastaturen. Die Software muss so gebaut sein, dass diese Hilfsmittel funktionieren.</p>
+  <table class="kompakt">
+    <thead><tr><th style="width:27%">Nutzergruppe</th><th style="width:38%">typische Barriere</th><th>hilft z. B.</th></tr></thead>
+    <tr><td>blinde Menschen (Screenreader, Braillezeile)</td><td>Bilder ohne Textalternative, Buttons ohne Namen, nur mit der Maus bedienbar</td><td>Alternativtexte, semantische Struktur, Tastaturbedienung</td></tr>
+    <tr><td>sehbehinderte und ältere Menschen</td><td>kleine Schrift, geringer Kontrast, Layout zerfällt beim Vergrößern</td><td>hoher Kontrast, skalierbare Schrift, Zoom bis 200 %</td></tr>
+    <tr><td>farbfehlsichtige Menschen (rund 8 % der Männer)</td><td>Information nur über Rot und Grün</td><td>zusätzlich Text, Symbol oder Muster</td></tr>
+    <tr><td>gehörlose und schwerhörige Menschen</td><td>Videos ohne Untertitel, Hinweise nur als Ton</td><td>Untertitel, Transkript, Gebärdensprache, visuelle Signale</td></tr>
+    <tr><td>motorisch eingeschränkte Menschen</td><td>winzige Klickflächen, enge Zeitlimits, komplizierte Gesten, Maus nötig</td><td>große Bedienelemente, Tastatur/Spracheingabe, keine engen Zeitlimits</td></tr>
+    <tr><td>kognitiv eingeschränkte Menschen, Menschen mit geringen Deutschkenntnissen</td><td>komplizierte Sprache, unübersichtliche Abläufe</td><td>einfache bzw. Leichte Sprache, klare Struktur, Hilfen</td></tr>
+    <tr><td>vorübergehend oder situativ eingeschränkte Menschen</td><td>Arm im Gips, grelles Sonnenlicht, laute Umgebung, keine Brille dabei</td><td>dieselben Maßnahmen</td></tr>
+  </table>
+  <div class="merke"><span class="kastentitel">Merke</span>Barrierefreiheit ist nicht nur ein Thema für Rollstuhlfahrer und blinde Menschen – und sie nützt allen: Untertitel im Zug, Kontrast in der Sonne, große Buttons beim Gehen, einfache Sprache für Eilige.</div>
+
+  <h4>Rechtlicher Rahmen (Kurzfassung)</h4>
+  <table class="kompakt">
+    <thead><tr><th style="width:24%">Regelung</th><th style="width:32%">gilt für</th><th>Inhalt</th></tr></thead>
+    <tr><td><strong>BGG</strong> und <strong>BITV 2.0</strong> (Barrierefreie-Informationstechnik-Verordnung)</td><td>öffentliche Stellen des Bundes (die Länder haben eigene, ähnliche Gesetze)</td><td>Websites, Apps und Intranet müssen barrierefrei sein; Pflicht zu einer „Erklärung zur Barrierefreiheit“ mit Feedback-Möglichkeit; Grundinformationen in Deutscher Gebärdensprache und Leichter Sprache</td></tr>
+    <tr><td><strong>BFSG</strong> (Barrierefreiheitsstärkungsgesetz), gilt seit 28.06.2025; setzt den <em>European Accessibility Act</em> der EU um</td><td>die <strong>private Wirtschaft</strong> – bestimmte Produkte und Dienstleistungen für Verbraucher, z. B. Online-Shops und Online-Buchungen (elektronischer Geschäftsverkehr), Bankdienstleistungen, E-Books, Websites/Apps/E-Tickets im Personenverkehr</td><td>Produkte und Dienstleistungen müssen barrierefrei sein, Informationen zur Barrierefreiheit sind bereitzustellen; Kleinstunternehmen (weniger als 10 Beschäftigte und höchstens 2 Mio. € Jahresumsatz oder Bilanzsumme) sind bei Dienstleistungen ausgenommen; Marktüberwachung und Bußgelder</td></tr>
+    <tr><td><strong>EN 301 549</strong> und <strong>WCAG</strong></td><td>technischer Maßstab für beide Gesetze</td><td>Die europäische Norm verweist für Web und Apps auf die WCAG 2.1, Konformitätsstufe <strong>AA</strong></td></tr>
+  </table>
+  <p>Die <strong>WCAG</strong> (Web Content Accessibility Guidelines) sind Richtlinien des W3C. Aktuell ist Version 2.2 (2023). Sie enthalten prüfbare Erfolgskriterien in drei Stufen: <strong>A</strong> (Mindestanforderungen), <strong>AA</strong> (der übliche gesetzliche Standard) und <strong>AAA</strong> (höchste Stufe).</p>
+  <div class="falle"><span class="kastentitel">Typische Falle</span>„Barrierefreiheit ist nur für Behörden Pflicht“ – stimmt seit Juni 2025 nicht mehr. Wer Verbrauchern online etwas verkauft oder Buchungen anbietet, fällt in der Regel unter das BFSG. Die BITV 2.0 dagegen gilt nur für öffentliche Stellen.</div>
+
+  <h4>Die vier Prinzipien der WCAG</h4>
+  <table class="kompakt">
+    <thead><tr><th style="width:16%">Prinzip</th><th style="width:40%">Bedeutung</th><th>Beispiele</th></tr></thead>
+    <tr><td><strong>wahrnehmbar</strong><br><span class="klein">perceivable</span></td><td>Alle Informationen müssen mit mindestens einem Sinn erfasst werden können.</td><td>Alternativtexte, Untertitel, Kontrast, nicht nur Farbe, vergrößerbarer Text</td></tr>
+    <tr><td><strong>bedienbar</strong><br><span class="klein">operable</span></td><td>Alle Funktionen müssen bedienbar sein – mit Maus, Tastatur, Touch oder Sprache.</td><td>vollständige Tastaturbedienung, sichtbarer Fokus, genug Zeit, große Ziele, nichts blinkt</td></tr>
+    <tr><td><strong>verständlich</strong><br><span class="klein">understandable</span></td><td>Inhalte und Bedienung müssen verständlich und vorhersehbar sein.</td><td>einfache Sprache, einheitliche Navigation, Beschriftungen, Fehlermeldungen mit Lösungshinweis</td></tr>
+    <tr><td><strong>robust</strong><br><span class="klein">robust</span></td><td>Inhalte müssen mit verschiedenen Browsern und Hilfsmitteln zuverlässig funktionieren.</td><td>valides, semantisches HTML; Steuerelemente geben Name, Rolle und Zustand an Hilfsmittel weiter</td></tr>
+  </table>
+  <div class="merke"><span class="kastentitel">Merke</span>Englisch <strong>POUR</strong>: <em>perceivable, operable, understandable, robust</em> – auf Deutsch <strong>wahrnehmbar, bedienbar, verständlich, robust</strong>.</div>
+
+  <h4>Anforderungen und Maßnahmen</h4>
+  <p>In der Prüfung werden <strong>Anforderung</strong> (was muss erfüllt sein?) und <strong>Maßnahme</strong> (wie setze ich es um?) getrennt verlangt. Die Tabelle ist dein Vorrat.</p>
+  <table class="kompakt">
+    <thead><tr><th style="width:24%">Anforderung</th><th style="width:60%">Maßnahme (konkret)</th><th>Prinzip</th></tr></thead>
+    <tr><td>ausreichender Kontrast</td><td>Text mindestens 4,5 : 1 zum Hintergrund; große Schrift (ab 24 px bzw. 18,7 px fett) sowie Bedienelemente und Grafiken mindestens 3 : 1; mit einem Kontrastrechner prüfen</td><td>wahrnehmbar</td></tr>
+    <tr><td>skalierbarer Text, Zoom</td><td>relative Schriftgrößen (<code>rem</code>, auf Android <code>sp</code>), Systemschriftgröße übernehmen; Vergrößerung auf 200 % ohne Verlust von Inhalten; bei 320 px Breite kein waagerechtes Scrollen</td><td>wahrnehmbar</td></tr>
+    <tr><td>Farbe nicht als einziges Merkmal</td><td>zusätzlich Text („ausgebucht“), Symbol (✓ / ✕), Muster; Links zusätzlich unterstreichen</td><td>wahrnehmbar</td></tr>
+    <tr><td>Textalternativen</td><td>Alternativtext für informative Bilder und Symbole; dekorative Bilder leer (<code>alt=""</code>); Diagramme zusätzlich als Tabelle oder Text</td><td>wahrnehmbar</td></tr>
+    <tr><td>Alternativen für Audio und Video</td><td>Untertitel, Transkript, Audiodeskription; ggf. Video in Gebärdensprache</td><td>wahrnehmbar</td></tr>
+    <tr><td>Tastaturbedienbarkeit</td><td>alles per Tab, Enter und Leertaste erreichbar; sichtbarer Fokusrahmen; logische Fokus-Reihenfolge; keine „Tastaturfalle“; Link „Zum Inhalt springen“</td><td>bedienbar</td></tr>
+    <tr><td>ausreichend große Bedienelemente</td><td>Zielgröße mind. 24 × 24 px (WCAG 2.2, Stufe AA); empfohlen 44 × 44 pt (iOS) bzw. 48 × 48 dp (Android) mit Abstand; Alternative zu komplizierten Gesten</td><td>bedienbar</td></tr>
+    <tr><td>genug Zeit, keine Ablenkung</td><td>Zeitlimits verlängerbar oder abschaltbar; Karussells und Animationen pausierbar, kein Autoplay; nichts blinkt öfter als 3-mal pro Sekunde</td><td>bedienbar</td></tr>
+    <tr><td>verständliche Sprache</td><td>kurze Sätze, bekannte Wörter, Fachbegriffe erklären; ggf. Leichte Sprache und weitere Sprachen; Sprache der Seite festlegen (richtige Aussprache im Screenreader)</td><td>verständlich</td></tr>
+    <tr><td>Beschriftungen und Fehlerhilfe</td><td>dauerhaft sichtbare Labels statt nur Platzhaltertext; Pflichtfelder als Text kennzeichnen; Fehlermeldung als Text direkt am Feld mit Korrekturvorschlag</td><td>verständlich</td></tr>
+    <tr><td>vorhersehbares Verhalten</td><td>Navigation überall gleich; keine unerwarteten Kontextwechsel (z. B. neues Fenster ohne Hinweis); aussagekräftige Linktexte statt „hier klicken“</td><td>verständlich</td></tr>
+    <tr><td>Kompatibilität mit Hilfsmitteln</td><td>semantisches HTML (Überschriften <code>h1</code>–<code>h6</code>, Listen, <code>button</code> statt klickbarem <code>div</code>, <code>label for</code>); ARIA-Attribute nur wo nötig; Statusmeldungen werden vom Screenreader angesagt</td><td>robust</td></tr>
+  </table>
+
+  <p><strong>Beispiel in HTML:</strong> Ein Screenreader kann nur vorlesen, was im Code steht.</p>
+  <div class="zweispaltig">
+  <pre>&lt;!-- schlecht --&gt;
+&lt;!-- Bild-Button ohne Namen,
+     per Tastatur nicht erreichbar --&gt;
+&lt;div class="btn" onclick="senden()"&gt;
+  &lt;img src="pfeil.png"&gt;
+&lt;/div&gt;
+
+&lt;!-- nur Platzhalter, kein Label --&gt;
+&lt;input type="text"
+       placeholder="E-Mail"&gt;</pre>
+  <pre>&lt;!-- gut --&gt;
+&lt;label for="mail"&gt;E-Mail-Adresse *&lt;/label&gt;
+&lt;input id="mail" type="email"
+       aria-describedby="mail-fehler"&gt;
+&lt;p id="mail-fehler"&gt;Bitte vollständige
+   Adresse eingeben, z. B. name@web.de&lt;/p&gt;
+&lt;button type="submit"&gt;
+  Leseausweis beantragen&lt;/button&gt;
+&lt;img src="cover.jpg"
+  alt="Buchcover: Der Schwarm von F. Schätzing"&gt;</pre>
+  </div>
+
+  <figure>
+    <svg viewBox="0 0 760 330" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <text x="190" y="16" text-anchor="middle" font-weight="bold" fill="#b91c1c">✗ nicht barrierefrei</text>
+      <text x="570" y="16" text-anchor="middle" font-weight="bold" fill="#15803d">✓ barrierefrei</text>
+      <!-- links -->
+      <rect x="10" y="24" width="360" height="296" rx="4" fill="#fff" stroke="#999"/>
+      <text x="40" y="52" font-size="15" font-weight="bold">Leseausweis beantragen</text>
+      <text x="40" y="74" font-size="11" fill="#c62828">Eingabe fehlerhaft!</text>
+      <text x="146" y="74" font-size="10" fill="#b4b4b4">Pflichtfelder sind rot markiert.</text>
+      <rect x="40" y="86" width="314" height="32" fill="#fff" stroke="#c62828" stroke-width="2"/>
+      <text x="50" y="107" font-size="12" fill="#aaa">E-Mail</text>
+      <rect x="40" y="128" width="314" height="32" fill="#fff" stroke="#999"/>
+      <text x="50" y="149" font-size="12" fill="#aaa">Geburtsdatum</text>
+      <rect x="40" y="178" width="9" height="9" fill="#fff" stroke="#999"/>
+      <text x="54" y="186" font-size="10" fill="#b4b4b4">Nutzungsordnung akzeptiert – mehr dazu <tspan text-decoration="underline">hier</tspan></text>
+      <rect x="316" y="206" width="38" height="30" rx="4" fill="#9ecbe0"/>
+      <text x="335" y="227" text-anchor="middle" font-size="16" fill="#fff">➜</text>
+      <!-- rechts -->
+      <rect x="390" y="24" width="360" height="296" rx="4" fill="#fff" stroke="#999"/>
+      <text x="420" y="52" font-size="15" font-weight="bold">Leseausweis beantragen</text>
+      <text x="420" y="76" font-size="12">E-Mail-Adresse *</text>
+      <rect x="420" y="82" width="314" height="32" fill="#fff" stroke="#b91c1c" stroke-width="2"/>
+      <text x="430" y="103" font-size="12">erika.muster@beispiel</text>
+      <text x="420" y="130" font-size="11" fill="#b91c1c">⚠ Die E-Mail-Adresse ist unvollständig.</text>
+      <text x="420" y="144" font-size="11" fill="#b91c1c">Beispiel: name@beispiel.de</text>
+      <text x="420" y="166" font-size="12">Geburtsdatum * (TT.MM.JJJJ)</text>
+      <rect x="420" y="172" width="314" height="30" fill="#fff" stroke="#555" stroke-width="1.5"/>
+      <text x="430" y="192" font-size="12">12.03.1990</text>
+      <rect x="420" y="216" width="20" height="20" fill="#fff" stroke="#222" stroke-width="1.5"/>
+      <text x="448" y="231" font-size="12">Ich akzeptiere die <tspan fill="#1f4e79" text-decoration="underline">Nutzungsordnung (PDF, 80 kB)</tspan></text>
+      <rect x="420" y="250" width="314" height="44" rx="6" fill="#1f4e79"/>
+      <text x="577" y="278" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">Leseausweis beantragen</text>
+      <text x="420" y="312" font-size="11" fill="#444">* Pflichtfeld</text>
+      <!-- Marker -->
+      <g font-size="11" font-weight="bold" text-anchor="middle">
+        <circle cx="24" cy="102" r="9" fill="#fff" stroke="#b91c1c" stroke-width="1.5"/><text x="24" y="106" fill="#b91c1c">1</text>
+        <circle cx="24" cy="70" r="9" fill="#fff" stroke="#b91c1c" stroke-width="1.5"/><text x="24" y="74" fill="#b91c1c">2</text>
+        <circle cx="24" cy="182" r="9" fill="#fff" stroke="#b91c1c" stroke-width="1.5"/><text x="24" y="186" fill="#b91c1c">3</text>
+        <circle cx="298" cy="221" r="9" fill="#fff" stroke="#b91c1c" stroke-width="1.5"/><text x="298" y="225" fill="#b91c1c">4</text>
+        <circle cx="404" cy="72" r="9" fill="#fff" stroke="#15803d" stroke-width="1.5"/><text x="404" y="76" fill="#15803d">1</text>
+        <circle cx="404" cy="136" r="9" fill="#fff" stroke="#15803d" stroke-width="1.5"/><text x="404" y="140" fill="#15803d">2</text>
+        <circle cx="404" cy="226" r="9" fill="#fff" stroke="#15803d" stroke-width="1.5"/><text x="404" y="230" fill="#15803d">3</text>
+        <circle cx="404" cy="272" r="9" fill="#fff" stroke="#15803d" stroke-width="1.5"/><text x="404" y="276" fill="#15803d">4</text>
+      </g>
+    </svg>
+    <figcaption>Abb. A-6: Dasselbe Formular einer Bibliothek – links mit Barrieren, rechts barrierefrei gestaltet</figcaption>
+  </figure>
+  <table class="kompakt">
+    <thead><tr><th class="nr">Nr.</th><th>Barriere (links)</th><th>Lösung (rechts)</th></tr></thead>
+    <tr><td class="nr">1</td><td>nur Platzhaltertext im Feld – verschwindet beim Tippen, wird nicht von jedem Screenreader als Beschriftung erkannt</td><td>dauerhaft sichtbares Label über dem Feld, im Code mit dem Feld verknüpft; Formatangabe im Label</td></tr>
+    <tr><td class="nr">2</td><td>Fehler nur als roter Rahmen und allgemeine Meldung ohne Feldbezug</td><td>Fehlermeldung als Text mit Symbol direkt am Feld, mit Beispiel zur Korrektur</td></tr>
+    <tr><td class="nr">3</td><td>winzige, hellgraue Schrift (Kontrast ca. 2 : 1), winzige Checkbox, Linktext „hier“</td><td>dunkle Schrift in normaler Größe, große Checkbox, aussagekräftiger Linktext mit Dateiformat</td></tr>
+    <tr><td class="nr">4</td><td>kleiner Button nur mit Symbol, heller Kontrast – unklar, was er tut</td><td>großer Button mit Text, der die Aktion beschreibt</td></tr>
+  </table>
+
+  <table class="kompakt kontrast kurz" style="width:auto">
+    <caption>Kontrast von Text auf weißem Grund (WCAG-Formel)</caption>
+    <thead><tr><th>Beispieltext</th><th>Farbe</th><th>Kontrast</th><th>Stufe AA für normalen Text</th></tr></thead>
+    <tr><td><span style="color:#b4b4b4">Kursleitung: S. Meier</span></td><td><code>#B4B4B4</code></td><td>2,1 : 1</td><td>✗ nicht erfüllt</td></tr>
+    <tr><td><span style="color:#999999">Kursleitung: S. Meier</span></td><td><code>#999999</code></td><td>2,9 : 1</td><td>✗ nicht erfüllt</td></tr>
+    <tr><td><span style="color:#767676">Kursleitung: S. Meier</span></td><td><code>#767676</code></td><td>4,5 : 1</td><td>✓ gerade erfüllt</td></tr>
+    <tr><td><span style="color:#595959">Kursleitung: S. Meier</span></td><td><code>#595959</code></td><td>7,0 : 1</td><td>✓ (sogar AAA)</td></tr>
+    <tr><td><span style="color:#222222">Kursleitung: S. Meier</span></td><td><code>#222222</code></td><td>15,9 : 1</td><td>✓</td></tr>
+  </table>
+
+  <h4>Inklusives Design: Schrift und Farbgebung</h4>
+  <p><strong>Inklusives Design</strong> (auch <em>Design for All</em>) heißt: von Anfang an so gestalten, dass möglichst viele Menschen das Produkt ohne Anpassung nutzen können – statt später Sonderlösungen anzubauen. Die Prüfung fragt dazu gern nach Schrift und Farbe.</p>
+  <table class="kompakt">
+    <thead><tr><th style="width:20%">Kriterium</th><th>Umsetzung (Beispiele)</th></tr></thead>
+    <tr><td>Schriftart / Schriftbild</td><td>serifenlose, klare Schrift, deutlich unterscheidbare Zeichen (I, l, 1 und O, 0) · Grundgröße für Fließtext etwa 16 px · Schriftgröße vom Nutzer einstellbar · Zeilenabstand etwa das 1,5-Fache · linksbündig, kein Blocksatz · kurze Zeilen (rund 60–80 Zeichen) · keine langen Texte in GROSSBUCHSTABEN oder kursiv · klare Hierarchie über Größe und Fettung</td></tr>
+    <tr><td>Farbgebung</td><td>hoher Kontrast (mind. 4,5 : 1) · Farbe nie alleiniger Informationsträger · Rot-Grün-Unterscheidungen vermeiden, besser z. B. Blau/Orange · Hochkontrast- und Dunkelmodus anbieten · Farbbedeutungen einheitlich (Rot = Fehler) · keine grellen, flackernden Farbwechsel</td></tr>
+    <tr><td>Layout, Bedienung</td><td>klare, gleichbleibende Struktur · großzügige Abstände · große Schaltflächen · wichtige Funktionen gut erreichbar</td></tr>
+  </table>
+
+  <div class="falle"><span class="kastentitel">Typische Falle</span>Anforderung und Maßnahme sagen dasselbe: „Anforderung: guter Kontrast – Maßnahme: Kontrast verbessern“ bringt kaum Punkte. Besser: <em>Anforderung:</em> „Texte müssen auch für sehbehinderte Menschen gut lesbar sein.“ <em>Maßnahme:</em> „Kontrastverhältnis von mindestens 4,5 : 1 einhalten und die Schrift über die Systemeinstellung bis 200 % vergrößerbar machen.“</div>
+
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    W21 T1 A3ab: Begriff „barrierefrei“ erläutern (4 P) – Definition plus Bezug auf Nutzergruppen bzw. Hilfsmittel.
+    W22 T1 A3b: für die Kriterien „Schriftart/Schriftbild“ und „Farbgebung“ je zwei Beispiele für inklusives Design (4 P).
+    S26 T1 A4b: zwei Anforderungen an barrierefreie Software und je eine geeignete Maßnahme in einer Tabelle beschreiben (8 P, also etwa 2 P je Feld). Bei „beschreiben“ reicht ein Stichwort nicht – ein ganzer Satz mit Bezug auf die Nutzer.</div>
+
+  <h4>Barrierefreiheit prüfen</h4>
+  <ul>
+    <li><strong>Automatische Prüfwerkzeuge</strong> (z. B. axe, WAVE, Lighthouse) finden fehlende Alternativtexte, zu geringe Kontraste oder fehlende Labels. Sie erkennen aber nur einen Teil der Probleme – ob ein Alternativtext <em>sinnvoll</em> ist, prüfen sie nicht.</li>
+    <li><strong>Manuelle Prüfung durch Fachleute:</strong> nur mit der Tastatur bedienen, mit einem Screenreader testen (NVDA, JAWS, VoiceOver, TalkBack), auf 200 % vergrößern, Farbfehlsichtigkeit simulieren, Kontraste messen – systematisch entlang der WCAG-Kriterien (z. B. nach dem Prüfverfahren „BITV-Test“).</li>
+    <li><strong>Nutzertests mit Menschen mit Behinderungen</strong> zeigen, ob die Anwendung im Alltag wirklich nutzbar ist.</li>
+    <li>Am besten von Anfang an: Barrierefreiheit in Anforderungen, Styleguide und Definition of Done aufnehmen, statt am Ende nachzubessern.</li>
+  </ul>
+
+  <!-- ===================== GUI-03 ===================== -->
+  <h3 id="e-03">GUI-03 · Usability &amp; Software-Ergonomie <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
+  <p class="klein">Vorkommen: 2/9 · Prüfungen: W21 (T1 A3aa Usability/UX an vier Punkten, A3ac Usability-Tests), S24 (T1 A4ba Mängel eines Mockups aus UI/UX-Sicht)</p>
+
+  <h4>Usability und User Experience</h4>
+  <p><strong>Usability</strong> (Gebrauchstauglichkeit) ist nach DIN EN ISO 9241-11 das Ausmaß, in dem bestimmte Benutzer ein System in einem bestimmten Nutzungskontext nutzen können, um bestimmte Ziele <strong>effektiv, effizient und zufriedenstellend</strong> zu erreichen.</p>
+  <table class="kompakt">
+    <thead><tr><th style="width:18%">Kriterium</th><th style="width:44%">Bedeutung</th><th>messbar z. B. über</th></tr></thead>
+    <tr><td>Effektivität</td><td>Das Ziel wird vollständig und richtig erreicht.</td><td>Erfolgsquote, Anzahl der Fehler</td></tr>
+    <tr><td>Effizienz</td><td>Der Aufwand (Zeit, Klicks, Eingaben) steht in einem guten Verhältnis zum Ergebnis.</td><td>Bearbeitungszeit, Anzahl der Schritte</td></tr>
+    <tr><td>Zufriedenstellung</td><td>Die Nutzung wird als angenehm empfunden, ohne Ärger oder Belastung.</td><td>Fragebogen (z. B. SUS), Interviews</td></tr>
+  </table>
+  <p>Wichtig ist der <strong>Nutzungskontext</strong>: wer (Zielgruppe), mit welchem Ziel, mit welchem Gerät, in welcher Umgebung. Eine App, die Profis am Schreibtisch effizient finden, kann für ältere Menschen unterwegs unbrauchbar sein.</p>
+  <p><strong>User Experience (UX)</strong> umfasst nach DIN EN ISO 9241-210 alle Wahrnehmungen und Reaktionen einer Person, die sich aus der tatsächlichen <em>und der erwarteten</em> Nutzung ergeben – also auch Erwartungen vorher, Emotionen, Ästhetik, Vertrauen und die Erinnerung danach. Usability ist ein Teil der UX.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 176" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="a7-pfeil" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#222"/>
+        </marker>
+      </defs>
+      <rect x="10" y="10" width="740" height="156" rx="10" fill="#fff" stroke="#1f4e79" stroke-width="2"/>
+      <text x="26" y="32" font-weight="bold" fill="#1f4e79">User Experience (UX): alle Wahrnehmungen und Reaktionen rund um die Nutzung</text>
+      <rect x="30" y="46" width="220" height="106" rx="6" fill="#fff" stroke="#888"/>
+      <rect x="270" y="46" width="220" height="106" rx="6" fill="#eef3fa" stroke="#222" stroke-width="2"/>
+      <rect x="510" y="46" width="220" height="106" rx="6" fill="#fff" stroke="#888"/>
+      <g text-anchor="middle" font-size="12">
+        <text x="140" y="68" font-weight="bold">vor der Nutzung</text>
+        <text x="140" y="90">Erwartungen, erster Eindruck,</text>
+        <text x="140" y="108">Bewertungen im App-Store,</text>
+        <text x="140" y="126">Markenbild</text>
+        <text x="380" y="68" font-weight="bold">während der Nutzung</text>
+        <text x="380" y="90" font-weight="bold" fill="#1f4e79">Usability (ISO 9241-11):</text>
+        <text x="380" y="108">effektiv · effizient · zufriedenstellend</text>
+        <text x="380" y="126">dazu: Ästhetik, Freude, Vertrauen</text>
+        <text x="620" y="68" font-weight="bold">nach der Nutzung</text>
+        <text x="620" y="90">Erinnerung, Vertrauen,</text>
+        <text x="620" y="108">Weiterempfehlung,</text>
+        <text x="620" y="126">erneute Nutzung</text>
+      </g>
+      <line x1="251" y1="99" x2="268" y2="99" stroke="#222" stroke-width="1.5" marker-end="url(#a7-pfeil)"/>
+      <line x1="491" y1="99" x2="508" y2="99" stroke="#222" stroke-width="1.5" marker-end="url(#a7-pfeil)"/>
+    </svg>
+    <figcaption>Abb. A-7: Usability ist ein Teil der User Experience</figcaption>
+  </figure>
+
+  <div class="merke"><span class="kastentitel">Merke</span><strong>Usability:</strong> Kann ich mein Ziel gut erreichen? <strong>UX:</strong> Wie erlebe ich das Produkt insgesamt – vorher, währenddessen und danach?</div>
+
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>W21 T1 A3aa: Usability und positive User Experience anhand von <strong>vier Punkten</strong> verdeutlichen (8 P, also 2 P je Punkt: Punkt nennen + kurz erläutern). Geeignete Punkte: intuitive, schnell erlernbare Bedienung · Effizienz (wenige Schritte, kurze Ladezeiten) · klare Struktur und Übersichtlichkeit · Konsistenz · verständliche Rückmeldungen und Fehlertoleranz · Barrierefreiheit · Nutzbarkeit auf allen Geräten (responsiv) · ansprechende Gestaltung · Vertrauen (transparente Preise, Datenschutz).</div>
+
+  <h4>Software-Ergonomie</h4>
+  <p><strong>Software-Ergonomie</strong> bedeutet, Software an die Fähigkeiten und Bedürfnisse der Menschen anzupassen, damit sie ihre Aufgaben ohne unnötige Belastung erledigen können. Für Bildschirmarbeitsplätze verlangt das sogar der Arbeitsschutz (Arbeitsstättenverordnung, Anhang 6). Die Normenreihe <strong>DIN EN ISO 9241</strong> „Ergonomie der Mensch-System-Interaktion“ regelt das; wichtig sind Teil 11 (Usability-Begriffe), Teil 110 (Interaktionsprinzipien), Teil 112 (Informationsdarstellung) und Teil 210 (menschzentrierte Gestaltung: Nutzungskontext verstehen → Anforderungen festlegen → Entwürfe erstellen → mit Nutzern bewerten, und das iterativ).</p>
+
+  <h4>Grundsätze der Dialoggestaltung nach DIN EN ISO 9241-110</h4>
+  <p>Seit der Neufassung 2020 heißt der Teil 110 „Interaktionsprinzipien“. In Prüfungen und Lehrbüchern ist „Grundsätze der Dialoggestaltung“ weiterhin üblich. Alte und neue Bezeichnungen werden akzeptiert – am sichersten schreibst du beide, z. B. „Robustheit gegen Benutzerfehler (Fehlertoleranz)“.</p>
+  <table class="kompakt">
+    <thead><tr><th style="width:19%">Grundsatz (2020)</th><th style="width:13%">früher (2006)</th><th style="width:34%">Was heißt das?</th><th>Beispiel (Bibliotheks-App, Mailprogramm)</th></tr></thead>
+    <tr><td><strong>Aufgabenangemessenheit</strong></td><td>gleich</td><td>Das System unterstützt die Aufgabe ohne unnötige Schritte und Informationen; sinnvolle Voreinstellungen.</td><td>„Alle verlängern“ statt jedes Medium einzeln; die Suche merkt sich die zuletzt gewählte Filiale.</td></tr>
+    <tr><td><strong>Selbstbeschreibungs­fähigkeit</strong></td><td>gleich</td><td>Der Benutzer erkennt jederzeit, wo er ist, was er tun kann und was das System gerade macht.</td><td>Seitentitel; „Verlängert bis 28.05.“ nach dem Tippen; Ladeanzeige beim Versand einer Mail.</td></tr>
+    <tr><td><strong>Erwartungs­konformität</strong></td><td>gleich</td><td>Das Verhalten entspricht Erfahrungen und Konventionen; Begriffe, Symbole und Positionen sind innerhalb der Anwendung und mit der Plattform einheitlich.</td><td>Papierkorb-Symbol löscht; „Senden“ steht immer an derselben Stelle; Sprache der Nutzer statt Fachjargon.</td></tr>
+    <tr><td><strong>Erlernbarkeit</strong></td><td>Lern­förderlichkeit</td><td>Das System hilft beim Kennenlernen und Lernen.</td><td>kurze Einführung beim ersten Start, Hilfetexte, Tooltips; gefahrloses Ausprobieren dank „Rückgängig“.</td></tr>
+    <tr><td><strong>Steuerbarkeit</strong></td><td>gleich</td><td>Der Benutzer bestimmt Ablauf, Richtung und Tempo: unterbrechen, zurückgehen, abbrechen. Dazu gehören seit 2020 auch Anpassungen an eigene Bedürfnisse.</td><td>Abbrechen jederzeit; Entwurf speichern und später weiterschreiben; Schriftgröße einstellen.</td></tr>
+    <tr><td><strong>Robustheit gegen Benutzerfehler</strong></td><td>Fehler­toleranz</td><td>Fehler werden vermieden, erkannt und lassen sich mit wenig Aufwand korrigieren; kein Schaden durch Fehlbedienung.</td><td>Auswahl statt Freitext; Prüfung schon beim Tippen; Rückfrage vor dem Löschen; Eingaben bleiben nach einem Fehler erhalten; verständliche Meldung mit Lösung.</td></tr>
+    <tr><td><strong>Benutzerbindung</strong></td><td>neu seit 2020</td><td>Das System ist einladend und motivierend, schafft Vertrauen und Lust auf weitere Nutzung – ohne Manipulation.</td><td>ansprechende Gestaltung, persönliche Begrüßung, Lesestatistik „12 Bücher in diesem Jahr“.</td></tr>
+    <tr><td class="klein" colspan="4">Entfallen ist der frühere eigene Grundsatz <strong>Individualisierbarkeit</strong> (Anpassen an Vorlieben und Fähigkeiten). Diese Aspekte werden heute vor allem der Steuerbarkeit zugeordnet.</td></tr>
+  </table>
+
+  <div class="merke"><span class="kastentitel">Merke – Leitfragen zum Zuordnen</span>
+    Unnötiger Aufwand oder Überflüssiges? → <strong>Aufgabenangemessenheit</strong> ·
+    Weiß ich, wo ich bin und was passiert ist? → <strong>Selbstbeschreibungsfähigkeit</strong> ·
+    Ist es so, wie ich es kenne und wie es sonst in der App ist? → <strong>Erwartungskonformität</strong> ·
+    Kann ich es ohne Handbuch lernen? → <strong>Erlernbarkeit</strong> ·
+    Kann ich abbrechen, zurückgehen, das Tempo bestimmen? → <strong>Steuerbarkeit</strong> ·
+    Was passiert bei Fehleingaben? → <strong>Robustheit gegen Benutzerfehler</strong> ·
+    Macht es Lust wiederzukommen, vertraue ich ihm? → <strong>Benutzerbindung</strong>
+  </div>
+
+  <div class="falle"><span class="kastentitel">Typische Falle</span>„Fehlertoleranz“ bedeutet <em>nicht</em>, dass das Programm nicht abstürzt – das ist Zuverlässigkeit nach ISO 25010. Gemeint sind Fehler des <strong>Benutzers</strong>. Außerdem: Eine unklare Beschriftung verletzt die Selbstbeschreibungsfähigkeit, eine ungewohnte Position oder uneinheitliche Begriffe die Erwartungskonformität. Viele Mängel verletzen mehrere Grundsätze – eine begründete Zuordnung reicht in der Regel.</div>
+
+  <p>Für die <strong>Anzeige</strong> von Informationen gibt es zusätzlich Teil 112 (Entdeckbarkeit, Ablenkungsfreiheit, Unterscheidbarkeit, eindeutige Interpretierbarkeit, Kompaktheit, Konsistenz). Bei der Anordnung helfen die <strong>Gestaltgesetze</strong>: <em>Nähe</em> (Zusammengehöriges steht nah beieinander), <em>Ähnlichkeit</em> (gleich Aussehendes hat die gleiche Funktion), <em>Geschlossenheit</em> (ein Rahmen bildet eine Gruppe). Elemente sollten an einem gemeinsamen Raster ausgerichtet sein – „schief“ angeordnete Elemente wirken unruhig und erschweren das Erfassen.</p>
+
+  <h4>Usability-Tests</h4>
+  <table class="kompakt">
+    <thead><tr><th style="width:18%">Verfahren</th><th style="width:38%">Ablauf</th><th style="width:22%">Vorteile</th><th>Nachteile</th></tr></thead>
+    <tr><td><strong>Thinking Aloud</strong> (Methode des lauten Denkens)</td><td>Testpersonen aus der Zielgruppe lösen typische Aufgaben („Verlängern Sie das Buch X“) und sprechen dabei ihre Gedanken laut aus. Ein Moderator beobachtet und protokolliert, oft mit Bildschirm- und Videoaufzeichnung.</td><td>zeigt, <em>warum</em> Probleme entstehen; schon mit Papier- oder Klickprototyp möglich; etwa 5 Personen finden die meisten Probleme</td><td>Aufwand; Laborsituation; lautes Denken verändert das Verhalten leicht</td></tr>
+    <tr><td><strong>A/B-Test</strong></td><td>Zwei Varianten einer Seite werden im laufenden Betrieb zufällig verschiedenen Nutzergruppen gezeigt. Verglichen werden Kennzahlen wie Abschlussquote oder Abbruchrate.</td><td>objektive Daten aus echter Nutzung, große Stichprobe</td><td>braucht ein laufendes System und viele Nutzer; zeigt nur <em>welche</em> Variante besser ist, nicht warum</td></tr>
+    <tr><td><strong>Eye-Tracking</strong></td><td>Eine Kamera erfasst, wohin die Testperson schaut; Auswertung als Heatmap oder Blickpfad.</td><td>zeigt, was übersehen wird</td><td>teure Technik, meist im Labor</td></tr>
+    <tr><td><strong>Fragebogen</strong>, z. B. SUS (System Usability Scale)</td><td>Nach der Nutzung bewerten Personen 10 Aussagen auf einer Skala; Ergebnis 0–100 Punkte (etwa 68 gilt als Durchschnitt).</td><td>günstig, vergleichbar, viele Teilnehmende</td><td>subjektiv; nennt keine konkreten Ursachen</td></tr>
+    <tr><td><strong>Expertenreview</strong> / heuristische Evaluation</td><td>3–5 Usability-Fachleute prüfen die Oberfläche anhand von Regeln (z. B. Nielsens 10 Heuristiken oder Grundsätze der ISO 9241-110).</td><td>schnell, günstig, ohne Testpersonen, sehr früh möglich</td><td>keine echten Nutzer; findet nicht alle Probleme</td></tr>
+    <tr><td>weitere</td><td colspan="3">Cognitive Walkthrough, Interviews und Fokusgruppen, Card Sorting (Aufbau der Navigation), Nutzungsanalyse (Web-Analytics, Klick-Heatmaps), Remote-Tests, Feedback-Funktion in der App</td></tr>
+  </table>
+
+  <table class="kompakt kurz">
+    <caption>Nielsens 10 Heuristiken (Grundlage der heuristischen Evaluation)</caption>
+    <tr><td>1 · Sichtbarkeit des Systemstatus</td><td>6 · Wiedererkennen statt Erinnern</td></tr>
+    <tr><td>2 · Übereinstimmung von System und realer Welt</td><td>7 · Flexibilität und Effizienz (Abkürzungen für Geübte)</td></tr>
+    <tr><td>3 · Kontrolle und Freiheit des Benutzers (Rückgängig, Abbrechen)</td><td>8 · Ästhetisches, minimalistisches Design</td></tr>
+    <tr><td>4 · Konsistenz und Standards</td><td>9 · Hilfe beim Erkennen, Verstehen und Beheben von Fehlern</td></tr>
+    <tr><td>5 · Fehlervermeidung</td><td>10 · Hilfe und Dokumentation</td></tr>
+  </table>
+
+  <div class="merke"><span class="kastentitel">Merke</span><strong>Vor dem Go-live</strong> (es gibt nur Entwürfe oder Prototypen): Thinking Aloud, Expertenreview, Eye-Tracking. <strong>Nach dem Go-live</strong> (echte Nutzung): A/B-Test, Nutzungsanalyse, Fragebogen und Feedback. Nenne in der Begründung den Zeitpunkt.</div>
+
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>W21 T1 A3ac: zwei Möglichkeiten zum Test der Benutzerfreundlichkeit beschreiben (4 P). „Beschreiben“ heißt: Verfahren nennen und den Ablauf in ein bis zwei Sätzen erklären. Nur „A/B-Test“ hinzuschreiben bringt höchstens die Hälfte.</div>
+
+  <h4>Mängel in einem Mockup erkennen und verbessern</h4>
+  <p>Gehe einen Entwurf <strong>systematisch von oben nach unten</strong> durch und stelle zu jedem Bereich die Fragen der Checkliste:</p>
+  <ol>
+    <li><strong>Orientierung:</strong> Gibt es einen Seitentitel, einen markierten Menüpunkt, eine Breadcrumb, einen Weg zurück? (Selbstbeschreibungsfähigkeit)</li>
+    <li><strong>Fokus auf die Aufgabe:</strong> Sind alle geforderten Funktionen da? Gibt es Überflüssiges oder Doppeltes (Werbung, doppelte Links, Link auf die eigene Seite)? (Aufgabenangemessenheit)</li>
+    <li><strong>Anordnung:</strong> Ausrichtung an einem Raster, Zusammengehöriges gruppiert, Wichtiges oben, Platz sinnvoll genutzt?</li>
+    <li><strong>Steuerelemente:</strong> Passt das Element zur Eingabe (Datum → Datumsauswahl, kleine Zahl → Stepper)?</li>
+    <li><strong>Beschriftung und Sprache:</strong> eindeutig, einheitlich, eine Sprache, kein Fachjargon? (Selbstbeschreibungsfähigkeit, Erwartungskonformität)</li>
+    <li><strong>Aktionen:</strong> Hauptaktion hervorgehoben? Gefährliche Aktionen (Löschen, Zurücksetzen) abgesetzt und mit Rückfrage? Abbrechen möglich? (Steuerbarkeit, Robustheit)</li>
+    <li><strong>Fehler und Rückmeldungen:</strong> verständliche Meldungen direkt am Feld? Bestätigung nach einer Aktion? (Robustheit, Selbstbeschreibungsfähigkeit)</li>
+    <li><strong>Verhalten:</strong> Öffnen Links unerwartet neue Fenster? Wechselt etwas automatisch? (Erwartungskonformität, Steuerbarkeit)</li>
+    <li><strong>Barrierefreiheit:</strong> Kontrast, Schriftgröße, Farbe als einziges Merkmal, Größe der Klickflächen, Labels (GUI-02).</li>
+  </ol>
+  <p>Formuliere jeden Mangel nach dem Schema <strong>Mangel (was, wo?) → Auswirkung auf den Nutzer → verletzter Grundsatz → Verbesserung</strong>. Beispiel: der Dialog einer Bibliothekssoftware zum Verlängern von Ausleihen.</p>
+
+  <figure>
+    <svg viewBox="0 0 560 250" width="560" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <rect x="10" y="10" width="540" height="230" rx="4" fill="#fff" stroke="#222"/>
+      <rect x="11" y="11" width="538" height="26" fill="#e8ecf1"/>
+      <line x1="10" y1="37" x2="550" y2="37" stroke="#999"/>
+      <text x="22" y="29" font-size="12" font-weight="bold">Info</text>
+      <text x="538" y="29" text-anchor="end" font-size="12">✕</text>
+      <text x="24" y="64">Möchten Sie die Verlängerung nicht abbrechen?</text>
+      <g fill="#1f4e79" stroke="#222">
+        <rect x="24" y="78" width="12" height="12"/><rect x="24" y="100" width="12" height="12"/><rect x="24" y="122" width="12" height="12"/>
+      </g>
+      <g stroke="#fff" stroke-width="2" fill="none">
+        <path d="M26,84 l3,3 l6,-7"/><path d="M26,106 l3,3 l6,-7"/><path d="M26,128 l3,3 l6,-7"/>
+      </g>
+      <g font-size="12">
+        <text x="44" y="89">Der Schwarm – nicht verlängerbar (vorgemerkt)</text>
+        <text x="44" y="111">Momo</text>
+        <text x="44" y="133">Die Känguru-Chroniken</text>
+      </g>
+      <text x="24" y="160" font-size="12" fill="#c62828">Fehler 0x1F: RES_CONFLICT</text>
+      <g fill="#f3f4f6" stroke="#888">
+        <rect x="24" y="186" width="80" height="30" rx="3"/><rect x="112" y="186" width="90" height="30" rx="3"/><rect x="210" y="186" width="70" height="30" rx="3"/>
+      </g>
+      <g font-size="12" text-anchor="middle">
+        <text x="64" y="206">OK</text><text x="157" y="206">Abbrechen</text><text x="245" y="206">Hilfe</text>
+      </g>
+      <g font-size="11" font-weight="bold" text-anchor="middle" fill="#fff">
+        <circle cx="60" cy="24" r="9" fill="#c2410c"/><text x="60" y="28">1</text>
+        <circle cx="340" cy="59" r="9" fill="#c2410c"/><text x="340" y="63">2</text>
+        <circle cx="354" cy="84" r="9" fill="#c2410c"/><text x="354" y="88">3</text>
+        <circle cx="222" cy="155" r="9" fill="#c2410c"/><text x="222" y="159">4</text>
+        <circle cx="298" cy="201" r="9" fill="#c2410c"/><text x="298" y="205">5</text>
+      </g>
+    </svg>
+    <figcaption>Abb. A-8: Entwurf eines Dialogs mit Mängeln (Bibliothekssoftware)</figcaption>
+  </figure>
+
+  <table class="kompakt">
+    <thead><tr><th class="nr">Nr.</th><th style="width:26%">Mangel</th><th style="width:22%">Auswirkung</th><th style="width:18%">Grundsatz</th><th>Verbesserung</th></tr></thead>
+    <tr><td class="nr">1</td><td>Fenstertitel „Info“ sagt nichts über den Zweck</td><td>Nutzer erkennt nicht sofort, worum es geht</td><td>Selbstbeschreibungs­fähigkeit</td><td>Titel „Ausleihen verlängern“</td></tr>
+    <tr><td class="nr">2</td><td>Frage mit doppelter Verneinung („nicht abbrechen?“)</td><td>missverständlich, führt zu falschen Entscheidungen</td><td>Selbstbeschreibungs­fähigkeit</td><td>„Möchten Sie die ausgewählten Medien um 4 Wochen verlängern?“</td></tr>
+    <tr><td class="nr">3</td><td>nicht verlängerbares Medium ist vorausgewählt</td><td>der Fehler wird geradezu provoziert</td><td>Robustheit gegen Benutzerfehler</td><td>nicht verlängerbare Medien ausgrauen, Grund anzeigen, nicht auswählbar machen</td></tr>
+    <tr><td class="nr">4</td><td>technische Fehlermeldung „0x1F: RES_CONFLICT“</td><td>Ursache und Lösung bleiben unklar</td><td>Robustheit gegen Benutzerfehler</td><td>„‚Der Schwarm‘ ist vorgemerkt und kann nicht verlängert werden. Bitte bis 14.05. zurückgeben.“</td></tr>
+    <tr><td class="nr">5</td><td>„OK“, „Abbrechen“, „Hilfe“ gleich gestaltet; „OK“ ist mehrdeutig</td><td>Nutzer klickt die falsche Schaltfläche</td><td>Erwartungs­konformität</td><td>eindeutige Verben: „Verlängern“ (hervorgehoben) und „Nicht verlängern“</td></tr>
+  </table>
+
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>S24 T1 A4ba: drei Mängel eines Mockups aus UI/UX-Sicht beschreiben (6 P), danach in A4bb ein verbessertes Mockup skizzieren (7 P). Laut Lösungshinweisen zählten z. B. eine ungünstige, nicht bündige Positionierung von Elementen, platzraubend untereinander gesetzte Links, Links, die neue Fenster öffnen, ein überflüssiger Link auf die gerade angezeigte Seite und unklare Doppelungen zwischen Menü und Seiteninhalt.</div>
+
+  <div class="falle"><span class="kastentitel">Typische Falle</span>„Sieht unschön aus“ ist kein Mangel im Sinne der Prüfung – nenne immer die <strong>Auswirkung auf die Bedienung</strong>. Und: Im verbesserten Mockup müssen die Mängel, die du selbst genannt hast, wirklich behoben sein. Der Prüfer vergleicht beide Teilaufgaben.</div>
+</section>
+
+<!-- ===================== TEIL B: BELEGSATZ ===================== -->
+<section class="teil" id="belegsatz">
+  <h2>B · Belegsatz</h2>
+  <p class="klein">Für diesen Block legt die IHK keine Notationshilfe bei. Der Belegsatz besteht deshalb nur aus den Anlagen zur Ausgangssituation, auf die sich alle Aufgaben beziehen. Keine Erklärungen.</p>
+
+  <div class="anlage" id="anlage-1">
+    <h4>Anlage 1 · Ausgangssituation</h4>
+    <p><strong>Die Aufgaben dieses Blocks beziehen sich auf die folgende Ausgangssituation:</strong></p>
+    <p>Die <strong>AquaVita Freizeit GmbH</strong> betreibt in der Stadt Lindenbrück drei Einrichtungen: das <strong>Hallenbad Mitte</strong>, das <strong>Freibad am Weiher</strong> und die <strong>Saunawelt Lindenbrück</strong>. Das private Unternehmen hat 140 Beschäftigte und zählt rund 450 000 Besuche im Jahr. Tickets werden bisher an der Kasse und über eine veraltete Website verkauft, Schwimmkurse (z. B. Seepferdchen, Aquafitness 50+) können nur telefonisch gebucht werden.</p>
+    <p>Die AquaVita hat die <strong>Brückner Digital GmbH</strong> beauftragt, drei Anwendungen zu entwickeln:</p>
+    <ul>
+      <li>eine neue, responsive <strong>Website</strong> mit Online-Ticketverkauf und Kursbuchung,</li>
+      <li>die <strong>App „AquaVita“</strong> für Android und iOS (Tickets, Kurse, aktuelle Auslastung der Bäder),</li>
+      <li>die Web-Anwendung <strong>„AquaVita Verwaltung“</strong> für die Mitarbeitenden (Kasse, Kursverwaltung).</li>
+    </ul>
+    <p>Sie sind Auszubildende bzw. Auszubildender zum Fachinformatiker / zur Fachinformatikerin Anwendungsentwicklung bei der Brückner Digital GmbH und arbeiten im UI/UX-Team mit. Sie erstellen und prüfen Entwürfe (Wireframes und Mockups), achten auf Barrierefreiheit und bereiten Usability-Tests vor.</p>
+    <p>Im Oktober 2026 hat die AquaVita ihre Kundschaft online zur bisherigen Website befragt (Anlage 3). Ein erster Entwurf der neuen Seite „Kurs buchen“ liegt vor (Anlage 4).</p>
+  </div>
+
+  <div class="anlage lang" id="anlage-2">
+    <h4>Anlage 2 · Anforderungen (Auszug aus dem Lastenheft)</h4>
+    <table class="kompakt">
+      <thead><tr><th style="width:9%">Nr.</th><th>A · Kursbuchung (Website und App)</th></tr></thead>
+      <tr><td>A1</td><td>Die Seite zeigt Kursname, Bad, Kursleitung, Dauer, Preis je Person und eine kurze Beschreibung des Kurses.</td></tr>
+      <tr><td>A2</td><td>Die angebotenen Termine (Datum und Uhrzeit) werden mit der Anzahl freier Plätze angezeigt. Ausgebuchte Termine sind nicht buchbar; für sie kann man sich auf eine Warteliste setzen lassen.</td></tr>
+      <tr><td>A3</td><td>Pro Buchung können 1 bis 4 Personen angemeldet werden. Für jede Person werden Name und Geburtsdatum erfasst (Altersgrenzen, z. B. „ab 50 Jahren“).</td></tr>
+      <tr><td>A4</td><td>Vor dem verbindlichen Buchen wird der Gesamtpreis angezeigt.</td></tr>
+      <tr><td>A5</td><td>Die AGB müssen bestätigt werden; die Anmeldung zum Newsletter ist freiwillig.</td></tr>
+      <tr><td>A6</td><td>Der Buchungsvorgang kann jederzeit abgebrochen werden.</td></tr>
+      <tr><td>A7</td><td>Nach der Buchung erhält die Kundin bzw. der Kunde eine Bestätigung auf dem Bildschirm und per E-Mail.</td></tr>
+    </table>
+    <table class="kompakt">
+      <thead><tr><th style="width:9%">Nr.</th><th>B · Seite „Auslastung“ (App)</th></tr></thead>
+      <tr><td>B1</td><td>Auswahl eines der drei Bäder (Hallenbad Mitte, Freibad am Weiher, Saunawelt).</td></tr>
+      <tr><td>B2</td><td>Aktuelle Auslastung des gewählten Bades als Anzahl der Gäste und in Prozent der Kapazität (Hallenbad Mitte: 400 Gäste).</td></tr>
+      <tr><td>B3</td><td>Prognose der Auslastung im Tagesverlauf (stündlich während der Öffnungszeit, Hallenbad Mitte 8–22 Uhr) für einen auswählbaren Tag – heute bis 6 Tage im Voraus.</td></tr>
+      <tr><td>B4</td><td>Aktuelle Wassertemperatur der Becken des gewählten Bades (Hallenbad Mitte: Sportbecken, Nichtschwimmerbecken, Kinderbecken).</td></tr>
+      <tr><td>B5</td><td>Von der Seite aus kann direkt ein Ticket für das gewählte Bad gekauft werden.</td></tr>
+      <tr><td>B6</td><td>Der Zeitpunkt der letzten Aktualisierung wird angezeigt; die Daten können manuell aktualisiert werden.</td></tr>
+    </table>
+    <table class="kompakt">
+      <thead><tr><th style="width:9%">Nr.</th><th>C · Ticketkauf (App)</th></tr></thead>
+      <tr><td>C1</td><td>Auswahl genau eines der drei Bäder.</td></tr>
+      <tr><td>C2</td><td>Auswahl des Besuchstags: heute bis 30 Tage im Voraus; an Revisionstagen ist das Bad geschlossen.</td></tr>
+      <tr><td>C3</td><td>Anzahl der Tickets je Tarif (Erwachsene, Ermäßigt, Kind) jeweils von 0 bis 10.</td></tr>
+      <tr><td>C4</td><td>Zusatzleistungen, beliebig kombinierbar: Sauna, Schließfach, Leihhandtuch.</td></tr>
+      <tr><td>C5</td><td>Kurze Rückmeldung, wenn das Ticket in der Wallet des Smartphones gespeichert wurde.</td></tr>
+      <tr><td>C6</td><td>Sicherheitsabfrage, bevor ein bereits gekauftes Ticket storniert wird.</td></tr>
+      <tr><td>C7</td><td>Wechsel zwischen den Hauptbereichen Start, Tickets, Kurse und Konto ist jederzeit möglich.</td></tr>
+    </table>
+    <table class="kompakt">
+      <thead><tr><th style="width:9%">Nr.</th><th>D · Allgemeine Anforderungen</th></tr></thead>
+      <tr><td>D1</td><td>Die App läuft unter Android und iOS; die Website ist responsiv (Smartphone, Tablet, Desktop).</td></tr>
+      <tr><td>D2</td><td>Website und App müssen barrierefrei sein. Maßstab sind die WCAG 2.1, Konformitätsstufe AA.</td></tr>
+      <tr><td>D3</td><td>Zielgruppen: Familien mit Kindern, Seniorinnen und Senioren, Schulen und Vereine, Touristinnen und Touristen (Deutsch und Englisch).</td></tr>
+      <tr><td>D4</td><td>Die Web-Anwendung „AquaVita Verwaltung“ (Anlage 5) wird bisher nur an PCs genutzt. Künftig sollen die Kursleitungen die Kurstermine auch auf Tablets im Hochformat am Beckenrand aufrufen und die Anwesenheit erfassen können.</td></tr>
+    </table>
+  </div>
+
+  <div class="anlage lang" id="anlage-3">
+    <h4>Anlage 3 · Online-Befragung zur bisherigen Website (Oktober 2026, Auszug)</h4>
+    <table class="kompakt">
+      <thead><tr><th class="nr">Nr.</th><th style="width:27%">Person</th><th>Rückmeldung</th></tr></thead>
+      <tr><td class="nr">F1</td><td>Frau B., 74 Jahre, Grauer Star</td><td class="zitat">„Die hellgraue Schrift auf weißem Grund kann ich kaum lesen. Wenn ich die Seite vergrößere, rutschen die Texte übereinander.“</td></tr>
+      <tr><td class="nr">F2</td><td>Herr T., 41 Jahre, Rot-Grün-Sehschwäche</td><td class="zitat">„Im Belegungskalender sind volle Tage rot und freie Tage grün. Für mich sehen beide gleich aus.“</td></tr>
+      <tr><td class="nr">F3</td><td>Herr K., 29 Jahre, blind, nutzt einen Screenreader</td><td class="zitat">„Bei den Schaltflächen sagt mein Screenreader nur ‚Schaltfläche‘ – ohne Namen. Die Fotos der Becken heißen ‚IMG_2231.jpg‘.“</td></tr>
+      <tr><td class="nr">F4</td><td>Frau L., 52 Jahre, Zittern der Hände (Tremor)</td><td class="zitat">„Die kleinen Plus- und Minus-Knöpfe beim Ticketkauf treffe ich fast nie. Mit der Tastatur komme ich nicht bis zum Bezahlen-Button.“</td></tr>
+      <tr><td class="nr">F5</td><td>Frau S., 33 Jahre, gehörlos</td><td class="zitat">„Das Erklärvideo zu den Baderegeln hat weder Untertitel noch eine Textfassung.“</td></tr>
+      <tr><td class="nr">F6</td><td>Herr A., 47 Jahre, lernt seit einem Jahr Deutsch</td><td class="zitat">„Den Text zu den Tarifen verstehe ich nicht: ‚Ermäßigungsberechtigt sind Personen gemäß § 4 Abs. 2 der Entgeltordnung, sofern ein entsprechender Nachweis …‘“</td></tr>
+      <tr><td class="nr">F7</td><td>Herr P., 38 Jahre, Vater</td><td class="zitat">„Bei der Kursanmeldung hatte ich das Geburtsdatum meiner Tochter falsch eingegeben. Es kam nur ‚Ungültige Eingabe‘ und alle Felder waren wieder leer.“</td></tr>
+      <tr><td class="nr">F8</td><td>Frau D., 22 Jahre, Studentin</td><td class="zitat">„Nach dem Bezahlen landete ich auf der Startseite. Ob der Kauf geklappt hat, wusste ich erst am nächsten Tag durch die Abbuchung.“</td></tr>
+      <tr><td class="nr">F9</td><td>Herr W., 69 Jahre, Stammgast</td><td class="zitat">„Für eine einzige Tageskarte muss ich mich durch sieben Seiten klicken und jedes Mal meine Adresse neu eingeben.“</td></tr>
+      <tr><td class="nr">F10</td><td>Frau R., 45 Jahre</td><td class="zitat">„Auf der Website heißt es ‚Warenkorb‘, in der alten App ‚Einkaufstasche‘. Und der Weiter-Knopf ist mal links, mal rechts.“</td></tr>
+      <tr><td class="nr">F11</td><td>Frau N., 35 Jahre, Mutter von zwei Kindern</td><td class="zitat">„Wenn ich beim Ticketkauf einen Schritt zurückgehe, ist meine Auswahl weg. Abbrechen kann ich nur, indem ich das Browserfenster schließe.“</td></tr>
+      <tr><td class="nr">F12</td><td>Herr M., 58 Jahre, neu in Lindenbrück</td><td class="zitat">„Wie die Wertkarte mit Bonusguthaben funktioniert, habe ich erst nach Wochen verstanden. Nirgends gibt es eine Erklärung.“</td></tr>
+    </table>
+  </div>
+
+  <div class="anlage" id="anlage-4">
+    <h4>Anlage 4 · Entwurf 1 der Seite „Kurs buchen“ (Website, Desktop-Ansicht)</h4>
+    <figure>
+      <svg viewBox="0 0 760 610" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <!-- Browserfenster -->
+        <rect x="1" y="1" width="758" height="608" rx="6" fill="#fff" stroke="#222" stroke-width="1.5"/>
+        <path d="M1.75,33 V7 a5.25,5.25 0 0 1 5.25,-5.25 H753 a5.25,5.25 0 0 1 5.25,5.25 V33 Z" fill="#e8ecf1"/>
+        <path d="M12,33 V11 a4,4 0 0 1 4,-4 H218 a4,4 0 0 1 4,4 V33" fill="#fff" stroke="#999"/>
+        <line x1="1" y1="33" x2="12" y2="33" stroke="#999"/>
+        <line x1="222" y1="33" x2="759" y2="33" stroke="#999"/>
+        <text x="24" y="25" font-size="12">AquaVita – Kurse</text>
+        <text x="208" y="25" font-size="12" fill="#666" text-anchor="end">×</text>
+        <g fill="#fff" stroke="#888"><circle cx="712" cy="17" r="5"/><circle cx="728" cy="17" r="5"/><circle cx="744" cy="17" r="5"/></g>
+        <text x="14" y="55" font-size="15" fill="#555">←</text>
+        <text x="36" y="55" font-size="15" fill="#bbb">→</text>
+        <text x="58" y="55" font-size="15" fill="#555">↻</text>
+        <rect x="86" y="40" width="620" height="20" rx="10" fill="#f3f4f6" stroke="#c8c8c8"/>
+        <text x="100" y="54" font-size="12" fill="#333">https://www.aquavita-freizeit.de/kurse/buchen?id=4711</text>
+        <text x="738" y="55" font-size="14" fill="#555" text-anchor="middle">⋮</text>
+        <line x1="1" y1="64" x2="759" y2="64" stroke="#c8c8c8"/>
+        <!-- Kopf der Website -->
+        <path d="M20,91 q6,-8 12,0 t12,0 t12,0" stroke="#1f4e79" stroke-width="2.5" fill="none"/>
+        <text x="62" y="93" font-size="19" font-weight="bold" fill="#1f4e79">AquaVita</text>
+        <g font-size="13"><text x="260" y="90">Start</text><text x="318" y="90">Bäder</text><text x="378" y="90">Tickets</text><text x="446" y="90">Kurse</text><text x="502" y="90">Kontakt</text></g>
+        <text x="740" y="90" font-size="13" text-anchor="end">Anmelden</text>
+        <line x1="20" y1="106" x2="740" y2="106" stroke="#ddd"/>
+        <!-- Bildkarussell -->
+        <rect x="20" y="114" width="720" height="104" fill="#f3f4f6" stroke="#999"/>
+        <line x1="20" y1="114" x2="740" y2="218" stroke="#d0d0d0"/>
+        <line x1="740" y1="114" x2="20" y2="218" stroke="#d0d0d0"/>
+        <rect x="220" y="138" width="320" height="48" rx="4" fill="#fff" stroke="#999"/>
+        <text x="380" y="159" text-anchor="middle" font-size="14" font-weight="bold">Saunawelt: 20 % Rabatt im November!</text>
+        <text x="380" y="177" text-anchor="middle" font-size="11" fill="#1f4e79">Jetzt Gutschein sichern ›</text>
+        <text x="38" y="175" font-size="26" fill="#666" text-anchor="middle">‹</text>
+        <text x="722" y="175" font-size="26" fill="#666" text-anchor="middle">›</text>
+        <circle cx="368" cy="206" r="4" fill="#555"/>
+        <circle cx="380" cy="206" r="4" fill="#fff" stroke="#555"/>
+        <circle cx="392" cy="206" r="4" fill="#fff" stroke="#555"/>
+        <!-- Kursinfo -->
+        <text x="20" y="250" font-size="11" fill="#b4b4b4">Aquafitness 50+ · Hallenbad Mitte · 45 Min. · Kursleitung: S. Brandt · Infos zum Kurs: <tspan text-decoration="underline">hier klicken ↗</tspan></text>
+        <!-- Fehlermeldung -->
+        <rect x="20" y="264" width="720" height="24" fill="#fdecec"/>
+        <text x="30" y="281" font-size="12" fill="#c62828">Fehler 422 – Eingabe ungültig. Pflichtfelder sind rot markiert.</text>
+        <!-- Formular links -->
+        <rect x="20" y="300" width="170" height="32" fill="#fff" stroke="#999"/>
+        <text x="30" y="321" font-size="12" fill="#9a9a9a">TT.MM.JJJJ</text>
+        <g fill="#fff" stroke="#999">
+          <rect x="20" y="344" width="84" height="30" rx="15"/><rect x="112" y="344" width="84" height="30" rx="15"/><rect x="204" y="344" width="84" height="30" rx="15"/>
+        </g>
+        <g font-size="12"><text x="34" y="364">09:00</text><text x="126" y="364">11:00</text><text x="218" y="364">17:30</text></g>
+        <circle cx="86" cy="359" r="5" fill="#2e7d32"/>
+        <circle cx="178" cy="359" r="5" fill="#c62828"/>
+        <circle cx="270" cy="359" r="5" fill="#2e7d32"/>
+        <rect x="20" y="388" width="345" height="32" fill="#fff" stroke="#999"/>
+        <text x="30" y="409" font-size="12" fill="#9a9a9a">Vor- und Nachname</text>
+        <rect x="20" y="432" width="345" height="32" fill="#fff" stroke="#c62828" stroke-width="2"/>
+        <text x="30" y="453" font-size="12" fill="#9a9a9a">Geburtsdatum</text>
+        <!-- Formular rechts -->
+        <text x="395" y="310" font-size="11" fill="#b4b4b4">Personen</text>
+        <line x1="395" y1="324" x2="640" y2="324" stroke="#c8c8c8" stroke-width="4" stroke-linecap="round"/>
+        <line x1="395" y1="324" x2="452" y2="324" stroke="#1f4e79" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="452" cy="324" r="9" fill="#fff" stroke="#555" stroke-width="1.5"/>
+        <rect x="395" y="348" width="14" height="14" fill="#1f4e79"/>
+        <path d="M398,355 l3,3 l6,-7" stroke="#fff" stroke-width="2" fill="none"/>
+        <text x="417" y="360" font-size="12">Ja, Newsletter mit Angeboten erhalten</text>
+        <rect x="395" y="376" width="9" height="9" fill="#fff" stroke="#999"/>
+        <text x="410" y="384" font-size="10" fill="#b4b4b4">AGB gelesen</text>
+        <rect x="395" y="400" width="130" height="48" fill="#eee" stroke="#999"/>
+        <g font-size="21" font-style="italic" fill="#555" font-family="Georgia, serif">
+          <text x="405" y="432" transform="rotate(-12 405 432)">x</text>
+          <text x="428" y="428" transform="rotate(10 428 428)">7</text>
+          <text x="451" y="436" transform="rotate(-8 451 436)">R</text>
+          <text x="475" y="429" transform="rotate(14 475 429)">q</text>
+          <text x="498" y="434" transform="rotate(-10 498 434)">2</text>
+        </g>
+        <path d="M398,418 C430,448 470,403 522,433" stroke="#777" fill="none"/>
+        <path d="M400,438 C440,408 480,453 520,413" stroke="#999" fill="none"/>
+        <rect x="535" y="408" width="170" height="32" fill="#fff" stroke="#999"/>
+        <text x="545" y="429" font-size="12" fill="#9a9a9a">Zeichen eingeben</text>
+        <text x="722" y="430" font-size="15" fill="#888" text-anchor="middle">↻</text>
+        <!-- Schaltflächen -->
+        <rect x="20" y="484" width="180" height="44" rx="4" fill="#1f4e79"/>
+        <text x="110" y="512" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">Zurücksetzen</text>
+        <rect x="208" y="492" width="80" height="28" rx="3" fill="#fff" stroke="#c8c8c8"/>
+        <text x="248" y="511" text-anchor="middle" font-size="12" fill="#999">Submit</text>
+        <g fill="none" stroke="#999" stroke-width="1.3">
+          <path d="M672,502 c-2,-4 -8,-4 -8,1 c0,4 8,9 8,9 c0,0 8,-5 8,-9 c0,-5 -6,-5 -8,-1 z"/>
+          <circle cx="694" cy="506" r="2.2"/><circle cx="704" cy="500" r="2.2"/><circle cx="704" cy="512" r="2.2"/>
+          <line x1="696" y1="505" x2="702" y2="501"/><line x1="696" y1="507" x2="702" y2="511"/>
+          <rect x="718" y="502" width="16" height="8"/><rect x="721" y="497" width="10" height="5"/><rect x="721" y="507" width="10" height="6" fill="#fff"/>
+        </g>
+        <!-- Fußzeile -->
+        <line x1="20" y1="556" x2="740" y2="556" stroke="#ddd"/>
+        <text x="20" y="580" font-size="10" fill="#b4b4b4">© AquaVita Freizeit GmbH · Impressum · Datenschutz · AGB</text>
+      </svg>
+    </figure>
+    <p class="klein"><strong>Hinweise zum Entwurf:</strong></p>
+    <ul class="hinweise">
+      <li>Dargestellt ist der Zustand nach dem Absenden mit einem ungültigen Geburtsdatum.</li>
+      <li>Das Bildkarussell wechselt automatisch alle 3 Sekunden; eine Pause-Funktion gibt es nicht.</li>
+      <li>Farbige Punkte bei den Uhrzeiten: grün = freie Plätze, rot = ausgebucht.</li>
+      <li>Der Link „hier klicken“ öffnet die Kursbeschreibung (PDF) in einem neuen Browserfenster.</li>
+      <li>Der Schieberegler „Personen“ reicht von 1 bis 4; der eingestellte Wert wird nicht angezeigt.</li>
+      <li>„Zurücksetzen“ leert alle Eingabefelder ohne Rückfrage.</li>
+      <li>Die drei Symbole rechts unten bedeuten „merken“, „teilen“ und „drucken“ (Größe 16 × 16 px).</li>
+      <li>Das Feld „TT.MM.JJJJ“ dient der Eingabe des gewünschten Kursdatums.</li>
+    </ul>
+  </div>
+
+  <div class="anlage" id="anlage-5">
+    <h4>Anlage 5 · Mockup der Web-Anwendung „AquaVita Verwaltung“ – Kursverwaltung (Desktop)</h4>
+    <figure>
+      <svg viewBox="0 0 760 530" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <!-- Browserfenster -->
+        <rect x="1" y="1" width="758" height="528" rx="6" fill="#fff" stroke="#222" stroke-width="1.5"/>
+        <path d="M1.75,33 V7 a5.25,5.25 0 0 1 5.25,-5.25 H753 a5.25,5.25 0 0 1 5.25,5.25 V33 Z" fill="#e8ecf1"/>
+        <path d="M12,33 V11 a4,4 0 0 1 4,-4 H218 a4,4 0 0 1 4,4 V33" fill="#fff" stroke="#999"/>
+        <line x1="1" y1="33" x2="12" y2="33" stroke="#999"/>
+        <line x1="222" y1="33" x2="759" y2="33" stroke="#999"/>
+        <text x="24" y="25" font-size="12">AquaVita Verwaltung</text>
+        <text x="208" y="25" font-size="12" fill="#666" text-anchor="end">×</text>
+        <g fill="#fff" stroke="#888"><circle cx="712" cy="17" r="5"/><circle cx="728" cy="17" r="5"/><circle cx="744" cy="17" r="5"/></g>
+        <text x="14" y="55" font-size="15" fill="#555">←</text>
+        <text x="36" y="55" font-size="15" fill="#bbb">→</text>
+        <text x="58" y="55" font-size="15" fill="#555">↻</text>
+        <rect x="86" y="40" width="620" height="20" rx="10" fill="#f3f4f6" stroke="#c8c8c8"/>
+        <text x="100" y="54" font-size="12" fill="#333">https://verwaltung.aquavita-freizeit.de/kurse/aquafitness-50</text>
+        <text x="738" y="55" font-size="14" fill="#555" text-anchor="middle">⋮</text>
+        <line x1="1" y1="64" x2="759" y2="64" stroke="#c8c8c8"/>
+        <!-- Kopf der Anwendung -->
+        <text x="20" y="92" font-size="17" font-weight="bold" fill="#1f4e79">AquaVita <tspan font-weight="normal" fill="#333">Verwaltung</tspan></text>
+        <g font-size="13"><text x="210" y="90">Dashboard</text><text x="296" y="90">Kasse</text><text x="350" y="90" font-weight="bold" fill="#1f4e79">Kurse</text><text x="406" y="90">Bäder</text><text x="460" y="90">Berichte</text></g>
+        <line x1="350" y1="99" x2="387" y2="99" stroke="#1f4e79" stroke-width="3"/>
+        <rect x="546" y="75" width="140" height="26" rx="13" fill="#fff" stroke="#999"/>
+        <circle cx="561" cy="87" r="5" fill="none" stroke="#555" stroke-width="1.5"/>
+        <line x1="565" y1="91" x2="569" y2="95" stroke="#555" stroke-width="2"/>
+        <text x="576" y="92" font-size="12" fill="#888">Suchen …</text>
+        <circle cx="714" cy="88" r="13" fill="#e8ecf1" stroke="#999"/>
+        <text x="714" y="92" text-anchor="middle" font-size="10">MY</text>
+        <text x="735" y="92" font-size="10">▾</text>
+        <line x1="20" y1="108" x2="740" y2="108" stroke="#ddd"/>
+        <!-- Breadcrumb, Überschrift -->
+        <text x="20" y="130" font-size="12"><tspan fill="#1f4e79" text-decoration="underline">Start</tspan> › <tspan fill="#1f4e79" text-decoration="underline">Kurse</tspan> › Aquafitness 50+</text>
+        <text x="20" y="164" font-size="19" font-weight="bold">Aquafitness 50+ · Hallenbad Mitte</text>
+        <rect x="590" y="144" width="150" height="32" rx="4" fill="#1f4e79"/>
+        <text x="665" y="165" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">+ Termin anlegen</text>
+        <!-- Tabs -->
+        <text x="20" y="194" font-weight="bold" fill="#1f4e79">Termine</text>
+        <text x="100" y="194" fill="#444">Teilnehmende (12)</text>
+        <text x="240" y="194" fill="#444">Warteliste (3)</text>
+        <line x1="20" y1="204" x2="740" y2="204" stroke="#ccc"/>
+        <line x1="20" y1="204" x2="76" y2="204" stroke="#1f4e79" stroke-width="3"/>
+        <!-- Filter -->
+        <rect x="20" y="216" width="200" height="28" rx="3" fill="#fff" stroke="#888"/>
+        <text x="30" y="235" font-size="12">Kursleitung: alle</text>
+        <text x="210" y="235" text-anchor="end">▾</text>
+        <rect x="240" y="216" width="236" height="28" rx="3" fill="#fff" stroke="#888"/>
+        <rect x="250" y="223" width="14" height="13" fill="#fff" stroke="#222"/>
+        <line x1="250" y1="227" x2="264" y2="227" stroke="#222"/>
+        <text x="272" y="235" font-size="12">01.11.2026 – 30.11.2026</text>
+        <rect x="500" y="223" width="14" height="14" fill="#fff" stroke="#555"/>
+        <text x="522" y="235" font-size="12">nur Termine mit freien Plätzen</text>
+        <!-- Tabelle -->
+        <rect x="20" y="256" width="720" height="26" fill="#e8ecf1" stroke="#bbb"/>
+        <g font-size="12" font-weight="bold"><text x="30" y="273">Datum</text><text x="160" y="273">Uhrzeit</text><text x="270" y="273">Kursleitung</text><text x="390" y="273">Belegung</text><text x="570" y="273">Status</text><text x="670" y="273">Aktion</text></g>
+        <g fill="#fff" stroke="#ddd">
+          <rect x="20" y="282" width="720" height="28"/><rect x="20" y="310" width="720" height="28"/><rect x="20" y="338" width="720" height="28"/><rect x="20" y="366" width="720" height="28"/><rect x="20" y="394" width="720" height="28"/>
+        </g>
+        <g font-size="12">
+          <text x="30" y="301">Mo 02.11.2026</text><text x="160" y="301">09:00–09:45</text><text x="270" y="301">S. Brandt</text><text x="570" y="301">ausgebucht</text>
+          <text x="30" y="329">Mi 04.11.2026</text><text x="160" y="329">09:00–09:45</text><text x="270" y="329">S. Brandt</text><text x="570" y="329">3 Plätze frei</text>
+          <text x="30" y="357">Fr 06.11.2026</text><text x="160" y="357">17:30–18:15</text><text x="270" y="357">J. Kowalski</text><text x="570" y="357">6 Plätze frei</text>
+          <text x="30" y="385">Mo 09.11.2026</text><text x="160" y="385">09:00–09:45</text><text x="270" y="385">S. Brandt</text><text x="570" y="385">ausgebucht</text>
+          <text x="30" y="413">Mi 11.11.2026</text><text x="160" y="413">09:00–09:45</text><text x="270" y="413">S. Brandt</text><text x="570" y="413">11 Plätze frei</text>
+        </g>
+        <g fill="#fff" stroke="#999">
+          <rect x="390" y="291" width="110" height="10"/><rect x="390" y="319" width="110" height="10"/><rect x="390" y="347" width="110" height="10"/><rect x="390" y="375" width="110" height="10"/><rect x="390" y="403" width="110" height="10"/>
+        </g>
+        <g fill="#1f4e79">
+          <rect x="390" y="291" width="110" height="10"/><rect x="390" y="319" width="88" height="10"/><rect x="390" y="347" width="66" height="10"/><rect x="390" y="375" width="110" height="10"/><rect x="390" y="403" width="29" height="10"/>
+        </g>
+        <g font-size="11"><text x="508" y="300">15/15</text><text x="508" y="328">12/15</text><text x="508" y="356">9/15</text><text x="508" y="384">15/15</text><text x="508" y="412">4/15</text></g>
+        <g font-size="12" fill="#1f4e79" text-decoration="underline"><text x="670" y="301">Bearbeiten</text><text x="670" y="329">Bearbeiten</text><text x="670" y="357">Bearbeiten</text><text x="670" y="385">Bearbeiten</text><text x="670" y="413">Bearbeiten</text></g>
+        <!-- Pagination -->
+        <text x="20" y="452" font-size="12" fill="#555">Termine 1–5 von 12</text>
+        <g fill="#fff" stroke="#999"><rect x="594" y="434" width="26" height="26" rx="3"/><rect x="654" y="434" width="26" height="26" rx="3"/><rect x="684" y="434" width="26" height="26" rx="3"/><rect x="714" y="434" width="26" height="26" rx="3"/></g>
+        <rect x="624" y="434" width="26" height="26" rx="3" fill="#1f4e79"/>
+        <g font-size="12" text-anchor="middle"><text x="607" y="452">‹</text><text x="637" y="452" fill="#fff">1</text><text x="667" y="452">2</text><text x="697" y="452">3</text><text x="727" y="452">›</text></g>
+        <!-- Toast -->
+        <rect x="440" y="474" width="300" height="40" rx="6" fill="#333"/>
+        <text x="456" y="499" font-size="12" fill="#fff">✓ Termin am 13.11.2026 gespeichert</text>
+        <text x="726" y="499" font-size="14" fill="#fff" text-anchor="end">×</text>
+        <!-- Markierungen -->
+        <g font-size="12" font-weight="bold" text-anchor="middle" fill="#fff">
+          <circle cx="232" cy="126" r="10" fill="#222"/><text x="232" y="130">1</text>
+          <circle cx="346" cy="190" r="10" fill="#222"/><text x="346" y="194">2</text>
+          <circle cx="220" cy="216" r="10" fill="#222"/><text x="220" y="220">3</text>
+          <circle cx="476" cy="216" r="10" fill="#222"/><text x="476" y="220">4</text>
+          <circle cx="728" cy="230" r="10" fill="#222"/><text x="728" y="234">5</text>
+          <circle cx="550" cy="324" r="10" fill="#222"/><text x="550" y="328">6</text>
+          <circle cx="578" cy="447" r="10" fill="#222"/><text x="578" y="451">7</text>
+          <circle cx="440" cy="474" r="10" fill="#222"/><text x="440" y="478">8</text>
+        </g>
+      </svg>
+    </figure>
+    <p class="klein">① bis ⑧: markierte Gestaltungselemente (zu Aufgabe GUI-01.1).</p>
+  </div>
+</section>
+
+<!-- ===================== TEIL C: AUFGABEN ===================== -->
+<section class="teil" id="aufgaben">
+  <h2>C · Aufgaben</h2>
+  <p class="klein">Alle Aufgaben beziehen sich auf die Ausgangssituation in Anlage 1 und die weiteren Anlagen des Belegsatzes. Skizzen werden mit Bleistift in die vorgedruckten Rahmen gezeichnet; Farben sind nicht erforderlich. Gesamt: 105 Punkte (ca. 95 Minuten).</p>
+
+  <!-- ===================== GUI-01 ===================== -->
+  <h3 id="a-01">GUI-01 · Mockup, Wireframe &amp; GUI-Elemente</h3>
+
+  <div class="aufgabe" id="GUI-01-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe GUI-01.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Im Projekt-Wiki sollen die Gestaltungselemente der Web-Anwendung „AquaVita Verwaltung“ beschrieben werden. In Anlage 5 sind acht Elemente mit ① bis ⑧ markiert.</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>Wählen Sie sechs der markierten Elemente aus. Nennen Sie jeweils die Bezeichnung des Gestaltungselements und beschreiben Sie kurz seinen Zweck.</div>
+    <table class="leer mittel">
+      <thead><tr><th class="nr">Nr.</th><th style="width:30%">Bezeichnung</th><th>Zweck</th></tr></thead>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+    </table>
+    <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 3a (Gestaltungselemente für Benutzerschnittstellen beschreiben)</p>
+  </div>
+
+  <div class="aufgabe" id="GUI-01-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe GUI-01.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">11 Punkte</span>
+    </div>
+    <p>Für den Ticketkauf in der App (Anlage 2, Anforderungen C1 bis C7) sollen passende Bedienelemente festgelegt werden. Außerdem soll die Kursverwaltung künftig auf Tablets laufen.</p>
+    <div class="teilaufgabe"><span class="tp">7 P</span>a) Ergänzen Sie die Tabelle. Nennen Sie für jede Anforderung ein geeignetes GUI-Element und begründen Sie Ihre Wahl kurz.</div>
+    <table class="leer mittel">
+      <thead><tr><th style="width:30%">Anforderung</th><th style="width:24%">GUI-Element</th><th>Begründung</th></tr></thead>
+      <tr><td>C1 Auswahl genau eines der drei Bäder</td><td></td><td></td></tr>
+      <tr><td>C2 Besuchstag (heute bis 30 Tage im Voraus, Revisionstage geschlossen)</td><td></td><td></td></tr>
+      <tr><td>C3 Anzahl Tickets je Tarif (0 bis 10)</td><td></td><td></td></tr>
+      <tr><td>C4 Zusatzleistungen Sauna, Schließfach, Leihhandtuch (beliebig kombinierbar)</td><td></td><td></td></tr>
+      <tr><td>C5 Rückmeldung „Ticket in der Wallet gespeichert“</td><td></td><td></td></tr>
+      <tr><td>C6 Sicherheitsabfrage vor dem Stornieren eines Tickets</td><td></td><td></td></tr>
+      <tr><td>C7 Wechsel zwischen Start, Tickets, Kurse und Konto</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Gemäß Anforderung D4 soll die Kursverwaltung (Anlage 5) auch auf Tablets im Hochformat am Beckenrand bedienbar sein. Erläutern Sie den Begriff <em>Responsive Design</em> und beschreiben Sie zwei konkrete Anpassungen der Seite aus Anlage 5 für die Nutzung auf dem Tablet.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 3a und W23 Teil 1, Aufgabe 4b (geeignete Darstellung wählen und begründen)</p>
+  </div>
+
+  <div class="aufgabe" id="GUI-01-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe GUI-01.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">18 Punkte</span>
+    </div>
+    <p>Für die App „AquaVita“ soll die Seite <strong>„Auslastung“</strong> entworfen werden (Anforderungen B1 bis B6 in Anlage 2). Die Projektleitung möchte die Gestaltung vor der Programmierung mit Mockups bei der AquaVita abstimmen.</p>
+    <div class="teilaufgabe">a) Wireframes und Mockups</div>
+    <div class="teilaufgabe" style="margin-left:18px"><span class="tp">2 P</span>aa) Erläutern Sie den Unterschied zwischen einem Wireframe und einem Mockup.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe" style="margin-left:18px"><span class="tp">4 P</span>ab) Beschreiben Sie zwei Vorteile, die sich aus der Erstellung von Mockups für dieses Projekt ergeben.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe">b) Für die Prognose der Auslastung im Tagesverlauf (Anforderung B3) kommen verschiedene Darstellungsformen in Frage.</div>
+    <div class="teilaufgabe" style="margin-left:18px"><span class="tp">2 P</span>ba) Nennen Sie zwei geeignete Darstellungsformen.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe" style="margin-left:18px"><span class="tp">2 P</span>bb) Entscheiden Sie sich für eine der beiden Darstellungsformen und begründen Sie Ihre Entscheidung.</div>
+    <div class="antwort z3"></div>
+    <div style="break-inside: avoid">
+    <div class="teilaufgabe"><span class="tp">8 P</span>c) Ergänzen Sie den folgenden Entwurf der Seite „Auslastung“ so, dass alle Anforderungen B1 bis B6 erfüllt sind. Verwenden Sie für die Prognose Ihre Darstellungsform aus bb), tragen Sie Beispieldaten ein und beschriften Sie die verwendeten Elemente.</div>
+    <figure>
+      <svg viewBox="0 0 760 800" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <rect x="10" y="10" width="392" height="776" rx="44" fill="#fff" stroke="#222" stroke-width="5"/>
+        <rect x="26" y="26" width="360" height="744" rx="30" fill="#fff" stroke="#222" stroke-width="1.2"/>
+        <rect x="156" y="26" width="100" height="22" rx="11" fill="#222"/>
+        <rect x="4" y="150" width="5" height="40" rx="2" fill="#222"/>
+        <rect x="4" y="205" width="5" height="60" rx="2" fill="#222"/>
+        <rect x="403" y="180" width="5" height="70" rx="2" fill="#222"/>
+        <text x="50" y="44" font-size="12" font-weight="bold">14:05</text>
+        <rect x="338" y="34" width="22" height="11" rx="2" fill="none" stroke="#222"/>
+        <rect x="340" y="36" width="15" height="7" fill="#222"/>
+        <text x="44" y="91" font-size="24">←</text>
+        <text x="206" y="89" text-anchor="middle" font-size="18" font-weight="bold">Auslastung</text>
+        <line x1="26" y1="104" x2="386" y2="104" stroke="#ccc"/>
+        <rect x="156" y="754" width="100" height="5" rx="2.5" fill="#222"/>
+        <rect x="430" y="26" width="320" height="744" fill="none" stroke="#bbb" stroke-dasharray="5 4"/>
+        <text x="590" y="48" text-anchor="middle" font-size="12" fill="#888">Platz für Beschriftungen</text>
+      </svg>
+    </figure>
+    </div>
+    <p class="quelle">Angelehnt an: S26 Teil 1, Aufgabe 4c (Vorteile von Mockups, Smartphone-Entwurf ergänzen) und W23 Teil 1, Aufgabe 4b (Darstellungsformen)</p>
+  </div>
+
+  <!-- ===================== GUI-02 ===================== -->
+  <h3 id="a-02">GUI-02 · Barrierefreiheit</h3>
+
+  <div class="aufgabe" id="GUI-02-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe GUI-02.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Website und App der AquaVita sollen barrierefrei sein (Anlage 2, D2).</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Erläutern Sie den Begriff „barrierefreie Software“.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Nennen Sie die vier Prinzipien, nach denen die WCAG gegliedert sind.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Nennen Sie vier Personengruppen, die von einer barrierefreien App der AquaVita profitieren.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 3ab (Barrierefreiheit erläutern)</p>
+  </div>
+
+  <div class="aufgabe" id="GUI-02-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe GUI-02.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">12 Punkte</span>
+    </div>
+    <p>In der Online-Befragung (Anlage 3) haben Nutzerinnen und Nutzer Probleme mit der bisherigen Website gemeldet. Die neue App soll diese Probleme vermeiden.</p>
+    <div class="teilaufgabe"><span class="tp">8 P</span>a) Wählen Sie vier der Rückmeldungen F1 bis F6 aus. Beschreiben Sie jeweils die Anforderung an barrierefreie Software, die verletzt ist, und eine geeignete Maßnahme für die neue App.</div>
+    <table class="leer hoch">
+      <thead><tr><th class="nr">Nr.</th><th style="width:44%">verletzte Anforderung</th><th>geeignete Maßnahme</th></tr></thead>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Damit die App von Anfang an für möglichst viele Menschen nutzbar ist, soll inklusives Design angewendet werden. Nennen Sie für die folgenden Kriterien je zwei Beispiele, wie inklusives Design umgesetzt werden kann.</div>
+    <table class="leer hoch">
+      <thead><tr><th style="width:24%">Kriterium</th><th>Beispiele</th></tr></thead>
+      <tr><td>Schriftart / Schriftbild</td><td></td></tr>
+      <tr><td>Farbgebung</td><td></td></tr>
+    </table>
+    <p class="quelle">Angelehnt an: S26 Teil 1, Aufgabe 4b (Anforderungen und Maßnahmen) und W22 Teil 1, Aufgabe 3b (inklusives Design)</p>
+  </div>
+
+  <div class="aufgabe" id="GUI-02-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe GUI-02.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">16 Punkte</span>
+    </div>
+    <p>Bevor die Seite „Kurs buchen“ umgesetzt wird, soll der Entwurf in Anlage 4 auf Barrierefreiheit geprüft werden.</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Die Geschäftsführung der AquaVita fragt, warum sie als privates Unternehmen überhaupt zur Barrierefreiheit ihrer Website und App verpflichtet ist. Erläutern Sie dies unter Angabe der gesetzlichen Grundlage.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">10 P</span>b) Beschreiben Sie vier Barrieren im Entwurf (Anlage 4). Ordnen Sie jede Barriere einem Prinzip der WCAG zu und beschreiben Sie eine geeignete Maßnahme.</div>
+    <table class="leer hoch">
+      <thead><tr><th style="width:40%">Barriere im Entwurf</th><th style="width:16%">WCAG-Prinzip</th><th>Maßnahme</th></tr></thead>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Beschreiben Sie zwei Verfahren, mit denen das Team vor dem Go-live prüfen kann, ob die fertige Website die Anforderungen an die Barrierefreiheit erfüllt.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: S26 Teil 1, Aufgabe 4b und S24 Teil 1, Aufgabe 4ba (Mängel eines Mockups beschreiben)</p>
+  </div>
+
+  <!-- ===================== GUI-03 ===================== -->
+  <h3 id="a-03">GUI-03 · Usability &amp; Software-Ergonomie</h3>
+
+  <div class="aufgabe" id="GUI-03-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe GUI-03.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Die AquaVita legt großen Wert auf eine gute Usability und eine positive User Experience ihrer neuen App.</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Erläutern Sie den Unterschied zwischen Usability und User Experience (UX).</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Ordnen Sie den folgenden Eigenschaften der App jeweils den Grundsatz der Dialoggestaltung nach DIN EN ISO 9241-110 zu, der damit vor allem erfüllt wird.</div>
+    <table class="leer">
+      <thead><tr><th class="nr">Nr.</th><th style="width:62%">Eigenschaft der App</th><th>Grundsatz</th></tr></thead>
+      <tr><td class="nr">1</td><td>Gutscheincodes werden ohne Leerzeichen übernommen; die leicht verwechselbaren Zeichen O und 0 werden automatisch richtig erkannt.</td><td></td></tr>
+      <tr><td class="nr">2</td><td>Beim Ticketkauf zeigt ein Balken oben „Schritt 2 von 3: Zusatzleistungen wählen“.</td><td></td></tr>
+      <tr><td class="nr">3</td><td>Erklärvideos lassen sich anhalten, zurückspulen und schneller abspielen.</td><td></td></tr>
+      <tr><td class="nr">4</td><td>Bei der Kursbuchung werden nur die Angaben abgefragt, die für den gewählten Kurs nötig sind – bei „Aquafitness 50+“ z. B. keine Angaben zu Erziehungsberechtigten.</td><td></td></tr>
+      <tr><td class="nr">5</td><td>Ein Tipp auf das Logo oben links führt – wie auf den meisten Websites – zur Startseite.</td><td></td></tr>
+      <tr><td class="nr">6</td><td>Neue Funktionen werden nach einem Update mit einer kurzen, überspringbaren Tour vorgestellt.</td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">1 P</span>c) Ein Grundsatz der Fassung von 2020 fehlt in der Tabelle. Nennen Sie ihn und geben Sie ein Beispiel für seine Umsetzung in der App.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 3aa (Usability und User Experience)</p>
+  </div>
+
+  <div class="aufgabe" id="GUI-03-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe GUI-03.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">12 Punkte</span>
+    </div>
+    <p>Die Rückmeldungen F7 bis F12 der Online-Befragung (Anlage 3) betreffen die Usability der bisherigen Website.</p>
+    <div class="teilaufgabe"><span class="tp">8 P</span>a) Wählen Sie vier der Rückmeldungen F7 bis F12 aus. Nennen Sie jeweils den verletzten Grundsatz der Dialoggestaltung nach DIN EN ISO 9241-110 und beschreiben Sie eine Verbesserung für die neue App.</div>
+    <table class="leer hoch">
+      <thead><tr><th class="nr">Nr.</th><th style="width:30%">verletzter Grundsatz</th><th>Verbesserung</th></tr></thead>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Die Usability der neuen App soll zweimal geprüft werden: vor dem Go-live mit einem klickbaren Prototyp und nach dem Go-live im laufenden Betrieb. Beschreiben Sie für jeden der beiden Zeitpunkte ein geeignetes Testverfahren.</div>
+    <table class="leer">
+      <thead><tr><th style="width:24%">Zeitpunkt</th><th>Testverfahren und Beschreibung</th></tr></thead>
+      <tr><td style="height:110px">vor dem Go-live (klickbarer Prototyp)</td><td></td></tr>
+      <tr><td style="height:110px">nach dem Go-live (laufender Betrieb)</td><td></td></tr>
+    </table>
+    <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 3ac (Möglichkeiten zum Test der Benutzerfreundlichkeit)</p>
+  </div>
+
+  <div class="aufgabe" id="GUI-03-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe GUI-03.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">18 Punkte</span>
+    </div>
+    <p>Der erste Entwurf der Seite „Kurs buchen“ (Anlage 4) wurde im Review mit der AquaVita wegen Mängeln bei der Usability abgelehnt. Sie sollen den Entwurf überarbeiten.</p>
+    <div class="teilaufgabe"><span class="tp">8 P</span>a) Beschreiben Sie vier Mängel des Entwurfs aus UI/UX-Sicht und nennen Sie jeweils den Grundsatz der Dialoggestaltung, gegen den verstoßen wird. Reine Barrierefreiheitsmängel wie Kontrast oder Farbe (siehe GUI-02.3) werden hier nicht gewertet.</div>
+    <table class="leer hoch">
+      <thead><tr><th style="width:66%">Mangel (mit Auswirkung auf den Nutzer)</th><th>Grundsatz</th></tr></thead>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+    </table>
+    <div style="break-inside: avoid">
+    <div class="teilaufgabe"><span class="tp">10 P</span>b) Skizzieren Sie im folgenden Rahmen ein verbessertes Mockup der Seite „Kurs buchen“. Es muss die Anforderungen A1 bis A7 (Anlage 2) erfüllen und die von Ihnen in a) genannten Mängel beseitigen. Verwenden Sie den Kurs „Aquafitness 50+“ mit den Terminen aus Anlage 5 als Beispieldaten (Preis: 9,50 € je Person).</div>
+    <figure>
+      <svg viewBox="0 0 760 640" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <rect x="1" y="1" width="758" height="638" rx="6" fill="#fff" stroke="#222" stroke-width="1.5"/>
+        <path d="M1.75,33 V7 a5.25,5.25 0 0 1 5.25,-5.25 H753 a5.25,5.25 0 0 1 5.25,5.25 V33 Z" fill="#e8ecf1"/>
+        <path d="M12,33 V11 a4,4 0 0 1 4,-4 H218 a4,4 0 0 1 4,4 V33" fill="#fff" stroke="#999"/>
+        <line x1="1" y1="33" x2="12" y2="33" stroke="#999"/>
+        <line x1="222" y1="33" x2="759" y2="33" stroke="#999"/>
+        <text x="24" y="25" font-size="12">AquaVita – Kurse</text>
+        <text x="208" y="25" font-size="12" fill="#666" text-anchor="end">×</text>
+        <g fill="#fff" stroke="#888"><circle cx="712" cy="17" r="5"/><circle cx="728" cy="17" r="5"/><circle cx="744" cy="17" r="5"/></g>
+        <text x="14" y="55" font-size="15" fill="#555">←</text>
+        <text x="36" y="55" font-size="15" fill="#bbb">→</text>
+        <text x="58" y="55" font-size="15" fill="#555">↻</text>
+        <rect x="86" y="40" width="620" height="20" rx="10" fill="#f3f4f6" stroke="#c8c8c8"/>
+        <text x="100" y="54" font-size="12" fill="#333">https://www.aquavita-freizeit.de/kurse/buchen?id=4711</text>
+        <text x="738" y="55" font-size="14" fill="#555" text-anchor="middle">⋮</text>
+        <line x1="1" y1="64" x2="759" y2="64" stroke="#c8c8c8"/>
+        <path d="M20,91 q6,-8 12,0 t12,0 t12,0" stroke="#1f4e79" stroke-width="2.5" fill="none"/>
+        <text x="62" y="93" font-size="19" font-weight="bold" fill="#1f4e79">AquaVita</text>
+        <g font-size="13"><text x="260" y="90">Start</text><text x="318" y="90">Bäder</text><text x="378" y="90">Tickets</text><text x="446" y="90">Kurse</text><text x="502" y="90">Kontakt</text></g>
+        <text x="740" y="90" font-size="13" text-anchor="end">Anmelden</text>
+        <line x1="20" y1="106" x2="740" y2="106" stroke="#ddd"/>
+      </svg>
+    </figure>
+    </div>
+    <p class="quelle">Angelehnt an: S24 Teil 1, Aufgabe 4b (Mängel eines Mockups aus UI/UX-Sicht, verbessertes Mockup skizzieren)</p>
+  </div>
+
+  <!-- ===================== ORIGINALAUFGABEN ===================== -->
+  <div style="break-inside: avoid">
+  <h3 id="originale">Originalaufgaben zum Üben</h3>
+  <p>Diese echten Prüfungsaufgaben passen zu diesem Block (Dateien im Ordner <code>Prüfungsvorbereitung</code>). Lösungen gibt es nur für 2023 Sommer, 2023 Winter, 2024 Sommer und 2025 Winter (dort vom u-form-Verlag) – für diesen Block also nur zu W23 und S24.</p>
+  <table class="kompakt" style="break-inside:auto">
+    <thead><tr><th>Prüfung</th><th>Aufgabe</th><th>Thema</th><th>Datei · Lösung</th></tr></thead>
+    <tr><td>Winter 2021</td><td>T1 A3a (aa 8 P, ab 4 P, ac 4 P)</td><td>Usability und User Experience an vier Punkten; Barrierefreiheit erläutern; zwei Usability-Tests beschreiben</td><td><code>2021/winter/AE 2021 Winter Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Winter 2022</td><td>T1 A3a (3 P), A3b (4 P)</td><td>Gestaltungselemente (Breadcrumb u. a.) beschreiben; inklusives Design: Schrift und Farbe</td><td><code>2022/winter/AE 2022 Winter Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Winter 2023</td><td>T1 A4b (ba 2 P, bb 2 P, bc 4 P)</td><td>Darstellungsformen für eine Übersicht nennen, eine begründen, skizzieren</td><td><code>2023/winter/AE Winter 2023 Teil 1.pdf</code> · Lösung: <code>AE Winter 2023 Teil 1 Lösungen.pdf</code></td></tr>
+    <tr><td>Sommer 2024</td><td>T1 A4b (ba 6 P, bb 7 P)</td><td>Mängel eines Mockups (Browser) aus UI/UX-Sicht; verbessertes Mockup skizzieren</td><td><code>2024/sommer/AE Sommer 2024 Teil 1+2+3.pdf</code> · Lösung: <code>AE Sommer 2024 Teil 1 Lösungen.pdf</code></td></tr>
+    <tr><td>Sommer 2026</td><td>T1 A4b (8 P), A4c (ca 4 P, cb 6 P)</td><td>Barrierefreiheit: Anforderungen und Maßnahmen; Vorteile von Mockups; Smartphone-Mockup ergänzen</td><td><code>2026/sommer/AE Sommer 2026 Teil 1.pdf</code> · keine Lösung</td></tr>
+  </table>
+  </div>
+</section>
+
+</body>
+</html>

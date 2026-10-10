@@ -1,0 +1,1596 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02 Algorithmen &amp; Programmierung – Lösungen</title>
+<link rel="stylesheet" href="style.css">
+<script src="uebungen.js"></script>
+<style>
+  /* Zusatzregeln Block 02 (Lösungen) */
+  nav.toc ol { columns: 3; column-gap: 24px; }
+  table.kompakt td, table.kompakt th { padding: 2px 6px; }
+  td.mono, th.mono { font-family: Consolas, "Courier New", monospace; font-size: 13px; }
+  pre { font-size: 12px; }
+  pre.ausgabe { background: #fff; border-style: dashed; }
+  pre.java, pre.ausgabe { break-inside: auto; }
+  .codelabel { break-after: avoid; }
+  .loesung .kopf { font-size: 16px; margin-bottom: 4px; break-after: avoid; page-break-after: avoid; }
+  td.mono { white-space: nowrap; }
+  .loesung h4 { margin: 12px 0 4px; font-size: 15px; }
+  .datei { font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header class="blockkopf">
+  <h1>Block 02 · Algorithmen &amp; Programmierung – Lösungen</h1>
+  <div class="unter">
+    Lösungssatz zu <a href="02_Algorithmen.html">02_Algorithmen.html</a>
+    · Pseudocode im IHK-Stil, dazu lauffähige Java-Dateien im Ordner <code>java\02_Algorithmen\</code> (Start mit <code>java Aufgabe_ALG_NN_k.java</code>)
+  </div>
+</header>
+
+<nav class="toc">
+  <strong>Inhalt</strong>
+  <ol>
+    <li><a href="#l-01">ALG-01 Pseudocode</a></li>
+    <li><a href="#l-02">ALG-02 Arrays/Listen</a></li>
+    <li><a href="#l-03">ALG-03 Min/Max, Suche</a></li>
+    <li><a href="#l-04">ALG-04 Speicherbedarf</a></li>
+    <li><a href="#l-05">ALG-05 Sortieren</a></li>
+    <li><a href="#l-06">ALG-06 Zeichenketten</a></li>
+    <li><a href="#l-07">ALG-07 Exceptions</a></li>
+    <li><a href="#l-08">ALG-08 Rekursion</a></li>
+    <li><a href="#l-09">ALG-09 Nebenläufigkeit</a></li>
+  </ol>
+</nav>
+
+<div class="info">
+  <span class="kastentitel">Hinweise zur Bewertung</span>
+  Wie in den IHK-Lösungshinweisen gilt: Andere sach- und fachgerechte Lösungen (andere Schleifenart, Java- oder C#-Syntax, Struktogramm) werden mit voller Punktzahl bewertet. Syntaxfehler kosten in der Regel keine Punkte, Logikfehler schon. Die Java-Ausgaben unten stammen aus einem echten Programmlauf (JDK 21).
+</div>
+
+<section class="teil" id="loesungen">
+  <h2>Lösungen</h2>
+  <!-- ===================== ALG-01 ===================== -->
+  <h3 id="l-01">ALG-01 · Algorithmus in Pseudocode schreiben</h3>
+
+  <div class="loesung" id="L-ALG-01-1">
+    <div class="kopf">Aufgabe ALG-01.1 · 6 Punkte</div>
+    <h4>a) Lücken (5 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:12%">Lücke</th><th>Inhalt</th></tr>
+      <tr><td>(1)</td><td><code>0</code></td></tr>
+      <tr><td>(2)</td><td><code>raeder.size() - 1</code></td></tr>
+      <tr><td>(3)</td><td><code>r.getAkkuStand() &lt; 25 und nicht r.isDefekt()</code></td></tr>
+      <tr><td>(4)</td><td><code>anzahl := anzahl + 1</code></td></tr>
+      <tr><td>(5)</td><td><code>anzahl</code></td></tr>
+    </table>
+    <pre class="pseudo">funktion zaehleLadebedarf(raeder : List&lt;Fahrrad&gt;) : integer
+  anzahl : integer := 0
+  zähle i von 0 bis raeder.size() - 1
+    r : Fahrrad := raeder.get(i)
+    wenn r.getAkkuStand() &lt; 25 und nicht r.isDefekt() dann
+      anzahl := anzahl + 1
+    Ende wenn
+  Ende zähle
+  rückgabe anzahl
+Ende funktion</pre>
+    <h4>b) Ergebnis (1 P)</h4>
+    <p>Die Funktion liefert <strong>3</strong> (Räder 102 mit 15 %, 104 mit 22 % und 107 mit 8 %). Rad 110 hat 28 % (nicht unter 25), Rad 103 ist defekt, wird aber schon wegen 60 % nicht gezählt.</p>
+    <p class="codelabel">Java · Aufgabe_ALG_01_1.java (Auszug)</p>
+    <pre class="java">// Lösung ALG-01.1: zählt einsatzfähige (nicht defekte) Räder mit Akkustand unter 25 %
+static int zaehleLadebedarf(List&lt;Fahrrad&gt; raeder) {
+    int anzahl = 0;                                       // Lücke 1
+    for (int i = 0; i &lt;= raeder.size() - 1; i++) {        // Lücke 2
+        Fahrrad r = raeder.get(i);
+        if (r.getAkkuStand() &lt; 25 &amp;&amp; !r.isDefekt()) {     // Lücke 3
+            anzahl = anzahl + 1;                          // Lücke 4
+        }
+    }
+    return anzahl;                                        // Lücke 5
+}</pre>
+    <p class="codelabel">Ausgabe</p>
+    <pre class="ausgabe">zaehleLadebedarf(Testdaten) = 3
+Betroffene Räder: 102 104 107
+Leere Liste -&gt; 0</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> je Lücke 1 P; Lücke (3) nur mit beiden Teilbedingungen. Gleichwertig: <code>r.isDefekt() = false</code>, Java-Schreibweise <code>anzahl++</code>, <code>i &lt; raeder.size()</code> bei Java-Schleifen. b) 1 P für Wert und Radnummern.</div>
+    <p><strong>Erklärung:</strong> Klassisches Zählmuster. „unter 25 %“ heißt <code>&lt;</code>, nicht <code>&lt;=</code>. Die Schleife läuft bis <code>size() - 1</code>, weil der letzte gültige Index eins kleiner als die Anzahl ist.</p>
+  </div>
+
+  <div class="loesung" id="L-ALG-01-2">
+    <div class="kopf">Aufgabe ALG-01.2 · 10 Punkte</div>
+    <h4>a) einsatzbereit (5 P)</h4>
+    <pre class="pseudo">funktion einsatzbereit(raeder : List&lt;Fahrrad&gt;, typ : string,
+                       minAkku : integer) : List&lt;Fahrrad&gt;
+  ergebnis : List&lt;Fahrrad&gt; := new List&lt;Fahrrad&gt;()
+  zähle i von 0 bis raeder.size() - 1
+    r : Fahrrad := raeder.get(i)
+    wenn r.getTyp() = typ und nicht r.isDefekt() und r.getAkkuStand() &gt;= minAkku dann
+      ergebnis.add(r)
+    Ende wenn
+  Ende zähle
+  rückgabe ergebnis
+Ende funktion</pre>
+    <h4>b) durchschnittsStrecke (5 P)</h4>
+    <pre class="pseudo">funktion durchschnittsStrecke(ausleihen : List&lt;Ausleihe&gt;, stationNr : integer) : double
+  summe : double := 0.0
+  anzahl : integer := 0
+  zähle i von 0 bis ausleihen.size() - 1
+    a : Ausleihe := ausleihen.get(i)
+    wenn a.getStartStation() = stationNr dann
+      summe := summe + a.getStrecke()
+      anzahl := anzahl + 1
+    Ende wenn
+  Ende zähle
+  wenn anzahl = 0 dann
+    rückgabe 0.0
+  Ende wenn
+  rückgabe summe / anzahl
+Ende funktion</pre>
+    <p class="codelabel">Java · Aufgabe_ALG_01_2.java (Auszug)</p>
+    <pre class="java">// a) alle einsatzbereiten Räder eines Typs mit Mindest-Akkustand in eine neue Liste
+static List&lt;Fahrrad&gt; einsatzbereit(List&lt;Fahrrad&gt; raeder, String typ, int minAkku) {
+    List&lt;Fahrrad&gt; ergebnis = new ArrayList&lt;&gt;();
+    for (int i = 0; i &lt; raeder.size(); i++) {
+        Fahrrad r = raeder.get(i);
+        if (r.getTyp().equals(typ) &amp;&amp; !r.isDefekt() &amp;&amp; r.getAkkuStand() &gt;= minAkku) {
+            ergebnis.add(r);
+        }
+    }
+    return ergebnis;
+}
+
+// b) durchschnittliche Strecke aller Ausleihen, die an einer Station beginnen
+static double durchschnittsStrecke(List&lt;Ausleihe&gt; ausleihen, int stationNr) {
+    double summe = 0.0;
+    int anzahl = 0;
+    for (int i = 0; i &lt; ausleihen.size(); i++) {
+        Ausleihe a = ausleihen.get(i);
+        if (a.getStartStation() == stationNr) {
+            summe = summe + a.getStrecke();
+            anzahl = anzahl + 1;
+        }
+    }
+    if (anzahl == 0) {
+        return 0.0;                 // keine Division durch 0
+    }
+    return summe / anzahl;
+}</pre>
+    <p class="codelabel">Ausgabe</p>
+    <pre class="ausgabe">a) einsatzbereit(raeder, "E-Bike", 30):
+   Rad 101 (E-Bike, Akku 85 %)
+   Rad 105 (E-Bike, Akku 95 %)
+   Rad 109 (E-Bike, Akku 55 %)
+   Rad 111 (E-Bike, Akku 90 %)
+   Rad 112 (E-Bike, Akku 33 %)
+   einsatzbereit(raeder, "Lastenrad", 30): [Rad 106 (Lastenrad, Akku 40 %)]
+b) durchschnittsStrecke je Startstation:
+   Station 1: 4,6000 km
+   Station 2: 2,1000 km
+   Station 3: 6,9667 km
+   Station 4: 5,0000 km
+   Station 5: 10,7500 km
+   Station 6: 7,9000 km
+   Station 7: 0,0000 km</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) neue Ergebnisliste anlegen 1 P, Schleife über alle Räder 1 P, vollständige Bedingung (Typ, nicht defekt, <code>&gt;= minAkku</code>) 2 P, <code>add</code> und Rückgabe 1 P. b) Summe und Zähler initialisiert 1 P, Schleife 1 P, Bedingung mit Aufsummieren und Zählen 1 P, Behandlung „keine Ausleihe“ 1 P, Rückgabe des Durchschnitts 1 P. In Java ist der Stringvergleich mit <code>equals</code> korrekt; im Pseudocode wird <code>=</code> akzeptiert (Anlage 5).</div>
+    <p><strong>Erklärung:</strong> a) ist das Filtermuster – die Originalliste bleibt unverändert, weil nur gelesen und in eine neue Liste geschrieben wird. b) kombiniert Summe und Zähler; ohne die Abfrage <code>anzahl = 0</code> würde für eine Station ohne Ausleihen durch 0 geteilt (in Java mit <code>double</code> ergibt das <code>NaN</code>, also ein sinnloses Ergebnis ohne Fehlermeldung).</p>
+  </div>
+
+  <div class="loesung" id="L-ALG-01-3">
+    <div class="kopf">Aufgabe ALG-01.3 · 30 Punkte</div>
+    <h4>a) langeFahrtenJeStation (6 P)</h4>
+    <pre class="pseudo">funktion langeFahrtenJeStation(ausleihen : List&lt;Ausleihe&gt;,
+                               anzahlStationen : integer) : integer[]
+  ergebnis : integer[] := new integer[anzahlStationen]     // alle Elemente sind 0
+  zähle i von 0 bis ausleihen.size() - 1
+    a : Ausleihe := ausleihen.get(i)
+    wenn a.getDauer() &gt; 60 dann
+      index : integer := a.getStartStation() - 1            // Station 1 -&gt; Index 0
+      ergebnis[index] := ergebnis[index] + 1
+    Ende wenn
+  Ende zähle
+  rückgabe ergebnis
+Ende funktion</pre>
+    <div class="bewertung"><strong>Bewertung a):</strong> Array mit <code>anzahlStationen</code> Elementen angelegt (mit 0 belegt) 1 P, Schleife über alle Ausleihen 1 P, Bedingung <code>&gt; 60</code> 1 P, Index <code>startStation - 1</code> 2 P, Rückgabe 1 P. Wer das Array mit <code>anzahlStationen + 1</code> Elementen anlegt und Index 0 ungenutzt lässt, erfüllt die Vorgabe „Index i für Station i + 1“ nicht (−2 P).</div>
+
+    <h4>b) erzeugeStatistik (10 P)</h4>
+    <pre class="pseudo">funktion erzeugeStatistik(ausleihen : List&lt;Ausleihe&gt;) : List&lt;KundenStatistik&gt;
+  statistik : List&lt;KundenStatistik&gt; := new List&lt;KundenStatistik&gt;()
+  zähle i von 0 bis ausleihen.size() - 1
+    kundenNr : integer := ausleihen.get(i).getKundenNr()
+    vorhanden : boolean := false
+    zähle j von 0 bis statistik.size() - 1
+      wenn statistik.get(j).getKundenNr() = kundenNr dann
+        vorhanden := true
+      Ende wenn
+    Ende zähle
+    wenn nicht vorhanden dann
+      statistik.add(new KundenStatistik(kundenNr))
+    Ende wenn
+  Ende zähle
+  rückgabe statistik
+Ende funktion</pre>
+    <p>Gleichwertige Alternative mit Hilfsliste: <code>nummern : List&lt;integer&gt;</code> mitführen und mit <code>wenn nicht nummern.contains(kundenNr) dann nummern.add(kundenNr); statistik.add(new KundenStatistik(kundenNr))</code> arbeiten.</p>
+    <div class="bewertung"><strong>Bewertung b):</strong> neue Liste 1 P, äußere Schleife über alle Ausleihen 2 P, Prüfung „Kundennummer schon vorhanden“ (innere Schleife oder Hilfsliste mit <code>contains</code>) 4 P, Objekt mit Konstruktor erzeugen und hinzufügen 2 P, Rückgabe 1 P. <strong>Nicht</strong> korrekt: <code>statistik.contains(new KundenStatistik(kundenNr))</code> – ein neu erzeugtes Objekt ist nie in der Liste enthalten (Anlage 2: Objekte sind nur gleich, wenn es dasselbe Objekt ist), dadurch entstehen Duplikate (−3 P).</div>
+
+    <h4>c) berechneStatistik (14 P)</h4>
+    <pre class="pseudo">funktion berechneStatistik(ausleihen : List&lt;Ausleihe&gt;, statistik : List&lt;KundenStatistik&gt;,
+                           von : Datum, bis : Datum) : void
+  zähle i von 0 bis statistik.size() - 1
+    ks : KundenStatistik := statistik.get(i)
+    anzahl : integer := 0                        // für jeden Kunden neu
+    summe : integer := 0
+    zähle j von 0 bis ausleihen.size() - 1
+      a : Ausleihe := ausleihen.get(j)
+      wenn a.getKundenNr() = ks.getKundenNr()
+           und a.getDatum().liegtZwischen(von, bis) dann
+        anzahl := anzahl + 1
+        summe := summe + a.getDauer()
+      Ende wenn
+    Ende zähle
+    ks.setAnzahl(anzahl)
+    ks.setGesamtDauer(summe)
+    wenn anzahl &gt; 0 dann
+      ks.setDurchschnitt(summe / anzahl)       // Kommazahl! Java: (double) summe / anzahl
+    sonst
+      ks.setDurchschnitt(0.0)
+    Ende wenn
+  Ende zähle
+Ende funktion</pre>
+    <div class="bewertung"><strong>Bewertung c):</strong> äußere Schleife über <code>statistik</code> 2 P, Zähler und Summe je Kunde (innerhalb der äußeren Schleife) auf 0 gesetzt 2 P, innere Schleife über <code>ausleihen</code> 2 P, Bedingung Kundennummer 1 P, Zeitraum mit <code>liegtZwischen</code> 2 P, Zählen und Aufsummieren 2 P, Werte per Setter gesetzt 1 P, Durchschnitt mit Behandlung „0 Ausleihen“ 2 P. Gleichwertig: ein Durchlauf über die Ausleihen, bei dem jeweils das passende Statistikobjekt gesucht und hochgezählt wird, danach eine Schleife für die Durchschnitte.</div>
+
+    <p class="codelabel">Java · Aufgabe_ALG_01_3.java (Auszug)</p>
+    <pre class="java">// a) Anzahl der Fahrten über 60 Minuten je Startstation; Index = stationNr - 1
+static int[] langeFahrtenJeStation(List&lt;Ausleihe&gt; ausleihen, int anzahlStationen) {
+    int[] ergebnis = new int[anzahlStationen];          // alle Elemente sind 0
+    for (int i = 0; i &lt; ausleihen.size(); i++) {
+        Ausleihe a = ausleihen.get(i);
+        if (a.getDauer() &gt; 60) {
+            int index = a.getStartStation() - 1;
+            ergebnis[index] = ergebnis[index] + 1;
+        }
+    }
+    return ergebnis;
+}
+
+// b) für jede Kundennummer genau ein KundenStatistik-Objekt (Werte noch 0)
+static List&lt;KundenStatistik&gt; erzeugeStatistik(List&lt;Ausleihe&gt; ausleihen) {
+    List&lt;KundenStatistik&gt; statistik = new ArrayList&lt;&gt;();
+    for (int i = 0; i &lt; ausleihen.size(); i++) {
+        int kundenNr = ausleihen.get(i).getKundenNr();
+        boolean vorhanden = false;
+        int j = 0;
+        while (j &lt; statistik.size() &amp;&amp; !vorhanden) {
+            if (statistik.get(j).getKundenNr() == kundenNr) {
+                vorhanden = true;
+            }
+            j = j + 1;
+        }
+        if (!vorhanden) {
+            statistik.add(new KundenStatistik(kundenNr));
+        }
+    }
+    return statistik;
+}
+
+// c) Werte je Kunde für den Zeitraum von..bis berechnen und setzen
+static void berechneStatistik(List&lt;Ausleihe&gt; ausleihen, List&lt;KundenStatistik&gt; statistik,
+                              Datum von, Datum bis) {
+    for (int i = 0; i &lt; statistik.size(); i++) {
+        KundenStatistik ks = statistik.get(i);
+        int anzahl = 0;                                   // für jeden Kunden neu!
+        int summe = 0;
+        for (int j = 0; j &lt; ausleihen.size(); j++) {
+            Ausleihe a = ausleihen.get(j);
+            if (a.getKundenNr() == ks.getKundenNr()
+                    &amp;&amp; a.getDatum().liegtZwischen(von, bis)) {
+                anzahl = anzahl + 1;
+                summe = summe + a.getDauer();
+            }
+        }
+        ks.setAnzahl(anzahl);
+        ks.setGesamtDauer(summe);
+        if (anzahl &gt; 0) {
+            ks.setDurchschnitt((double) summe / anzahl);   // keine Ganzzahldivision
+        } else {
+            ks.setDurchschnitt(0.0);
+        }
+    }
+}</pre>
+    <p class="codelabel">Ausgabe</p>
+    <pre class="ausgabe">a) langeFahrtenJeStation(ausleihen, 6) = [0, 0, 1, 0, 1, 1]
+b) erzeugeStatistik: 5 Objekte
+   Kunde 5001: anzahl=0, gesamtDauer=0, durchschnitt=0,00
+   Kunde 5002: anzahl=0, gesamtDauer=0, durchschnitt=0,00
+   Kunde 5003: anzahl=0, gesamtDauer=0, durchschnitt=0,00
+   Kunde 5004: anzahl=0, gesamtDauer=0, durchschnitt=0,00
+   Kunde 5005: anzahl=0, gesamtDauer=0, durchschnitt=0,00
+c) berechneStatistik(..., 2026-09-16, 2026-09-17):
+   Kunde 5001: anzahl=1, gesamtDauer=26, durchschnitt=26,00
+   Kunde 5002: anzahl=0, gesamtDauer=0, durchschnitt=0,00
+   Kunde 5003: anzahl=2, gesamtDauer=98, durchschnitt=49,00
+   Kunde 5004: anzahl=1, gesamtDauer=33, durchschnitt=33,00
+   Kunde 5005: anzahl=1, gesamtDauer=9, durchschnitt=9,00
+   Kontrolle Gesamtzeitraum 2026-09-14 bis 2026-09-17:
+   Kunde 5001: anzahl=3, gesamtDauer=66, durchschnitt=22,00
+   Kunde 5002: anzahl=2, gesamtDauer=76, durchschnitt=38,00
+   Kunde 5003: anzahl=3, gesamtDauer=173, durchschnitt=57,67
+   Kunde 5004: anzahl=2, gesamtDauer=128, durchschnitt=64,00
+   Kunde 5005: anzahl=2, gesamtDauer=40, durchschnitt=20,00</pre>
+    <p><strong>Erklärung:</strong> Die Aufgabe kombiniert drei Grundmuster: a) Ergebnis-Array „je Station“ (wie W24 „je Strecke“), b) eindeutige Liste (wie S26 a), c) verschachtelte Schleifen mit Summe/Durchschnitt und Zeitraumfilter (wie S26 b). Die häufigsten Punktverluste: Zähler und Summe nur einmal vor der äußeren Schleife initialisiert (dann summieren sich die Werte über alle Kunden auf), Ganzzahldivision (98 / 2 ginge gut, 173 / 3 würde in Java 57 statt 57,67 ergeben) und Division durch 0 bei Kunde 5002, der im Zeitraum nichts ausgeliehen hat.</p>
+  </div>
+
+  <!-- ===================== ALG-02 ===================== -->
+  <h3 id="l-02">ALG-02 · Arrays und Listen durchlaufen</h3>
+
+  <div class="loesung" id="L-ALG-02-1">
+    <div class="kopf">Aufgabe ALG-02.1 · 5 Punkte</div>
+    <p><strong>a)</strong> (je 1 P, zwei davon) Ein Array hat eine feste Größe, die beim Anlegen festgelegt wird; eine Liste wächst und schrumpft dynamisch. · Bei Arrays greift man mit <code>feld[i]</code> zu und fragt die Länge mit <code>length</code> ab, bei Listen über Methoden (<code>get(i)</code>, <code>size()</code>). · Listen bieten Methoden zum Einfügen und Entfernen (<code>add</code>, <code>remove</code>), beim Array muss man dafür umkopieren. · In Java kann ein Array primitive Typen (<code>int</code>) speichern, eine Liste nur Objekte (<code>Integer</code>).</p>
+    <p><strong>b)</strong> kleinster Index 0, größter Index 23. (1 P)</p>
+    <p><strong>c)</strong> Index 24 existiert nicht. Java löst zur Laufzeit eine <code>ArrayIndexOutOfBoundsException</code> aus; wird sie nicht behandelt, bricht das Programm ab. Das Array wird <em>nicht</em> automatisch vergrößert. (1 P)</p>
+    <p><strong>d)</strong> 7 · 24 = 168 Elemente; Zugriff: <code>zaehler[4][17]</code>. (1 P)</p>
+    <p class="codelabel">Java · Aufgabe_ALG_02_1.java (Auszug)</p>
+    <pre class="java">public static void main(String[] args) {
+    int[] belegung = new int[24];
+    System.out.println("belegung.length = " + belegung.length
+            + ", kleinster Index = 0, größter Index = " + (belegung.length - 1));
+    try {
+        belegung[24] = 5;
+    } catch (ArrayIndexOutOfBoundsException e) {
+        System.out.println("belegung[24] = 5  -&gt;  " + e.getClass().getSimpleName());
+        System.out.println("   Meldung: " + e.getMessage());
+    }
+
+    int[][] zaehler = new int[7][24];
+    System.out.println("zaehler: " + zaehler.length + " Zeilen x " + zaehler[0].length
+            + " Spalten = " + (zaehler.length * zaehler[0].length) + " Elemente");
+    zaehler[4][17] = 12;   // Freitag (Index 4), 17-Uhr-Stunde
+    System.out.println("zaehler[4][17] = " + zaehler[4][17]);
+
+    List&lt;Integer&gt; liste = new ArrayList&lt;&gt;();
+    liste.add(7);
+    liste.add(3);
+    liste.add(9);
+    System.out.println("Liste wächst dynamisch: size() = " + liste.size()
+            + " " + liste);
+}</pre>
+    <p class="codelabel">Ausgabe</p>
+    <pre class="ausgabe">belegung.length = 24, kleinster Index = 0, größter Index = 23
+belegung[24] = 5  -&gt;  ArrayIndexOutOfBoundsException
+   Meldung: Index 24 out of bounds for length 24
+zaehler: 7 Zeilen x 24 Spalten = 168 Elemente
+zaehler[4][17] = 12
+Liste wächst dynamisch: size() = 3 [7, 3, 9]</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) 2 × 1 P für zwei verschiedene, richtig beschriebene Unterschiede; b)–d) je 1 P (d nur mit Anzahl und Zugriff).</div>
+  </div>
+
+  <div class="loesung" id="L-ALG-02-2">
+    <div class="kopf">Aufgabe ALG-02.2 · 10 Punkte</div>
+    <h4>a) summeJeTag (4 P)</h4>
+    <pre class="pseudo">funktion summeJeTag(daten : integer[][]) : integer[]
+  summen : integer[] := new integer[daten.length]
+  zähle tag von 0 bis daten.length - 1
+    summe : integer := 0
+    zähle f von 0 bis daten[tag].length - 1
+      summe := summe + daten[tag][f]
+    Ende zähle
+    summen[tag] := summe
+  Ende zähle
+  rückgabe summen
+Ende funktion</pre>
+    <h4>b) summeJeZeitfenster (4 P)</h4>
+    <pre class="pseudo">funktion summeJeZeitfenster(daten : integer[][]) : integer[]
+  anzahlFenster : integer := daten[0].length
+  summen : integer[] := new integer[anzahlFenster]
+  zähle f von 0 bis anzahlFenster - 1
+    summe : integer := 0
+    zähle tag von 0 bis daten.length - 1
+      summe := summe + daten[tag][f]
+    Ende zähle
+    summen[f] := summe
+  Ende zähle
+  rückgabe summen
+Ende funktion</pre>
+    <p>Alternative für b): Ergebnis-Array anlegen und in beliebiger Schleifenreihenfolge <code>summen[f] := summen[f] + daten[tag][f]</code> rechnen.</p>
+    <h4>c) Rückgabewerte (2 P)</h4>
+    <p><code>summeJeTag</code> = [57, 58, 61, 63, 68, 68, 55] · <code>summeJeZeitfenster</code> = [17, 73, 74, 95, 126, 45] (Kontrolle: beide ergeben zusammen 430 Ausleihen).</p>
+    <p class="codelabel">Java · Aufgabe_ALG_02_2.java (Auszug)</p>
+    <pre class="java">// a) Summe je Zeile (= je Wochentag)
+static int[] summeJeTag(int[][] daten) {
+    int[] summen = new int[daten.length];
+    for (int tag = 0; tag &lt; daten.length; tag++) {
+        int summe = 0;
+        for (int f = 0; f &lt; daten[tag].length; f++) {
+            summe = summe + daten[tag][f];
+        }
+        summen[tag] = summe;
+    }
+    return summen;
+}
+
+// b) Summe je Spalte (= je Zeitfenster)
+static int[] summeJeZeitfenster(int[][] daten) {
+    int anzahlFenster = daten[0].length;
+    int[] summen = new int[anzahlFenster];
+    for (int f = 0; f &lt; anzahlFenster; f++) {
+        int summe = 0;
+        for (int tag = 0; tag &lt; daten.length; tag++) {
+            summe = summe + daten[tag][f];
+        }
+        summen[f] = summe;
+    }
+    return summen;
+}</pre>
+    <p class="codelabel">Ausgabe</p>
+    <pre class="ausgabe">a) summeJeTag         = [57, 58, 61, 63, 68, 68, 55]
+b) summeJeZeitfenster = [17, 73, 74, 95, 126, 45]
+Kontrolle: Gesamtsumme über Zeilen = 430, über Spalten = 430</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) und b) je: Ergebnis-Array in richtiger Größe 1 P, verschachtelte Schleifen mit richtigen Grenzen 1 P, Summe je Zeile/Spalte zurückgesetzt und gespeichert 1 P, Rückgabe 1 P. Feste Grenzen 7 bzw. 6 in b) −1 P. c) je Array 1 P.</div>
+    <p><strong>Erklärung:</strong> Für Spaltensummen läuft die äußere Schleife über die Spalten (<code>daten[0].length</code>), die innere über die Zeilen (<code>daten.length</code>). Der häufigste Fehler ist, beide Grenzen mit <code>daten.length</code> zu bilden – bei 7 × 6 führt das zu einem Indexfehler.</p>
+  </div>
+
+  <div class="loesung" id="L-ALG-02-3">
+    <div class="kopf">Aufgabe ALG-02.3 · 16 Punkte</div>
+    <h4>a) genutzteRaeder (5 P)</h4>
+    <pre class="pseudo">funktion genutzteRaeder(ausleihen : List&lt;Ausleihe&gt;) : List&lt;integer&gt;
+  ergebnis : List&lt;integer&gt; := new List&lt;integer&gt;()
+  zähle i von 0 bis ausleihen.size() - 1
+    radNr : integer := ausleihen.get(i).getRadNr()
+    wenn nicht ergebnis.contains(radNr) dann
+      ergebnis.add(radNr)
+    Ende wenn
+  Ende zähle
+  rückgabe ergebnis
+Ende funktion</pre>
+    <h4>b) Ergebnis (1 P)</h4>
+    <p>[101, 105, 106, 104, 110, 109, 111, 107, 112, 102] – 10 Radnummern; 101 und 106 kommen in den Ausleihen je zweimal vor, stehen aber nur einmal in der Liste.</p>
+    <h4>c) entferneDefekte (7 P)</h4>
+    <pre class="pseudo">funktion entferneDefekte(raeder : List&lt;Fahrrad&gt;) : integer
+  entfernt : integer := 0
+  i : integer := raeder.size() - 1            // rückwärts durchlaufen
+  solange i &gt;= 0
+    wenn raeder.get(i).isDefekt() dann
+      raeder.remove(i)
+      entfernt := entfernt + 1
+    Ende wenn
+    i := i - 1
+  Ende solange
+  rückgabe entfernt
+Ende funktion</pre>
+    <p>Gleichwertig vorwärts, wenn <code>i</code> nur erhöht wird, falls <em>nichts</em> entfernt wurde:</p>
+    <pre class="pseudo">i : integer := 0
+solange i &lt; raeder.size()
+  wenn raeder.get(i).isDefekt() dann
+    raeder.remove(i)                // i bleibt: Nachfolger steht jetzt auf Position i
+    entfernt := entfernt + 1
+  sonst
+    i := i + 1
+  Ende wenn
+Ende solange</pre>
+    <p>Für die Testdaten liefert die Funktion 2 (Räder 103 und 108 werden entfernt).</p>
+    <h4>d) Ursache (3 P)</h4>
+    <p>Nach <code>remove(1)</code> (Rad 108) rücken alle folgenden Räder eine Position nach vorn: 103 steht nun auf Index 1, 109 auf Index 2. Die Schleife erhöht <code>i</code> aber auf 2 und prüft als Nächstes 109. Rad 103 wird <strong>übersprungen</strong> und bleibt in der Liste; das Ergebnis ist [107, 103, 109] mit Rückgabe 1 statt 2. Das passiert immer, wenn zwei zu entfernende Elemente direkt hintereinander stehen.</p>
+    <p class="codelabel">Java · Aufgabe_ALG_02_3.java (Auszug)</p>
+    <pre class="java">// a) jede Radnummer genau einmal, in der Reihenfolge des ersten Auftretens
+static List&lt;Integer&gt; genutzteRaeder(List&lt;Ausleihe&gt; ausleihen) {
+    List&lt;Integer&gt; ergebnis = new ArrayList&lt;&gt;();
+    for (int i = 0; i &lt; ausleihen.size(); i++) {
+        int radNr = ausleihen.get(i).getRadNr();
+        if (!ergebnis.contains(radNr)) {
+            ergebnis.add(radNr);
+        }
+    }
+    return ergebnis;
+}
+
+// b) defekte Räder entfernen - rückwärts, damit kein Element übersprungen wird
+static int entferneDefekte(List&lt;Fahrrad&gt; raeder) {
+    int entfernt = 0;
+    for (int i = raeder.size() - 1; i &gt;= 0; i--) {
+        if (raeder.get(i).isDefekt()) {
+            raeder.remove(i);            // remove(int index)
+            entfernt = entfernt + 1;
+        }
+    }
+    return entfernt;
+}</pre>
+    <p class="codelabel">Ausgabe (inklusive der fehlerhaften Variante aus d)</p>
+    <pre class="ausgabe">a) genutzteRaeder = [101, 105, 106, 104, 110, 109, 111, 107, 112, 102]
+b) entferneDefekte(Testdaten) = 2, Rest: [101, 102, 104, 105, 106, 107, 109, 110, 111, 112]
+c) richtig (rückwärts) auf [107, 108d, 103d, 109]: entfernt 2 -&gt; [107, 109]
+   falsch (vorwärts, i++)  auf [107, 108d, 103d, 109]: entfernt 1 -&gt; [107, 103, 109]</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) neue Liste 1 P, Schleife 1 P, Duplikatprüfung mit <code>contains</code> 2 P, <code>add</code> und Rückgabe 1 P. b) 1 P (Reihenfolge muss stimmen). c) Zähler 1 P, Durchlauf ohne Überspringen (rückwärts oder bedingtes Erhöhen) 3 P, Prüfung <code>isDefekt()</code> mit <code>remove(i)</code> 2 P, Rückgabe 1 P. Eine Lösung, die eine neue Liste ohne defekte Räder zurückgibt, erfüllt die Aufgabe nicht (übergebene Liste soll verändert werden, Rückgabe ist die Anzahl) – höchstens 3 P. d) Index-Verschiebung erkannt 2 P, am Beispiel konkret erläutert 1 P.</div>
+  </div>
+
+  <!-- ===================== ALG-03 ===================== -->
+  <h3 id="l-03">ALG-03 · Minimum/Maximum, lineare Suche</h3>
+
+  <div class="loesung" id="L-ALG-03-1">
+    <div class="kopf">Aufgabe ALG-03.1 · 5 Punkte</div>
+    <p><strong>a)</strong> Die Funktion liefert <strong>0</strong> (richtig wäre 15, Rad 102). (1 P)</p>
+    <p><strong>b)</strong> <code>min</code> wird mit 0 initialisiert. Da kein Akkustand kleiner als 0 ist, ist die Bedingung <code>raeder[i].getAkkuStand() &lt; min</code> nie erfüllt; die Funktion gibt immer den Startwert 0 zurück. Außerdem wird <code>raeder[0]</code> nie betrachtet, weil die Schleife bei 1 beginnt – das ist nur richtig, wenn das erste Element als Startwert dient. (2 P)</p>
+    <p><strong>c)</strong> <code>min : integer := raeder[0].getAkkuStand()</code> (1 P)</p>
+    <p><strong>d)</strong> Das Array muss mindestens ein Element enthalten (darf nicht leer bzw. <code>null</code> sein), sonst führt der Zugriff auf <code>raeder[0]</code> zu einem Laufzeitfehler. (1 P)</p>
+    <p class="codelabel">Java · Aufgabe_ALG_03_1.java (Auszug)</p>
+    <pre class="java">// gegebene, FEHLERHAFTE Funktion
+static int minAkkuFalsch(Fahrrad[] raeder) {
+    int min = 0;
+    for (int i = 1; i &lt;= raeder.length - 1; i++) {
+        if (raeder[i].getAkkuStand() &lt; min) {
+            min = raeder[i].getAkkuStand();
+        }
+    }
+    return min;
+}
+
+// korrigierte Funktion: Initialisierung mit dem ersten Element
+static int minAkku(Fahrrad[] raeder) {
+    int min = raeder[0].getAkkuStand();
+    for (int i = 1; i &lt;= raeder.length - 1; i++) {
+        if (raeder[i].getAkkuStand() &lt; min) {
+            min = raeder[i].getAkkuStand();
+        }
+    }
+    return min;
+}</pre>
+    <p class="codelabel">Ausgabe</p>
+    <pre class="ausgabe">fehlerhaft: minAkkuFalsch(101..105) = 0
+korrigiert: minAkku(101..105)      = 15
+leeres Array -&gt; ArrayIndexOutOfBoundsException (Vorbedingung: mindestens 1 Element)</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> b) 1 P für die Ursache (Startwert 0), 1 P für die Wirkung (Bedingung nie wahr, immer 0). c) Ein „großer Startwert“ wie 101 reicht hier <strong>nicht</strong>, weil die Schleife bei 1 beginnt und Element 0 dann fehlen würde (0 P), es sei denn, auch die Schleife wird auf 0 geändert – das war ausgeschlossen.</div>
+  </div>
+
+  <div class="loesung" id="L-ALG-03-2">
+    <div class="kopf">Aufgabe ALG-03.2 · 10 Punkte</div>
+    <h4>a) findeRad (5 P)</h4>
+    <pre class="pseudo">funktion findeRad(raeder : List&lt;Fahrrad&gt;, radNr : integer) : Fahrrad
+  gefunden : Fahrrad := null
+  i : integer := 0
+  solange i &lt; raeder.size() und gefunden = null
+    wenn raeder.get(i).getRadNr() = radNr dann
+      gefunden := raeder.get(i)
+    Ende wenn
+    i := i + 1
+  Ende solange
+  rückgabe gefunden                          // null, wenn nicht vorhanden
+Ende funktion</pre>
+    <p>Gleichwertig: Zählschleife mit <code>rückgabe raeder.get(i)</code> direkt beim Treffer und <code>rückgabe null</code> nach der Schleife.</p>
+    <h4>b) vollstesRad (5 P)</h4>
+    <pre class="pseudo">funktion vollstesRad(raeder : List&lt;Fahrrad&gt;, typ : string) : Fahrrad
+  bestes : Fahrrad := null
+  zähle i von 0 bis raeder.size() - 1
+    r : Fahrrad := raeder.get(i)
+    wenn r.getTyp() = typ und nicht r.isDefekt() dann
+      wenn bestes = null oder r.getAkkuStand() &gt; bestes.getAkkuStand() dann
+        bestes := r
+      Ende wenn
+    Ende wenn
+  Ende zähle
+  rückgabe bestes
+Ende funktion</pre>
+    <p class="codelabel">Java · Aufgabe_ALG_03_2.java (Auszug)</p>
+    <pre class="java">// a) lineare Suche mit Abbruch; null, wenn nicht gefunden
+static Fahrrad findeRad(List&lt;Fahrrad&gt; raeder, int radNr) {
+    Fahrrad gefunden = null;
+    int i = 0;
+    while (i &lt; raeder.size() &amp;&amp; gefunden == null) {
+        if (raeder.get(i).getRadNr() == radNr) {
+            gefunden = raeder.get(i);
+        }
+        i = i + 1;
+    }
+    return gefunden;
+}
+
+// b) nicht defektes Rad eines Typs mit dem höchsten Akkustand; null, wenn keines passt
+static Fahrrad vollstesRad(List&lt;Fahrrad&gt; raeder, String typ) {
+    Fahrrad bestes = null;
+    for (int i = 0; i &lt; raeder.size(); i++) {
+        Fahrrad r = raeder.get(i);
+        if (r.getTyp().equals(typ) &amp;&amp; !r.isDefekt()) {
+            if (bestes == null || r.getAkkuStand() &gt; bestes.getAkkuStand()) {
+                bestes = r;
+            }
+        }
+    }
+    return bestes;
+}</pre>
+    <p class="codelabel">Ausgabe</p>
+    <pre class="ausgabe">a) findeRad(raeder, 109) = Rad 109 (E-Bike, Akku 55 %)
+   findeRad(raeder, 200) = null
+b) vollstesRad(raeder, "Lastenrad") = Rad 106 (Lastenrad, Akku 40 %)
+   vollstesRad(raeder, "E-Bike")    = Rad 105 (E-Bike, Akku 95 %)
+   vollstesRad(raeder, "Tandem")    = null</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Schleife 1 P, Vergleich der Radnummer 1 P, Abbruch nach dem Fund 2 P, <code>null</code> bei Nichtfinden 1 P. b) Startwert <code>null</code> (bzw. erstes passendes Rad) 1 P, Bedingung Typ und nicht defekt 1 P, Maximumvergleich 2 P, Rückgabe des Objekts 1 P.</div>
+    <p><strong>Erklärung:</strong> Bei b) ist die Falle der Startwert: Mit <code>raeder.get(0)</code> zu starten wäre falsch, weil Rad 101 ein E-Bike ist und bei der Suche nach Lastenrädern nicht in Frage kommt. Das defekte Lastenrad 103 hat zwar den höchsten Akkustand (60 %), richtig ist aber 106 (40 %).</p>
+  </div>
+
+  <div class="loesung" id="L-ALG-03-3">
+    <div class="kopf">Aufgabe ALG-03.3 · 20 Punkte</div>
+    <h4>a) Entfernung (2 P)</h4>
+    <p>d = √((6,0 − 4,0)² + (4,0 − 3,0)²) = √(4 + 1) = √5 ≈ <strong>2,24 km</strong></p>
+    <h4>b) naechsteStation (12 P)</h4>
+    <pre class="pseudo">funktion naechsteStation(stationen : List&lt;Station&gt;, kx : double, ky : double,
+                         benoetigt : integer) : Station
+  beste : Station := null
+  minEntfernung : double := 0.0                 // erst gültig, wenn beste &lt;&gt; null
+  zähle i von 0 bis stationen.size() - 1
+    s : Station := stationen.get(i)
+    verfuegbar : integer := 0                   // je Station neu zählen
+    zähle j von 0 bis s.getRaeder().size() - 1
+      r : Fahrrad := s.getRaeder().get(j)
+      wenn nicht r.isDefekt() und r.getAkkuStand() &gt;= 30 dann
+        verfuegbar := verfuegbar + 1
+      Ende wenn
+    Ende zähle
+    wenn verfuegbar &gt;= benoetigt dann
+      e : double := entfernung(kx, ky, s.getX(), s.getY())
+      wenn beste = null oder e &lt; minEntfernung dann
+        beste := s
+        minEntfernung := e
+      Ende wenn
+    Ende wenn
+  Ende zähle
+  rückgabe beste                                // null, wenn keine Station passt
+Ende funktion</pre>
+    <div class="bewertung"><strong>Bewertung b):</strong> äußere Schleife über Stationen 1 P, Zähler je Station zurückgesetzt 1 P, innere Schleife über <code>getRaeder()</code> 2 P, Bedingung „einsatzbereit“ (nicht defekt und ≥ 30 %) 2 P, Vergleich <code>&gt;= benoetigt</code> 1 P, Entfernung mit <code>entfernung(…)</code> 1 P, Minimumlogik mit korrektem Startwert 2 P, Station merken und zurückgeben (<code>null</code>, wenn keine passt) 2 P.</div>
+    <h4>c) Ergebnis für (4,0 | 3,0) und benoetigt = 2 (3 P)</h4>
+    <table class="kompakt">
+      <tr><th>Station</th><th>Entfernung</th><th>einsatzbereite Räder</th><th>kommt in Frage?</th></tr>
+      <tr><td>1 Hauptbahnhof</td><td>2,83 km</td><td>1 (101)</td><td>nein</td></tr>
+      <tr><td>2 Marktplatz</td><td>0,71 km</td><td>1 (105; 104 hat nur 22 %)</td><td>nein</td></tr>
+      <tr><td>3 Uni-Campus</td><td>2,24 km</td><td>1 (106; 107 zu leer, 108 defekt)</td><td>nein</td></tr>
+      <tr><td>4 Hafen</td><td>3,91 km</td><td>1 (109)</td><td>nein</td></tr>
+      <tr><td>5 Klinikum</td><td>4,12 km</td><td>0 (110 hat nur 28 %)</td><td>nein</td></tr>
+      <tr><td>6 Seepark</td><td>4,74 km</td><td>2 (111, 112)</td><td><strong>ja</strong></td></tr>
+    </table>
+    <p>Die Funktion liefert <strong>Station 6 Seepark</strong> (4,74 km). Die nächstgelegene Station 2 Marktplatz (0,71 km) hat nur ein einsatzbereites Rad und erfüllt die Bedingung „mindestens 2“ nicht; nur am Seepark stehen zwei einsatzbereite Räder.</p>
+    <h4>d) Startwert 0 (3 P)</h4>
+    <p>Entfernungen sind nie negativ. Mit <code>minEntfernung := 0</code> wäre <code>e &lt; minEntfernung</code> nie erfüllt (bei einer Bedingung ohne <code>beste = null</code>) – es würde nie eine Station gemerkt und die Funktion gäbe immer <code>null</code> zurück. Geeignete Alternativen: einen Merker verwenden (<code>beste = null oder e &lt; minEntfernung</code>, wie oben), mit einem sehr großen Wert starten (z. B. <code>Double.MAX_VALUE</code> bzw. größer als jede mögliche Entfernung) oder die erste passende Station als Startwert nehmen.</p>
+    <p class="codelabel">Java · Aufgabe_ALG_03_3.java (Auszug)</p>
+    <pre class="java">/** Hilfsfunktion aus Anlage 5: Luftlinie in km. */
+static double entfernung(double x1, double y1, double x2, double y2) {
+    return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+}
+
+// b) nächstgelegene Station mit mindestens "benoetigt" einsatzbereiten Rädern
+static Station naechsteStation(List&lt;Station&gt; stationen, double kx, double ky,
+                               int benoetigt) {
+    Station beste = null;
+    double minEntfernung = 0.0;              // wird erst gültig, wenn beste != null
+    for (int i = 0; i &lt; stationen.size(); i++) {
+        Station s = stationen.get(i);
+        int verfuegbar = 0;
+        for (int j = 0; j &lt; s.getRaeder().size(); j++) {
+            Fahrrad r = s.getRaeder().get(j);
+            if (!r.isDefekt() &amp;&amp; r.getAkkuStand() &gt;= 30) {
+                verfuegbar = verfuegbar + 1;
+            }
+        }
+        if (verfuegbar &gt;= benoetigt) {
+            double e = entfernung(kx, ky, s.getX(), s.getY());
+            if (beste == null || e &lt; minEntfernung) {
+                beste = s;
+                minEntfernung = e;
+            }
+        }
+    }
+    return beste;
+}</pre>
+    <p class="codelabel">Ausgabe</p>
+    <pre class="ausgabe">a) Entfernung Kunde (4,0|3,0) - Station 3 (6,0|4,0) = 2,24 km
+   Übersicht je Station:
+   Station 1 Hauptbahnhof   Entfernung 2,83 km, einsatzbereit: 1
+   Station 2 Marktplatz     Entfernung 0,71 km, einsatzbereit: 1
+   Station 3 Uni-Campus     Entfernung 2,24 km, einsatzbereit: 1
+   Station 4 Hafen          Entfernung 3,91 km, einsatzbereit: 1
+   Station 5 Klinikum       Entfernung 4,12 km, einsatzbereit: 0
+   Station 6 Seepark        Entfernung 4,74 km, einsatzbereit: 2
+b/c) naechsteStation(stationen, 4.0, 3.0, 1) = Station 2 Marktplatz
+b/c) naechsteStation(stationen, 4.0, 3.0, 2) = Station 6 Seepark
+b/c) naechsteStation(stationen, 4.0, 3.0, 3) = null</pre>
+    <div class="bewertung"><strong>Bewertung a), c), d):</strong> a) Ansatz 1 P, Ergebnis 1 P. c) Ergebnis 1 P, Begründung (Marktplatz nur 1 einsatzbereites Rad) 2 P. d) Begründung 2 P, Alternative 1 P.</div>
+    <p><strong>Erklärung:</strong> Typischer „nächster Nachbar mit Bedingung“ wie in W23 – zusätzlich muss je Station in einer inneren Schleife gezählt werden. Weil die erste Station die Bedingung nicht erfüllen muss, ist der Merker <code>beste = null</code> der sicherste Startwert.</p>
+  </div>
+
+  <!-- ===================== ALG-04 ===================== -->
+  <h3 id="l-04">ALG-04 · Speicherbedarf berechnen / Zahlensysteme</h3>
+
+  <div class="loesung" id="L-ALG-04-1">
+    <div class="kopf">Aufgabe ALG-04.1 · 6 Punkte</div>
+    <h4>a) Einheiten (2 P)</h4>
+    <table class="kompakt" style="width:auto">
+      <tr><th>Einheit</th><th>Anzahl Byte</th></tr>
+      <tr><td>1 KiB</td><td>2¹⁰ = 1 024</td></tr>
+      <tr><td>1 kB</td><td>10³ = 1 000</td></tr>
+      <tr><td>1 MiB</td><td>2²⁰ = 1 048 576</td></tr>
+      <tr><td>1 GB</td><td>10⁹ = 1 000 000 000</td></tr>
+    </table>
+    <h4>b) 202 umwandeln (2 P)</h4>
+    <pre>202 : 2 = 101  Rest 0
+101 : 2 =  50  Rest 1
+ 50 : 2 =  25  Rest 0
+ 25 : 2 =  12  Rest 1
+ 12 : 2 =   6  Rest 0
+  6 : 2 =   3  Rest 0
+  3 : 2 =   1  Rest 1
+  1 : 2 =   0  Rest 1      Reste von unten nach oben lesen
+
+202 (dezimal) = 1100 1010 (binär)
+Hex: 1100 = C, 1010 = A  -&gt;  202 = CA (hex)     Probe: 12 · 16 + 10 = 202</pre>
+    <h4>c) (1 P)</h4>
+    <p>7E (hex) = 7 · 16 + 14 = <strong>126</strong>; 1011 0110 (binär) = 128 + 32 + 16 + 4 + 2 = <strong>182</strong>.</p>
+    <h4>d) (1 P)</h4>
+    <p>2¹² = <strong>4 096</strong> verschiedene Werte (vorzeichenlos 0 bis 4 095).</p>
+    <p class="codelabel">Kontrollrechnung mit Java · Aufgabe_ALG_04_1.java · Ausgabe</p>
+    <pre class="ausgabe">a) 1 KiB = 1024 Byte, 1 kB = 1000 Byte, 1 MiB = 1048576 Byte, 1 GB = 1000000000 Byte
+b) 202 dezimal = 11001010 binär = CA hex
+   Divisionsrestverfahren 202:
+   202 : 2 = 101 Rest 0
+   101 : 2 = 50 Rest 1
+   50 : 2 = 25 Rest 0
+   25 : 2 = 12 Rest 1
+   12 : 2 = 6 Rest 0
+   6 : 2 = 3 Rest 0
+   3 : 2 = 1 Rest 1
+   1 : 2 = 0 Rest 1
+c) 7E hex = 126 dezimal, 10110110 binär = 182 dezimal
+d) 12 Bit -&gt; 2^12 = 4096 verschiedene Werte (0 bis 4095)</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Zeile 0,5 P. b) Binärzahl mit erkennbarem Rechenweg 1 P, Hexzahl 1 P (auch über Division durch 16: 202 : 16 = 12 Rest 10 → CA). c) 0,5 P je Wert. d) 1 P.</div>
+  </div>
+
+  <div class="loesung" id="L-ALG-04-2">
+    <div class="kopf">Aufgabe ALG-04.2 · 8 Punkte</div>
+    <h4>a) Datentypen (4 P)</h4>
+    <table class="kompakt">
+      <tr><th>Feld</th><th>Wertebereich</th><th>Datentyp</th><th>Byte</th><th>Begründung</th></tr>
+      <tr><td>ausleihNr</td><td>1 bis 3 000 000</td><td><code>int</code></td><td>4</td><td>größer als 32 767 (short)</td></tr>
+      <tr><td>kundenNr</td><td>1 bis 200 000</td><td><code>int</code></td><td>4</td><td>größer als 32 767</td></tr>
+      <tr><td>radNr</td><td>1 bis 5 000</td><td><code>short</code></td><td>2</td><td>größer als 127, kleiner als 32 767</td></tr>
+      <tr><td>startStation</td><td>1 bis 60</td><td><code>byte</code></td><td>1</td><td>passt in −128 … 127</td></tr>
+      <tr><td>startZeit</td><td>ca. 1,8 · 10¹²</td><td><code>long</code></td><td>8</td><td>größer als 2,1 · 10⁹ (int)</td></tr>
+      <tr><td>dauer</td><td>0 bis 1 440</td><td><code>short</code></td><td>2</td><td>größer als 127</td></tr>
+      <tr><td>strecke</td><td>Kommazahl, einfache Genauigkeit</td><td><code>float</code></td><td>4</td><td>einfache Genauigkeit reicht</td></tr>
+      <tr><td>preisCent</td><td>0 bis 50 000</td><td><code>int</code></td><td>4</td><td>größer als 32 767</td></tr>
+    </table>
+    <h4>b) Speicherbedarf (4 P)</h4>
+    <pre>Datensatz    = 4 + 4 + 2 + 1 + 8 + 2 + 4 + 4        =         29 Byte
+pro Jahr     = 29 Byte · 2 400 Datensätze/Tag · 365 Tage
+             = 25 404 000 Byte
+in MiB       = 25 404 000 : 1 024 : 1 024             ≈      24,23 MiB</pre>
+    <p class="codelabel">Kontrollrechnung mit Java · Aufgabe_ALG_04_2.java · Ausgabe</p>
+    <pre class="ausgabe">   ausleihNr     int    4 Byte
+   kundenNr      int    4 Byte
+   radNr         short  2 Byte
+   startStation  byte   1 Byte
+   startZeit     long   8 Byte
+   dauer         short  2 Byte
+   strecke       float  4 Byte
+   preisCent     int    4 Byte
+a/b) Datensatz = 29 Byte
+   Wertebereiche: byte -128..127, short -32768..32767
+   pro Jahr = 29 * 2400 * 365 = 25404000 Byte
+   = 24,2271 MiB  (zum Vergleich 25,4040 MB)</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Feld 0,5 P (Typ und Byte). b) Datensatzgröße 1 P, Hochrechnung pro Jahr 1 P, Umrechnung mit 1 024 1 P, Ergebnis mit Einheit und Rundung 1 P. Folgefehler aus a) werden nicht erneut abgezogen. Wer für <code>strecke</code> <code>double</code> (8 Byte) wählt, verliert in a) 0,5 P; b) wird dann mit 33 Byte und 27,57 MiB als Folgerechnung anerkannt.</div>
+    <p><strong>Erklärung:</strong> <code>short</code> reicht bis 32 767, <code>byte</code> bis 127 (vorzeichenbehaftet). Ein Zeitstempel in Millisekunden passt längst nicht mehr in <code>int</code> – das ist der Grund, warum Java <code>System.currentTimeMillis()</code> als <code>long</code> liefert.</p>
+  </div>
+
+  <div class="loesung" id="L-ALG-04-3">
+    <div class="kopf">Aufgabe ALG-04.3 · 12 Punkte</div>
+    <h4>a) Speicherbedarf (6 P)</h4>
+    <pre>Pixel je Foto      = 4 000 · 3 000                           =        12 000 000 Pixel
+Bit je Foto        = 12 000 000 Pixel · 3 Kanäle · 8 Bit      =       288 000 000 Bit
+Byte je Foto       = 288 000 000 Bit : 8                      =        36 000 000 Byte
+MiB je Foto        = 36 000 000 : 1 024 : 1 024               ≈             34,33 MiB
+
+Fotos pro Jahr     = 2 Fotos · 2 400 Rückgaben/Tag · 365 Tage =         1 752 000 Fotos
+Byte pro Jahr      = 36 000 000 Byte · 1 752 000              = 63 072 000 000 000 Byte
+TiB pro Jahr       = 63 072 000 000 000 : 1 024⁴              ≈             57,36 TiB</pre>
+    <p>Auch der Weg über den gerundeten Wert ist richtig: 34,33 MiB · 1 752 000 = 60 146 160 MiB; : 1 024 : 1 024 ≈ 57,36 TiB.</p>
+    <h4>b) Festplatten (4 P)</h4>
+    <pre>komprimiert, 2 Jahre = 63 072 000 000 000 Byte · 2 : 15      = 8 409 600 000 000 Byte
+                     = 8,41 TB  (SI, wie die Herstellerangabe)   ≈ 7,65 TiB
+1 Festplatte "8 TB"  = 8 000 000 000 000 Byte                     ≈ 7,28 TiB
+Anzahl               = 8,41 TB : 8 TB = 1,05  -&gt; aufrunden       =  2 Festplatten</pre>
+    <p>Falle: Wer 7,65 TiB mit „8 TB“ vergleicht, kommt fälschlich auf eine Platte – es muss in derselben Einheit verglichen werden (8,41 TB &gt; 8 TB bzw. 7,65 TiB &gt; 7,28 TiB).</p>
+    <h4>c) Anzeige „7,27 TB“ (2 P)</h4>
+    <p>Der Hersteller rechnet mit SI-Präfixen: 8 TB = 8 · 10¹² Byte. Das Betriebssystem rechnet binär (1 TiB = 2⁴⁰ = 1 099 511 627 776 Byte), beschriftet den Wert aber mit „TB“: 8 · 10¹² : 2⁴⁰ ≈ 7,28 TiB (angezeigt abgeschnitten bzw. abzüglich Dateisystem-Verwaltungsdaten ≈ 7,27). Es fehlt also kein Speicher, nur die Einheit ist eine andere.</p>
+    <p class="codelabel">Kontrollrechnung mit Java · Aufgabe_ALG_04_3.java · Ausgabe</p>
+    <pre class="ausgabe">a) Pixel pro Bild   = 12000000
+   Bit pro Bild     = 288000000
+   Byte pro Bild    = 36000000
+   MiB pro Bild     = 34,3323
+   Bilder pro Jahr  = 1752000
+   Byte pro Jahr    = 63072000000000
+   TiB pro Jahr     = 57,3636
+b) JPEG 1:15, 2 Jahre = 8409600000000 Byte = 8,4096 TB = 7,6485 TiB
+   8 TB = 7,2760 TiB
+   benötigte Platten = 2
+   (Falsch gerechnet mit TiB-Wert gegen 8: 7,65 / 8 -&gt; 1 Platte)</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Pixel · Farbtiefe 1 P, Bit → Byte 1 P, MiB je Foto 1 P, Anzahl Fotos pro Jahr (beide Kameras!) 1 P, Hochrechnung 1 P, TiB-Ergebnis 1 P; Rundungsdifferenzen werden toleriert. b) Kompression 1 P, zwei Jahre 1 P, Vergleich in gleicher Einheit 1 P, Ergebnis 2 Platten 1 P. c) SI vs. binär erklärt 1 P, Rechnung bzw. Zahlenbeleg 1 P.</div>
+    <p><strong>Erklärung:</strong> Gleiches Schema wie W23 (GiB) und S26 (TiB): erst ein Bild in Bit, dann Byte, dann Hochrechnung, zuletzt Umrechnung. Die zwei Kameras je Rückgabe werden am häufigsten vergessen.</p>
+  </div>
+
+  <!-- ===================== ALG-05 ===================== -->
+  <h3 id="l-05">ALG-05 · Sortieren</h3>
+
+  <div class="loesung" id="L-ALG-05-1">
+    <div class="kopf">Aufgabe ALG-05.1 · 5 Punkte</div>
+    <h4>a) Durchläufe (3 P)</h4>
+    <table class="kompakt">
+      <tr><th>Durchlauf</th><th>Inhalt nach dem Durchlauf</th><th>Vertauschungen</th></tr>
+      <tr><td>1</td><td><code>[17, 8, 33, 25, 42]</code></td><td>4 (42↔17, 42↔8, 42↔33, 42↔25)</td></tr>
+      <tr><td>2</td><td><code>[8, 17, 25, 33, 42]</code></td><td>2 (17↔8, 33↔25)</td></tr>
+      <tr><td>3</td><td><code>[8, 17, 25, 33, 42]</code></td><td>0 → Abbruch</td></tr>
+      <tr><td>4</td><td>–</td><td>–</td></tr>
+    </table>
+    <h4>b) Komplexität (2 P)</h4>
+    <p>Bubblesort hat im schlechtesten Fall die Zeitkomplexität <strong>O(n²)</strong>. Besser: Mergesort (O(n log n)), Heapsort (O(n log n)) oder Quicksort (im Mittel O(n log n)).</p>
+    <p class="codelabel">Kontrolle mit Java · Aufgabe_ALG_05_1.java · Ausgabe</p>
+    <pre class="ausgabe">Start:          [42, 17, 8, 33, 25]
+nach Durchlauf 1: [17, 8, 33, 25, 42]  Vertauschungen: 4
+nach Durchlauf 2: [8, 17, 25, 33, 42]  Vertauschungen: 2
+nach Durchlauf 3: [8, 17, 25, 33, 42]  Vertauschungen: 0
+Abbruch, weil im letzten Durchlauf nicht getauscht wurde.</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je korrektem Durchlauf (Inhalt und Anzahl) 1 P; Durchlauf 3 zählt nur, wenn erkannt wird, dass 0 Vertauschungen zum Abbruch führen. b) je 1 P.</div>
+  </div>
+
+  <div class="loesung" id="L-ALG-05-2">
+    <div class="kopf">Aufgabe ALG-05.2 · 10 Punkte</div>
+    <h4>a) Bubblesort nach Akkustand (6 P)</h4>
+    <pre class="pseudo">funktion sortiereNachAkku(raeder : Fahrrad[]) : void
+  n : integer := raeder.length
+  zähle i von 0 bis n - 2
+    zähle j von 0 bis n - 2 - i
+      wenn raeder[j].getAkkuStand() &gt; raeder[j + 1].getAkkuStand() dann
+        hilf : Fahrrad := raeder[j]              // ganzes Objekt tauschen
+        raeder[j] := raeder[j + 1]
+        raeder[j + 1] := hilf
+      Ende wenn
+    Ende zähle
+  Ende zähle
+Ende funktion</pre>
+    <h4>b) mit vorzeitigem Abbruch (2 P)</h4>
+    <pre class="pseudo">funktion sortiereNachAkku(raeder : Fahrrad[]) : void
+  n : integer := raeder.length
+  durchlauf : integer := 0
+  getauscht : boolean := true                     // neu
+  solange getauscht                               // geändert (statt zähle i …)
+    getauscht := false                            // neu
+    zähle j von 0 bis n - 2 - durchlauf
+      wenn raeder[j].getAkkuStand() &gt; raeder[j + 1].getAkkuStand() dann
+        hilf : Fahrrad := raeder[j]
+        raeder[j] := raeder[j + 1]
+        raeder[j + 1] := hilf
+        getauscht := true                         // neu
+      Ende wenn
+    Ende zähle
+    durchlauf := durchlauf + 1
+  Ende solange
+Ende funktion</pre>
+    <h4>c) Stabilität (2 P)</h4>
+    <p>Ein Sortierverfahren ist <strong>stabil</strong>, wenn Elemente mit gleichem Sortierschlüssel nach dem Sortieren in derselben Reihenfolge stehen wie vorher. Das Verfahren oben ist stabil, weil nur bei <code>&gt;</code> getauscht wird: Räder mit gleichem Akkustand werden nie gegeneinander vertauscht. (Mit <code>&gt;=</code> wäre es instabil.)</p>
+    <p class="codelabel">Java · Aufgabe_ALG_05_2.java (Auszug, Variante b)</p>
+    <pre class="java">// a/b) Bubblesort aufsteigend nach Akkustand, mit vorzeitigem Abbruch
+static void sortiereNachAkku(Fahrrad[] raeder) {
+    int n = raeder.length;
+    boolean getauscht = true;
+    int durchlauf = 0;
+    while (getauscht) {
+        getauscht = false;
+        for (int j = 0; j &lt;= n - 2 - durchlauf; j++) {
+            if (raeder[j].getAkkuStand() &gt; raeder[j + 1].getAkkuStand()) {
+                Fahrrad hilf = raeder[j];
+                raeder[j] = raeder[j + 1];
+                raeder[j + 1] = hilf;
+                getauscht = true;
+            }
+        }
+        durchlauf = durchlauf + 1;
+    }
+}</pre>
+    <p class="codelabel">Ausgabe</p>
+    <pre class="ausgabe">Ladereihenfolge (aufsteigend nach Akkustand):
+   Rad 107 (E-Bike, Akku 8 %)
+   Rad 102 (E-Bike, Akku 15 %)
+   Rad 104 (E-Bike, Akku 22 %)
+   Rad 110 (Lastenrad, Akku 28 %)
+   Rad 112 (E-Bike, Akku 33 %)
+   Rad 106 (Lastenrad, Akku 40 %)
+   Rad 109 (E-Bike, Akku 55 %)
+   Rad 103 (Lastenrad, Akku 60 %, defekt)
+   Rad 108 (E-Bike, Akku 71 %, defekt)
+   Rad 101 (E-Bike, Akku 85 %)
+   Rad 111 (E-Bike, Akku 90 %)
+   Rad 105 (E-Bike, Akku 95 %)</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Schleifengrenzen (kein Zugriff über das Array-Ende) 2 P, Vergleich über den Getter 2 P, Tausch der Objekte mit Hilfsvariable 2 P. b) Merker richtig zurückgesetzt/gesetzt 1 P, Abbruchbedingung 1 P. c) Begriff 1 P, Aussage mit Begründung 1 P.</div>
+  </div>
+
+  <div class="loesung" id="L-ALG-05-3">
+    <div class="kopf">Aufgabe ALG-05.3 · 18 Punkte</div>
+    <h4>a) sortiere mit Vergleichsfunktion (7 P)</h4>
+    <pre class="pseudo">funktion sortiere(ausleihen : Ausleihe[], vergleiche : Function) : void
+  zähle i von 0 bis ausleihen.length - 2
+    zähle j von 0 bis ausleihen.length - 2 - i
+      wenn vergleiche(ausleihen[j], ausleihen[j + 1]) &gt; 0 dann
+        hilf : Ausleihe := ausleihen[j]
+        ausleihen[j] := ausleihen[j + 1]
+        ausleihen[j + 1] := hilf
+      Ende wenn
+    Ende zähle
+  Ende zähle
+Ende funktion</pre>
+    <h4>b) nachDauerAbsteigend (3 P)</h4>
+    <pre class="pseudo">funktion nachDauerAbsteigend(a : Ausleihe, b : Ausleihe) : integer
+  wenn a.getDauer() &gt; b.getDauer() dann
+    rückgabe -1                                   // längere Ausleihe gehört nach vorn
+  Ende wenn
+  wenn a.getDauer() &lt; b.getDauer() dann
+    rückgabe 1
+  Ende wenn
+  rückgabe 0
+Ende funktion</pre>
+    <p>Kurzform (ebenfalls richtig): <code>rückgabe b.getDauer() - a.getDauer()</code>.</p>
+    <h4>c) nachStationDannPreis (5 P)</h4>
+    <pre class="pseudo">funktion nachStationDannPreis(a : Ausleihe, b : Ausleihe) : integer
+  wenn a.getStartStation() &lt;&gt; b.getStartStation() dann
+    rückgabe a.getStartStation() - b.getStartStation()   // aufsteigend
+  Ende wenn
+  wenn a.getPreis() &gt; b.getPreis() dann          // gleiche Station: Preis absteigend
+    rückgabe -1
+  Ende wenn
+  wenn a.getPreis() &lt; b.getPreis() dann
+    rückgabe 1
+  Ende wenn
+  rückgabe 0
+Ende funktion</pre>
+    <h4>d) Reihenfolge und Stabilität (3 P)</h4>
+    <p>Reihenfolge der Ausleihnummern: <strong>11, 1, 9, 2, 3, 8, 4, 6, 5, 12, 7, 10</strong>.</p>
+    <p>Die Ausleihen 1 und 9 beginnen beide an Station 1 und kosten beide 0,00 € – die Vergleichsfunktion liefert 0. Ein stabiles Verfahren lässt sie in der ursprünglichen Reihenfolge (1 vor 9). Bei einem instabilen Verfahren könnte auch 9 vor 1 stehen.</p>
+    <p class="codelabel">Java · Aufgabe_ALG_05_3.java (Auszug)</p>
+    <pre class="java">// b) generischer Bubblesort: die Reihenfolge bestimmt allein die Vergleichsfunktion
+static void sortiere(Ausleihe[] ausleihen, Comparator&lt;Ausleihe&gt; vergleiche) {
+    for (int i = 0; i &lt; ausleihen.length - 1; i++) {
+        for (int j = 0; j &lt; ausleihen.length - 1 - i; j++) {
+            if (vergleiche.compare(ausleihen[j], ausleihen[j + 1]) &gt; 0) {
+                Ausleihe hilf = ausleihen[j];
+                ausleihen[j] = ausleihen[j + 1];
+                ausleihen[j + 1] = hilf;
+            }
+        }
+    }
+}
+
+// c1) nach Dauer absteigend
+static int nachDauerAbsteigend(Ausleihe a, Ausleihe b) {
+    if (a.getDauer() &gt; b.getDauer()) {
+        return -1;
+    } else if (a.getDauer() &lt; b.getDauer()) {
+        return 1;
+    }
+    return 0;
+}
+
+// c2) nach Startstation aufsteigend, bei gleicher Station nach Preis absteigend
+static int nachStationDannPreis(Ausleihe a, Ausleihe b) {
+    if (a.getStartStation() != b.getStartStation()) {
+        return a.getStartStation() - b.getStartStation();
+    }
+    if (a.getPreis() &gt; b.getPreis()) {
+        return -1;
+    } else if (a.getPreis() &lt; b.getPreis()) {
+        return 1;
+    }
+    return 0;
+}</pre>
+    <p class="codelabel">Ausgabe</p>
+    <pre class="ausgabe">sortiere(feld, nachDauerAbsteigend):
+   Ausleihe  5: Kunde 5004, Rad 110, Station 5 -&gt; 4, 2026-09-15,  95 min, 12,40 km,   6,50 EUR
+   Ausleihe  3: Kunde 5003, Rad 106, Station 3 -&gt; 5, 2026-09-14,  75 min,  9,80 km,   7,50 EUR
+   Ausleihe  7: Kunde 5002, Rad 111, Station 6 -&gt; 3, 2026-09-15,  64 min,  8,70 km,  13,80 EUR
+   Ausleihe 12: Kunde 5003, Rad 106, Station 5 -&gt; 3, 2026-09-17,  58 min,  9,10 km,   5,80 EUR
+   Ausleihe  8: Kunde 5003, Rad 107, Station 3 -&gt; 3, 2026-09-16,  40 min,  6,20 km,   4,00 EUR
+   Ausleihe 10: Kunde 5004, Rad 112, Station 6 -&gt; 1, 2026-09-16,  33 min,  7,10 km,   0,30 EUR
+   Ausleihe  6: Kunde 5005, Rad 109, Station 4 -&gt; 2, 2026-09-15,  31 min,  5,00 km,   7,20 EUR
+   Ausleihe  9: Kunde 5001, Rad 101, Station 1 -&gt; 6, 2026-09-16,  26 min,  7,30 km,   0,00 EUR
+   Ausleihe  4: Kunde 5001, Rad 104, Station 3 -&gt; 1, 2026-09-14,  22 min,  4,90 km,   0,00 EUR
+   Ausleihe  1: Kunde 5001, Rad 101, Station 1 -&gt; 3, 2026-09-14,  18 min,  4,60 km,   0,00 EUR
+   Ausleihe  2: Kunde 5002, Rad 105, Station 2 -&gt; 1, 2026-09-14,  12 min,  2,10 km,   3,40 EUR
+   Ausleihe 11: Kunde 5005, Rad 102, Station 1 -&gt; 2, 2026-09-17,   9 min,  1,90 km,   2,80 EUR
+sortiere(feld, nachStationDannPreis):
+   Ausleihe 11: Kunde 5005, Rad 102, Station 1 -&gt; 2, 2026-09-17,   9 min,  1,90 km,   2,80 EUR
+   Ausleihe  1: Kunde 5001, Rad 101, Station 1 -&gt; 3, 2026-09-14,  18 min,  4,60 km,   0,00 EUR
+   Ausleihe  9: Kunde 5001, Rad 101, Station 1 -&gt; 6, 2026-09-16,  26 min,  7,30 km,   0,00 EUR
+   Ausleihe  2: Kunde 5002, Rad 105, Station 2 -&gt; 1, 2026-09-14,  12 min,  2,10 km,   3,40 EUR
+   Ausleihe  3: Kunde 5003, Rad 106, Station 3 -&gt; 5, 2026-09-14,  75 min,  9,80 km,   7,50 EUR
+   Ausleihe  8: Kunde 5003, Rad 107, Station 3 -&gt; 3, 2026-09-16,  40 min,  6,20 km,   4,00 EUR
+   Ausleihe  4: Kunde 5001, Rad 104, Station 3 -&gt; 1, 2026-09-14,  22 min,  4,90 km,   0,00 EUR
+   Ausleihe  6: Kunde 5005, Rad 109, Station 4 -&gt; 2, 2026-09-15,  31 min,  5,00 km,   7,20 EUR
+   Ausleihe  5: Kunde 5004, Rad 110, Station 5 -&gt; 4, 2026-09-15,  95 min, 12,40 km,   6,50 EUR
+   Ausleihe 12: Kunde 5003, Rad 106, Station 5 -&gt; 3, 2026-09-17,  58 min,  9,10 km,   5,80 EUR
+   Ausleihe  7: Kunde 5002, Rad 111, Station 6 -&gt; 3, 2026-09-15,  64 min,  8,70 km,  13,80 EUR
+   Ausleihe 10: Kunde 5004, Rad 112, Station 6 -&gt; 1, 2026-09-16,  33 min,  7,10 km,   0,30 EUR
+Kontrolle mit Java-Comparator, Reihenfolge der Ausleihnummern: 11 1 9 2 3 8 4 6 5 12 7 10</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Schleifengrenzen 2 P, Aufruf der übergebenen Funktion mit Auswertung <code>&gt; 0</code> 2 P, Tausch 2 P, kein fest verdrahtetes Attribut 1 P (andere Verfahren wie Selection- oder Insertionsort ebenfalls volle Punkte). b) je Fall (größer, kleiner, gleich) 1 P. c) Stationsvergleich 2 P, Preisvergleich absteigend 2 P, Gleichheit 1 P. d) Reihenfolge 2 P, Stabilität erläutert 1 P.</div>
+    <p><strong>Erklärung:</strong> Der Sortieralgorithmus kennt kein Attribut mehr – er fragt nur „steht a hinter b?“ (<code>&gt; 0</code>). Dadurch genügt <em>ein</em> getesteter Algorithmus für beliebig viele Sortierkriterien. In Java entspricht die Vergleichsfunktion einem <code>Comparator&lt;Ausleihe&gt;</code>, der z. B. als Methodenreferenz <code>Aufgabe_ALG_05_3::nachDauerAbsteigend</code> oder als Lambda übergeben wird.</p>
+  </div>
+
+  <!-- ===================== ALG-06 ===================== -->
+  <h3 id="l-06">ALG-06 · Zeichenketten verarbeiten</h3>
+
+  <div class="loesung" id="L-ALG-06-1">
+    <div class="kopf">Aufgabe ALG-06.1 · 4 Punkte</div>
+    <h4>a) (2 P)</h4>
+    <table class="kompakt" style="width:auto">
+      <tr><th>Ausdruck</th><th>Ergebnis</th></tr>
+      <tr><td class="mono">code.length()</td><td>9</td></tr>
+      <tr><td class="mono">code.charAt(3)</td><td>'0' (Zeichen)</td></tr>
+      <tr><td class="mono">code.substring(3, 7)</td><td>"0107"</td></tr>
+      <tr><td class="mono">code.indexOf('-')</td><td>2</td></tr>
+    </table>
+    <h4>b) (2 P)</h4>
+    <p>Strings sind Objekte. <code>==</code> vergleicht bei Objekten die <strong>Referenzen</strong>, also ob beide Variablen auf <em>dasselbe</em> Objekt im Speicher zeigen. Zwei inhaltsgleiche Strings (z. B. einer aus einer Benutzereingabe, einer im Programm) sind meist verschiedene Objekte – <code>==</code> liefert dann <code>false</code>. <code>equals()</code> vergleicht dagegen den <strong>Inhalt</strong> Zeichen für Zeichen. (Dass <code>==</code> bei zwei gleichen Literalen manchmal zufällig <code>true</code> liefert, liegt am String-Pool und ist nicht verlässlich.)</p>
+    <p class="codelabel">Kontrolle mit Java · Aufgabe_ALG_06_1.java · Ausgabe</p>
+    <pre class="ausgabe">code.length()        = 9
+code.charAt(3)       = '0'
+code.substring(3, 7) = "0107"
+code.indexOf('-')    = 2
+a == b      -&gt; false   (vergleicht Referenzen)
+a.equals(b) -&gt; true    (vergleicht Inhalte)</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Ausdruck 0,5 P (bei charAt genügt 0). b) Referenzvergleich 1 P, Inhaltsvergleich mit equals 1 P.</div>
+  </div>
+
+  <div class="loesung" id="L-ALG-06-2">
+    <div class="kopf">Aufgabe ALG-06.2 · 10 Punkte</div>
+    <h4>a) pruefePasswort (8 P)</h4>
+    <pre class="pseudo">funktion pruefePasswort(pw : string) : boolean
+  wenn pw.length() &lt; 10 dann
+    rückgabe false
+  Ende wenn
+  sonderzeichen : string := "!?#+-_*"
+  gross : boolean := false
+  klein : boolean := false
+  ziffer : boolean := false
+  sonder : boolean := false
+  zähle i von 0 bis pw.length() - 1
+    c : char := pw.charAt(i)
+    wenn c = ' ' dann
+      rückgabe false                              // Leerzeichen verboten
+    Ende wenn
+    wenn istGrossbuchstabe(c) dann
+      gross := true
+    Ende wenn
+    wenn istKleinbuchstabe(c) dann
+      klein := true
+    Ende wenn
+    wenn istZiffer(c) dann
+      ziffer := true
+    Ende wenn
+    wenn sonderzeichen.indexOf(c) &gt;= 0 dann
+      sonder := true
+    Ende wenn
+  Ende zähle
+  rückgabe gross und klein und ziffer und sonder   // erst NACH der Schleife auswerten
+Ende funktion</pre>
+    <h4>b) Ergebnisse (2 P)</h4>
+    <table class="kompakt" style="width:auto">
+      <tr><th>Passwort</th><th>Ergebnis</th><th>Grund</th></tr>
+      <tr><td class="mono">Rad2026!</td><td>false</td><td>nur 8 Zeichen</td></tr>
+      <tr><td class="mono">auenrad#2026</td><td>false</td><td>kein Großbuchstabe</td></tr>
+      <tr><td class="mono">Auenrad#2026</td><td>true</td><td>alle Regeln erfüllt</td></tr>
+      <tr><td class="mono">Auen Rad#2026</td><td>false</td><td>enthält ein Leerzeichen</td></tr>
+    </table>
+    <p class="codelabel">Java · Aufgabe_ALG_06_2.java (Auszug)</p>
+    <pre class="java">// a) Passwortrichtlinie der Auenrad-App
+static boolean pruefePasswort(String pw) {
+    if (pw.length() &lt; 10) {
+        return false;
+    }
+    String sonderzeichen = "!?#+-_*";
+    boolean gross = false;
+    boolean klein = false;
+    boolean ziffer = false;
+    boolean sonder = false;
+    for (int i = 0; i &lt;= pw.length() - 1; i++) {
+        char c = pw.charAt(i);
+        if (c == ' ') {
+            return false;
+        } else if (istGrossbuchstabe(c)) {
+            gross = true;
+        } else if (istKleinbuchstabe(c)) {
+            klein = true;
+        } else if (istZiffer(c)) {
+            ziffer = true;
+        } else if (sonderzeichen.indexOf(c) &gt;= 0) {
+            sonder = true;
+        }
+    }
+    return gross &amp;&amp; klein &amp;&amp; ziffer &amp;&amp; sonder;
+}</pre>
+    <p class="codelabel">Ausgabe</p>
+    <pre class="ausgabe">pruefePasswort("Rad2026!") = false
+pruefePasswort("auenrad#2026") = false
+pruefePasswort("Auenrad#2026") = true
+pruefePasswort("Auen Rad#2026") = false
+pruefePasswort("AUENRAD#2026x") = true
+pruefePasswort("Auenrad2026") = false</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Längenprüfung (<code>&lt; 10</code> → false, also „mindestens 10“) 1 P, Schleife über alle Zeichen (0 bis <code>length() - 1</code>) 1 P, je Zeichenklasse Merker korrekt initialisiert und gesetzt 4 × 1 P, Leerzeichenprüfung 1 P, Gesamtergebnis nach der Schleife 1 P. b) je Passwort 0,5 P.</div>
+    <p><strong>Erklärung:</strong> „Mindestens ein …“ verlangt Merker, die erst nach der Schleife ausgewertet werden. Genau diese Fehler steckten im Struktogramm von W21: Länge mit <code>&gt;</code> statt <code>&gt;=</code> geprüft, Schleife bis <code>≤ length</code> und ein Merker, der im sonst-Zweig wieder auf false gesetzt wurde.</p>
+  </div>
+
+  <div class="loesung" id="L-ALG-06-3">
+    <div class="kopf">Aufgabe ALG-06.3 · 14 Punkte</div>
+    <h4>a) zerlegeName (6 P)</h4>
+    <pre class="pseudo">funktion zerlegeName(vollname : string) : string[]
+  ergebnis : string[] := new string[2]
+  pos : integer := vollname.indexOf(',')
+  wenn pos = -1 dann                              // kein Komma
+    ergebnis[0] := ""
+    ergebnis[1] := vollname.trim()
+  sonst
+    ergebnis[1] := vollname.substring(0, pos).trim()                       // Nachname
+    ergebnis[0] := vollname.substring(pos + 1, vollname.length()).trim()   // Vorname
+  Ende wenn
+  rückgabe ergebnis
+Ende funktion</pre>
+    <h4>b) pruefeRadCode (6 P)</h4>
+    <pre class="pseudo">funktion pruefeRadCode(code : string) : boolean
+  wenn code.length() &lt;&gt; 9 dann
+    rückgabe false
+  Ende wenn
+  wenn code.substring(0, 3) &lt;&gt; "AR-" oder code.charAt(7) &lt;&gt; '-' dann
+    rückgabe false
+  Ende wenn
+  summe : integer := 0
+  zähle i von 3 bis 6
+    c : char := code.charAt(i)
+    wenn nicht istZiffer(c) dann
+      rückgabe false
+    Ende wenn
+    summe := summe + zahlwert(c)
+  Ende zähle
+  p : char := code.charAt(8)
+  wenn nicht istZiffer(p) dann
+    rückgabe false
+  Ende wenn
+  rückgabe zahlwert(p) = summe mod 10
+Ende funktion</pre>
+    <h4>c) Probleme beim Zerlegen (2 P)</h4>
+    <ul>
+      <li>Uneinheitliche Altdaten: kein Komma, mehrere Kommas oder vertauschte Reihenfolge („Tom Haas“ statt „Haas, Tom“).</li>
+      <li>Titel und Namenszusätze (Dr., von, van der), Doppelnamen und mehrere Vornamen – es ist nicht eindeutig, was zum Vor- und was zum Nachnamen gehört.</li>
+      <li>Zusätzliche/fehlende Leerzeichen, Tippfehler, Sonderzeichen oder falsch kodierte Umlaute aus dem Altsystem.</li>
+      <li>Firmen oder Gruppen als „Kunde“, die gar keinen Vornamen haben.</li>
+    </ul>
+    <p class="codelabel">Java · Aufgabe_ALG_06_3.java (Auszug)</p>
+    <pre class="java">// a) "Nachname, Vorname" -&gt; [Vorname, Nachname]
+static String[] zerlegeName(String vollname) {
+    String[] ergebnis = new String[2];
+    int pos = vollname.indexOf(',');
+    if (pos == -1) {
+        ergebnis[0] = "";
+        ergebnis[1] = vollname.trim();
+    } else {
+        ergebnis[1] = vollname.substring(0, pos).trim();
+        ergebnis[0] = vollname.substring(pos + 1, vollname.length()).trim();
+    }
+    return ergebnis;
+}
+
+// b) Format "AR-" + 4 Ziffern + "-" + Prüfziffer (= Summe der 4 Ziffern mod 10)
+static boolean pruefeRadCode(String code) {
+    if (code.length() != 9) {
+        return false;
+    }
+    if (!code.substring(0, 3).equals("AR-") || code.charAt(7) != '-') {
+        return false;
+    }
+    int summe = 0;
+    for (int i = 3; i &lt;= 6; i++) {
+        char c = code.charAt(i);
+        if (!istZiffer(c)) {
+            return false;
+        }
+        summe = summe + zahlwert(c);
+    }
+    char p = code.charAt(8);
+    if (!istZiffer(p)) {
+        return false;
+    }
+    return zahlwert(p) == summe % 10;
+}</pre>
+    <p class="codelabel">Ausgabe</p>
+    <pre class="ausgabe">zerlegeName("Schulze-Ebert, Anna Lena") -&gt; Vorname "Anna Lena", Nachname "Schulze-Ebert"
+zerlegeName("Haas,Tom") -&gt; Vorname "Tom", Nachname "Haas"
+zerlegeName("  Nowak ,  Piotr ") -&gt; Vorname "Piotr", Nachname "Nowak"
+zerlegeName("Müller") -&gt; Vorname "", Nachname "Müller"
+pruefeRadCode("AR-0107-8") = true
+pruefeRadCode("AR-0107-7") = false
+pruefeRadCode("AR-01O7-8") = false
+pruefeRadCode("AR-107-8") = false
+pruefeRadCode("AR-0959-3") = true
+pruefeRadCode("XR-0107-8") = false</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Position des Kommas bestimmt 1 P, Fall ohne Komma 1 P, Nachname mit <code>substring(0, pos)</code> 1 P, Vorname ab <code>pos + 1</code> 1 P, <code>trim</code> 1 P, Array angelegt und zurückgegeben 1 P. b) Länge 1 P, „AR-“ und Bindestrich an Position 7 1 P, Schleife über die vier Ziffern mit Ziffernprüfung 2 P, Summe und Vergleich der Prüfziffer mit <code>mod 10</code> 2 P. c) je sinnvollem Problem 1 P.</div>
+    <p><strong>Erklärung:</strong> Bei <code>substring(von, bis)</code> ist <em>bis</em> ausgeschlossen – <code>substring(0, pos)</code> endet also genau vor dem Komma. In Java muss der Präfixvergleich mit <code>equals</code> erfolgen (<code>!code.substring(0, 3).equals("AR-")</code>).</p>
+  </div>
+
+  <!-- ===================== ALG-07 ===================== -->
+  <h3 id="l-07">ALG-07 · Exceptions / Fehlerbehandlung</h3>
+
+  <div class="loesung" id="L-ALG-07-1">
+    <div class="kopf">Aufgabe ALG-07.1 · 5 Punkte</div>
+    <p><strong>a)</strong> <em>Checked</em> Exceptions erben von <code>Exception</code> (aber nicht von <code>RuntimeException</code>). Der Compiler erzwingt, dass sie gefangen (<code>try/catch</code>) oder mit <code>throws</code> in der Methodensignatur weitergereicht werden. Sie beschreiben äußere Umstände, die auch korrekter Code nicht verhindern kann, z. B. <code>IOException</code>, <code>SQLException</code>. <em>Unchecked</em> Exceptions erben von <code>RuntimeException</code>; der Compiler verlangt keine Behandlung. Sie entstehen meist durch Programmierfehler, z. B. <code>NullPointerException</code>, <code>ArithmeticException</code>, <code>IllegalArgumentException</code>.</p>
+    <p><strong>b)</strong> Der <code>finally</code>-Block wird <strong>immer</strong> ausgeführt, nachdem der try-Block (und ggf. ein catch-Block) beendet ist – egal, ob eine Ausnahme aufgetreten ist, ob sie gefangen wurde und auch bei einem <code>return</code> im try-Block. Typischer Einsatz: Ressourcen freigeben, z. B. Datei oder Datenbankverbindung schließen, Sperre freigeben.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Unterschied (Behandlungspflicht durch den Compiler) 1 P, je Beispiel 1 P. b) Zeitpunkt 1 P, Einsatzzweck 1 P.</div>
+  </div>
+
+  <div class="loesung" id="L-ALG-07-2">
+    <div class="kopf">Aufgabe ALG-07.2 · 9 Punkte</div>
+    <h4>a) Ausgaben und Rückgabewerte (6 P)</h4>
+    <table class="kompakt">
+      <tr><th>Aufruf</th><th>Ausgabe</th><th>Rückgabewert / Ablauf</th></tr>
+      <tr><td class="mono">centProMinute("750", 30)</td><td class="mono">A B E F</td><td>25 (750 / 30, kein Fehler)</td></tr>
+      <tr><td class="mono">centProMinute("7,50", 30)</td><td class="mono">A C E F</td><td>−1: <code>parseInt</code> wirft <code>NumberFormatException</code>, <code>ergebnis</code> behält den Startwert</td></tr>
+      <tr><td class="mono">centProMinute("750", 0)</td><td class="mono">A D E F</td><td>0: Ganzzahldivision durch 0 wirft <code>ArithmeticException</code>, der catch-Block setzt 0</td></tr>
+      <tr><td class="mono">centProMinute("750", -5)</td><td class="mono">A E</td><td>kein Rückgabewert: die <code>IllegalArgumentException</code> wird von keinem catch-Block gefangen; nach dem finally-Block (E) wird sie an den Aufrufer weitergereicht, „F“ und <code>return</code> werden nicht mehr ausgeführt</td></tr>
+    </table>
+    <p class="codelabel">Kontrolle mit Java · Aufgabe_ALG_07_2.java · Ausgabe (der Aufrufer fängt die Ausnahme des 4. Aufrufs ab, um sie anzuzeigen)</p>
+    <pre class="ausgabe">1) centProMinute("750", 30): Ausgabe A B E F | Rückgabe 25
+2) centProMinute("7,50", 30): Ausgabe A C E F | Rückgabe -1
+3) centProMinute("750", 0): Ausgabe A D E F | Rückgabe 0
+4) centProMinute("750", -5): Ausgabe A E | keine Rückgabe
+   -&gt; Ausnahme beim Aufrufer: IllegalArgumentException: Minuten negativ</pre>
+    <h4>b) Beurteilung (3 P)</h4>
+    <p>Der Vorschlag ist schlecht. Ein leerer Block <code>catch (Exception e) { }</code> <strong>verschluckt</strong> jeden Fehler: Es gibt weder Meldung noch Protokolleintrag, und der Aufrufer rechnet mit −1 weiter, als wäre nichts passiert. Außerdem fängt er auch Ausnahmen ab, die gar nicht hier behandelt werden sollen (die <code>IllegalArgumentException</code> bei negativen Minuten, Programmierfehler wie <code>NullPointerException</code>), sodass Fehler verdeckt werden. Eine unterschiedliche Reaktion (Division durch 0 → 0, Formatfehler → −1) ist nicht mehr möglich. Besser: gezielt die erwarteten Ausnahmen fangen, sinnvoll reagieren und protokollieren.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Aufruf 1,5 P (Ausgabe 1 P, Rückgabe/Ablauf 0,5 P); beim 4. Aufruf muss erkannt werden, dass F fehlt und kein Wert zurückkommt. b) 3 P für eine begründete Ablehnung mit mindestens zwei Argumenten (Fehler verschluckt/kein Log, zu allgemeiner Fang, keine differenzierte Reaktion).</div>
+  </div>
+
+  <div class="loesung" id="L-ALG-07-3">
+    <div class="kopf">Aufgabe ALG-07.3 · 14 Punkte</div>
+    <h4>a) Fehlerfälle (3 P)</h4>
+    <ul>
+      <li>Die Liste <code>ausleihen</code> ist <code>null</code> (Aufrufer hat keine Daten geladen) → Zugriff führt zu <code>NullPointerException</code>.</li>
+      <li>Die Stationsnummer ist ungültig (0, negativ oder eine Station, die es nicht gibt).</li>
+      <li>Für die Station gibt es keine Ausleihe (oder die Liste ist leer) → Division durch 0 beim Durchschnitt.</li>
+    </ul>
+    <h4>b) durchschnittsDauer (7 P)</h4>
+    <pre class="pseudo">funktion durchschnittsDauer(ausleihen : List&lt;Ausleihe&gt;, stationNr : integer) : double
+  wenn ausleihen = null dann
+    throw new IllegalArgumentException("Liste der Ausleihen fehlt")
+  Ende wenn
+  wenn stationNr &lt; 1 dann
+    throw new IllegalArgumentException("Ungültige Stationsnummer: " + stationNr)
+  Ende wenn
+  summe : integer := 0
+  anzahl : integer := 0
+  zähle i von 0 bis ausleihen.size() - 1
+    a : Ausleihe := ausleihen.get(i)
+    wenn a.getStartStation() = stationNr dann
+      summe := summe + a.getDauer()
+      anzahl := anzahl + 1
+    Ende wenn
+  Ende zähle
+  wenn anzahl = 0 dann
+    throw new KeineDatenException("Keine Ausleihen für Station " + stationNr)
+  Ende wenn
+  rückgabe summe / anzahl              // Kommazahl! Java: (double) summe / anzahl
+Ende funktion</pre>
+    <h4>c) zeigeStationsbericht (4 P)</h4>
+    <pre class="pseudo">funktion zeigeStationsbericht(ausleihen : List&lt;Ausleihe&gt;, stationNr : integer) : void
+  try
+    d : double := durchschnittsDauer(ausleihen, stationNr)
+    ausgabe("Station " + stationNr + ": durchschnittliche Dauer " + d + " min")
+  catch (KeineDatenException e)
+    ausgabe("Für diese Station liegen keine Ausleihen vor.")
+  catch (IllegalArgumentException e)
+    protokolliere(e.getMessage())
+  Ende try
+Ende funktion</pre>
+    <p class="codelabel">Java · Aufgabe_ALG_07_3.java (Auszug) – in Java muss die geprüfte Ausnahme mit <code>throws</code> deklariert werden</p>
+    <pre class="java">/** eigene, geprüfte (checked) Ausnahme */
+static class KeineDatenException extends Exception {
+    private static final long serialVersionUID = 1L;
+
+    KeineDatenException(String meldung) {
+        super(meldung);
+    }
+}
+
+// b) durchschnittliche Dauer der Ausleihen, die an stationNr beginnen
+static double durchschnittsDauer(List&lt;Ausleihe&gt; ausleihen, int stationNr)
+        throws KeineDatenException {
+    if (ausleihen == null) {
+        throw new IllegalArgumentException("Liste der Ausleihen fehlt (null)");
+    }
+    if (stationNr &lt; 1) {
+        throw new IllegalArgumentException("Ungültige Stationsnummer: " + stationNr);
+    }
+    int summe = 0;
+    int anzahl = 0;
+    for (int i = 0; i &lt; ausleihen.size(); i++) {
+        Ausleihe a = ausleihen.get(i);
+        if (a.getStartStation() == stationNr) {
+            summe = summe + a.getDauer();
+            anzahl = anzahl + 1;
+        }
+    }
+    if (anzahl == 0) {
+        throw new KeineDatenException("Keine Ausleihen für Station " + stationNr);
+    }
+    return (double) summe / anzahl;
+}
+
+// c) Aufrufer: fängt die Ausnahmen und reagiert benutzerfreundlich
+static void zeigeStationsbericht(List&lt;Ausleihe&gt; ausleihen, int stationNr) {
+    try {
+        double d = durchschnittsDauer(ausleihen, stationNr);
+        System.out.printf(Locale.GERMANY, "Station %d: durchschnittliche Dauer %.1f min%n",
+                stationNr, d);
+    } catch (KeineDatenException e) {
+        System.out.println("Station " + stationNr
+                + ": Für diese Station liegen keine Ausleihen vor.");
+    } catch (IllegalArgumentException e) {
+        System.out.println("FEHLER-LOG: " + e.getMessage());
+    }
+}</pre>
+    <p class="codelabel">Ausgabe</p>
+    <pre class="ausgabe">Station 3: durchschnittliche Dauer 45,7 min
+Station 4: durchschnittliche Dauer 31,0 min
+Station 7: Für diese Station liegen keine Ausleihen vor.
+FEHLER-LOG: Ungültige Stationsnummer: 0
+FEHLER-LOG: Liste der Ausleihen fehlt (null)</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Fehlerfall 1 P. b) Prüfungen auf <code>null</code> und <code>&lt; 1</code> mit <code>throw</code> 2 P, Schleife mit Summe und Anzahl 2 P, <code>KeineDatenException</code> bei Anzahl 0 (vor der Division) 2 P, Rückgabe als Kommazahl 1 P. c) Aufruf und Ausgabe im try-Block 1 P, catch für <code>KeineDatenException</code> mit Meldung 1 P, catch für <code>IllegalArgumentException</code> mit <code>protokolliere(e.getMessage())</code> 1 P, korrekte Struktur (Ausgabe nur im Erfolgsfall) 1 P.</div>
+    <p><strong>Erklärung:</strong> Die Prüfungen am Anfang („Wächter“) brechen bei Vertragsverletzungen sofort ab (<em>fail fast</em>). Die fachliche Situation „keine Daten“ wird als eigene, geprüfte Ausnahme gemeldet; der Aufrufer muss sich darum kümmern und kann eine verständliche Meldung anzeigen, statt eine falsche Zahl (0 oder <code>NaN</code>) auszugeben.</p>
+  </div>
+
+  <!-- ===================== ALG-08 ===================== -->
+  <h3 id="l-08">ALG-08 · Rekursion</h3>
+
+  <div class="loesung" id="L-ALG-08-1">
+    <div class="kopf">Aufgabe ALG-08.1 · 4 Punkte</div>
+    <p><strong>a)</strong> Der <strong>Basisfall</strong> ist die Abbruchbedingung: Für ihn liefert die Funktion ihr Ergebnis direkt, ohne sich selbst erneut aufzurufen (z. B. 0! = 1). Im <strong>Rekursionsfall</strong> ruft sich die Funktion mit einem kleineren bzw. einfacheren Teilproblem selbst auf und setzt aus dessen Ergebnis ihr eigenes zusammen (z. B. n! = n · (n − 1)!). Der Rekursionsfall muss sich dem Basisfall nähern.</p>
+    <p><strong>b)</strong> Die Funktion ruft sich endlos selbst auf. Jeder Aufruf legt einen neuen Eintrag (Parameter, lokale Variablen, Rücksprungadresse) auf dem Aufrufstapel ab, bis der Stack-Speicher erschöpft ist. Java bricht dann mit einem <code>StackOverflowError</code> ab.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Begriff 1 P. b) Endlosrekursion 1 P, Stacküberlauf/Programmabbruch 1 P.</div>
+  </div>
+
+  <div class="loesung" id="L-ALG-08-2">
+    <div class="kopf">Aufgabe ALG-08.2 · 8 Punkte</div>
+    <h4>a) Schreibtischtest binaer(13) (5 P)</h4>
+    <table class="kompakt">
+      <tr><th>Aufruf</th><th>n</th><th>n div 2</th><th>n mod 2</th><th>Rückgabewert</th></tr>
+      <tr><td>1</td><td>13</td><td>6</td><td>1</td><td>binaer(6) + "1" = "110" + "1" = <strong>"1101"</strong></td></tr>
+      <tr><td>2</td><td>6</td><td>3</td><td>0</td><td>binaer(3) + "0" = "11" + "0" = "110"</td></tr>
+      <tr><td>3</td><td>3</td><td>1</td><td>1</td><td>binaer(1) + "1" = "1" + "1" = "11"</td></tr>
+      <tr><td>4</td><td>1</td><td>0</td><td>1</td><td>binaer(0) + "1" = "" + "1" = "1"</td></tr>
+      <tr><td>5</td><td>0</td><td>–</td><td>–</td><td>"" (Basisfall)</td></tr>
+      <tr><td>6</td><td colspan="4">– (nicht benötigt)</td></tr>
+    </table>
+    <h4>b) Fehler und Korrektur (3 P)</h4>
+    <p>Für <strong>n = 0</strong> liefert die Funktion den leeren Text <code>""</code> statt <code>"0"</code>. Korrektur: Der Basisfall gilt für n &lt; 2 und gibt die Ziffer selbst zurück.</p>
+    <pre class="pseudo">funktion binaer(n : integer) : string
+  wenn n &lt; 2 dann
+    rückgabe "" + n                               // "0" bzw. "1"
+  Ende wenn
+  rückgabe binaer(n div 2) + (n mod 2)
+Ende funktion</pre>
+    <p>Achtung: Nur den Basisfall auf <code>wenn n = 0 dann rückgabe "0"</code> zu ändern, wäre falsch – dann entstünde für jede Zahl eine führende Null (binaer(13) = "01101").</p>
+    <p class="codelabel">Java · Aufgabe_ALG_08_2.java (Auszug, korrigierte Funktion)</p>
+    <pre class="java">// korrigierte Funktion: Basisfall n &lt; 2 liefert die Ziffer selbst
+static String binaerKorrigiert(int n) {
+    if (n &lt; 2) {
+        return "" + n;
+    }
+    return binaerKorrigiert(n / 2) + (n % 2);
+}</pre>
+    <p class="codelabel">Ausgabe (mit Aufrufprotokoll der ursprünglichen Funktion)</p>
+    <pre class="ausgabe">a) Schreibtischtest binaer(13):
+binaer(13) aufgerufen
+   binaer(6) aufgerufen
+      binaer(3) aufgerufen
+         binaer(1) aufgerufen
+            binaer(0) aufgerufen
+            binaer(0) liefert ""
+         binaer(1) liefert "1"  (n div 2 = 0, n mod 2 = 1)
+      binaer(3) liefert "11"  (n div 2 = 1, n mod 2 = 1)
+   binaer(6) liefert "110"  (n div 2 = 3, n mod 2 = 0)
+binaer(13) liefert "1101"  (n div 2 = 6, n mod 2 = 1)
+   Ergebnis: "1101"
+binaer(0) aufgerufen
+binaer(0) liefert ""
+b) binaer(0) = ""  &lt;- falsch, erwartet "0"
+   binaerKorrigiert(0) = "0"  Kontrolle: 0
+   binaerKorrigiert(1) = "1"  Kontrolle: 1
+   binaerKorrigiert(2) = "10"  Kontrolle: 10
+   binaerKorrigiert(13) = "1101"  Kontrolle: 1101
+   binaerKorrigiert(45) = "101101"  Kontrolle: 101101
+   binaerKorrigiert(255) = "11111111"  Kontrolle: 11111111</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je korrekt ausgefüllter Aufrufzeile 1 P (5 Aufrufe). b) Wert 0 erkannt 1 P, korrekte Korrektur 2 P (Lösungen mit führender Null nur 1 P).</div>
+  </div>
+
+  <div class="loesung" id="L-ALG-08-3">
+    <div class="kopf">Aufgabe ALG-08.3 · 12 Punkte</div>
+    <h4>a) rekursive binäre Suche (6 P)</h4>
+    <pre class="pseudo">funktion suche(nummern : integer[], gesucht : integer,
+               links : integer, rechts : integer) : integer
+  wenn links &gt; rechts dann
+    rückgabe -1                                   // Basisfall 1: Suchbereich leer
+  Ende wenn
+  mitte : integer := (links + rechts) div 2
+  wenn nummern[mitte] = gesucht dann
+    rückgabe mitte                                // Basisfall 2: gefunden
+  Ende wenn
+  wenn nummern[mitte] &lt; gesucht dann
+    rückgabe suche(nummern, gesucht, mitte + 1, rechts)   // rechte Hälfte
+  sonst
+    rückgabe suche(nummern, gesucht, links, mitte - 1)    // linke Hälfte
+  Ende wenn
+Ende funktion</pre>
+    <h4>b) Aufrufe für gesucht = 112 (2 P)</h4>
+    <table class="kompakt" style="width:auto">
+      <tr><th>Aufruf</th><th>links</th><th>rechts</th><th>mitte</th><th>nummern[mitte]</th><th>weiter</th></tr>
+      <tr><td>1</td><td>0</td><td>11</td><td>5</td><td>106</td><td>rechts suchen</td></tr>
+      <tr><td>2</td><td>6</td><td>11</td><td>8</td><td>109</td><td>rechts suchen</td></tr>
+      <tr><td>3</td><td>9</td><td>11</td><td>10</td><td>111</td><td>rechts suchen</td></tr>
+      <tr><td>4</td><td>11</td><td>11</td><td>11</td><td>112</td><td>gefunden → Index 11</td></tr>
+    </table>
+    <h4>c) Rekursion vs. Iteration (4 P)</h4>
+    <ul>
+      <li><strong>Vorteil:</strong> Der Code ist kurz und entspricht direkt der Idee „Problem halbieren und in einer Hälfte weitersuchen“ (Teile und herrsche); dadurch ist er gut lesbar und leicht auf Korrektheit zu prüfen.</li>
+      <li><strong>Nachteil:</strong> Jeder Aufruf belegt Speicher auf dem Aufrufstapel und kostet Zeit für den Funktionsaufruf; bei sehr tiefer Rekursion droht ein <code>StackOverflowError</code>, und die Fehlersuche ist schwieriger. (Bei der binären Suche ist die Tiefe mit etwa log₂ n – bei 1 000 Elementen höchstens 10 Ebenen – allerdings unkritisch.)</li>
+    </ul>
+    <p class="codelabel">Java · Aufgabe_ALG_08_3.java (Auszug, rekursiv und iterativ)</p>
+    <pre class="java">// a) rekursive binäre Suche in einem aufsteigend sortierten Array; -1 = nicht gefunden
+static int suche(int[] nummern, int gesucht, int links, int rechts) {
+    String info = links &lt;= rechts ? "  mitte = " + ((links + rechts) / 2) : "  -&gt; links &gt; rechts";
+    System.out.println("   suche(nummern, " + gesucht + ", " + links + ", " + rechts + ")" + info);
+    if (links &gt; rechts) {
+        return -1;                                      // Basisfall 1: Bereich leer
+    }
+    int mitte = (links + rechts) / 2;
+    if (nummern[mitte] == gesucht) {
+        return mitte;                                   // Basisfall 2: gefunden
+    } else if (nummern[mitte] &lt; gesucht) {
+        return suche(nummern, gesucht, mitte + 1, rechts);  // rechte Hälfte
+    } else {
+        return suche(nummern, gesucht, links, mitte - 1);   // linke Hälfte
+    }
+}
+
+// zum Vergleich: iterative Variante
+static int sucheIterativ(int[] nummern, int gesucht) {
+    int links = 0;
+    int rechts = nummern.length - 1;
+    while (links &lt;= rechts) {
+        int mitte = (links + rechts) / 2;
+        if (nummern[mitte] == gesucht) {
+            return mitte;
+        } else if (nummern[mitte] &lt; gesucht) {
+            links = mitte + 1;
+        } else {
+            rechts = mitte - 1;
+        }
+    }
+    return -1;
+}</pre>
+    <p class="codelabel">Ausgabe</p>
+    <pre class="ausgabe">b) Aufrufe für gesucht = 112:
+   suche(nummern, 112, 0, 11)  mitte = 5
+   suche(nummern, 112, 6, 11)  mitte = 8
+   suche(nummern, 112, 9, 11)  mitte = 10
+   suche(nummern, 112, 11, 11)  mitte = 11
+   Ergebnis: Index 11
+   Aufrufe für gesucht = 100:
+   suche(nummern, 100, 0, 11)  mitte = 5
+   suche(nummern, 100, 0, 4)  mitte = 2
+   suche(nummern, 100, 0, 1)  mitte = 0
+   suche(nummern, 100, 0, -1)  -&gt; links &gt; rechts
+   Ergebnis: Index -1
+   iterativ: 112 -&gt; 11, 104 -&gt; 3, 100 -&gt; -1
+   max. Anzahl Halbierungen bei 1000 Elementen: 10</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Basisfall „Bereich leer“ 1 P, Berechnung von mitte 1 P, Basisfall „gefunden“ 1 P, rekursive Aufrufe mit korrekten Grenzen (<code>mitte + 1</code> / <code>mitte - 1</code>) 2 P, Ergebnis des rekursiven Aufrufs zurückgegeben 1 P. b) 2 P für alle vier Aufrufe. c) je Vor- und Nachteil 1 P Nennung + 1 P Begründung.</div>
+  </div>
+
+  <!-- ===================== ALG-09 ===================== -->
+  <h3 id="l-09">ALG-09 · Nebenläufigkeit</h3>
+
+  <div class="loesung" id="L-ALG-09-1">
+    <div class="kopf">Aufgabe ALG-09.1 · 4 Punkte</div>
+    <p><strong>a)</strong> Eine Race Condition liegt vor, wenn mehrere nebenläufige Abläufe (Threads, Prozesse, Server) auf dieselbe Ressource zugreifen, mindestens einer davon schreibend, und das Ergebnis von der zufälligen zeitlichen Reihenfolge der Zugriffe abhängt. Folge sind inkonsistente Daten, z. B. verlorene Änderungen oder Doppelbuchungen.</p>
+    <p><strong>b)</strong> (zwei davon) Zwei Kunden reservieren bzw. leihen gleichzeitig dasselbe (letzte) Rad aus. · Zwei Kunden geben gleichzeitig an einer fast vollen Station zurück (Zähler freier Stellplätze). · Station meldet den Akkustand, während die Werkstatt den Datensatz desselben Rades ändert. · Das Kundenkonto wird gleichzeitig in App und Kundenportal geändert (z. B. Guthaben/Abo).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) gleichzeitiger Zugriff auf gemeinsame Daten 1 P, Ergebnis abhängig von der Reihenfolge/Folgen 1 P. b) je passendem Beispiel aus dem Szenario 1 P.</div>
+  </div>
+
+  <div class="loesung" id="L-ALG-09-2">
+    <div class="kopf">Aufgabe ALG-09.2 · 8 Punkte</div>
+    <h4>a) Problem (4 P)</h4>
+    <p>Es entsteht eine <strong>Doppelbuchung</strong> (Lost Update): Beide Threads lesen bei t1 und t2 den Wert 1, bevor einer von ihnen schreibt. Beide prüfen auf Basis dieses veralteten Werts (t3, t4), beide schreiben 0 und speichern eine Reservierung (t5, t6). Für ein einziges Lastenrad gibt es nun zwei Reservierungen; die Änderung von Thread A wird von B überschrieben, der Bestand müsste eigentlich „−1“ sein. Ursache: Die Folge Lesen – Prüfen – Schreiben ist ein <strong>kritischer Abschnitt</strong>, der nicht atomar bzw. nicht gegen gleichzeitigen Zugriff geschützt ist.</p>
+    <h4>b) Pessimistisches Sperren (4 P)</h4>
+    <p>Beim pessimistischen Sperren sperrt ein Thread den Datensatz <strong>vor dem Lesen</strong> (z. B. in einer Transaktion mit <code>SELECT … FOR UPDATE</code>, in Java mit <code>synchronized</code>/Lock). Andere Threads, die denselben Datensatz sperren wollen, müssen warten, bis die Sperre mit dem Ende der Transaktion (Commit) freigegeben wird. Dadurch kann immer nur ein Thread den kritischen Abschnitt durchlaufen.</p>
+    <table class="kompakt">
+      <tr><th>Zeit</th><th>Thread A (Jana)</th><th>Thread B (Tom)</th><th>DB</th></tr>
+      <tr><td>t1</td><td>sperrt Datensatz, liest 1</td><td></td><td>1 (gesperrt von A)</td></tr>
+      <tr><td>t2</td><td></td><td>will sperren → <strong>wartet</strong></td><td>1</td></tr>
+      <tr><td>t3</td><td>prüft 1 &gt; 0 → ja</td><td>wartet</td><td>1</td></tr>
+      <tr><td>t4</td><td>schreibt 0, speichert Reservierung, Commit → Sperre frei</td><td>wartet</td><td>0</td></tr>
+      <tr><td>t5</td><td></td><td>erhält Sperre, liest 0</td><td>0 (gesperrt von B)</td></tr>
+      <tr><td>t6</td><td></td><td>prüft 0 &gt; 0 → nein → „kein Lastenrad frei“, Sperre frei</td><td>0</td></tr>
+    </table>
+    <p class="codelabel">Java · Aufgabe_ALG_09_2.java (Auszug: geschützte Variante)</p>
+    <pre class="java">/** geschützt: kritischer Abschnitt unter einer Sperre (pessimistisch) */
+static void reserviereGesperrt(String kunde) throws InterruptedException {
+    synchronized (SPERRE) {
+        int frei = freieLastenraeder;
+        Thread.sleep(50);
+        if (frei &gt; 0) {
+            freieLastenraeder = frei - 1;
+            reservierungen++;
+            System.out.println("   " + kunde + ": Reservierung bestätigt");
+        } else {
+            System.out.println("   " + kunde + ": leider kein Rad frei");
+        }
+    }
+}</pre>
+    <p class="codelabel">Ausgabe (Reihenfolge der Threadzeilen kann je Lauf variieren)</p>
+    <pre class="ausgabe">Ohne Sperre (1 freies Lastenrad, 2 gleichzeitige Anfragen):
+   Thread B (Kunde Tom)  : Reservierung bestätigt
+   Thread A (Kundin Jana): Reservierung bestätigt
+   =&gt; Reservierungen: 2, freieLastenraeder: 0
+Mit Sperre (synchronized):
+   Thread A (Kundin Jana): Reservierung bestätigt
+   Thread B (Kunde Tom)  : leider kein Rad frei
+   =&gt; Reservierungen: 1, freieLastenraeder: 0</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Problem benannt (Doppelbuchung/Lost Update) 2 P, Ursache am Ablauf erläutert (beide lesen den alten Wert, nicht atomar) 2 P. b) Prinzip der Sperre 2 P, geänderter Ablauf (B wartet und erhält danach 0) 2 P.</div>
+  </div>
+
+  <div class="loesung" id="L-ALG-09-3">
+    <div class="kopf">Aufgabe ALG-09.3 · 14 Punkte</div>
+    <h4>a) Vor- und Nachteile (6 P)</h4>
+    <table class="kompakt">
+      <tr><th>Variante</th><th>Vorteil</th><th>Nachteil</th></tr>
+      <tr><td>A (pessimistisch, Sperre bei Detailansicht)</td><td>Wer die Detailansicht geöffnet hat, kann das Rad sicher reservieren; ein Konflikt beim Speichern ist ausgeschlossen, die Logik ist einfach.</td><td>Das Rad ist bis zu 10 Minuten blockiert, auch wenn der Kunde nur schaut oder die App schließt; andere sehen es als „nicht verfügbar“. Viele offene Sperren belasten die Datenbank; Sperren müssen bei Verbindungsabbruch zuverlässig per Timeout aufgehoben werden.</td></tr>
+      <tr><td>B (optimistisch, Versionsnummer)</td><td>Keine Blockade: Beliebig viele Kunden können das Rad gleichzeitig ansehen; Sperren dauern nur Millisekunden, das System skaliert gut, keine Deadlocks.</td><td>Ein Konflikt fällt erst beim Tippen auf „Reservieren“ auf; der langsamere Kunde erhält eine Fehlermeldung und muss neu wählen. Zusätzliche Versionsspalte und Konfliktbehandlung nötig.</td></tr>
+    </table>
+    <h4>b) Entscheidung (3 P)</h4>
+    <p>Empfohlen wird <strong>Variante B</strong>. Viele Kunden sehen sich Räder an, aber nur selten wollen zwei Kunden in denselben Sekunden <em>dasselbe</em> Lastenrad reservieren – Konflikte sind also selten, und dann ist eine Meldung „leider gerade vergeben“ zumutbar. Variante A hält eine Sperre über eine Benutzerinteraktion von bis zu 10 Minuten; das ist viel zu lang, weil das Rad in dieser Zeit für alle anderen blockiert ist. Sperren sollten nur so lange dauern wie die eigentliche Änderung (Millisekunden) – das leistet die unteilbare Operation in Variante B.</p>
+    <h4>c) reserviere (5 P)</h4>
+    <pre class="pseudo">funktion reserviere(db : RadDB, radNr : integer, kundenNr : integer) : boolean
+  info : RadInfo := db.leseRad(radNr)
+  wenn info.getStatus() &lt;&gt; "frei" dann
+    rückgabe false                       // schon reserviert oder ausgeliehen
+  Ende wenn
+  wenn db.setzeStatusWennVersion(radNr, "reserviert", info.getVersion()) dann
+    db.legeReservierungAn(radNr, kundenNr)
+    rückgabe true
+  sonst
+    rückgabe false                       // Version geändert: jemand war schneller
+  Ende wenn
+Ende funktion</pre>
+    <p class="codelabel">Java · Aufgabe_ALG_09_3.java (Auszug, mit simulierter Datenbank und zwei gleichzeitigen Threads)</p>
+    <pre class="java">// c) Reservierung mit optimistischem Sperren
+static boolean reserviere(RadDB db, int radNr, int kundenNr) {
+    RadInfo info = db.leseRad(radNr);
+    if (!info.getStatus().equals("frei")) {
+        return false;                                   // schon vergeben
+    }
+    // ... Kunde bestätigt in der App, Zeit vergeht ...
+    try { Thread.sleep(30); } catch (InterruptedException e) { }
+    if (db.setzeStatusWennVersion(radNr, "reserviert", info.getVersion())) {
+        db.legeReservierungAn(radNr, kundenNr);
+        return true;
+    }
+    return false;                                       // Konflikt: jemand war schneller
+}</pre>
+    <p class="codelabel">Ausgabe</p>
+    <pre class="ausgabe">Gleichzeitige Reservierungsversuche für Rad 106: 2
+davon erfolgreich: 1, abgewiesen (Konflikt): 1
+Status danach: reserviert, Version: 8, gespeicherte Reservierungen: 1
+Dritter Versuch später: reserviere(...) = false</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Vor- bzw. Nachteil 1,5 P. b) Entscheidung mit fachlicher Begründung 2 P, Bezug zur Sperrdauer 1 P (Variante A mit überzeugender Begründung, z. B. stark verkürzter Sperrdauer von 1–2 Minuten, ebenfalls volle Punktzahl). c) <code>leseRad</code> 1 P, Statusprüfung 1 P, <code>setzeStatusWennVersion</code> mit der zuvor gelesenen Version 2 P, Reservierung nur bei Erfolg und korrekte Rückgabewerte 1 P.</div>
+    <p><strong>Erklärung:</strong> Entscheidend ist, dass Prüfen und Ändern in <em>einer</em> unteilbaren Operation passieren. Wer stattdessen erst den Status liest und dann einfach „reserviert“ schreibt, hat genau die Race Condition aus ALG-09.2. In einer echten Anwendung würden Statusänderung und Anlegen der Reservierung zusätzlich in einer Transaktion zusammengefasst, damit nicht nur eines von beiden gespeichert wird.</p>
+  </div>
+</section>
+
+</body>
+</html>

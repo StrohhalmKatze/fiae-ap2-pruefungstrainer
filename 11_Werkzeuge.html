@@ -1,0 +1,1766 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11 Entwicklungsumgebung &amp; Werkzeuge – Übungen</title>
+<link rel="stylesheet" href="style.css">
+<script src="uebungen.js"></script>
+<style>
+  /* Zusatzregeln Block 11 */
+  nav.toc ol ol { columns: 2; column-gap: 24px; font-size: 13px; }
+  table.kompakt td, table.kompakt th { padding: 2px 6px; }
+  table.leer td { height: 34px; }
+  table.leer.hoch td { height: 64px; }
+  .zweispaltig { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+  .zweispaltig > * { flex: 1 1 300px; min-width: 0; }
+  .englisch { font-family: Georgia, "Times New Roman", serif; font-size: 14.5px; }
+  .englisch p, .englisch li { margin: 4px 0; }
+  .mail { border: 1px solid #aaa; border-radius: 3px; padding: 8px 12px; background: #fff; font-size: 14px; }
+  .mail .mailkopf { font-size: 13px; color: var(--muted); border-bottom: 1px solid #ddd; padding-bottom: 4px; margin-bottom: 6px; }
+  .mail ol { margin: 4px 0; }
+  pre.yaml { border-left: 4px solid var(--oft); }
+  pre.konsole { background: #fff; border-style: dashed; }
+  td.mono, th.mono { font-family: Consolas, "Courier New", monospace; font-size: 13px; }
+  .mail { break-inside: avoid; }
+  .zeichenflaeche.mittel { height: 300px; }
+  table.klein td, table.klein th { font-size: 12.5px; }
+  @media print { .teilaufgabe, .aufgabe .kopf, h4 { break-after: avoid; } }
+</style>
+</head>
+<body>
+
+<!-- ===================== KOPF ===================== -->
+<header class="blockkopf">
+  <h1>Block 11 · Entwicklungsumgebung &amp; Werkzeuge</h1>
+  <div class="unter">
+    <span class="badge k-sonstige">Sonstige</span> 2/9 Prüfungen (W21, W22) · Ø 21 von 200 Punkten · nur Teil 1 (jeweils Aufgabe 1 bzw. 2)
+    · Lösungen: <a href="11_Werkzeuge_Loesungen.html">11_Werkzeuge_Loesungen.html</a>
+  </div>
+</header>
+
+<nav class="toc">
+  <strong>Inhalt</strong>
+  <ol>
+    <li><a href="#erklaerung">Erklärungssatz</a>
+      <ol>
+        <li><a href="#e-01">WZ-01 Versionsverwaltung (Git)</a></li>
+        <li><a href="#e-02">WZ-02 CI/CD &amp; Deployment</a></li>
+        <li><a href="#e-03">WZ-03 Softwarearchitektur</a></li>
+        <li><a href="#e-04">WZ-04 Compiler vs. Interpreter</a></li>
+        <li><a href="#e-05">WZ-05 Bibliotheken, Frameworks, Doku</a></li>
+        <li><a href="#e-06">WZ-06 Open Source &amp; Lizenzen</a></li>
+      </ol>
+    </li>
+    <li><a href="#belegsatz">Belegsatz</a> (Anlagen 1–11)</li>
+    <li><a href="#aufgaben">Aufgaben</a>
+      <ol>
+        <li><a href="#a-01">WZ-01 (3 Aufgaben)</a></li>
+        <li><a href="#a-02">WZ-02 (3 Aufgaben)</a></li>
+        <li><a href="#a-03">WZ-03 (3 Aufgaben)</a></li>
+        <li><a href="#a-04">WZ-04 (3 Aufgaben)</a></li>
+        <li><a href="#a-05">WZ-05 (3 Aufgaben)</a></li>
+        <li><a href="#a-06">WZ-06 (3 Aufgaben)</a></li>
+        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+
+<div class="info no-print">
+  <span class="kastentitel">So arbeitest du mit diesem Block</span>
+  Erst den Erklärungssatz lesen, dann die Aufgaben mit dem Belegsatz daneben lösen (Belegsatz am besten separat ausdrucken und neben die Aufgaben legen). Zeitrichtwert: 1 Punkt ≈ 0,9 Minuten.
+  Lösungen erst danach in der separaten Lösungsdatei nachsehen. Fast alle Aufgaben sind Textaufgaben („beschreiben“, „erläutern“, „bewerten“): Übe, in ganzen Sätzen und mit Bezug auf die Situation zu antworten – reine Stichwortlisten geben in der IHK-Prüfung oft nur die halbe Punktzahl.
+</div>
+
+<!-- ===================== TEIL A: ERKLÄRUNGSSATZ ===================== -->
+<section class="teil" id="erklaerung">
+  <h2>A · Erklärungssatz</h2>
+
+  <p>Die Themen dieses Blocks kamen bisher nur in den ersten beiden Prüfungen nach neuer Ausbildungsordnung vor (W21 und W22), dort aber jeweils mit rund 20 Punkten in Teil 1. Jedes Unterthema wurde genau einmal gefragt – meist mit kurzen Wissensfragen („Nennen Sie …“, „Beschreiben Sie den Unterschied …“) oder einer Bewertung („Entscheiden Sie, ob Sie dem Vorschlag zustimmen“). Es ist Grundlagenwissen aus dem Ausbildungsalltag und kann jederzeit wiederkommen, z. B. als Einstieg in Aufgabe 1 oder 2 von Teil 1.</p>
+
+  <table class="kompakt">
+    <tr><th>Unterthema</th><th>Kategorie</th><th>Original</th><th>Wichtigste Fähigkeit</th></tr>
+    <tr><td>WZ-01 Versionsverwaltung (Git)</td><td><span class="badge k-sonstige">Sonstige</span></td><td>W21 T1 A1c (4 P)</td><td>Nutzen begründen, Begriffe, Commit-Graph, Team-Workflow bewerten</td></tr>
+    <tr><td>WZ-02 CI/CD &amp; Deployment</td><td><span class="badge k-sonstige">Sonstige</span></td><td>W22 T1 A1c (6 P)</td><td>Pipeline beschreiben, Vorteile der Automatisierung</td></tr>
+    <tr><td>WZ-03 Softwarearchitektur</td><td><span class="badge k-sonstige">Sonstige</span></td><td>W22 T1 A2a (6 P)</td><td>3 Schichten und ihr Zusammenspiel, MVC, Skizze</td></tr>
+    <tr><td>WZ-04 Compiler vs. Interpreter</td><td><span class="badge k-sonstige">Sonstige</span></td><td>W21 T1 A1a (6 P)</td><td>Unterschied, Beispiele, Vor-/Nachteile</td></tr>
+    <tr><td>WZ-05 Bibliotheken, Frameworks, Doku</td><td><span class="badge k-sonstige">Sonstige</span></td><td>W21 T1 A1b (10 P)</td><td>Vor-/Nachteile, Dokumentation einer Erweiterung</td></tr>
+    <tr><td>WZ-06 Open Source &amp; Lizenzen</td><td><span class="badge k-sonstige">Sonstige</span></td><td>W22 T1 A2c (9 P)</td><td>Begriff, Lizenzpflichten (Copyleft), Vor-/Nachteile</td></tr>
+  </table>
+
+  <!-- ===================== WZ-01 ===================== -->
+  <h3 id="e-01">WZ-01 · Versionsverwaltung (Git) <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfung: W21 T1 A1c (4 P: Ein Entwicklungsteam aus zehn Personen schlägt vor, mit einer Versionsverwaltung zu arbeiten – zustimmen oder ablehnen und fachlich begründen)</p>
+
+  <p>Eine <strong>Versionsverwaltung</strong> (Version Control System, VCS) speichert jede Änderung an Dateien – meist Quellcode – als neue Version in einem <strong>Repository</strong>. Zu jeder Version werden Autor, Zeitpunkt und eine Beschreibung festgehalten. Dadurch kann ein Team gleichzeitig an denselben Dateien arbeiten, Änderungen zusammenführen und jederzeit auf einen früheren Stand zurückgehen.</p>
+
+  <h4>Wozu eine Versionsverwaltung? (Argumente für die Prüfung)</h4>
+  <ul>
+    <li><strong>Paralleles Arbeiten im Team:</strong> Jeder arbeitet auf seiner eigenen Kopie bzw. seinem eigenen Branch; Änderungen werden kontrolliert zusammengeführt, statt sich gegenseitig zu überschreiben (Netzlaufwerk-Problem).</li>
+    <li><strong>Nachvollziehbarkeit:</strong> Wer hat wann was und warum geändert? Fehler lassen sich auf eine Änderung zurückführen (<code>git log</code>, <code>git blame</code>).</li>
+    <li><strong>Wiederherstellbarkeit:</strong> Jeder frühere Stand ist abrufbar; fehlerhafte Änderungen können gezielt rückgängig gemacht werden (<code>git revert</code>).</li>
+    <li><strong>Releases und Varianten:</strong> Ausgelieferte Versionen werden markiert (Tags); ein Fehler in Version 1.2 lässt sich beheben, während an 1.3 weitergearbeitet wird (Branches).</li>
+    <li><strong>Qualitätssicherung und Automatisierung:</strong> Grundlage für Code-Reviews (Pull Requests) und für CI/CD-Pipelines, die bei jedem Push bauen und testen (→ WZ-02).</li>
+    <li><strong>Datensicherheit:</strong> Bei verteilten Systemen liegt die komplette Historie auf jedem Entwicklerrechner und auf dem Server (ersetzt aber kein geplantes Backup).</li>
+  </ul>
+  <p>Gegen eine Versionsverwaltung spricht praktisch nur der Einarbeitungs- und Einrichtungsaufwand. In der Prüfung lautet die erwartete Antwort daher fast immer: <strong>zustimmen</strong> – und mit zwei konkreten Vorteilen für <em>dieses</em> Team begründen.</p>
+
+  <h4>Zentrale und verteilte Versionsverwaltung</h4>
+  <figure>
+    <svg viewBox="0 0 740 250" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <text x="180" y="18" text-anchor="middle" font-weight="bold">Zentral (z. B. Subversion)</text>
+      <rect x="95" y="32" width="170" height="52" fill="#eef3fa" stroke="#222"/>
+      <text x="180" y="54" text-anchor="middle" font-weight="bold">Server</text>
+      <text x="180" y="72" text-anchor="middle">Repository mit Historie</text>
+      <rect x="10" y="170" width="105" height="44" fill="#fff" stroke="#222"/>
+      <text x="62" y="197" text-anchor="middle">Arbeitskopie</text>
+      <rect x="128" y="170" width="105" height="44" fill="#fff" stroke="#222"/>
+      <text x="180" y="197" text-anchor="middle">Arbeitskopie</text>
+      <rect x="246" y="170" width="105" height="44" fill="#fff" stroke="#222"/>
+      <text x="298" y="197" text-anchor="middle">Arbeitskopie</text>
+      <line x1="62" y1="170" x2="150" y2="84" stroke="#222"/>
+      <line x1="180" y1="170" x2="180" y2="84" stroke="#222"/>
+      <line x1="298" y1="170" x2="210" y2="84" stroke="#222"/>
+      <text x="186" y="130" font-size="12">commit / update</text>
+      <text x="180" y="236" text-anchor="middle" font-size="12">Historie nur auf dem Server – ohne Server kein Commit</text>
+
+      <line x1="370" y1="10" x2="370" y2="240" stroke="#bbb" stroke-dasharray="4,4"/>
+
+      <text x="555" y="18" text-anchor="middle" font-weight="bold">Verteilt (z. B. Git)</text>
+      <rect x="455" y="32" width="200" height="52" fill="#eef3fa" stroke="#222"/>
+      <text x="555" y="54" text-anchor="middle" font-weight="bold">Remote-Repository</text>
+      <text x="555" y="72" text-anchor="middle">(z. B. GitLab, GitHub)</text>
+      <rect x="385" y="160" width="112" height="56" fill="#fff" stroke="#222"/>
+      <text x="441" y="182" text-anchor="middle">Repository</text>
+      <text x="441" y="200" text-anchor="middle">+ Arbeitskopie</text>
+      <rect x="505" y="160" width="112" height="56" fill="#fff" stroke="#222"/>
+      <text x="561" y="182" text-anchor="middle">Repository</text>
+      <text x="561" y="200" text-anchor="middle">+ Arbeitskopie</text>
+      <rect x="625" y="160" width="112" height="56" fill="#fff" stroke="#222"/>
+      <text x="681" y="182" text-anchor="middle">Repository</text>
+      <text x="681" y="200" text-anchor="middle">+ Arbeitskopie</text>
+      <line x1="441" y1="160" x2="520" y2="84" stroke="#222"/>
+      <line x1="561" y1="160" x2="561" y2="84" stroke="#222"/>
+      <line x1="681" y1="160" x2="600" y2="84" stroke="#222"/>
+      <text x="567" y="126" font-size="12">push / pull</text>
+      <text x="561" y="236" text-anchor="middle" font-size="12">jede Kopie enthält die vollständige Historie</text>
+    </svg>
+    <figcaption>Abb. A-1: Zentrale und verteilte Versionsverwaltung</figcaption>
+  </figure>
+  <table class="kompakt">
+    <tr><th></th><th>Zentral (CVS, Subversion/SVN, Perforce)</th><th>Verteilt (Git, Mercurial)</th></tr>
+    <tr><td>Repository</td><td>nur auf dem Server; Entwickler haben nur eine Arbeitskopie</td><td>jeder Klon ist ein vollständiges Repository mit gesamter Historie</td></tr>
+    <tr><td>Commit</td><td>direkt auf den Server – nur mit Netzverbindung</td><td>lokal, offline möglich; Austausch später per <code>push</code>/<code>pull</code></td></tr>
+    <tr><td>Geschwindigkeit</td><td>Log, Vergleich, Commit brauchen den Server</td><td>fast alles lokal und daher schnell</td></tr>
+    <tr><td>Ausfallsicherheit</td><td>Server ist Single Point of Failure</td><td>jede Kopie kann den Server wiederherstellen</td></tr>
+    <tr><td>Branches</td><td>möglich, aber eher schwerfällig</td><td>billig und schnell – Grundlage moderner Workflows</td></tr>
+    <tr><td>Stärken</td><td>einfaches Modell, feine Rechtevergabe je Verzeichnis, Sperren (Locking) großer Binärdateien</td><td>flexibel, offline, Pull-Request-Workflows; heute Standard</td></tr>
+  </table>
+
+  <h4>Die wichtigsten Begriffe</h4>
+  <table class="kompakt">
+    <tr><th style="width:24%">Begriff</th><th>Bedeutung</th></tr>
+    <tr><td>Repository</td><td>Datenbank aller Versionen eines Projekts (bei Git der Ordner <code>.git</code>). <strong>Remote</strong> = entferntes Repository auf einem Server, Standardname <code>origin</code>.</td></tr>
+    <tr><td>Arbeitsverzeichnis, Staging-Bereich</td><td>Arbeitsverzeichnis = die Dateien, an denen man arbeitet. Mit <code>git add</code> werden Änderungen in den Staging-Bereich (Index) vorgemerkt; nur diese landen im nächsten Commit.</td></tr>
+    <tr><td>Commit</td><td>gespeicherter Stand (Schnappschuss) mit eindeutiger ID (Hash, z. B. <code>4f2a9c1</code>), Autor, Zeitpunkt, Nachricht und Verweis auf den/die Vorgänger-Commit(s).</td></tr>
+    <tr><td>Branch</td><td>Entwicklungszweig; technisch ein <strong>beweglicher Zeiger</strong> auf den letzten Commit des Zweigs. Ein neuer Commit verschiebt den Zeiger mit. Standard-Branch heute meist <code>main</code> (früher <code>master</code>).</td></tr>
+    <tr><td>HEAD</td><td>Zeiger auf den aktuell ausgecheckten Branch bzw. Commit („wo stehe ich gerade?“).</td></tr>
+    <tr><td>Merge</td><td>Zusammenführen eines Branches in einen anderen. <strong>Fast-Forward:</strong> Der Ziel-Branch hat sich nicht weiterentwickelt – sein Zeiger wird einfach vorgeschoben, es entsteht kein neuer Commit. <strong>Merge-Commit:</strong> Beide haben neue Commits – Git erzeugt einen Commit mit <em>zwei</em> Vorgängern.</td></tr>
+    <tr><td>Merge-Konflikt</td><td>Beide Branches haben dieselbe Stelle einer Datei unterschiedlich geändert; Git kann nicht automatisch entscheiden, ein Mensch muss den Konflikt auflösen.</td></tr>
+    <tr><td>clone, fetch, pull, push</td><td><code>clone</code>: Remote-Repository erstmals vollständig kopieren. <code>fetch</code>: neue Commits vom Remote holen, <em>ohne</em> die eigenen Branches zu verändern (nur <code>origin/main</code> wird aktualisiert). <code>pull</code> = <code>fetch</code> + <code>merge</code> (bzw. rebase) in den aktuellen Branch. <code>push</code>: eigene Commits zum Remote hochladen.</td></tr>
+    <tr><td>Tag</td><td><strong>fester</strong> Name für einen bestimmten Commit, z. B. <code>v2.1.0</code> für ein Release. Im Gegensatz zum Branch bewegt sich ein Tag nicht.</td></tr>
+    <tr><td>Rebase</td><td>Commits eines Branches auf einen neuen Ausgangspunkt „umsetzen“ → lineare Historie. Keine bereits veröffentlichten (gepushten) Commits rebasen.</td></tr>
+    <tr><td>Pull Request / Merge Request</td><td>Anfrage auf der Plattform (GitHub: Pull Request, GitLab: Merge Request), einen Branch in <code>main</code> zu übernehmen. Dort finden Code-Review, Diskussion und automatische Prüfungen (CI) statt, bevor gemergt wird.</td></tr>
+  </table>
+
+  <table class="kompakt">
+    <caption>Git-Befehle (Grundwortschatz)</caption>
+    <tr><th style="width:42%">Befehl</th><th>Wirkung</th></tr>
+    <tr><td class="mono">git clone &lt;url&gt;</td><td>Remote-Repository erstmals vollständig kopieren</td></tr>
+    <tr><td class="mono">git status</td><td>anzeigen, was geändert bzw. vorgemerkt ist</td></tr>
+    <tr><td class="mono">git add &lt;datei&gt;</td><td>Änderung für den nächsten Commit vormerken</td></tr>
+    <tr><td class="mono">git commit -m "Nachricht"</td><td>Commit aus den vorgemerkten Änderungen erstellen</td></tr>
+    <tr><td class="mono">git commit -am "Nachricht"</td><td>alle geänderten, bereits versionierten Dateien vormerken und committen</td></tr>
+    <tr><td class="mono">git log --oneline --graph</td><td>Historie als Graph anzeigen</td></tr>
+    <tr><td class="mono">git switch -c &lt;branch&gt; (älter: git checkout -b)</td><td>Branch anlegen und dorthin wechseln</td></tr>
+    <tr><td class="mono">git switch &lt;branch&gt;</td><td>Branch wechseln</td></tr>
+    <tr><td class="mono">git merge &lt;branch&gt;</td><td>angegebenen Branch in den aktuellen Branch mergen</td></tr>
+    <tr><td class="mono">git fetch</td><td>neue Commits vom Remote holen (eigener Branch bleibt unverändert)</td></tr>
+    <tr><td class="mono">git pull</td><td>fetch + merge in den aktuellen Branch</td></tr>
+    <tr><td class="mono">git push origin &lt;branch&gt;</td><td>eigene Commits zum Remote hochladen</td></tr>
+    <tr><td class="mono">git tag -a v1.0.0 -m "…"</td><td>annotierten Tag auf den aktuellen Commit setzen</td></tr>
+    <tr><td class="mono">git revert &lt;commit&gt;</td><td>Commit durch einen Gegen-Commit rückgängig machen</td></tr>
+  </table>
+
+  <p><strong>Beispiel: Projekt „Kassenbuch“.</strong> <code>main</code> steht auf Commit C2. Dann werden diese Befehle ausgeführt:</p>
+  <pre>git switch -c feature/csv-export
+git commit -m "…"                      # E1
+git commit -m "…"                      # E2
+git switch main
+git commit -m "…"                      # C3 (dringender Fix direkt auf main)
+git merge feature/csv-export           # M
+git tag -a v2.0.0 -m "Version 2.0.0"</pre>
+  <p>Weil <code>main</code> mit C3 einen eigenen neuen Commit hat, ist kein Fast-Forward möglich: Es entsteht der Merge-Commit M mit den Vorgängern C3 und E2. (Hätte es C3 nicht gegeben, wäre <code>main</code> beim Merge einfach auf E2 vorgerückt.)</p>
+
+  <figure>
+    <svg viewBox="0 0 640 190" width="640" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <!-- Verbindungen -->
+      <line x1="60" y1="120" x2="140" y2="120" stroke="#222" stroke-width="2"/>
+      <line x1="140" y1="120" x2="380" y2="120" stroke="#222" stroke-width="2"/>
+      <line x1="380" y1="120" x2="480" y2="120" stroke="#222" stroke-width="2"/>
+      <line x1="140" y1="120" x2="220" y2="55" stroke="#222" stroke-width="2"/>
+      <line x1="220" y1="55" x2="300" y2="55" stroke="#222" stroke-width="2"/>
+      <line x1="300" y1="55" x2="480" y2="120" stroke="#222" stroke-width="2"/>
+      <!-- Commits -->
+      <circle cx="60" cy="120" r="17" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="60" y="125" text-anchor="middle">C1</text>
+      <circle cx="140" cy="120" r="17" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="140" y="125" text-anchor="middle">C2</text>
+      <circle cx="220" cy="55" r="17" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="220" y="60" text-anchor="middle">E1</text>
+      <circle cx="300" cy="55" r="17" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="300" y="60" text-anchor="middle">E2</text>
+      <circle cx="380" cy="120" r="17" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="380" y="125" text-anchor="middle">C3</text>
+      <circle cx="480" cy="120" r="19" fill="#eef3fa" stroke="#222" stroke-width="2"/><text x="480" y="125" text-anchor="middle" font-weight="bold">M</text>
+      <!-- Zeiger -->
+      <rect x="250" y="8" width="140" height="22" rx="3" fill="#fff" stroke="#222"/><text x="320" y="24" text-anchor="middle" font-size="12">feature/csv-export</text>
+      <line x1="300" y1="30" x2="300" y2="38" stroke="#222"/>
+      <rect x="512" y="88" width="118" height="22" rx="3" fill="#fff" stroke="#222"/><text x="571" y="104" text-anchor="middle" font-size="12">HEAD → main</text>
+      <line x1="512" y1="104" x2="499" y2="114" stroke="#222"/>
+      <path d="M452,158 L508,158 L518,169 L508,180 L452,180 Z" fill="#fff" stroke="#222"/><text x="482" y="174" text-anchor="middle" font-size="12">v2.0.0</text>
+      <line x1="480" y1="139" x2="480" y2="158" stroke="#222"/>
+      <text x="20" y="182" font-size="11" fill="#555">Zeit →</text>
+    </svg>
+    <figcaption>Abb. A-2: Commit-Graph nach den Befehlen oben – zwei Branches, Merge-Commit M mit zwei Vorgängern, Tag v2.0.0</figcaption>
+  </figure>
+  <p class="klein">Zeichenregeln für Commit-Graphen: Commits als Kreise in zeitlicher Reihenfolge, Linien zum Vorgänger, Branch-Namen und Tags als beschriftete Zeiger auf „ihren“ Commit, HEAD beim aktuell ausgecheckten Branch. (In Git zeigt jeder Commit auf seinen Vorgänger; Pfeile sind daher korrekt in Richtung Vergangenheit. Ohne Pfeile mit Zeitachse ist es ebenso eindeutig.)</p>
+
+  <h4>Merge-Konflikte erkennen und lösen</h4>
+  <p>Git führt Änderungen automatisch zusammen, solange sie unterschiedliche Stellen betreffen. Ändern beide Seiten <strong>dieselben Zeilen</strong> (oder löscht eine Seite eine Datei, die die andere ändert), stoppt der Merge und markiert die Stelle in der Datei:</p>
+  <pre>timeout.sekunden=
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+30
+=======
+120
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/langsame-drucker</pre>
+  <p>Oberhalb von <code>=======</code> steht der Stand des aktuellen Branches (HEAD), darunter der des einzumergenden Branches. <strong>So gehst du vor:</strong> (1) Konfliktdateien mit <code>git status</code> ermitteln, (2) fachlich entscheiden, welcher Inhalt richtig ist – eine Seite, die andere oder eine Kombination, bei Unklarheit mit dem Autor der anderen Änderung sprechen, (3) Konfliktmarker entfernen, (4) kompilieren und testen, (5) mit <code>git add</code> als gelöst markieren und mit <code>git commit</code> den Merge abschließen. Alternativ bricht <code>git merge --abort</code> den Merge ab.</p>
+  <div class="merke"><span class="kastentitel">Merke</span>Merge-Konflikte sind kein Fehler von Git, sondern eine Rückfrage: Zwei Personen haben dieselbe Stelle unterschiedlich geändert. Sie werden seltener und kleiner, je <strong>kürzer Branches leben</strong> und je öfter man den aktuellen Stand von <code>main</code> holt.</div>
+
+  <h4>Branching-Strategien</h4>
+  <table class="kompakt">
+    <tr><th style="width:20%">Strategie</th><th>Ablauf</th><th>Geeignet für / Bewertung</th></tr>
+    <tr><td>Feature-Branch-Workflow</td><td><code>main</code> ist immer lauffähig. Für jede Aufgabe (Ticket) ein kurzer Branch, z. B. <code>feature/123-login</code>; Abschluss über Pull Request mit Review und CI-Prüfung, dann Merge in <code>main</code>.</td><td>sehr verbreitet, einfach, gut für kleine und mittlere Teams; Reviews und Tests vor jedem Merge</td></tr>
+    <tr><td>Git-Flow</td><td>dauerhafte Branches <code>main</code> (nur Releases) und <code>develop</code> (Integration); dazu <code>feature/*</code>, <code>release/*</code> (Release vorbereiten), <code>hotfix/*</code> (Fehler im Release).</td><td>für geplante, versionierte Releases und mehrere gepflegte Versionen; relativ aufwendig, viele Merges, eher langsam</td></tr>
+    <tr><td>Trunk-based Development</td><td>Alle integrieren sehr häufig (mind. täglich) in den Hauptzweig („Trunk“), Branches leben nur Stunden; Unfertiges wird per Feature-Toggle verborgen.</td><td>passt zu Continuous Integration/Deployment; setzt gute automatische Tests und Disziplin voraus</td></tr>
+  </table>
+  <p>Ergänzend: <strong>Branch-Schutz</strong> auf <code>main</code> (kein direkter Push, Merge nur per Pull Request mit mindestens einem Review und grüner Pipeline).</p>
+
+  <h4>Pull Request und Code-Review</h4>
+  <p>Vorteile: <strong>Vier-Augen-Prinzip</strong> (Fehler, Sicherheitslücken und unklarer Code werden vor dem Merge gefunden), <strong>Wissensverteilung</strong> im Team (mehr als eine Person kennt jeden Codeteil), einheitlicher Stil und Einhaltung von Konventionen, dokumentierte Diskussion zu jeder Änderung, automatische Prüfungen (Build, Tests, statische Analyse) laufen vor dem Merge. Nachteile: Zeitaufwand, Wartezeiten, wenn Reviews liegen bleiben – deshalb kleine Pull Requests.</p>
+
+  <h4>.gitignore – was gehört nicht ins Repository?</h4>
+  <div class="zweispaltig">
+    <div>
+      <p>Versioniert wird alles, was man braucht, um das Projekt <strong>aus dem Quellcode zu bauen</strong>: Quellcode, Tests, Build-Konfiguration (<code>pom.xml</code>, <code>package.json</code>, <code>build.gradle</code>), Datenbank-Migrationsskripte, Dokumentation, die <code>.gitignore</code> selbst.</p>
+      <p>Nicht versioniert werden: <strong>erzeugte Dateien</strong> (Build-Ausgaben, kompilierte Klassen, heruntergeladene Abhängigkeiten), <strong>persönliche Einstellungen</strong> (IDE-Ordner), Logdateien, Betriebssystem-Dateien und vor allem <strong>Geheimnisse</strong> (Passwörter, API-Schlüssel, Zertifikate).</p>
+    </div>
+    <div>
+      <p class="codelabel">Beispiel .gitignore (Python-Projekt)</p>
+      <pre># erzeugte Dateien
+__pycache__/
+*.pyc
+dist/
+# virtuelle Umgebung
+.venv/
+# Editor / Betriebssystem
+.vscode/
+Thumbs.db
+# Geheimnisse
+.env
+*.log</pre>
+    </div>
+  </div>
+  <div class="falle"><span class="kastentitel">Typische Falle</span>Ein Passwort, das einmal committet und gepusht wurde, steht in der Historie – auch wenn es im nächsten Commit gelöscht wird. Es muss als kompromittiert gelten und <strong>geändert</strong> werden. Ein späterer Eintrag in <code>.gitignore</code> wirkt nur für noch nicht versionierte Dateien.</div>
+
+  <h4>Gute Commit-Nachrichten</h4>
+  <ul>
+    <li>Erste Zeile: kurze Zusammenfassung (ca. 50 Zeichen), was die Änderung bewirkt, gern mit Ticketnummer; im Imperativ oder sachlich („Rundung der Mehrwertsteuer korrigiert“).</li>
+    <li>Danach optional eine Leerzeile und ein Text, <strong>warum</strong> die Änderung nötig war.</li>
+    <li>Ein Commit = eine zusammengehörige (atomare) Änderung, die das Projekt in einem lauffähigen Zustand hinterlässt.</li>
+    <li>Konvention „Conventional Commits“: Präfix wie <code>feat:</code>, <code>fix:</code>, <code>docs:</code>, <code>refactor:</code>, <code>test:</code>.</li>
+  </ul>
+  <table class="kompakt">
+    <tr><th>Schlecht</th><th>Besser</th></tr>
+    <tr><td><code>update</code>, <code>.</code>, <code>zwischenstand</code>, <code>Freitag</code></td><td><code>KB-57: Export der Buchungen als CSV ergänzt</code></td></tr>
+    <tr><td><code>bugfix</code></td><td><code>fix: Rundungsfehler bei Beträgen mit 3 Nachkommastellen behoben</code></td></tr>
+  </table>
+  <div class="falle"><span class="kastentitel">Typische Fallen</span><strong>Git ≠ GitHub:</strong> Git ist das Versionsverwaltungsprogramm, GitHub/GitLab/Bitbucket sind Plattformen, die Remote-Repositories hosten und Pull Requests, Tickets und CI anbieten. · <strong>pull ≠ fetch</strong> (pull verändert den eigenen Branch, fetch nicht). · Ein Branch ist <strong>keine Kopie</strong> aller Dateien, sondern nur ein Zeiger. · Veröffentlichte Commits nicht mit <code>reset</code> oder <code>rebase</code> umschreiben, sondern mit <code>revert</code> korrigieren.</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>W21 T1 A1c (4 P):</strong> Das Entwicklungsteam (zehn Personen) schlägt vor, mit einer Versionsverwaltung zu arbeiten. Gefragt war, ob man zustimmt, mit fachlicher Begründung. Erwartet: Zustimmung und zwei gut erläuterte Argumente (paralleles Arbeiten ohne gegenseitiges Überschreiben, Nachvollziehbarkeit/Historie, Wiederherstellen alter Stände, Branches für Releases/Features). Denkbar sind auch Begriffe („Erläutern Sie Branch und Merge“), ein Commit-Graph oder die Bewertung eines Team-Workflows.</div>
+
+  <!-- ===================== WZ-02 ===================== -->
+  <h3 id="e-02">WZ-02 · CI/CD &amp; Deployment <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfung: W22 T1 A1c (6 P: Durch manuelles Kompilieren und Bereitstellen gab es Probleme mit der Verfügbarkeit – ca) beschreiben, wie automatisierte Kompilierung und Bereitstellung umgesetzt werden können (2 P), cb) zwei Vorteile gegenüber der manuellen Bereitstellung nennen (4 P))</p>
+
+  <p><strong>Deployment</strong> (Bereitstellung) bezeichnet alle Schritte, mit denen eine neue Softwareversion auf eine Zielumgebung gebracht und dort in Betrieb genommen wird. Manuell heißt das oft: Ein Administrator baut die Software auf seinem Rechner, kopiert Dateien auf den Server, passt Konfigurationen von Hand an und startet Dienste neu. Jeder dieser Schritte kann vergessen oder falsch ausgeführt werden – typische Folgen sind Ausfälle, „bei mir lief es aber“ und Abhängigkeit von einer einzelnen Person.</p>
+
+  <h4>CI, Continuous Delivery, Continuous Deployment</h4>
+  <table class="kompakt">
+    <tr><th style="width:22%">Begriff</th><th>Bedeutung</th></tr>
+    <tr><td>Continuous Integration (CI)</td><td>Entwickler integrieren ihre Änderungen <strong>häufig</strong> (mindestens täglich) in den gemeinsamen Hauptzweig. Jede Integration (jeder Push/Pull Request) wird von einem CI-Server <strong>automatisch gebaut und getestet</strong>. Fehler fallen Minuten nach der Änderung auf, nicht erst Wochen später beim Release. Ein „roter“ Build wird sofort repariert.</td></tr>
+    <tr><td>Continuous Delivery (CD)</td><td>Erweitert CI: Jede Änderung, die alle Prüfungen besteht, wird automatisch zu einem <strong>auslieferbaren Artefakt</strong> verpackt und automatisch in Test-/Staging-Umgebungen installiert. Die Software ist jederzeit releasefähig; die Übernahme in die <strong>Produktion</strong> erfolgt per <strong>manueller Freigabe</strong> („auf Knopfdruck“), dann aber ebenfalls automatisiert.</td></tr>
+    <tr><td>Continuous Deployment</td><td>Wie Continuous Delivery, aber <strong>ohne manuelle Freigabe</strong>: Jede Änderung, die die Pipeline besteht, geht automatisch in Produktion. Setzt sehr gute automatisierte Tests und Überwachung voraus.</td></tr>
+  </table>
+
+  <figure>
+    <svg viewBox="0 0 740 270" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+      <defs>
+        <marker id="e02a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#222"/>
+        </marker>
+        <marker id="e02a-offen" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10" fill="none" stroke="#222" stroke-width="1.5"/>
+        </marker>
+      </defs>
+      <!-- Rückmeldung -->
+      <path d="M233,62 L233,30 L49,30 L49,58" fill="none" stroke="#222" stroke-dasharray="5,4" marker-end="url(#e02a-offen)"/>
+      <text x="141" y="24" text-anchor="middle" font-size="11">Fehler → Pipeline stoppt, Rückmeldung an Entwickler</text>
+      <!-- Stufen -->
+      <rect x="10" y="62" width="78" height="50" rx="4" fill="#eef3fa" stroke="#222"/>
+      <text x="49" y="84" text-anchor="middle">Commit /</text><text x="49" y="100" text-anchor="middle">Push</text>
+      <rect x="102" y="62" width="78" height="50" rx="4" fill="#fff" stroke="#222"/>
+      <text x="141" y="84" text-anchor="middle">Build</text><text x="141" y="100" text-anchor="middle" font-size="11">kompilieren</text>
+      <rect x="194" y="62" width="78" height="50" rx="4" fill="#fff" stroke="#222"/>
+      <text x="233" y="84" text-anchor="middle">Tests</text><text x="233" y="100" text-anchor="middle" font-size="11">Unit, Integr.</text>
+      <rect x="286" y="62" width="78" height="50" rx="4" fill="#fff" stroke="#222"/>
+      <text x="325" y="84" text-anchor="middle">Statische</text><text x="325" y="100" text-anchor="middle">Analyse</text>
+      <rect x="378" y="62" width="78" height="50" rx="4" fill="#fff" stroke="#222"/>
+      <text x="417" y="84" text-anchor="middle">Packaging</text><text x="417" y="100" text-anchor="middle" font-size="11">Artefakt</text>
+      <rect x="470" y="62" width="78" height="50" rx="4" fill="#fff" stroke="#222"/>
+      <text x="509" y="84" text-anchor="middle">Deploy</text><text x="509" y="100" text-anchor="middle">Staging</text>
+      <rect x="562" y="62" width="78" height="50" rx="4" fill="#fff" stroke="#222" stroke-dasharray="5,3"/>
+      <text x="601" y="84" text-anchor="middle">Freigabe</text><text x="601" y="100" text-anchor="middle" font-size="11">(manuell)</text>
+      <rect x="654" y="62" width="78" height="50" rx="4" fill="#fff" stroke="#222"/>
+      <text x="693" y="84" text-anchor="middle">Deploy</text><text x="693" y="100" text-anchor="middle">Produktion</text>
+      <!-- Pfeile -->
+      <line x1="88" y1="87" x2="101" y2="87" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <line x1="180" y1="87" x2="193" y2="87" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <line x1="272" y1="87" x2="285" y2="87" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <line x1="364" y1="87" x2="377" y2="87" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <line x1="456" y1="87" x2="469" y2="87" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <line x1="548" y1="87" x2="561" y2="87" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <line x1="640" y1="87" x2="653" y2="87" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <!-- Spannen -->
+      <path d="M10,135 L10,143 L364,143 L364,135" fill="none" stroke="#222"/>
+      <text x="187" y="160" text-anchor="middle" font-weight="bold">Continuous Integration</text>
+      <path d="M10,180 L10,188 L640,188 L640,180" fill="none" stroke="#222"/>
+      <text x="325" y="205" text-anchor="middle"><tspan font-weight="bold">Continuous Delivery</tspan>: jederzeit auslieferbar, Produktion auf Knopfdruck</text>
+      <path d="M10,225 L10,233 L732,233 L732,225" fill="none" stroke="#222"/>
+      <text x="371" y="250" text-anchor="middle"><tspan font-weight="bold">Continuous Deployment</tspan>: auch Produktion automatisch – ohne manuelle Freigabe</text>
+    </svg>
+    <figcaption>Abb. A-3: Typische Build-Pipeline und die Reichweite von CI, Continuous Delivery und Continuous Deployment</figcaption>
+  </figure>
+
+  <h4>Stufen einer Pipeline</h4>
+  <table class="kompakt">
+    <tr><th style="width:18%">Stufe</th><th>Was passiert?</th><th style="width:26%">Werkzeuge (Beispiele)</th></tr>
+    <tr><td>Auslöser</td><td>Push, Pull Request, Tag oder Zeitplan startet die Pipeline auf dem CI-Server; Code kommt immer aus der Versionsverwaltung.</td><td>GitLab CI/CD, GitHub Actions, Jenkins, Azure DevOps</td></tr>
+    <tr><td>Build</td><td>Abhängigkeiten laden, Quellcode kompilieren – in einer sauberen, immer gleichen Umgebung.</td><td>Maven, Gradle, npm, dotnet</td></tr>
+    <tr><td>Test</td><td>Unit-Tests, Integrationstests (z. B. gegen eine Test-Datenbank), ggf. Testabdeckung messen.</td><td>JUnit, pytest, Jest</td></tr>
+    <tr><td>Statische Analyse</td><td>Code prüfen, ohne ihn auszuführen: Stil, typische Fehlermuster, Sicherheitslücken, bekannte Schwachstellen in Abhängigkeiten.</td><td>SonarQube, Checkstyle, SpotBugs, ESLint, Dependency-Check</td></tr>
+    <tr><td>Packaging</td><td>Auslieferbares <strong>Artefakt</strong> erzeugen (JAR, App-Bundle, Container-Image), versionieren und in einem Repository/Registry ablegen.</td><td>Docker, Nexus, Container-Registry</td></tr>
+    <tr><td>Deploy</td><td>Artefakt per Skript in Test-, Staging- und Produktionsumgebung installieren, Datenbank migrieren, Smoke-Test.</td><td>Skripte, Kubernetes, Ansible, Flyway/Liquibase</td></tr>
+  </table>
+  <p>Schlägt eine Stufe fehl, <strong>stoppt die Pipeline</strong>: Nachfolgende Stufen laufen nicht, das Team wird benachrichtigt. Die Pipeline wird als Datei im Repository beschrieben („Pipeline as Code“) und damit selbst versioniert. Beispiel für ein Node.js-Projekt mit GitHub Actions:</p>
+  <pre class="yaml"># .github/workflows/ci.yml
+name: CI
+on: [push, pull_request]          # Auslöser
+jobs:
+  pruefen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4   # Code aus dem Repository holen
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci                 # Abhängigkeiten exakt nach Lock-Datei
+      - run: npm run lint           # statische Analyse
+      - run: npm test               # Unit-Tests</pre>
+
+  <h4>Build-Werkzeuge</h4>
+  <p>Ein <strong>Build-Tool</strong> automatisiert alles, was nötig ist, um aus Quellcode ein lauffähiges Produkt zu machen: <strong>Abhängigkeiten auflösen und herunterladen</strong> (inkl. transitiver Abhängigkeiten), <strong>kompilieren</strong>, <strong>Tests ausführen</strong>, <strong>Artefakte packen</strong> (JAR/WAR, APK), Dokumentation erzeugen, Versionen veröffentlichen. Weil der Ablauf in einer Datei beschrieben ist, baut jeder Rechner und der CI-Server das Projekt <strong>gleich</strong> (reproduzierbarer Build).</p>
+  <table class="kompakt">
+    <tr><th>Werkzeug</th><th>Konfiguration</th><th>Merkmale</th></tr>
+    <tr><td>Maven (Java)</td><td><code>pom.xml</code> (XML)</td><td>„Konvention vor Konfiguration“ (feste Ordnerstruktur <code>src/main/java</code>, <code>src/test/java</code>); fester Lebenszyklus <code>validate → compile → test → package → verify → install → deploy</code>: <code>mvn package</code> führt alle vorherigen Phasen mit aus. Bibliotheken aus Maven Central.</td></tr>
+    <tr><td>Gradle (Java, Kotlin, Android)</td><td><code>build.gradle(.kts)</code> (Groovy/Kotlin-DSL)</td><td>flexibel programmierbar, inkrementelle Builds und Build-Cache (schnell), Standard bei Android; Aufruf über den Wrapper <code>./gradlew build</code>.</td></tr>
+    <tr><td>npm (JavaScript/TypeScript)</td><td><code>package.json</code> + <code>package-lock.json</code></td><td>Paketverwaltung und Skripte (<code>npm run build</code>, <code>npm test</code>).</td></tr>
+  </table>
+
+  <h4>Umgebungen (Stages)</h4>
+  <p><strong>Entwicklung</strong> (lokal) → <strong>Test/Integration</strong> (automatische Tests) → <strong>Staging</strong> → <strong>Produktion</strong>. Die <strong>Staging-Umgebung</strong> ist eine möglichst exakte Kopie der Produktion (gleiche Betriebssystem- und Laufzeitversionen, gleiche Konfiguration, realistische, aber anonymisierte Daten). Dort werden Installation, Datenbankmigration und Abnahme (z. B. durch Fachbereich oder Kunden) geprüft, ohne echte Nutzer zu gefährden. Grundsatz <strong>„Build once, deploy many“</strong>: Dasselbe, einmal gebaute Artefakt wandert durch alle Umgebungen; nur die Konfiguration (Umgebungsvariablen, Secrets) unterscheidet sich.</p>
+
+  <h4>Vorteile automatisierter Bereitstellung</h4>
+  <div class="zweispaltig">
+    <ul>
+      <li><strong>Reproduzierbar und fehlerarm:</strong> Jeder Lauf führt dieselben Schritte in derselben Reihenfolge aus – nichts wird vergessen.</li>
+      <li><strong>Tests laufen immer:</strong> Ungetesteter oder fehlerhafter Code kommt nicht in die Produktion.</li>
+      <li><strong>Schneller und häufiger:</strong> kleine Änderungen statt großer Releases → geringeres Risiko, schnellere Fehlerbehebung.</li>
+      <li><strong>Frühe Fehlererkennung</strong> bei Integrationsproblemen.</li>
+    </ul>
+    <ul>
+      <li><strong>Unabhängig von Einzelpersonen:</strong> Das Wissen steckt im Skript, nicht im Kopf des Administrators.</li>
+      <li><strong>Nachvollziehbar:</strong> Protokoll, welche Version wann von wem freigegeben wurde.</li>
+      <li><strong>Schneller Rollback</strong> auf die vorherige Version.</li>
+      <li><strong>Höhere Verfügbarkeit</strong> und Entlastung des Teams (keine Wochenend-Einsätze).</li>
+    </ul>
+  </div>
+  <p>Nachteile/Aufwand: Einrichtung und Pflege der Pipeline und der Infrastruktur, Know-how, aussagekräftige automatische Tests sind Voraussetzung (eine Pipeline ohne gute Tests liefert Fehler nur schneller aus).</p>
+  <p><strong>Weitere Begriffe:</strong> <em>Rollback</em> = Zurück auf die letzte funktionierende Version. <em>Blue-Green-Deployment</em> = neue Version parallel aufbauen und dann umschalten. <em>Canary Release</em> = neue Version zuerst nur für einen kleinen Teil der Nutzer. <em>Secrets</em> (Passwörter, Schlüssel) gehören nie in die Pipeline-Datei oder das Repository, sondern in geschützte Variablen des CI-Systems bzw. einen Secret-Speicher.</p>
+
+  <h4>Container (Docker) im Deployment</h4>
+  <p>Ein <strong>Container-Image</strong> enthält die Anwendung <em>samt</em> Laufzeitumgebung (z. B. Java 21), Bibliotheken und Konfigurationsvorgaben. Aus dem Image werden Container gestartet – auf dem Entwicklerrechner, im Test und in der Produktion <strong>identisch</strong>. Damit verschwinden Fehler durch abweichende Umgebungen. Images werden in einer <strong>Registry</strong> abgelegt; viele Container werden mit Kubernetes orchestriert (verteilen, skalieren, neu starten). Beschrieben wird ein Image in einem <code>Dockerfile</code>:</p>
+  <pre># Dockerfile für das Projekt „Kassenbuch“
+# Basis-Image mit Java-21-Laufzeit
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+# gebaute Anwendung in das Image kopieren
+COPY target/kassenbuch.jar app.jar
+EXPOSE 8080
+# Startbefehl des Containers
+ENTRYPOINT ["java", "-jar", "app.jar"]</pre>
+  <p class="klein">Kommentare stehen im Dockerfile immer in einer eigenen Zeile.</p>
+  <table class="kompakt">
+    <tr><th></th><th>Container</th><th>Virtuelle Maschine (VM)</th></tr>
+    <tr><td>Inhalt</td><td>Anwendung + Bibliotheken; nutzt den <strong>Kernel des Host-Betriebssystems</strong> mit</td><td>komplettes Gast-Betriebssystem auf virtueller Hardware (Hypervisor)</td></tr>
+    <tr><td>Größe, Start</td><td>Megabytes, Start in Sekunden</td><td>Gigabytes, Start in Minuten</td></tr>
+    <tr><td>Isolation</td><td>Prozess-Isolation, geringer als bei VMs</td><td>stärker (eigener Kernel)</td></tr>
+  </table>
+
+  <h4>DevOps</h4>
+  <p><strong>DevOps</strong> (Development + Operations) ist eine Kultur bzw. Arbeitsweise, in der Entwicklung und Betrieb nicht getrennt „über den Zaun werfen“, sondern <strong>gemeinsam Verantwortung</strong> für die laufende Software übernehmen. Kernelemente: Automatisierung (CI/CD, Infrastructure as Code), kurze Feedbackschleifen, Messen und Überwachen im Betrieb (Monitoring, Logging), kleine und häufige Releases, „You build it, you run it“. CI/CD ist das wichtigste Werkzeug von DevOps.</p>
+
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>Continuous <strong>Delivery</strong> (Produktion mit manueller Freigabe) und Continuous <strong>Deployment</strong> (vollautomatisch) verwechseln. · CI ist kein Programm, sondern eine Praxis; Jenkins/GitLab sind nur Werkzeuge dafür. · Tests, deren Fehlschlag ignoriert wird (z. B. <code>allow_failure: true</code>), sind wertlos. · Passwörter im Klartext in der Pipeline-Datei.</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>W22 T1 A1c (6 P):</strong> Wegen manueller Kompilierung und Bereitstellung kam es zu Ausfällen. Erwartet war (ca) eine Beschreibung der Umsetzung: Code liegt in der Versionsverwaltung, ein CI/CD-Server baut bei jeder Änderung automatisch, führt Tests aus und verteilt das Ergebnis per Skript auf die Server; (cb) zwei Vorteile mit kurzer Erläuterung, z. B. weniger menschliche Fehler/reproduzierbar, Tests vor jeder Auslieferung, schnellere und häufigere Releases, Unabhängigkeit vom Administrator. Antworte immer mit Bezug auf das geschilderte Problem (hier: Verfügbarkeit).</div>
+
+  <!-- ===================== WZ-03 ===================== -->
+  <h3 id="e-03">WZ-03 · Softwarearchitektur <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfung: W22 T1 A2a (6 P: beschreiben, wie die 3-Schichten-Architektur bei einer Webanwendung typischerweise aussieht und wie die Komponenten zusammenarbeiten)</p>
+
+  <p>Die <strong>Softwarearchitektur</strong> beschreibt die grundlegende Struktur eines Systems: aus welchen <strong>Komponenten</strong> es besteht, welche <strong>Aufgabe</strong> jede hat und wie sie <strong>miteinander kommunizieren</strong>. Gute Architektur trennt Verantwortlichkeiten („Separation of Concerns“), damit Teile unabhängig geändert, getestet und ausgetauscht werden können.</p>
+
+  <h4>Client-Server, Thin Client und Fat Client</h4>
+  <p>Beim <strong>Client-Server-Modell</strong> bietet ein Server Dienste an (Daten, Berechnungen), Clients fordern sie an (Anfrage → Antwort, z. B. per HTTP). Wie viel Logik auf dem Client liegt, unterscheidet Thin und Fat Client:</p>
+  <table class="kompakt">
+    <tr><th></th><th>Thin Client</th><th>Fat (Rich) Client</th></tr>
+    <tr><td>Prinzip</td><td>Client zeigt nur an und nimmt Eingaben entgegen; Logik und Daten liegen auf dem Server</td><td>Client enthält einen großen Teil der Logik, oft auch lokale Daten</td></tr>
+    <tr><td>Beispiele</td><td>klassische Webanwendung im Browser, Terminal-Server</td><td>Desktop-Anwendung, App mit Offline-Modus und lokaler Datenbank</td></tr>
+    <tr><td>Vorteile</td><td>geringe Anforderungen an das Endgerät, Updates nur zentral auf dem Server, Daten zentral und sicher</td><td>offline nutzbar, schnelle Reaktion, entlastet Server und Netz, volle Nutzung der Gerätefunktionen</td></tr>
+    <tr><td>Nachteile</td><td>ohne Netz/Server nicht nutzbar, Serverlast, Latenz</td><td>Installation und Updates auf jedem Gerät, Daten müssen synchronisiert werden (Konflikte), höhere Geräteanforderungen</td></tr>
+  </table>
+
+  <h4>Schichtenarchitektur und 3-Schichten-Architektur</h4>
+  <p>In einer <strong>Schichtenarchitektur</strong> wird die Software in übereinanderliegende Schichten mit klaren Aufgaben zerlegt. Jede Schicht nutzt nur die Dienste der Schicht <strong>direkt darunter</strong> über definierte Schnittstellen und kennt die Schichten darüber nicht. Die klassische Aufteilung ist die <strong>3-Schichten-Architektur</strong>:</p>
+  <table class="kompakt">
+    <tr><th style="width:22%">Schicht</th><th>Aufgabe</th><th style="width:30%">Typische Technik</th></tr>
+    <tr><td><strong>Präsentationsschicht</strong> (Presentation Layer)</td><td>Benutzeroberfläche: Daten darstellen, Eingaben entgegennehmen, einfache Eingabeprüfung (Format, Pflichtfelder), Anfragen an die Logikschicht senden</td><td>Browser mit HTML/CSS/JavaScript, App-Oberfläche, Desktop-GUI</td></tr>
+    <tr><td><strong>Logikschicht</strong> (Business/Application Layer)</td><td>Geschäftsregeln und Abläufe: Berechnungen, fachliche Prüfungen, Rechte, Transaktionen steuern, Schnittstellen zu Fremdsystemen</td><td>Anwendungsserver, REST-API (Java/Spring, C#/ASP.NET, PHP, Node.js)</td></tr>
+    <tr><td><strong>Datenhaltungsschicht</strong> (Data Layer)</td><td>Daten dauerhaft und konsistent speichern, lesen, ändern, löschen; Integrität, Datensicherung</td><td>Datenbankserver (MySQL, PostgreSQL), Dateisystem; Zugriff per SQL</td></tr>
+  </table>
+  <figure>
+    <svg viewBox="0 0 740 340" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e03a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#222"/>
+        </marker>
+      </defs>
+      <!-- Schichtbeschriftung -->
+      <rect x="10" y="10" width="160" height="88" fill="#eef3fa" stroke="#222"/>
+      <text x="90" y="48" text-anchor="middle" font-weight="bold">Präsentation</text>
+      <text x="90" y="66" text-anchor="middle" font-size="12">Darstellung, Eingabe</text>
+      <rect x="10" y="122" width="160" height="104" fill="#eef3fa" stroke="#222"/>
+      <text x="90" y="168" text-anchor="middle" font-weight="bold">Logik</text>
+      <text x="90" y="186" text-anchor="middle" font-size="12">Geschäftsregeln</text>
+      <rect x="10" y="250" width="160" height="80" fill="#eef3fa" stroke="#222"/>
+      <text x="90" y="284" text-anchor="middle" font-weight="bold">Datenhaltung</text>
+      <text x="90" y="302" text-anchor="middle" font-size="12">Speicherung</text>
+      <!-- Schichtbänder -->
+      <rect x="185" y="10" width="545" height="88" fill="none" stroke="#999" stroke-dasharray="5,4"/>
+      <rect x="185" y="122" width="545" height="104" fill="none" stroke="#999" stroke-dasharray="5,4"/>
+      <rect x="185" y="250" width="545" height="80" fill="none" stroke="#999" stroke-dasharray="5,4"/>
+      <!-- Präsentation -->
+      <rect x="205" y="30" width="230" height="48" fill="#fff" stroke="#222"/>
+      <text x="320" y="50" text-anchor="middle">Browser: Ticket-Webshop</text>
+      <text x="320" y="68" text-anchor="middle" font-size="12">(HTML, CSS, JavaScript)</text>
+      <rect x="480" y="30" width="230" height="48" fill="#fff" stroke="#222"/>
+      <text x="595" y="50" text-anchor="middle">Kassen-App</text>
+      <text x="595" y="68" text-anchor="middle" font-size="12">(Theaterkasse, Tablet)</text>
+      <!-- Logik -->
+      <rect x="205" y="134" width="505" height="80" fill="#fff" stroke="#222"/>
+      <text x="457" y="152" text-anchor="middle" font-weight="bold">Anwendungsserver (REST-API)</text>
+      <rect x="218" y="164" width="104" height="36" fill="#fff" stroke="#222"/><text x="270" y="187" text-anchor="middle" font-size="12">Spielplan</text>
+      <rect x="334" y="164" width="110" height="36" fill="#fff" stroke="#222"/><text x="389" y="187" text-anchor="middle" font-size="12">Reservierung</text>
+      <rect x="456" y="164" width="120" height="36" fill="#fff" stroke="#222"/><text x="516" y="187" text-anchor="middle" font-size="12">Preisberechnung</text>
+      <rect x="588" y="164" width="110" height="36" fill="#fff" stroke="#222"/><text x="643" y="187" text-anchor="middle" font-size="12">Zahlung</text>
+      <!-- Daten -->
+      <ellipse cx="457" cy="266" rx="130" ry="9" fill="#fff" stroke="#222"/>
+      <path d="M327,266 L327,310 A130,9 0 0 0 587,310 L587,266" fill="#fff" stroke="#222"/>
+      <text x="457" y="292" text-anchor="middle">Datenbankserver</text>
+      <text x="457" y="308" text-anchor="middle" font-size="12">Vorstellungen, Plätze, Buchungen</text>
+      <!-- Kommunikation -->
+      <line x1="320" y1="80" x2="320" y2="132" stroke="#222" marker-start="url(#e03a-pfeil)" marker-end="url(#e03a-pfeil)"/>
+      <line x1="595" y1="80" x2="595" y2="132" stroke="#222" marker-start="url(#e03a-pfeil)" marker-end="url(#e03a-pfeil)"/>
+      <text x="457" y="112" text-anchor="middle" font-size="12">HTTPS: Anfrage → Antwort (JSON/HTML)</text>
+      <line x1="457" y1="216" x2="457" y2="255" stroke="#222" marker-start="url(#e03a-pfeil)" marker-end="url(#e03a-pfeil)"/>
+      <text x="467" y="240" font-size="12">SQL (Abfrage → Ergebnismenge)</text>
+    </svg>
+    <figcaption>Abb. A-4: 3-Schichten-Architektur am Beispiel eines Theater-Ticketshops</figcaption>
+  </figure>
+  <p><strong>Zusammenspiel</strong> (Beispiel „Platz buchen“): Der Nutzer wählt im Browser einen Platz; die Präsentationsschicht schickt eine HTTPS-Anfrage an den Anwendungsserver. Die Logikschicht prüft, ob der Platz frei ist, berechnet den Preis (Ermäßigung) und veranlasst die Speicherung: Sie sendet SQL-Befehle an die Datenhaltungsschicht, die die Buchung in der Datenbank speichert und das Ergebnis zurückmeldet. Die Logikschicht gibt eine Antwort (z. B. JSON mit Buchungsnummer) an die Präsentationsschicht, die sie dem Nutzer anzeigt. <strong>Die Präsentationsschicht greift nie direkt auf die Datenbank zu.</strong></p>
+  <p><strong>Schicht (Layer) vs. Stufe (Tier):</strong> Layer ist die <em>logische</em> Aufteilung des Codes, Tier die <em>physische</em> Verteilung auf Rechner. Drei Schichten können auf einem Rechner laufen; bei einer Webanwendung sind sie meist auf drei Stufen verteilt (Client-Rechner, Anwendungsserver, Datenbankserver) – deshalb auch „3-Tier“ bzw. allgemein n-Tier.</p>
+  <table class="kompakt">
+    <tr><th>Vorteile der Schichtenarchitektur</th><th>Nachteile</th></tr>
+    <tr><td>
+      <ul>
+        <li>Austauschbarkeit: z. B. neue App-Oberfläche oder anderes DBMS, ohne die anderen Schichten zu ändern</li>
+        <li>Wartbarkeit und Übersicht durch klare Zuständigkeiten</li>
+        <li>Wiederverwendung: Web und App nutzen dieselbe Logik</li>
+        <li>Testbarkeit: Schichten einzeln testen (z. B. Logik mit Test-Datenbank)</li>
+        <li>parallele Entwicklung durch spezialisierte Teams</li>
+        <li>Skalierbarkeit: Stufen einzeln auf mehrere Server verteilen</li>
+        <li>Sicherheit: Datenbank nur vom Anwendungsserver erreichbar</li>
+      </ul>
+    </td><td>
+      <ul>
+        <li>mehr Entwurfs- und Programmieraufwand (Schnittstellen, Datenobjekte)</li>
+        <li>Performance: Anfragen laufen durch alle Schichten, bei Verteilung zusätzlich Netzwerklatenz</li>
+        <li>kleine Änderungen (neues Feld) betreffen oft alle Schichten</li>
+        <li>für sehr kleine Anwendungen überdimensioniert</li>
+      </ul>
+    </td></tr>
+  </table>
+
+  <h4>MVC – Model View Controller</h4>
+  <p><strong>MVC</strong> ist ein Architektur- bzw. Entwurfsmuster für Anwendungen mit Benutzeroberfläche. Es trennt drei Verantwortlichkeiten:</p>
+  <ul>
+    <li><strong>Model:</strong> die fachlichen Daten <em>und</em> die zugehörige Geschäftslogik (Klassen wie <code>Medium</code>, Dienste wie <code>MedienKatalog</code>, Datenzugriff). Kennt weder View noch Controller.</li>
+    <li><strong>View:</strong> die Darstellung der Daten (HTML-Template, Fenster, Liste). Enthält keine Geschäftslogik.</li>
+    <li><strong>Controller:</strong> nimmt Benutzereingaben entgegen, ruft das Model auf und wählt die passende View aus. Er „steuert“, rechnet aber nicht selbst.</li>
+  </ul>
+  <figure>
+    <svg viewBox="0 0 740 300" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e03b-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#222"/>
+        </marker>
+        <marker id="e03b-offen" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10" fill="none" stroke="#222" stroke-width="1.5"/>
+        </marker>
+      </defs>
+      <rect x="10" y="115" width="130" height="60" fill="#fff" stroke="#222"/>
+      <text x="75" y="140" text-anchor="middle" font-weight="bold">Nutzer</text>
+      <text x="75" y="158" text-anchor="middle" font-size="12">(Browser)</text>
+      <rect x="285" y="15" width="190" height="62" fill="#eef3fa" stroke="#222"/>
+      <text x="380" y="40" text-anchor="middle" font-weight="bold">Controller</text>
+      <text x="380" y="60" text-anchor="middle" font-size="12">MedienController</text>
+      <rect x="570" y="110" width="160" height="72" fill="#eef3fa" stroke="#222"/>
+      <text x="650" y="134" text-anchor="middle" font-weight="bold">Model</text>
+      <text x="650" y="153" text-anchor="middle" font-size="12">MedienKatalog,</text>
+      <text x="650" y="169" text-anchor="middle" font-size="12">Medium</text>
+      <rect x="285" y="220" width="190" height="62" fill="#eef3fa" stroke="#222"/>
+      <text x="380" y="245" text-anchor="middle" font-weight="bold">View</text>
+      <text x="380" y="265" text-anchor="middle" font-size="12">trefferliste.html</text>
+      <!-- 1 -->
+      <line x1="140" y1="125" x2="284" y2="55" stroke="#222" marker-end="url(#e03b-pfeil)"/>
+      <text x="30" y="74" font-size="12">1 Eingabe: Suche „Krimi“</text>
+      <!-- 2 -->
+      <line x1="475" y1="40" x2="600" y2="109" stroke="#222" marker-end="url(#e03b-pfeil)"/>
+      <text x="548" y="52" font-size="12">2 suche("Krimi")</text>
+      <!-- 3 -->
+      <line x1="570" y1="140" x2="476" y2="72" stroke="#222" stroke-dasharray="5,3" marker-end="url(#e03b-offen)"/>
+      <text x="470" y="128" font-size="12">3 Trefferliste</text>
+      <!-- 4 -->
+      <line x1="380" y1="78" x2="380" y2="219" stroke="#222" marker-end="url(#e03b-pfeil)"/>
+      <text x="388" y="170" font-size="12">4 Daten übergeben,</text>
+      <text x="388" y="185" font-size="12">View auswählen</text>
+      <!-- 5 -->
+      <line x1="285" y1="250" x2="141" y2="168" stroke="#222" marker-end="url(#e03b-pfeil)"/>
+      <text x="120" y="235" font-size="12">5 HTML-Seite</text>
+    </svg>
+    <figcaption>Abb. A-5: MVC in einer Web-Anwendung (Bibliothekskatalog): Controller steuert, Model liefert Daten, View stellt dar</figcaption>
+  </figure>
+  <p>Vorteile von MVC: Darstellung lässt sich ändern oder ergänzen (z. B. zusätzliche Smartphone-Ansicht), ohne Geschäftslogik anzufassen; mehrere Views für dasselbe Model; Logik ist ohne Oberfläche testbar; Designer und Entwickler können parallel arbeiten. Im klassischen Desktop-MVC benachrichtigt das Model die View über Änderungen (Beobachter-Muster); in Web-Frameworks (Spring MVC, ASP.NET Core MVC, Laravel) übergibt der Controller die Daten an die View. Verwandte Muster: MVP, MVVM (z. B. bei Android, WPF, Angular).</p>
+  <div class="merke"><span class="kastentitel">Merke: MVC und 3 Schichten sind kein Widerspruch</span>Die 3-Schichten-Architektur gliedert das <strong>ganze System</strong> (Oberfläche – Logik – Daten, oft auf verschiedene Rechner verteilt). MVC ist ein <strong>Muster für die Struktur einer Anwendung mit Oberfläche</strong>. Beides wird kombiniert: View und Controller gehören zur Präsentationsschicht; das „Model“ entspricht der Logikschicht samt Datenzugriff auf die Datenhaltungsschicht.</div>
+
+  <h4>Monolith und Microservices</h4>
+  <table class="kompakt">
+    <tr><th></th><th>Monolith</th><th>Microservices</th></tr>
+    <tr><td>Aufbau</td><td>eine Anwendung, ein Deployment (intern ggf. in Module/Schichten gegliedert)</td><td>viele kleine, eigenständige Dienste je Fachbereich (z. B. Bestellung, Zahlung, Versand), jeder mit eigener Datenhaltung; Kommunikation über das Netz (REST, Messaging)</td></tr>
+    <tr><td>Vorteile</td><td>einfach zu entwickeln, testen, deployen und debuggen; keine Netzwerkkommunikation zwischen Teilen; Transaktionen einfach; ideal für kleine Teams und den Start</td><td>Dienste unabhängig deploy- und skalierbar; Ausfall eines Dienstes legt nicht alles lahm; Teams arbeiten unabhängig; Technologie je Dienst wählbar</td></tr>
+    <tr><td>Nachteile</td><td>wird groß und unübersichtlich; jede Änderung erfordert neues Deployment des Ganzen; nur als Ganzes skalierbar; Technologiewechsel schwer</td><td>hohe Komplexität: verteiltes System (Netzwerkfehler, Latenz), Datenkonsistenz über Dienste hinweg, aufwendiges Monitoring, Tests und Betrieb (Container, Orchestrierung); lohnt sich erst bei großen Systemen/Teams</td></tr>
+  </table>
+  <p>Ein guter Mittelweg ist der <strong>modulare Monolith</strong>: ein Deployment, intern aber streng in fachliche Module getrennt – bei Bedarf lassen sich einzelne Module später als Microservice herauslösen.</p>
+
+  <h4>So gehst du vor: Architektur aus einem Szenario ableiten und skizzieren</h4>
+  <ol>
+    <li><strong>Benutzergruppen und Endgeräte</strong> sammeln → Clients in der Präsentationsschicht (Browser, App, Kassen-Terminal).</li>
+    <li><strong>Fachliche Funktionen</strong> sammeln → Dienste/Komponenten der Logikschicht (meist ein Anwendungsserver mit REST-API).</li>
+    <li><strong>Daten</strong> sammeln → Datenbank(en) in der Datenhaltungsschicht; lokale Datenhaltung auf Clients (Offline) gesondert zeigen.</li>
+    <li><strong>Externe Systeme</strong> ergänzen (Zahlungsdienst, Kartendienst, ERP) – meist von der Logikschicht angesprochen.</li>
+    <li><strong>Verbindungen beschriften:</strong> Protokoll und Format (HTTPS/REST mit JSON, SQL, Datei-Export XML/CSV).</li>
+    <li>Schichten als Bänder oder Rahmen kennzeichnen und eine kurze Legende ergänzen.</li>
+  </ol>
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>Pfeil vom Browser direkt zur Datenbank. · Geschäftsregeln in der Oberfläche (z. B. Preisberechnung nur in JavaScript – leicht zu manipulieren; Prüfungen immer auch auf dem Server). · Das Model bei MVC nur als „Datenbank“ beschreiben – es enthält auch die Geschäftslogik. · Microservices als Allheilmittel empfehlen, obwohl das Team klein ist.</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>W22 T1 A2a (6 P):</strong> Beschreiben, wie die 3-Schichten-Architektur bei einer Webanwendung aussieht und wie die Komponenten zusammenarbeiten. Erwartet: die drei Schichten mit je einer Aufgabe und typischer Technik (je ca. 1 P) sowie der Ablauf einer Anfrage durch die Schichten und zurück (ca. 3 P). Eine Skizze ist hilfreich, ersetzt aber nicht die Beschreibung. Ebenso denkbar: Architektur für das Szenario skizzieren, Thin vs. Fat Client entscheiden, MVC-Rollen zuordnen.</div>
+
+  <!-- ===================== WZ-04 ===================== -->
+  <h3 id="e-04">WZ-04 · Compiler vs. Interpreter <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfung: W21 T1 A1a (6 P: aa) je eine Programmiersprache für Compiler- und Interpretersprachen nennen, ab) Unterschied beschreiben, ac) je einen Vor- und Nachteil eines Interpreters gegenüber einem Compiler nennen – je 2 P)</p>
+
+  <p>Ein Prozessor versteht nur <strong>Maschinencode</strong> (Befehle seines Befehlssatzes, z. B. x86-64 oder ARM). Programme in Hochsprachen müssen deshalb übersetzt werden. Dafür gibt es zwei Grundprinzipien – und Mischformen.</p>
+  <ul>
+    <li><strong>Compiler:</strong> übersetzt den <strong>gesamten Quellcode vor der Ausführung</strong> in Maschinencode (bzw. eine andere Zielsprache) und erzeugt eine ausführbare Datei. Ausgeführt wird später nur noch diese Datei – Quellcode und Compiler werden dafür nicht mehr gebraucht.</li>
+    <li><strong>Interpreter:</strong> liest den Quellcode <strong>zur Laufzeit</strong> Anweisung für Anweisung, übersetzt sie und führt sie sofort aus. Es entsteht keine ausführbare Datei; auf jedem Zielrechner muss der Interpreter installiert sein.</li>
+  </ul>
+  <figure>
+    <svg viewBox="0 0 740 330" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+      <defs>
+        <marker id="e04a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#222"/>
+        </marker>
+      </defs>
+      <!-- Spur 1 -->
+      <rect x="10" y="15" width="140" height="100" fill="#f3f4f6" stroke="#222"/>
+      <text x="80" y="58" text-anchor="middle" font-weight="bold" font-size="13">Kompiliert</text>
+      <text x="80" y="76" text-anchor="middle">C, C++, Go, Rust</text>
+      <rect x="165" y="25" width="85" height="44" fill="#fff" stroke="#222"/><text x="207" y="44" text-anchor="middle">Quellcode</text><text x="207" y="60" text-anchor="middle" font-size="11">.c</text>
+      <rect x="270" y="25" width="80" height="44" fill="#eef3fa" stroke="#222" stroke-width="2"/><text x="310" y="51" text-anchor="middle" font-weight="bold">Compiler</text>
+      <rect x="370" y="25" width="90" height="44" fill="#fff" stroke="#222"/><text x="415" y="44" text-anchor="middle">Objektcode</text><text x="415" y="60" text-anchor="middle" font-size="11">.o / .obj</text>
+      <rect x="480" y="25" width="70" height="44" fill="#eef3fa" stroke="#222" stroke-width="2"/><text x="515" y="51" text-anchor="middle" font-weight="bold">Linker</text>
+      <rect x="570" y="25" width="100" height="44" fill="#fff" stroke="#222"/><text x="620" y="44" text-anchor="middle">ausführbare</text><text x="620" y="60" text-anchor="middle">Datei (.exe)</text>
+      <rect x="690" y="25" width="45" height="44" fill="#fff" stroke="#222"/><text x="712" y="51" text-anchor="middle">CPU</text>
+      <rect x="465" y="84" width="100" height="26" fill="#fff" stroke="#222"/><text x="515" y="102" text-anchor="middle">Bibliotheken</text>
+      <line x1="250" y1="47" x2="269" y2="47" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <line x1="350" y1="47" x2="369" y2="47" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <line x1="460" y1="47" x2="479" y2="47" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <line x1="550" y1="47" x2="569" y2="47" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <line x1="670" y1="47" x2="689" y2="47" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <line x1="515" y1="84" x2="515" y2="70" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <text x="310" y="95" text-anchor="middle" font-size="11" fill="#555">einmal, vor der Ausführung</text>
+      <!-- Spur 2 -->
+      <rect x="10" y="130" width="140" height="80" fill="#f3f4f6" stroke="#222"/>
+      <text x="80" y="164" text-anchor="middle" font-weight="bold" font-size="13">Interpretiert</text>
+      <text x="80" y="182" text-anchor="middle">Python, PHP, JavaScript</text>
+      <rect x="165" y="148" width="85" height="44" fill="#fff" stroke="#222"/><text x="207" y="167" text-anchor="middle">Quellcode</text><text x="207" y="183" text-anchor="middle" font-size="11">.py</text>
+      <rect x="270" y="148" width="400" height="44" fill="#eef3fa" stroke="#222" stroke-width="2"/>
+      <text x="470" y="166" text-anchor="middle" font-weight="bold">Interpreter</text>
+      <text x="470" y="183" text-anchor="middle">Anweisung lesen → übersetzen → ausführen → nächste Anweisung</text>
+      <rect x="690" y="148" width="45" height="44" fill="#fff" stroke="#222"/><text x="712" y="174" text-anchor="middle">CPU</text>
+      <line x1="250" y1="170" x2="269" y2="170" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <line x1="670" y1="170" x2="689" y2="170" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <text x="470" y="206" text-anchor="middle" font-size="11" fill="#555">bei jeder Ausführung, zur Laufzeit</text>
+      <!-- Spur 3 -->
+      <rect x="10" y="225" width="140" height="95" fill="#f3f4f6" stroke="#222"/>
+      <text x="80" y="265" text-anchor="middle" font-weight="bold" font-size="13">Bytecode + VM</text>
+      <text x="80" y="283" text-anchor="middle">Java, Kotlin, C#</text>
+      <rect x="165" y="245" width="85" height="44" fill="#fff" stroke="#222"/><text x="207" y="264" text-anchor="middle">Quellcode</text><text x="207" y="280" text-anchor="middle" font-size="11">.java</text>
+      <rect x="270" y="245" width="80" height="44" fill="#eef3fa" stroke="#222" stroke-width="2"/><text x="310" y="271" text-anchor="middle" font-weight="bold">Compiler</text>
+      <rect x="370" y="245" width="90" height="44" fill="#fff" stroke="#222"/><text x="415" y="264" text-anchor="middle">Bytecode</text><text x="415" y="280" text-anchor="middle" font-size="11">plattformneutral</text>
+      <rect x="480" y="245" width="190" height="44" fill="#eef3fa" stroke="#222" stroke-width="2"/><text x="575" y="264" text-anchor="middle" font-weight="bold">Virtuelle Maschine</text><text x="575" y="280" text-anchor="middle">(Interpreter + JIT-Compiler)</text>
+      <rect x="690" y="245" width="45" height="44" fill="#fff" stroke="#222"/><text x="712" y="271" text-anchor="middle">CPU</text>
+      <line x1="250" y1="267" x2="269" y2="267" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <line x1="350" y1="267" x2="369" y2="267" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <line x1="460" y1="267" x2="479" y2="267" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <line x1="670" y1="267" x2="689" y2="267" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <text x="310" y="306" text-anchor="middle" font-size="11" fill="#555">vorab</text>
+      <text x="575" y="306" text-anchor="middle" font-size="11" fill="#555">zur Laufzeit, auf jeder Plattform mit VM</text>
+    </svg>
+    <figcaption>Abb. A-6: Drei Wege vom Quellcode zur Ausführung (blau, fett umrandet = Programm/Werkzeug, weiß = Datei)</figcaption>
+  </figure>
+
+  <table class="kompakt">
+    <tr><th style="width:20%">Merkmal</th><th>Compiler</th><th>Interpreter</th></tr>
+    <tr><td>Zeitpunkt</td><td>einmal vor der Ausführung (Übersetzungszeit)</td><td>bei jeder Ausführung (Laufzeit)</td></tr>
+    <tr><td>Ergebnis</td><td>ausführbare Datei in Maschinencode</td><td>keine Datei, direkte Ausführung</td></tr>
+    <tr><td>Geschwindigkeit</td><td><strong>schnelle Ausführung</strong>, Optimierung beim Übersetzen</td><td>langsamer, da während der Ausführung übersetzt wird</td></tr>
+    <tr><td>Fehlererkennung</td><td>Syntax- und Typfehler <strong>vor</strong> dem Start für das ganze Programm</td><td>Fehler erst, wenn die Zeile ausgeführt wird (ggf. erst nach Wochen in einem selten genutzten Zweig)</td></tr>
+    <tr><td>Entwicklung</td><td>nach jeder Änderung neu übersetzen</td><td><strong>schneller Test-Zyklus</strong>: ändern und sofort ausführen, interaktive Konsole (REPL)</td></tr>
+    <tr><td>Plattform</td><td>ausführbare Datei ist an Betriebssystem und Prozessor gebunden → je Plattform eigene Übersetzung</td><td><strong>Quellcode plattformunabhängig</strong>, sofern ein Interpreter für die Plattform existiert</td></tr>
+    <tr><td>Weitergabe</td><td>nur die ausführbare Datei, Quellcode bleibt geschützt; Zielrechner braucht keinen Compiler</td><td>Quellcode wird weitergegeben (einsehbar); Interpreter muss auf dem Zielrechner installiert sein</td></tr>
+  </table>
+
+  <h4>Mischformen: Bytecode, virtuelle Maschine und JIT</h4>
+  <p><strong>Java</strong> wird vom Compiler <code>javac</code> nicht in Maschinencode, sondern in plattformunabhängigen <strong>Bytecode</strong> (<code>.class</code>-Dateien, gebündelt als <code>.jar</code>) übersetzt. Diesen führt die <strong>Java Virtual Machine (JVM)</strong> aus: Sie interpretiert den Bytecode zunächst und übersetzt häufig genutzte Programmteile („Hotspots“) zur Laufzeit mit dem <strong>Just-in-time-Compiler (JIT)</strong> in optimierten Maschinencode. Ergebnis: „Write once, run anywhere“ (dieselbe <code>.jar</code> läuft auf jedem System mit passender JVM) bei fast nativer Geschwindigkeit. Genauso arbeiten C# und andere .NET-Sprachen (Zwischencode IL, Laufzeitumgebung CLR) und Kotlin. Auch Python erzeugt intern Bytecode (<code>.pyc</code>), gilt aber als interpretierte Sprache; JavaScript-Engines im Browser kombinieren Interpreter und JIT.</p>
+  <p>Ein <strong>Transpiler</strong> (Source-to-Source-Compiler) übersetzt eine Hochsprache in eine andere, z. B. <strong>TypeScript → JavaScript</strong> (<code>tsc</code>). Vorteil: Die strengere Ausgangssprache (statische Typen) findet Fehler beim Übersetzen; ausgeführt wird das erzeugte JavaScript.</p>
+  <div class="merke"><span class="kastentitel">Merke</span>„Kompiliert“ oder „interpretiert“ ist streng genommen eine Eigenschaft der <strong>Implementierung</strong>, nicht der Sprache. In der Prüfung zählen die typischen Zuordnungen: <strong>Compiler</strong>: C, C++, Go, Rust, Pascal · <strong>Interpreter</strong>: Python, PHP, JavaScript, Ruby, Shell/PowerShell · <strong>Bytecode + VM</strong>: Java, C#, Kotlin. Nennt man Java als Compilersprache, sollte man den Bytecode erwähnen.</div>
+
+  <h4>Der Übersetzungsvorgang im Detail</h4>
+  <ol>
+    <li><strong>Präprozessor</strong> (C/C++): bindet Header-Dateien ein (<code>#include</code>), ersetzt Makros.</li>
+    <li><strong>Compiler</strong>:
+      <ul>
+        <li><em>lexikalische Analyse</em>: Quelltext in Tokens zerlegen (Schlüsselwörter, Bezeichner, Zahlen, Operatoren),</li>
+        <li><em>Syntaxanalyse</em> (Parser): prüft die Grammatik und baut einen Syntaxbaum → <strong>Syntaxfehler</strong>,</li>
+        <li><em>semantische Analyse</em>: prüft Bedeutung, z. B. Typen, deklarierte Variablen → <strong>Typfehler</strong>,</li>
+        <li><em>Optimierung</em> und <em>Codeerzeugung</em>: Objektcode (Maschinencode mit noch offenen Verweisen).</li>
+      </ul>
+    </li>
+    <li><strong>Linker</strong> (Binder): verbindet die Objektdateien des Programms mit den benötigten <strong>Bibliotheken</strong>, löst Verweise auf Funktionen in anderen Dateien auf und erzeugt die <strong>ausführbare Datei</strong>.</li>
+    <li><strong>Loader</strong> (Betriebssystem): lädt die Datei beim Start in den Speicher.</li>
+  </ol>
+  <table class="kompakt">
+    <tr><th></th><th>Statisches Linken</th><th>Dynamisches Linken</th></tr>
+    <tr><td>Wie?</td><td>Bibliothekscode wird in die ausführbare Datei kopiert</td><td>Bibliothek (<code>.dll</code>, <code>.so</code>) wird erst beim Start/zur Laufzeit geladen</td></tr>
+    <tr><td>Vorteil</td><td>eigenständige Datei, keine fehlenden Bibliotheken auf dem Zielsystem</td><td>kleinere Programme, Bibliothek von mehreren Programmen gemeinsam genutzt, Sicherheitsupdate der Bibliothek wirkt ohne Neukompilierung</td></tr>
+    <tr><td>Nachteil</td><td>größere Datei; Fehler in der Bibliothek erfordern Neukompilierung</td><td>Bibliothek muss in passender Version vorhanden sein („DLL-Hölle“)</td></tr>
+  </table>
+
+  <h4>Fehlerarten</h4>
+  <table class="kompakt">
+    <tr><th style="width:18%">Fehlerart</th><th>Beschreibung</th><th style="width:30%">Beispiel (Java)</th><th style="width:22%">Erkannt …</th></tr>
+    <tr><td>Syntaxfehler</td><td>Verstoß gegen die Grammatik der Sprache</td><td><code>int x = 5</code> (Semikolon fehlt)</td><td>vom Compiler; beim Interpreter beim Einlesen</td></tr>
+    <tr><td>Semantischer Fehler / Typfehler</td><td>syntaktisch korrekt, aber unzulässig (falscher Typ, unbekannte Variable)</td><td><code>boolean ok = "ja";</code></td><td>bei statischer Typisierung vom Compiler; bei dynamischer Typisierung (Python) erst zur Laufzeit</td></tr>
+    <tr><td>Laufzeitfehler</td><td>Programm stürzt bei der Ausführung ab bzw. wirft eine Exception</td><td><code>int q = 10 / 0;</code> → ArithmeticException; <code>null</code>-Zugriff → NullPointerException</td><td>erst zur Laufzeit, nur wenn die Stelle erreicht wird</td></tr>
+    <tr><td>Logischer Fehler</td><td>Programm läuft, liefert aber falsche Ergebnisse</td><td><code>i &lt; n - 1</code> statt <code>i &lt; n</code> (letztes Element fehlt)</td><td>gar nicht automatisch – nur durch Tests, Debugging, Code-Review</td></tr>
+  </table>
+
+  <h4>Werkzeuge der Entwicklungsumgebung (IDE)</h4>
+  <p>Eine <strong>IDE</strong> (Integrated Development Environment, z. B. IntelliJ IDEA, Eclipse, Visual Studio, Android Studio; VS Code als erweiterbarer Editor) vereint die Werkzeuge der Entwicklung unter einer Oberfläche: Editor mit <strong>Syntaxhervorhebung</strong> und <strong>Autovervollständigung</strong>, <strong>Fehleranzeige schon beim Tippen</strong>, Compiler/Build-Integration (Maven, Gradle), <strong>Debugger</strong>, Test-Runner (JUnit), <strong>Refactoring</strong>-Funktionen (z. B. Methode umbenennen in allen Dateien), Code-Formatierung, Git-Integration, Navigation (zur Definition springen, Aufrufe finden), Profiler.</p>
+  <p>Mit dem <strong>Debugger</strong> wird ein Programm kontrolliert ausgeführt, um logische Fehler zu finden:</p>
+  <ul>
+    <li><strong>Haltepunkt (Breakpoint):</strong> Das Programm hält an einer gewählten Zeile an; <em>bedingter</em> Haltepunkt nur, wenn eine Bedingung gilt (z. B. <code>i == 99</code>).</li>
+    <li><strong>Schrittweise Ausführung:</strong> Step Over (nächste Zeile), Step Into (in die aufgerufene Methode hinein), Step Out (bis zum Ende der Methode), Resume (bis zum nächsten Haltepunkt).</li>
+    <li><strong>Variablen und Ausdrücke beobachten</strong> (Watches), Werte zur Laufzeit ändern, <strong>Aufrufstapel</strong> (Call Stack) ansehen.</li>
+  </ul>
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>„Ein Interpreter erzeugt eine Datei“ – nein. · „Kompilierte Programme laufen überall“ – nein, nur auf der Zielplattform; plattformunabhängig ist der <em>Quellcode</em> bzw. der Bytecode. · „Interpretierte Sprachen haben keine Fehlermeldungen“ – sie melden sie nur später. · Beim Vorteil/Nachteil immer die <strong>Richtung</strong> beachten: gefragt ist meist „Interpreter gegenüber Compiler“.</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>W21 T1 A1a (6 P):</strong> Bei der Vorbereitung eines Projekts sollen Compiler- und Interpretersprachen verglichen werden: aa) je eine Sprache nennen, ab) Unterschied beschreiben (Zeitpunkt der Übersetzung, ausführbare Datei ja/nein), ac) je einen Vor- und Nachteil des Interpreters (z. B. plattformunabhängig/schneller Test vs. langsamere Ausführung/Fehler erst zur Laufzeit). Vertiefungen wie Bytecode, JIT, Linker oder Fehlerarten sind naheliegende Varianten.</div>
+
+  <!-- ===================== WZ-05 ===================== -->
+  <h3 id="e-05">WZ-05 · Klassenbibliotheken, Frameworks &amp; Dokumentation <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfung: W21 T1 A1b (10 P: ba) einen Vorteil und einen Nachteil des Einsatzes einer umfassenden Klassenbibliothek beschreiben (4 P), bb) drei Aspekte beschreiben, die bei der Dokumentation einer eigenen Erweiterung der Bibliothek zu beachten sind (6 P))</p>
+
+  <p>Eine <strong>Klassenbibliothek</strong> ist eine Sammlung wiederverwendbarer, bereits getesteter Klassen und Methoden für wiederkehrende Aufgaben, z. B. die Java-Standardbibliothek (<code>java.util</code>, <code>java.time</code>), Bibliotheken für JSON, PDF-Erzeugung, Logging oder Diagramme. Die öffentlich nutzbaren Klassen und Methoden bilden die <strong>API</strong> (Application Programming Interface) der Bibliothek – nur auf sie darf sich der eigene Code verlassen; interne Details können sich ändern.</p>
+
+  <h4>Bibliothek oder Framework?</h4>
+  <figure>
+    <svg viewBox="0 0 740 215" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e05a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#222"/>
+        </marker>
+      </defs>
+      <text x="180" y="18" text-anchor="middle" font-weight="bold">Bibliothek</text>
+      <rect x="40" y="32" width="280" height="52" fill="#eef3fa" stroke="#222" stroke-width="2"/>
+      <text x="180" y="54" text-anchor="middle" font-weight="bold">Dein Programm</text>
+      <text x="180" y="72" text-anchor="middle" font-size="12">steuert den Ablauf</text>
+      <rect x="20" y="150" width="100" height="40" fill="#fff" stroke="#222"/><text x="70" y="175" text-anchor="middle" font-size="12">CSV lesen</text>
+      <rect x="130" y="150" width="100" height="40" fill="#fff" stroke="#222"/><text x="180" y="175" text-anchor="middle" font-size="12">PDF erzeugen</text>
+      <rect x="240" y="150" width="100" height="40" fill="#fff" stroke="#222"/><text x="290" y="175" text-anchor="middle" font-size="12">Datum rechnen</text>
+      <line x1="90" y1="84" x2="72" y2="149" stroke="#222" marker-end="url(#e05a-pfeil)"/>
+      <line x1="180" y1="84" x2="180" y2="149" stroke="#222" marker-end="url(#e05a-pfeil)"/>
+      <line x1="270" y1="84" x2="288" y2="149" stroke="#222" marker-end="url(#e05a-pfeil)"/>
+      <text x="186" y="122" font-size="12">ruft auf</text>
+      <text x="180" y="208" text-anchor="middle" font-size="12">Bibliotheksfunktionen (fremder Code)</text>
+
+      <line x1="370" y1="8" x2="370" y2="205" stroke="#bbb" stroke-dasharray="4,4"/>
+
+      <text x="560" y="18" text-anchor="middle" font-weight="bold">Framework</text>
+      <rect x="400" y="32" width="320" height="168" fill="#fff" stroke="#222"/>
+      <rect x="400" y="32" width="320" height="52" fill="#f3f4f6" stroke="#222"/>
+      <text x="560" y="54" text-anchor="middle" font-weight="bold">Framework (fremder Code)</text>
+      <text x="560" y="72" text-anchor="middle" font-size="12">steuert den Ablauf, z. B. HTTP-Anfrage annehmen</text>
+      <rect x="420" y="140" width="135" height="44" fill="#eef3fa" stroke="#222" stroke-width="2"/>
+      <text x="487" y="160" text-anchor="middle" font-size="12">Dein Code:</text><text x="487" y="176" text-anchor="middle" font-size="12">Controller-Methode</text>
+      <rect x="570" y="140" width="135" height="44" fill="#eef3fa" stroke="#222" stroke-width="2"/>
+      <text x="637" y="160" text-anchor="middle" font-size="12">Dein Code:</text><text x="637" y="176" text-anchor="middle" font-size="12">Test-Methode</text>
+      <line x1="487" y1="84" x2="487" y2="139" stroke="#222" marker-end="url(#e05a-pfeil)"/>
+      <line x1="637" y1="84" x2="637" y2="139" stroke="#222" marker-end="url(#e05a-pfeil)"/>
+      <text x="560" y="118" text-anchor="middle" font-size="12">ruft auf</text>
+    </svg>
+    <figcaption>Abb. A-7: Bibliothek – dein Code ruft fremden Code auf. Framework – der fremde Code ruft deinen Code auf (Inversion of Control)</figcaption>
+  </figure>
+  <p>Ein <strong>Framework</strong> ist ein Rahmengerüst, das den <strong>Ablauf und die Struktur</strong> der Anwendung vorgibt. Der Entwickler ergänzt nur fachlichen Code an vorgesehenen Stellen (Klassen ableiten, Interfaces implementieren, Annotationen wie <code>@GetMapping</code> oder <code>@Test</code>), und das Framework ruft diesen Code zur richtigen Zeit auf. Diese Umkehr der Steuerung heißt <strong>Inversion of Control</strong> („Hollywood-Prinzip: Don’t call us, we call you“). Beispiele: Spring/Spring Boot, Jakarta EE, ASP.NET Core, Angular, Django, Laravel, Android-SDK, JUnit.</p>
+
+  <h4>Vor- und Nachteile (umfangreicher) Klassenbibliotheken</h4>
+  <table class="kompakt">
+    <tr><th>Vorteile</th><th>Nachteile</th></tr>
+    <tr><td>
+      <ul>
+        <li><strong>Zeit- und Kostenersparnis:</strong> Standardaufgaben müssen nicht selbst programmiert werden; das Team konzentriert sich auf die Fachlogik.</li>
+        <li><strong>Erprobte Qualität:</strong> von vielen Nutzern getestet, weniger Fehler als eine Eigenentwicklung, Sonderfälle bedacht (z. B. Schaltjahre, Zeitzonen).</li>
+        <li><strong>Wartung durch Dritte:</strong> Fehlerbehebungen und Sicherheitsupdates kommen vom Hersteller bzw. der Community.</li>
+        <li><strong>Standardisierung:</strong> bekannte API, Dokumentation, Beispiele, neue Teammitglieder kennen sie oft schon.</li>
+      </ul>
+    </td><td>
+      <ul>
+        <li><strong>Abhängigkeit:</strong> von Weiterentwicklung, Updates, Lizenz und Fortbestand des Projekts bzw. Herstellers.</li>
+        <li><strong>Einarbeitungsaufwand</strong> in eine umfangreiche API.</li>
+        <li><strong>Overhead:</strong> nur ein kleiner Teil wird genutzt, die Anwendung wird größer und ggf. langsamer.</li>
+        <li><strong>Sicherheitslücken im Fremdcode</strong> betreffen die eigene Anwendung (z. B. Log4Shell in Log4j 2, Dezember 2021).</li>
+        <li><strong>Begrenzte Anpassbarkeit</strong>, Versionskonflikte zwischen Bibliotheken, ggf. Lizenzkosten oder -pflichten.</li>
+      </ul>
+    </td></tr>
+  </table>
+
+  <h4>Paketmanager und Abhängigkeiten</h4>
+  <p><strong>Paketmanager</strong> bzw. Build-Tools mit Abhängigkeitsverwaltung (Maven/Gradle für Java, npm für JavaScript, pip für Python, NuGet für .NET) erledigen: Bibliotheken in der angegebenen Version aus einem <strong>zentralen Repository</strong> (Maven Central, npm-Registry, PyPI) herunterladen, <strong>transitive Abhängigkeiten</strong> (Abhängigkeiten der Abhängigkeiten) automatisch mitladen, Versionskonflikte auflösen, Gültigkeitsbereiche trennen (z. B. Testbibliotheken nur zum Testen) und den Stand reproduzierbar machen (<strong>Lock-Datei</strong> wie <code>package-lock.json</code> hält die exakt verwendeten Versionen fest). Abhängigkeiten werden deklariert statt als JAR-Dateien ins Repository kopiert.</p>
+  <div class="zweispaltig">
+    <div>
+      <p class="codelabel">Beispiel package.json (npm)</p>
+      <pre>"dependencies": {
+  "express": "^4.19.2",
+  "dayjs":   "~1.11.10"
+},
+"devDependencies": {
+  "jest": "^29.7.0"
+}</pre>
+    </div>
+    <div>
+      <p><code>^4.19.2</code>: kompatible Updates erlaubt, also ≥ 4.19.2 und &lt; 5.0.0.<br><code>~1.11.10</code>: nur Patch-Updates, also ≥ 1.11.10 und &lt; 1.12.0.<br><code>devDependencies</code>: nur für Entwicklung/Test, nicht im ausgelieferten Produkt.</p>
+    </div>
+  </div>
+
+  <h4>Semantische Versionierung (SemVer)</h4>
+  <p>Versionsnummern der Form <strong>MAJOR.MINOR.PATCH</strong> (z. B. 4.19.2) mit festen Regeln:</p>
+  <table class="kompakt">
+    <tr><th style="width:18%">Teil erhöht</th><th>Bedeutung</th><th style="width:30%">Für Nutzer der Bibliothek</th></tr>
+    <tr><td>PATCH (4.19.<strong>3</strong>)</td><td>abwärtskompatible Fehlerbehebung</td><td>gefahrlos aktualisieren, keine Codeänderung</td></tr>
+    <tr><td>MINOR (4.<strong>20</strong>.0)</td><td>neue Funktionen, abwärtskompatibel; auch: Funktionen als veraltet (<em>deprecated</em>) markiert</td><td>ohne Codeänderung möglich; Deprecation-Warnungen beachten</td></tr>
+    <tr><td>MAJOR (<strong>5</strong>.0.0)</td><td>inkompatible Änderungen der API (Breaking Changes): Methoden entfernt/umbenannt, Verhalten geändert, neue Mindestvoraussetzungen</td><td>Änderungen am eigenen Code wahrscheinlich; Migrationshinweise lesen, gründlich testen</td></tr>
+  </table>
+  <p>Versionen <code>0.y.z</code> gelten als Anfangsentwicklung – dort kann sich alles jederzeit ändern. Vorabversionen werden angehängt: <code>2.0.0-beta.1</code>. Übliche Praxis: Veraltetes erst in einer MINOR-Version als deprecated markieren und frühestens in der nächsten MAJOR-Version entfernen.</p>
+
+  <h4>Risiken durch Abhängigkeiten und Gegenmaßnahmen</h4>
+  <table class="kompakt">
+    <tr><th>Risiko</th><th>Gegenmaßnahme</th></tr>
+    <tr><td>bekannte Sicherheitslücke in einer (auch transitiven) Abhängigkeit</td><td>automatischer Schwachstellen-Scan in der Pipeline (z. B. OWASP Dependency-Check, <code>npm audit</code>, Dependabot/Renovate), zügig aktualisieren, SBOM führen (→ WZ-06)</td></tr>
+    <tr><td>Projekt wird nicht mehr gepflegt / verschwindet (npm „left-pad“, 2016)</td><td>vor dem Einsatz Aktivität, Verbreitung, Maintainer prüfen; eigenes Artefakt-Repository als Zwischenspeicher (Nexus, Artifactory)</td></tr>
+    <tr><td>Breaking Change beim Update</td><td>Versionen festlegen bzw. Lock-Datei, SemVer beachten, Release Notes lesen, automatisierte Tests vor dem Update</td></tr>
+    <tr><td>Schadcode in Paketen (Lieferkettenangriff, Tippfehler-Pakete)</td><td>nur vertrauenswürdige Quellen, Prüfsummen/Signaturen, wenige und bekannte Abhängigkeiten</td></tr>
+    <tr><td>Lizenzpflichten (z. B. Copyleft)</td><td>Lizenz vor dem Einsatz prüfen (→ WZ-06)</td></tr>
+  </table>
+
+  <h4>Eine eigene Bibliothekserweiterung dokumentieren</h4>
+  <p>Wer eine Bibliothek um eigene Klassen erweitert, muss so dokumentieren, dass <strong>andere Entwickler</strong> (Zielgruppe!) die Erweiterung ohne Rückfrage korrekt einsetzen und später warten können. Worauf zu achten ist:</p>
+  <ul>
+    <li><strong>Vollständige API-Beschreibung</strong> jeder öffentlichen Klasse und Methode: Zweck, Parameter (Bedeutung, Einheit, gültiger Wertebereich, ob <code>null</code> erlaubt ist), Rückgabewert, mögliche Exceptions und wann sie auftreten, Seiteneffekte, ggf. Thread-Sicherheit.</li>
+    <li><strong>Bezug zur Originalbibliothek:</strong> Was wurde erweitert oder überschrieben, welches Verhalten weicht ab, mit welcher Version der Basisbibliothek ist die Erweiterung getestet/kompatibel?</li>
+    <li><strong>Versionierung und Änderungshistorie:</strong> eigene Versionsnummer (SemVer), Changelog, veraltete Methoden kennzeichnen (<code>@deprecated</code> mit Alternative), <code>@since</code>.</li>
+    <li><strong>Codebeispiele</strong> und Einstieg (Einbindung als Abhängigkeit, typische Verwendung).</li>
+    <li><strong>Form und Pflege:</strong> direkt im Quellcode (Javadoc), daraus HTML erzeugen; einheitliche Sprache und Begriffe, verständlich, aktuell halten – Dokumentation ist Teil jeder Änderung (Review!).</li>
+    <li><strong>Rechtliches/Organisatorisches:</strong> Lizenz der Basisbibliothek beachten (Hinweise, ggf. Offenlegungspflichten), Autor/Ansprechpartner.</li>
+  </ul>
+  <p class="codelabel">Beispiel: Javadoc-Kommentar</p>
+  <pre class="java">/**
+ * Berechnet den Bruttobetrag aus einem Nettobetrag.
+ * Das Ergebnis wird kaufmännisch auf zwei Nachkommastellen gerundet.
+ *
+ * &lt;p&gt;Beispiel: {@code berechneBrutto(new BigDecimal("100.00"), Steuersatz.ERMAESSIGT)}
+ * liefert {@code 107.00}.&lt;/p&gt;
+ *
+ * @param netto Nettobetrag in Euro; nicht {@code null} und nicht negativ
+ * @param satz  anzuwendender Steuersatz; nicht {@code null}
+ * @return Bruttobetrag in Euro mit zwei Nachkommastellen
+ * @throws IllegalArgumentException wenn {@code netto} negativ ist
+ * @since 1.4
+ * @see Steuersatz
+ */
+public static BigDecimal berechneBrutto(BigDecimal netto, Steuersatz satz) { … }</pre>
+  <p class="klein">Wichtige Javadoc-Tags: <code>@param</code>, <code>@return</code>, <code>@throws</code>, <code>@since</code>, <code>@deprecated</code>, <code>@see</code>, <code>{@code …}</code>, <code>{@link …}</code>. Daraus erzeugt das Werkzeug <code>javadoc</code> eine HTML-Referenz (entsprechend: XML-Kommentare in C#, Docstrings in Python, JSDoc).</p>
+  <p><strong>Erweitern statt ändern:</strong> Eine Bibliothek erweitert man über ihre vorgesehenen Erweiterungspunkte – eigene Unterklassen, Implementierung von Interfaces, Komposition/Wrapper (eigene Klasse benutzt die Bibliotheksklasse) – und nicht durch Ändern ihres Quellcodes. Sonst gehen die eigenen Änderungen beim nächsten Update der Bibliothek verloren oder Updates (auch Sicherheitsupdates) werden praktisch unmöglich (Open-Closed-Prinzip: offen für Erweiterung, geschlossen für Änderung).</p>
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>Bibliothek und Framework verwechseln (Kriterium ist, wer wen aufruft). · Bei „Vor- und Nachteil beschreiben“ nur ein Stichwort nennen – „beschreiben“ verlangt einen ganzen Satz mit Begründung. · Dokumentation nur als „Kommentare im Code“ beschreiben – gefragt sind <em>Inhalte</em> (Parameter, Rückgabe, Ausnahmen, Version, Beispiele) und <em>Zielgruppe</em>.</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>W21 T1 A1b (10 P):</strong> ba) Für die gewählte Sprache gibt es eine umfassende Klassenbibliothek – einen Vorteil und einen Nachteil beschreiben (je 2 P). bb) Die Bibliothek soll um eigene Klassen erweitert werden – drei Aspekte, die in der Dokumentation der Erweiterung zu beachten sind (je 2 P), z. B. Schnittstellen vollständig beschreiben, Versionierung/Kompatibilität, Beispiele, Verständlichkeit für die Zielgruppe, einheitliche Form (Javadoc).</div>
+
+  <!-- ===================== WZ-06 ===================== -->
+  <h3 id="e-06">WZ-06 · Open Source &amp; Lizenzen <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfung: W22 T1 A2c (9 P: ca) Begriff Open Source erläutern (3 P), cb) begründen, ob jede Open-Source-Bibliothek ohne Einschränkungen eingesetzt werden darf (2 P), cc) einen Vor- und einen Nachteil von Open-Source-Bibliotheken beschreiben (4 P))</p>
+
+  <h4>Was ist Open Source?</h4>
+  <p><strong>Open-Source-Software</strong> ist Software, deren <strong>Quellcode öffentlich zugänglich</strong> ist und deren <strong>Lizenz</strong> jedem erlaubt, sie <strong>für beliebige Zwecke zu nutzen, den Code zu untersuchen, zu verändern und – verändert oder unverändert – weiterzugeben</strong>. Welche Lizenzen das erfüllen, legt die <strong>Open Source Initiative (OSI)</strong> anhand der <em>Open Source Definition</em> fest. Deren zehn Kriterien zusammengefasst:</p>
+  <ul>
+    <li>freie Weitergabe (auch Verkauf als Teil einer Distribution) ohne Lizenzgebühr,</li>
+    <li>Quellcode muss verfügbar sein; veränderte und abgeleitete Werke müssen erlaubt sein (die Lizenz darf verlangen, dass Änderungen gekennzeichnet werden),</li>
+    <li>keine Diskriminierung von Personen, Gruppen oder Einsatzgebieten (auch kommerzielle Nutzung erlaubt),</li>
+    <li>die Rechte gelten für alle Empfänger, ohne Zusatzvertrag, und sind nicht an ein bestimmtes Produkt gebunden,</li>
+    <li>die Lizenz darf andere Software, die zusammen verbreitet wird, nicht einschränken und muss technologieneutral sein.</li>
+  </ul>
+  <p>Die Free Software Foundation spricht von <strong>Freier Software</strong> mit vier Freiheiten (benutzen, untersuchen, weitergeben, verbessern). Gemeint sind praktisch dieselben Lizenzen, die Begründung ist eher ethisch; zusammengefasst oft „FOSS“.</p>
+  <div class="merke"><span class="kastentitel">Merke</span>Open Source heißt <strong>nicht</strong> „rechtefrei“: Das Urheberrecht bleibt bei den Autoren. Nutzen darf man die Software nur, weil – und soweit – die Lizenz es erlaubt, und nur, wenn man ihre <strong>Bedingungen erfüllt</strong>. Software <strong>ohne Lizenzangabe</strong> (z. B. Code in einem öffentlichen Repository ohne LICENSE-Datei) darf man daher nicht einfach verwenden: Alle Rechte liegen beim Urheber.</div>
+
+  <h4>Abgrenzung zu anderen Software-Arten</h4>
+  <table class="kompakt">
+    <tr><th style="width:18%">Art</th><th>Beschreibung</th><th style="width:30%">Beispiel</th></tr>
+    <tr><td>Open Source</td><td>Quellcode offen; nutzen, ändern, weitergeben erlaubt (unter Lizenzbedingungen); meist kostenlos, kommerzielle Nutzung erlaubt</td><td>Linux, LibreOffice, Firefox, PostgreSQL</td></tr>
+    <tr><td>Freeware</td><td>kostenlos nutzbar, aber <strong>Quellcode nicht verfügbar</strong>, Veränderung verboten; Nutzung oft eingeschränkt (z. B. nur privat)</td><td>viele kostenlose Tools und Viewer</td></tr>
+    <tr><td>Shareware</td><td>darf zum Testen kostenlos genutzt und weitergegeben werden; nach Testzeitraum oder für den vollen Funktionsumfang kostenpflichtig; Quellcode nicht verfügbar</td><td>Testversionen von Packprogrammen, Tools</td></tr>
+    <tr><td>Proprietär / kommerziell</td><td>Hersteller behält alle Rechte, Nutzung nur gegen Lizenz (Kauf, Abo), Quellcode geheim, Weitergabe verboten</td><td>Microsoft Office, Adobe Photoshop</td></tr>
+    <tr><td>„Source available“</td><td>Quellcode einsehbar, aber Lizenz schränkt Nutzung ein (z. B. kein konkurrierendes Cloud-Angebot) – <strong>keine</strong> Open Source im Sinne der OSI</td><td>SSPL, Business Source License (BSL)</td></tr>
+  </table>
+
+  <h4>Lizenztypen: permissiv und Copyleft</h4>
+  <p>Kern der Unterscheidung ist die Frage, ob die Lizenz <strong>auf abgeleitete Werke „vererbt“</strong> wird. <strong>Copyleft</strong> bedeutet: Wer die Software verändert oder in eigene Software einbaut und <strong>weitergibt</strong>, muss das Ergebnis unter <strong>derselben Lizenz</strong> und <strong>mit Quellcode</strong> weitergeben.</p>
+  <figure>
+    <svg viewBox="0 0 740 230" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+      <defs>
+        <marker id="e06a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#222"/>
+        </marker>
+      </defs>
+      <rect x="10" y="10" width="172" height="170" rx="4" fill="#fff" stroke="#222"/>
+      <text x="96" y="32" text-anchor="middle" font-weight="bold" font-size="13">Permissiv</text>
+      <text x="96" y="50" text-anchor="middle">MIT, BSD, Apache 2.0</text>
+      <line x1="20" y1="60" x2="172" y2="60" stroke="#bbb"/>
+      <text x="20" y="80">Pflicht: Lizenztext und</text>
+      <text x="20" y="96">Copyright-Hinweis</text>
+      <text x="20" y="112">mitliefern</text>
+      <text x="20" y="140">Eigener Code: beliebige</text>
+      <text x="20" y="156">Lizenz, auch proprietär</text>
+
+      <rect x="192" y="10" width="172" height="170" rx="4" fill="#fff" stroke="#222"/>
+      <text x="278" y="32" text-anchor="middle" font-weight="bold" font-size="13">Schwaches Copyleft</text>
+      <text x="278" y="50" text-anchor="middle">LGPL, MPL 2.0, EPL 2.0</text>
+      <line x1="202" y1="60" x2="354" y2="60" stroke="#bbb"/>
+      <text x="202" y="80">Änderungen an der</text>
+      <text x="202" y="96">Bibliothek selbst unter</text>
+      <text x="202" y="112">gleicher Lizenz offenlegen</text>
+      <text x="202" y="140">Eigener Code, der sie nur</text>
+      <text x="202" y="156">nutzt: beliebige Lizenz</text>
+
+      <rect x="374" y="10" width="172" height="170" rx="4" fill="#eef3fa" stroke="#222"/>
+      <text x="460" y="32" text-anchor="middle" font-weight="bold" font-size="13">Starkes Copyleft</text>
+      <text x="460" y="50" text-anchor="middle">GPL-2.0, GPL-3.0</text>
+      <line x1="384" y1="60" x2="536" y2="60" stroke="#bbb"/>
+      <text x="384" y="80">Bei Weitergabe: gesamtes</text>
+      <text x="384" y="96">abgeleitetes Werk unter</text>
+      <text x="384" y="112">GPL, mit Quellcode</text>
+      <text x="384" y="140">Nur interne Nutzung:</text>
+      <text x="384" y="156">keine Offenlegungspflicht</text>
+
+      <rect x="556" y="10" width="172" height="170" rx="4" fill="#eef3fa" stroke="#222" stroke-width="2"/>
+      <text x="642" y="32" text-anchor="middle" font-weight="bold" font-size="13">Netzwerk-Copyleft</text>
+      <text x="642" y="50" text-anchor="middle">AGPL-3.0</text>
+      <line x1="566" y1="60" x2="718" y2="60" stroke="#bbb"/>
+      <text x="566" y="80">wie GPL, zusätzlich:</text>
+      <text x="566" y="96">Wer das (veränderte) Werk</text>
+      <text x="566" y="112">als Netzdienst anbietet,</text>
+      <text x="566" y="128">muss den Nutzern den</text>
+      <text x="566" y="144">Quellcode anbieten (SaaS)</text>
+
+      <line x1="10" y1="198" x2="728" y2="198" stroke="#222" stroke-width="1.5" marker-end="url(#e06a-pfeil)"/>
+      <text x="369" y="220" text-anchor="middle">zunehmende Pflichten für den eigenen Code (Reichweite des Copylefts)</text>
+    </svg>
+    <figcaption>Abb. A-8: Spektrum der Open-Source-Lizenzen</figcaption>
+  </figure>
+  <table class="kompakt">
+    <tr><th style="width:15%">Lizenz</th><th style="width:15%">Typ</th><th>Wichtigste Bedingungen</th><th style="width:22%">Bekannte Beispiele</th></tr>
+    <tr><td>MIT</td><td>permissiv</td><td>Copyright- und Lizenzhinweis in allen Kopien beibehalten; Haftungsausschluss. Sonst praktisch keine Pflichten.</td><td>React, jQuery</td></tr>
+    <tr><td>BSD (2-/3-Clause)</td><td>permissiv</td><td>wie MIT; 3-Clause zusätzlich: Namen der Autoren nicht ohne Erlaubnis für Werbung nutzen.</td><td>Programmiersprache Go</td></tr>
+    <tr><td>Apache 2.0</td><td>permissiv</td><td>Lizenztext beilegen, NOTICE-Datei weitergeben, Änderungen kennzeichnen; enthält ausdrückliche <strong>Patentlizenz</strong>.</td><td>Spring Framework, Kotlin, Android (AOSP)</td></tr>
+    <tr><td>LGPL (2.1/3.0)</td><td>schwaches Copyleft</td><td>Bibliothek darf von proprietärer Software genutzt (gelinkt) werden. Änderungen an der Bibliothek selbst müssen unter LGPL offengelegt werden; Nutzer müssen die Bibliothek gegen eine andere Version austauschen können (üblich: dynamisches Linken); Lizenztext und Bezugsquelle des Bibliotheks-Quellcodes mitliefern.</td><td>Qt (auch GPL/kommerziell), FFmpeg (Grundkonfiguration)</td></tr>
+    <tr><td>MPL 2.0</td><td>schwaches Copyleft (dateibezogen)</td><td>geänderte MPL-Dateien bleiben MPL und müssen offengelegt werden; eigene neue Dateien frei lizenzierbar.</td><td>Firefox</td></tr>
+    <tr><td>GPL (2.0/3.0)</td><td>starkes Copyleft</td><td>Wer das Programm oder ein darauf basierendes Werk (auch durch Einbinden einer GPL-Bibliothek) <strong>weitergibt</strong>, muss es als Ganzes unter GPL lizenzieren und den <strong>vollständigen Quellcode</strong> mitliefern oder anbieten. Verkaufen ist erlaubt, zusätzliche Einschränkungen nicht.</td><td>Linux-Kernel (GPL-2.0), WordPress, MySQL Community</td></tr>
+    <tr><td>AGPL-3.0</td><td>Netzwerk-Copyleft</td><td>wie GPL-3.0; zusätzlich gilt das Bereitstellen eines (veränderten bzw. darauf aufbauenden) Programms <strong>über ein Netzwerk</strong> als Auslöser: Den Nutzern des Dienstes muss der Quellcode angeboten werden. Schließt die „SaaS-Lücke“ der GPL.</td><td>Nextcloud, Grafana; iText (AGPL oder kommerziell)</td></tr>
+  </table>
+
+  <h4>Wann greift das Copyleft? – Weitergabe ist der Auslöser</h4>
+  <ul>
+    <li><strong>Weitergabe</strong> (Verbreitung) = Software verlässt die eigene Organisation: Verkauf, Download, App-Store, Auslieferung an Kunden, auch JavaScript, das an Browser ausgeliefert wird. Dann gelten die Pflichten der Lizenz.</li>
+    <li><strong>Nur interne Nutzung</strong> (auch verändert) und <strong>Betrieb auf dem eigenen Server</strong>, den Kunden nur über das Netz nutzen (SaaS): Bei MIT, LGPL und GPL entsteht <strong>keine</strong> Offenlegungspflicht – bei der <strong>AGPL schon</strong>.</li>
+    <li><strong>Werkzeuge</strong> wie Compiler, Git, Build-Server oder Datenbanken, die man nur <em>benutzt</em>, „infizieren“ den eigenen Code nicht, auch wenn sie unter GPL stehen.</li>
+  </ul>
+  <p><strong>Dual Licensing:</strong> Manche Hersteller bieten dieselbe Software unter einer Copyleft-Lizenz (GPL/AGPL) <em>und</em> gegen Gebühr unter einer kommerziellen Lizenz an. Wer den Quellcode nicht offenlegen will, kauft die kommerzielle Lizenz.</p>
+  <p><strong>Lizenzkompatibilität:</strong> Code unter permissiver Lizenz darf in GPL-Projekte übernommen werden (MIT → GPL: ja; Apache 2.0 → GPL-3.0: ja, aber nicht in „GPL-2.0-only“-Projekte). Umgekehrt nicht: GPL-Code darf nicht in ein MIT- oder proprietäres Projekt kopiert werden, weil die Lizenz des Ergebnisses dann GPL sein muss. GPL-2.0-only und GPL-3.0 sind untereinander nicht kompatibel („or later“-Klausel beachten).</p>
+
+  <h4>Vor- und Nachteile von Open-Source-Bibliotheken</h4>
+  <table class="kompakt">
+    <tr><th>Vorteile</th><th>Nachteile</th></tr>
+    <tr><td>
+      <ul>
+        <li>keine Lizenzkosten</li>
+        <li>Quellcode einsehbar: Funktionsweise und Sicherheit prüfbar, Fehler selbst analysierbar, anpassbar</li>
+        <li>große Community: viele Nutzer finden Fehler, schnelle Fehlerbehebung bei aktiven Projekten, Wissen im Netz</li>
+        <li>keine Abhängigkeit von einem Hersteller: bei Einstellung kann das Projekt weitergeführt (geforkt) werden</li>
+        <li>offene Standards und Formate</li>
+      </ul>
+    </td><td>
+      <ul>
+        <li>kein garantierter Support, keine Gewährleistung/Haftung (Haftungsausschluss in der Lizenz); Support nur über Community oder kostenpflichtige Drittanbieter</li>
+        <li>Lizenzpflichten müssen geprüft und eingehalten werden (Copyleft kann eigenen Code betreffen) – Aufwand für Compliance</li>
+        <li>Fortbestand unsicher (Projekt wird eingestellt, Lizenzwechsel)</li>
+        <li>Sicherheitslücken sind öffentlich sichtbar; Updates muss man selbst einspielen</li>
+        <li>schwankende Qualität und Dokumentation</li>
+      </ul>
+    </td></tr>
+  </table>
+
+  <h4>So gehst du vor: Darf diese Bibliothek eingesetzt werden?</h4>
+  <ol>
+    <li>Lizenz ermitteln (LICENSE-Datei, Paketangaben) – <strong>keine Lizenz = nicht verwenden</strong> bzw. Erlaubnis einholen.</li>
+    <li>Einsatz klären: Wird die Software <strong>weitergegeben</strong> (App, Download, Auslieferung an Kunden), nur <strong>intern</strong> genutzt oder als <strong>Netzdienst</strong> (SaaS) betrieben? Wird die Bibliothek verändert?</li>
+    <li>Lizenztyp prüfen: permissiv → Hinweise beilegen; schwaches Copyleft → Bibliothek unverändert und austauschbar einbinden, Änderungen offenlegen; GPL bei Weitergabe bzw. AGPL bei SaaS → mit proprietärem Geschäftsmodell nicht vereinbar → Alternative oder kommerzielle Lizenz.</li>
+    <li><strong>Transitive Abhängigkeiten</strong> und kommerzielle Lizenzbedingungen (Nutzerzahl, Weitergabe) ebenso prüfen.</li>
+    <li>Ergebnis dokumentieren (Lizenzliste/SBOM, Third-Party-Notices in der Anwendung); Prüfung in der Pipeline automatisieren.</li>
+  </ol>
+
+  <h4>Software Bill of Materials (SBOM)</h4>
+  <p>Eine <strong>SBOM</strong> („Stückliste“ der Software) ist eine maschinenlesbare, vollständige Liste aller Komponenten eines Softwareprodukts – einschließlich <strong>transitiver Abhängigkeiten</strong> – mit Name, Version, Hersteller/Herkunft, <strong>Lizenz</strong> und Prüfsumme. Gängige Formate sind <strong>SPDX</strong> und <strong>CycloneDX</strong>; Build-Werkzeuge erzeugen sie automatisch in der Pipeline. Nutzen: Wird eine Sicherheitslücke in einer Bibliothek bekannt, sieht man sofort, welche Produkte und Versionen betroffen sind; Lizenzprüfung und Weitergabe von Lizenzinformationen an Kunden; Transparenz in der Lieferkette. Der <strong>EU Cyber Resilience Act</strong> (Verordnung (EU) 2024/2847) verpflichtet Hersteller von Produkten mit digitalen Elementen u. a. dazu, die enthaltenen Komponenten und Schwachstellen zu dokumentieren und dafür eine SBOM in einem gängigen, maschinenlesbaren Format zu erstellen. Die Meldepflichten für aktiv ausgenutzte Schwachstellen gelten seit 11. September 2026, die übrigen Pflichten ab 11. Dezember 2027.</p>
+
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>„Open Source = Freeware“ – falsch: Freeware ist kostenlos, aber ohne Quellcode und ohne Änderungsrecht. · „GPL verbietet kommerzielle Nutzung“ – falsch: Verkauf ist erlaubt, nur der Quellcode muss bei Weitergabe mit. · „Jede Open-Source-Bibliothek darf ich uneingeschränkt nutzen“ – falsch: Die Lizenzbedingungen müssen eingehalten werden. · „Auf dem Server ist GPL immer unproblematisch“ – nicht bei der AGPL.</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>W22 T1 A2c (9 P):</strong> In einer Besprechung wurde diskutiert, ob es bei Open-Source-Bibliotheken Einschränkungen gibt. ca) Begriff Open Source erläutern (offener Quellcode, Nutzung/Veränderung/Weitergabe durch Lizenz erlaubt, 3 P). cb) Begründen, ob jede Open-Source-Bibliothek ohne Einschränkungen eingesetzt werden darf – erwartete Antwort: <strong>nein</strong>, die Lizenzbedingungen (z. B. Copyleft der GPL: Offenlegung des eigenen Quellcodes bei Weitergabe) sind zu beachten (2 P). cc) je einen Vor- und Nachteil beschreiben (je 2 P).</div>
+</section>
+
+<!-- ===================== TEIL B: BELEGSATZ ===================== -->
+<section class="teil" id="belegsatz">
+  <h2>B · Belegsatz</h2>
+  <p class="klein">Enthält nur, was dir auch die IHK beilegen würde: die Ausgangssituation und die Anlagen, auf die sich die Aufgaben beziehen. Notationshilfen legt die IHK für diese Themen nicht bei (die Belegsätze W21 und W22 enthielten nur UML, Pseudocode/Struktogramm und SQL). Alle Firmen, Personen und Bibliotheken sind frei erfunden; Lizenzen, Werkzeuge und Befehle sind real.</p>
+
+  <div class="anlage" id="anlage-1">
+    <h4>Anlage 1 · Ausgangssituation</h4>
+    <p><strong>Die Aufgaben dieses Blocks beziehen sich auf die folgende Ausgangssituation:</strong></p>
+    <p>Die <strong>Lindner Digital GmbH</strong> in Kassel ist ein Softwarehaus mit 45 Mitarbeitenden. Sie sind Auszubildende/r zum Fachinformatiker/zur Fachinformatikerin Anwendungsentwicklung im Team „Field Service“ (acht Entwicklerinnen und Entwickler, eine Testerin, ein Administrator; Teamleiter Markus Feld).</p>
+    <p>Das Team entwickelt für die <strong>Haustechnik Albers GmbH &amp; Co. KG</strong> (Heizung, Sanitär, Lüftung; sechs Niederlassungen in Nordhessen, 140 Monteurinnen und Monteure) die Software <strong>„MonteurPlus“</strong>:</p>
+    <ul>
+      <li><strong>Web-Disposition:</strong> Webanwendung, mit der die Disponenten im Browser Aufträge (Wartung, Reparatur, Notdienst) anlegen, einplanen und Monteuren zuweisen. Teil davon ist die interaktive <strong>Plantafel</strong> (Aufträge per Drag &amp; Drop auf Monteure und Tage ziehen).</li>
+      <li><strong>Monteur-App:</strong> Android-App für die Smartphones und Tablets der Monteure: Auftragsliste, Navigation, Materialerfassung, Fotos, Arbeitsbericht mit Unterschrift des Kunden. Die App muss auch in Kellern ohne Mobilfunkempfang funktionieren und gleicht ihre Daten später ab.</li>
+      <li><strong>Server:</strong> Java-Anwendung auf Basis des Frameworks Spring Boot mit Datenbank. Abgeschlossene Aufträge werden nachts an das ERP-System von Albers übergeben (Rechnungsstellung).</li>
+      <li><strong>Datenübernahme:</strong> einmaliger Import von ca. 60 000 Kunden- und Wartungsvertragsdatensätzen aus dem Altsystem (CSV-Export).</li>
+    </ul>
+    <p>Lindner Digital betreibt den Server im eigenen Rechenzentrum; Albers nutzt MonteurPlus über das Internet. Ab 2027 will Lindner Digital MonteurPlus auch <strong>anderen Handwerksbetrieben als Mietsoftware (Software as a Service)</strong> anbieten; die Monteur-App wird dann über den Google Play Store verteilt. Quellcode und Rechte an MonteurPlus sollen bei Lindner Digital bleiben (<strong>proprietäre Software</strong>).</p>
+    <p><strong>Bisherige Arbeitsweise:</strong> Der Quellcode lag bisher auf dem Netzlaufwerk <code>\\fs01\projekte\monteurplus</code>. Seit September 2026 liegt der Server-Code testweise in einem Git-Repository auf dem GitLab-Server von Lindner Digital (Anlage 3). Erstellung und Auslieferung neuer Versionen erledigt der Administrator von Hand (Anlage 4).</p>
+  </div>
+
+  <div class="anlage" id="anlage-2">
+    <h4>Anlage 2 · E-Mail des Teamleiters zur Versionsverwaltung</h4>
+    <div class="mail">
+      <div class="mailkopf"><strong>Von:</strong> Markus Feld · <strong>An:</strong> Team Field Service · <strong>Datum:</strong> 28.09.2026<br><strong>Betreff:</strong> Ab 1. Oktober: alle mit Git</div>
+      <p>Hallo zusammen,</p>
+      <p>nach dem Ärger letzte Woche (Lukas hat beim Kopieren auf das Netzlaufwerk Sarahs Änderungen am AuftragService überschrieben – zwei Tage Arbeit waren weg) stellen wir ab 1. Oktober komplett auf Git um. Damit es einfach bleibt, gelten folgende Regeln:</p>
+      <ol>
+        <li>Alle arbeiten ausschließlich mit Git und unserem GitLab-Server. Das Netzlaufwerk wird schreibgeschützt.</li>
+        <li>Alle arbeiten direkt auf dem Branch <code>main</code> und pushen, sobald etwas fertig ist. Branches brauchen wir bei acht Leuten nicht.</li>
+        <li>Code-Reviews kosten zu viel Zeit, die lassen wir weg. Frau Kaya testet ja vor jedem Release.</li>
+        <li>Damit niemand etwas verliert, committen wir einfach alles, was im Projektordner liegt – auch den Ordner <code>target/</code>, die IDE-Einstellungen (<code>.idea/</code>) und die <code>application-local.properties</code> mit den Zugangsdaten zur Testdatenbank.</li>
+        <li>Commit-Nachrichten sind freiwillig, jeder schreibt, was er will.</li>
+        <li>Releases markieren wir wie bisher: Projektordner als ZIP auf dem Netzlaufwerk ablegen, z. B. <code>monteurplus_v1.3_final2.zip</code>.</li>
+      </ol>
+      <p>Viele Grüße<br>Markus</p>
+    </div>
+  </div>
+
+  <div class="anlage" id="anlage-3">
+    <h4>Anlage 3 · Git-Repository des Servers (Stand 05.10.2026)</h4>
+    <pre class="konsole">$ git log --oneline --graph --all
+* 7d2e4b1 (HEAD -&gt; main, origin/main) MP-118: Auftragsliste nach Termin sortieren
+* 3c9a0f5 MP-112: REST-Endpunkt GET /auftraege/{id} ergänzt
+* e58b3d7 asdf
+* d0c4417 Zwischenstand Freitag
+* a41c9e2 fix
+* 19be7d0 Projektgerüst angelegt
+
+$ git show --stat a41c9e2
+commit a41c9e2b7f3d8e1c0a59b6d2f4e7c8a1b3d5e6f7
+Author: Lukas Brandt &lt;l.brandt@lindner-digital.example&gt;
+Date:   Tue Sep 15 16:42:10 2026 +0200
+
+    fix
+
+ src/main/java/de/lindner/monteurplus/auftrag/AuftragService.java | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)</pre>
+    <p>Inhalt der Änderung <code>a41c9e2</code> laut Ticket <strong>MP-109</strong>: Beim Speichern eines Auftrags ohne Kundenadresse trat eine NullPointerException auf. Jetzt prüft der AuftragService die Adresse und meldet „Kundenadresse fehlt“.</p>
+  </div>
+
+  <div class="anlage" id="anlage-4">
+    <h4>Anlage 4 · Bisherige Bereitstellung des Servers und Störungsprotokoll</h4>
+    <p>Alle zwei Wochen freitags ab 18 Uhr stellt der Administrator Herr Okafor eine neue Version bereit:</p>
+    <ol>
+      <li>Er kopiert den aktuellen Stand vom Netzlaufwerk auf seinen Rechner und erstellt die JAR-Datei mit seiner Entwicklungsumgebung.</li>
+      <li>Die automatischen Tests führt er aus, „wenn noch Zeit ist“.</li>
+      <li>Er lädt die JAR-Datei per SFTP auf den Produktivserver, stoppt den Dienst, ersetzt die Datei, passt bei Bedarf Konfigurationsdateien von Hand an und startet den Dienst neu.</li>
+      <li>Datenbankänderungen spielt er mit SQL-Skripten ein, die ihm die Entwickler per E-Mail schicken.</li>
+    </ol>
+    <table class="kompakt">
+      <caption>Störungsprotokoll MonteurPlus (Auszug)</caption>
+      <tr><th style="width:14%">Datum</th><th style="width:34%">Störung</th><th>Ursache (laut Nachbetrachtung)</th></tr>
+      <tr><td>05.06.2026</td><td>Server startet nach dem Update nicht (<code>UnsupportedClassVersionError</code>)</td><td>auf dem Rechner des Administrators war Java 21 installiert, auf dem Produktivserver Java 17</td></tr>
+      <tr><td>19.06.2026</td><td>Auftragsliste in der App bleibt leer</td><td>SQL-Skript für eine neue Spalte wurde nicht eingespielt</td></tr>
+      <tr><td>03.07.2026</td><td>Fotos können nicht gespeichert werden</td><td>ein unfertiger, ungetesteter Stand eines Entwicklers lag mit auf dem Netzlaufwerk und wurde ausgeliefert</td></tr>
+      <tr><td>17.07.2026</td><td>3 Stunden Ausfall am Freitagabend</td><td>Administrator krank; die Vertretung kannte den Ablauf nicht und vergaß, den Dienst neu zu starten</td></tr>
+    </table>
+  </div>
+
+  <div class="anlage" id="anlage-5">
+    <h4>Anlage 5 · Pipeline des Servers (<code>.gitlab-ci.yml</code>, seit Oktober 2026 im Einsatz)</h4>
+    <pre class="yaml"># .gitlab-ci.yml – MonteurPlus Server (Spring Boot, Java 21)
+stages:
+  - build
+  - test
+  - analyse
+  - package
+  - staging
+  - production
+
+default:
+  image: maven:3.9-eclipse-temurin-21
+
+build:
+  stage: build
+  script:
+    - mvn -B compile
+
+unit-tests:
+  stage: test
+  script:
+    - mvn -B test
+  artifacts:
+    reports:
+      junit: target/surefire-reports/TEST-*.xml
+
+integration-tests:
+  stage: test
+  services:
+    - postgres:16
+  variables:
+    POSTGRES_DB: monteurplus_test
+    POSTGRES_USER: ci
+    POSTGRES_PASSWORD: $TEST_DB_PASSWORT    # geschützte CI/CD-Variable
+  script:
+    - mvn -B verify -P integrationstest
+
+code-analyse:
+  stage: analyse
+  script:
+    - mvn -B compile checkstyle:check spotbugs:check
+
+package:
+  stage: package
+  image: docker:27
+  services:
+    - docker:27-dind
+  script:
+    # Das Dockerfile baut die JAR-Datei und verpackt sie mit Java 21 in ein Image
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin "$CI_REGISTRY"
+    - docker build -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA" .
+    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA"
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+
+deploy-staging:
+  stage: staging
+  script:
+    - ./deploy.sh staging "$CI_COMMIT_SHORT_SHA"
+  environment: staging
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+
+deploy-production:
+  stage: production
+  script:
+    - ./deploy.sh production "$CI_COMMIT_SHORT_SHA"
+  environment: production
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: manual</pre>
+    <table class="kompakt">
+      <caption>Hinweise zur Syntax von GitLab CI/CD</caption>
+      <tr><th style="width:30%">Element</th><th>Bedeutung</th></tr>
+      <tr><td><code>stages</code></td><td>Reihenfolge der Stufen. Alle Jobs einer Stage laufen parallel; die nächste Stage startet erst, wenn alle Jobs der vorherigen Stage erfolgreich waren. Schlägt ein Job fehl, gilt die Pipeline als fehlgeschlagen.</td></tr>
+      <tr><td><code>script</code></td><td>Befehle, die der Job nacheinander ausführt</td></tr>
+      <tr><td><code>image</code>, <code>services</code></td><td>Container-Image, in dem der Job läuft, bzw. zusätzlich gestartete Container (z. B. Datenbank)</td></tr>
+      <tr><td><code>rules: - if: …</code></td><td>Job wird nur in die Pipeline aufgenommen, wenn die Bedingung erfüllt ist. Jobs ohne <code>rules</code> laufen bei jedem Push auf jeden Branch.</td></tr>
+      <tr><td><code>when: manual</code></td><td>Job startet erst, wenn ihn eine berechtigte Person in GitLab per Klick auslöst</td></tr>
+      <tr><td><code>allow_failure: true</code></td><td>ein Fehlschlag dieses Jobs hält die Pipeline nicht an</td></tr>
+      <tr><td><code>$CI_COMMIT_BRANCH</code>, <code>$CI_COMMIT_SHORT_SHA</code></td><td>vordefinierte Variablen: Branch der Pipeline, Kurz-ID des Commits</td></tr>
+      <tr><td><code>environment</code></td><td>Zielumgebung, in GitLab mit Versionshistorie angezeigt</td></tr>
+    </table>
+  </div>
+
+  <div class="anlage" id="anlage-6">
+    <h4>Anlage 6 · Pipeline-Entwurf für die Monteur-App (Kollege Jonas Weber)</h4>
+    <pre class="yaml"># .gitlab-ci.yml – Monteur-App (Android) – Entwurf J. Weber
+image: registry.lindner.example/android-build:35
+
+variables:
+  KEYSTORE_PASSWORT: "Albers2026!"          # Passwort des App-Signaturschlüssels
+  PLAY_STORE_ZUGANG: "pl4y-st0re-7731-mp"   # Zugang zum Play-Store-Konto
+
+stages:
+  - build
+  - test
+  - deploy
+
+build-app:
+  stage: build
+  script:
+    - ./gradlew assembleRelease
+
+unit-tests:
+  stage: test
+  script:
+    - ./gradlew testReleaseUnitTest
+  allow_failure: true        # damit die Pipeline nicht so oft rot ist
+
+deploy-playstore:
+  stage: deploy
+  script:
+    - ./gradlew publishReleaseBundle --track production</pre>
+    <p class="klein">Die Datei liegt im Repository der Monteur-App, auf das alle 45 Mitarbeitenden Lesezugriff haben. <code>publishReleaseBundle --track production</code> baut das App-Bundle und veröffentlicht es im Google Play Store für alle Nutzer.</p>
+  </div>
+
+  <div class="anlage" id="anlage-7">
+    <h4>Anlage 7 · Architekturbeschreibung MonteurPlus (Entwurf 0.3)</h4>
+    <table class="kompakt">
+      <tr><th style="width:22%">Komponente</th><th>Beschreibung</th></tr>
+      <tr><td>Web-Disposition</td><td>läuft im Browser der Disponenten (Windows-PCs). Die Seiten (z. B. Auftragsübersicht) erzeugt der Server mit Spring MVC und HTML-Templates; die Plantafel ist ein TypeScript-Modul im Browser, das Daten über die REST-API lädt und speichert.</td></tr>
+      <tr><td>Monteur-App</td><td>Android-App (Kotlin) mit lokaler SQLite-Datenbank für den Offline-Betrieb (Aufträge der Woche, Material, Berichte, Fotos). Sobald eine Verbindung besteht, gleicht die App ihre Daten über die REST-API ab (HTTPS, JSON).</td></tr>
+      <tr><td>Anwendungsserver</td><td>Spring-Boot-Anwendung (Java 21) als Container auf einem Linux-Server im Rechenzentrum von Lindner Digital. Enthält: REST-API für App und Plantafel; Web-Controller und Templates der Web-Disposition; Dienste (Services) Auftragsverwaltung, Einsatzplanung, Synchronisation und Berichtserstellung (PDF); Datenzugriffsklassen (Repositories), die per SQL auf die Datenbank zugreifen.</td></tr>
+      <tr><td>Datenbankserver</td><td>PostgreSQL 16: Kunden, Wartungsverträge, Aufträge, Monteure, Material, Arbeitsberichte. Nur vom Anwendungsserver erreichbar.</td></tr>
+      <tr><td>Kartendienst (extern)</td><td>Geokodierung von Adressen und Berechnung von Fahrzeiten; Zugriff des Servers über eine HTTPS-API (JSON).</td></tr>
+      <tr><td>ERP-System Albers (extern)</td><td>erhält jede Nacht die abgeschlossenen Aufträge als XML-Datei per SFTP.</td></tr>
+    </table>
+    <table class="kompakt">
+      <caption>Bestandteile der Funktion „Auftragsübersicht“ der Web-Disposition</caption>
+      <tr><th style="width:26%">Bestandteil</th><th>Beschreibung</th></tr>
+      <tr><td><code>auftragsliste.html</code></td><td>HTML-Template; erzeugt die Tabelle der Aufträge und das Filterformular (Status, Niederlassung)</td></tr>
+      <tr><td><code>auftragsliste.css</code></td><td>Gestaltung der Tabelle, z. B. rote Zeilen für Notdienst-Aufträge</td></tr>
+      <tr><td><code>AuftragController</code></td><td>nimmt die Anfrage <code>GET /auftraege?status=OFFEN&amp;niederlassung=Kassel</code> entgegen, ruft den <code>AuftragService</code> auf und übergibt die Ergebnisliste an das Template</td></tr>
+      <tr><td><code>AuftragService</code></td><td>fachliche Logik: Aufträge filtern, nach Termin und Priorität sortieren, überfällige Aufträge kennzeichnen</td></tr>
+      <tr><td><code>Auftrag</code></td><td>Klasse mit den Auftragsdaten (Auftragsnummer, Kunde, Termin, Status, Priorität, zugewiesener Monteur)</td></tr>
+      <tr><td><code>AuftragRepository</code></td><td>liest und speichert Aufträge per SQL in der Datenbank</td></tr>
+    </table>
+  </div>
+
+  <div class="anlage" id="anlage-8">
+    <h4>Anlage 8 · Programmiersprachen und Werkzeuge im Projekt</h4>
+    <table class="kompakt">
+      <tr><th style="width:30%">Teil</th><th style="width:18%">Sprache</th><th>Werkzeuge / Laufzeitumgebung</th></tr>
+      <tr><td>Server</td><td>Java 21</td><td>IntelliJ IDEA, Maven, <code>javac</code>; Ausführung auf der JVM (Eclipse Temurin 21) im Container</td></tr>
+      <tr><td>Plantafel der Web-Disposition</td><td>TypeScript 5</td><td>VS Code, npm, TypeScript-Compiler <code>tsc</code>; Ausführung im Browser</td></tr>
+      <tr><td>Monteur-App</td><td>Kotlin</td><td>Android Studio, Gradle</td></tr>
+      <tr><td>Datenübernahme (einmalig, ca. 60 000 Datensätze aus CSV-Dateien; Laufzeit unkritisch, wird über Nacht ausgeführt)</td><td>noch offen: Python oder C++</td><td>–</td></tr>
+      <tr><td>Kommandozeilenprogramm <code>mp-export</code>: wandelt die Lagerbestandsdateien der Niederlassungen in das Importformat von MonteurPlus um; läuft auf den Windows-PCs der Lager und auf einem Linux-Server</td><td>Go</td><td>Go-Compiler (<code>go build</code>); Ergebnis soll eine einzelne ausführbare Datei ohne weitere Installation sein</td></tr>
+    </table>
+    <p class="klein">Entwicklerrechner: Windows 11 · Server: Linux (Ubuntu) mit Container-Laufzeit</p>
+  </div>
+
+  <div class="anlage" id="anlage-9" style="break-before: page">
+    <h4>Anlage 9 · Abhängigkeiten des Servers und Release Notes der Bibliothek TerminKern</h4>
+    <p class="codelabel">pom.xml (Auszug)</p>
+    <pre>&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;de.example.terminkern&lt;/groupId&gt;
+    &lt;artifactId&gt;terminkern&lt;/artifactId&gt;
+    &lt;version&gt;2.4.1&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;com.example.pdf&lt;/groupId&gt;
+    &lt;artifactId&gt;pdfmaker-core&lt;/artifactId&gt;
+    &lt;version&gt;7.1.0&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+    &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;</pre>
+    <p class="codelabel">Ausgabe von mvn dependency:tree (gekürzt)</p>
+    <pre class="konsole">[INFO] de.lindner:monteurplus-server:jar:1.3.0
+[INFO] +- org.springframework.boot:spring-boot-starter-web:jar:3.5.6:compile
+[INFO] |  \- (… 27 weitere Bibliotheken …)
+[INFO] +- de.example.terminkern:terminkern:jar:2.4.1:compile
+[INFO] |  +- org.example.kalender:feiertage-de:jar:1.8.0:compile
+[INFO] |  \- org.example.json:json-mini:jar:0.9.2:compile
+[INFO] +- com.example.pdf:pdfmaker-core:jar:7.1.0:compile
+[INFO] \- org.junit.jupiter:junit-jupiter:jar:5.12.2:test</pre>
+    <p class="klein">Der Server-Code verwendet die Methode <code>Kalender.feiertage(int jahr)</code> von TerminKern an 14 Stellen.</p>
+    <div class="englisch">
+      <p><strong>TerminKern – Release Notes (excerpt)</strong><br>TerminKern follows Semantic Versioning 2.0.0.</p>
+      <p><strong>3.0.0</strong> (2026-10-01)</p>
+      <ul>
+        <li>BREAKING: Java 21 is now the minimum required version.</li>
+        <li>BREAKING: The package <code>de.example.terminkern</code> has been renamed to <code>de.example.termin</code>.</li>
+        <li>BREAKING: The deprecated method <code>Kalender.feiertage(int jahr)</code> has been removed.</li>
+        <li>New: time zone support for appointments.</li>
+      </ul>
+      <p><strong>2.5.0</strong> (2026-09-01)</p>
+      <ul>
+        <li>New: <code>Kalender.istBrueckentag(LocalDate)</code> detects bridge days between a public holiday and a weekend.</li>
+        <li>Deprecated: <code>Kalender.feiertage(int jahr)</code>. Use <code>Kalender.feiertage(Year jahr, Bundesland land)</code> instead. The old method will be removed in the next major release.</li>
+      </ul>
+      <p><strong>2.4.2</strong> (2026-08-12)</p>
+      <ul>
+        <li>Fixed: Easter Monday was calculated incorrectly for some years after 2100.</li>
+        <li>Security: Updated the dependency json-mini from 0.9.2 to 0.9.3. Version 0.9.2 can be forced into an endless loop by deeply nested JSON input (denial of service).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="anlage" id="anlage-10">
+    <h4>Anlage 10 · Erweiterung der Bibliothek TerminKern für MonteurPlus</h4>
+    <pre class="java">package de.lindner.monteurplus.termin;
+
+import de.example.terminkern.Bundesland;
+import de.example.terminkern.Kalender;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Optional;
+
+// Erweiterung von TerminKern 2.4.1 für MonteurPlus
+public class EinsatzKalender extends Kalender {
+
+    private static final int MAX_TAGE = 30;
+    private final Arbeitszeitmodell modell;
+
+    public EinsatzKalender(Bundesland land, Arbeitszeitmodell modell) {
+        super(land);
+        this.modell = modell;
+    }
+
+    // sucht termin
+    public Optional&lt;LocalDateTime&gt; naechsterFreierTermin(
+            Monteur m, LocalDate ab, Duration dauer, boolean notdienst) {
+        if (dauer.isNegative() || dauer.isZero()) {
+            throw new IllegalArgumentException("dauer");
+        }
+        LocalDate tag = ab;
+        for (int i = 0; i &lt; MAX_TAGE; i++) {
+            if (notdienst || (!istFeiertag(tag) &amp;&amp; modell.istArbeitstag(tag))) {
+                Optional&lt;LocalDateTime&gt; slot =
+                        m.getEinsatzplan().freierSlot(tag, dauer);
+                if (slot.isPresent()) {
+                    return slot;
+                }
+            }
+            tag = tag.plusDays(1);
+        }
+        return Optional.empty();
+    }
+}</pre>
+    <p class="klein"><code>istFeiertag(LocalDate)</code> ist eine Methode der Basisklasse <code>Kalender</code> aus TerminKern. <code>freierSlot(tag, dauer)</code> liefert den frühesten freien Zeitraum der Länge <code>dauer</code> im Einsatzplan des Monteurs an diesem Tag oder ein leeres <code>Optional</code>. Die Klasse soll künftig auch von zwei anderen Teams genutzt werden.</p>
+  </div>
+
+  <div class="anlage" id="anlage-11">
+    <h4>Anlage 11 · Lizenzübersicht der eingesetzten bzw. geplanten Bibliotheken</h4>
+    <table class="kompakt">
+      <tr><th style="width:4%">Nr.</th><th style="width:15%">Bibliothek</th><th>Einsatz in MonteurPlus</th><th style="width:17%">Lizenz</th><th style="width:24%">Anmerkung</th></tr>
+      <tr><td>1</td><td>ChartLite 4.2</td><td>Diagramme in der Web-Disposition (JavaScript, wird an die Browser ausgeliefert)</td><td>MIT</td><td>–</td></tr>
+      <tr><td>2</td><td>JsonFast 2.17</td><td>JSON-Verarbeitung im Server</td><td>Apache License 2.0</td><td>enthält eine NOTICE-Datei</td></tr>
+      <tr><td>3</td><td>GeoKit 3.1</td><td>Kartenanzeige in der Monteur-App; unverändert, als eigenständige Bibliothek eingebunden</td><td>LGPL-3.0</td><td>–</td></tr>
+      <tr><td>4</td><td>SignPad 1.4</td><td>Unterschriftenfeld in der Monteur-App</td><td>GPL-3.0</td><td>–</td></tr>
+      <tr><td>5</td><td>PdfMaker Core 7.1</td><td>Erzeugung der Arbeitsberichte (PDF) auf dem Server</td><td>AGPL-3.0 oder kommerzielle Lizenz (Dual Licensing)</td><td>kommerzielle Lizenz: 2 400 € pro Jahr</td></tr>
+      <tr><td>6</td><td>RouteOpt SDK 5</td><td>Tourenoptimierung auf dem Server</td><td>proprietär</td><td>3 € je Monteur und Monat; Lizenzvertrag: „Nutzung nur für eigene interne Zwecke des Lizenznehmers“</td></tr>
+      <tr><td>7</td><td>csv-quick 0.3</td><td>Einlesen der CSV-Altdaten (einmalige Datenübernahme)</td><td>keine Angabe</td><td>öffentliches Repository einer Privatperson ohne LICENSE-Datei</td></tr>
+      <tr><td>8</td><td>DbMigrate 2.0</td><td>spielt Datenbankänderungen ein; läuft nur in der eigenen Pipeline, wird nicht ausgeliefert</td><td>GPL-2.0</td><td>–</td></tr>
+      <tr><td>9</td><td>FeiertageDE 1.8 (feiertage-de)</td><td>transitive Abhängigkeit von TerminKern (Feiertagsberechnung)</td><td>BSD-3-Clause</td><td>–</td></tr>
+      <tr><td>10</td><td>TerminKern 2.4.1</td><td>Kalenderfunktionen im Server (Anlage 9)</td><td>Apache License 2.0</td><td>–</td></tr>
+      <tr><td>11</td><td>json-mini 0.9.2</td><td>transitive Abhängigkeit von TerminKern</td><td>MIT</td><td>–</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ===================== TEIL C: AUFGABEN ===================== -->
+<section class="teil" id="aufgaben">
+  <h2>C · Aufgaben</h2>
+  <p class="klein">Alle Aufgaben beziehen sich auf die Ausgangssituation in Anlage 1. Antworten Sie – wie in der Prüfung – in ganzen Sätzen und mit Bezug auf die Situation, sofern nicht ausdrücklich nur „nennen“ verlangt ist.</p>
+
+  <!-- ===================== WZ-01 ===================== -->
+  <h3 id="a-01">WZ-01 · Versionsverwaltung (Git)</h3>
+
+  <div class="aufgabe" id="WZ-01-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe WZ-01.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">5 Punkte</span>
+    </div>
+    <p>Zwei neue Kolleginnen haben bisher nur mit Subversion gearbeitet. Sie sollen ihnen die Grundlagen von Git erklären.</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Beschreiben Sie den Unterschied zwischen einer zentralen und einer verteilten Versionsverwaltung.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Erläutern Sie die folgenden Begriffe jeweils in einem Satz.</div>
+    <table class="leer">
+      <tr><th style="width:18%">Begriff</th><th>Erläuterung</th></tr>
+      <tr><td>Repository</td><td></td></tr>
+      <tr><td>Commit</td><td></td></tr>
+      <tr><td>Branch</td><td></td></tr>
+      <tr><td>Merge</td><td></td></tr>
+      <tr><td>Push</td><td></td></tr>
+      <tr><td>Tag</td><td></td></tr>
+    </table>
+    <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 1c (Versionsverwaltung im Team)</p>
+  </div>
+
+  <div class="aufgabe" id="WZ-01-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe WZ-01.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Sie übernehmen das Ticket <strong>MP-130</strong> (Fotos zu Aufträgen hochladen). Ihr lokales Repository entspricht dem Stand in Anlage 3; den neuesten Commit <code>7d2e4b1</code> bezeichnen wir im Folgenden mit <strong>C</strong>. Sie führen nacheinander diese Befehle aus. Während Sie an Ihrem Branch arbeiten, pusht ein Kollege den Commit „MP-125: Notdienst-Kennzeichen“ (im Folgenden <strong>N</strong>) auf <code>origin/main</code>.</p>
+    <pre>(1)  git switch -c feature/MP-130-fotos
+(2)  git add FotoController.java                       # neue Datei
+(3)  git commit -m "MP-130: Upload von Auftragsfotos"            # F1
+(4)  git commit -am "MP-130: Fotos vor dem Upload verkleinern"   # F2
+(5)  git switch main
+(6)  git pull
+(7)  git merge feature/MP-130-fotos                    # M, kein Konflikt
+(8)  git tag -a v1.3.0 -m "Release 1.3.0"
+(9)  git push origin main
+(10) git push origin v1.3.0</pre>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Zeichnen Sie den Commit-Graphen nach Befehl (10). Beginnen Sie mit Commit C und kennzeichnen Sie die Commits F1, F2, N und M, die Branches <code>main</code> und <code>feature/MP-130-fotos</code>, den Tag und HEAD.</div>
+    <div class="zeichenflaeche"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Geben Sie für die Befehle (6) und (7) jeweils an, ob ein Fast-Forward stattfindet, und begründen Sie Ihre Antwort.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Einige Tage später mergen Sie den Branch <code>feature/MP-131-anfahrt</code> (Anfahrtspauschale abhängig von der Entfernung) in <code>main</code>. Git meldet:</div>
+    <pre class="konsole">$ git merge feature/MP-131-anfahrt
+Auto-merging src/main/java/de/lindner/monteurplus/auftrag/AuftragService.java
+CONFLICT (content): Merge conflict in src/main/java/de/lindner/monteurplus/auftrag/AuftragService.java
+Automatic merge failed; fix conflicts and then commit the result.</pre>
+    <pre>public double anfahrtspauschale(Auftrag a) {
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+    return a.isNotdienst() ? 89.00 : 39.00;
+=======
+    return a.isNotdienst() ? 79.00 : 35.00 + 0.50 * a.getEntfernungKm();
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/MP-131-anfahrt
+}</pre>
+    <p>Erläutern Sie, wie es zu dieser Meldung kam (1 P), und beschreiben Sie, wie Sie den Konflikt auflösen und den Merge abschließen (2 P).</p>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>d) Ein Kollege möchte nur sehen, welche neuen Commits auf <code>origin/main</code> liegen, ohne seinen lokalen Branch zu verändern. Nennen Sie den passenden Befehl und grenzen Sie ihn von <code>git pull</code> ab.</div>
+    <div class="antwort z3"></div>
+  </div>
+
+  <div class="aufgabe" id="WZ-01-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe WZ-01.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">18 Punkte</span>
+    </div>
+    <p>Teamleiter Markus Feld hat die Regeln für die Arbeit mit Git per E-Mail verschickt (Anlage 2). Er bittet Sie, die Regeln vor dem 1. Oktober fachlich zu prüfen.</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Ein Entwickler aus einem anderen Team hält die Umstellung (Punkt 1) für überflüssig: „Ein Netzlaufwerk mit einem Ordner pro Tag reicht völlig.“ Entscheiden Sie, ob Sie der Umstellung zustimmen, und begründen Sie Ihre Entscheidung mit zwei fachlichen Argumenten.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">6 P</span>b) Bewerten Sie die Punkte 2, 3 und 4 der E-Mail. Beschreiben Sie jeweils ein Problem und einen Verbesserungsvorschlag.</div>
+    <table class="leer hoch">
+      <tr><th style="width:10%">Punkt</th><th style="width:45%">Problem</th><th>Verbesserungsvorschlag</th></tr>
+      <tr><td>2</td><td></td><td></td></tr>
+      <tr><td>3</td><td></td><td></td></tr>
+      <tr><td>4</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Schlagen Sie dem Team eine geeignete Branching-Strategie vor. Nennen Sie die Strategie und beschreiben Sie, wie ein Teammitglied damit ein Ticket vom Beginn der Arbeit bis zur Übernahme in <code>main</code> bearbeitet.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>d) Beurteilen Sie Punkt 6 und nennen Sie die Git-Funktion, die stattdessen eingesetzt werden sollte.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>e) Bewerten Sie Punkt 5 anhand des Git-Logs in Anlage 3 und formulieren Sie für den Commit <code>a41c9e2</code> eine aussagekräftige Commit-Nachricht.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 1c (Vorschlag des Teams zur Versionsverwaltung bewerten), erweitert um Team-Workflow</p>
+  </div>
+
+  <!-- ===================== WZ-02 ===================== -->
+  <h3 id="a-02">WZ-02 · CI/CD &amp; Deployment</h3>
+
+  <div class="aufgabe" id="WZ-02-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe WZ-02.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">5 Punkte</span>
+    </div>
+    <p>In einer Teamsitzung fallen immer wieder die Begriffe CI und CD. Sie sollen sie für die Projektdokumentation klären.</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Grenzen Sie die Begriffe Continuous Integration, Continuous Delivery und Continuous Deployment voneinander ab.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Für den Server wird Maven eingesetzt. Nennen Sie zwei Aufgaben, die ein Build-Werkzeug wie Maven übernimmt.</div>
+    <div class="antwort z3"></div>
+  </div>
+
+  <div class="aufgabe" id="WZ-02-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe WZ-02.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Seit Oktober baut und verteilt eine GitLab-Pipeline den Server automatisch (Anlage 5).</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Stellen Sie den Ablauf der Pipeline für einen Push auf <code>main</code> als Diagramm dar. Berücksichtigen Sie die Reihenfolge der Stages, parallel laufende Jobs und den manuellen Schritt.</div>
+    <div class="zeichenflaeche mittel"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Begründen Sie, ob es sich um Continuous Delivery oder Continuous Deployment handelt.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Eine Entwicklerin pusht Commits auf den Branch <code>feature/MP-140-material</code>. Nennen Sie die Jobs, die dabei ausgeführt werden, und beschreiben Sie, was geschieht, wenn der Job <code>unit-tests</code> fehlschlägt.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>d) Erläutern Sie den Zweck der Staging-Umgebung im Projekt MonteurPlus.</div>
+    <div class="antwort z3"></div>
+  </div>
+
+  <div class="aufgabe" id="WZ-02-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe WZ-02.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">18 Punkte</span>
+    </div>
+    <p>Durch die manuelle Bereitstellung kam es in den letzten Monaten mehrfach zu Ausfällen von MonteurPlus (Anlage 4). Die Geschäftsführung von Albers droht mit einer Vertragsstrafe. Sie sollen die Automatisierung vorbereiten.</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Beschreiben Sie, wie die Kompilierung und Bereitstellung des Servers automatisiert werden kann.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Wählen Sie zwei Störungen aus Anlage 4 aus. Erläutern Sie jeweils, wie eine automatisierte Bereitstellung die Störung verhindert hätte, und leiten Sie daraus je einen Vorteil gegenüber der manuellen Bereitstellung ab.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">6 P</span>c) Ihr Kollege Jonas Weber hat für die Monteur-App den Pipeline-Entwurf in Anlage 6 erstellt. Nennen Sie drei Schwachstellen des Entwurfs und beschreiben Sie jeweils eine Verbesserung.</div>
+    <table class="leer hoch">
+      <tr><th style="width:5%">Nr.</th><th style="width:45%">Schwachstelle</th><th>Verbesserung</th></tr>
+      <tr><td>1</td><td></td><td></td></tr>
+      <tr><td>2</td><td></td><td></td></tr>
+      <tr><td>3</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">3 P</span>d) Der Server wird künftig als Docker-Container betrieben (Anlage 5, Job <code>package</code>). Erläutern Sie, wie dadurch eine Störung wie die vom 05.06.2026 verhindert wird, und nennen Sie einen Unterschied zwischen einem Container und einer virtuellen Maschine.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>e) Entwicklung und Administration sollen künftig nach dem DevOps-Gedanken zusammenarbeiten. Beschreiben Sie diesen Grundgedanken.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 1c (automatisierte Kompilierung und Bereitstellung, Vorteile gegenüber manueller Bereitstellung)</p>
+  </div>
+
+  <!-- ===================== WZ-03 ===================== -->
+  <h3 id="a-03">WZ-03 · Softwarearchitektur</h3>
+
+  <div class="aufgabe" id="WZ-03-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe WZ-03.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">5 Punkte</span>
+    </div>
+    <p>MonteurPlus wird als 3-Schichten-Architektur umgesetzt (Anlage 7).</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Nennen Sie die drei Schichten und beschreiben Sie jeweils eine Aufgabe der Schicht.</div>
+    <table class="leer hoch">
+      <tr><th style="width:30%">Schicht</th><th>Aufgabe</th></tr>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Unterscheiden Sie Thin Client und Fat Client und ordnen Sie die Web-Disposition (ohne Plantafel) und die Monteur-App jeweils zu.</div>
+    <div class="antwort z5"></div>
+  </div>
+
+  <div class="aufgabe" id="WZ-03-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe WZ-03.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Die Auftragsübersicht der Web-Disposition ist nach dem MVC-Muster aufgebaut (Anlage 7, untere Tabelle).</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Ordnen Sie die sechs Bestandteile den Rollen Model, View und Controller zu.</div>
+    <table>
+      <tr><th style="width:40%">Bestandteil</th><th>Rolle (Model / View / Controller)</th></tr>
+      <tr><td><code>auftragsliste.html</code></td><td></td></tr>
+      <tr><td><code>auftragsliste.css</code></td><td></td></tr>
+      <tr><td><code>AuftragController</code></td><td></td></tr>
+      <tr><td><code>AuftragService</code></td><td></td></tr>
+      <tr><td><code>Auftrag</code></td><td></td></tr>
+      <tr><td><code>AuftragRepository</code></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Stellen Sie in einem Diagramm dar, wie Browser, Controller, Model (mit Datenbank) und View zusammenarbeiten, wenn eine Disponentin die offenen Aufträge der Niederlassung Kassel aufruft. Nummerieren und beschriften Sie die Schritte.</div>
+    <div class="zeichenflaeche mittel"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Ein Kollege fragt, ob man bei Verwendung von MVC überhaupt noch eine 3-Schichten-Architektur braucht. Erläutern Sie den Zusammenhang zwischen MVC und der 3-Schichten-Architektur am Beispiel der Auftragsübersicht.</div>
+    <div class="antwort z5"></div>
+  </div>
+
+  <div class="aufgabe" id="WZ-03-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe WZ-03.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">18 Punkte</span>
+    </div>
+    <p>Für das Angebot an weitere Handwerksbetriebe soll die Architektur von MonteurPlus dokumentiert und überprüft werden. Grundlage ist der Entwurf in Anlage 7.</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Beschreiben Sie, wie die 3-Schichten-Architektur bei MonteurPlus aussieht und wie die Komponenten zusammenarbeiten. Verwenden Sie als Beispiel den Ablauf „Ein Monteur schließt einen Auftrag mit Arbeitsbericht in der App ab“.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>b) Erstellen Sie eine Skizze der Architektur von MonteurPlus. Ordnen Sie alle Komponenten aus Anlage 7 einer Schicht bzw. den externen Systemen zu und beschriften Sie die Kommunikationswege mit Protokoll bzw. Datenformat.</div>
+    <div class="zeichenflaeche gross"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>c) Ein Kollege schlägt vor, den Server von Anfang an als Microservices umzusetzen (je ein Dienst für Aufträge, Einsatzplanung, Synchronisation und Berichte). Erläutern Sie je zwei Vor- und Nachteile gegenüber einem Monolithen und geben Sie eine begründete Empfehlung für das Team (Anlage 1).</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>d) Begründen Sie, warum die Monteur-App nicht direkt auf den Datenbankserver zugreifen soll, sondern über die REST-API des Anwendungsservers.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 2a (3-Schichten-Architektur einer Webanwendung und Zusammenarbeit der Komponenten)</p>
+  </div>
+
+  <!-- ===================== WZ-04 ===================== -->
+  <h3 id="a-04">WZ-04 · Compiler vs. Interpreter</h3>
+
+  <div class="aufgabe" id="WZ-04-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe WZ-04.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">7 Punkte</span>
+    </div>
+    <p>In MonteurPlus werden mehrere Programmiersprachen eingesetzt (Anlage 8). Die Projektleitung möchte die grundlegenden Unterschiede der Übersetzungsverfahren verstehen.</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Beschreiben Sie den Unterschied zwischen einem Compiler und einem Interpreter.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Kreuzen Sie an, wie die folgenden Sprachen üblicherweise ausgeführt werden.</div>
+    <table class="leer">
+      <tr><th style="width:22%">Sprache</th><th>Compiler → Maschinencode</th><th>Interpreter</th><th>Compiler → Bytecode → virtuelle Maschine</th></tr>
+      <tr><td>C++</td><td></td><td></td><td></td></tr>
+      <tr><td>Python</td><td></td><td></td><td></td></tr>
+      <tr><td>Java</td><td></td><td></td><td></td></tr>
+      <tr><td>Go</td><td></td><td></td><td></td></tr>
+      <tr><td>PHP</td><td></td><td></td><td></td></tr>
+      <tr><td>C#</td><td></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Nennen Sie je einen Vorteil und einen Nachteil eines Interpreters gegenüber einem Compiler.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 1a</p>
+  </div>
+
+  <div class="aufgabe" id="WZ-04-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe WZ-04.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Bei der Entwicklung des Servers (Java) und des Importskripts (Python) treten die folgenden Fehler auf.</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Bestimmen Sie für die Java-Ausschnitte (1) bis (4) die Fehlerart (Syntaxfehler, Typfehler, Laufzeitfehler, logischer Fehler) und geben Sie an, wann bzw. wodurch der Fehler bemerkt wird.</div>
+    <table class="leer">
+      <tr><th style="width:5%">Nr.</th><th style="width:43%">Java-Ausschnitt</th><th style="width:20%">Fehlerart</th><th>Wann/wodurch bemerkt?</th></tr>
+      <tr><td>(1)</td><td><code>String plz = 34117;</code></td><td></td><td></td></tr>
+      <tr><td>(2)</td><td><code>for (int i = 0; i &lt; auftraege.size(); i++ {</code></td><td></td><td></td></tr>
+      <tr><td>(3)</td><td><code>Auftrag letzter = auftraege.get(auftraege.size());</code></td><td></td><td></td></tr>
+      <tr><td>(4)</td><td><code>int summeMinuten = 250;<br>int anzahl = 4;<br>double schnitt = summeMinuten / anzahl;</code><br><span class="klein">Anzeige: Ø Einsatzdauer 62,0 min</span></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Im Python-Importskript steht in Zeile 12 <code>plz = 34117</code> und in Zeile 87 <code>plz_text = plz.zfill(5)</code> (<code>zfill</code> füllt einen <em>Text</em> links mit Nullen auf). Erläutern Sie, wann und warum dieser Fehler bemerkt wird, und vergleichen Sie mit Ausschnitt (1).</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Der Fehler in Ausschnitt (4) ist zunächst niemandem aufgefallen. Beschreiben Sie, wie Sie einen solchen Fehler mit dem Debugger Ihrer Entwicklungsumgebung finden. Verwenden Sie dabei mindestens drei Funktionen des Debuggers.</div>
+    <div class="antwort z8"></div>
+  </div>
+
+  <div class="aufgabe" id="WZ-04-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe WZ-04.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">16 Punkte</span>
+    </div>
+    <p>Vor der Ausweitung des Projekts sollen die eingesetzten Sprachen und Übersetzungswege dokumentiert und offene Entscheidungen getroffen werden (Anlage 8).</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Erläutern Sie, wie der Java-Quellcode des Servers vom Entwicklerrechner (Windows) bis zur Ausführung auf dem Linux-Server übersetzt und ausgeführt wird. Gehen Sie auf Bytecode, JVM und JIT-Compiler ein.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Für die einmalige Datenübernahme schlägt eine Kollegin Python vor; der Teamleiter bevorzugt C++, „weil kompilierte Programme schneller sind“. Bewerten Sie beide Vorschläge unter Berücksichtigung des Einsatzzwecks und geben Sie eine begründete Empfehlung.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Die Plantafel wird in TypeScript geschrieben und mit <code>tsc</code> übersetzt. Erläutern Sie, was dabei geschieht, und beschreiben Sie einen Vorteil gegenüber direkt in JavaScript geschriebenem Code.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>d) Das Kommandozeilenprogramm <code>mp-export</code> wird in Go entwickelt (Anlage 8).</div>
+    <div class="teilaufgabe">da) Beschreiben Sie den Übersetzungsvorgang vom Go-Quellcode bis zur ausführbaren Datei <code>mp-export.exe</code> und erläutern Sie dabei die Aufgabe des Linkers. (3 P)</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe">db) Erläutern Sie, warum für den Linux-Server eine eigene ausführbare Datei erstellt werden muss, obwohl der Quellcode derselbe ist. (2 P)</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 1a (Compiler- und Interpretersprachen), vertieft um Bytecode, Transpiler und Linker</p>
+  </div>
+
+  <!-- ===================== WZ-05 ===================== -->
+  <h3 id="a-05">WZ-05 · Klassenbibliotheken, Frameworks &amp; Dokumentation</h3>
+
+  <div class="aufgabe" id="WZ-05-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe WZ-05.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Der Server nutzt das Framework Spring Boot und mehrere Bibliotheken (Anlagen 1 und 9).</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Erläutern Sie den Unterschied zwischen einer Klassenbibliothek und einem Framework.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Für die Arbeitsberichte (PDF) soll statt einer Eigenentwicklung eine umfangreiche PDF-Bibliothek eingesetzt werden. Beschreiben Sie je einen Vorteil und einen Nachteil dieser Entscheidung.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 1ba</p>
+  </div>
+
+  <div class="aufgabe" id="WZ-05-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe WZ-05.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Die Abhängigkeiten des Servers werden mit Maven verwaltet (Anlage 9).</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Erläutern Sie anhand von Anlage 9, welche Aufgaben Maven bei der Verwaltung von Abhängigkeiten übernimmt. Gehen Sie auf transitive Abhängigkeiten ein.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Der Server nutzt TerminKern 2.4.1. Werten Sie die englischen Release Notes in Anlage 9 aus: Erläutern Sie für die Versionen 2.4.2, 2.5.0 und 3.0.0, was die Versionsnummer nach Semantic Versioning aussagt und ob ein Update ohne Änderungen am Code von MonteurPlus möglich ist (3 P). Empfehlen Sie, auf welche Version kurzfristig aktualisiert werden soll (1 P).</div>
+    <table class="leer hoch">
+      <tr><th style="width:12%">Version</th><th>Aussage der Versionsnummer / Inhalt</th><th style="width:28%">Update ohne Codeänderung?</th></tr>
+      <tr><td>2.4.2</td><td></td><td></td></tr>
+      <tr><td>2.5.0</td><td></td><td></td></tr>
+      <tr><td>3.0.0</td><td></td><td></td></tr>
+    </table>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Beschreiben Sie das Risiko, das sich aus der Abhängigkeit <code>json-mini</code> für MonteurPlus ergibt, und zwei Maßnahmen, mit denen solche Risiken künftig früh erkannt oder begrenzt werden.</div>
+    <div class="antwort z5"></div>
+  </div>
+
+  <div class="aufgabe" id="WZ-05-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe WZ-05.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">16 Punkte</span>
+    </div>
+    <p>Das Team hat die Bibliothek TerminKern um die Klasse <code>EinsatzKalender</code> erweitert (Anlage 10). Die Erweiterung soll künftig auch von zwei anderen Teams genutzt werden und muss deshalb dokumentiert werden.</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Beschreiben Sie drei Aspekte, die Sie bei der Dokumentation dieser Erweiterung beachten müssen. Beziehen Sie sich dabei auf den Code in Anlage 10.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>b) Erstellen Sie für die Methode <code>naechsterFreierTermin</code> einen vollständigen Javadoc-Kommentar.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Ein Kollege schlägt vor, die Methode einfach direkt in die Klasse <code>Kalender</code> im Quellcode von TerminKern einzufügen. Begründen Sie, warum die Erweiterung stattdessen als eigene Unterklasse umgesetzt wurde.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>d) Nennen Sie zwei Bestandteile der Dokumentation, die über die Beschreibung der einzelnen Methoden hinausgehen.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 1bb (Dokumentation einer eigenen Bibliothekserweiterung)</p>
+  </div>
+
+  <!-- ===================== WZ-06 ===================== -->
+  <h3 id="a-06">WZ-06 · Open Source &amp; Lizenzen</h3>
+
+  <div class="aufgabe" id="WZ-06-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe WZ-06.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>In einer Projektbesprechung wird darüber gesprochen, welche Bibliotheken in MonteurPlus verwendet werden dürfen.</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Erläutern Sie den Begriff Open Source.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Ein Kollege meint: „Open Source heißt, wir dürfen jede dieser Bibliotheken ohne Einschränkung einsetzen.“ Begründen Sie, ob er recht hat.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>c) Nennen Sie je eine permissive Lizenz und eine Copyleft-Lizenz.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 2ca und 2cb</p>
+  </div>
+
+  <div class="aufgabe" id="WZ-06-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe WZ-06.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Für die Lizenzprüfung von MonteurPlus sollen Sie Software-Arten abgrenzen und erste Bibliotheken aus Anlage 11 prüfen.</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Ergänzen Sie die Tabelle mit „ja“, „nein“ oder „eingeschränkt“.</div>
+    <table class="leer">
+      <tr><th style="width:22%">Software-Art</th><th>Quellcode verfügbar</th><th>Verändern erlaubt</th><th>Weitergabe erlaubt</th><th>kostenlos nutzbar</th></tr>
+      <tr><td>Open Source</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Freeware</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Shareware</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Proprietäre Software</td><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">6 P</span>b) Prüfen Sie für die Bibliotheken Nr. 1, 3 und 4 aus Anlage 11, ob sie in MonteurPlus eingesetzt werden dürfen, und beschreiben Sie, welche Pflichten sich jeweils ergeben. Beachten Sie das Geschäftsmodell in Anlage 1.</div>
+    <table class="leer hoch">
+      <tr><th style="width:8%">Nr.</th><th style="width:16%">Einsatz zulässig?</th><th>Begründung und Pflichten</th></tr>
+      <tr><td>1</td><td></td><td></td></tr>
+      <tr><td>3</td><td></td><td></td></tr>
+      <tr><td>4</td><td></td><td></td></tr>
+    </table>
+  </div>
+
+  <div class="aufgabe" id="WZ-06-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe WZ-06.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">18 Punkte</span>
+    </div>
+    <p>Bevor MonteurPlus ab 2027 als Mietsoftware an weitere Handwerksbetriebe angeboten wird, bittet Sie die Geschäftsführung um eine Lizenzprüfung (Anlagen 1 und 11).</p>
+    <div class="teilaufgabe"><span class="tp">8 P</span>a) Prüfen Sie die Bibliotheken Nr. 5 bis 8 aus Anlage 11. Geben Sie jeweils an, ob sie eingesetzt werden können (ja / ja, mit Auflagen / nein), und begründen Sie Ihre Entscheidung. Nennen Sie, wo nötig, eine Maßnahme.</div>
+    <table class="leer hoch">
+      <tr><th style="width:8%">Nr.</th><th style="width:16%">Einsatz?</th><th>Begründung / Maßnahme</th></tr>
+      <tr><td>5</td><td></td><td></td></tr>
+      <tr><td>6</td><td></td><td></td></tr>
+      <tr><td>7</td><td></td><td></td></tr>
+      <tr><td>8</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Die Geschäftsführung fragt, ob man künftig grundsätzlich auf Open-Source-Bibliotheken setzen sollte. Erläutern Sie zwei Vorteile und zwei Nachteile von Open-Source-Bibliotheken.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Ein Entwickler möchte einige Funktionen aus dem Quellcode von SignPad (Nr. 4) in die Hilfsbibliothek <code>lindner-utils</code> kopieren, die Lindner Digital unter der MIT-Lizenz auf GitHub veröffentlichen will. Beurteilen Sie dieses Vorhaben.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>d) Erläutern Sie, was eine Software Bill of Materials (SBOM) ist, und beschreiben Sie am Beispiel der Bibliotheken FeiertageDE und json-mini (Nr. 9 und 11) einen Nutzen für MonteurPlus.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 2c (Open Source, Lizenzbedingungen, Vor- und Nachteile von Open-Source-Bibliotheken)</p>
+  </div>
+
+  <!-- ===================== ORIGINALAUFGABEN ===================== -->
+  <h3 id="originale">Originalaufgaben zum Üben</h3>
+  <p>Diese echten Prüfungsaufgaben passen zu diesem Block (Dateien im Ordner <code>Prüfungsvorbereitung</code>). Für W21 und W22 gibt es keine Lösungsdateien; Lösungen liegen nur für 2023 Sommer, 2023 Winter, 2024 Sommer und 2025 Winter vor (dort vom u-form-Verlag). Vergleiche deine Antworten zu W21/W22 mit den Lösungen der entsprechenden Übungsaufgaben in diesem Block.</p>
+  <table class="kompakt klein" style="break-inside:auto">
+    <tr><th>Prüfung</th><th>Aufgabe</th><th>Thema</th><th>Datei · Lösung</th></tr>
+    <tr><td>Winter 2021</td><td>T1 A1a (6 P)</td><td>Compiler- und Interpretersprachen: Beispiele, Unterschied, Vor-/Nachteil Interpreter</td><td><code>2021/winter/AE 2021 Winter Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Winter 2021</td><td>T1 A1b (10 P)</td><td>umfassende Klassenbibliothek: Vor-/Nachteil; Dokumentation einer eigenen Erweiterung</td><td>wie oben · keine Lösung</td></tr>
+    <tr><td>Winter 2021</td><td>T1 A1c (4 P)</td><td>Vorschlag des Teams zur Versionsverwaltung bewerten</td><td>wie oben · keine Lösung</td></tr>
+    <tr><td>Winter 2021</td><td>T1 A4cb (5 P)</td><td>verwandt: nur automatische Code-Reviews und Unit-Tests als QS – bewerten</td><td>wie oben · keine Lösung</td></tr>
+    <tr><td>Winter 2022</td><td>T1 A1c (6 P)</td><td>automatisierte Kompilierung und Bereitstellung (CI/CD), Vorteile gegenüber manueller Bereitstellung</td><td><code>2022/winter/AE 2022 Winter Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Winter 2022</td><td>T1 A2a (6 P)</td><td>3-Schichten-Architektur einer Webanwendung, Zusammenarbeit der Komponenten</td><td>wie oben · keine Lösung</td></tr>
+    <tr><td>Winter 2022</td><td>T1 A2c (9 P)</td><td>Open Source erläutern, Lizenzbedingungen, Vor-/Nachteil von OSS-Bibliotheken</td><td>wie oben · keine Lösung</td></tr>
+    <tr><td>Winter 2022</td><td>T1 A1a (4 P)</td><td>verwandt: Schwachstellen veralteter IT-Infrastruktur (Verfügbarkeit)</td><td>wie oben · keine Lösung</td></tr>
+    <tr><td>Sommer 2024</td><td>T1 A1b (6 P)</td><td>verwandt: drei qualitätssichernde Maßnahmen (z. B. Code-Review, CI)</td><td><code>2024/sommer/AE Sommer 2024 Teil 1+2+3.pdf</code> · Lösung: <code>AE Sommer 2024 Teil 1 Lösungen.pdf</code></td></tr>
+  </table>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,1759 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>07 IT-Sicherheit &amp; Datenschutz – Übungen</title>
+<link rel="stylesheet" href="style.css">
+<script src="uebungen.js"></script>
+<style>
+  /* Zusatzregeln Block 07 */
+  nav.toc ol ol { columns: 2; column-gap: 24px; font-size: 13px; }
+  table.kompakt td, table.kompakt th { padding: 2px 6px; }
+  table.leer td { height: 34px; }
+  table.leer.hoch td { height: 56px; }
+  table.leer.eng td { height: 28px; }
+  blockquote.en { break-inside: avoid; }
+  #anlage-8 { break-before: page; }
+  table.ankreuz td, table.ankreuz th { text-align: center; }
+  table.ankreuz td:first-child, table.ankreuz th:first-child { text-align: left; }
+  table.ankreuz td:not(:first-child) { width: 13%; }
+  td.mono, th.mono { font-family: Consolas, "Courier New", monospace; font-size: 13px; }
+  .zweispaltig { display: flex; gap: 16px; flex-wrap: wrap; }
+  .zweispaltig > * { flex: 1 1 300px; min-width: 0; }
+  blockquote.en { margin: 8px 0; padding: 8px 14px; border-left: 4px solid #999; background: #fafafa; font-style: italic; }
+  blockquote.en p { margin: 6px 0; }
+  .zitat { margin: 6px 0 6px 0; padding: 4px 10px; border-left: 3px solid #bbb; }
+  pre { font-size: 12.5px; }
+  pre.java { break-inside: auto; }
+  td.nr { white-space: nowrap; font-weight: 600; width: 1%; }
+  .luecke { display: inline-block; min-width: 120px; border-bottom: 1px solid #333; }
+  ol.schritte li { margin: 4px 0; }
+  @media print { .anlage { break-inside: auto; } table { break-inside: auto; } tr { break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<!-- ===================== KOPF ===================== -->
+<header class="blockkopf">
+  <h1>Block 07 · IT-Sicherheit &amp; Datenschutz</h1>
+  <div class="unter">
+    <span class="badge k-immer">Immer</span> 8/9 Prüfungen (fehlte nur in W23) · Ø 12 von 200 Punkten · fast nur Teil 1 (Ausnahme S24: Teil 2, Aufgabe 1)
+    · Lösungen: <a href="07_IT-Sicherheit_Loesungen.html">07_IT-Sicherheit_Loesungen.html</a>
+  </div>
+</header>
+
+<nav class="toc">
+  <strong>Inhalt</strong>
+  <ol>
+    <li><a href="#erklaerung">Erklärungssatz</a>
+      <ol>
+        <li><a href="#e-01">SEC-01 Verschlüsselungsverfahren</a></li>
+        <li><a href="#e-02">SEC-02 Hash, Signatur, Zertifikate/PKI</a></li>
+        <li><a href="#e-03">SEC-03 Schutzziele &amp; Schutzbedarf</a></li>
+        <li><a href="#e-04">SEC-04 Authentifizierung</a></li>
+        <li><a href="#e-05">SEC-05 Datenschutz / DSGVO</a></li>
+        <li><a href="#e-06">SEC-06 Angriffe &amp; Gegenmaßnahmen</a></li>
+      </ol>
+    </li>
+    <li><a href="#belegsatz">Belegsatz</a> (Anlagen 1–11, keine IHK-Notationshilfe für diesen Block)</li>
+    <li><a href="#aufgaben">Aufgaben</a>
+      <ol>
+        <li><a href="#a-01">SEC-01 (3 Aufgaben)</a></li>
+        <li><a href="#a-02">SEC-02 (3 Aufgaben)</a></li>
+        <li><a href="#a-03">SEC-03 (3 Aufgaben)</a></li>
+        <li><a href="#a-04">SEC-04 (3 Aufgaben)</a></li>
+        <li><a href="#a-05">SEC-05 (3 Aufgaben)</a></li>
+        <li><a href="#a-06">SEC-06 (3 Aufgaben)</a></li>
+        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+
+<div class="info no-print">
+  <span class="kastentitel">So arbeitest du mit diesem Block</span>
+  Erst den Erklärungssatz lesen, dann die Aufgaben mit dem Belegsatz daneben lösen (Belegsatz am besten separat ausdrucken und neben die Aufgaben legen). Zeitrichtwert: 1 Punkt ≈ 0,9 Minuten.
+  Lösungen erst danach in der separaten Lösungsdatei nachsehen. Zu den beiden Code-Aufgaben (SEC-04.2, SEC-06.3) gibt es lauffähige Java-Dateien im Ordner <code>java\07_IT-Sicherheit\</code>.
+</div>
+
+<!-- ===================== TEIL A: ERKLÄRUNGSSATZ ===================== -->
+<section class="teil" id="erklaerung">
+  <h2>A · Erklärungssatz</h2>
+
+  <p>IT-Sicherheit kam in <strong>8 von 9</strong> Prüfungen vor, fast immer in <strong>Teil 1</strong> als Teilaufgabe einer Szenario-Aufgabe (Sensoren übertragen Daten, eine App spricht mit einem Server, ein Webserver bekommt ein Zertifikat). Gefragt wird mit den Operatoren <em>nennen</em>, <em>erläutern</em>, <em>begründen</em>, meist 1–9 Punkte je Teilaufgabe. Gerechnet oder programmiert wird hier selten. Punkte gibt es für <strong>saubere Begriffe</strong> und eine <strong>Begründung mit Bezug zum Szenario</strong>. Wer verschlüsseln, signieren und hashen sicher auseinanderhält, holt hier schnelle Punkte.</p>
+
+  <table class="kompakt">
+    <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
+    <tr><td>SEC-01 Verschlüsselungsverfahren</td><td><span class="badge k-meistens">Meistens</span></td><td>1–8</td><td>hybride Verschlüsselung erklären, Verfahren begründet auswählen (IoT!)</td></tr>
+    <tr><td>SEC-02 Hash, Signatur, Zertifikate/PKI</td><td><span class="badge k-meistens">Meistens</span></td><td>2–9</td><td>Signatur erstellen/prüfen, „Verschlüsselung ≠ Integrität“, Vertrauenskette</td></tr>
+    <tr><td>SEC-03 Schutzziele &amp; Schutzbedarf</td><td><span class="badge k-meistens">Meistens</span></td><td>3–6</td><td>Situation → Schutzziel, Sicherheitsanforderungen formulieren</td></tr>
+    <tr><td>SEC-04 Authentifizierung</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>3–6</td><td>2FA, Passwörter speichern, Passwort-Reset, OAuth2-Rollen</td></tr>
+    <tr><td>SEC-05 Datenschutz / DSGVO</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>4–6</td><td>Einwilligung, Datenschutzerklärung, Grundsätze, keine echten Daten in Fremdtools</td></tr>
+    <tr><td>SEC-06 Angriffe &amp; Gegenmaßnahmen</td><td><span class="badge k-sonstige">Sonstige</span></td><td>2–5</td><td>Angriff erkennen und passende Gegenmaßnahme nennen</td></tr>
+  </table>
+
+  <h4>Die wichtigste Tabelle des Blocks: Welcher Mechanismus sichert welches Schutzziel?</h4>
+  <p>Fast jede Krypto-Frage lässt sich mit dieser Tabelle beantworten. Die Schutzziele selbst werden in SEC-03 genau erklärt.</p>
+  <table class="kompakt">
+    <tr><th>Mechanismus</th><th>Vertraulichkeit</th><th>Integrität</th><th>Authentizität</th><th>Verbindlichkeit</th></tr>
+    <tr><td>Symmetrische Verschlüsselung (AES)</td><td>✔</td><td>– (nur mit MAC bzw. AEAD-Modus)</td><td>–</td><td>–</td></tr>
+    <tr><td>Asymmetrische Verschlüsselung (RSA)</td><td>✔</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>Hashwert allein (SHA-256)</td><td>–</td><td>nur zufällige Fehler erkennbar</td><td>–</td><td>–</td></tr>
+    <tr><td>MAC / HMAC (Hash + geheimer Schlüssel)</td><td>–</td><td>✔</td><td>✔ (Absender kennt den Schlüssel)</td><td>–</td></tr>
+    <tr><td>Digitale Signatur</td><td>–</td><td>✔</td><td>✔</td><td>✔</td></tr>
+    <tr><td>Zertifikat (PKI)</td><td>–</td><td>–</td><td>✔ (Schlüssel gehört wirklich zu …)</td><td>Grundlage für Signaturen</td></tr>
+    <tr><td>TLS / HTTPS</td><td>✔</td><td>✔</td><td>✔ (des Servers)</td><td>–</td></tr>
+  </table>
+  <div class="merke"><span class="kastentitel">Merke</span><strong>Verschlüsseln</strong> schützt vor dem <em>Mitlesen</em>, <strong>Signieren/MAC</strong> schützt vor <em>unbemerkter Veränderung und Fälschung</em>. Das eine ersetzt das andere nicht. Wer beides braucht, muss beides einsetzen (oder TLS bzw. einen AEAD-Modus wie AES-GCM, die beides kombinieren).</div>
+
+  <!-- ===================== SEC-01 ===================== -->
+  <h3 id="e-01">SEC-01 · Verschlüsselungsverfahren <span class="badge k-meistens">Meistens</span></h3>
+  <p class="klein">Vorkommen: Kryptografie insgesamt 6/9 · Verschlüsselungsverfahren davon in W21, W22, S23, W25, S26 · immer Teil 1, 1–8 Punkte je Teilaufgabe</p>
+
+  <h4>Grundbegriffe</h4>
+  <ul>
+    <li><strong>Klartext</strong> (lesbare Daten) wird mit einem <strong>Verfahren</strong> (Algorithmus) und einem <strong>Schlüssel</strong> in <strong>Geheimtext</strong> (Chiffrat) umgewandelt. Nur wer den passenden Schlüssel hat, kann zurückwandeln.</li>
+    <li><strong>Kerckhoffs-Prinzip:</strong> Das Verfahren ist öffentlich bekannt, die Sicherheit hängt <em>nur</em> am geheimen Schlüssel. Ein „geheimer eigener Algorithmus“ ist keine Sicherheitsmaßnahme.</li>
+    <li>Verschlüsselung sichert das Schutzziel <strong>Vertraulichkeit</strong>. Sie verhindert nicht, dass jemand das Chiffrat verändert (→ SEC-02).</li>
+    <li><strong>Kodierung ist keine Verschlüsselung:</strong> Base64, URL-Encoding oder Hex lassen sich von jedem ohne Schlüssel zurückwandeln.</li>
+  </ul>
+
+  <figure>
+    <svg viewBox="0 0 760 320" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e01a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#222"/></marker>
+      </defs>
+      <!-- Zeile 1: symmetrisch -->
+      <text x="10" y="20" font-weight="bold">Symmetrische Verschlüsselung</text>
+      <rect x="10" y="32" width="100" height="44" fill="#fff" stroke="#222"/>
+      <text x="60" y="50" text-anchor="middle">Klartext</text>
+      <text x="60" y="67" text-anchor="middle" font-size="11">„Treffen 9 Uhr“</text>
+      <rect x="150" y="32" width="130" height="44" rx="10" fill="#fff" stroke="#222"/>
+      <text x="215" y="58" text-anchor="middle">verschlüsseln</text>
+      <rect x="320" y="32" width="120" height="44" fill="#fff" stroke="#222"/>
+      <text x="380" y="50" text-anchor="middle">Chiffrat</text>
+      <text x="380" y="67" text-anchor="middle" font-size="11" font-family="Consolas, monospace">x7#Qa!9vR…</text>
+      <rect x="480" y="32" width="130" height="44" rx="10" fill="#fff" stroke="#222"/>
+      <text x="545" y="58" text-anchor="middle">entschlüsseln</text>
+      <rect x="650" y="32" width="100" height="44" fill="#fff" stroke="#222"/>
+      <text x="700" y="50" text-anchor="middle">Klartext</text>
+      <text x="700" y="67" text-anchor="middle" font-size="11">„Treffen 9 Uhr“</text>
+      <line x1="110" y1="54" x2="148" y2="54" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="280" y1="54" x2="318" y2="54" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="440" y1="54" x2="478" y2="54" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="610" y1="54" x2="648" y2="54" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <rect x="150" y="104" width="460" height="34" fill="#eef3fa" stroke="#222"/>
+      <text x="380" y="126" text-anchor="middle">derselbe geheime Schlüssel K – beide müssen ihn vorher kennen</text>
+      <line x1="215" y1="104" x2="215" y2="79" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="545" y1="104" x2="545" y2="79" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <!-- Zeile 2: asymmetrisch -->
+      <text x="10" y="178" font-weight="bold">Asymmetrische Verschlüsselung</text>
+      <rect x="10" y="190" width="100" height="44" fill="#fff" stroke="#222"/>
+      <text x="60" y="208" text-anchor="middle">Klartext</text>
+      <text x="60" y="225" text-anchor="middle" font-size="11">„Treffen 9 Uhr“</text>
+      <rect x="150" y="190" width="130" height="44" rx="10" fill="#fff" stroke="#222"/>
+      <text x="215" y="216" text-anchor="middle">verschlüsseln</text>
+      <rect x="320" y="190" width="120" height="44" fill="#fff" stroke="#222"/>
+      <text x="380" y="208" text-anchor="middle">Chiffrat</text>
+      <text x="380" y="225" text-anchor="middle" font-size="11" font-family="Consolas, monospace">8f!Kq2#Lw…</text>
+      <rect x="480" y="190" width="130" height="44" rx="10" fill="#fff" stroke="#222"/>
+      <text x="545" y="216" text-anchor="middle">entschlüsseln</text>
+      <rect x="650" y="190" width="100" height="44" fill="#fff" stroke="#222"/>
+      <text x="700" y="208" text-anchor="middle">Klartext</text>
+      <text x="700" y="225" text-anchor="middle" font-size="11">„Treffen 9 Uhr“</text>
+      <line x1="110" y1="212" x2="148" y2="212" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="280" y1="212" x2="318" y2="212" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="440" y1="212" x2="478" y2="212" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="610" y1="212" x2="648" y2="212" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <rect x="120" y="262" width="190" height="42" fill="#eef3fa" stroke="#222"/>
+      <text x="215" y="279" text-anchor="middle">öffentlicher Schlüssel</text>
+      <text x="215" y="296" text-anchor="middle">des Empfängers</text>
+      <rect x="450" y="262" width="190" height="42" fill="#eef3fa" stroke="#222"/>
+      <text x="545" y="279" text-anchor="middle">privater Schlüssel</text>
+      <text x="545" y="296" text-anchor="middle">des Empfängers (geheim)</text>
+      <line x1="215" y1="262" x2="215" y2="237" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="545" y1="262" x2="545" y2="237" stroke="#222" marker-end="url(#e01a-pfeil)"/>
+      <line x1="310" y1="283" x2="450" y2="283" stroke="#222" stroke-dasharray="5,4"/>
+      <text x="380" y="276" text-anchor="middle" font-size="12">ein Schlüsselpaar</text>
+    </svg>
+    <figcaption>Abb. A-1: Symmetrisch – ein gemeinsamer Schlüssel; asymmetrisch – ein Schlüsselpaar des Empfängers</figcaption>
+  </figure>
+
+  <h4>Symmetrische Verschlüsselung</h4>
+  <p>Sender und Empfänger verwenden <strong>denselben geheimen Schlüssel</strong> zum Ver- und Entschlüsseln.</p>
+  <ul>
+    <li><strong>Verfahren:</strong> <strong>AES</strong> (Advanced Encryption Standard, Schlüssellänge 128, 192 oder 256 Bit) ist der Standard. Daneben ChaCha20 (gut für Geräte ohne AES-Hardware). Veraltet und unsicher: DES (56 Bit), RC4; 3DES wird nicht mehr empfohlen.</li>
+    <li><strong>Vorteile:</strong> sehr schnell, wenig Rechenleistung und Energie, oft direkt in Hardware umgesetzt (Prozessoren, viele Mikrocontroller). Geeignet für <strong>große Datenmengen</strong>.</li>
+    <li><strong>Nachteil 1 – Schlüsselaustauschproblem:</strong> Der Schlüssel muss vorher über einen <em>sicheren Kanal</em> zu beiden Partnern gelangen. Schickt man ihn unverschlüsselt über das Netz, kann ihn jeder mitlesen. Baut man ihn fest in eine Software ein, haben alle Installationen denselben Schlüssel, und er lässt sich aus der Software auslesen.</li>
+    <li><strong>Nachteil 2 – Schlüsselanzahl:</strong> Für <em>n</em> Personen, die paarweise geheim kommunizieren wollen, braucht man <em>n·(n−1)/2</em> Schlüssel. Beispiel: 50 Personen → 50·49/2 = 1.225 Schlüssel.</li>
+    <li>Da beide Seiten denselben Schlüssel haben, kann man nicht beweisen, <em>wer</em> von beiden eine Nachricht verschlüsselt hat.</li>
+  </ul>
+
+  <h4>Asymmetrische Verschlüsselung (Public-Key-Verfahren)</h4>
+  <p>Jeder Teilnehmer hat ein <strong>Schlüsselpaar</strong>: einen <strong>öffentlichen Schlüssel</strong> (Public Key, darf jeder kennen) und einen <strong>privaten Schlüssel</strong> (Private Key, verlässt nie den Besitzer). Was mit dem einen Schlüssel bearbeitet wurde, kann nur mit dem anderen umgekehrt werden. Wer B eine vertrauliche Nachricht schicken will, verschlüsselt mit dem <strong>öffentlichen Schlüssel von B</strong>; entschlüsseln kann nur B mit seinem privaten Schlüssel.</p>
+  <ul>
+    <li><strong>Verfahren:</strong> RSA, Verfahren auf elliptischen Kurven (ECC, z. B. ECDH für Schlüsselvereinbarung, ECDSA für Signaturen), Diffie-Hellman (Schlüsselvereinbarung).</li>
+    <li><strong>Vorteile:</strong> kein geheimer Schlüsselaustausch nötig (der öffentliche Schlüssel darf ja jeder sehen); bei <em>n</em> Teilnehmern nur <em>n</em> Schlüsselpaare; ermöglicht digitale Signaturen (SEC-02).</li>
+    <li><strong>Nachteile:</strong> sehr <strong>rechenaufwendig</strong> (grob 100- bis 1000-mal langsamer als AES), lange Schlüssel, nur für <strong>kleine Datenmengen</strong> geeignet. Bei RSA ist das Chiffrat außerdem immer so lang wie der Schlüssel (RSA-2048 → 256 Byte), auch wenn die Nachricht nur 10 Byte hat.</li>
+    <li><strong>Neues Problem:</strong> Gehört der öffentliche Schlüssel wirklich dem, für den ich ihn halte? Ein Angreifer könnte mir seinen eigenen Schlüssel unterschieben (Man-in-the-Middle). Lösung: <strong>Zertifikate</strong> (SEC-02).</li>
+  </ul>
+
+  <div class="merke"><span class="kastentitel">RSA in drei Sätzen (für „Erläutern Sie, was man unter RSA versteht“)</span>
+    RSA (nach Rivest, Shamir, Adleman) ist ein <strong>asymmetrisches</strong> Verfahren mit öffentlichem und privatem Schlüssel. Seine Sicherheit beruht darauf, dass man eine sehr große Zahl <em>n</em>, das Produkt zweier großer Primzahlen <em>p·q</em>, praktisch nicht wieder in diese Primfaktoren zerlegen kann – ohne <em>p</em> und <em>q</em> lässt sich der private Schlüssel nicht berechnen. RSA wird zum Verschlüsseln kleiner Datenmengen (z. B. Sitzungsschlüssel) und zum Signieren verwendet; wegen der langen Schlüssel (2048–4096 Bit, das BSI empfiehlt mindestens 3000 Bit) ist es rechenaufwendig.
+  </div>
+  <p class="klein"><strong>Nur zum Verständnis</strong> (wird nicht gerechnet): Mit den Mini-Primzahlen p = 3, q = 11 ist n = 33. Öffentlicher Schlüssel (e = 3, n = 33), privater Schlüssel (d = 7, n = 33). Nachricht m = 4: Chiffrat c = 4³ mod 33 = 64 mod 33 = <strong>31</strong>. Entschlüsseln: 31⁷ mod 33 = <strong>4</strong>. Mit echten Zahlen von 600 Dezimalstellen ist das Rückrechnen ohne d praktisch unmöglich.</p>
+
+  <table class="kompakt">
+    <tr><th>Kriterium</th><th>symmetrisch (z. B. AES)</th><th>asymmetrisch (z. B. RSA, ECC)</th></tr>
+    <tr><td>Schlüssel</td><td>ein gemeinsamer geheimer Schlüssel</td><td>Schlüsselpaar: öffentlich + privat</td></tr>
+    <tr><td>Geschwindigkeit</td><td>sehr schnell, auch in Hardware</td><td>langsam, rechenintensiv</td></tr>
+    <tr><td>Datenmenge</td><td>beliebig groß</td><td>nur kleine Datenmengen</td></tr>
+    <tr><td>Schlüsselverteilung</td><td>Problem: sicherer Kanal nötig</td><td>einfach: öffentlicher Schlüssel darf bekannt sein (Echtheit über Zertifikat)</td></tr>
+    <tr><td>Schlüsselanzahl bei n Partnern</td><td>n·(n−1)/2</td><td>n Schlüsselpaare</td></tr>
+    <tr><td>Signatur möglich?</td><td>nein (nur MAC)</td><td>ja</td></tr>
+    <tr><td>typische Schlüssellänge</td><td>128–256 Bit</td><td>RSA 2048–4096 Bit, ECC 256–384 Bit</td></tr>
+  </table>
+
+  <h4>Hybride Verschlüsselung – die Kombination (am häufigsten gefragt!)</h4>
+  <p>Hybride Verfahren nutzen die Stärken beider Welten: <strong>Asymmetrisch</strong> wird nur ein kleiner, zufällig erzeugter <strong>Sitzungsschlüssel</strong> (Session Key) sicher übertragen; die eigentlichen <strong>Daten</strong> werden mit diesem Sitzungsschlüssel <strong>symmetrisch</strong> und damit schnell verschlüsselt. Beispiel: Eine Mandantin lädt im Online-Portal ihrer Steuerkanzlei 40 MB Belege hoch.</p>
+  <figure>
+    <svg viewBox="0 0 760 270" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e01b-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#222"/></marker>
+      </defs>
+      <text x="150" y="20" text-anchor="middle" font-weight="bold">Sender: Browser der Mandantin</text>
+      <text x="620" y="20" text-anchor="middle" font-weight="bold">Empfänger: Server der Kanzlei</text>
+      <!-- Sender -->
+      <rect x="30" y="34" width="240" height="46" rx="8" fill="#fff" stroke="#222"/>
+      <text x="150" y="53" text-anchor="middle">① Sitzungsschlüssel S</text>
+      <text x="150" y="70" text-anchor="middle">zufällig erzeugen</text>
+      <rect x="30" y="106" width="240" height="46" rx="8" fill="#fff" stroke="#222"/>
+      <text x="150" y="125" text-anchor="middle">② Belege mit S verschlüsseln</text>
+      <text x="150" y="142" text-anchor="middle">(symmetrisch, z. B. AES)</text>
+      <rect x="30" y="178" width="240" height="46" rx="8" fill="#fff" stroke="#222"/>
+      <text x="150" y="197" text-anchor="middle">③ S mit öffentlichem Schlüssel</text>
+      <text x="150" y="214" text-anchor="middle">der Kanzlei verschlüsseln (RSA)</text>
+      <line x1="150" y1="80" x2="150" y2="104" stroke="#222" marker-end="url(#e01b-pfeil)"/>
+      <path d="M30,57 H15 V201 H28" fill="none" stroke="#222" marker-end="url(#e01b-pfeil)"/>
+      <!-- Übertragung -->
+      <text x="385" y="98" text-anchor="middle" font-size="12">Übertragung über das Internet</text>
+      <rect x="305" y="110" width="160" height="38" fill="#eef3fa" stroke="#222"/>
+      <text x="385" y="134" text-anchor="middle">Chiffrat der Belege</text>
+      <rect x="305" y="182" width="160" height="38" fill="#eef3fa" stroke="#222"/>
+      <text x="385" y="206" text-anchor="middle">verschlüsselter S</text>
+      <line x1="270" y1="129" x2="303" y2="129" stroke="#222" marker-end="url(#e01b-pfeil)"/>
+      <line x1="270" y1="201" x2="303" y2="201" stroke="#222" marker-end="url(#e01b-pfeil)"/>
+      <line x1="465" y1="129" x2="498" y2="129" stroke="#222" marker-end="url(#e01b-pfeil)"/>
+      <line x1="465" y1="201" x2="498" y2="201" stroke="#222" marker-end="url(#e01b-pfeil)"/>
+      <!-- Empfänger -->
+      <rect x="500" y="106" width="240" height="46" rx="8" fill="#fff" stroke="#222"/>
+      <text x="620" y="125" text-anchor="middle">⑤ Belege mit S entschlüsseln</text>
+      <text x="620" y="142" text-anchor="middle">(symmetrisch, AES)</text>
+      <rect x="500" y="178" width="240" height="46" rx="8" fill="#fff" stroke="#222"/>
+      <text x="620" y="197" text-anchor="middle">④ S mit eigenem privatem</text>
+      <text x="620" y="214" text-anchor="middle">Schlüssel entschlüsseln (RSA)</text>
+      <line x1="620" y1="178" x2="620" y2="154" stroke="#222" marker-end="url(#e01b-pfeil)"/>
+      <text x="628" y="170" font-size="12">S</text>
+      <text x="380" y="256" text-anchor="middle" font-size="12">Nur der kurze Schlüssel S wird (langsam) asymmetrisch verschlüsselt, die großen Daten (schnell) symmetrisch.</text>
+    </svg>
+    <figcaption>Abb. A-2: Ablauf der hybriden Verschlüsselung</figcaption>
+  </figure>
+  <p><strong>So beschreibst du den Ablauf (Schritte nummerieren, Schlüssel immer genau benennen):</strong></p>
+  <ol class="schritte">
+    <li>Der Sender erzeugt einen zufälligen <strong>symmetrischen Sitzungsschlüssel</strong> (nur für diese Sitzung/Nachricht).</li>
+    <li>Er verschlüsselt die <strong>Daten</strong> mit dem Sitzungsschlüssel <strong>symmetrisch</strong> (AES).</li>
+    <li>Er verschlüsselt den <strong>Sitzungsschlüssel</strong> mit dem <strong>öffentlichen Schlüssel des Empfängers</strong> asymmetrisch (RSA) und schickt beides.</li>
+    <li>Der Empfänger entschlüsselt den Sitzungsschlüssel mit seinem <strong>privaten Schlüssel</strong>.</li>
+    <li>Mit dem Sitzungsschlüssel entschlüsselt er die Daten symmetrisch.</li>
+  </ol>
+  <p><strong>Vorteile hybrid:</strong> schnell auch bei großen Datenmengen (gegenüber rein asymmetrisch) · kein vorheriger geheimer Schlüsselaustausch nötig (gegenüber rein symmetrisch) · für jede Sitzung ein neuer Schlüssel, ein erbeuteter Sitzungsschlüssel öffnet also nur diese eine Sitzung.</p>
+  <div class="merke"><span class="kastentitel">Merke</span>Hybrid = <strong>asymmetrisch für den Schlüssel, symmetrisch für die Daten.</strong> Die Daten werden <em>einmal</em> verschlüsselt, nicht zweimal.</div>
+
+  <h4>TLS / HTTPS vereinfacht</h4>
+  <p>TLS (Transport Layer Security, Nachfolger von SSL) ist das Standardbeispiel für hybride Verschlüsselung. HTTPS ist HTTP über TLS; TLS steckt auch in sicheren Mail-Verbindungen, MQTT über TLS usw. Umgangssprachlich heißt das Server-Zertifikat noch „SSL-Zertifikat“.</p>
+  <figure>
+    <svg viewBox="0 0 720 345" width="720" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e01c-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#222"/></marker>
+      </defs>
+      <rect x="60" y="10" width="180" height="40" fill="#fff" stroke="#222"/>
+      <text x="150" y="35" text-anchor="middle" font-weight="bold">Client (Browser/App)</text>
+      <rect x="480" y="10" width="180" height="40" fill="#fff" stroke="#222"/>
+      <text x="570" y="35" text-anchor="middle" font-weight="bold">Server</text>
+      <line x1="150" y1="50" x2="150" y2="335" stroke="#222" stroke-dasharray="5,4"/>
+      <line x1="570" y1="50" x2="570" y2="335" stroke="#222" stroke-dasharray="5,4"/>
+      <!-- 1 -->
+      <text x="360" y="77" text-anchor="middle">① ClientHello: unterstützte Verfahren, Zufallszahl</text>
+      <line x1="150" y1="85" x2="568" y2="85" stroke="#222" marker-end="url(#e01c-pfeil)"/>
+      <!-- 2 -->
+      <text x="360" y="117" text-anchor="middle">② ServerHello + Zertifikat (enthält öffentlichen Schlüssel)</text>
+      <line x1="570" y1="125" x2="152" y2="125" stroke="#222" marker-end="url(#e01c-pfeil)"/>
+      <!-- 3 -->
+      <rect x="40" y="140" width="260" height="42" fill="#fff" stroke="#222"/>
+      <text x="170" y="157" text-anchor="middle">③ Client prüft das Zertifikat:</text>
+      <text x="170" y="174" text-anchor="middle">CA-Signatur, Gültigkeit, Domainname</text>
+      <!-- 4 -->
+      <text x="360" y="203" text-anchor="middle">④ Schlüsselaustausch: Geheimnis mit dem öffentl. Schlüssel</text>
+      <text x="360" y="219" text-anchor="middle">des Servers verschlüsselt (TLS 1.2) bzw. Diffie-Hellman (TLS 1.3)</text>
+      <line x1="150" y1="227" x2="568" y2="227" stroke="#222" marker-end="url(#e01c-pfeil)"/>
+      <!-- 5 -->
+      <rect x="60" y="244" width="600" height="30" fill="#eef3fa" stroke="#222"/>
+      <text x="360" y="264" text-anchor="middle">⑤ Beide berechnen daraus denselben symmetrischen Sitzungsschlüssel</text>
+      <!-- 6 -->
+      <text x="360" y="301" text-anchor="middle">⑥ Nutzdaten symmetrisch verschlüsselt + geschützt (AES-GCM)</text>
+      <line x1="152" y1="312" x2="568" y2="312" stroke="#222" stroke-width="2" marker-start="url(#e01c-pfeil)" marker-end="url(#e01c-pfeil)"/>
+    </svg>
+    <figcaption>Abb. A-3: TLS-Handshake vereinfacht – asymmetrisch zum Schlüsselaustausch, danach symmetrisch</figcaption>
+  </figure>
+  <p><strong>Was TLS leistet:</strong> <em>Vertraulichkeit</em> (symmetrische Verschlüsselung der Nutzdaten), <em>Integrität</em> (jeder Datensatz wird mit einem MAC bzw. im AEAD-Modus geschützt, Veränderungen fallen auf) und <em>Authentizität des Servers</em> (Zertifikat; der Client weiß, mit wem er spricht). Den Client authentifiziert TLS normalerweise <em>nicht</em>, das macht die Anwendung (Login). Ausnahme: gegenseitiges TLS (mTLS) mit Client-Zertifikat, z. B. bei Maschinen untereinander.</p>
+  <p class="klein">In IHK-Lösungen genügt meist die „klassische“ Darstellung aus TLS 1.2: Der Client erzeugt das Sitzungsgeheimnis und schickt es mit dem öffentlichen Schlüssel des Servers verschlüsselt. Seit TLS 1.3 wird der Sitzungsschlüssel stattdessen von beiden Seiten per (Elliptic-Curve-)Diffie-Hellman berechnet; das Zertifikat dient dann zur Authentifizierung des Servers. Beides ist „hybrid“.</p>
+
+  <h4>Transport- vs. Ende-zu-Ende-Verschlüsselung</h4>
+  <figure>
+    <svg viewBox="0 0 740 242" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e01d-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#222"/></marker>
+      </defs>
+      <text x="10" y="18" font-weight="bold">Transportverschlüsselung (jede Teilstrecke einzeln, z. B. TLS)</text>
+      <rect x="10" y="34" width="120" height="40" fill="#fff" stroke="#222"/>
+      <text x="70" y="59" text-anchor="middle">Absender</text>
+      <rect x="290" y="34" width="180" height="40" fill="#fff" stroke="#222"/>
+      <text x="380" y="59" text-anchor="middle">Mail-/Chat-Server</text>
+      <rect x="610" y="34" width="120" height="40" fill="#fff" stroke="#222"/>
+      <text x="670" y="59" text-anchor="middle">Empfänger</text>
+      <line x1="130" y1="54" x2="288" y2="54" stroke="#222" stroke-width="2" marker-end="url(#e01d-pfeil)"/>
+      <line x1="470" y1="54" x2="608" y2="54" stroke="#222" stroke-width="2" marker-end="url(#e01d-pfeil)"/>
+      <text x="209" y="47" text-anchor="middle" font-size="12">verschlüsselt</text>
+      <text x="539" y="47" text-anchor="middle" font-size="12">verschlüsselt</text>
+      <text x="380" y="94" text-anchor="middle" font-size="12">Server entschlüsselt und verschlüsselt neu → Inhalt dort im Klartext lesbar</text>
+      <text x="10" y="124" font-weight="bold">Ende-zu-Ende-Verschlüsselung (z. B. S/MIME, PGP, Messenger mit E2E)</text>
+      <text x="380" y="152" text-anchor="middle" font-size="12">durchgehend verschlüsselt – Schlüssel nur bei Absender und Empfänger</text>
+      <path d="M70,170 V158 H670 V168" fill="none" stroke="#222" stroke-dasharray="6,4" marker-end="url(#e01d-pfeil)"/>
+      <rect x="10" y="170" width="120" height="40" fill="#fff" stroke="#222"/>
+      <text x="70" y="195" text-anchor="middle">Absender</text>
+      <rect x="290" y="170" width="180" height="40" fill="#fff" stroke="#222"/>
+      <text x="380" y="195" text-anchor="middle">Mail-/Chat-Server</text>
+      <rect x="610" y="170" width="120" height="40" fill="#fff" stroke="#222"/>
+      <text x="670" y="195" text-anchor="middle">Empfänger</text>
+      <line x1="130" y1="190" x2="288" y2="190" stroke="#222" stroke-width="2" marker-end="url(#e01d-pfeil)"/>
+      <line x1="470" y1="190" x2="608" y2="190" stroke="#222" stroke-width="2" marker-end="url(#e01d-pfeil)"/>
+      <text x="380" y="230" text-anchor="middle" font-size="12">Server leitet nur Chiffrat weiter und kann den Inhalt nicht lesen</text>
+    </svg>
+    <figcaption>Abb. A-4: Transport- und Ende-zu-Ende-Verschlüsselung</figcaption>
+  </figure>
+  <table class="kompakt">
+    <tr><th></th><th>Transportverschlüsselung</th><th>Ende-zu-Ende-Verschlüsselung</th></tr>
+    <tr><td>Was wird geschützt?</td><td>jede Teilstrecke (Client → Server, Server → Server)</td><td>der Inhalt vom ersten Absender bis zum letzten Empfänger</td></tr>
+    <tr><td>Zwischenstationen</td><td>sehen den Klartext (Server, Gateways, Proxys)</td><td>sehen nur Chiffrat</td></tr>
+    <tr><td>Risiko</td><td>kompromittierte oder neugierige Zwischenstation</td><td>Schlüsselverwaltung bei den Endpunkten aufwendiger; Server kann Inhalte nicht prüfen/durchsuchen</td></tr>
+    <tr><td>Beispiele</td><td>HTTPS, TLS zwischen Mailservern, WLAN-Verschlüsselung</td><td>S/MIME, PGP, E2E-Messenger, Verschlüsselung direkt im Sensor bis zur Anwendung</td></tr>
+  </table>
+
+  <h4>Verfahren für leistungsschwache Geräte (IoT-Sensoren)</h4>
+  <p>Batteriebetriebene Sensoren haben wenig Rechenleistung und Speicher, sollen jahrelang mit einer Batterie laufen und dürfen per Funk oft nur wenige Byte je Nachricht senden. <strong>So gehst du bei der Auswahl vor:</strong></p>
+  <ol class="schritte">
+    <li><strong>Rahmenbedingungen aus der Anlage herauslesen:</strong> Prozessor, RAM, Energieversorgung, Laufzeitziel, maximale Nachrichtengröße, Sendehäufigkeit, vorhandene Krypto-Hardware.</li>
+    <li><strong>Symmetrisch bevorzugen:</strong> AES-128 ist schnell, energiesparend und oft als Hardware-Baustein vorhanden. Das Chiffrat ist kaum größer als der Klartext.</li>
+    <li><strong>Schlüsselverteilung lösen:</strong> Jedes Gerät bekommt bei der Produktion oder Inbetriebnahme einen <strong>eigenen</strong> Schlüssel (Pre-Shared Key), der sicher im Gerät (z. B. Secure Element) und auf dem Server gespeichert wird. Nie einen gemeinsamen Schlüssel für alle Geräte – sonst öffnet ein gestohlenes Gerät alle anderen.</li>
+    <li><strong>Asymmetrisch nur sparsam:</strong> Wenn überhaupt, dann ECC statt RSA (256-Bit-ECC ≈ Sicherheit von 3072-Bit-RSA bei viel kürzeren Schlüsseln), und nur selten, z. B. einmalig beim Einbinden des Geräts.</li>
+    <li><strong>Integrität nicht vergessen:</strong> Zusätzlich einen MAC mitschicken bzw. einen AEAD-Modus verwenden (SEC-02).</li>
+  </ol>
+  <p>Beispiel mit anderen Daten: Ein Funk-Wasserzähler mit Knopfzelle soll 12 Jahre laufen und sendet einmal täglich ein 20-Byte-Telegramm. RSA-2048 würde jede Nachricht auf mindestens 256 Byte aufblähen und viel Energie kosten; ein AES-128-Schlüssel je Zähler, der beim Einbau beim Versorger hinterlegt wird, ist die passende Lösung.</p>
+
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>
+    <ul>
+      <li>„Mit dem <em>privaten</em> Schlüssel verschlüsseln, damit es vertraulich ist“ – falsch. Mit dem privaten Schlüssel wird <strong>signiert</strong>; jeder mit dem öffentlichen Schlüssel kann das „entschlüsseln“. Für Vertraulichkeit immer der <strong>öffentliche Schlüssel des Empfängers</strong>.</li>
+      <li>„Asymmetrisch ist sicherer als symmetrisch“ – falsch. AES-128 ist etwa so stark wie RSA-3072. Der Unterschied liegt in Schlüsselverteilung und Geschwindigkeit.</li>
+      <li>„Hybrid heißt doppelt verschlüsselt“ – falsch. Die Daten werden einmal symmetrisch verschlüsselt, nur der Sitzungsschlüssel asymmetrisch.</li>
+      <li>Bei „Vorteil/Nachteil“-Fragen immer <strong>den Vergleich</strong> nennen: „schneller <em>als</em> rein asymmetrisch“, nicht nur „schnell“.</li>
+    </ul>
+  </div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <strong>W21 T1 A4a (8 P):</strong> Eine Software verschlüsselt mit einem eingebauten Lizenzschlüssel symmetrisch; Schwäche erkennen und eine asymmetrische bzw. hybride Alternative mit Vor- und Nachteil erläutern.
+    <strong>W22 T1 A1d (5 P):</strong> Ablauf der hybriden Verschlüsselung bei TLS beschreiben.
+    <strong>S23 T1 A4a (4 P):</strong> Verschlüsselungsverfahren für Sensoren mit geringer Rechenleistung auswählen und begründen.
+    <strong>W25 T1 A3a (4 P):</strong> Transportverschlüsselung benennen und den Vorteil der hybriden Verschlüsselung erläutern.
+    <strong>S26 T1 A3bc/bd (6 P):</strong> „Erläutern Sie, was man unter RSA versteht“ und „Begründen Sie, ob RSA in Ihrem Projekt sinnvoll ist“ – das Projekt hatte batteriebetriebene Bodensensoren. Erwartet: RSA ist asymmetrisch und rechenaufwendig → für die Sensoren ungeeignet bzw. nur für den Schlüsselaustausch sinnvoll.
+  </div>
+
+  <!-- ===================== SEC-02 ===================== -->
+  <h3 id="e-02">SEC-02 · Hash, digitale Signatur, Zertifikate/PKI <span class="badge k-meistens">Meistens</span></h3>
+  <p class="klein">Vorkommen: Kryptografie insgesamt 6/9 · Hash/Signatur/Zertifikat davon in W21, S22, W22, S23, S26 · Teil 1, 2–9 Punkte je Teilaufgabe</p>
+
+  <h4>Hashfunktionen</h4>
+  <p>Eine kryptografische Hashfunktion berechnet aus beliebig großen Daten einen <strong>Hashwert</strong> (Prüfsumme, „digitaler Fingerabdruck“) <strong>fester Länge</strong>, z. B. 256 Bit bei SHA-256. Eigenschaften:</p>
+  <ul>
+    <li><strong>Einwegfunktion:</strong> Aus dem Hashwert lassen sich die Ausgangsdaten nicht zurückberechnen.</li>
+    <li><strong>Kollisionsresistenz:</strong> Es ist praktisch unmöglich, zwei verschiedene Eingaben mit demselben Hashwert zu finden.</li>
+    <li><strong>Lawineneffekt:</strong> Eine winzige Änderung der Eingabe ergibt einen völlig anderen Hashwert.</li>
+    <li><strong>Deterministisch und schnell:</strong> Gleiche Eingabe → immer gleicher Hashwert; Berechnung geht schnell.</li>
+  </ul>
+  <table class="kompakt">
+    <tr><th>Eingabe</th><th>SHA-256 (gekürzt)</th></tr>
+    <tr><td><code>Paket 5K-2209 zugestellt</code></td><td class="mono">7fe5231676663b5a…70b551f39650</td></tr>
+    <tr><td><code>Paket 5K-2209 zugestellt.</code> (mit Punkt)</td><td class="mono">2697297fcb427fd1…cdb017d122</td></tr>
+  </table>
+  <table class="kompakt">
+    <tr><th>Verfahren</th><th>Länge</th><th>Einsatz heute</th></tr>
+    <tr><td>MD5</td><td>128 Bit</td><td><strong>unsicher</strong> (Kollisionen leicht erzeugbar) – höchstens noch als Prüfsumme gegen zufällige Fehler</td></tr>
+    <tr><td>SHA-1</td><td>160 Bit</td><td><strong>unsicher</strong> (praktische Kollision seit 2017)</td></tr>
+    <tr><td>SHA-256, SHA-512 (SHA-2), SHA-3</td><td>256–512 Bit</td><td>aktueller Standard für Integrität und Signaturen</td></tr>
+    <tr><td>bcrypt, scrypt, Argon2, PBKDF2</td><td>–</td><td>absichtlich <em>langsame</em> Verfahren speziell für Passwörter (SEC-04)</td></tr>
+  </table>
+  <p><strong>Einsatz:</strong> Prüfsummen bei Downloads, Grundlage der digitalen Signatur, Passwortspeicherung (mit Salt), Versionsverwaltung (Git), Erkennen doppelter Dateien.</p>
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>
+    <ul>
+      <li><strong>Hashen ist keine Verschlüsselung.</strong> Es gibt keinen Schlüssel und kein „Entschlüsseln“. Daten, die man später wieder im Klartext braucht, darf man nicht nur als Hash speichern.</li>
+      <li><strong>Ein Hash allein schützt nicht vor absichtlicher Manipulation:</strong> Wer die Daten unterwegs ändert, kann den mitgeschickten Hashwert einfach neu berechnen. Gegen Angreifer braucht man ein Geheimnis im Spiel – also MAC oder Signatur.</li>
+    </ul>
+  </div>
+
+  <h4>MAC / HMAC – Prüfsumme mit geheimem Schlüssel</h4>
+  <p>Ein <strong>MAC</strong> (Message Authentication Code) ist eine Prüfsumme, in die ein <strong>geheimer symmetrischer Schlüssel</strong> eingeht. Das genormte Verfahren auf Basis einer Hashfunktion heißt <strong>HMAC</strong> (z. B. HMAC-SHA256). Beispiel: Eine Wetterstation sendet „Wind 87 km/h“ und dazu HMAC(K, „Wind 87 km/h“). Der Server kennt K, berechnet den HMAC über die empfangene Nachricht neu und vergleicht.</p>
+  <ul>
+    <li>Sichert <strong>Integrität</strong> (Änderung → anderer MAC) und <strong>Authentizität</strong> (nur wer K kennt, konnte den MAC berechnen).</li>
+    <li>Sichert <strong>keine Verbindlichkeit</strong>: Beide Seiten kennen K. Der Empfänger könnte den MAC also auch selbst erzeugt haben und kann Dritten nicht beweisen, dass die Nachricht vom Absender stammt.</li>
+    <li>Sehr leichtgewichtig, daher ideal für IoT. <strong>AEAD-Modi</strong> wie AES-GCM oder AES-CCM verschlüsseln <em>und</em> berechnen einen MAC in einem Schritt.</li>
+  </ul>
+
+  <h4>Digitale Signatur</h4>
+  <figure>
+    <svg viewBox="0 0 760 365" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e02a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#222"/></marker>
+      </defs>
+      <text x="130" y="20" font-weight="bold">Absenderin (Lieferantin): signieren</text>
+      <rect x="10" y="32" width="100" height="40" fill="#fff" stroke="#222"/>
+      <text x="60" y="57" text-anchor="middle">Rechnung</text>
+      <rect x="145" y="32" width="120" height="40" rx="10" fill="#fff" stroke="#222"/>
+      <text x="205" y="57" text-anchor="middle">Hashfunktion</text>
+      <rect x="300" y="32" width="100" height="40" fill="#fff" stroke="#222"/>
+      <text x="350" y="57" text-anchor="middle">Hashwert</text>
+      <rect x="435" y="27" width="180" height="50" rx="10" fill="#fff" stroke="#222"/>
+      <text x="525" y="48" text-anchor="middle">mit eigenem privatem</text>
+      <text x="525" y="65" text-anchor="middle">Schlüssel signieren</text>
+      <rect x="650" y="32" width="100" height="40" fill="#eef3fa" stroke="#222"/>
+      <text x="700" y="57" text-anchor="middle">Signatur</text>
+      <line x1="110" y1="52" x2="143" y2="52" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <line x1="265" y1="52" x2="298" y2="52" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <line x1="400" y1="52" x2="433" y2="52" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <line x1="615" y1="52" x2="648" y2="52" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <!-- Übertragung -->
+      <line x1="60" y1="72" x2="60" y2="168" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <line x1="700" y1="72" x2="700" y2="168" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <text x="380" y="118" text-anchor="middle" font-size="12">Übertragung: Rechnung + Signatur (die Rechnung selbst bleibt lesbar!)</text>
+      <text x="130" y="158" font-weight="bold">Empfänger: prüfen</text>
+      <rect x="10" y="170" width="130" height="40" fill="#fff" stroke="#222"/>
+      <text x="75" y="195" text-anchor="middle">empf. Rechnung</text>
+      <rect x="175" y="170" width="120" height="40" rx="10" fill="#fff" stroke="#222"/>
+      <text x="235" y="195" text-anchor="middle">Hashfunktion</text>
+      <rect x="330" y="170" width="110" height="40" fill="#fff" stroke="#222"/>
+      <text x="385" y="195" text-anchor="middle">Hashwert H1</text>
+      <rect x="630" y="170" width="120" height="40" fill="#eef3fa" stroke="#222"/>
+      <text x="690" y="195" text-anchor="middle">empf. Signatur</text>
+      <line x1="140" y1="190" x2="173" y2="190" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <line x1="295" y1="190" x2="328" y2="190" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <rect x="590" y="235" width="160" height="50" rx="10" fill="#fff" stroke="#222"/>
+      <text x="670" y="256" text-anchor="middle">mit öffentlichem Schlüssel</text>
+      <text x="670" y="273" text-anchor="middle">der Absenderin prüfen</text>
+      <line x1="690" y1="210" x2="690" y2="233" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <rect x="465" y="240" width="100" height="40" fill="#fff" stroke="#222"/>
+      <text x="515" y="265" text-anchor="middle">Hashwert H2</text>
+      <line x1="590" y1="260" x2="567" y2="260" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <rect x="330" y="305" width="110" height="40" rx="10" fill="#fff" stroke="#222"/>
+      <text x="385" y="330" text-anchor="middle">H1 = H2 ?</text>
+      <line x1="385" y1="210" x2="385" y2="303" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <path d="M515,280 V325 H442" fill="none" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <rect x="10" y="300" width="280" height="50" fill="#fff" stroke="#222"/>
+      <text x="150" y="320" text-anchor="middle">gleich: Rechnung unverändert und</text>
+      <text x="150" y="337" text-anchor="middle">wirklich von der Absenderin</text>
+      <line x1="330" y1="325" x2="292" y2="325" stroke="#222" marker-end="url(#e02a-pfeil)"/>
+      <text x="452" y="343" font-size="12">ungleich: verändert oder</text>
+      <text x="452" y="358" font-size="12">falsche Absenderin → ablehnen</text>
+    </svg>
+    <figcaption>Abb. A-5: Digitale Signatur erstellen (oben) und prüfen (unten)</figcaption>
+  </figure>
+  <p><strong>Ablauf in Worten:</strong> Die Absenderin bildet den Hashwert des Dokuments und <strong>signiert</strong> ihn mit ihrem <strong>privaten Schlüssel</strong> (bei RSA anschaulich: „verschlüsselt den Hashwert mit dem privaten Schlüssel“). Dokument und Signatur werden zusammen versendet. Der Empfänger berechnet den Hashwert des empfangenen Dokuments selbst (H1), prüft die Signatur mit dem <strong>öffentlichen Schlüssel der Absenderin</strong> (erhält H2) und vergleicht H1 mit H2.</p>
+  <ul>
+    <li><strong>Gesichert:</strong> Integrität (jede Änderung ändert H1), Authentizität (nur die Besitzerin des privaten Schlüssels konnte signieren), Verbindlichkeit/Nichtabstreitbarkeit (sie kann es später nicht bestreiten – im Gegensatz zum MAC).</li>
+    <li><strong>Nicht gesichert: Vertraulichkeit.</strong> Das Dokument wird im Klartext mitgeschickt. Wer beides braucht, signiert <em>und</em> verschlüsselt (z. B. E-Mail mit S/MIME oder PGP).</li>
+    <li>Warum nur den Hashwert signieren? Asymmetrische Verfahren sind langsam; der Hashwert ist kurz und steht trotzdem eindeutig für das ganze Dokument.</li>
+  </ul>
+  <table class="kompakt">
+    <tr><th>Ziel</th><th>Wer handelt?</th><th>Welcher Schlüssel?</th></tr>
+    <tr><td>Nachricht an B vertraulich verschlüsseln</td><td>Sender A</td><td>öffentlicher Schlüssel von <strong>B</strong></td></tr>
+    <tr><td>Nachricht entschlüsseln</td><td>Empfänger B</td><td>privater Schlüssel von <strong>B</strong></td></tr>
+    <tr><td>Nachricht signieren</td><td>Sender A</td><td>privater Schlüssel von <strong>A</strong></td></tr>
+    <tr><td>Signatur prüfen</td><td>Empfänger B (oder jeder andere)</td><td>öffentlicher Schlüssel von <strong>A</strong></td></tr>
+  </table>
+  <div class="merke"><span class="kastentitel">Merksatz</span>Verschlüsseln <em>für jemanden</em> → <strong>dessen öffentlicher</strong> Schlüssel. Signieren <em>als ich selbst</em> → <strong>mein privater</strong> Schlüssel.</div>
+
+  <h4>Zertifikate und PKI</h4>
+  <p>Problem der asymmetrischen Verfahren: Woher weiß ich, dass ein öffentlicher Schlüssel wirklich zum Online-Shop oder zur Lieferantin gehört? Ein <strong>digitales Zertifikat</strong> (Standard X.509) ist eine von einer <strong>Zertifizierungsstelle (CA, Certificate Authority)</strong> digital signierte Bescheinigung, die einen <strong>öffentlichen Schlüssel an eine Identität bindet</strong> (Domain, Person, Firma).</p>
+  <ul>
+    <li><strong>Inhalt:</strong> Inhaber (z. B. Domainname), öffentlicher Schlüssel des Inhabers, Aussteller (CA), Gültigkeitszeitraum, Seriennummer, Verwendungszweck, <strong>Signatur der CA</strong>.</li>
+    <li><strong>PKI (Public-Key-Infrastruktur):</strong> alles, was zum Ausstellen, Verteilen, Prüfen und Sperren von Zertifikaten gehört: Zertifizierungsstellen (Root-CA, Zwischen-CAs), Registrierungsstelle (prüft die Identität des Antragstellers), Verzeichnisse, Sperrlisten (CRL) bzw. Online-Sperrprüfung (OCSP), Regeln.</li>
+    <li><strong>Vertrauenskette:</strong> Die Root-Zertifikate weniger CAs sind im Betriebssystem bzw. Browser vorinstalliert („Vertrauensanker“). Die Root-CA signiert Zwischen-CAs, diese signieren die Server-Zertifikate.</li>
+  </ul>
+  <figure>
+    <svg viewBox="0 0 560 330" width="560" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e02b-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#222"/></marker>
+      </defs>
+      <rect x="10" y="10" width="340" height="78" fill="#eef3fa" stroke="#222"/>
+      <text x="20" y="30" font-weight="bold">Root-Zertifikat „Beispiel Root CA“</text>
+      <text x="20" y="49">signiert von: sich selbst</text>
+      <text x="20" y="68">vorinstalliert im Betriebssystem/Browser</text>
+      <rect x="10" y="125" width="340" height="78" fill="#fff" stroke="#222"/>
+      <text x="20" y="145" font-weight="bold">Zwischenzertifikat „Beispiel Server CA“</text>
+      <text x="20" y="164">öffentlicher Schlüssel der Server CA</text>
+      <text x="20" y="183">signiert von: Beispiel Root CA</text>
+      <rect x="10" y="240" width="340" height="78" fill="#fff" stroke="#222"/>
+      <text x="20" y="260" font-weight="bold">Server-Zertifikat „shop.weinhandel.example“</text>
+      <text x="20" y="279">öffentlicher Schlüssel des Shop-Servers</text>
+      <text x="20" y="298">signiert von: Beispiel Server CA · gültig bis …</text>
+      <line x1="120" y1="88" x2="120" y2="123" stroke="#222" marker-end="url(#e02b-pfeil)"/>
+      <text x="128" y="111" font-size="12">signiert</text>
+      <line x1="120" y1="203" x2="120" y2="238" stroke="#222" marker-end="url(#e02b-pfeil)"/>
+      <text x="128" y="226" font-size="12">signiert</text>
+      <line x1="430" y1="300" x2="430" y2="30" stroke="#222" stroke-width="2" marker-end="url(#e02b-pfeil)"/>
+      <text x="445" y="150" font-size="12">Prüfrichtung</text>
+      <text x="445" y="166" font-size="12">des Browsers:</text>
+      <text x="445" y="182" font-size="12">von unten bis</text>
+      <text x="445" y="198" font-size="12">zum Vertrauens-</text>
+      <text x="445" y="214" font-size="12">anker</text>
+    </svg>
+    <figcaption>Abb. A-6: Zertifikatskette (Chain of Trust)</figcaption>
+  </figure>
+  <p><strong>Was der Browser prüft:</strong> (1) Passt der Name im Zertifikat zur aufgerufenen Adresse? (2) Ist das Zertifikat gültig (Zeitraum) und nicht gesperrt? (3) Ist die Signatur korrekt – geprüft mit dem öffentlichen Schlüssel der ausstellenden CA? (4) Schritt (3) wiederholt sich Stufe für Stufe bis zu einem Root-Zertifikat, das im Vertrauensspeicher liegt. Geht alles auf, zeigt der Browser das Schloss; sonst eine Warnung.</p>
+  <ul>
+    <li><strong>Selbstsigniertes Zertifikat:</strong> Niemand Vertrauenswürdiges bürgt dafür → Browserwarnung. Nur für Tests oder interne Systeme mit eigener, verteilter Root.</li>
+    <li><strong>Validierungsstufen:</strong> DV (nur Domainbesitz geprüft, z. B. kostenlos und automatisiert bei Let's Encrypt), OV (Organisation geprüft), EV (erweiterte Prüfung).</li>
+    <li><strong>Was ein TLS-Zertifikat für eine Website leistet:</strong> Authentizität des Servers und – über den damit abgesicherten Schlüsselaustausch – Vertraulichkeit und Integrität der Verbindung.</li>
+  </ul>
+
+  <h4>Code-Signing</h4>
+  <p>Auch Programme, Treiber, Apps, Makros und Firmware-Updates werden signiert. Der Hersteller signiert die Datei mit dem privaten Schlüssel seines <strong>Code-Signing-Zertifikats</strong>; das Betriebssystem bzw. Gerät prüft vor dem Start oder der Installation Signatur und Zertifikatskette. Beispiel: Eine Bäckereikette verteilt eine neue Version ihrer Kassensoftware. Ist die Datei signiert, zeigt Windows den geprüften Herausgeber an; ist sie unsigniert oder nach dem Signieren verändert worden, erscheint „Unbekannter Herausgeber“ bzw. eine Sperrwarnung.</p>
+  <ul>
+    <li>Code-Signing sichert <strong>Integrität</strong> (Datei unverändert) und <strong>Authentizität</strong> (stammt vom genannten Hersteller).</li>
+    <li>Es garantiert <strong>nicht</strong>, dass das Programm fehlerfrei oder gutartig ist – nur, wer es veröffentlicht hat.</li>
+    <li>Der private Signaturschlüssel muss besonders geschützt werden (Hardware-Sicherheitsmodul, nur der Build-Server signiert).</li>
+  </ul>
+
+  <div class="falle"><span class="kastentitel">Fangfrage: „Die Daten sind doch verschlüsselt – dann kann sie auch niemand verändern“</span>
+    Falsch. Verschlüsselung sichert nur die <strong>Vertraulichkeit</strong>. Ein Angreifer kann das Chiffrat verändern, abschneiden oder eine alte Nachricht erneut einspielen, ohne den Schlüssel zu kennen. Der Empfänger entschlüsselt dann einfach Datenmüll oder – bei manchen Modi (Stromchiffren, AES-CTR) – sogar <em>gezielt veränderten</em> Klartext: Das Kippen eines Bits im Chiffrat kippt genau dasselbe Bit im Klartext. Ohne MAC, Signatur oder AEAD-Modus bemerkt er das nicht. Umgekehrt gilt: <strong>Signieren statt Verschlüsseln</strong> sichert Integrität und Authentizität, aber <strong>keine</strong> Vertraulichkeit.
+  </div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <strong>W21 T1 A4b (4 P):</strong> Beim Start einer Software erscheint die Warnung, sie stamme aus einer nicht vertrauenswürdigen Quelle – Ursache erläutern und erklären, wie das Signieren mit einem Zertifikat hilft.
+    <strong>S22 T1 A4c (9 P):</strong> Drei Sicherheitsmechanismen erläutern, die ein SSL-Zertifikat für einen Webserver bewirkt (Vertraulichkeit, Integrität, Authentizität).
+    <strong>W22 T1 A1e (3 P):</strong> Beschreiben, wie die Echtheit eines öffentlichen Schlüssels über Zertifikate/PKI geprüft wird.
+    <strong>S23 T1 A4b (4 P):</strong> „Signieren statt verschlüsseln?“ – welche Schutzziele werden erreicht, welche nicht.
+    <strong>S26 T1 A3bb (4 P):</strong> Ein Verfahren erläutern, mit dem Sensordaten bei der Übertragung nicht unbemerkt manipuliert werden können (Hash allein reicht nicht → MAC oder Signatur).
+  </div>
+
+  <!-- ===================== SEC-03 ===================== -->
+  <h3 id="e-03">SEC-03 · Schutzziele &amp; Schutzbedarf <span class="badge k-meistens">Meistens</span></h3>
+  <p class="klein">Vorkommen: 6/9 · Prüfungen: S22, W22, S23, S24, W25, S26 · Teil 1 (meist 3–4 Punkte, oft in Krypto-Aufgaben eingebaut)</p>
+
+  <h4>Die Schutzziele</h4>
+  <p>Das BSI nennt drei <strong>Grundwerte der Informationssicherheit</strong>: Vertraulichkeit, Integrität und Verfügbarkeit (englisch CIA: Confidentiality, Integrity, Availability). Dazu kommen häufig Authentizität und Verbindlichkeit, die das BSI als Teilaspekte der Integrität sieht. Wenn in der Prüfung nach dem „Schutzziel nach BSI“ gefragt wird, ist fast immer einer der drei Grundwerte gemeint.</p>
+  <table class="kompakt">
+    <tr><th style="width:16%">Schutzziel</th><th style="width:28%">Bedeutung</th><th style="width:18%">Signalwörter</th><th style="width:19%">Beispiel (Online-Shop für Fahrradteile)</th><th>typische Maßnahmen</th></tr>
+    <tr><td><strong>Vertraulichkeit</strong></td><td>Informationen sind nur Befugten zugänglich.</td><td>einsehen, mitlesen, abhören, veröffentlicht, weitergegeben, gestohlen</td><td>Kundenliste mit Adressen liegt in einem öffentlich erreichbaren Cloud-Ordner.</td><td>Verschlüsselung (Übertragung und Speicherung), Rechte- und Rollenkonzept, Authentifizierung, Festplattenverschlüsselung</td></tr>
+    <tr><td><strong>Integrität</strong></td><td>Daten sind korrekt, vollständig und unverändert; Änderungen sind erkennbar bzw. nur Befugten möglich.</td><td>verändert, manipuliert, verfälscht, fehlerhaft, unvollständig</td><td>Ein Preis wird unbemerkt von 49,90 € auf 4,99 € geändert.</td><td>Hash/MAC/Signatur, Schreibrechte nur für Befugte, Protokollierung, Versionierung, Eingabeprüfung, Transaktionen</td></tr>
+    <tr><td><strong>Verfügbarkeit</strong></td><td>Systeme und Daten sind nutzbar, wenn sie gebraucht werden.</td><td>nicht erreichbar, Ausfall, überlastet, zu langsam, gelöscht, gesperrt</td><td>Der Shop bricht am Aktionstag unter der Last zusammen.</td><td>Redundanz, Backups, USV, Lastverteilung, Skalierung, Monitoring, DDoS-Schutz, Notfallplan</td></tr>
+    <tr><td><strong>Authentizität</strong></td><td>Echtheit: Daten bzw. Kommunikationspartner sind wirklich, wer oder was sie vorgeben zu sein.</td><td>gefälscht, vorgetäuscht, angeblich, im Namen von</td><td>Eine E-Mail „vom Lieferanten“ mit geänderter Bankverbindung ist gefälscht.</td><td>Signatur, Zertifikate, MAC, starke Authentifizierung, Rückruf über bekannte Nummer</td></tr>
+    <tr><td><strong>Verbindlichkeit</strong> (Nicht-abstreitbarkeit)</td><td>Eine Handlung kann später nicht abgestritten werden; sie ist einer Person nachweisbar zuzuordnen.</td><td>bestreitet, nachweisen, beweisen, wer war es?</td><td>Ein Kunde bestreitet, eine teure Bestellung aufgegeben zu haben.</td><td>digitale Signatur, revisionssichere Protokollierung mit Zeitstempel, persönliche statt Sammelkonten</td></tr>
+  </table>
+
+  <h4>So gehst du vor: Situation → Schutzziel</h4>
+  <ol class="schritte">
+    <li>Frage dich: <strong>Was ist passiert bzw. was befürchtet jemand?</strong> Wer sieht etwas, das er nicht sehen darf? Was wurde verändert? Was geht nicht mehr? Wer ist nicht der, der er vorgibt zu sein? Wer kann etwas abstreiten?</li>
+    <li>Achte auf die <strong>Signalwörter</strong> aus der Tabelle.</li>
+    <li>Nenne <strong>ein</strong> Hauptschutzziel und begründe mit einem Halbsatz aus der Situation („…, weil die Ausleihdaten nicht mehr abrufbar sind“).</li>
+    <li>Ist die Situation mehrdeutig, nenne das naheliegendste Schutzziel und erwähne das zweite kurz.</li>
+  </ol>
+  <p><strong>Beispiele (Stadtbibliothek):</strong> „Wegen eines Defekts am Datenbankserver kann zwei Tage lang nichts ausgeliehen werden“ → <em>Verfügbarkeit</em>. „Ein Praktikant ändert Rückgabedaten, damit seine Freunde keine Mahngebühr zahlen“ → <em>Integrität</em>. „Die Ausleihhistorie einer Leserin taucht in einem Internetforum auf“ → <em>Vertraulichkeit</em>.</p>
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>
+    <ul>
+      <li><strong>Ransomware</strong> verletzt vor allem die <em>Verfügbarkeit</em> (Daten unbrauchbar). Werden die Daten vorher kopiert und mit Veröffentlichung gedroht, zusätzlich die Vertraulichkeit.</li>
+      <li><strong>Abhören</strong> ist Vertraulichkeit, nicht Integrität – es wird ja nichts verändert.</li>
+      <li><strong>Phishing-Mail:</strong> Die gefälschte Absenderangabe verletzt die Authentizität; Ziel des Angreifers ist meist die Vertraulichkeit (Zugangsdaten).</li>
+      <li>Nur das Schutzziel hinzuschreiben, gibt selten volle Punkte. Bei „erläutern“ gehört die Bedeutung <em>und</em> der Bezug zur Situation dazu.</li>
+    </ul>
+  </div>
+
+  <h4>BSI IT-Grundschutz und Schutzbedarfsfeststellung</h4>
+  <p>Der <strong>IT-Grundschutz</strong> des BSI (BSI-Standards 200-1 bis 200-3 und das IT-Grundschutz-Kompendium mit seinen Bausteinen) beschreibt, wie eine Organisation ein angemessenes Sicherheitsniveau erreicht. Ablauf der Standard-Absicherung, stark vereinfacht:</p>
+  <ol class="schritte">
+    <li><strong>Strukturanalyse:</strong> Welche Geschäftsprozesse, Anwendungen, IT-Systeme, Räume und Netze gibt es?</li>
+    <li><strong>Schutzbedarfsfeststellung:</strong> Für jedes Objekt und jedes Schutzziel (V, I, A) wird der Schutzbedarf bestimmt.</li>
+    <li><strong>Modellierung:</strong> passende Bausteine aus dem Kompendium zuordnen (z. B. „Webanwendungen“, „Clients unter Windows“).</li>
+    <li><strong>IT-Grundschutz-Check:</strong> Soll-Ist-Vergleich der Anforderungen.</li>
+    <li><strong>Risikoanalyse</strong> für Objekte mit hohem oder sehr hohem Schutzbedarf, danach <strong>Umsetzung</strong> der Maßnahmen.</li>
+  </ol>
+  <table class="kompakt">
+    <tr><th style="width:16%">Kategorie</th><th style="width:38%">Bedeutung (sinngemäß BSI)</th><th>Woran man es festmacht (Schadensszenarien)</th></tr>
+    <tr><td><strong>normal</strong></td><td>Die Schadensauswirkungen sind begrenzt und überschaubar.</td><td rowspan="3">Verstoß gegen Gesetze/Verträge · Beeinträchtigung des Rechts auf informationelle Selbstbestimmung (Datenschutz) · Gefahr für Leib und Leben · Beeinträchtigung der Aufgabenerfüllung · negative Innen- und Außenwirkung (Image) · finanzielle Auswirkungen</td></tr>
+    <tr><td><strong>hoch</strong></td><td>Die Schadensauswirkungen können beträchtlich sein.</td></tr>
+    <tr><td><strong>sehr hoch</strong></td><td>Die Schadensauswirkungen können ein existenziell bedrohliches, katastrophales Ausmaß erreichen.</td></tr>
+  </table>
+  <p><strong>Beispiel (Stadtbibliothek, andere Daten als in den Aufgaben):</strong></p>
+  <table class="kompakt">
+    <tr><th>Objekt</th><th>V</th><th>I</th><th>A</th><th>Begründung</th></tr>
+    <tr><td>Online-Katalog (Buchbestand)</td><td>normal</td><td>normal</td><td>normal</td><td>öffentliche Daten; ein Ausfall ist ärgerlich, die Ausleihe vor Ort funktioniert weiter.</td></tr>
+    <tr><td>Leserkonten mit Ausleihhistorie</td><td>hoch</td><td>normal</td><td>normal</td><td>personenbezogen; die Historie erlaubt Rückschlüsse auf Interessen, Gesundheit oder politische Haltung → Datenschutzverstoß und Imageschaden.</td></tr>
+    <tr><td>Selbstverbuchungsautomaten mit Diebstahlsicherung</td><td>normal</td><td>hoch</td><td>hoch</td><td>Ausfall → keine Ausleihe/Rückgabe, lange Schlangen; Manipulation → Medien verlassen unbemerkt das Haus.</td></tr>
+  </table>
+  <ul>
+    <li><strong>Maximumprinzip:</strong> Ein IT-System erbt den <em>höchsten</em> Schutzbedarf der Anwendungen bzw. Daten, die darauf laufen. Liegen Katalog und Leserkonten auf demselben Server, hat der Server bei der Vertraulichkeit den Schutzbedarf „hoch“.</li>
+    <li><strong>Kumulationseffekt:</strong> Viele Anwendungen mit normalem Bedarf auf einem System können zusammen einen höheren Bedarf ergeben (fällt der Server aus, fällt alles gleichzeitig aus).</li>
+    <li><strong>Verteilungseffekt:</strong> Ist eine Anwendung redundant auf mehrere Systeme verteilt, kann der Bedarf des einzelnen Systems niedriger sein.</li>
+  </ul>
+
+  <h4>Sicherheitsanforderungen formulieren</h4>
+  <p>Wird nach „sicherheitstechnischen Anforderungen“ an ein System gefragt (S24), erwartet die IHK konkrete, überprüfbare Sätze, die sich einem Schutzziel zuordnen lassen. Muster: <em>„Das System muss … (Was? Womit? Wie viel?)“</em>. Beispiele für die Online-Terminbuchung einer Kfz-Werkstatt:</p>
+  <ul>
+    <li>Alle Verbindungen zwischen Browser und Server müssen mit TLS 1.2 oder höher verschlüsselt werden. <span class="klein">(Vertraulichkeit, Integrität)</span></li>
+    <li>Passwörter müssen mit Salt und einem langsamen Hashverfahren gespeichert werden; nach fünf Fehlversuchen wird das Konto für 15 Minuten gesperrt. <span class="klein">(Vertraulichkeit)</span></li>
+    <li>Werkstattmitarbeiter dürfen nur die Termine ihrer eigenen Filiale sehen und ändern (Rollenkonzept). <span class="klein">(Vertraulichkeit, Integrität)</span></li>
+    <li>Jede Änderung oder Stornierung eines Termins wird mit Benutzer und Zeitpunkt manipulationssicher protokolliert. <span class="klein">(Verbindlichkeit, Integrität)</span></li>
+    <li>Die Buchung muss Mo–Sa von 6 bis 22 Uhr zu 99,5 % verfügbar sein; die Datenbank wird täglich gesichert und lässt sich innerhalb von 4 Stunden wiederherstellen. <span class="klein">(Verfügbarkeit)</span></li>
+  </ul>
+  <div class="falle"><span class="kastentitel">Typische Falle</span>„Das System muss sicher sein“ oder „Datenschutz muss beachtet werden“ ist keine Anforderung und bringt keine Punkte. Immer <strong>konkret</strong> (Was genau? Womit?) und möglichst <strong>messbar</strong>.</div>
+
+  <h4>Verfügbarkeit und Ausfallsicherheit</h4>
+  <ul>
+    <li><strong>Redundanz:</strong> doppelte Komponenten (RAID-Festplattenverbund, zweites Netzteil, Server-Cluster, zweites Rechenzentrum, zweite Internetleitung). Achtung: <strong>RAID ist kein Backup</strong> – versehentlich gelöschte oder verschlüsselte Daten sind auf allen Platten gleichzeitig weg.</li>
+    <li><strong>Backups:</strong> regelmäßig, automatisiert, nach der <strong>3-2-1-Regel</strong> (3 Kopien, 2 verschiedene Medien, 1 außer Haus/offline). Offline bzw. unveränderbar, damit Ransomware sie nicht mitverschlüsselt. Die Wiederherstellung regelmäßig testen.</li>
+    <li><strong>Lastverteilung und Skalierung</strong> (Load Balancer, zusätzliche Server in Spitzenzeiten), <strong>DDoS-Schutz</strong>, <strong>Monitoring</strong> mit Alarmierung.</li>
+    <li><strong>Unterbrechungsfreie Stromversorgung (USV)</strong> bzw. Notstrom, Klimatisierung, Brandschutz.</li>
+    <li><strong>Organisatorisch:</strong> Wartungsverträge mit garantierten Reaktionszeiten (SLA), Notfallhandbuch, Ersatzgeräte, Zuständigkeiten.</li>
+    <li><strong>Veraltete IT</strong> ist ein Verfügbarkeits- <em>und</em> Sicherheitsrisiko. Beispiel: Das Kassensystem eines Kinos läuft auf einem Betriebssystem ohne Herstellerunterstützung. Bekannt gewordene Lücken werden nicht mehr geschlossen, Ersatzteile und Treiber fehlen, neue Software läuft darauf nicht mehr.</li>
+  </ul>
+
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <strong>S26 T1 A3ba (3 P):</strong> Ein Kunde sagt, manipulierte Sensorwerte könnten großen Schaden anrichten – „Erläutern Sie das IT-Schutzziel nach BSI, das der Kunde angesprochen hat“ (Integrität: Bedeutung + Bezug).
+    <strong>S24 T1 A1c (4 P):</strong> Sicherheitstechnische Anforderungen an eine Plattform beschreiben (erwartet z. B. sichere Datenübertragung, sichere Speicherung personenbezogener Daten, sichere Authentifizierung).
+    <strong>W22 T1 A1a (4 P):</strong> Schwachstellen einer veralteten IT-Infrastruktur, Schwerpunkt Verfügbarkeit.
+    <strong>S22 T1 A4c, S23 T1 A4b, W25 T1 A3bb:</strong> Schutzziele als Teil von Krypto- bzw. Datenschutzfragen (welche Schutzziele erreicht ein Zertifikat, eine Signatur, eine Maßnahme?).
+  </div>
+
+  <!-- ===================== SEC-04 ===================== -->
+  <h3 id="e-04">SEC-04 · Authentifizierung <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
+  <p class="klein">Vorkommen: 3/9 · Prüfungen: S22 (OAuth2), W22 (SSO/OAuth2), S24 (Passwort-Reset, Teil 2) · 3–6 Punkte je Teilaufgabe</p>
+
+  <h4>Identifikation – Authentifizierung – Autorisierung</h4>
+  <table class="kompakt">
+    <tr><th>Begriff</th><th>Frage</th><th>Beispiel Hotel</th><th>Beispiel IT</th></tr>
+    <tr><td><strong>Identifikation</strong></td><td>Wer behauptest du zu sein?</td><td>Gast nennt seinen Namen.</td><td>Benutzername eingeben</td></tr>
+    <tr><td><strong>Authentifizierung</strong></td><td>Beweise es!</td><td>Gast zeigt seinen Ausweis.</td><td>Passwort, Einmalcode, Fingerabdruck wird geprüft</td></tr>
+    <tr><td><strong>Autorisierung</strong></td><td>Was darfst du?</td><td>Die Schlüsselkarte öffnet nur Zimmer 214 und den Fitnessraum.</td><td>Rechte- und Rollenkonzept: Lesen ja, Löschen nein</td></tr>
+  </table>
+  <p class="klein">Genau genommen <em>authentisiert</em> sich der Benutzer (er legt einen Nachweis vor), und das System <em>authentifiziert</em> ihn (es prüft den Nachweis). In der Prüfung werden beide Wörter meist gleich verwendet.</p>
+
+  <h4>Faktoren und Mehr-Faktor-Authentifizierung (2FA/MFA)</h4>
+  <table class="kompakt">
+    <tr><th>Faktor</th><th>Beispiele</th><th>Schwäche</th></tr>
+    <tr><td><strong>Wissen</strong> (etwas, das ich weiß)</td><td>Passwort, PIN, Sicherheitsfrage</td><td>kann erraten, ausgespäht, per Phishing abgefragt werden</td></tr>
+    <tr><td><strong>Besitz</strong> (etwas, das ich habe)</td><td>Smartphone mit Authenticator-App (TOTP), Hardware-Token/FIDO2-Schlüssel, Chipkarte, Handynummer für SMS-Code</td><td>kann verloren gehen oder gestohlen werden; SMS ist schwächer (SIM-Tausch, Abfangen)</td></tr>
+    <tr><td><strong>Inhärenz / Biometrie</strong> (etwas, das ich bin)</td><td>Fingerabdruck, Gesichtserkennung, Iris, Stimme</td><td>nicht änderbar, wenn kompromittiert; Fehlerkennungen; Datenschutz (besondere Daten)</td></tr>
+  </table>
+  <ul>
+    <li><strong>Zwei-Faktor-Authentifizierung (2FA)</strong> verlangt zwei Faktoren aus <strong>verschiedenen</strong> Kategorien, z. B. Passwort + Code aus der Authenticator-App. Ein gestohlenes Passwort allein reicht dem Angreifer dann nicht.</li>
+    <li><strong>TOTP</strong> (Time-based One-Time Password): App und Server kennen ein gemeinsames Geheimnis und berechnen daraus zusammen mit der Uhrzeit alle 30 Sekunden einen neuen sechsstelligen Code.</li>
+    <li><strong>FIDO2 / Passkeys:</strong> asymmetrisches Verfahren; der private Schlüssel bleibt auf dem Gerät und ist an die echte Domain gebunden → schützt besonders gut gegen Phishing.</li>
+  </ul>
+  <div class="falle"><span class="kastentitel">Typische Falle</span>Passwort + PIN oder Passwort + Sicherheitsfrage sind <strong>zweimal Wissen</strong> – das ist keine Zwei-Faktor-Authentifizierung. Auch ein Code per E-Mail ist schwach, wenn das E-Mail-Konto mit demselben Passwort geschützt ist.</div>
+
+  <h4>Passwort-Richtlinien</h4>
+  <ul>
+    <li><strong>Länge schlägt Komplexität:</strong> lieber eine lange Passphrase (z. B. vier zufällige Wörter) als ein kurzes Passwort mit Sonderzeichen. Mindestlänge vorgeben (heute meist 12 oder mehr Zeichen).</li>
+    <li>Neue Passwörter gegen Listen bekannter, geleakter Passwörter prüfen; Standardpasswörter bei Inbetriebnahme ändern.</li>
+    <li>Kein erzwungener Wechsel ohne Anlass (führt zu „Sommer2025!“ → „Herbst2025!“), aber sofortiger Wechsel bei Verdacht auf Kompromittierung.</li>
+    <li>Für jeden Dienst ein eigenes Passwort; Passwortmanager empfehlen.</li>
+    <li>Systemseitig: Sperre oder steigende Wartezeit nach Fehlversuchen, Benachrichtigung bei Anmeldung von neuem Gerät.</li>
+  </ul>
+
+  <h4>Passwörter sicher speichern</h4>
+  <p>Passwörter werden <strong>nie im Klartext</strong> und <strong>nie umkehrbar verschlüsselt</strong> gespeichert, sondern nur als Hashwert. Beim Login wird die Eingabe genauso gehasht und mit dem gespeicherten Wert verglichen. Ein einfacher, schneller Hash (MD5, auch SHA-256) reicht aber nicht:</p>
+  <ul>
+    <li><strong>Problem 1 – gleiche Passwörter, gleiche Hashes:</strong> Wer die Datenbank sieht, erkennt sofort, welche Benutzer dasselbe Passwort haben.</li>
+    <li><strong>Problem 2 – vorberechnete Tabellen:</strong> Für häufige Passwörter gibt es fertige Listen „Hashwert → Passwort“ (Rainbow Tables, Suchmaschinen).</li>
+    <li><strong>Problem 3 – Geschwindigkeit:</strong> Grafikkarten berechnen Milliarden MD5-Hashes pro Sekunde. Kurze Passwörter sind so in Minuten durchprobiert (Brute Force, Wörterbuchangriff).</li>
+  </ul>
+  <table class="kompakt">
+    <tr><th>Baustein</th><th>Was ist das?</th><th>Wo gespeichert?</th><th>Wogegen hilft es?</th></tr>
+    <tr><td><strong>Salt</strong></td><td>zufälliger Wert (z. B. 16 Byte), <em>für jeden Benutzer anders</em>, wird vor dem Hashen an das Passwort gehängt</td><td>in der Datenbank neben dem Hash (nicht geheim)</td><td>Problem 1 und 2: gleiche Passwörter ergeben verschiedene Hashes, vorberechnete Tabellen sind nutzlos</td></tr>
+    <tr><td><strong>Pepper</strong></td><td>geheimer Wert, <em>für alle Benutzer gleich</em></td><td><strong>nicht</strong> in der Datenbank, sondern z. B. in geschützter Konfiguration oder einem Hardware-Sicherheitsmodul</td><td>Wird nur die Datenbank gestohlen, kann der Angreifer ohne Pepper keine Passwörter durchprobieren.</td></tr>
+    <tr><td><strong>Langsame Hashfunktion</strong> / Key Stretching</td><td>bcrypt, scrypt, Argon2, PBKDF2: viele tausend Runden bzw. viel Speicher je Berechnung</td><td>–</td><td>Problem 3: Ein Login dauert z. B. 0,1 s (für den Nutzer egal), das Durchprobieren von Milliarden Passwörtern wird unbezahlbar langsam.</td></tr>
+  </table>
+  <p>Schematisch: Registrierung <code>salt := zufallswert()</code>, <code>hash := H(pepper + salt + passwort)</code> (mit vielen Runden) → <code>salt</code> und <code>hash</code> speichern. Login: <code>salt</code> zum Benutzer laden, mit der Eingabe denselben Hash berechnen, vergleichen. In der Praxis nimmt man dafür eine fertige Bibliotheksfunktion (Java: <code>SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256")</code>, PHP: <code>password_hash()</code>, Spring: <code>BCryptPasswordEncoder</code>) statt einer Eigenentwicklung.</p>
+
+  <h4>Sicherer Passwort-Reset</h4>
+  <ul>
+    <li><strong>Schlecht:</strong> „Wir schicken Ihnen Ihr Passwort zu“ – das beweist, dass es im Klartext gespeichert ist. Sicherheitsfragen („Name des ersten Haustiers“) lassen sich oft in sozialen Netzwerken recherchieren.</li>
+    <li><strong>Schwachstelle Link per E-Mail:</strong> Wer Zugriff auf das Postfach hat (gehacktes Konto, abgefangene Mail, Mitleser am Firmenrechner), kann das Passwort neu setzen und das Konto übernehmen. Der Reset hat dann nur noch die Sicherheit des E-Mail-Kontos.</li>
+    <li><strong>Besser:</strong> zufälliges, nur <strong>einmal</strong> verwendbares Token mit <strong>kurzer Gültigkeit</strong> (z. B. 30 Minuten), nur dessen Hash speichern; zusätzlich einen <strong>zweiten Faktor über einen anderen Kanal</strong> verlangen (Code per SMS oder aus der Authenticator-App); nach dem Reset alle Sitzungen beenden und den Nutzer über die Änderung benachrichtigen; dieselbe Meldung anzeigen, egal ob die E-Mail-Adresse existiert (sonst erfährt ein Angreifer, wer Kunde ist).</li>
+  </ul>
+
+  <h4>Sitzungen (Sessions)</h4>
+  <p>Nach dem Login bekommt der Client eine zufällige, lange <strong>Session-ID</strong> bzw. ein Token. Regeln: nur über HTTPS übertragen, Cookie mit den Attributen <code>Secure</code>, <code>HttpOnly</code> (kein Zugriff per JavaScript) und <code>SameSite</code>; nach dem Login eine <em>neue</em> Session-ID vergeben; <strong>Timeout</strong> nach Inaktivität (z. B. 15 Minuten bei sensiblen Daten); beim Logout serverseitig ungültig machen.</p>
+
+  <h4>Single Sign-On (SSO)</h4>
+  <p>Der Benutzer meldet sich <strong>einmal</strong> bei einem zentralen Identitätsdienst (Identity Provider) an und kann danach mehrere Anwendungen ohne erneute Anmeldung nutzen. Beispiel: Studierende melden sich einmal an und nutzen Lernplattform, Mail und Bibliotheksportal. Technik: SAML 2.0, OpenID Connect (baut auf OAuth2 auf), im Firmennetz Kerberos/Active Directory.</p>
+  <table class="kompakt">
+    <tr><th>Vorteile</th><th>Nachteile</th></tr>
+    <tr><td>nur ein Passwort → weniger vergessene Passwörter, weniger Passwort-Wiederverwendung, weniger Supportaufwand · zentrale Benutzerverwaltung: Sperren bei Austritt an einer Stelle · MFA muss nur einmal zentral eingerichtet werden · Komfort, Zeitersparnis</td><td><strong>Single Point of Failure:</strong> Fällt der Identity Provider aus, geht nirgends eine Anmeldung · kompromittiertes Konto öffnet <em>alle</em> Anwendungen (daher MFA Pflicht) · Abhängigkeit vom Anbieter, bei externen Anbietern Datenschutzfragen · Einführungs- und Integrationsaufwand</td></tr>
+  </table>
+
+  <h4>OAuth2 – delegierte Autorisierung</h4>
+  <p>OAuth2 regelt, wie eine Anwendung <strong>im Auftrag eines Benutzers</strong> auf dessen Daten bei einem anderen Dienst zugreifen darf, <strong>ohne das Passwort des Benutzers zu erhalten</strong>. Der Benutzer meldet sich nur beim Dienst selbst an und stimmt einem eingeschränkten Zugriff (Scope) zu; die Anwendung bekommt dafür ein zeitlich begrenztes Token.</p>
+  <table class="kompakt">
+    <tr><th>Rolle</th><th>Bedeutung</th><th>Beispiel unten</th></tr>
+    <tr><td><strong>Resource Owner</strong></td><td>Besitzer der Daten, erteilt die Zustimmung (meist der Benutzer)</td><td>Nutzerin mit Online-Fotoalbum</td></tr>
+    <tr><td><strong>Client</strong></td><td>Anwendung, die auf die Daten zugreifen möchte</td><td>Fotodruck-Dienst</td></tr>
+    <tr><td><strong>Authorization Server</strong></td><td>authentifiziert den Resource Owner, holt die Zustimmung ein und stellt Codes/Tokens aus</td><td>Login-Server des Fotoalbum-Anbieters</td></tr>
+    <tr><td><strong>Resource Server</strong></td><td>hält die geschützten Daten (Protected Resource) und prüft das Access Token</td><td>Foto-API des Fotoalbum-Anbieters</td></tr>
+  </table>
+  <figure>
+    <svg viewBox="0 0 760 420" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e04a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#222"/></marker>
+      </defs>
+      <!-- Köpfe -->
+      <rect x="5" y="8" width="150" height="48" fill="#fff" stroke="#222"/>
+      <text x="80" y="28" text-anchor="middle" font-weight="bold">Nutzerin</text>
+      <text x="80" y="46" text-anchor="middle" font-style="italic" font-size="12">Resource Owner</text>
+      <rect x="200" y="8" width="150" height="48" fill="#fff" stroke="#222"/>
+      <text x="275" y="28" text-anchor="middle" font-weight="bold">Fotodruck-Dienst</text>
+      <text x="275" y="46" text-anchor="middle" font-style="italic" font-size="12">Client</text>
+      <rect x="405" y="8" width="170" height="48" fill="#fff" stroke="#222"/>
+      <text x="490" y="28" text-anchor="middle" font-weight="bold">Login Fotoanbieter</text>
+      <text x="490" y="46" text-anchor="middle" font-style="italic" font-size="12">Authorization Server</text>
+      <rect x="600" y="8" width="155" height="48" fill="#fff" stroke="#222"/>
+      <text x="677" y="28" text-anchor="middle" font-weight="bold">Foto-API</text>
+      <text x="677" y="46" text-anchor="middle" font-style="italic" font-size="12">Resource Server</text>
+      <!-- Lebenslinien -->
+      <line x1="80" y1="56" x2="80" y2="410" stroke="#222" stroke-dasharray="5,4"/>
+      <line x1="275" y1="56" x2="275" y2="410" stroke="#222" stroke-dasharray="5,4"/>
+      <line x1="490" y1="56" x2="490" y2="410" stroke="#222" stroke-dasharray="5,4"/>
+      <line x1="677" y1="56" x2="677" y2="410" stroke="#222" stroke-dasharray="5,4"/>
+      <!-- 1 -->
+      <text x="177" y="82" text-anchor="middle" font-size="12">① „Fotos drucken“</text>
+      <line x1="80" y1="90" x2="273" y2="90" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <!-- 2 -->
+      <text x="177" y="117" text-anchor="middle" font-size="12">② Weiterleitung zum Login</text>
+      <line x1="275" y1="125" x2="82" y2="125" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <!-- 3 -->
+      <rect x="180" y="141" width="200" height="16" fill="#fff"/>
+      <text x="280" y="153" text-anchor="middle" font-size="12">③ Login + Zustimmung „Fotos lesen“</text>
+      <line x1="80" y1="162" x2="488" y2="162" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <!-- 4 -->
+      <text x="382" y="190" text-anchor="middle" font-size="12">④ Authorization Code</text>
+      <line x1="490" y1="197" x2="277" y2="197" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <text x="382" y="212" text-anchor="middle" font-size="11">(per Weiterleitung über den Browser)</text>
+      <!-- 5 -->
+      <text x="382" y="240" text-anchor="middle" font-size="12">⑤ Authorization Code</text>
+      <text x="382" y="254" text-anchor="middle" font-size="12">+ Client-ID und -Secret</text>
+      <line x1="275" y1="262" x2="488" y2="262" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <!-- 6 -->
+      <text x="382" y="290" text-anchor="middle" font-size="12">⑥ Access Token</text>
+      <line x1="490" y1="297" x2="277" y2="297" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <text x="382" y="312" text-anchor="middle" font-size="11">(evtl. zusätzlich Refresh Token)</text>
+      <!-- 7 -->
+      <rect x="400" y="331" width="180" height="16" fill="#fff"/>
+      <text x="490" y="343" text-anchor="middle" font-size="12">⑦ GET /fotos + Access Token</text>
+      <line x1="275" y1="352" x2="675" y2="352" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+      <!-- 8 -->
+      <rect x="400" y="371" width="180" height="16" fill="#fff"/>
+      <text x="490" y="383" text-anchor="middle" font-size="12">⑧ Fotos (Protected Resource)</text>
+      <line x1="677" y1="392" x2="277" y2="392" stroke="#222" marker-end="url(#e04a-pfeil)"/>
+    </svg>
+    <figcaption>Abb. A-7: OAuth2 Authorization Code Flow am Beispiel eines Fotodruck-Dienstes</figcaption>
+  </figure>
+  <ul>
+    <li><strong>Authorization Code:</strong> kurzlebiger Einmal-Code, der über den Browser zum Client gelangt. Er allein gibt noch keinen Datenzugriff, sondern wird vom Client (zusammen mit seiner Client-ID und seinem Client-Secret bzw. PKCE bei Apps) <strong>direkt beim Authorization Server gegen das Access Token eingetauscht</strong>.</li>
+    <li><strong>Access Token:</strong> „Zugangsausweis“ für die API; enthält bzw. verweist auf Scope und Ablaufzeit (z. B. 1 Stunde). Der Resource Server prüft es bei jeder Anfrage. Ein <strong>Refresh Token</strong> erlaubt, ohne neue Benutzeranmeldung ein neues Access Token zu holen.</li>
+    <li><strong>Scope:</strong> Umfang der Berechtigung, z. B. nur „Fotos lesen“, nicht „Fotos löschen“.</li>
+    <li><strong>Vorteile:</strong> Das Passwort bleibt beim Anbieter · Zugriff ist auf den Scope begrenzt · Zugriff kann je Anwendung widerrufen werden, ohne das Passwort zu ändern · Tokens laufen ab · MFA des Anbieters gilt automatisch mit.</li>
+    <li><strong>OpenID Connect (OIDC)</strong> ergänzt OAuth2 um ein ID-Token und macht daraus ein Anmeldeverfahren („Anmelden mit …“) – Grundlage vieler SSO-Lösungen.</li>
+  </ul>
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>
+    <ul>
+      <li>OAuth2 ist in erster Linie <strong>Autorisierung</strong> (Zugriff erlauben), nicht Authentifizierung des Clients beim Benutzer.</li>
+      <li><strong>Authorization Code ≠ Access Token:</strong> Mit dem Code allein kommt man nicht an die Daten; die API akzeptiert nur das Access Token.</li>
+      <li>Der Client sieht <strong>nie</strong> das Passwort des Resource Owners.</li>
+    </ul>
+  </div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <strong>S22 T1 A4b (4 P):</strong> In einer vorgegebenen OAuth2-Grafik (Resource Owner, Client, Authorization Server, Resource Server) die Begriffe Access Token, Protected Resource und Auth. Code an die richtigen Pfeile schreiben (ein Begriff doppelt).
+    <strong>W22 T1 A1f (6 P):</strong> SSO bzw. OAuth2 für eine Webanwendung: Vor- und Nachteile erläutern.
+    <strong>S24 T2 A1c (6 P):</strong> Schwachstelle eines Passwort-Resets per E-Mail-Link erläutern und ein sichereres Verfahren beschreiben (erwartet: zweiter Kanal, z. B. zusätzlicher Code per SMS).
+  </div>
+
+  <!-- ===================== SEC-05 ===================== -->
+  <h3 id="e-05">SEC-05 · Datenschutz / DSGVO <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
+  <p class="klein">Vorkommen: 2/9 · Prüfungen: W24 (Einwilligung, Datenschutzerklärung in einer App), W25 (keine echten Daten auf eine Online-Prüfseite) · Teil 1, 4–6 Punkte</p>
+
+  <h4>Datenschutz ist nicht Datensicherheit</h4>
+  <table class="kompakt">
+    <tr><th></th><th>Datenschutz</th><th>Datensicherheit / IT-Sicherheit</th></tr>
+    <tr><td>Schützt …</td><td>die <strong>Person</strong> und ihr Recht auf informationelle Selbstbestimmung</td><td>die <strong>Daten und Systeme</strong> selbst (alle Daten, auch nicht personenbezogene)</td></tr>
+    <tr><td>Leitfrage</td><td>Darf ich diese personenbezogenen Daten überhaupt erheben, speichern, weitergeben – und wie lange?</td><td>Wie schütze ich Daten vor Verlust, Manipulation und unbefugtem Zugriff?</td></tr>
+    <tr><td>Grundlage</td><td>DSGVO, BDSG</td><td>Schutzziele, BSI IT-Grundschutz, ISO 27001</td></tr>
+    <tr><td>Beispiel</td><td>Einwilligung einholen, Daten nach Zweckerfüllung löschen</td><td>Backup, Verschlüsselung, Firewall</td></tr>
+  </table>
+  <p>Beides hängt zusammen: Die DSGVO verlangt „geeignete technische und organisatorische Maßnahmen“ (TOM) – also Datensicherheit – für personenbezogene Daten.</p>
+
+  <h4>Personenbezogene Daten</h4>
+  <ul>
+    <li><strong>Personenbezogen</strong> (Art. 4 DSGVO) sind alle Informationen über eine <em>identifizierte oder identifizierbare</em> natürliche Person. Identifizierbar heißt: Mit Zusatzwissen lässt sich die Person ermitteln. Beispiele: Name, Anschrift, Geburtsdatum, E-Mail-Adresse, Telefonnummer, Kundennummer, Kfz-Kennzeichen, Standortdaten, Online-Kennungen (Cookie-ID, Geräte-ID), Foto, Stimme.</li>
+    <li><strong>Nicht personenbezogen</strong> sind Daten ohne Bezug zu einer Person (Temperatur einer Maschine) und <strong>echt anonymisierte</strong> bzw. so stark zusammengefasste Daten, dass kein Rückschluss auf Einzelne möglich ist („durchschnittlich 312 Besucher pro Tag“).</li>
+    <li><strong>Pseudonymisierte</strong> Daten (Name durch Kennung ersetzt, Zuordnungstabelle existiert noch) bleiben <strong>personenbezogen</strong> – Pseudonymisierung ist aber eine gute Schutzmaßnahme.</li>
+    <li><strong>Besondere Kategorien</strong> (Art. 9): Gesundheitsdaten, genetische und biometrische Daten (zur Identifizierung), ethnische Herkunft, politische Meinung, religiöse Überzeugung, Gewerkschaftszugehörigkeit, Sexualleben/sexuelle Orientierung. Grundsätzlich verboten, außer mit <strong>ausdrücklicher</strong> Einwilligung oder einer anderen Ausnahme aus Art. 9 Abs. 2 – und mit besonders hohem Schutzbedarf.</li>
+  </ul>
+
+  <h4>Grundsätze der Verarbeitung (Art. 5)</h4>
+  <table class="kompakt">
+    <tr><th style="width:30%">Grundsatz</th><th>Bedeutung · Beispiel Online-Shop</th></tr>
+    <tr><td>Rechtmäßigkeit, Treu und Glauben, Transparenz</td><td>nur mit Rechtsgrundlage; die Person weiß, was mit ihren Daten passiert (Datenschutzerklärung).</td></tr>
+    <tr><td>Zweckbindung</td><td>Daten nur für den festgelegten Zweck verwenden: Die Lieferadresse dient dem Versand, nicht dem Verkauf an Adresshändler.</td></tr>
+    <tr><td>Datenminimierung</td><td>nur so viele Daten wie nötig: Für einen Newsletter genügt die E-Mail-Adresse; Geburtsdatum und Telefonnummer sind überflüssig.</td></tr>
+    <tr><td>Richtigkeit</td><td>Daten aktuell halten, falsche berichtigen.</td></tr>
+    <tr><td>Speicherbegrenzung</td><td>löschen, sobald der Zweck erfüllt ist und keine Aufbewahrungspflicht besteht.</td></tr>
+    <tr><td>Integrität und Vertraulichkeit</td><td>angemessene Sicherheit durch TOM (Verschlüsselung, Zugriffsrechte, Backups).</td></tr>
+    <tr><td>Rechenschaftspflicht</td><td>Der Verantwortliche muss die Einhaltung <em>nachweisen</em> können (Verarbeitungsverzeichnis, dokumentierte Einwilligungen).</td></tr>
+  </table>
+
+  <h4>Rechtsgrundlagen (Art. 6 Abs. 1) – ohne eine davon ist die Verarbeitung verboten</h4>
+  <table class="kompakt">
+    <tr><th style="width:30%">Rechtsgrundlage</th><th>Beispiel</th></tr>
+    <tr><td>a) Einwilligung</td><td>Newsletter, Werbung, Weitergabe an Partner, freiwillige Zusatzfunktionen</td></tr>
+    <tr><td>b) Vertrag / Vertragsanbahnung</td><td>Name, Lieferadresse und Zahlungsdaten zur Abwicklung einer Bestellung</td></tr>
+    <tr><td>c) rechtliche Verpflichtung</td><td>Aufbewahrung von Rechnungen nach Handels- und Steuerrecht</td></tr>
+    <tr><td>d) lebenswichtige Interessen</td><td>Notfall: Daten an den Rettungsdienst</td></tr>
+    <tr><td>e) öffentliche Aufgabe</td><td>Behörden</td></tr>
+    <tr><td>f) berechtigtes Interesse (mit Abwägung)</td><td>Betrugsprävention, IT-Sicherheit (z. B. Log-Dateien für kurze Zeit)</td></tr>
+  </table>
+
+  <h4>Einwilligung richtig einholen</h4>
+  <ul>
+    <li><strong>Freiwillig:</strong> keine Nachteile bei Ablehnung. <strong>Kopplungsverbot:</strong> Die Vertragsleistung darf nicht von einer Einwilligung abhängig gemacht werden, die dafür nicht nötig ist.</li>
+    <li><strong>Für einen bestimmten Fall und getrennt</strong> je Zweck (eigene Checkbox für Newsletter, eigene für Weitergabe an Partner), nicht in AGB versteckt.</li>
+    <li><strong>Informiert:</strong> Zweck, Verantwortlicher, Empfänger, Widerrufsrecht sind vorher bekannt.</li>
+    <li><strong>Unmissverständlich durch aktive Handlung:</strong> leere Checkbox, die der Nutzer selbst ankreuzt. <strong>Vorangekreuzte Kästchen sind keine wirksame Einwilligung</strong> (EuGH 2019, „Planet49“).</li>
+    <li><strong>Jederzeit widerrufbar</strong> – so einfach wie erteilt (z. B. Schalter in den App-Einstellungen).</li>
+    <li><strong>Nachweisbar</strong> (Zeitpunkt, Version des Textes speichern; bei Newslettern Double-Opt-in).</li>
+    <li>Für <strong>Gesundheitsdaten</strong> und andere besondere Kategorien: <strong>ausdrücklich</strong> und gesondert.</li>
+  </ul>
+  <p><strong>Beispiel (App einer Tanzschule):</strong> Bei der Anmeldung zum Kurs werden nur Name, E-Mail und Bankverbindung als Pflichtfelder abgefragt (Vertrag). Darunter zwei <em>leere</em>, getrennte Checkboxen: „Ich möchte den monatlichen Newsletter erhalten“ und „Fotos von mir dürfen auf der Website der Tanzschule erscheinen“, jeweils mit Hinweis auf den Widerruf in den Einstellungen und einem Link zur Datenschutzerklärung.</p>
+
+  <h4>Datenschutzerklärung (Informationspflichten, Art. 13)</h4>
+  <p>Die Datenschutzerklärung <strong>informiert</strong> – ihr muss man nicht „zustimmen“. In einer App muss sie <strong>vor</strong> der Datenerhebung (z. B. im Registrierungsdialog und im Store-Eintrag) und jederzeit über das Menü erreichbar sein, in klarer, verständlicher Sprache. Inhalt:</p>
+  <ul>
+    <li>Name und Kontaktdaten des Verantwortlichen und ggf. des Datenschutzbeauftragten,</li>
+    <li>Zwecke und Rechtsgrundlagen der Verarbeitung, ggf. das berechtigte Interesse,</li>
+    <li>Empfänger (z. B. Zahlungsdienstleister, Hosting-Anbieter), Übermittlung in Drittländer,</li>
+    <li>Speicherdauer bzw. Kriterien für die Löschung,</li>
+    <li>Betroffenenrechte, Widerrufsrecht bei Einwilligungen, Beschwerderecht bei der Aufsichtsbehörde,</li>
+    <li>ob die Angabe der Daten Pflicht ist und was passiert, wenn man sie nicht angibt.</li>
+  </ul>
+
+  <h4>Betroffenenrechte</h4>
+  <table class="kompakt">
+    <tr><th>Recht</th><th>Inhalt</th></tr>
+    <tr><td>Auskunft (Art. 15)</td><td>welche Daten, Zwecke, Empfänger, Speicherdauer; Kopie der Daten</td></tr>
+    <tr><td>Berichtigung (Art. 16)</td><td>falsche Daten korrigieren lassen</td></tr>
+    <tr><td>Löschung, „Recht auf Vergessenwerden“ (Art. 17)</td><td>wenn Zweck entfallen, Einwilligung widerrufen, Verarbeitung unrechtmäßig – <em>aber nicht</em>, solange eine gesetzliche Aufbewahrungspflicht besteht</td></tr>
+    <tr><td>Einschränkung der Verarbeitung (Art. 18)</td><td>Daten „sperren“ statt löschen, z. B. während Aufbewahrungsfristen</td></tr>
+    <tr><td>Datenübertragbarkeit (Art. 20)</td><td>eigene Daten in gängigem, maschinenlesbarem Format erhalten (z. B. JSON, CSV)</td></tr>
+    <tr><td>Widerspruch (Art. 21) · Widerruf der Einwilligung (Art. 7)</td><td>Verarbeitung für die Zukunft stoppen (z. B. Werbung)</td></tr>
+  </table>
+  <p class="klein">Frist für die Antwort: grundsätzlich ein Monat. Vorher die Identität des Anfragenden prüfen – sonst gibt man die Daten womöglich einem Betrüger.</p>
+
+  <h4>Weitere Begriffe, die man kennen muss</h4>
+  <ul>
+    <li><strong>TOM</strong> (technische und organisatorische Maßnahmen, Art. 32): z. B. Verschlüsselung, Pseudonymisierung, Rollen- und Rechtekonzept, Protokollierung, Backups, Zutrittskontrolle zum Serverraum, Verpflichtung der Mitarbeitenden auf Vertraulichkeit, Schulungen.</li>
+    <li><strong>Privacy by Design</strong> (Art. 25): Datenschutz von Anfang an in die Technik einbauen (z. B. Pseudonymisierung, Löschroutinen, Verschlüsselung im Entwurf vorsehen). <strong>Privacy by Default:</strong> Die <em>Voreinstellungen</em> sind die datenschutzfreundlichsten – z. B. Profil standardmäßig privat, Standortfreigabe aus, optionale Datenfelder leer.</li>
+    <li><strong>Auftragsverarbeitung</strong> (Art. 28): Ein Dienstleister verarbeitet Daten im Auftrag (Cloud-Hosting, Rechenzentrum, Newsletter-Dienst). Pflicht: <strong>AV-Vertrag</strong>, Dienstleister ist weisungsgebunden, muss TOM nachweisen; Unterauftragnehmer nur mit Zustimmung. Bei Servern außerhalb der EU zusätzlich prüfen, ob ein angemessenes Datenschutzniveau besteht (Angemessenheitsbeschluss, z. B. EU-US Data Privacy Framework, oder Standardvertragsklauseln).</li>
+    <li><strong>Datenschutz-Folgenabschätzung</strong> (Art. 35) bei voraussichtlich hohem Risiko, z. B. umfangreiche Verarbeitung von Gesundheitsdaten.</li>
+    <li><strong>Datenpanne:</strong> Meldung an die Aufsichtsbehörde binnen <strong>72 Stunden</strong> (Art. 33), bei hohem Risiko auch Benachrichtigung der Betroffenen. Bußgelder bis 20 Mio. € oder 4 % des weltweiten Jahresumsatzes.</li>
+    <li><strong>Aufbewahrungspflichten</strong> gehen dem Löschwunsch vor: Rechnungen und andere Buchungsbelege müssen nach Handels- und Steuerrecht mehrere Jahre aufbewahrt werden (Buchungsbelege derzeit 8 Jahre). In dieser Zeit werden sie gesperrt, nicht gelöscht.</li>
+  </ul>
+
+  <h4>Echte Daten in Testsystemen und Online-Tools</h4>
+  <p>Wer echte personenbezogene Daten (Kundenlisten, Rechnungen, Bankverbindungen) in ein kostenloses Online-Prüf- oder Konvertierungstool hochlädt, <strong>übermittelt sie an einen Dritten</strong> – ohne Rechtsgrundlage, ohne AV-Vertrag, ohne Wissen, wo und wie lange sie gespeichert werden (eventuell außerhalb der EU). Das verletzt Datenschutz <em>und</em> Vertraulichkeit. Besser: <strong>synthetische Testdaten</strong> (erfundene, aber realistische Datensätze) oder sauber anonymisierte Daten verwenden, Prüfwerkzeuge lokal bzw. im eigenen Netz betreiben oder einen Anbieter mit AV-Vertrag wählen.</p>
+
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>
+    <ul>
+      <li>„Mit der Registrierung akzeptieren Sie unsere Datenschutzerklärung“ – die Datenschutzerklärung ist eine <strong>Information</strong>, keine Einwilligung.</li>
+      <li>Eine Einwilligung ist nicht immer nötig: Für die Vertragserfüllung (Rechnungsadresse) ist Art. 6 Abs. 1 b die Rechtsgrundlage.</li>
+      <li>Löschen auf Wunsch ist kein absolutes Recht – gesetzliche Aufbewahrungspflichten gehen vor.</li>
+      <li>Pseudonymisierte Daten sind weiterhin personenbezogen.</li>
+    </ul>
+  </div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <strong>W24 T1 A1d (4 P):</strong> Was muss eine App zum Datenschutz bereitstellen? Erwartet: Datenschutzerklärung (Inhalte, Erreichbarkeit) und eine wirksame Einwilligung für Verarbeitungen, die nicht für den Vertrag nötig sind.
+    <strong>W25 T1 A3bb (6 P):</strong> Ein Mitarbeiter will echte elektronische Rechnungen auf einer kostenlosen Online-Prüfseite validieren lassen – Probleme aus Sicht von Datenschutz und Schutzzielen erläutern und eine Alternative nennen.
+  </div>
+
+  <!-- ===================== SEC-06 ===================== -->
+  <h3 id="e-06">SEC-06 · Angriffe &amp; Gegenmaßnahmen <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfung: S24 (Teil 2, A1b: Makros in Word-Anhängen, 5 P) · als Wissen aber auch Grundlage für SEC-03 und SEC-04</p>
+
+  <table class="kompakt">
+    <tr><th style="width:17%">Angriff</th><th style="width:33%">So funktioniert er</th><th style="width:13%">verletzt v. a.</th><th>Gegenmaßnahmen</th></tr>
+    <tr><td><strong>Phishing</strong> (gezielt: Spear-Phishing)</td><td>gefälschte Mail/Website/SMS lockt auf eine nachgebaute Anmeldeseite, um Zugangsdaten abzugreifen</td><td>Vertraulichkeit, Authentizität</td><td>Schulung (Absender, Links prüfen), 2FA bzw. Passkeys, Spam-/Linkfilter, Meldeweg für verdächtige Mails</td></tr>
+    <tr><td><strong>Social Engineering</strong></td><td>Manipulation von Menschen: Anrufer gibt sich als IT-Support oder Chef aus und fordert Passwort oder Überweisung (Pretexting, CEO-Fraud)</td><td>Vertraulichkeit</td><td>Schulung/Sensibilisierung, klare Regel „IT fragt nie nach Passwörtern“, Rückruf über bekannte Nummer, Vier-Augen-Prinzip bei Zahlungen</td></tr>
+    <tr><td><strong>Schadsoftware im Anhang</strong> (z. B. Makro-Malware)</td><td>Office-Dokument mit Makro (z. B. <code>.docm</code>, <code>.xlsm</code>) fordert „Inhalt aktivieren“; das Makro lädt Schadsoftware nach</td><td>alle</td><td>Makros aus Internet-Dateien per Richtlinie blockieren, nur signierte Makros erlauben, Anhangfilter/Sandbox, Virenschutz, minimale Benutzerrechte, Schulung</td></tr>
+    <tr><td><strong>Ransomware</strong></td><td>Schadsoftware verschlüsselt Daten und fordert Lösegeld; oft werden Daten vorher kopiert</td><td>Verfügbarkeit (+ Vertraulichkeit)</td><td>Offline-/unveränderbare Backups und getestete Wiederherstellung, Patches, Netzsegmentierung, minimale Rechte, E-Mail-Schutz</td></tr>
+    <tr><td><strong>Brute Force</strong>, Wörterbuchangriff, <strong>Credential Stuffing</strong></td><td>systematisches Durchprobieren von Passwörtern bzw. Ausprobieren geleakter Zugangsdaten aus anderen Diensten</td><td>Vertraulichkeit</td><td>Fehlversuchssperre/Verzögerung, Rate Limiting je IP und Konto, CAPTCHA, 2FA, Prüfung gegen geleakte Passwörter, Monitoring</td></tr>
+    <tr><td><strong>(D)DoS</strong></td><td>Überlastung eines Dienstes durch massenhaft Anfragen, bei DDoS von vielen (gekaperten) Rechnern gleichzeitig</td><td>Verfügbarkeit</td><td>DDoS-Schutzdienst/Filter beim Provider, Rate Limiting, Lastverteilung, automatische Skalierung, Notfallplan</td></tr>
+    <tr><td><strong>Man-in-the-Middle</strong> (z. B. gefälschter WLAN-Hotspot „Evil Twin“)</td><td>Angreifer schaltet sich unbemerkt zwischen zwei Kommunikationspartner, liest mit oder verändert Daten</td><td>Vertraulichkeit, Integrität</td><td>TLS mit konsequenter Zertifikatsprüfung (Warnungen nie wegklicken, in Apps Certificate Pinning), VPN, WPA3/WPA2-Enterprise, HSTS</td></tr>
+    <tr><td><strong>SQL-Injection</strong></td><td>Eingaben werden ungeprüft in SQL-Befehle eingebaut und verändern deren Bedeutung</td><td>alle</td><td><strong>Prepared Statements</strong>, Eingabevalidierung (Whitelist), Datenbankbenutzer mit minimalen Rechten, keine technischen Fehlermeldungen an Nutzer</td></tr>
+    <tr><td><strong>Cross-Site Scripting (XSS)</strong></td><td>Angreifer schleust Skriptcode in eine Webseite ein (z. B. über einen Kommentar), der im Browser anderer Besucher ausgeführt wird</td><td>Vertraulichkeit, Integrität</td><td><strong>Output-Encoding</strong> (<code>&lt;</code> → <code>&amp;lt;</code>), Template-Engines mit automatischem Escaping, Content-Security-Policy, Cookies mit <code>HttpOnly</code></td></tr>
+    <tr><td><strong>CSRF</strong> (Cross-Site Request Forgery)</td><td>Eine fremde Seite löst im Browser eines angemeldeten Nutzers unbemerkt eine Aktion auf der echten Seite aus; das Session-Cookie wird automatisch mitgeschickt</td><td>Integrität</td><td>CSRF-Token in Formularen, Cookies mit <code>SameSite</code>, erneute Passwortabfrage bei kritischen Änderungen</td></tr>
+  </table>
+
+  <h4>SQL-Injection im Code erkennen und beheben</h4>
+  <p>Beispiel: Die Katalogsuche einer Bibliothek baut die Eingabe des Benutzers direkt in den SQL-Text ein.</p>
+  <p class="codelabel">Java · unsicher</p>
+  <pre class="java">String sql = "SELECT titel, autor FROM buch WHERE autor = '" + eingabe + "'";
+Statement st = con.createStatement();
+ResultSet rs = st.executeQuery(sql);</pre>
+  <p>Enthält die Eingabe ein Hochkomma, endet die Zeichenkette im SQL-Text vorzeitig, und alles danach wird als <em>SQL-Code</em> gelesen. Schon ein harmloser Autorenname wie <code>O'Brien</code> führt deshalb zu einem Syntaxfehler. Ein Angreifer nutzt genau diesen Effekt gezielt aus: Er formuliert seine Eingabe so, dass sich die Bedeutung der Abfrage ändert. Bedingungen wie eine Passwortprüfung werden dann umgangen, fremde Tabellen ausgelesen oder Daten verändert.</p>
+  <p class="codelabel">Java · sicher mit Prepared Statement</p>
+  <pre class="java">String sql = "SELECT titel, autor FROM buch WHERE autor = ?";
+PreparedStatement ps = con.prepareStatement(sql);
+ps.setString(1, eingabe);          // Wert wird getrennt als reine Daten übergeben
+ResultSet rs = ps.executeQuery();</pre>
+  <p><strong>Warum das hilft:</strong> Die SQL-Anweisung mit dem Platzhalter <code>?</code> wird zuerst an die Datenbank geschickt und dort vorbereitet. Der Eingabewert wird anschließend <strong>getrennt als Datenwert</strong> übergeben und nie als SQL-Code interpretiert. Eine Eingabe mit Hochkommas ist dann einfach ein (nicht existierender) Autorenname und ändert die Abfrage nicht mehr. Eigene „Filter“, die Hochkommas entfernen, sind dagegen fehleranfällig.</p>
+
+  <h4>XSS in einem Satz</h4>
+  <p>Ein Gästebuch speichert den Kommentar <code>&lt;script&gt;…&lt;/script&gt;</code> und gibt ihn unverändert in die HTML-Seite aus – jeder Besucher führt das Skript aus (z. B. Diebstahl des Session-Cookies, gefälschtes Login-Formular). Abhilfe: Ausgaben <strong>kontextgerecht kodieren</strong>, dann zeigt der Browser <code>&lt;script&gt;</code> nur als Text an.</p>
+
+  <div class="merke"><span class="kastentitel">Merke</span>Eingaben im Client (App, JavaScript) zu prüfen ist bequem für den Nutzer, aber <strong>keine Sicherheitsmaßnahme</strong>: Ein Angreifer schickt seine Anfrage einfach direkt an den Server (z. B. mit einem eigenen Programm). Geprüft wird immer <strong>auf dem Server</strong>.</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <strong>S24 T2 A1b (5 P):</strong> Aktionäre sollen Einladungen als Word-Dokument im Mailanhang erhalten. ba) Risiko erläutern (Makros können Schadcode ausführen, Dokumente aus externen Quellen sind gefährlich), bb) eine sicherere Alternative beschreiben (z. B. Einladung direkt auf der Plattform im Browser anzeigen bzw. ohne aktive Inhalte bereitstellen).
+  </div>
+</section>
+
+<!-- ===================== TEIL B: BELEGSATZ ===================== -->
+<section class="teil" id="belegsatz">
+  <h2>B · Belegsatz</h2>
+  <p class="klein">Für IT-Sicherheit und Datenschutz legt die IHK keine Notationshilfe bei. Der Belegsatz besteht deshalb nur aus den Anlagen zur Ausgangssituation, auf die sich die Aufgaben beziehen. Keine Erklärungen.</p>
+
+  <div class="anlage" id="anlage-1">
+    <h4>Anlage 1 · Ausgangssituation</h4>
+    <p><strong>Die Aufgaben dieses Blocks beziehen sich auf die folgende Ausgangssituation:</strong></p>
+    <p>Die <strong>Pulsar Fitness GmbH</strong> betreibt 14 Fitnessstudios in Niedersachsen mit rund 38.000 Mitgliedern. Verträge, Kursbuchung und Zutritt laufen bisher über eine veraltete Studiosoftware, Excel-Listen und Papierformulare. Die Geschäftsführerin, Frau Petersen, hat die neue Plattform <strong>„PulsarConnect“</strong> in Auftrag gegeben. Sie besteht aus</p>
+    <ul>
+      <li>der <strong>Mitglieder-App</strong> (Android/iOS): Registrierung, Vertragsdaten, Kursbuchung, Check-in per QR-Code, Trainingspläne, Ergebnisse der Körperanalyse,</li>
+      <li>dem <strong>Web-Portal</strong> für Mitglieder sowie Trainerinnen und Trainer (u. a. Kursbewertungen),</li>
+      <li>dem Desktop-Programm <strong>„PulsarDesk“</strong> für die Empfangs-PCs in den Studios,</li>
+      <li>dem <strong>Backend</strong> (API-Server, Login-Server, Datenbank-Server, Update-Server) bei einem Cloud-Anbieter mit Rechenzentrum in Frankfurt am Main,</li>
+      <li>der <strong>Studiotechnik</strong>: Körperanalyse-Waagen, Drehkreuze und elektronische Spindschlösser sowie batteriebetriebene Funk-Sensoren, die CO₂-Gehalt, Temperatur, Luftfeuchte und Belegung der Kursräume messen und über ein Funk-Gateway im Studio übertragen.</li>
+    </ul>
+    <p>Die Beiträge werden per SEPA-Lastschrift eingezogen; dazu wird die IBAN jedes Mitglieds gespeichert. Die Krankenkasse <strong>VitaKasse</strong> möchte über ihre Bonus-App – mit Zustimmung des Mitglieds – abrufen können, wie oft das Mitglied im Monat trainiert hat (Bonusprogramm).</p>
+    <p>Sie sind Auszubildende/r zum Fachinformatiker/zur Fachinformatikerin Anwendungsentwicklung bei der <strong>Seidel &amp; Brandt Software GmbH</strong>, die PulsarConnect entwickelt. Sie arbeiten im Team „Sicherheit und Datenschutz“ mit. Ihre Themen: sichere Kommunikation zwischen den Komponenten, Benutzerkonten und Anmeldung, Schutzbedarfsanalyse, Datenschutz in der App und die Prüfung des Altsystems auf Schwachstellen.</p>
+  </div>
+
+  <div class="anlage" id="anlage-2">
+    <h4>Anlage 2 · Systemskizze PulsarConnect</h4>
+    <figure>
+      <svg viewBox="0 0 760 395" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <!-- Studio -->
+        <rect x="10" y="10" width="265" height="375" fill="none" stroke="#222" stroke-dasharray="6,4"/>
+        <text x="142" y="32" text-anchor="middle" font-weight="bold">Studio (eines von 14)</text>
+        <rect x="22" y="50" width="120" height="46" fill="#fff" stroke="#222"/>
+        <text x="82" y="69" text-anchor="middle">Funk-Sensoren</text>
+        <text x="82" y="86" text-anchor="middle" font-size="12">PS-200 (Batterie)</text>
+        <rect x="180" y="50" width="85" height="46" fill="#fff" stroke="#222"/>
+        <text x="222" y="69" text-anchor="middle">Funk-</text>
+        <text x="222" y="86" text-anchor="middle">Gateway</text>
+        <line x1="142" y1="73" x2="180" y2="73" stroke="#222" stroke-dasharray="3,3"/>
+        <text x="161" y="66" text-anchor="middle" font-size="11">Funk</text>
+        <rect x="180" y="190" width="85" height="46" fill="#fff" stroke="#222"/>
+        <text x="222" y="209" text-anchor="middle">Router /</text>
+        <text x="222" y="226" text-anchor="middle">Firewall</text>
+        <line x1="222" y1="96" x2="222" y2="190" stroke="#222"/>
+        <rect x="22" y="130" width="120" height="46" fill="#fff" stroke="#222"/>
+        <text x="82" y="149" text-anchor="middle">Körperanalyse-</text>
+        <text x="82" y="166" text-anchor="middle" font-size="12">Waage BodyScan 5</text>
+        <rect x="22" y="220" width="120" height="46" fill="#fff" stroke="#222"/>
+        <text x="82" y="239" text-anchor="middle">Drehkreuz und</text>
+        <text x="82" y="256" text-anchor="middle">Spindschlösser</text>
+        <rect x="22" y="310" width="120" height="46" fill="#fff" stroke="#222"/>
+        <text x="82" y="329" text-anchor="middle">Empfangs-PC</text>
+        <text x="82" y="346" text-anchor="middle" font-size="12">(PulsarDesk)</text>
+        <line x1="160" y1="153" x2="160" y2="333" stroke="#222"/>
+        <line x1="142" y1="153" x2="160" y2="153" stroke="#222"/>
+        <line x1="142" y1="243" x2="160" y2="243" stroke="#222"/>
+        <line x1="142" y1="333" x2="160" y2="333" stroke="#222"/>
+        <line x1="160" y1="213" x2="180" y2="213" stroke="#222"/>
+        <text x="166" y="292" font-size="11">Studio-Netz</text>
+        <text x="166" y="306" font-size="11">(LAN/WLAN)</text>
+        <!-- Internet und externe Teilnehmer -->
+        <ellipse cx="380" cy="213" rx="50" ry="30" fill="#fff" stroke="#222"/>
+        <text x="380" y="218" text-anchor="middle">Internet</text>
+        <line x1="265" y1="213" x2="330" y2="213" stroke="#222"/>
+        <text x="297" y="206" text-anchor="middle" font-size="11">HTTPS</text>
+        <rect x="300" y="30" width="160" height="48" fill="#fff" stroke="#222"/>
+        <text x="380" y="50" text-anchor="middle" font-weight="bold">Mitglieder</text>
+        <text x="380" y="68" text-anchor="middle" font-size="12">App und Browser</text>
+        <line x1="380" y1="78" x2="380" y2="183" stroke="#222"/>
+        <text x="386" y="134" font-size="11">HTTPS</text>
+        <rect x="300" y="330" width="160" height="48" fill="#fff" stroke="#222"/>
+        <text x="380" y="350" text-anchor="middle" font-weight="bold">VitaKasse</text>
+        <text x="380" y="368" text-anchor="middle" font-size="12">Bonus-App + Server</text>
+        <line x1="380" y1="243" x2="380" y2="330" stroke="#222"/>
+        <text x="386" y="292" font-size="11">HTTPS</text>
+        <line x1="430" y1="213" x2="495" y2="213" stroke="#222"/>
+        <text x="462" y="206" text-anchor="middle" font-size="11">HTTPS</text>
+        <!-- Rechenzentrum -->
+        <rect x="485" y="10" width="265" height="375" fill="none" stroke="#222" stroke-dasharray="6,4"/>
+        <text x="617" y="32" text-anchor="middle" font-weight="bold">Cloud-Rechenzentrum</text>
+        <text x="617" y="48" text-anchor="middle" font-size="12">(Frankfurt am Main)</text>
+        <rect x="510" y="72" width="220" height="46" fill="#fff" stroke="#222"/>
+        <text x="620" y="91" text-anchor="middle" font-weight="bold">API-Server</text>
+        <text x="620" y="108" text-anchor="middle" font-size="12">(REST, HTTPS)</text>
+        <rect x="510" y="134" width="220" height="46" fill="#fff" stroke="#222"/>
+        <text x="620" y="153" text-anchor="middle" font-weight="bold">Login-Server</text>
+        <text x="620" y="170" text-anchor="middle" font-size="12">(Benutzerkonten, OAuth2)</text>
+        <rect x="510" y="196" width="220" height="46" fill="#fff" stroke="#222"/>
+        <text x="620" y="215" text-anchor="middle" font-weight="bold">Update-Server</text>
+        <text x="620" y="232" text-anchor="middle" font-size="12">(Firmware Waagen/Sensoren)</text>
+        <rect x="510" y="300" width="220" height="46" fill="#fff" stroke="#222"/>
+        <text x="620" y="319" text-anchor="middle" font-weight="bold">Datenbank-Server</text>
+        <text x="620" y="336" text-anchor="middle" font-size="12">(Mitglieder- und Trainingsdaten)</text>
+        <line x1="495" y1="95" x2="495" y2="219" stroke="#222"/>
+        <line x1="495" y1="95" x2="510" y2="95" stroke="#222"/>
+        <line x1="495" y1="157" x2="510" y2="157" stroke="#222"/>
+        <line x1="495" y1="219" x2="510" y2="219" stroke="#222"/>
+        <path d="M730,95 H742 V323 H730" fill="none" stroke="#222"/>
+        <line x1="730" y1="157" x2="742" y2="157" stroke="#222"/>
+      </svg>
+      <figcaption>Anlage 2: Komponenten von PulsarConnect (vereinfacht)</figcaption>
+    </figure>
+  </div>
+
+  <div class="anlage" id="anlage-3">
+    <h4>Anlage 3 · Technische Daten der Studiotechnik (Auszug aus den Datenblättern)</h4>
+    <table class="kompakt">
+      <tr><th style="width:17%"></th><th style="width:31%">Funk-Sensor PS-200</th><th style="width:28%">Körperanalyse-Waage BodyScan 5</th><th>Funk-Gateway GW-10</th></tr>
+      <tr><td>Zweck</td><td>misst CO₂, Temperatur, Luftfeuchte und Personenzahl im Kursraum</td><td>misst Gewicht, Körperfett, Muskelmasse; Zuordnung zum Mitglied per QR-Code aus der App</td><td>empfängt die Funkdaten aller Sensoren eines Studios</td></tr>
+      <tr><td>Prozessor / Speicher</td><td>32-Bit-Mikrocontroller, 48 MHz, 32 KB RAM, 256 KB Flash</td><td>ARM-Prozessor 1,2 GHz, 1 GB RAM</td><td>ARM-Prozessor 1,5 GHz, 2 GB RAM, Linux</td></tr>
+      <tr><td>Krypto-Unterstützung</td><td>AES-128-Hardwarebaustein; keine Hardwareunterstützung für RSA oder ECC</td><td>TLS 1.3 möglich</td><td>TLS 1.3 möglich</td></tr>
+      <tr><td>Energieversorgung</td><td>2 × AA-Batterie, geforderte Laufzeit mindestens 5 Jahre</td><td>Netzbetrieb</td><td>Netzbetrieb</td></tr>
+      <tr><td>Kommunikation</td><td>868-MHz-Funk (LPWAN, Herstellerprotokoll): max. <strong>48 Byte</strong> Nutzdaten je Nachricht, Sendezeit höchstens 1 % (gesetzlicher Duty Cycle)</td><td>WLAN des Studios</td><td>Funk zu den Sensoren, LAN zum Router</td></tr>
+      <tr><td>Datenmenge</td><td>alle 10 Minuten ein Messwertsatz mit 12 Byte</td><td>ca. 2 KB je Messung</td><td>–</td></tr>
+      <tr><td>Sicherheit im Pilotbetrieb</td><td>Alle Sensoren eines Studios verschlüsseln mit <strong>einem gemeinsamen</strong> AES-Schlüssel, den auch das Gateway kennt. Das Gateway entschlüsselt die Werte, prüft sie und sendet sie per TLS an den API-Server.</td><td>sendet die Messwerte <strong>unverschlüsselt per HTTP</strong> an den API-Server; lädt Firmware-Updates per HTTP vom Update-Server</td><td>Firmware-Updates vom Update-Server</td></tr>
+    </table>
+  </div>
+
+  <div class="anlage" id="anlage-4">
+    <h4>Anlage 4 · Auszug aus dem Vorfallprotokoll (Altsystem und Pilotbetrieb, August 2026)</h4>
+    <table class="kompakt">
+      <tr><th style="width:6%">Nr.</th><th style="width:10%">Datum</th><th>Beschreibung</th></tr>
+      <tr><td class="nr">V1</td><td>03.08.</td><td>Am Abend war die Kursbuchung im Web-Portal 40 Minuten lang nicht erreichbar. Laut Cloud-Anbieter trafen in dieser Zeit Millionen sinnloser Anfragen von Tausenden verschiedener IP-Adressen ein.</td></tr>
+      <tr><td class="nr">V2</td><td>05.08.</td><td>Ein Trainer hat die PDF-Auswertung einer Körperanalyse per E-Mail versehentlich an ein anderes Mitglied mit gleichem Nachnamen geschickt.</td></tr>
+      <tr><td class="nr">V3</td><td>07.08.</td><td>Der Empfang im Studio Lüneburg erhält eine E-Mail des angeblichen Getränkelieferanten mit dem Anhang <code>Rechnung_August.docm</code>. Beim Öffnen erscheint der Hinweis „Um die Rechnung korrekt anzuzeigen, klicken Sie auf <em>Inhalt aktivieren</em>“.</td></tr>
+      <tr><td class="nr">V4</td><td>11.08.</td><td>Bei einem Mitglied war der Tarif in der Datenbank ohne Auftrag von „Premium“ auf „Basis“ geändert worden; dadurch wurde monatelang ein zu niedriger Beitrag abgebucht.</td></tr>
+      <tr><td class="nr">V5</td><td>12.08.</td><td>Ein Anrufer gibt sich als Techniker von Seidel &amp; Brandt aus, kündigt eine „dringende Wartung“ an und bittet die Empfangskraft im Studio Celle, ihm das Passwort für PulsarDesk zu nennen.</td></tr>
+      <tr><td class="nr">V6</td><td>14.08.</td><td>Das Web-Portal protokolliert innerhalb einer Stunde 18.000 fehlgeschlagene Anmeldeversuche für über 6.000 verschiedene Mitgliederkonten. Die E-Mail-Passwort-Kombinationen stammen offenbar aus einem Datenleck eines anderen Online-Dienstes; 37 Anmeldungen waren erfolgreich.</td></tr>
+      <tr><td class="nr">V7</td><td>17.08.</td><td>Ein Stromausfall im Studio Uelzen legt Funk-Gateway und Spindschlösser lahm; die Mitglieder kommen zwei Stunden lang nicht an ihre Sachen.</td></tr>
+      <tr><td class="nr">V8</td><td>19.08.</td><td>Unter einer Kursbewertung im Web-Portal steht ein Kommentar, der Skriptcode enthält. Wer die Bewertungen ansieht, bekommt ein Fenster „Sitzung abgelaufen – bitte erneut anmelden“, das die eingegebenen Zugangsdaten an eine fremde Adresse schickt.</td></tr>
+      <tr><td class="nr">V9</td><td>21.08.</td><td>Die Buchhaltung erhält eine E-Mail, die scheinbar von Frau Petersen stammt: Sie solle wegen eines vertraulichen Geräteeinkaufs sofort 24.800 € auf ein ausländisches Konto überweisen. Absender: <code>petersen@pulsar-fitnes.example</code>.</td></tr>
+      <tr><td class="nr">V10</td><td>24.08.</td><td>Im Studio Lüneburg ist neben dem Gäste-WLAN „Pulsar-Gast“ ein zweites, offenes WLAN „Pulsar-Gast-Free“ aufgetaucht. Mitglieder, die sich damit verbunden haben, melden Zertifikatswarnungen im Browser.</td></tr>
+      <tr><td class="nr">V11</td><td>26.08.</td><td>Ein Mitglied war im Web-Portal angemeldet und klickte in einem Fitness-Forum auf den Link „Gratis-Trainingsplan“. Kurz darauf war in seinem Pulsar-Konto eine fremde E-Mail-Adresse hinterlegt, obwohl es selbst nichts geändert hatte.</td></tr>
+      <tr><td class="nr">V12</td><td>28.08.</td><td>Ein Mitglied bestreitet, seine Mitgliedschaft über die App gekündigt zu haben. Pulsar kann nicht nachweisen, dass die Kündigung tatsächlich von diesem Mitglied abgeschickt wurde.</td></tr>
+      <tr><td class="nr">V13</td><td>31.08.</td><td>Auf dem Empfangs-PC im Studio Celle haben alle Dateien die Endung <code>.locked</code> und lassen sich nicht mehr öffnen; eine Textdatei fordert 2 Bitcoin für die Entschlüsselung.</td></tr>
+    </table>
+  </div>
+
+  <div class="anlage" id="anlage-5">
+    <h4>Anlage 5 · Gesprächsnotiz: Aussagen aus dem Projekt-Workshop</h4>
+    <p class="zitat"><strong>A1 – Frau Petersen (Geschäftsführung):</strong> „Jeden Sonntag um 18 Uhr schalten wir die Kurse der neuen Woche frei. Dann versuchen Hunderte Mitglieder gleichzeitig, einen Platz zu bekommen. Wenn das System dann hängt, haben wir am Montag Beschwerden ohne Ende.“</p>
+    <p class="zitat"><strong>A2 – Herr Okafor (Leitung Trainingsbetrieb):</strong> „Die Ergebnisse der Körperanalyse und die Angaben zu Vorerkrankungen gehen nur das Mitglied und seine Trainerin oder seinen Trainer etwas an – nicht den Empfang und schon gar nicht andere Mitglieder.“</p>
+    <p class="zitat"><strong>A3 – Frau Lindqvist (Buchhaltung):</strong> „Wenn ein Mitglied in der App kündigt oder den Tarif wechselt, müssen wir im Streitfall beweisen können, dass genau dieses Mitglied das war und wann.“</p>
+    <p class="zitat"><strong>A4 – Herr Brandl (Leitung Studio Celle):</strong> „Ein Backup brauchen wir in Zukunft nicht mehr. Die Daten liegen dann doch in der Cloud, und der Anbieter hat bestimmt mehrere Festplatten.“</p>
+  </div>
+
+  <div class="anlage" id="anlage-6">
+    <h4>Anlage 6 · Daten und Systeme in PulsarConnect (Auszug)</h4>
+    <table class="kompakt">
+      <tr><th style="width:6%">Nr.</th><th style="width:20%">Objekt</th><th>Inhalt / Funktion</th><th style="width:28%">Zugriff</th></tr>
+      <tr><td class="nr">D1</td><td>Kursplan</td><td>Kurse, Uhrzeiten, Räume, Vornamen der Trainerinnen und Trainer</td><td>öffentlich auf der Website und in der App</td></tr>
+      <tr><td class="nr">D2</td><td>Mitgliederstammdaten</td><td>Name, Anschrift, Geburtsdatum, E-Mail, Telefonnummer, Tarif, IBAN</td><td>Empfang, Buchhaltung, das Mitglied selbst</td></tr>
+      <tr><td class="nr">D3</td><td>Gesundheits- und Körperdaten</td><td>Gewicht, Körperfettanteil, Herzfrequenzverläufe, Angaben zu Vorerkrankungen und Medikamenten</td><td>das Mitglied, die zuständige Trainerin bzw. der zuständige Trainer</td></tr>
+      <tr><td class="nr">D4</td><td>Check-in-Protokoll</td><td>Mitgliedsnummer, Studio, Zeitpunkt jedes Check-ins</td><td>Studioleitung; Anzahl der Besuche je Monat für die VitaKasse (nur mit Zustimmung)</td></tr>
+      <tr><td class="nr">D5</td><td>Zutrittssystem</td><td>Steuerung der Drehkreuze und Spindschlösser, Prüfung des QR-Codes aus der App</td><td>täglich von allen Mitgliedern genutzt</td></tr>
+      <tr><td class="nr">D6</td><td>Raumklima-Messwerte</td><td>CO₂, Temperatur, Luftfeuchte, Personenzahl je Kursraum</td><td>Haustechnik, Lüftungssteuerung</td></tr>
+    </table>
+    <p class="klein">D1 bis D4 werden auf dem Datenbank-Server im Cloud-Rechenzentrum gespeichert (Anlage 2).</p>
+  </div>
+
+  <div class="anlage" id="anlage-7">
+    <h4>Anlage 7 · Ablauf der Anbindung des VitaKasse-Bonusprogramms (OAuth2)</h4>
+    <p>Ein Mitglied möchte, dass die Bonus-App der VitaKasse die Anzahl seiner Studiobesuche im Monat abrufen darf. Die Rollen (R1)–(R4) und die Inhalte (A)–(D) sind in Aufgabe SEC-04.3 zu ergänzen.</p>
+    <figure>
+      <svg viewBox="0 0 760 440" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <defs>
+          <marker id="b07a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#222"/></marker>
+        </defs>
+        <!-- Mitglied -->
+        <rect x="20" y="20" width="210" height="82" fill="#fff" stroke="#222"/>
+        <text x="125" y="42" text-anchor="middle" font-weight="bold">Mitglied</text>
+        <text x="125" y="60" text-anchor="middle" font-size="12">(Browser auf dem Smartphone)</text>
+        <text x="30" y="90" font-size="12">Rolle (R1):</text>
+        <rect x="95" y="74" width="125" height="22" fill="none" stroke="#222" stroke-dasharray="4,3"/>
+        <!-- Bonus-App -->
+        <rect x="20" y="200" width="210" height="225" fill="#fff" stroke="#222"/>
+        <text x="125" y="300" text-anchor="middle" font-weight="bold">VitaKasse-Bonus-App</text>
+        <text x="30" y="336" font-size="12">Rolle (R2):</text>
+        <rect x="95" y="320" width="125" height="22" fill="none" stroke="#222" stroke-dasharray="4,3"/>
+        <!-- Login-Server -->
+        <rect x="530" y="200" width="210" height="100" fill="#fff" stroke="#222"/>
+        <text x="635" y="226" text-anchor="middle" font-weight="bold">Pulsar-Login-Server</text>
+        <text x="540" y="280" font-size="12">Rolle (R3):</text>
+        <rect x="605" y="264" width="125" height="22" fill="none" stroke="#222" stroke-dasharray="4,3"/>
+        <!-- API -->
+        <rect x="530" y="325" width="210" height="100" fill="#fff" stroke="#222"/>
+        <text x="635" y="351" text-anchor="middle" font-weight="bold">Pulsar-Trainingsdaten-API</text>
+        <text x="540" y="405" font-size="12">Rolle (R4):</text>
+        <rect x="605" y="389" width="125" height="22" fill="none" stroke="#222" stroke-dasharray="4,3"/>
+        <!-- 1 -->
+        <line x1="70" y1="200" x2="70" y2="104" stroke="#222" marker-end="url(#b07a-pfeil)"/>
+        <text x="77" y="140" font-size="11.5">① Autorisierungs-</text>
+        <text x="77" y="154" font-size="11.5">anfrage</text>
+        <!-- 4 -->
+        <line x1="200" y1="102" x2="200" y2="198" stroke="#222" marker-end="url(#b07a-pfeil)"/>
+        <text x="207" y="140" font-size="11.5">④ Weiterleitung</text>
+        <text x="207" y="154" font-size="11.5">(Inhalt wie ③)</text>
+        <!-- 2 -->
+        <path d="M230,40 H690 V198" fill="none" stroke="#222" marker-end="url(#b07a-pfeil)"/>
+        <text x="460" y="34" text-anchor="middle" font-size="12">② Anmeldung + Zustimmung „Besuche lesen“</text>
+        <!-- 3 -->
+        <path d="M600,200 V80 H232" fill="none" stroke="#222" marker-end="url(#b07a-pfeil)"/>
+        <text x="285" y="73" font-size="12">③ (A)</text>
+        <rect x="325" y="58" width="200" height="18" fill="none" stroke="#222" stroke-dasharray="4,3"/>
+        <!-- 5 -->
+        <line x1="230" y1="225" x2="528" y2="225" stroke="#222" marker-end="url(#b07a-pfeil)"/>
+        <text x="380" y="218" text-anchor="middle" font-size="12">⑤ Inhalt von ③ + Client-ID + Client-Secret</text>
+        <!-- 6 -->
+        <line x1="530" y1="275" x2="232" y2="275" stroke="#222" marker-end="url(#b07a-pfeil)"/>
+        <text x="280" y="268" font-size="12">⑥ (B)</text>
+        <rect x="325" y="252" width="190" height="18" fill="none" stroke="#222" stroke-dasharray="4,3"/>
+        <!-- 7 -->
+        <line x1="230" y1="350" x2="528" y2="350" stroke="#222" marker-end="url(#b07a-pfeil)"/>
+        <text x="245" y="343" font-size="12">⑦ Anfrage „Besuche“ mit (C)</text>
+        <rect x="428" y="327" width="95" height="18" fill="none" stroke="#222" stroke-dasharray="4,3"/>
+        <!-- 8 -->
+        <line x1="530" y1="400" x2="232" y2="400" stroke="#222" marker-end="url(#b07a-pfeil)"/>
+        <text x="280" y="393" font-size="12">⑧ (D)</text>
+        <rect x="325" y="377" width="190" height="18" fill="none" stroke="#222" stroke-dasharray="4,3"/>
+      </svg>
+      <figcaption>Anlage 7: OAuth2-Ablauf (Authorization Code) – Rollen und Inhalte teilweise ausgeblendet</figcaption>
+    </figure>
+  </div>
+
+  <div class="anlage" id="anlage-8">
+    <h4>Anlage 8 · Code-Ausschnitt und Tabellenauszug aus dem Altsystem (Web-Portal)</h4>
+    <p class="codelabel">Java · Klasse MitgliederDAO (Auszug, mit Zeilennummern)</p>
+    <pre class="java"> 1  import java.security.MessageDigest;
+ 2  import java.sql.*;
+ 3
+ 4  public class MitgliederDAO {
+ 5
+ 6      private static final String DB_URL  = "jdbc:mysql://db.pulsar.intern:3306/pulsar";
+ 7      private static final String DB_USER = "root";
+ 8      private static final String DB_PASS = "Pulsar2026!";
+ 9
+10      // Anmeldung im Web-Portal: true, wenn E-Mail und Passwort stimmen
+11      public boolean login(String email, String passwort) throws Exception {
+12          Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+13          String sql = "SELECT mitglied_nr FROM mitglied WHERE email = '" + email
+14                     + "' AND passwort_md5 = '" + md5(passwort) + "'";
+15          Statement st = con.createStatement();
+16          ResultSet rs = st.executeQuery(sql);
+17          return rs.next();              // mindestens ein Treffer = angemeldet
+18      }
+19
+20      // Kursbewertungen als HTML-Liste für das Web-Portal
+21      public String bewertungenAlsHtml(int kursId) {
+22          StringBuilder html = new StringBuilder("&lt;ul&gt;");
+23          try {
+24              Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+25              PreparedStatement ps = con.prepareStatement(
+26                  "SELECT kommentar FROM bewertung WHERE kurs_id = ?");
+27              ps.setInt(1, kursId);
+28              ResultSet rs = ps.executeQuery();
+29              while (rs.next()) {
+30                  html.append("&lt;li&gt;").append(rs.getString("kommentar")).append("&lt;/li&gt;");
+31              }
+32          } catch (SQLException e) {
+33              return "&lt;p&gt;Datenbankfehler: " + e.getMessage() + "&lt;/p&gt;";
+34          }
+35          return html.append("&lt;/ul&gt;").toString();
+36      }
+37
+38      // MD5-Hashwert als Hex-String (32 Zeichen)
+39      private static String md5(String text) throws Exception {
+40          MessageDigest md = MessageDigest.getInstance("MD5");
+41          StringBuilder hex = new StringBuilder();
+42          for (byte b : md.digest(text.getBytes("UTF-8"))) {
+43              hex.append(String.format("%02x", b));
+44          }
+45          return hex.toString();
+46      }
+47  }</pre>
+    <table class="daten" style="width:auto">
+      <caption>Tabelle <code>mitglied</code> des Altsystems (Auszug, weitere Spalten ausgeblendet)</caption>
+      <tr><th>mitglied_nr</th><th>email</th><th>passwort_md5</th></tr>
+      <tr><td>1</td><td>admin@pulsar-fitness.example</td><td>5491f5505c21cf4d6af2befd5a69fb34</td></tr>
+      <tr><td>10231</td><td>m.berger@mail.example</td><td>10b43971a8295f3720f38fbcdd9d6ac6</td></tr>
+      <tr><td>10232</td><td>s.yilmaz@mail.example</td><td>e10adc3949ba59abbe56e057f20f883e</td></tr>
+      <tr><td>10233</td><td>k.hansen@mail.example</td><td>10b43971a8295f3720f38fbcdd9d6ac6</td></tr>
+      <tr><td>10234</td><td>t.wolff@mail.example</td><td>37880b01d2a4f6376fa3d292a7352c54</td></tr>
+    </table>
+  </div>
+
+  <div class="anlage" id="anlage-9">
+    <h4>Anlage 9 · Fachtext (englisch): How TLS 1.3 protects a connection</h4>
+    <blockquote class="en" lang="en">
+      <p>When an app or a browser connects to a server via HTTPS, a TLS handshake takes place before any application data is sent. First, the server presents its certificate. The certificate contains the server's public key and is digitally signed by a certificate authority (CA). The client verifies this signature, the validity period and the host name.</p>
+      <p>Next, client and server perform an ephemeral Diffie-Hellman key exchange: each side generates a temporary key pair that is used for this single connection only. By exchanging their temporary public keys, both sides can calculate the same shared secret, but the secret itself is never transmitted. The server also signs the handshake with its private key to prove that it really owns the certificate.</p>
+      <p>From the shared secret, symmetric session keys are derived. All application data is then encrypted with a fast symmetric cipher such as AES-GCM, which also detects whether data has been modified in transit.</p>
+      <p>As the temporary keys are deleted at the end of the session, recorded traffic cannot be decrypted later – not even by an attacker who steals the server's long-term private key. This property is called <em>forward secrecy</em>.</p>
+    </blockquote>
+  </div>
+
+  <div class="anlage" id="anlage-10">
+    <h4>Anlage 10 · Fachtext (englisch): Storing passwords the right way</h4>
+    <blockquote class="en" lang="en">
+      <p>Never store user passwords in plain text or with reversible encryption. Store a password hash instead. However, general-purpose hash functions such as MD5 or SHA-256 are designed to be fast – an attacker with a modern graphics card can test billions of password guesses per second against a stolen list of such hashes. Password hashing must therefore be deliberately slow: use a dedicated algorithm such as Argon2id, scrypt or bcrypt, or apply PBKDF2 with a high number of iterations.</p>
+      <p>Before hashing, combine each password with a unique <em>salt</em>: a random value of at least 16 bytes that is generated for every user. The salt does not need to be kept secret and is stored together with the hash. It ensures that identical passwords produce different hashes and makes precomputed tables (rainbow tables) useless.</p>
+      <p>For additional protection, a <em>pepper</em> can be used. Unlike the salt, the pepper is secret, is the same for all users and must not be stored in the database – for example, it can be kept in a hardware security module or a protected configuration file. If only the database is stolen, the attacker cannot test any guesses without it.</p>
+      <p>To verify a login, load the user's salt, compute the hash of the entered password in exactly the same way and compare the result with the stored hash.</p>
+    </blockquote>
+  </div>
+
+  <div class="anlage" id="anlage-11">
+    <h4>Anlage 11 · Entwurf des Registrierungsbildschirms der Mitglieder-App</h4>
+    <figure>
+      <svg viewBox="0 0 360 592" width="360" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+        <rect x="10" y="5" width="340" height="580" rx="30" fill="#fff" stroke="#222" stroke-width="2"/>
+        <rect x="150" y="17" width="60" height="7" rx="3" fill="none" stroke="#222"/>
+        <rect x="24" y="36" width="312" height="520" fill="#fff" stroke="#888"/>
+        <rect x="24" y="36" width="312" height="54" fill="#eef3fa" stroke="#888"/>
+        <text x="180" y="59" text-anchor="middle" font-weight="bold" font-size="16">Pulsar Fitness</text>
+        <text x="180" y="79" text-anchor="middle" font-size="13">Jetzt Mitglied werden</text>
+        <text x="36" y="106" font-size="11" fill="#444">* = Pflichtfeld</text>
+        <!-- Felder -->
+        <rect x="36" y="114" width="138" height="30" rx="4" fill="#fff" stroke="#888"/>
+        <text x="44" y="134" fill="#666">Vorname *</text>
+        <rect x="186" y="114" width="138" height="30" rx="4" fill="#fff" stroke="#888"/>
+        <text x="194" y="134" fill="#666">Nachname *</text>
+        <rect x="36" y="152" width="288" height="30" rx="4" fill="#fff" stroke="#888"/>
+        <text x="44" y="172" fill="#666">E-Mail-Adresse *</text>
+        <rect x="36" y="190" width="138" height="30" rx="4" fill="#fff" stroke="#888"/>
+        <text x="44" y="210" fill="#666">Geburtsdatum *</text>
+        <rect x="186" y="190" width="138" height="30" rx="4" fill="#fff" stroke="#888"/>
+        <text x="194" y="210" fill="#666">Telefonnummer *</text>
+        <rect x="36" y="228" width="138" height="30" rx="4" fill="#fff" stroke="#888"/>
+        <text x="44" y="248" fill="#666">Familienstand * ▾</text>
+        <rect x="186" y="228" width="138" height="30" rx="4" fill="#fff" stroke="#888"/>
+        <text x="194" y="248" fill="#666">Arbeitgeber *</text>
+        <rect x="36" y="266" width="288" height="44" rx="4" fill="#fff" stroke="#888"/>
+        <text x="44" y="284" fill="#666">Vorerkrankungen, Medikamente *</text>
+        <text x="44" y="300" fill="#666" font-size="11">(z. B. Herz, Gelenke, Diabetes)</text>
+        <rect x="36" y="318" width="288" height="30" rx="4" fill="#fff" stroke="#888"/>
+        <text x="44" y="338" fill="#666">IBAN *</text>
+        <!-- Checkbox 1 -->
+        <rect x="36" y="362" width="14" height="14" fill="#fff" stroke="#222"/>
+        <path d="M38,369 L42,374 L49,364" fill="none" stroke="#222" stroke-width="2"/>
+        <text x="58" y="373" font-size="11">Ich akzeptiere die AGB und bin damit</text>
+        <text x="58" y="387" font-size="11">einverstanden, dass meine Daten für</text>
+        <text x="58" y="401" font-size="11">Werbezwecke genutzt und an Partner-</text>
+        <text x="58" y="415" font-size="11">unternehmen weitergegeben werden. *</text>
+        <!-- Checkbox 2 -->
+        <rect x="36" y="428" width="14" height="14" fill="#fff" stroke="#222"/>
+        <path d="M38,435 L42,440 L49,430" fill="none" stroke="#222" stroke-width="2"/>
+        <text x="58" y="439" font-size="11">Newsletter mit Angeboten abonnieren</text>
+        <!-- Button -->
+        <rect x="36" y="460" width="288" height="38" rx="6" fill="#1f4e79" stroke="#1f4e79"/>
+        <text x="180" y="484" text-anchor="middle" fill="#fff" font-weight="bold" font-size="13">Kostenpflichtig registrieren</text>
+        <text x="180" y="522" text-anchor="middle" font-size="10.5" fill="#444">Mit der Registrierung erkennen Sie unsere</text>
+        <text x="180" y="536" text-anchor="middle" font-size="10.5" fill="#444">Datenschutzbestimmungen an.</text>
+        <circle cx="180" cy="570" r="8" fill="none" stroke="#222"/>
+      </svg>
+      <figcaption>Anlage 11: Registrierungsbildschirm (Entwurf der Fachabteilung; die Häkchen sind beim Öffnen bereits gesetzt)</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== TEIL C: AUFGABEN ===================== -->
+<section class="teil" id="aufgaben">
+  <h2>C · Aufgaben</h2>
+  <p class="klein">Alle Aufgaben beziehen sich auf die Ausgangssituation in Anlage 1. Antworten bei „erläutern“ und „begründen“ immer mit Bezug zur Situation (PulsarConnect) formulieren. Zeitrichtwert: 1 Punkt ≈ 0,9 Minuten.</p>
+
+  <!-- ===================== SEC-01 ===================== -->
+  <h3 id="a-01">SEC-01 · Verschlüsselungsverfahren</h3>
+
+  <div class="aufgabe" id="SEC-01-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SEC-01.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Für die Kommunikation zwischen Mitglieder-App und API-Server (Anlage 2) diskutiert das Team verschiedene Verschlüsselungsverfahren.</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Kreuzen Sie für jede Aussage an, ob sie auf die symmetrische, die asymmetrische oder die hybride Verschlüsselung zutrifft. Je Aussage ist genau ein Kreuz zu setzen.</div>
+    <table class="ankreuz kompakt">
+      <tr><th>Aussage</th><th>symmetrisch</th><th>asymmetrisch</th><th>hybrid</th></tr>
+      <tr><td>1. Beide Kommunikationspartner verwenden denselben geheimen Schlüssel.</td><td></td><td></td><td></td></tr>
+      <tr><td>2. Der Absender verschlüsselt mit dem öffentlichen Schlüssel des Empfängers.</td><td></td><td></td><td></td></tr>
+      <tr><td>3. Das Verfahren ist schnell und eignet sich zum Verschlüsseln großer Datenmengen, z. B. von Trainingsvideos.</td><td></td><td></td><td></td></tr>
+      <tr><td>4. Ein zufällig erzeugter Sitzungsschlüssel wird asymmetrisch verschlüsselt übertragen, die Nutzdaten werden mit diesem Sitzungsschlüssel verschlüsselt.</td><td></td><td></td><td></td></tr>
+      <tr><td>5. Ein bekanntes Beispiel für dieses Verfahren ist RSA.</td><td></td><td></td><td></td></tr>
+      <tr><td>6. Ein bekanntes Beispiel für dieses Verfahren ist AES.</td><td></td><td></td><td></td></tr>
+      <tr><td>7. Damit 20 Personen paarweise vertraulich kommunizieren können, werden 190 Schlüssel benötigt.</td><td></td><td></td><td></td></tr>
+      <tr><td>8. Wird bei HTTPS eingesetzt, um die Vorteile der beiden anderen Verfahren zu kombinieren.</td><td></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Ein Kollege schlägt vor, einen festen AES-Schlüssel in die Mitglieder-App einzubauen, mit dem alle installierten Apps ihre Daten für den API-Server verschlüsseln. Erläutern Sie das Problem dieses Vorschlags.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 4a (symmetrische Verschlüsselung mit eingebautem Schlüssel)</p>
+  </div>
+
+  <div class="aufgabe" id="SEC-01-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SEC-01.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Bei der Registrierung überträgt die Mitglieder-App unter anderem die IBAN und Angaben zu Vorerkrankungen an den API-Server. Die Verbindung wird per HTTPS (TLS) abgesichert; der API-Server besitzt dafür ein Zertifikat mit seinem öffentlichen Schlüssel.</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Beschreiben Sie in Schritten, wie beim Aufbau der HTTPS-Verbindung zwischen Mitglieder-App und API-Server die hybride Verschlüsselung eingesetzt wird. Geben Sie dabei jeweils genau an, welcher Schlüssel verwendet wird.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Erläutern Sie jeweils einen Vorteil des hybriden Verfahrens gegenüber einer rein symmetrischen und gegenüber einer rein asymmetrischen Verschlüsselung.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 1d (TLS hybrid) und W25 Teil 1, Aufgabe 3a (Vorteil hybride Verschlüsselung)</p>
+  </div>
+
+  <div class="aufgabe" id="SEC-01-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SEC-01.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">18 Punkte</span>
+    </div>
+    <p>Die Funk-Sensoren PS-200 übertragen ihre Messwerte über das Funk-Gateway und den Router an den API-Server (Anlagen 2 und 3). Ihr Kollege Herr Demir schlägt vor, die Messwerte künftig direkt auf jedem Sensor mit RSA (2048 Bit) für den API-Server zu verschlüsseln, „weil asymmetrische Verfahren sicherer sind als symmetrische“.</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Erläutern Sie, was man unter dem RSA-Verfahren versteht.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Begründen Sie mithilfe von Anlage 3, ob die Verschlüsselung der Sensordaten mit RSA sinnvoll ist. Gehen Sie dabei auch auf die Aussage von Herrn Demir ein.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Schlagen Sie ein geeignetes Verfahren zur Verschlüsselung der Sensordaten vor. Beschreiben Sie, wie die benötigten Schlüssel sicher auf Sensor und Server gelangen, und nennen Sie eine Schwachstelle der derzeitigen Schlüsselverwaltung (Anlage 3).</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>d) Im Pilotbetrieb entschlüsselt das Gateway die Sensordaten und sendet sie per TLS weiter (Anlage 3). Erläutern Sie am Beispiel der Strecke Sensor – Gateway – API-Server den Unterschied zwischen Transport- und Ende-zu-Ende-Verschlüsselung und nennen Sie ein Risiko der derzeitigen Lösung.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>e) Der Fachtext in Anlage 9 beschreibt eine Eigenschaft von TLS 1.3, die als <em>forward secrecy</em> bezeichnet wird. Erläutern Sie auf Deutsch, was darunter zu verstehen ist und wodurch TLS 1.3 diese Eigenschaft erreicht.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: S26 Teil 1, Aufgabe 3bc/3bd (RSA erläutern, Eignung im IoT-Projekt) und S23 Teil 1, Aufgabe 4a (Verschlüsselung für Sensoren)</p>
+  </div>
+
+  <!-- ===================== SEC-02 ===================== -->
+  <h3 id="a-02">SEC-02 · Hash, digitale Signatur, Zertifikate/PKI</h3>
+
+  <div class="aufgabe" id="SEC-02-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SEC-02.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Nennen Sie drei Eigenschaften einer kryptografischen Hashfunktion.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Ein Kollege schlägt vor: „Wir speichern die IBAN der Mitglieder nur noch als SHA-256-Hashwert. Dann ist sie sicher verschlüsselt, und für die Lastschrift entschlüsseln wir sie einfach wieder.“ Nehmen Sie Stellung zu diesem Vorschlag und nennen Sie eine geeignete Alternative.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: S26 Teil 1, Aufgabe 3bb (Hashverfahren)</p>
+  </div>
+
+  <div class="aufgabe" id="SEC-02-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SEC-02.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Die Körperanalyse-Waagen laden neue Firmware vom Update-Server (Anlagen 2 und 3). Damit nur Original-Firmware installiert wird, soll jede Firmware-Datei auf dem Build-Server von Seidel &amp; Brandt digital signiert und von der Waage vor der Installation geprüft werden. Das folgende Schema zeigt den Ablauf; einige Felder fehlen.</p>
+    <figure>
+      <svg viewBox="0 0 760 375" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <defs>
+          <marker id="c0202-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#222"/></marker>
+        </defs>
+        <!-- Bahnen -->
+        <rect x="10" y="10" width="245" height="355" fill="none" stroke="#222"/>
+        <rect x="10" y="10" width="245" height="30" fill="#eef3fa" stroke="#222"/>
+        <text x="132" y="30" text-anchor="middle" font-weight="bold">Build-Server (Hersteller)</text>
+        <rect x="415" y="10" width="335" height="355" fill="none" stroke="#222"/>
+        <rect x="415" y="10" width="335" height="30" fill="#eef3fa" stroke="#222"/>
+        <text x="582" y="30" text-anchor="middle" font-weight="bold">Körperanalyse-Waage</text>
+        <!-- links -->
+        <rect x="25" y="55" width="215" height="32" fill="#fff" stroke="#222"/>
+        <text x="132" y="76" text-anchor="middle">Firmware-Datei v2.4</text>
+        <rect x="25" y="105" width="215" height="32" rx="8" fill="#fff" stroke="#222" stroke-dasharray="5,4"/>
+        <text x="33" y="126">(1)</text>
+        <rect x="25" y="155" width="215" height="32" fill="#fff" stroke="#222"/>
+        <text x="132" y="176" text-anchor="middle">Hashwert</text>
+        <rect x="25" y="205" width="215" height="46" rx="8" fill="#fff" stroke="#222"/>
+        <text x="132" y="221" text-anchor="middle">signieren mit</text>
+        <text x="33" y="243">(2)</text>
+        <rect x="58" y="228" width="174" height="18" fill="none" stroke="#222" stroke-dasharray="4,3"/>
+        <rect x="25" y="268" width="215" height="32" fill="#eef3fa" stroke="#222"/>
+        <text x="132" y="289" text-anchor="middle">digitale Signatur</text>
+        <line x1="132" y1="87" x2="132" y2="103" stroke="#222" marker-end="url(#c0202-pfeil)"/>
+        <line x1="132" y1="137" x2="132" y2="153" stroke="#222" marker-end="url(#c0202-pfeil)"/>
+        <line x1="132" y1="187" x2="132" y2="203" stroke="#222" marker-end="url(#c0202-pfeil)"/>
+        <line x1="132" y1="251" x2="132" y2="266" stroke="#222" marker-end="url(#c0202-pfeil)"/>
+        <!-- Update-Server -->
+        <rect x="270" y="55" width="130" height="50" fill="#fff" stroke="#222"/>
+        <text x="335" y="76" text-anchor="middle">Update-</text>
+        <text x="335" y="93" text-anchor="middle">Server</text>
+        <line x1="240" y1="71" x2="268" y2="71" stroke="#222" marker-end="url(#c0202-pfeil)"/>
+        <path d="M240,284 H258 V96 H268" fill="none" stroke="#222" marker-end="url(#c0202-pfeil)"/>
+        <line x1="400" y1="80" x2="423" y2="80" stroke="#222" marker-end="url(#c0202-pfeil)"/>
+        <path d="M400,63 H408 V47 H665 V53" fill="none" stroke="#222" marker-end="url(#c0202-pfeil)"/>
+        <!-- rechts, Spalte Firmware -->
+        <rect x="425" y="55" width="155" height="32" fill="#fff" stroke="#222"/>
+        <text x="502" y="76" text-anchor="middle">empfangene Firmware</text>
+        <rect x="425" y="105" width="155" height="32" rx="8" fill="#fff" stroke="#222"/>
+        <text x="502" y="126" text-anchor="middle">Hashfunktion</text>
+        <rect x="425" y="168" width="155" height="32" fill="#fff" stroke="#222"/>
+        <text x="502" y="189" text-anchor="middle">Hashwert H1</text>
+        <line x1="502" y1="87" x2="502" y2="103" stroke="#222" marker-end="url(#c0202-pfeil)"/>
+        <line x1="502" y1="137" x2="502" y2="166" stroke="#222" marker-end="url(#c0202-pfeil)"/>
+        <!-- rechts, Spalte Signatur -->
+        <rect x="590" y="55" width="150" height="32" fill="#eef3fa" stroke="#222"/>
+        <text x="665" y="76" text-anchor="middle">empfangene Signatur</text>
+        <rect x="590" y="105" width="150" height="46" rx="8" fill="#fff" stroke="#222"/>
+        <text x="665" y="121" text-anchor="middle">prüfen mit</text>
+        <text x="596" y="143">(3)</text>
+        <rect x="620" y="128" width="114" height="18" fill="none" stroke="#222" stroke-dasharray="4,3"/>
+        <rect x="590" y="168" width="150" height="32" fill="#fff" stroke="#222" stroke-dasharray="5,4"/>
+        <text x="597" y="189">(4)</text>
+        <line x1="665" y1="87" x2="665" y2="103" stroke="#222" marker-end="url(#c0202-pfeil)"/>
+        <line x1="665" y1="151" x2="665" y2="166" stroke="#222" marker-end="url(#c0202-pfeil)"/>
+        <!-- Vergleich -->
+        <rect x="455" y="232" width="255" height="34" rx="8" fill="#fff" stroke="#222" stroke-dasharray="5,4"/>
+        <text x="463" y="254">(5)</text>
+        <line x1="502" y1="200" x2="502" y2="230" stroke="#222" marker-end="url(#c0202-pfeil)"/>
+        <line x1="665" y1="200" x2="665" y2="230" stroke="#222" marker-end="url(#c0202-pfeil)"/>
+        <!-- Ergebnis -->
+        <rect x="425" y="300" width="175" height="52" fill="#fff" stroke="#222" stroke-dasharray="5,4"/>
+        <text x="432" y="318">(6)</text>
+        <rect x="615" y="300" width="125" height="52" fill="#fff" stroke="#222"/>
+        <text x="677" y="322" text-anchor="middle">Update verwerfen,</text>
+        <text x="677" y="339" text-anchor="middle">Fehler melden</text>
+        <line x1="530" y1="266" x2="530" y2="298" stroke="#222" marker-end="url(#c0202-pfeil)"/>
+        <text x="537" y="287" font-size="12">gleich</text>
+        <line x1="677" y1="266" x2="677" y2="298" stroke="#222" marker-end="url(#c0202-pfeil)"/>
+        <text x="684" y="287" font-size="12">ungleich</text>
+      </svg>
+      <figcaption>Abb. zu SEC-02.2: Signieren und Prüfen der Firmware (Felder (1)–(6) fehlen)</figcaption>
+    </figure>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Ergänzen Sie die Felder (1) bis (6).</div>
+    <table class="leer eng kompakt">
+      <tr><th style="width:10%">Feld</th><th>Inhalt</th></tr>
+      <tr><td>(1)</td><td></td></tr>
+      <tr><td>(2)</td><td></td></tr>
+      <tr><td>(3)</td><td></td></tr>
+      <tr><td>(4)</td><td></td></tr>
+      <tr><td>(5)</td><td></td></tr>
+      <tr><td>(6)</td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Frau Petersen fragt, ob es genügt, die Firmware zu signieren, oder ob sie zusätzlich verschlüsselt werden muss. Erläutern Sie, welche Schutzziele durch die Signatur sichergestellt werden und welches nicht, und begründen Sie, ob die Signatur für die Firmware-Updates ausreicht.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: S23 Teil 1, Aufgabe 4b (Signieren statt Verschlüsseln)</p>
+  </div>
+
+  <div class="aufgabe" id="SEC-02-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SEC-02.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">18 Punkte</span>
+    </div>
+    <p>Vor dem Start von PulsarConnect sind noch mehrere Sicherheitsfragen offen.</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Beim ersten Start von PulsarDesk auf einem Empfangs-PC zeigt Windows die Meldung „Der Computer wurde durch Windows geschützt“ mit dem Hinweis „Herausgeber: Unbekannter Herausgeber“. Erläutern Sie, warum diese Meldung erscheint, und beschreiben Sie, wie Seidel &amp; Brandt sie durch Code-Signing vermeiden kann.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>b) Das Web-Portal erhält ein TLS-Zertifikat für <code>portal.pulsar-fitness.example</code>, ausgestellt von einer Zwischen-CA, die ihrerseits von einer Root-CA zertifiziert ist. Beschreiben Sie, wie der Browser eines Mitglieds prüft, ob er tatsächlich mit dem echten Web-Portal verbunden ist.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Die Waagen sollen ihre Messwerte künftig verschlüsselt übertragen (Anlage 3). Ein Kollege meint: „Wenn wir die Messwerte mit AES verschlüsseln, kann sie unterwegs auch niemand mehr verändern.“ Beurteilen Sie diese Aussage.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>d) Die Funk-Sensoren können wegen ihrer geringen Rechenleistung keine digitale Signatur erzeugen (Anlage 3). Erläutern Sie ein Verfahren, mit dem der API-Server trotzdem erkennen kann, ob Messwerte der Sensoren auf dem Übertragungsweg manipuliert wurden.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>e) Begründen Sie, warum das Verfahren aus d) – anders als eine digitale Signatur – keine Verbindlichkeit (Nichtabstreitbarkeit) bietet.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 4b (Code-Signatur), W22 Teil 1, Aufgabe 1e (Echtheit über PKI), S26 Teil 1, Aufgabe 3bb (Schutz vor Manipulation)</p>
+  </div>
+
+  <!-- ===================== SEC-03 ===================== -->
+  <h3 id="a-03">SEC-03 · Schutzziele &amp; Schutzbedarf</h3>
+
+  <div class="aufgabe" id="SEC-03-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SEC-03.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Ordnen Sie den folgenden Vorfällen aus Anlage 4 jeweils das hauptsächlich verletzte Schutzziel zu (Vertraulichkeit, Integrität, Verfügbarkeit, Authentizität oder Verbindlichkeit) und begründen Sie Ihre Zuordnung in Stichworten.</p>
+    <table class="leer hoch kompakt">
+      <tr><th style="width:10%">Vorfall</th><th style="width:25%">Schutzziel</th><th>Begründung (Stichworte)</th></tr>
+      <tr><td>V1</td><td></td><td></td></tr>
+      <tr><td>V2</td><td></td><td></td></tr>
+      <tr><td>V4</td><td></td><td></td></tr>
+      <tr><td>V7</td><td></td><td></td></tr>
+      <tr><td>V9</td><td></td><td></td></tr>
+      <tr><td>V12</td><td></td><td></td></tr>
+    </table>
+    <p class="quelle">Angelehnt an: S26 Teil 1, Aufgabe 3ba und S22 Teil 1, Aufgabe 4c (Schutzziele zuordnen)</p>
+  </div>
+
+  <div class="aufgabe" id="SEC-03-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SEC-03.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Leiten Sie aus den Aussagen A1 bis A3 in Anlage 5 jeweils eine konkrete, überprüfbare sicherheitstechnische Anforderung an PulsarConnect ab und nennen Sie das betroffene Schutzziel.</div>
+    <table class="leer hoch kompakt">
+      <tr><th style="width:10%">Aussage</th><th style="width:22%">Schutzziel</th><th>Sicherheitstechnische Anforderung</th></tr>
+      <tr><td>A1</td><td></td><td></td></tr>
+      <tr><td>A2</td><td></td><td></td></tr>
+      <tr><td>A3</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Auf den Empfangs-PCs der Studios läuft noch Windows 8.1, für das seit Januar 2023 keine Sicherheitsupdates mehr erscheinen. Die Studioleitungen wollen die PCs „noch ein paar Jahre“ weiter nutzen. Erläutern Sie zwei Risiken dieser Situation für die Schutzziele.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: S24 Teil 1, Aufgabe 1c (sicherheitstechnische Anforderungen) und W22 Teil 1, Aufgabe 1a (veraltete IT-Infrastruktur)</p>
+  </div>
+
+  <div class="aufgabe" id="SEC-03-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SEC-03.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">16 Punkte</span>
+    </div>
+    <p>Für PulsarConnect soll ein Sicherheitskonzept nach BSI IT-Grundschutz erstellt werden. Sie bereiten die Schutzbedarfsfeststellung vor.</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Beschreiben Sie die drei Schutzbedarfskategorien des BSI.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">8 P</span>b) Bestimmen Sie für die Objekte D1, D2, D3 und D5 aus Anlage 6 den Schutzbedarf (normal, hoch, sehr hoch) hinsichtlich Vertraulichkeit (V), Integrität (I) und Verfügbarkeit (A). Begründen Sie jeweils die höchste Einstufung des Objekts.</div>
+    <table class="leer hoch kompakt">
+      <tr><th style="width:18%">Objekt</th><th style="width:11%">V</th><th style="width:11%">I</th><th style="width:11%">A</th><th>Begründung der höchsten Einstufung</th></tr>
+      <tr><td>D1 Kursplan</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>D2 Mitglieder&shy;stammdaten</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>D3 Gesundheits- und Körperdaten</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>D5 Zutritts&shy;system</td><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Bestimmen Sie den Schutzbedarf des Datenbank-Servers hinsichtlich der Vertraulichkeit und nennen Sie das Prinzip, nach dem Sie dabei vorgehen.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>d) Nehmen Sie Stellung zur Aussage A4 von Herrn Brandl (Anlage 5).</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: S26 Teil 1, Aufgabe 3b (Schutzziel aus Kundensicht), erweitert um die Schutzbedarfsfeststellung nach BSI-Standard 200-2</p>
+  </div>
+
+  <!-- ===================== SEC-04 ===================== -->
+  <h3 id="a-04">SEC-04 · Authentifizierung</h3>
+
+  <div class="aufgabe" id="SEC-04-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SEC-04.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Erläutern Sie den Unterschied zwischen Authentifizierung und Autorisierung am Beispiel einer Trainerin, die sich am Web-Portal anmeldet und dort die Körperdaten ihrer Mitglieder einsehen will.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Für die Anmeldung der Trainerinnen und Trainer am Web-Portal soll eine Zwei-Faktor-Authentifizierung eingeführt werden. Nennen Sie die drei Kategorien von Authentifizierungsfaktoren mit je einem Beispiel, das für PulsarConnect geeignet ist.</div>
+    <table class="leer kompakt">
+      <tr><th style="width:35%">Kategorie</th><th>Beispiel für PulsarConnect</th></tr>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">1 P</span>c) Begründen Sie, warum die Kombination aus Passwort und Sicherheitsfrage keine Zwei-Faktor-Authentifizierung ist.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S24 Teil 2, Aufgabe 1c (zweiter Faktor) und W22 Teil 1, Aufgabe 1f</p>
+  </div>
+
+  <div class="aufgabe" id="SEC-04-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SEC-04.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">12 Punkte</span>
+    </div>
+    <p>Bei der Übernahme der Mitgliederkonten aus dem Altsystem untersuchen Sie die Tabelle <code>mitglied</code> und die Methode <code>md5</code> in Anlage 8.</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Erläutern Sie zwei Schwachstellen der Passwortspeicherung im Altsystem, die Sie am Tabellenauszug erkennen können.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Beschreiben Sie auf Deutsch anhand des Fachtextes in Anlage 10, wie die Passwörter in PulsarConnect gespeichert werden sollen. Gehen Sie dabei auf Salt, Pepper und die Wahl der Hashfunktion ein.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) In PulsarConnect wird bei der Registrierung zuerst <code>h := sha256(PEPPER + salt + passwort)</code> berechnet. Danach wird <code>h</code> noch 9 999-mal mit <code>h := sha256(h + salt)</code> erneut gehasht (insgesamt 10 000 Durchläufe). Gespeichert werden <code>salt</code> und das Endergebnis <code>h</code>. Zur Verfügung stehen die Funktion <code>sha256(text : string) : string</code> (liefert den Hashwert als Hex-String) und die Konstante <code>PEPPER : string</code>; <code>+</code> verkettet Zeichenketten.<br>
+    Entwickeln Sie in Pseudocode die Funktion <code>pruefePasswort(eingabe : string, salt : string, gespeicherterHash : string) : boolean</code>, die <code>true</code> zurückgibt, wenn die Eingabe zum gespeicherten Hash passt, und sonst <code>false</code>.</div>
+    <div class="antwort z12"></div>
+    <p class="quelle">Angelehnt an: S24 Teil 2, Aufgabe 1c (Passwortsicherheit); Fachtext-Aufgabe wie S26 Teil 1, Aufgabe 3a und W25 Teil 1, Aufgabe 3; Pseudocode-Stil wie im Belegsatz S24</p>
+  </div>
+
+  <div class="aufgabe" id="SEC-04-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SEC-04.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">18 Punkte</span>
+    </div>
+    <p>Die Bonus-App der VitaKasse soll – mit Zustimmung des Mitglieds – die Anzahl seiner Studiobesuche abrufen dürfen (Objekt D4 in Anlage 6). Pulsar setzt dafür OAuth2 ein; den Ablauf zeigt Anlage 7.</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Ergänzen Sie die Rollen (R1) bis (R4) und die Inhalte (A) bis (D) aus Anlage 7. Verwenden Sie dafür die folgenden Begriffe; ein Begriff wird mehrfach benötigt: <em>Resource Owner, Client, Authorization Server, Resource Server, Authorization Code, Access Token, Protected Resource</em>.</div>
+    <div class="zweispaltig">
+      <table class="leer kompakt">
+        <tr><th style="width:18%">Rolle</th><th>Begriff</th></tr>
+        <tr><td>(R1)</td><td></td></tr>
+        <tr><td>(R2)</td><td></td></tr>
+        <tr><td>(R3)</td><td></td></tr>
+        <tr><td>(R4)</td><td></td></tr>
+      </table>
+      <table class="leer kompakt">
+        <tr><th style="width:18%">Inhalt</th><th>Begriff</th></tr>
+        <tr><td>(A)</td><td></td></tr>
+        <tr><td>(B)</td><td></td></tr>
+        <tr><td>(C)</td><td></td></tr>
+        <tr><td>(D)</td><td></td></tr>
+      </table>
+    </div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Die VitaKasse schlägt stattdessen vor, dass die Mitglieder einfach ihre Pulsar-Zugangsdaten (E-Mail und Passwort) in der Bonus-App hinterlegen. Erläutern Sie zwei Vorteile des OAuth2-Verfahrens gegenüber diesem Vorschlag.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Für die Mitarbeitenden von Pulsar (Empfang, Trainer, Verwaltung) soll ein Single Sign-On für PulsarDesk, das Web-Portal und das E-Mail-System eingeführt werden. Erläutern Sie je einen Vorteil und einen Nachteil von Single Sign-On für Pulsar.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>d) Hat ein Mitglied sein Passwort vergessen, schickt das Web-Portal bisher einen Link per E-Mail, über den sofort ein neues Passwort gesetzt werden kann. Erläutern Sie eine Schwachstelle dieses Verfahrens und beschreiben Sie ein sichereres Vorgehen.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: S22 Teil 1, Aufgabe 4b (OAuth2-Grafik), W22 Teil 1, Aufgabe 1f (SSO/OAuth2) und S24 Teil 2, Aufgabe 1c (Passwort-Reset)</p>
+  </div>
+
+  <!-- ===================== SEC-05 ===================== -->
+  <h3 id="a-05">SEC-05 · Datenschutz / DSGVO</h3>
+
+  <div class="aufgabe" id="SEC-05-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SEC-05.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">5 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Erläutern Sie den Unterschied zwischen Datenschutz und Datensicherheit.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Kreuzen Sie an, ob es sich jeweils um personenbezogene Daten im Sinne der DSGVO handelt.</div>
+    <table class="ankreuz kompakt">
+      <tr><th>Daten</th><th>ja</th><th>nein</th></tr>
+      <tr><td>1. die Mitgliedsnummer 10231 eines Mitglieds</td><td></td><td></td></tr>
+      <tr><td>2. „Im Studio Celle trainierten im August durchschnittlich 412 Mitglieder pro Tag.“</td><td></td><td></td></tr>
+      <tr><td>3. die IP-Adresse, mit der ein Mitglied die App nutzt</td><td></td><td></td></tr>
+      <tr><td>4. der CO₂-Wert in Kursraum 2 (Objekt D6)</td><td></td><td></td></tr>
+      <tr><td>5. das Foto einer Trainerin auf der Website</td><td></td><td></td></tr>
+      <tr><td>6. ein Körperfettanteil von 24 %, gespeichert zusammen mit einer Mitgliedsnummer</td><td></td><td></td></tr>
+    </table>
+    <p class="quelle">Grundlagenaufgabe zu W24 Teil 1, Aufgabe 1d und W25 Teil 1, Aufgabe 3bb</p>
+  </div>
+
+  <div class="aufgabe" id="SEC-05-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SEC-05.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Die Fachabteilung hat den Registrierungsbildschirm der Mitglieder-App entworfen (Anlage 11). Sie sollen den Entwurf vor der Umsetzung auf Datenschutz prüfen.</p>
+    <div class="teilaufgabe"><span class="tp">8 P</span>a) Nennen Sie vier datenschutzrechtliche Mängel des Entwurfs und beschreiben Sie jeweils eine Verbesserung.</div>
+    <table class="leer hoch kompakt">
+      <tr><th style="width:5%">Nr.</th><th style="width:45%">Mangel</th><th>Verbesserung</th></tr>
+      <tr><td>1</td><td></td><td></td></tr>
+      <tr><td>2</td><td></td><td></td></tr>
+      <tr><td>3</td><td></td><td></td></tr>
+      <tr><td>4</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Nennen Sie zwei Inhalte, die die Datenschutzerklärung der Mitglieder-App enthalten muss.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W24 Teil 1, Aufgabe 1d (Datenschutzerklärung und Einwilligung in einer App)</p>
+  </div>
+
+  <div class="aufgabe" id="SEC-05-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SEC-05.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">15 Punkte</span>
+    </div>
+    <p>PulsarConnect verarbeitet zahlreiche personenbezogene Daten (Anlage 6).</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Künftig sollen auch die Herzfrequenzverläufe aus den Brustgurten der Mitglieder gespeichert werden (D3). Erläutern Sie, warum für diese Daten besondere Anforderungen gelten, und nennen Sie die Rechtsgrundlage, auf die Pulsar die Verarbeitung stützen kann.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Ein ehemaliges Mitglied schreibt: „Teilen Sie mir mit, welche Daten Sie über mich gespeichert haben, und löschen Sie danach sofort alles.“ Beschreiben Sie die beiden angesprochenen Betroffenenrechte und erläutern Sie, warum Pulsar die Rechnungsdaten trotzdem noch nicht löschen darf.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) PulsarConnect wird im Rechenzentrum eines Cloud-Anbieters betrieben (Anlage 2). Erläutern Sie, was Pulsar dabei datenschutzrechtlich beachten muss.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>d) Ein Entwickler möchte für einen Test der neuen Lastschrift-Funktion einen Export mit den echten Namen und IBANs aller Mitglieder in ein kostenloses Online-Tool zur IBAN-Prüfung hochladen. Beurteilen Sie dieses Vorhaben und schlagen Sie eine Alternative vor.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>e) Erläutern Sie den Grundsatz „Privacy by Default“ an einem Beispiel aus der Mitglieder-App.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W25 Teil 1, Aufgabe 3bb (keine echten Daten auf eine Online-Prüfseite) und W24 Teil 1, Aufgabe 1d</p>
+  </div>
+
+  <!-- ===================== SEC-06 ===================== -->
+  <h3 id="a-06">SEC-06 · Angriffe &amp; Gegenmaßnahmen</h3>
+
+  <div class="aufgabe" id="SEC-06-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SEC-06.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Betrachten Sie Vorfall V3 in Anlage 4.</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Erläutern Sie das Risiko, das beim Öffnen des Anhangs und Klicken auf „Inhalt aktivieren“ besteht.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Nennen Sie zwei Maßnahmen, mit denen Pulsar solche Angriffe auf die Empfangs-PCs verhindern oder erschweren kann.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Pulsar verschickt seine Monatsrechnungen bisher selbst als Word-Dokument mit Makro (für ein Rückfrageformular) per E-Mail an die Mitglieder. Beschreiben Sie eine sicherere Alternative und begründen Sie sie.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S24 Teil 2, Aufgabe 1b (Word-Anhang mit Makros, sicherere Alternative)</p>
+  </div>
+
+  <div class="aufgabe" id="SEC-06-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SEC-06.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">12 Punkte</span>
+    </div>
+    <p>Benennen Sie für die folgenden Vorfälle aus Anlage 4 jeweils die Angriffsart und beschreiben Sie eine geeignete Gegenmaßnahme.</p>
+    <table class="leer hoch kompakt">
+      <tr><th style="width:9%">Vorfall</th><th style="width:28%">Angriffsart</th><th>Gegenmaßnahme</th></tr>
+      <tr><td>V5</td><td></td><td></td></tr>
+      <tr><td>V6</td><td></td><td></td></tr>
+      <tr><td>V8</td><td></td><td></td></tr>
+      <tr><td>V10</td><td></td><td></td></tr>
+      <tr><td>V11</td><td></td><td></td></tr>
+      <tr><td>V13</td><td></td><td></td></tr>
+    </table>
+    <p class="quelle">Eigene Aufgabe zur Wissensbreite (Angriffe kamen bisher nur in S24 Teil 2, Aufgabe 1b vor)</p>
+  </div>
+
+  <div class="aufgabe" id="SEC-06-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe SEC-06.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">18 Punkte</span>
+    </div>
+    <p>Bei der Prüfung des Altsystems untersuchen Sie die Klasse <code>MitgliederDAO</code> (Anlage 8). Die Datenbank des Altsystems ist eine MySQL-Datenbank. Die Methode <code>login</code> wird vom Anmeldeformular des Web-Portals mit den Eingaben aus den Feldern „E-Mail“ und „Passwort“ aufgerufen.</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Erläutern Sie die Sicherheitslücke in der Methode <code>login</code> (Zeilen 11–18).</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Das neue Mitglied mit der gültigen E-Mail-Adresse <code>o'neil@mail.example</code> kann sich über die Methode <code>login</code> nicht anmelden; stattdessen tritt ein Datenbankfehler auf. Geben Sie die SQL-Anweisung an, die in Zeile 13/14 entsteht (Passwort <code>Lauf2026</code>, MD5-Wert <code>ac03ebddb7750a7c60020f0281650bd5</code>), erläutern Sie die Ursache des Fehlers und leiten Sie daraus ab, welche Gefahr für das Web-Portal besteht.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>c) Überarbeiten Sie die Methode <code>login</code> in Java so, dass SQL-Injection nicht mehr möglich ist. Die übrigen Schwächen der Methode müssen Sie hier nicht beheben.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>d) Nennen Sie zwei weitere Sicherheitsmängel im Code-Ausschnitt – außer der Lücke aus a) und der Verwendung von MD5 – und beschreiben Sie jeweils eine Abhilfe.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>e) Ein Kollege schlägt vor, stattdessen einfach in der Mitglieder-App und im Browser per JavaScript zu prüfen, dass die Eingaben keine Hochkommas enthalten. Begründen Sie, warum das nicht ausreicht.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Eigene Aufgabe auf Prüfungsniveau (Code analysieren wie in W25 Teil 2, Aufgabe 3; Sicherheitsthema wie S24 Teil 2, Aufgabe 1)</p>
+  </div>
+
+  <!-- ===================== ORIGINALAUFGABEN ===================== -->
+  <h3 id="originale">Originalaufgaben zum Üben</h3>
+  <p>Diese echten Prüfungsaufgaben passen zu diesem Block (Dateien im Ordner <code>Prüfungsvorbereitung</code>). Lösungen gibt es nur für 2023 Sommer, 2023 Winter, 2024 Sommer und 2025 Winter (dort vom u-form-Verlag). W23 enthielt keine Sicherheitsaufgabe.</p>
+  <table class="kompakt" style="break-inside:auto">
+    <tr><th>Prüfung</th><th>Aufgabe</th><th>Thema</th><th>Datei · Lösung</th></tr>
+    <tr><td>Winter 2021</td><td>T1 A4a (8 P)</td><td>symmetrische Verschlüsselung mit Lizenzschlüssel; asymmetrische bzw. hybride Alternative mit Vor- und Nachteil</td><td><code>2021/winter/AE 2021 Winter Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Winter 2021</td><td>T1 A4b (4 P)</td><td>Warnung „nicht vertrauenswürdige Quelle“, Signieren mit Zertifikat (Code-Signing)</td><td>wie oben · keine Lösung</td></tr>
+    <tr><td>Sommer 2022</td><td>T1 A4b (4 P)</td><td>OAuth2-Ablauf: Access Token, Protected Resource, Auth. Code zuordnen</td><td><code>2022/sommer/AE 2022 Sommer Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Sommer 2022</td><td>T1 A4c (9 P)</td><td>drei Sicherheitsmechanismen eines SSL-Zertifikats (Vertraulichkeit, Integrität, Authentizität)</td><td>wie oben · keine Lösung</td></tr>
+    <tr><td>Winter 2022</td><td>T1 A1a (4 P)</td><td>Schwachstellen veralteter IT-Infrastruktur (Verfügbarkeit)</td><td><code>2022/winter/AE 2022 Winter Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Winter 2022</td><td>T1 A1d–f (14 P)</td><td>TLS und hybride Verschlüsselung; Echtheit über Zertifikate/PKI; SSO/OAuth2 Vor- und Nachteile</td><td>wie oben · keine Lösung</td></tr>
+    <tr><td>Sommer 2023</td><td>T1 A4a, A4b (8 P)</td><td>Verschlüsselung für IoT-Sensoren; Signieren statt Verschlüsseln</td><td><code>2023/sommer/AE Sommer 2023 Teil 1.pdf</code> · Lösung: <code>AE Sommer 2023 Teil 1+2 Lösungen.pdf</code></td></tr>
+    <tr><td>Sommer 2024</td><td>T1 A1c (4 P)</td><td>sicherheitstechnische Anforderungen an eine Plattform</td><td><code>2024/sommer/AE Sommer 2024 Teil 1+2+3.pdf</code> · Lösung: <code>AE Sommer 2024 Teil 1 Lösungen.pdf</code></td></tr>
+    <tr><td>Sommer 2024</td><td>T2 A1b, A1c (11 P)</td><td>Risiko Word-Anhang mit Makros, sicherere Alternative; Schwachstelle Passwort-Reset per Mail, sichereres Verfahren</td><td>wie oben · Lösung: <code>AE Sommer 2024 Teil 2 Lösungen.pdf</code></td></tr>
+    <tr><td>Winter 2024</td><td>T1 A1d (4 P)</td><td>Datenschutzerklärung und Einwilligung in einer App</td><td><code>2024/winter/AE Winter 2024 Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Winter 2025</td><td>T1 A3a (4 P)</td><td>Transportverschlüsselung, Vorteil der hybriden Verschlüsselung</td><td><code>2025/winter/AE Winter 2025 Teil 1.pdf</code> · Lösung: <code>AE Winter 2025 Lösungserleuterungen.pdf</code> (u-form)</td></tr>
+    <tr><td>Winter 2025</td><td>T1 A3bb (6 P)</td><td>echte Rechnungen auf einer Online-Prüfseite: Datenschutz und Schutzziele</td><td>wie oben</td></tr>
+    <tr><td>Sommer 2026</td><td>T1 A3b (13 P)</td><td>BSI-Schutzziel Integrität; Verfahren gegen Manipulation (Hash/MAC/Signatur); RSA erläutern und Eignung im IoT-Projekt begründen</td><td><code>2026/sommer/AE Sommer 2026 Teil 1.pdf</code> · keine Lösung</td></tr>
+  </table>
+</section>
+
+</body>
+</html>

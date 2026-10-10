@@ -1,0 +1,2172 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>01 Datenbanken – Übungen</title>
+<link rel="stylesheet" href="style.css">
+<script src="uebungen.js"></script>
+<style>
+  nav.toc ol ol { columns: 2; column-gap: 24px; font-size: 13px; }
+  table.ergebnis { width: auto; min-width: 40%; }
+  table.kompakt { width: auto; }
+  table.ausfuellen td { height: 2.6em; }
+  .nebeneinander { display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-start; }
+  .nebeneinander > div { flex: 1 1 210px; min-width: 0; }
+  .formular { border: 2px solid #333; padding: 12px 16px; margin: 10px 0; font-size: 14px; break-inside: avoid; }
+  .formular table { font-size: 13px; }
+  td.re, th.re { text-align: right; }
+  .englisch { font-family: Georgia, "Times New Roman", serif; font-size: 14.5px; }
+  .englisch p { margin: 6px 0; }
+  .rm { font-family: Consolas, "Courier New", monospace; font-size: 14px; margin: 3px 0; }
+  .rm u { text-decoration-thickness: 1px; }
+  h4.tabtitel { margin: 14px 0 2px; font-size: 14px; }
+  @media print { .teilaufgabe, h4.tabtitel, .aufgabe .kopf { break-after: avoid; } }
+  table.syntax { break-inside: auto; }
+  table.syntax tr { break-inside: avoid; }
+  table.syntax td:first-child { font-family: Consolas, "Courier New", monospace; font-size: 12.5px; white-space: pre-wrap; }
+  table.syntax tr.gruppe td { background: #e8ecf1; font-weight: 700; font-style: italic; font-family: inherit; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<header class="blockkopf">
+  <h1>Block 01 · Datenbanken</h1>
+  <div class="unter">
+    <span class="badge k-immer">Immer</span> 9/9 Prüfungen · Ø 54 von 200 Punkten · Teil 1 + Teil 2
+    · Kürzel <strong>DB</strong> · 12 Unterthemen · 36 Aufgaben · 345 Punkte
+    · Lösungen: <a href="01_Datenbanken_Loesungen.html">01_Datenbanken_Loesungen.html</a>
+  </div>
+</header>
+
+<nav class="toc">
+  <strong>Inhalt</strong>
+  <ol>
+    <li><a href="#erklaerung">Erklärungssatz</a>
+      <ol>
+        <li><a href="#e-01">DB-01 ER-/Relationenmodell</a></li>
+        <li><a href="#e-02">DB-02 Normalisierung</a></li>
+        <li><a href="#e-03">DB-03 SELECT mit JOIN</a></li>
+        <li><a href="#e-04">DB-04 Aggregate, GROUP BY, HAVING</a></li>
+        <li><a href="#e-05">DB-05 INSERT, UPDATE, DELETE</a></li>
+        <li><a href="#e-06">DB-06 DB-Theorie</a></li>
+        <li><a href="#e-07">DB-07 Unterabfragen</a></li>
+        <li><a href="#e-08">DB-08 DDL</a></li>
+        <li><a href="#e-09">DB-09 UNION</a></li>
+        <li><a href="#e-10">DB-10 GRANT, REVOKE</a></li>
+        <li><a href="#e-11">DB-11 Trigger, Procedure, View</a></li>
+        <li><a href="#e-12">DB-12 Datenqualität</a></li>
+      </ol>
+    </li>
+    <li><a href="#belegsatz">Belegsatz</a> (<a href="#notation">Notationshilfen ER-Modell, SQL-Syntax</a>, <a href="#anlage-1">Anlagen 1–8</a>)</li>
+    <li><a href="#aufgaben">Aufgaben</a>
+      <ol>
+        <li><a href="#a-01">DB-01 (3 Aufgaben)</a></li>
+        <li><a href="#a-02">DB-02 (3 Aufgaben)</a></li>
+        <li><a href="#a-03">DB-03 (3 Aufgaben)</a></li>
+        <li><a href="#a-04">DB-04 (3 Aufgaben)</a></li>
+        <li><a href="#a-05">DB-05 (3 Aufgaben)</a></li>
+        <li><a href="#a-06">DB-06 (3 Aufgaben)</a></li>
+        <li><a href="#a-07">DB-07 (3 Aufgaben)</a></li>
+        <li><a href="#a-08">DB-08 (3 Aufgaben)</a></li>
+        <li><a href="#a-09">DB-09 (3 Aufgaben)</a></li>
+        <li><a href="#a-10">DB-10 (3 Aufgaben)</a></li>
+        <li><a href="#a-11">DB-11 (3 Aufgaben)</a></li>
+        <li><a href="#a-12">DB-12 (3 Aufgaben)</a></li>
+        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+
+<div class="info no-print">
+  <span class="kastentitel">So arbeitest du mit diesem Block</span>
+  Erst den Erklärungssatz lesen, dann die Aufgaben mit dem Belegsatz daneben lösen (Belegsatz am besten separat ausdrucken).
+  Zeitrichtwert: 1 Punkt ≈ 0,9 Minuten. Lösungen erst danach in der separaten Lösungsdatei nachsehen.
+  Alle SQL-Aufgaben laufen auf der Datenbank in Anlage 2/3; die Daten gibt es zum Ausprobieren als Skript <code>sql/01_Datenbanken.sql</code> (MySQL/SQLite).
+</div>
+
+<!-- ===================== TEIL A: ERKLÄRUNGSSATZ ===================== -->
+<section class="teil" id="erklaerung">
+  <h2>A · Erklärungssatz</h2>
+  <p>Die Beispiele in diesem Teil verwenden bewusst <strong>andere Szenarien</strong> (Musikschule, Fitnessstudio) als die Aufgaben in Teil C (Fahrradverleih VeloPunkt). So lernst du die Methode, ohne die Lösung schon zu kennen.</p>
+
+  <!-- ======================= DB-01 ======================= -->
+  <h3 id="e-01">DB-01 · ER-/Relationenmodell <span class="badge k-immer">Immer</span></h3>
+  <p class="klein">Vorkommen: 9/9 · Prüfungen: alle (W21–S26) · meist Teil 2, Aufgabe 3 (16–25 P), zusätzlich in Teil 1 (W21, S23, W23, S24, W25)</p>
+
+  <h4>Worum geht es?</h4>
+  <p>Eine Datenbank wird in zwei Stufen entworfen:</p>
+  <ol>
+    <li><strong>Konzeptionell – ER-Modell</strong> (Entity-Relationship-Modell): beschreibt den Ausschnitt der Realität mit Entitäten, Beziehungen und Attributen – unabhängig davon, welches Datenbanksystem später verwendet wird.</li>
+    <li><strong>Logisch – Relationenmodell</strong> (relationales Datenmodell): Tabellen mit Spalten, Primärschlüsseln (PK) und Fremdschlüsseln (FK). Es lässt sich direkt in <code>CREATE TABLE</code>-Befehle umsetzen.</li>
+  </ol>
+  <p>In der Prüfung wird meist das <strong>Relationenmodell in 3. Normalform</strong> verlangt („Erstellen Sie ein relationales Datenmodell in 3NF …“), seltener ein ER-Modell (W21 T1, W23 T1, S24 T1).</p>
+
+  <h4>Begriffe</h4>
+  <table>
+    <tr><th>Begriff</th><th>Bedeutung</th><th>Beispiel (Musikschule)</th></tr>
+    <tr><td>Entität</td><td>einzelnes, eindeutig unterscheidbares Objekt</td><td>die Schülerin Mia Kramer</td></tr>
+    <tr><td>Entitätstyp</td><td>Zusammenfassung gleichartiger Entitäten → wird zur <strong>Tabelle</strong></td><td>Schüler</td></tr>
+    <tr><td>Attribut</td><td>Eigenschaft eines Entitätstyps → wird zur <strong>Spalte</strong></td><td>Geburtsdatum</td></tr>
+    <tr><td>Schlüsselattribut</td><td>identifiziert jede Entität eindeutig (im ERM unterstrichen) → wird zum <strong>Primärschlüssel</strong></td><td>SchülerNr</td></tr>
+    <tr><td>Beziehung(styp)</td><td>Zusammenhang zwischen Entitätstypen, mit einem Verb benannt</td><td>Schüler <em>belegt</em> Kurs</td></tr>
+    <tr><td>Kardinalität</td><td>wie viele Entitäten der einen Seite mit einer Entität der anderen Seite in Beziehung stehen können</td><td>1:1, 1:n, m:n</td></tr>
+    <tr><td>Beziehungsattribut</td><td>Eigenschaft, die erst durch die Beziehung entsteht und zu keiner Entität allein gehört</td><td>Anmeldedatum (eines Schülers <em>zu einem</em> Kurs)</td></tr>
+  </table>
+
+  <h4>Notation (Chen-Notation wie im IHK-Belegsatz)</h4>
+  <p>Der Belegsatz zeigt nur die drei Symbole: <strong>Rechteck = Entität, Raute = Beziehung, Ellipse = Attribut</strong>. Die <strong>Kardinalitäten stehen nicht im Belegsatz</strong> – die musst du kennen. Man schreibt sie als <code>1</code>, <code>n</code> oder <code>m</code> an die Verbindungslinien.</p>
+  <figure>
+<svg viewBox="0 0 680 196" width="680" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+<rect x="20" y="14" width="150" height="36" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="95.0" y="37.0" text-anchor="middle" font-weight="bold">Person</text>
+<line x1="170" y1="32" x2="240" y2="32" stroke="#222"/>
+<polygon points="240,32 300,10 360,32 300,54" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="300" y="36" text-anchor="middle">besitzt</text>
+<line x1="360" y1="32" x2="430" y2="32" stroke="#222"/>
+<rect x="430" y="14" width="150" height="36" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="505.0" y="37.0" text-anchor="middle" font-weight="bold">Personalausweis</text>
+<text x="178" y="26" font-weight="bold">1</text>
+<text x="414" y="26" font-weight="bold">1</text>
+<text x="610" y="37" font-weight="bold" font-size="15">1 : 1</text>
+<rect x="20" y="76" width="150" height="36" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="95.0" y="99.0" text-anchor="middle" font-weight="bold">Abteilung</text>
+<line x1="170" y1="94" x2="240" y2="94" stroke="#222"/>
+<polygon points="240,94 300,72 360,94 300,116" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="300" y="98" text-anchor="middle">beschäftigt</text>
+<line x1="360" y1="94" x2="430" y2="94" stroke="#222"/>
+<rect x="430" y="76" width="150" height="36" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="505.0" y="99.0" text-anchor="middle" font-weight="bold">Mitarbeiter</text>
+<text x="178" y="88" font-weight="bold">1</text>
+<text x="414" y="88" font-weight="bold">n</text>
+<text x="610" y="99" font-weight="bold" font-size="15">1 : n</text>
+<rect x="20" y="138" width="150" height="36" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="95.0" y="161.0" text-anchor="middle" font-weight="bold">Student</text>
+<line x1="170" y1="156" x2="240" y2="156" stroke="#222"/>
+<polygon points="240,156 300,134 360,156 300,178" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="300" y="160" text-anchor="middle">besucht</text>
+<line x1="360" y1="156" x2="430" y2="156" stroke="#222"/>
+<rect x="430" y="138" width="150" height="36" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="505.0" y="161.0" text-anchor="middle" font-weight="bold">Vorlesung</text>
+<text x="178" y="150" font-weight="bold">m</text>
+<text x="414" y="150" font-weight="bold">n</text>
+<text x="610" y="161" font-weight="bold" font-size="15">m : n</text>
+</svg>
+<figcaption>Abb. A-1: Die drei Kardinalitäten in Chen-Notation – die Zahl steht jeweils an der Entität, deren Anzahl sie angibt</figcaption>
+</figure>
+
+  <p><strong>So liest du eine Beziehung:</strong> Von einer Entität über die Raute zur Zahl auf der anderen Seite: „<em>Eine</em> Abteilung beschäftigt <em>n</em> Mitarbeiter“ und „<em>Ein</em> Mitarbeiter wird von <em>1</em> Abteilung beschäftigt.“ Die Zahl steht also an der Entität, deren Anzahl sie angibt.</p>
+  <table>
+    <tr><th>Kardinalität</th><th>Bedeutung</th><th>Bestimmung durch zwei Fragen</th></tr>
+    <tr><td>1:1</td><td>Zu jedem A gehört höchstens ein B und umgekehrt.</td><td>Wie viele Ausweise hat eine Person? <em>Einen.</em> Wie vielen Personen gehört ein Ausweis? <em>Einer.</em></td></tr>
+    <tr><td>1:n</td><td>Ein A hat mehrere B, jedes B gehört zu genau einem A.</td><td>Wie viele Mitarbeiter hat eine Abteilung? <em>Mehrere.</em> In wie vielen Abteilungen arbeitet ein Mitarbeiter? <em>In einer.</em></td></tr>
+    <tr><td>m:n</td><td>Ein A hat mehrere B und ein B hat mehrere A.</td><td>Wie viele Vorlesungen besucht ein Student? <em>Mehrere.</em> Wie viele Studenten besuchen eine Vorlesung? <em>Mehrere.</em></td></tr>
+  </table>
+  <div class="merke"><span class="kastentitel">Merke</span>Kardinalität immer mit <strong>zwei Fragen</strong> bestimmen – einmal von links nach rechts, einmal von rechts nach links („Wie viele B kann ein A haben?“ / „Wie viele A kann ein B haben?“). Zweimal „einer“ → 1:1, einmal „mehrere“ → 1:n, zweimal „mehrere“ → m:n.</div>
+  <p class="klein">Ergänzung: Manche Lehrbücher nutzen die modifizierte Chen-Notation mit <code>c</code> (0 oder 1) und <code>mc</code> (0 bis viele) oder die Min-Max-Notation <code>(0,1)</code>, <code>(1,*)</code>. In den IHK-Lösungen genügen <code>1</code>, <code>n</code>, <code>m</code>.</p>
+
+  <h4>Besondere Beziehungen</h4>
+  <ul>
+    <li><strong>Rekursive Beziehung:</strong> Ein Entitätstyp steht mit sich selbst in Beziehung, z. B. „Lehrkraft <em>betreut</em> Lehrkraft“ (Mentor). Zwei Linien von derselben Entität zur Raute; die Rollen (Mentor/Mentee) an die Linien schreiben.</li>
+    <li><strong>Beziehung mit Attribut:</strong> Das Attribut (Ellipse) hängt an der Raute, z. B. Anmeldedatum an „belegt“. Typisch bei m:n: Menge, Datum, Note, Anzahl, Preis zum Zeitpunkt.</li>
+    <li><strong>Mehrere Beziehungen zwischen denselben Entitätstypen:</strong> z. B. Spiel – Mannschaft als „Heimmannschaft“ und „Gastmannschaft“. Jede Beziehung wird einzeln modelliert (zwei Rauten).</li>
+    <li><strong>Soft Delete</strong> (S24): Datensätze werden nicht physisch gelöscht, sondern als gelöscht markiert, z. B. Attribut <code>geloescht</code> (boolean) oder <code>GeloeschtAm</code> (Datum). So bleiben Historie und Bezüge erhalten.</li>
+  </ul>
+  <p><strong>Beispiel Musikschule:</strong> Eine Lehrkraft leitet mehrere Kurse, jeder Kurs hat genau eine Lehrkraft. Schüler belegen beliebig viele Kurse, ein Kurs hat viele Schüler; gespeichert wird das Anmeldedatum. Erfahrene Lehrkräfte betreuen als Mentor mehrere neue Lehrkräfte, jede Lehrkraft hat höchstens einen Mentor. Ein Schüler kann höchstens ein Leihinstrument ausleihen, ein Leihinstrument ist höchstens an einen Schüler verliehen.</p>
+  <figure>
+<svg viewBox="0 0 760 410" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+<rect x="50" y="170" width="130" height="40" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="115.0" y="195.0" text-anchor="middle" font-weight="bold">Lehrkraft</text>
+<rect x="340" y="170" width="110" height="40" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="395.0" y="195.0" text-anchor="middle" font-weight="bold">Kurs</text>
+<rect x="610" y="170" width="110" height="40" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="665.0" y="195.0" text-anchor="middle" font-weight="bold">Schüler</text>
+<rect x="590" y="320" width="150" height="40" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="665.0" y="345.0" text-anchor="middle" font-weight="bold">Leihinstrument</text>
+<polygon points="210,190 260,166 310,190 260,214" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="260" y="194" text-anchor="middle">leitet</text>
+<polygon points="480,190 530,166 580,190 530,214" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="530" y="194" text-anchor="middle">belegt</text>
+<polygon points="623,275 665,253 707,275 665,297" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="665" y="279" text-anchor="middle">leiht</text>
+<polygon points="63,290 115,266 167,290 115,314" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="115" y="294" text-anchor="middle">betreut</text>
+<line x1="180" y1="190" x2="210" y2="190" stroke="#222"/>
+<line x1="310" y1="190" x2="340" y2="190" stroke="#222"/>
+<line x1="450" y1="190" x2="480" y2="190" stroke="#222"/>
+<line x1="580" y1="190" x2="610" y2="190" stroke="#222"/>
+<line x1="665" y1="210" x2="665" y2="253" stroke="#222"/>
+<line x1="665" y1="297" x2="665" y2="320" stroke="#222"/>
+<line x1="115" y1="210" x2="115" y2="266" stroke="#222"/>
+<polyline points="50,190 26,190 26,290 63,290" fill="none" stroke="#222"/>
+<text x="186" y="184" font-weight="bold">1</text>
+<text x="326" y="184" font-weight="bold">n</text>
+<text x="456" y="184" font-weight="bold">n</text>
+<text x="592" y="184" font-weight="bold">m</text>
+<text x="671" y="228" font-weight="bold">1</text>
+<text x="671" y="315" font-weight="bold">1</text>
+<text x="121" y="246" font-weight="bold">n</text>
+<text x="32" y="184" font-weight="bold">1</text>
+<text x="32" y="244" font-size="11" font-style="italic" fill="#444">Mentor</text>
+<text x="121" y="262" font-size="11" font-style="italic" fill="#444">Mentee</text>
+<ellipse cx="75" cy="100" rx="46" ry="16" fill="#fff" stroke="#222"/><text x="75" y="104" text-anchor="middle" text-decoration="underline">LehrerNr</text>
+<line x1="82" y1="116" x2="100" y2="170" stroke="#222"/>
+<ellipse cx="170" cy="100" rx="34" ry="16" fill="#fff" stroke="#222"/><text x="170" y="104" text-anchor="middle">Name</text>
+<line x1="165" y1="116" x2="150" y2="170" stroke="#222"/>
+<ellipse cx="355" cy="100" rx="40" ry="16" fill="#fff" stroke="#222"/><text x="355" y="104" text-anchor="middle" text-decoration="underline">KursNr</text>
+<line x1="360" y1="116" x2="380" y2="170" stroke="#222"/>
+<ellipse cx="440" cy="100" rx="32" ry="16" fill="#fff" stroke="#222"/><text x="440" y="104" text-anchor="middle">Titel</text>
+<line x1="435" y1="116" x2="420" y2="170" stroke="#222"/>
+<ellipse cx="530" cy="262" rx="58" ry="16" fill="#fff" stroke="#222"/><text x="530" y="266" text-anchor="middle">Anmeldedatum</text>
+<line x1="530" y1="214" x2="530" y2="246" stroke="#222"/>
+<ellipse cx="625" cy="100" rx="50" ry="16" fill="#fff" stroke="#222"/><text x="625" y="104" text-anchor="middle" text-decoration="underline">SchülerNr</text>
+<line x1="630" y1="116" x2="650" y2="170" stroke="#222"/>
+<ellipse cx="715" cy="100" rx="34" ry="16" fill="#fff" stroke="#222"/><text x="715" y="104" text-anchor="middle">Name</text>
+<line x1="712" y1="116" x2="695" y2="170" stroke="#222"/>
+<ellipse cx="500" cy="330" rx="56" ry="16" fill="#fff" stroke="#222"/><text x="500" y="334" text-anchor="middle" text-decoration="underline">InstrumentNr</text>
+<line x1="556" y1="332" x2="590" y2="336" stroke="#222"/>
+<ellipse cx="500" cy="382" rx="52" ry="16" fill="#fff" stroke="#222"/><text x="500" y="386" text-anchor="middle">Bezeichnung</text>
+<line x1="548" y1="375" x2="590" y2="352" stroke="#222"/>
+</svg>
+<figcaption>Abb. A-2: ER-Modell „Musikschule“ (Chen-Notation, Schlüsselattribute unterstrichen)</figcaption>
+</figure>
+
+
+  <h4>Vom ER-Modell zum Relationenmodell</h4>
+  <table>
+    <tr><th>Begriff im Relationenmodell</th><th>Bedeutung</th></tr>
+    <tr><td>Relation / Tabelle</td><td>entspricht einem Entitätstyp (oder einer aufgelösten m:n-Beziehung)</td></tr>
+    <tr><td>Tupel / Datensatz / Zeile</td><td>eine Entität</td></tr>
+    <tr><td>Primärschlüssel (PK)</td><td>Spalte(n), die jede Zeile eindeutig identifizieren; nie NULL, nie doppelt</td></tr>
+    <tr><td>Zusammengesetzter Schlüssel</td><td>PK aus mehreren Spalten, typisch in Zwischentabellen</td></tr>
+    <tr><td>Surrogatschlüssel</td><td>künstliche, fortlaufende Nummer (ID) ohne fachliche Bedeutung</td></tr>
+    <tr><td>Fremdschlüssel (FK)</td><td>Spalte, die auf den PK einer anderen (oder derselben) Tabelle verweist und so die Beziehung herstellt</td></tr>
+  </table>
+  <p><strong>Zwei übliche Darstellungen</strong> (beide werden in der Prüfung akzeptiert):</p>
+  <ol>
+    <li><strong>Textnotation:</strong> <span class="rm">Kurs(<u>KursNr</u>, Titel, Wochentag, ↑LehrerNr)</span> – PK unterstrichen, FK mit ↑ (alternativ <code>#</code> oder „(FK)“) gekennzeichnet.</li>
+    <li><strong>Tabellen-Kästen</strong> (so zeichnen die IHK-Lösungen): Tabellenname als Kopf, darunter die Attribute mit „(PK)“/„(FK)“, Verbindungslinien zwischen den Tabellen mit <code>1</code> und <code>n</code> an den Enden.</li>
+  </ol>
+  <div class="falle"><span class="kastentitel">Typische Falle</span>Die Notation des Relationenmodells (PK/FK-Kennzeichnung, Kardinalitäten an den Linien) steht <strong>nicht</strong> im Belegsatz. Du musst sie selbst beherrschen.</div>
+
+  <h4>Überführungsregeln</h4>
+  <table>
+    <tr><th>Im ER-Modell</th><th>Umsetzung im Relationenmodell</th></tr>
+    <tr><td>Entitätstyp</td><td>eigene Tabelle; das Schlüsselattribut wird PK</td></tr>
+    <tr><td>Attribut</td><td>Spalte; zusammengesetzte Attribute zerlegen (Anschrift → Straße, Hausnummer, PLZ, Ort; Name → Vorname, Nachname)</td></tr>
+    <tr><td><strong>1:n</strong></td><td>PK der <strong>1-Seite</strong> wird als <strong>FK in die Tabelle der n-Seite</strong> aufgenommen</td></tr>
+    <tr><td><strong>1:1</strong></td><td>FK in <em>eine</em> der beiden Tabellen – am besten in die Tabelle, deren Datensätze immer einen Partner haben (dann ist der FK nie NULL) – und zusätzlich <code>UNIQUE</code>, damit jeder Wert nur einmal vorkommt; alternativ beide Tabellen zusammenlegen</td></tr>
+    <tr><td><strong>m:n</strong></td><td>eigene <strong>Zwischentabelle</strong> (Verbindungstabelle) mit den PKs beider Seiten als FKs; beide zusammen bilden den PK. Beziehungsattribute kommen in die Zwischentabelle. Aus einer m:n werden zwei 1:n-Beziehungen.</td></tr>
+    <tr><td>rekursiv 1:n</td><td>FK in derselben Tabelle, der auf den eigenen PK zeigt (MentorNr → LehrerNr)</td></tr>
+    <tr><td>rekursiv m:n</td><td>Zwischentabelle mit zwei FKs auf dieselbe Tabelle, z. B. Stückliste(<u>↑OberteilNr, ↑UnterteilNr</u>, Menge)</td></tr>
+    <tr><td>mehrere Beziehungen zwischen denselben Tabellen</td><td>je Beziehung ein eigener FK mit sprechendem Namen, z. B. Spiel(<u>SpielNr</u>, ↑HeimTeamNr, ↑GastTeamNr)</td></tr>
+  </table>
+  <figure>
+<svg viewBox="0 0 760 380" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+<rect x="40" y="40" width="170" height="114" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<text x="125.0" y="58" text-anchor="middle" font-weight="bold">Lehrkraft</text>
+<line x1="40" y1="66" x2="210" y2="66" stroke="#222"/>
+<text x="48" y="82">LehrerNr (PK)</text>
+<text x="48" y="102">Name</text>
+<text x="48" y="122">Telefon</text>
+<text x="48" y="142">MentorNr (FK)</text>
+<rect x="300" y="40" width="170" height="114" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<text x="385.0" y="58" text-anchor="middle" font-weight="bold">Kurs</text>
+<line x1="300" y1="66" x2="470" y2="66" stroke="#222"/>
+<text x="308" y="82">KursNr (PK)</text>
+<text x="308" y="102">Titel</text>
+<text x="308" y="122">Wochentag</text>
+<text x="308" y="142">LehrerNr (FK)</text>
+<rect x="545" y="40" width="195" height="94" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<text x="642.5" y="58" text-anchor="middle" font-weight="bold">Leihinstrument</text>
+<line x1="545" y1="66" x2="740" y2="66" stroke="#222"/>
+<text x="553" y="82">InstrumentNr (PK)</text>
+<text x="553" y="102">Bezeichnung</text>
+<text x="553" y="122">SchuelerNr (FK, UNIQUE)</text>
+<rect x="290" y="250" width="190" height="94" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<text x="385.0" y="268" text-anchor="middle" font-weight="bold">Belegung</text>
+<line x1="290" y1="276" x2="480" y2="276" stroke="#222"/>
+<text x="298" y="292">SchuelerNr (PK, FK)</text>
+<text x="298" y="312">KursNr (PK, FK)</text>
+<text x="298" y="332">Anmeldedatum</text>
+<rect x="570" y="250" width="170" height="114" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<text x="655.0" y="268" text-anchor="middle" font-weight="bold">Schueler</text>
+<line x1="570" y1="276" x2="740" y2="276" stroke="#222"/>
+<text x="578" y="292">SchuelerNr (PK)</text>
+<text x="578" y="312">Vorname</text>
+<text x="578" y="332">Nachname</text>
+<text x="578" y="352">Geburtsdatum</text>
+<line x1="210" y1="110" x2="300" y2="110" stroke="#222"/>
+<text x="216" y="104" font-weight="bold">1</text>
+<text x="288" y="104" font-weight="bold">n</text>
+<polyline points="40,78 16,78 16,138 40,138" fill="none" stroke="#222"/>
+<text x="22" y="72" font-weight="bold">1</text>
+<text x="22" y="153" font-weight="bold">n</text>
+<line x1="385" y1="154" x2="385" y2="250" stroke="#222"/>
+<text x="391" y="170" font-weight="bold">1</text>
+<text x="391" y="244" font-weight="bold">n</text>
+<line x1="570" y1="300" x2="480" y2="300" stroke="#222"/>
+<text x="556" y="294" font-weight="bold">1</text>
+<text x="486" y="294" font-weight="bold">n</text>
+<line x1="655" y1="134" x2="655" y2="250" stroke="#222"/>
+<text x="661" y="150" font-weight="bold">1</text>
+<text x="661" y="244" font-weight="bold">1</text>
+</svg>
+<figcaption>Abb. A-3: Relationenmodell „Musikschule“ als Tabellen-Kästen (IHK-Darstellung)</figcaption>
+</figure>
+
+  <p>Dasselbe Modell in Textnotation:</p>
+  <p class="rm">Lehrkraft(<u>LehrerNr</u>, Name, Telefon, ↑MentorNr)</p>
+  <p class="rm">Kurs(<u>KursNr</u>, Titel, Wochentag, ↑LehrerNr)</p>
+  <p class="rm">Schueler(<u>SchuelerNr</u>, Vorname, Nachname, Geburtsdatum)</p>
+  <p class="rm">Belegung(<u>↑SchuelerNr, ↑KursNr</u>, Anmeldedatum)</p>
+  <p class="rm">Leihinstrument(<u>InstrumentNr</u>, Bezeichnung, ↑SchuelerNr) <span class="klein">– SchuelerNr ist UNIQUE (1:1)</span></p>
+  <div class="merke"><span class="kastentitel">Merke</span>
+    Der <strong>Fremdschlüssel steht immer auf der n-Seite.</strong> Eine m:n-Beziehung gibt es im Relationenmodell nicht – sie wird <strong>immer</strong> über eine Zwischentabelle aufgelöst, deren PK aus den beiden FKs besteht.</div>
+
+  <h4>So gehst du vor (Teil 2, Aufgabe 3)</h4>
+  <ol>
+    <li>Text/Formular durcharbeiten: Substantive → Kandidaten für Tabellen und Attribute, Verben → Beziehungen.</li>
+    <li>Je Tabelle alle genannten Attribute sammeln. <em>„Übernehmen Sie alle genannten Attribute“</em> bringt Punkte – nichts weglassen.</li>
+    <li>PK festlegen (vorhandene Nummer oder künstliche ID).</li>
+    <li>Kardinalität jeder Beziehung mit den zwei Fragen bestimmen.</li>
+    <li>1:n → FK auf die n-Seite; m:n → Zwischentabelle; 1:1 → FK + UNIQUE.</li>
+    <li>Beziehungsattribute (Menge, Datum, Anzahl, Note) in die Zwischentabelle.</li>
+    <li>3NF prüfen (→ DB-02): keine Mehrfachwerte, keine berechneten Werte, keine transitiven Abhängigkeiten.</li>
+    <li>Zeichnen: jede Linie mit 1/n beschriften, FKs kennzeichnen. Ein <strong>vorgegebenes ERM vollständig übernehmen</strong> – auch die schon gegebenen Beziehungen bringen Punkte.</li>
+  </ol>
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>
+    <ul>
+      <li>Kardinalitäten an den Linien vergessen – kostet pro Beziehung Punkte.</li>
+      <li>FK auf der 1-Seite eingetragen (z. B. KursNr in Lehrkraft) – unmöglich, eine Lehrkraft hat ja mehrere Kurse.</li>
+      <li>m:n nicht aufgelöst oder Zwischentabelle ohne PK.</li>
+      <li>Beziehungsattribut (Anzahl, Note) in eine der beiden Haupttabellen geschrieben.</li>
+      <li>Zwei Beziehungen zwischen denselben Tabellen nur einmal modelliert (z. B. Heim- und Gastmannschaft).</li>
+      <li>Berechnete Werte (Summe, Alter, Anzahl) als Spalte gespeichert.</li>
+    </ul>
+  </div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li><strong>S26 T2 A3a (20 P):</strong> ERM mit einer 1:n- und einer m:n-Beziehung ist gegeben, dazu Informationen aus einer Ist-Analyse → in ein relationales Modell in 3NF überführen und erweitern, alle Attribute, PK, FK, Kardinalitäten.</li>
+      <li><strong>W21 T2 A3 (25 P), W22 T2 A3b (10 P), W23 T2 A3a (18 P), W24 T2 A3a (16 P):</strong> Relationenmodell in 3NF aus Beispieldaten oder Text.</li>
+      <li><strong>W21 T1 2b (16 P):</strong> ER-Modell mit rekursiver und m:n-Beziehung; <strong>W23 T1 4a (14 P):</strong> ER-Diagramm mit m:n und Attributen; <strong>S24 T1 4a (10 P):</strong> ER-Modell erweitern (Soft Delete, m:n).</li>
+      <li>Bewertungsschema der IHK-Lösung W23: je Tabelle mit allen Attributen 1 P, je PK 1 P, je Beziehung mit Kardinalität 1 P, je FK 1 P.</li>
+    </ul>
+  </div>
+
+  <!-- ======================= DB-02 ======================= -->
+  <h3 id="e-02">DB-02 · Normalisierung 1NF–3NF <span class="badge k-immer">Immer</span></h3>
+  <p class="klein">Vorkommen: 8/9 · Prüfungen: alle außer S24 · Teil 2, Aufgabe 3 und Teil 1 (S23, W25)</p>
+
+  <h4>Warum normalisieren?</h4>
+  <p><strong>Redundanz</strong> = dieselbe Information ist mehrfach gespeichert. Das kostet Speicher, vor allem aber führt es zu <strong>Inkonsistenzen</strong> (widersprüchlichen Daten), weil Änderungen nicht überall nachgezogen werden. Ziel der Normalisierung: jede Information genau einmal speichern und so Anomalien verhindern.</p>
+  <p>Beispiel – unnormalisierte Kursliste einer Musikschule (Excel):</p>
+  <table class="daten">
+    <tr><th>KursNr</th><th>Kurstitel</th><th>LehrerNr</th><th>Lehrer</th><th>Raum</th><th>Teilnehmer</th></tr>
+    <tr><td>K1</td><td>Gitarre Anfänger</td><td>L7</td><td>Petra Lang</td><td>R2</td><td>101 Mia Kramer, 102 Noah Ernst</td></tr>
+    <tr><td>K2</td><td>Klavier</td><td>L3</td><td>Uwe Brandl</td><td>R1</td><td>101 Mia Kramer</td></tr>
+    <tr><td>K3</td><td>Gitarre Fortgeschr.</td><td>L7</td><td>Petra Lang</td><td>R2</td><td>103 Lea Fink, 102 Noah Ernst</td></tr>
+  </table>
+
+  <h4>Anomalien</h4>
+  <table>
+    <tr><th>Anomalie</th><th>Bedeutung</th><th>Beispiel aus der Kursliste</th></tr>
+    <tr><td><strong>Einfügeanomalie</strong></td><td>Ein Sachverhalt kann nicht gespeichert werden, ohne dass gleichzeitig ein anderer, noch nicht vorhandener Sachverhalt erfasst wird.</td><td>Eine neue Lehrkraft kann erst gespeichert werden, wenn sie einen Kurs hat (die Zeile braucht eine KursNr).</td></tr>
+    <tr><td><strong>Änderungsanomalie</strong></td><td>Eine Änderung muss an mehreren Stellen erfolgen; wird eine Stelle vergessen, ist der Bestand widersprüchlich.</td><td>Petra Lang heißt nach der Heirat Petra Roos → in K1 und K3 ändern; wird K3 vergessen, gibt es zwei Namen für L7.</td></tr>
+    <tr><td><strong>Löschanomalie</strong></td><td>Beim Löschen eines Datensatzes gehen ungewollt weitere Informationen verloren.</td><td>Wird Kurs K2 gelöscht, ist auch jede Information über Uwe Brandl weg.</td></tr>
+  </table>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    „Erläutern Sie die Änderungsanomalie …“ heißt: <strong>Begriff erklären UND am konkreten Datensatz der Anlage zeigen</strong> (welche Zeilen, welcher Wert). Eine reine Definition gibt nur die Hälfte der Punkte (W25 T1 4b: drei Anomalien, 6 P; S23 T1 4ca: Änderungsanomalie, 3 P; W25 T1 4a: Redundanz an einem Beispiel, 2 P).</div>
+
+  <h4>Grundbegriffe</h4>
+  <ul>
+    <li><strong>Funktionale Abhängigkeit A → B:</strong> Zu jedem Wert von A gehört genau ein Wert von B. Beispiel: LehrerNr → Lehrer (L7 gehört immer zu Petra Lang). Umgekehrt muss das nicht gelten (zwei Lehrkräfte könnten gleich heißen).</li>
+    <li><strong>Voll funktionale Abhängigkeit:</strong> B hängt vom <em>gesamten</em> (zusammengesetzten) Schlüssel ab, nicht nur von einem Teil davon.</li>
+    <li><strong>Transitive Abhängigkeit:</strong> Schlüssel → A → B, wobei A selbst kein Schlüssel ist. Beispiel: KursNr → LehrerNr → Lehrer.</li>
+    <li><strong>Schlüsselkandidat:</strong> minimale Attributkombination, die jede Zeile eindeutig identifiziert; einer davon wird Primärschlüssel. <strong>Nichtschlüsselattribut:</strong> gehört zu keinem Schlüsselkandidaten.</li>
+  </ul>
+
+  <h4>Die drei Normalformen</h4>
+  <table>
+    <tr><th>NF</th><th>Regel</th><th>Typischer Verstoß</th><th>Lösung</th></tr>
+    <tr><td><strong>1NF</strong></td><td>Alle Attributwerte sind <strong>atomar</strong> (ein Wert pro Feld), keine Wiederholungsgruppen.</td><td>„101 Mia Kramer, 102 Noah Ernst“ in einem Feld; „Petra Lang“ statt Vor- und Nachname getrennt</td><td>Mehrfachwerte in eigene Zeilen bzw. eigene Tabelle; zusammengesetzte Felder zerlegen</td></tr>
+    <tr><td><strong>2NF</strong></td><td>1NF und jedes Nichtschlüsselattribut ist <strong>voll funktional vom gesamten PK</strong> abhängig.</td><td>Teilnahme(<u>KursNr, SchuelerNr</u>, Kurstitel): Kurstitel hängt nur von KursNr ab</td><td>teilabhängige Attribute mit ihrem Teilschlüssel in eine eigene Tabelle</td></tr>
+    <tr><td><strong>3NF</strong></td><td>2NF und <strong>kein Nichtschlüsselattribut hängt transitiv</strong> (über ein anderes Nichtschlüsselattribut) vom PK ab.</td><td>Kurs(<u>KursNr</u>, LehrerNr, Lehrer): Lehrer hängt von LehrerNr ab</td><td>transitiv abhängige Attribute in eigene Tabelle; das „Zwischenattribut“ wird dort PK und bleibt in der Ursprungstabelle als FK</td></tr>
+  </table>
+  <div class="merke"><span class="kastentitel">Merke</span>
+    Jedes Nichtschlüsselattribut hängt <strong>vom Schlüssel</strong> ab (1NF), <strong>vom ganzen Schlüssel</strong> (2NF) und <strong>von nichts als dem Schlüssel</strong> (3NF).<br>
+    Die 2NF kann nur bei einem <strong>zusammengesetzten</strong> PK verletzt sein. Eine Tabelle in 1NF mit einspaltigem PK ist automatisch in 2NF.</div>
+
+  <h4>Durchgerechnetes Beispiel: Kursliste → 3NF</h4>
+  <p><strong>1NF:</strong> Je Kurs und Teilnehmer eine eigene Zeile, Namen zerlegt. Schlüssel: (KursNr, SchuelerNr).</p>
+  <p class="rm">Kursliste(<u>KursNr, SchuelerNr</u>, Kurstitel, LehrerNr, LehrerVorname, LehrerNachname, Raum, SchuelerVorname, SchuelerNachname)</p>
+  <p><strong>2NF:</strong> Kurstitel, LehrerNr, Lehrername und Raum hängen nur von KursNr ab, die Schülernamen nur von SchuelerNr → auslagern.</p>
+  <p class="rm">Kurs(<u>KursNr</u>, Kurstitel, LehrerNr, LehrerVorname, LehrerNachname, Raum)</p>
+  <p class="rm">Schueler(<u>SchuelerNr</u>, Vorname, Nachname)</p>
+  <p class="rm">Belegung(<u>↑KursNr, ↑SchuelerNr</u>)</p>
+  <p><strong>3NF:</strong> In Kurs hängen die Lehrernamen transitiv über LehrerNr vom PK ab → eigene Tabelle.</p>
+  <p class="rm">Lehrkraft(<u>LehrerNr</u>, Vorname, Nachname)</p>
+  <p class="rm">Kurs(<u>KursNr</u>, Kurstitel, Raum, ↑LehrerNr)</p>
+  <p class="rm">Schueler(<u>SchuelerNr</u>, Vorname, Nachname)</p>
+  <p class="rm">Belegung(<u>↑KursNr, ↑SchuelerNr</u>)</p>
+  <p class="klein">Hätte ein Raum weitere Eigenschaften (Größe, Etage), bekäme auch er eine eigene Tabelle Raum(<u>RaumNr</u>, …) und Kurs einen FK RaumNr.</p>
+
+  <h4>Formular/Beleg → 3NF: So gehst du vor</h4>
+  <ol>
+    <li>Alle Felder des Formulars als Attributliste aufschreiben – auch Kopf- und Fußdaten.</li>
+    <li><strong>Berechnete Felder streichen</strong> (Positionsbetrag, Summe, Steuerbetrag, Alter) – sie werden bei Bedarf per SQL berechnet.</li>
+    <li>Zusammengesetzte Felder zerlegen (Name, Anschrift).</li>
+    <li>Wiederholgruppen (z. B. Positionen) erkennen → eigene Tabelle mit FK zum Kopf (1NF).</li>
+    <li>Für jede Attributgruppe fragen: <em>„Wovon hängt dieser Wert ab?“</em> → je „Ding“ (Person, Artikel, Ort …) eine Tabelle (2NF/3NF).</li>
+    <li>Historische Werte bewusst speichern: Ein Preis, der zum Zeitpunkt des Belegs galt, gehört in die Positionstabelle, weil sich der aktuelle Preis ändern kann. Das ist keine Redundanz im Sinne der Normalisierung.</li>
+    <li>Beziehungen, Kardinalitäten und FKs eintragen.</li>
+  </ol>
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>
+    <ul>
+      <li>Berechnete Werte (Gesamtpreis, Summe) als Spalte gespeichert → Redundanz.</li>
+      <li>Nur „Name“ bzw. „Adresse“ als ein Feld → Verstoß gegen die 1NF (die IHK bewertet die Zerlegung).</li>
+      <li><strong>PLZ/Ort:</strong> Streng genommen hängt der Ort von der PLZ ab. In Prüfungslösungen bleiben PLZ und Ort meist in der Personentabelle (eine PLZ kann mehrere Orte umfassen, die Abhängigkeit ist also nicht eindeutig). Eine eigene Tabelle Ort(<u>PLZ</u>, Ort) ist aber ebenfalls korrekt.</li>
+      <li>Zwischenschritte (1NF, 2NF) sind meist nicht verlangt – gefragt ist das <strong>Ergebnis in 3NF</strong>, sofern die Aufgabe nicht ausdrücklich die Schritte fordert.</li>
+    </ul>
+  </div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li><strong>W25 T1 A4 (24 P):</strong> Redundanz an einem Beispiel (2 P), Änderungs-, Einfüge- und Löschanomalie (6 P), Tabelle in 3NF als relationales Modell (16 P) – in Teil 1!</li>
+      <li><strong>S22 T2 A3 (20 P):</strong> 3NF aus einer Tarifübersicht; <strong>S23 T1 4cb (13 P):</strong> Relationenmodell in 3NF inklusive JSON-Sensordaten.</li>
+      <li>Fast jede Modellierungsaufgabe enthält die Formulierung „in der 3. Normalform“.</li>
+    </ul>
+  </div>
+
+  <!-- ======================= Beispieldatenbank Fitness ======================= -->
+  <div class="info">
+    <span class="kastentitel">Beispieldatenbank für die SQL-Erklärungen (DB-03 bis DB-11): Fitnessstudio</span>
+    Alle Beispielabfragen und -ergebnisse in diesem Erklärungssatz beziehen sich auf diese vier Tabellen (Kurs.TrainerNr → Trainer, Buchung.MitgliedNr → Mitglied, Buchung.KursNr → Kurs). Kurs „Boxen“ hat (noch) keinen Trainer, Trainer „Jan Ott“ keinen Kurs, Mitglied „Wolf“ keine Buchung.
+    <div class="nebeneinander">
+      <div><h4 class="tabtitel">Mitglied</h4><table class="daten ergebnis">
+<tr><th>MitgliedNr</th><th>Vorname</th><th>Nachname</th><th>Ort</th><th>Eintritt</th></tr>
+<tr><td>1</td><td>Anna</td><td>Berg</td><td>Bonn</td><td>2024-01-15</td></tr>
+<tr><td>2</td><td>Ben</td><td>Kurz</td><td>Köln</td><td>2025-03-01</td></tr>
+<tr><td>3</td><td>Cem</td><td>Aydin</td><td>Bonn</td><td>2025-09-10</td></tr>
+<tr><td>4</td><td>Dana</td><td>Wolf</td><td>Siegburg</td><td>2026-02-01</td></tr>
+</table></div>
+      <div><h4 class="tabtitel">Trainer</h4><table class="daten ergebnis">
+<tr><th>TrainerNr</th><th>Name</th></tr>
+<tr><td>1</td><td>Lisa Stein</td></tr>
+<tr><td>2</td><td>Omar Haddad</td></tr>
+<tr><td>3</td><td>Jan Ott</td></tr>
+</table></div>
+    </div>
+    <div class="nebeneinander">
+      <div><h4 class="tabtitel">Kurs</h4><table class="daten ergebnis">
+<tr><th>KursNr</th><th>Titel</th><th>TrainerNr</th><th>Preis</th></tr>
+<tr><td>10</td><td>Yoga</td><td>1</td><td>8.00</td></tr>
+<tr><td>11</td><td>Spinning</td><td>2</td><td>10.00</td></tr>
+<tr><td>12</td><td>Pilates</td><td>1</td><td>9.00</td></tr>
+<tr><td>13</td><td>Boxen</td><td>NULL</td><td>12.00</td></tr>
+</table></div>
+      <div><h4 class="tabtitel">Buchung</h4><table class="daten ergebnis">
+<tr><th>BuchungNr</th><th>MitgliedNr</th><th>KursNr</th><th>Datum</th></tr>
+<tr><td>1</td><td>1</td><td>10</td><td>2026-03-02</td></tr>
+<tr><td>2</td><td>1</td><td>11</td><td>2026-03-04</td></tr>
+<tr><td>3</td><td>2</td><td>10</td><td>2026-03-02</td></tr>
+<tr><td>4</td><td>3</td><td>11</td><td>2026-04-07</td></tr>
+<tr><td>5</td><td>1</td><td>10</td><td>2026-04-06</td></tr>
+<tr><td>6</td><td>2</td><td>12</td><td>2026-04-08</td></tr>
+</table></div>
+    </div>
+  </div>
+
+  <!-- ======================= DB-03 ======================= -->
+  <h3 id="e-03">DB-03 · SQL: SELECT mit JOIN <span class="badge k-immer">Immer</span></h3>
+  <p class="klein">Vorkommen: 9/9 · Prüfungen: alle · Teil 2, Aufgabe 4 (die SQL-Aufgabe ist in allen 9 Prüfungen Aufgabe 4 von Teil 2)</p>
+
+  <h4>Aufbau einer Abfrage</h4>
+<pre class="sql">SELECT   Spalten / Ausdrücke [AS Alias]   -- was wird angezeigt?
+FROM     Tabelle [Alias]
+  [INNER | LEFT] JOIN Tabelle2 ON Bedingung
+WHERE    Bedingung für einzelne Zeilen
+GROUP BY Spalten
+HAVING   Bedingung für Gruppen
+ORDER BY Spalte [ASC | DESC], …;</pre>
+  <div class="merke"><span class="kastentitel">Merke</span>
+    Die <strong>Schreibreihenfolge</strong> ist fest: SELECT – FROM – (JOIN) – WHERE – GROUP BY – HAVING – ORDER BY.<br>
+    Die <strong>Ausführungsreihenfolge</strong> ist eine andere: FROM/JOIN → WHERE → GROUP BY → HAVING → SELECT → ORDER BY. Darum darf ein Spaltenalias aus dem SELECT in ORDER BY verwendet werden, aber nicht in WHERE.</div>
+
+  <h4>Bedingungen in WHERE</h4>
+  <table>
+    <tr><th>Operator</th><th>Beispiel</th><th>Bedeutung</th></tr>
+    <tr><td><code>=  &lt;&gt;  &lt;  &gt;  &lt;=  &gt;=</code></td><td><code>Preis &gt;= 9</code></td><td>Vergleich (<code>&lt;&gt;</code> = ungleich)</td></tr>
+    <tr><td><code>AND, OR, NOT</code></td><td><code>Ort = 'Bonn' AND Eintritt &gt;= '2025-01-01'</code></td><td>Verknüpfung; AND bindet stärker als OR → <strong>Klammern setzen</strong></td></tr>
+    <tr><td><code>BETWEEN … AND …</code></td><td><code>Datum BETWEEN '2026-03-01' AND '2026-03-31'</code></td><td>Bereich, beide Grenzen <strong>inklusive</strong></td></tr>
+    <tr><td><code>IN (…)</code></td><td><code>Ort IN ('Bonn', 'Köln')</code></td><td>einer der aufgezählten Werte</td></tr>
+    <tr><td><code>LIKE</code></td><td><code>Nachname LIKE 'B%'</code>, <code>Code LIKE 'A_7%'</code></td><td>Muster: <code>%</code> = beliebig viele Zeichen (auch keins), <code>_</code> = genau ein Zeichen</td></tr>
+    <tr><td><code>IS NULL / IS NOT NULL</code></td><td><code>TrainerNr IS NULL</code></td><td>prüft auf „kein Wert“ – <strong>niemals</strong> <code>= NULL</code></td></tr>
+  </table>
+  <p>Texte und Datumswerte stehen in einfachen Anführungszeichen, Zahlen ohne. Dezimalpunkt statt Komma (<code>9.50</code>). Datumsliterale im Format <code>'JJJJ-MM-TT'</code>.</p>
+
+  <h4>Funktionen, berechnete Spalten, Alias</h4>
+  <table>
+    <tr><th>Funktion (MySQL)</th><th>Ergebnis</th></tr>
+    <tr><td><code>YEAR(d)</code>, <code>MONTH(d)</code>, <code>DAY(d)</code></td><td>Jahr, Monat (1–12), Tag aus einem Datum</td></tr>
+    <tr><td><code>CURDATE()</code>, <code>NOW()</code></td><td>heutiges Datum bzw. Datum mit Uhrzeit</td></tr>
+    <tr><td><code>DATEDIFF(d1, d2)</code></td><td>Anzahl Tage <code>d1 − d2</code> (<code>DATEDIFF('2026-04-08', '2026-04-06')</code> = 2)</td></tr>
+    <tr><td><code>Preis * 10 AS Zehnerkarte</code></td><td>berechnete Spalte mit Alias</td></tr>
+  </table>
+  <p class="klein">Dialekt-Hinweis: Im IHK-Belegsatz (z. B. S22) steht <code>DATEDIFF(Datumsteil, Anfangsdatum, Enddatum)</code> sowie <code>TODAY</code>/<code>CURRENT</code> (SQL-Server-Stil). Verwende in der Prüfung die Schreibweise aus dem Belegsatz deiner Prüfung; sinnvolle Varianten werden akzeptiert.</p>
+<pre class="sql">SELECT Nachname, Ort, YEAR(Eintritt) AS Jahr
+FROM   Mitglied
+WHERE  YEAR(Eintritt) &gt;= 2025 AND (Ort = 'Bonn' OR Ort = 'Siegburg')
+ORDER BY Eintritt;</pre>
+  <table class="daten ergebnis">
+<tr><th>Nachname</th><th>Ort</th><th>Jahr</th></tr>
+<tr><td>Aydin</td><td>Bonn</td><td>2025</td></tr>
+<tr><td>Wolf</td><td>Siegburg</td><td>2026</td></tr>
+</table>
+<pre class="sql">SELECT Titel, Preis, Preis * 10 AS Zehnerkarte, Preis * 10 * 0.9 AS ZehnerkarteRabatt
+FROM   Kurs
+WHERE  Titel LIKE '%ing%' OR Titel LIKE 'Y%';</pre>
+  <table class="daten ergebnis">
+<tr><th>Titel</th><th>Preis</th><th>Zehnerkarte</th><th>ZehnerkarteRabatt</th></tr>
+<tr><td>Yoga</td><td>8.00</td><td>80.00</td><td>72.00</td></tr>
+<tr><td>Spinning</td><td>10.00</td><td>100.00</td><td>90.00</td></tr>
+</table>
+
+  <h4>JOIN-Arten</h4>
+  <p>Ein JOIN verbindet Tabellen über ihre Beziehung, fast immer <strong>FK = PK</strong>. Fehlt die ON-Bedingung, entsteht das kartesische Produkt (jede Zeile mit jeder).</p>
+  <table>
+    <tr><th>JOIN-Art</th><th>liefert</th></tr>
+    <tr><td><code>[INNER] JOIN</code></td><td>nur Zeilen, die auf <strong>beiden</strong> Seiten einen Partner haben</td></tr>
+    <tr><td><code>LEFT [OUTER] JOIN</code></td><td><strong>alle</strong> Zeilen der linken Tabelle (vor dem JOIN), dazu die passenden der rechten; fehlt ein Partner, sind die rechten Spalten <code>NULL</code></td></tr>
+    <tr><td><code>RIGHT [OUTER] JOIN</code></td><td>umgekehrt: alle Zeilen der rechten Tabelle (selten nötig – man kann die Tabellen tauschen und LEFT JOIN nehmen)</td></tr>
+  </table>
+<pre class="sql">SELECT k.Titel, t.Name
+FROM   Kurs k
+  INNER JOIN Trainer t ON t.TrainerNr = k.TrainerNr;   -- bzw. LEFT JOIN / RIGHT JOIN</pre>
+  <div class="nebeneinander">
+    <div><p class="klein"><strong>INNER JOIN</strong> (Boxen fehlt)</p><table class="daten ergebnis">
+<tr><th>Titel</th><th>Name</th></tr>
+<tr><td>Yoga</td><td>Lisa Stein</td></tr>
+<tr><td>Spinning</td><td>Omar Haddad</td></tr>
+<tr><td>Pilates</td><td>Lisa Stein</td></tr>
+</table></div>
+    <div><p class="klein"><strong>LEFT JOIN</strong> (alle Kurse)</p><table class="daten ergebnis">
+<tr><th>Titel</th><th>Name</th></tr>
+<tr><td>Yoga</td><td>Lisa Stein</td></tr>
+<tr><td>Spinning</td><td>Omar Haddad</td></tr>
+<tr><td>Pilates</td><td>Lisa Stein</td></tr>
+<tr><td>Boxen</td><td>NULL</td></tr>
+</table></div>
+    <div><p class="klein"><strong>RIGHT JOIN</strong> (alle Trainer)</p><table class="daten ergebnis">
+<tr><th>Titel</th><th>Name</th></tr>
+<tr><td>Yoga</td><td>Lisa Stein</td></tr>
+<tr><td>Pilates</td><td>Lisa Stein</td></tr>
+<tr><td>Spinning</td><td>Omar Haddad</td></tr>
+<tr><td>NULL</td><td>Jan Ott</td></tr>
+</table></div>
+  </div>
+  <p><strong>Mehrere Tabellen</strong> verbindet man als Kette entlang der Fremdschlüssel. Tabellenaliase (<code>m</code>, <code>b</code>, <code>k</code>) sparen Schreibarbeit und machen Spaltennamen eindeutig:</p>
+<pre class="sql">SELECT m.Nachname, k.Titel, b.Datum
+FROM   Mitglied m
+  INNER JOIN Buchung b ON b.MitgliedNr = m.MitgliedNr
+  INNER JOIN Kurs k    ON k.KursNr     = b.KursNr
+WHERE  m.Ort = 'Bonn'
+ORDER BY b.Datum;</pre>
+  <table class="daten ergebnis">
+<tr><th>Nachname</th><th>Titel</th><th>Datum</th></tr>
+<tr><td>Berg</td><td>Yoga</td><td>2026-03-02</td></tr>
+<tr><td>Berg</td><td>Spinning</td><td>2026-03-04</td></tr>
+<tr><td>Berg</td><td>Yoga</td><td>2026-04-06</td></tr>
+<tr><td>Aydin</td><td>Spinning</td><td>2026-04-07</td></tr>
+</table>
+  <p class="klein">Die ältere Schreibweise <code>FROM Mitglied m, Buchung b, Kurs k WHERE b.MitgliedNr = m.MitgliedNr AND …</code> ist gleichwertig zum INNER JOIN und wird akzeptiert. Für einen LEFT JOIN braucht man aber die JOIN-Syntax.</p>
+
+  <h4>Die LEFT-JOIN-Falle: Bedingung in ON oder in WHERE?</h4>
+  <p>Aufgabe: „Alle Mitglieder mit ihren Buchungen im April – <em>auch Mitglieder ohne April-Buchung</em> sollen erscheinen.“</p>
+  <div class="nebeneinander">
+    <div>
+      <p class="klein"><strong>Richtig – Bedingung in ON</strong></p>
+<pre class="sql">SELECT m.Nachname, b.Datum
+FROM   Mitglied m
+  LEFT JOIN Buchung b
+    ON  b.MitgliedNr = m.MitgliedNr
+    AND MONTH(b.Datum) = 4
+ORDER BY m.Nachname;</pre>
+      <table class="daten ergebnis">
+<tr><th>Nachname</th><th>Datum</th></tr>
+<tr><td>Aydin</td><td>2026-04-07</td></tr>
+<tr><td>Berg</td><td>2026-04-06</td></tr>
+<tr><td>Kurz</td><td>2026-04-08</td></tr>
+<tr><td>Wolf</td><td>NULL</td></tr>
+</table>
+    </div>
+    <div>
+      <p class="klein"><strong>Falsch – Bedingung in WHERE</strong></p>
+<pre class="sql">SELECT m.Nachname, b.Datum
+FROM   Mitglied m
+  LEFT JOIN Buchung b
+    ON  b.MitgliedNr = m.MitgliedNr
+WHERE  MONTH(b.Datum) = 4
+ORDER BY m.Nachname;</pre>
+      <table class="daten ergebnis">
+<tr><th>Nachname</th><th>Datum</th></tr>
+<tr><td>Aydin</td><td>2026-04-07</td></tr>
+<tr><td>Berg</td><td>2026-04-06</td></tr>
+<tr><td>Kurz</td><td>2026-04-08</td></tr>
+</table>
+    </div>
+  </div>
+  <p>WHERE wird <strong>nach</strong> dem Join ausgewertet. Für „Wolf“ ist <code>b.Datum</code> NULL, <code>MONTH(NULL) = 4</code> ist nicht wahr → die Zeile fällt heraus. Der LEFT JOIN wirkt dann wie ein INNER JOIN. Ebenso würden Mitglieder fehlen, die nur im März gebucht haben.</p>
+  <div class="merke"><span class="kastentitel">Merke</span>
+    „<strong>Auch X ohne Y</strong>“ / „alle X, auch wenn …“ → <strong>LEFT JOIN</strong>, die Tabelle mit „allen“ Zeilen steht links (nach FROM).<br>
+    Bedingungen auf die <strong>rechte (optionale) Tabelle</strong> gehören in die <strong>ON-Klausel</strong>; Bedingungen auf die linke Tabelle dürfen in WHERE stehen.</div>
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>
+    <ul>
+      <li><code>= NULL</code> statt <code>IS NULL</code> – liefert nie ein Ergebnis.</li>
+      <li>AND/OR ohne Klammern: <code>Ort = 'Bonn' OR Ort = 'Köln' AND Preis &gt; 9</code> bedeutet <code>Ort = 'Bonn' OR (Ort = 'Köln' AND Preis &gt; 9)</code>.</li>
+      <li>Mehrdeutige Spaltennamen bei Joins (KursNr steht in zwei Tabellen) → Tabellenalias voranstellen.</li>
+      <li>Join-Bedingung vergessen → kartesisches Produkt (viel zu viele Zeilen).</li>
+      <li>Bei DATETIME-Spalten erfasst <code>BETWEEN '…-01' AND '…-31'</code> den letzten Tag nur bis 00:00 Uhr; sicherer ist <code>&gt;= '2026-03-01' AND &lt; '2026-04-01'</code>.</li>
+    </ul>
+  </div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li>„Auch … ohne …“ = LEFT JOIN kam in <strong>S22, W22, S23, W23 und S26</strong> vor.</li>
+      <li><strong>W21 T2 4e (8 P):</strong> Join über 4 Tabellen mit ORDER BY; <strong>W24 T2 4c (12 P):</strong> 3-Tabellen-Join mit Datumsdifferenz; <strong>S23 T2 4b (8 P):</strong> 3-Tabellen-Join mit Wochentag und ORDER BY; <strong>W22 T2 4c (5 P):</strong> LIKE-Muster bei PLZ; <strong>W23 T2 4a (4 P):</strong> BETWEEN.</li>
+      <li>Punkte gibt es meist je Klausel (SELECT-Liste, FROM/JOIN, WHERE, ORDER BY) – schreibe also auch bei Unsicherheit alle Teile hin.</li>
+    </ul>
+  </div>
+
+  <!-- ======================= DB-04 ======================= -->
+  <h3 id="e-04">DB-04 · SQL: Aggregatfunktionen, GROUP BY und HAVING <span class="badge k-immer">Immer</span></h3>
+  <p class="klein">Vorkommen: 8/9 · Prüfungen: alle außer W24 · Teil 2, Aufgabe 4</p>
+
+  <h4>Aggregatfunktionen</h4>
+  <table>
+    <tr><th>Funktion</th><th>liefert</th><th>NULL-Werte</th></tr>
+    <tr><td><code>COUNT(*)</code></td><td>Anzahl Zeilen</td><td>werden mitgezählt</td></tr>
+    <tr><td><code>COUNT(Spalte)</code></td><td>Anzahl Werte in der Spalte</td><td>werden <strong>nicht</strong> gezählt</td></tr>
+    <tr><td><code>COUNT(DISTINCT Spalte)</code></td><td>Anzahl verschiedener Werte</td><td>nicht gezählt</td></tr>
+    <tr><td><code>SUM</code>, <code>AVG</code></td><td>Summe, Durchschnitt</td><td>ignoriert (AVG teilt nur durch die Anzahl der Nicht-NULL-Werte)</td></tr>
+    <tr><td><code>MIN</code>, <code>MAX</code></td><td>kleinster, größter Wert (auch bei Text und Datum)</td><td>ignoriert</td></tr>
+  </table>
+<pre class="sql">SELECT COUNT(*) AS Anzahl, MIN(Preis) AS Min, MAX(Preis) AS Max,
+       SUM(Preis) AS Summe, AVG(Preis) AS Schnitt
+FROM   Kurs;</pre>
+  <table class="daten ergebnis">
+<tr><th>Anzahl</th><th>Min</th><th>Max</th><th>Summe</th><th>Schnitt</th></tr>
+<tr><td>4</td><td>8.00</td><td>12.00</td><td>39.00</td><td>9.7500</td></tr>
+</table>
+<pre class="sql">SELECT COUNT(*) AS alle, COUNT(TrainerNr) AS mitTrainer, COUNT(DISTINCT TrainerNr) AS versch
+FROM   Kurs;</pre>
+  <table class="daten ergebnis">
+<tr><th>alle</th><th>mitTrainer</th><th>versch</th></tr>
+<tr><td>4</td><td>3</td><td>2</td></tr>
+</table>
+
+  <h4>GROUP BY</h4>
+  <p>Ohne GROUP BY fasst eine Aggregatfunktion die ganze (gefilterte) Tabelle zu <strong>einer</strong> Zeile zusammen. Mit GROUP BY entsteht <strong>je Gruppe eine Zeile</strong>.</p>
+  <div class="merke"><span class="kastentitel">Merke – GROUP-BY-Regel</span>
+    Jede Spalte im SELECT, die <strong>nicht</strong> in einer Aggregatfunktion steht, muss auch im GROUP BY stehen. (MySQL ist je nach Einstellung toleranter – die Prüfung erwartet die Regel.)</div>
+  <p>Beispiel: Anzahl Buchungen je Kurs – auch Kurse ohne Buchung:</p>
+<pre class="sql">SELECT k.Titel, COUNT(b.BuchungNr) AS Anzahl, COUNT(*) AS Zeilen
+FROM   Kurs k
+  LEFT JOIN Buchung b ON b.KursNr = k.KursNr
+GROUP BY k.KursNr, k.Titel
+ORDER BY Anzahl DESC;</pre>
+  <table class="daten ergebnis">
+<tr><th>Titel</th><th>Anzahl</th><th>Zeilen</th></tr>
+<tr><td>Yoga</td><td>3</td><td>3</td></tr>
+<tr><td>Spinning</td><td>2</td><td>2</td></tr>
+<tr><td>Pilates</td><td>1</td><td>1</td></tr>
+<tr><td>Boxen</td><td>0</td><td>1</td></tr>
+</table>
+  <p>„Boxen“ hat keine Buchung. Nach dem LEFT JOIN existiert trotzdem <strong>eine</strong> Zeile (mit NULL in den Buchungsspalten). <code>COUNT(*)</code> zählt diese Zeile mit (1), <code>COUNT(b.BuchungNr)</code> zählt nur echte Buchungen (0).</p>
+
+  <h4>WHERE oder HAVING?</h4>
+  <table>
+    <tr><th></th><th>WHERE</th><th>HAVING</th></tr>
+    <tr><td>filtert</td><td>einzelne Zeilen</td><td>Gruppen</td></tr>
+    <tr><td>Zeitpunkt</td><td>vor der Gruppierung</td><td>nach der Gruppierung</td></tr>
+    <tr><td>Aggregatfunktionen erlaubt?</td><td>nein</td><td>ja</td></tr>
+    <tr><td>Beispiel</td><td><code>WHERE YEAR(b.Datum) = 2026</code></td><td><code>HAVING COUNT(*) &gt;= 2</code></td></tr>
+  </table>
+<pre class="sql">SELECT m.MitgliedNr, m.Nachname, COUNT(*) AS Buchungen
+FROM   Mitglied m
+  INNER JOIN Buchung b ON b.MitgliedNr = m.MitgliedNr
+WHERE  YEAR(b.Datum) = 2026          -- Zeilenfilter
+GROUP BY m.MitgliedNr, m.Nachname
+HAVING COUNT(*) &gt;= 2;                -- Gruppenfilter</pre>
+  <table class="daten ergebnis">
+<tr><th>MitgliedNr</th><th>Nachname</th><th>Buchungen</th></tr>
+<tr><td>1</td><td>Berg</td><td>3</td></tr>
+<tr><td>2</td><td>Kurz</td><td>2</td></tr>
+</table>
+
+  <h4>So gehst du vor</h4>
+  <ol>
+    <li>„je …“, „pro …“, „für jede(n) …“ → das ist die <strong>GROUP-BY-Spalte</strong> (plus die Spalten, die dazu angezeigt werden sollen).</li>
+    <li>„Anzahl“ → COUNT, „Summe/Umsatz/Gesamt“ → SUM, „Durchschnitt“ → AVG, „höchste/niedrigste/letzte“ → MAX/MIN.</li>
+    <li>Bedingung an Einzelzeilen (Jahr, Status, Ort) → WHERE. Bedingung an das Gruppenergebnis („mehr als 3“, „Summe über 100 €“) → HAVING.</li>
+    <li>„auch … ohne …“ / „mit 0“ → LEFT JOIN und <code>COUNT(Spalte der rechten Tabelle)</code>.</li>
+    <li>Sortieren nach dem Aggregat: <code>ORDER BY Anzahl DESC</code> (Alias) oder <code>ORDER BY COUNT(*) DESC</code>.</li>
+  </ol>
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>
+    <ul>
+      <li>Aggregatfunktion in WHERE (<code>WHERE COUNT(*) &gt; 2</code>) → Syntaxfehler, gehört in HAVING.</li>
+      <li><code>COUNT(*)</code> nach LEFT JOIN liefert 1 statt 0.</li>
+      <li>Spalte im SELECT, aber nicht im GROUP BY.</li>
+      <li>AVG ignoriert NULL; sollen fehlende Werte als 0 zählen: <code>AVG(COALESCE(Spalte, 0))</code>.</li>
+      <li>Mit Aggregaten darf man rechnen, z. B. Durchschnitt pro Monat <code>COUNT(*) / 12</code> (S23).</li>
+    </ul>
+  </div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li><strong>W21 T2 4d (6 P):</strong> GROUP BY mit <code>HAVING COUNT(…) &gt; 50</code>; <strong>W25 T2 4c (5 P):</strong> <code>HAVING COUNT(*) &gt;= 3</code>.</li>
+      <li><strong>W25 T2 4b/4e:</strong> SUM über 4 Tabellen, SUM je Kategorie mit ORDER BY DESC; <strong>S24 T2 4b (8 P):</strong> MIN/MAX/AVG/COUNT je Börse.</li>
+      <li><strong>S22 T2 4bc, S23 T2 4c, W22 T2 4a, S26 T2 4b:</strong> LEFT JOIN + GROUP BY (Anzahl/Summe auch für Datensätze ohne Partner).</li>
+    </ul>
+  </div>
+
+  <!-- ======================= DB-05 ======================= -->
+  <h3 id="e-05">DB-05 · SQL: INSERT, UPDATE, DELETE <span class="badge k-meistens">Meistens</span></h3>
+  <p class="klein">Vorkommen: 7/9 · Prüfungen: W21, S22, W22, W23, S24, W25, S26 · Teil 2, Aufgabe 4</p>
+
+  <h4>INSERT – Datensätze einfügen</h4>
+<pre class="sql">INSERT INTO Mitglied (MitgliedNr, Vorname, Nachname, Ort, Eintritt)
+VALUES (5, 'Eva', 'Lorenz', 'Bonn', '2026-10-01');
+
+-- mehrere Zeilen auf einmal
+INSERT INTO Trainer (TrainerNr, Name)
+VALUES (4, 'Kai Brehm'), (5, 'Ina Vogt');</pre>
+  <ul>
+    <li>Spaltenliste immer angeben – dann ist die Reihenfolge der Spalten in der Tabelle egal und fehlende Spalten bekommen NULL bzw. ihren DEFAULT.</li>
+    <li>Werte in derselben Reihenfolge wie die Spaltenliste; Text und Datum in <code>'…'</code>, Zahlen ohne, <code>NULL</code> ohne Anführungszeichen.</li>
+    <li>Eine Spalte mit <code>AUTO_INCREMENT</code> lässt man weg – das DBMS vergibt die Nummer.</li>
+  </ul>
+
+  <h4>UPDATE – Werte ändern</h4>
+<pre class="sql">UPDATE Kurs
+SET    Preis = Preis * 1.05              -- Preis um 5 % erhöhen
+WHERE  TrainerNr = 1;
+
+-- mit Unterabfrage (die Nummer ist nicht bekannt, nur der Name)
+UPDATE Kurs
+SET    Preis = Preis - 1
+WHERE  TrainerNr = (SELECT TrainerNr FROM Trainer WHERE Name = 'Omar Haddad');
+
+-- MySQL-Variante: UPDATE mit JOIN
+UPDATE Kurs k
+  INNER JOIN Trainer t ON t.TrainerNr = k.TrainerNr
+SET    k.Preis = k.Preis - 1
+WHERE  t.Name = 'Omar Haddad';</pre>
+  <div class="merke"><span class="kastentitel">Merke</span><code>UPDATE</code> und <code>DELETE</code> <strong>ohne WHERE</strong> betreffen <strong>alle</strong> Zeilen der Tabelle. Mehrere Spalten trennt man im SET mit Komma: <code>SET Preis = 9.50, TrainerNr = 2</code>.</div>
+
+  <h4>DELETE – Datensätze löschen</h4>
+<pre class="sql">DELETE FROM Buchung
+WHERE  Datum &lt; '2026-04-01';</pre>
+  <p><strong>Referenzielle Integrität:</strong> Ein Datensatz, auf den noch ein Fremdschlüssel zeigt, kann (ohne <code>ON DELETE CASCADE</code>) nicht gelöscht werden. Deshalb gilt:</p>
+  <ul>
+    <li><strong>Löschen:</strong> erst die Datensätze in der <strong>Kind-Tabelle</strong> (mit dem FK), dann den Datensatz in der <strong>Eltern-Tabelle</strong>.</li>
+    <li><strong>Einfügen:</strong> umgekehrt – erst Eltern, dann Kind.</li>
+  </ul>
+<pre class="sql">-- Mitglied 2 vollständig löschen
+DELETE FROM Buchung  WHERE MitgliedNr = 2;   -- 1. Kind
+DELETE FROM Mitglied WHERE MitgliedNr = 2;   -- 2. Eltern</pre>
+  <table>
+    <tr><th>Befehl</th><th>Wirkung</th></tr>
+    <tr><td><code>DELETE FROM t WHERE …</code></td><td>löscht ausgewählte Zeilen (DML), Struktur bleibt</td></tr>
+    <tr><td><code>TRUNCATE TABLE t</code></td><td>leert die ganze Tabelle schnell (DDL), Struktur bleibt</td></tr>
+    <tr><td><code>DROP TABLE t</code></td><td>löscht die Tabelle samt Struktur und Daten</td></tr>
+  </table>
+
+  <h4>Archivierungsmuster: INSERT … SELECT + DELETE</h4>
+  <p>Alte Datensätze werden aus der Arbeitstabelle in eine Archivtabelle <strong>verschoben</strong>: Die Arbeitstabelle bleibt klein und schnell, die Historie bleibt erhalten.</p>
+<pre class="sql">START TRANSACTION;
+
+INSERT INTO Buchung_Archiv (BuchungNr, MitgliedNr, KursNr, Datum)
+SELECT BuchungNr, MitgliedNr, KursNr, Datum
+FROM   Buchung
+WHERE  Datum &lt; '2026-04-01';
+
+DELETE FROM Buchung
+WHERE  Datum &lt; '2026-04-01';
+
+COMMIT;</pre>
+  <div class="merke"><span class="kastentitel">Merke</span>
+    <strong>Gleiche WHERE-Bedingung</strong> im INSERT…SELECT und im DELETE · <strong>erst kopieren, dann löschen</strong> · beides in <strong>einer Transaktion</strong> · bei INSERT…SELECT <strong>kein</strong> <code>VALUES</code>.</div>
+  <p>Hat die Archivtabelle eine <strong>andere Struktur</strong> (Klartext statt Fremdschlüssel, berechnete Werte), wird im SELECT gejoint und gerechnet:</p>
+<pre class="sql">INSERT INTO Kurs_Archiv (KursNr, Titel, Trainer, AnzahlBuchungen)
+SELECT k.KursNr, k.Titel, t.Name, COUNT(b.BuchungNr)
+FROM   Kurs k
+  LEFT JOIN Trainer t ON t.TrainerNr = k.TrainerNr
+  LEFT JOIN Buchung b ON b.KursNr   = k.KursNr
+WHERE  k.KursNr = 12
+GROUP BY k.KursNr, k.Titel, t.Name;</pre>
+  <table class="daten ergebnis">
+<tr><th>KursNr</th><th>Titel</th><th>Trainer</th><th>AnzahlBuchungen</th></tr>
+<tr><td>12</td><td>Pilates</td><td>Lisa Stein</td><td>1</td></tr>
+</table>
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>
+    <ul>
+      <li><code>VALUES</code> und <code>SELECT</code> kombiniert – bei INSERT…SELECT steht nur das SELECT.</li>
+      <li>Unterschiedliche Bedingungen in INSERT und DELETE → Datenverlust oder Dubletten im Archiv.</li>
+      <li>Vergleiche mit NULL: <code>Ende &lt; '2026-01-01'</code> erfasst keine Zeilen mit <code>Ende = NULL</code> (meist gewollt: laufende Vorgänge bleiben).</li>
+      <li>Falsche Löschreihenfolge bei Fremdschlüsseln.</li>
+      <li>Dezimalkomma (<code>9,50</code>) statt Dezimalpunkt (<code>9.50</code>).</li>
+    </ul>
+  </div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li><strong>Archivieren:</strong> W22 T2 4b (10 P) und S24 T2 4c (8 P): INSERT INTO … SELECT + DELETE; S26 T2 4ca (10 P): Archiv mit JOIN und Aggregat, 4cb (4 P): DELETE-Reihenfolge wegen FK.</li>
+      <li><strong>UPDATE:</strong> W21 T2 4c (5 P): Preis +5 % mit Unterabfrage; W23 T2 4c (8 P): UPDATE mit JOIN und MONTH/YEAR; W25 T2 4d: UPDATE mit SUBSTRING nach ALTER TABLE.</li>
+      <li><strong>INSERT/DELETE einzeln:</strong> W25 T2 4a (2 P), S24 T2 4a (2 P).</li>
+    </ul>
+  </div>
+
+  <!-- ======================= DB-06 ======================= -->
+  <h3 id="e-06">DB-06 · Datenbank-Theorie: ACID, Transaktion, Integrität, Index, NoSQL <span class="badge k-meistens">Meistens</span></h3>
+  <p class="klein">Vorkommen: 6/9 · Prüfungen: S22, W22, S23, W23, W24, W25 · meist Teil 1</p>
+
+  <h4>Transaktion und ACID</h4>
+  <p>Eine <strong>Transaktion</strong> ist eine Folge von Datenbankoperationen, die als logische Einheit <strong>ganz oder gar nicht</strong> ausgeführt wird. <code>START TRANSACTION</code> beginnt sie, <code>COMMIT</code> macht die Änderungen dauerhaft, <code>ROLLBACK</code> nimmt alle Änderungen seit Beginn zurück.</p>
+  <p>Beispiel: Ein Mitglied wird von Kurs A nach Kurs B umgebucht (DELETE der alten + INSERT der neuen Buchung). Fällt nach dem DELETE der Server aus, wäre das Mitglied ohne Transaktion in gar keinem Kurs mehr.</p>
+  <table>
+    <tr><th>Eigenschaft</th><th>Bedeutung</th><th>Beispiel Fitnessstudio</th></tr>
+    <tr><td><strong>A</strong>tomicity – Atomarität</td><td>alles oder nichts; bei Fehler wird alles zurückgesetzt</td><td>Umbuchung wird komplett oder gar nicht ausgeführt</td></tr>
+    <tr><td><strong>C</strong>onsistency – Konsistenz</td><td>Die DB geht von einem konsistenten in einen konsistenten Zustand über; alle Integritätsbedingungen (PK, FK, CHECK) sind danach erfüllt.</td><td>keine Buchung auf einen nicht existierenden Kurs</td></tr>
+    <tr><td><strong>I</strong>solation</td><td>Gleichzeitig laufende Transaktionen beeinflussen sich nicht – das Ergebnis ist so, als liefen sie nacheinander.</td><td>Zwei Mitglieder buchen gleichzeitig den letzten freien Platz → nur eines bekommt ihn.</td></tr>
+    <tr><td><strong>D</strong>urability – Dauerhaftigkeit</td><td>Nach dem COMMIT bleiben die Änderungen erhalten, auch bei Absturz oder Stromausfall.</td><td>Bestätigte Buchung ist nach dem Neustart noch da.</td></tr>
+  </table>
+
+  <h4>Referenzielle Integrität</h4>
+  <p>Jeder Fremdschlüsselwert muss als Primärschlüsselwert in der referenzierten Tabelle existieren (oder NULL sein, wenn erlaubt). Das DBMS verhindert daher</p>
+  <ul>
+    <li>das Einfügen/Ändern eines FK-Werts, zu dem es keinen PK gibt (Buchung für Mitglied 99, das nicht existiert),</li>
+    <li>das Löschen/Ändern eines PK-Werts, auf den noch FKs zeigen – oder reagiert gemäß der festgelegten Regel:</li>
+  </ul>
+  <table>
+    <tr><th>Regel</th><th>Wirkung beim Löschen des Eltern-Datensatzes</th></tr>
+    <tr><td><code>ON DELETE RESTRICT</code> / <code>NO ACTION</code></td><td>Löschen wird verweigert (Standard)</td></tr>
+    <tr><td><code>ON DELETE CASCADE</code></td><td>abhängige Datensätze werden automatisch mitgelöscht</td></tr>
+    <tr><td><code>ON DELETE SET NULL</code></td><td>FK in den abhängigen Datensätzen wird auf NULL gesetzt</td></tr>
+  </table>
+<pre class="sql">FOREIGN KEY (TrainerNr) REFERENCES Trainer (TrainerNr) ON DELETE SET NULL</pre>
+
+  <h4>Index</h4>
+  <p>Ein Index ist eine zusätzliche, sortierte Datenstruktur (meist ein B-Baum) über eine oder mehrere Spalten – vergleichbar mit dem Stichwortverzeichnis eines Buches. Ohne Index muss das DBMS bei einer Suche die ganze Tabelle lesen (Full Table Scan).</p>
+  <table>
+    <tr><th>Vorteile</th><th>Nachteile</th></tr>
+    <tr><td>schnelleres Suchen (WHERE), Verknüpfen (JOIN) und Sortieren (ORDER BY)<br>UNIQUE-Index stellt Eindeutigkeit sicher</td><td>zusätzlicher Speicherplatz<br>INSERT, UPDATE und DELETE werden langsamer, weil der Index mitgepflegt werden muss</td></tr>
+  </table>
+  <p><strong>Sinnvoll</strong> für Spalten, die oft in WHERE, JOIN (Fremdschlüssel!) oder ORDER BY vorkommen, bei großen Tabellen und Spalten mit vielen verschiedenen Werten. <strong>Wenig sinnvoll</strong> bei kleinen Tabellen, bei Spalten mit wenigen verschiedenen Werten (z. B. ja/nein) und bei Tabellen mit sehr vielen Schreibzugriffen. Der Primärschlüssel ist automatisch indiziert.</p>
+<pre class="sql">CREATE INDEX idx_buchung_datum ON Buchung (Datum);</pre>
+
+  <h4>Redundanz und Anomalien</h4>
+  <p>Siehe <a href="#e-02">DB-02</a>. Ergänzung: <strong>Gewollte Redundanz</strong> gibt es z. B. in Archiv- und Auswertungstabellen (Data Warehouse), bei bewusster Denormalisierung für schnellere Abfragen und bei Datensicherungen.</p>
+
+  <h4>NoSQL und dokumentenorientierte Datenbanken</h4>
+  <p><strong>NoSQL</strong> („not only SQL“) bezeichnet Datenbanken ohne festes Tabellenschema. Arten: <strong>Dokumentenorientiert</strong> (JSON-Dokumente, z. B. MongoDB), <strong>Key-Value</strong> (Schlüssel → Wert, z. B. Cache, Sitzungsdaten), <strong>spaltenorientiert</strong> (Wide Column, sehr große verteilte Datenmengen), <strong>Graph</strong> (Knoten und Kanten, z. B. soziale Netze, Routen).</p>
+  <table>
+    <tr><th>Relational</th><th>Dokumentenorientiert</th></tr>
+    <tr><td>Tabelle</td><td>Collection (Sammlung)</td></tr>
+    <tr><td>Zeile / Datensatz</td><td>Document (Dokument)</td></tr>
+    <tr><td>Spalte / Attribut</td><td>Field (Feld, Schlüssel-Wert-Paar)</td></tr>
+    <tr><td>Primärschlüssel</td><td><code>_id</code> (Dokument-ID)</td></tr>
+    <tr><td>Fremdschlüssel + JOIN</td><td>Referenz (gespeicherte ID eines anderen Dokuments) oder Einbettung (Embedding)</td></tr>
+  </table>
+  <p><strong>Einbettung vs. Referenz</strong> am Beispiel „Mitglied mit Buchungen“:</p>
+  <div class="nebeneinander">
+    <div><p class="klein"><strong>Einbettung (Embedding)</strong></p>
+<pre>{
+  "_id": 1,
+  "vorname": "Anna",
+  "nachname": "Berg",
+  "ort": "Bonn",
+  "buchungen": [
+    { "datum": "2026-03-02", "kurs": "Yoga" },
+    { "datum": "2026-03-04", "kurs": "Spinning" }
+  ]
+}</pre></div>
+    <div><p class="klein"><strong>Referenz</strong></p>
+<pre>// Collection "mitglieder"
+{ "_id": 1, "vorname": "Anna",
+  "nachname": "Berg", "ort": "Bonn" }
+
+// Collection "buchungen"
+{ "_id": 1, "mitgliedId": 1,
+  "kursId": 10, "datum": "2026-03-02" }</pre></div>
+  </div>
+  <table>
+    <tr><th></th><th>Einbettung</th><th>Referenz</th></tr>
+    <tr><td>Vorteil</td><td>ein Lesezugriff liefert alles; Änderung eines Dokuments ist atomar</td><td>keine Duplikate; Daten unabhängig voneinander änderbar</td></tr>
+    <tr><td>Nachteil</td><td>Daten werden dupliziert (Kursname in vielen Dokumenten); Dokumente wachsen</td><td>mehrere Abfragen bzw. Verknüpfung (Lookup) nötig</td></tr>
+    <tr><td>geeignet für</td><td>„gehört zu“, wird zusammen gelesen, 1:wenige</td><td>m:n, große oder unabhängig geänderte Daten</td></tr>
+  </table>
+  <p><strong>JSON-Regeln:</strong> Objekt <code>{ "schlüssel": wert, … }</code>, Array <code>[ wert, wert ]</code>; Schlüssel und Strings in <strong>doppelten</strong> Anführungszeichen; Zahlen, <code>true</code>, <code>false</code>, <code>null</code> ohne; kein Komma nach dem letzten Element; Datum als String.</p>
+  <table>
+    <tr><th>Kriterium</th><th>Relationale DB</th><th>Dokumentenorientierte DB</th></tr>
+    <tr><td>Schema</td><td>fest, vorab definiert</td><td>flexibel, Dokumente einer Collection dürfen unterschiedlich aufgebaut sein</td></tr>
+    <tr><td>Struktur</td><td>normalisierte Tabellen</td><td>verschachtelte Dokumente</td></tr>
+    <tr><td>Beziehungen</td><td>FK + JOIN</td><td>Einbettung oder Referenz, kaum Joins</td></tr>
+    <tr><td>Konsistenz</td><td>ACID über beliebig viele Tabellen</td><td>oft nur je Dokument atomar; verteilt häufig „eventual consistency“ (BASE)</td></tr>
+    <tr><td>Skalierung</td><td>eher vertikal (größerer Server)</td><td>horizontal (viele Server, Sharding)</td></tr>
+    <tr><td>Abfrage</td><td>standardisiertes SQL</td><td>produktspezifische Abfragesprache/API</td></tr>
+    <tr><td>typischer Einsatz</td><td>Buchhaltung, Verwaltung, viele Beziehungen, strenge Konsistenz</td><td>große, wechselnd strukturierte Datenmengen: Logs, Sensordaten, Kataloge, Inhalte</td></tr>
+  </table>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li><strong>W23 T1 A3 (25 P):</strong> ACID erläutern (8 P), Begriffe relational ↔ Dokument zuordnen (3 P), Tabellen in JSON-Dokumente umwandeln (7 P), Einbettung als Array (7 P).</li>
+      <li><strong>S22 T1 2c (9 P):</strong> Vorteile von NoSQL aus einem englischen Text; <strong>W22 T1 4c (5 P):</strong> NoSQL vs. relational begründen.</li>
+      <li><strong>S22 T2 4ac (2 P):</strong> Zweck eines Index; <strong>S23 T1 4ca, W25 T1 4a/b:</strong> Redundanz und Anomalien.</li>
+    </ul>
+  </div>
+
+  <!-- ======================= DB-07 ======================= -->
+  <h3 id="e-07">DB-07 · SQL: Unterabfragen <span class="badge k-oft">Oft</span></h3>
+  <p class="klein">Vorkommen: 5/9 · Prüfungen: W21, S22, W22, W23, S26 · Teil 2, Aufgabe 4</p>
+  <p>Eine Unterabfrage (Subquery) ist ein SELECT in Klammern innerhalb einer anderen Anweisung (SELECT, UPDATE, DELETE, INSERT).</p>
+  <table>
+    <tr><th>Art</th><th>liefert</th><th>verwendet mit</th></tr>
+    <tr><td>skalare Unterabfrage</td><td>genau einen Wert</td><td><code>=  &lt;  &gt;</code> …, auch im SELECT oder SET</td></tr>
+    <tr><td>Listen-Unterabfrage</td><td>eine Spalte, mehrere Zeilen</td><td><code>IN</code>, <code>NOT IN</code></td></tr>
+    <tr><td>EXISTS-Unterabfrage</td><td>wahr/falsch (gibt es mindestens eine Zeile?)</td><td><code>EXISTS</code>, <code>NOT EXISTS</code></td></tr>
+    <tr><td>Tabellen-Unterabfrage</td><td>eine (Zwischen-)Tabelle</td><td>in <code>FROM (…) AS alias</code></td></tr>
+  </table>
+  <p><strong>Vergleich mit einem Aggregat</strong> – Kurse, die teurer sind als der Durchschnitt:</p>
+<pre class="sql">SELECT Titel, Preis
+FROM   Kurs
+WHERE  Preis &gt; (SELECT AVG(Preis) FROM Kurs);</pre>
+  <table class="daten ergebnis">
+<tr><th>Titel</th><th>Preis</th></tr>
+<tr><td>Spinning</td><td>10.00</td></tr>
+<tr><td>Boxen</td><td>12.00</td></tr>
+</table>
+  <p><strong>IN</strong> – Mitglieder, die Spinning (Kurs 11) gebucht haben:</p>
+<pre class="sql">SELECT Nachname
+FROM   Mitglied
+WHERE  MitgliedNr IN (SELECT MitgliedNr FROM Buchung WHERE KursNr = 11);</pre>
+  <table class="daten ergebnis">
+<tr><th>Nachname</th></tr>
+<tr><td>Berg</td></tr>
+<tr><td>Aydin</td></tr>
+</table>
+  <p><strong>NOT EXISTS</strong> – Mitglieder ohne jede Buchung:</p>
+<pre class="sql">SELECT m.Nachname
+FROM   Mitglied m
+WHERE  NOT EXISTS (SELECT * FROM Buchung b WHERE b.MitgliedNr = m.MitgliedNr);</pre>
+  <table class="daten ergebnis">
+<tr><th>Nachname</th></tr>
+<tr><td>Wolf</td></tr>
+</table>
+  <h4>Korreliert oder nicht korreliert?</h4>
+  <ul>
+    <li><strong>Nicht korreliert:</strong> Die Unterabfrage ist unabhängig von der äußeren Abfrage, wird einmal ausgewertet und das Ergebnis verwendet (Beispiele AVG und IN oben).</li>
+    <li><strong>Korreliert:</strong> Die Unterabfrage verweist auf eine Spalte der äußeren Abfrage (z. B. <code>m.MitgliedNr</code>) und wird gedanklich <strong>für jede Zeile der äußeren Abfrage neu</strong> ausgeführt (Beispiel NOT EXISTS oben).</li>
+  </ul>
+  <p>Korreliertes Beispiel – die jeweils letzte Buchung jedes Mitglieds:</p>
+<pre class="sql">SELECT b.BuchungNr, b.MitgliedNr, b.Datum
+FROM   Buchung b
+WHERE  b.Datum = (SELECT MAX(b2.Datum)
+                  FROM   Buchung b2
+                  WHERE  b2.MitgliedNr = b.MitgliedNr)
+ORDER BY b.MitgliedNr;</pre>
+  <table class="daten ergebnis">
+<tr><th>BuchungNr</th><th>MitgliedNr</th><th>Datum</th></tr>
+<tr><td>5</td><td>1</td><td>2026-04-06</td></tr>
+<tr><td>6</td><td>2</td><td>2026-04-08</td></tr>
+<tr><td>4</td><td>3</td><td>2026-04-07</td></tr>
+</table>
+  <p><strong>Unterabfrage in FROM</strong> – „Wie viele Buchungen hat der meistgebuchte Kurs?“ (Aggregat über ein Aggregat):</p>
+<pre class="sql">SELECT MAX(Anzahl) AS Maximum
+FROM   (SELECT KursNr, COUNT(*) AS Anzahl
+        FROM   Buchung
+        GROUP BY KursNr) AS tbl;</pre>
+  <table class="daten ergebnis">
+<tr><th>Maximum</th></tr>
+<tr><td>3</td></tr>
+</table>
+  <p class="klein">Alternative zu NOT IN/NOT EXISTS: <code>LEFT JOIN … WHERE rechts.PK IS NULL</code> (alle linken Zeilen ohne Partner).</p>
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>
+    <ul>
+      <li><code>=</code> statt <code>IN</code>, obwohl die Unterabfrage mehrere Zeilen liefert → Laufzeitfehler.</li>
+      <li><strong>NOT IN und NULL:</strong> Enthält die Unterabfrage einen NULL-Wert, liefert <code>NOT IN</code> <em>keine einzige</em> Zeile. Beispiel: „Trainer ohne Kurs“ mit <code>WHERE TrainerNr NOT IN (SELECT TrainerNr FROM Kurs)</code> ergibt eine leere Menge, weil Kurs „Boxen“ die TrainerNr NULL hat. <code>NOT EXISTS</code> (oder <code>… WHERE TrainerNr IS NOT NULL</code> in der Unterabfrage) liefert korrekt „Jan Ott“.</li>
+      <li>Unterabfrage in FROM ohne Alias → Fehler in MySQL.</li>
+      <li>Aggregat direkt in WHERE (<code>WHERE Preis &gt; AVG(Preis)</code>) – geht nicht, dafür braucht man die Unterabfrage.</li>
+    </ul>
+  </div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li><strong>S22 T2 4bb (5 P):</strong> DELETE mit NOT IN bzw. NOT EXISTS; <strong>W23 T2 4d (8 P):</strong> korrelierte Unterabfrage mit AVG; <strong>W21 T2 4c (5 P):</strong> UPDATE mit Unterabfrage; <strong>S26 T2 4cb:</strong> DELETE mit Unterabfrage.</li>
+      <li>Der IHK-Belegsatz enthält IN/NOT IN, EXISTS/NOT EXISTS und die Unterabfrage in FROM – nachschlagen erlaubt!</li>
+    </ul>
+  </div>
+
+  <!-- ======================= DB-08 ======================= -->
+  <h3 id="e-08">DB-08 · SQL: DDL (CREATE, ALTER, DROP, INDEX) <span class="badge k-oft">Oft</span></h3>
+  <p class="klein">Vorkommen: 5/9 · Prüfungen: W21, S22, W22, W25, S26 · Teil 2, Aufgabe 3/4</p>
+
+  <h4>SQL-Teilsprachen und CRUD</h4>
+  <table>
+    <tr><th>Teilsprache</th><th>Zweck</th><th>Befehle</th></tr>
+    <tr><td><strong>DDL</strong> – Data Definition Language</td><td>Struktur definieren</td><td><code>CREATE</code>, <code>ALTER</code>, <code>DROP</code> (auch <code>TRUNCATE</code>)</td></tr>
+    <tr><td><strong>DML</strong> – Data Manipulation Language</td><td>Daten bearbeiten (und abfragen)</td><td><code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>, <code>SELECT</code> (SELECT wird teils als DQL – Data Query Language – geführt)</td></tr>
+    <tr><td><strong>DCL</strong> – Data Control Language</td><td>Rechte vergeben/entziehen</td><td><code>GRANT</code>, <code>REVOKE</code></td></tr>
+    <tr><td><strong>TCL</strong> – Transaction Control Language</td><td>Transaktionen steuern</td><td><code>COMMIT</code>, <code>ROLLBACK</code></td></tr>
+  </table>
+  <p><strong>CRUD</strong> (Create, Read, Update, Delete) sind die vier Grundoperationen auf <em>Daten</em>: Create → <code>INSERT</code>, Read → <code>SELECT</code>, Update → <code>UPDATE</code>, Delete → <code>DELETE</code> – also alles <strong>DML</strong>. (Nicht verwechseln: <code>CREATE TABLE</code> und <code>DROP TABLE</code> sind DDL.)</p>
+
+  <h4>Datentypen</h4>
+  <table>
+    <tr><th>Datentyp</th><th>Verwendung</th><th>Beispiel</th></tr>
+    <tr><td><code>INTEGER</code> (<code>INT</code>)</td><td>Ganzzahlen, IDs, Mengen</td><td>MitgliedNr, Anzahl</td></tr>
+    <tr><td><code>DECIMAL(p,s)</code></td><td>exakte Festkommazahl: p Stellen insgesamt, davon s Nachkommastellen – für <strong>Geld</strong></td><td>Preis <code>DECIMAL(6,2)</code> → max. 9999.99</td></tr>
+    <tr><td><code>DOUBLE</code> / <code>FLOAT</code></td><td>Gleitkommazahl (Rundungsfehler möglich) – für Messwerte</td><td>Temperatur, Koordinaten</td></tr>
+    <tr><td><code>CHAR(n)</code></td><td>Text fester Länge</td><td>Ländercode <code>CHAR(2)</code></td></tr>
+    <tr><td><code>VARCHAR(n)</code></td><td>Text variabler Länge (höchstens n Zeichen)</td><td>Nachname <code>VARCHAR(40)</code></td></tr>
+    <tr><td><code>TEXT</code></td><td>lange Texte</td><td>Bemerkung</td></tr>
+    <tr><td><code>DATE</code>, <code>TIME</code>, <code>DATETIME</code></td><td>Datum, Uhrzeit, beides</td><td>Eintritt <code>DATE</code></td></tr>
+    <tr><td><code>BOOLEAN</code></td><td>wahr/falsch (in MySQL intern <code>TINYINT(1)</code>)</td><td>aktiv</td></tr>
+  </table>
+  <div class="merke"><span class="kastentitel">Merke</span>
+    <strong>PLZ, Telefonnummer, Hausnummer, IBAN als Text</strong> (CHAR/VARCHAR): Es gibt führende Nullen (01067), Sonderzeichen (+49, 12a) und es wird nicht damit gerechnet.<br>
+    <strong>Geldbeträge als DECIMAL</strong>, nicht als DOUBLE (keine Rundungsfehler).</div>
+
+  <h4>CREATE TABLE mit Einschränkungen (Constraints)</h4>
+  <table>
+    <tr><th>Constraint</th><th>Bedeutung</th></tr>
+    <tr><td><code>PRIMARY KEY (Spalte[, …])</code></td><td>Primärschlüssel (eindeutig, nicht NULL); mehrere Spalten = zusammengesetzter PK</td></tr>
+    <tr><td><code>FOREIGN KEY (Spalte) REFERENCES Tabelle (Spalte)</code></td><td>Fremdschlüssel (referenzielle Integrität)</td></tr>
+    <tr><td><code>NOT NULL</code></td><td>Pflichtfeld</td></tr>
+    <tr><td><code>UNIQUE</code></td><td>Wert darf nur einmal vorkommen (NULL ist mehrfach erlaubt)</td></tr>
+    <tr><td><code>DEFAULT Wert</code></td><td>Standardwert, wenn beim INSERT nichts angegeben wird</td></tr>
+    <tr><td><code>CHECK (Bedingung)</code></td><td>Wertebereich prüfen, z. B. <code>CHECK (Preis &gt;= 0)</code></td></tr>
+    <tr><td><code>AUTO_INCREMENT</code> (MySQL)</td><td>fortlaufende Nummer automatisch vergeben</td></tr>
+  </table>
+<pre class="sql">CREATE TABLE Kurs (
+  KursNr      INTEGER      NOT NULL,
+  Titel       VARCHAR(30)  NOT NULL UNIQUE,
+  TrainerNr   INTEGER,                          -- darf NULL sein
+  Preis       DECIMAL(5,2) NOT NULL DEFAULT 8.00,
+  MaxPlaetze  INTEGER      CHECK (MaxPlaetze &gt; 0),
+  PRIMARY KEY (KursNr),
+  FOREIGN KEY (TrainerNr) REFERENCES Trainer (TrainerNr)
+);</pre>
+  <p>Reihenfolge: Die referenzierte Tabelle (Trainer) muss <strong>vorher</strong> existieren; beim Löschen mit <code>DROP TABLE</code> umgekehrt. Der Datentyp des FK muss zum PK passen. Zusammengesetzter PK: <code>PRIMARY KEY (MitgliedNr, KursNr, Datum)</code>.</p>
+
+  <h4>ALTER TABLE, DROP, CREATE INDEX</h4>
+<pre class="sql">ALTER TABLE Mitglied ADD COLUMN Email VARCHAR(80);
+ALTER TABLE Mitglied DROP COLUMN Ort;
+ALTER TABLE Mitglied MODIFY COLUMN Nachname VARCHAR(60) NOT NULL;   -- MySQL
+ALTER TABLE Mitglied ADD CONSTRAINT uq_mitglied_email UNIQUE (Email);
+ALTER TABLE Kurs ADD FOREIGN KEY (TrainerNr) REFERENCES Trainer (TrainerNr);
+DROP TABLE Buchung_Alt;
+CREATE INDEX idx_mitglied_nachname ON Mitglied (Nachname);</pre>
+  <p><strong>Spalte aus vorhandenen Daten ableiten</strong> (Muster aus W25): neue Spalte anlegen → per UPDATE mit Textfunktion füllen → ggf. alte Spalte löschen. Beispiel: Die ersten zwei Zeichen eines Mitgliedscodes wie <code>'BN-2024-001'</code> geben den Standort an:</p>
+<pre class="sql">ALTER TABLE Mitglied ADD COLUMN Standort CHAR(2);
+UPDATE Mitglied SET Standort = LEFT(Mitgliedscode, 2);     -- oder SUBSTRING(Mitgliedscode, 1, 2)</pre>
+  <p>Textfunktionen (MySQL): <code>LEFT(t, n)</code>, <code>RIGHT(t, n)</code>, <code>SUBSTRING(t, start, länge)</code> (Zählung ab 1), <code>LENGTH(t)</code>, <code>CONCAT(t1, t2, …)</code>, <code>UPPER(t)</code>/<code>LOWER(t)</code>, <code>TRIM(t)</code>.</p>
+  <div class="falle"><span class="kastentitel">Typische Fallen</span>
+    <ul>
+      <li>Komma nach der letzten Spaltendefinition bzw. fehlende Kommas dazwischen.</li>
+      <li>FK auf eine Tabelle, die noch nicht existiert; FK mit anderem Datentyp als der PK.</li>
+      <li>PLZ als INTEGER (01067 wird zu 1067).</li>
+      <li><code>DROP TABLE</code> statt <code>DELETE</code> – DROP löscht die ganze Tabelle.</li>
+    </ul>
+  </div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li><strong>W21 T2 4a (3 P):</strong> CREATE TABLE; <strong>W22 T2 3c (3 P):</strong> Datentypen festlegen; <strong>S22 T2 4ba (3 P):</strong> CREATE INDEX.</li>
+      <li><strong>W25 T2 4d (8 P):</strong> ALTER TABLE ADD/DROP und Spalte per UPDATE mit SUBSTRING füllen; <strong>S26 T2 4a (3 P):</strong> CRUD-Operationen den SQL-Befehlen bzw. DDL/DML zuordnen.</li>
+    </ul>
+  </div>
+
+  <!-- ======================= DB-09 ======================= -->
+  <h3 id="e-09">DB-09 · SQL: UNION <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfung: S24 (T2 4d, 12 P)</p>
+  <p><code>UNION</code> hängt die Ergebnisse zweier SELECT-Anweisungen <strong>untereinander</strong> (ein JOIN verbindet dagegen nebeneinander).</p>
+  <ul>
+    <li>Beide SELECTs brauchen die <strong>gleiche Anzahl Spalten</strong> mit <strong>kompatiblen Datentypen in gleicher Reihenfolge</strong>.</li>
+    <li>Die Spaltennamen des Ergebnisses kommen aus dem <strong>ersten</strong> SELECT.</li>
+    <li><code>ORDER BY</code> steht nur <strong>einmal ganz am Ende</strong> und sortiert das Gesamtergebnis.</li>
+  </ul>
+  <table>
+    <tr><th></th><th>UNION</th><th>UNION ALL</th></tr>
+    <tr><td>Duplikate</td><td>werden entfernt (wie DISTINCT)</td><td>bleiben erhalten</td></tr>
+    <tr><td>Geschwindigkeit</td><td>langsamer (Vergleich aller Zeilen)</td><td>schneller</td></tr>
+    <tr><td>verwenden, wenn …</td><td>eine Liste ohne Wiederholungen gewünscht ist</td><td>jede Zeile ein eigener Datensatz ist, der gezählt/summiert werden soll</td></tr>
+  </table>
+<pre class="sql">SELECT Nachname AS Name, 'Mitglied' AS Rolle FROM Mitglied WHERE Ort = 'Bonn'
+UNION
+SELECT Name, 'Trainer' FROM Trainer
+ORDER BY Name;</pre>
+  <table class="daten ergebnis">
+<tr><th>Name</th><th>Rolle</th></tr>
+<tr><td>Aydin</td><td>Mitglied</td></tr>
+<tr><td>Berg</td><td>Mitglied</td></tr>
+<tr><td>Jan Ott</td><td>Trainer</td></tr>
+<tr><td>Lisa Stein</td><td>Trainer</td></tr>
+<tr><td>Omar Haddad</td><td>Trainer</td></tr>
+</table>
+  <p><strong>Typisches Muster: aktuelle Tabelle + Archivtabelle gemeinsam auswerten.</strong> Soll über die vereinigte Menge gruppiert werden, kommt die UNION in eine Unterabfrage in FROM:</p>
+<pre class="sql">SELECT Jahr, COUNT(*) AS Anzahl
+FROM   (SELECT YEAR(Datum) AS Jahr FROM Buchung
+        UNION ALL
+        SELECT YEAR(Datum) FROM Buchung_Archiv) AS alle
+GROUP BY Jahr
+ORDER BY Jahr;</pre>
+  <p>Sind die Gruppen in den beiden Tabellen sicher getrennt (z. B. alle alten Jahre nur im Archiv), kann man auch jede Tabelle einzeln gruppieren und die beiden Gruppenergebnisse mit UNION ALL verbinden. Überschneiden sich die Gruppen, entstehen dabei aber <strong>zwei Ergebniszeilen für dieselbe Gruppe</strong>.</p>
+  <div class="falle"><span class="kastentitel">Typische Falle</span>UNION statt UNION ALL beim Zählen oder Summieren: Zwei verschiedene Datensätze mit zufällig identischen Werten in allen ausgewählten Spalten werden zu einer Zeile zusammengefasst – das Ergebnis ist zu klein.</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>S24 T2 4d (12 P):</strong> Auswertung je Jahr (MIN, MAX, COUNT) über eine aktuelle Tabelle und ihre Archivtabelle mit <code>UNION ALL</code>, <code>GROUP BY YEAR(…)</code> und <code>ORDER BY … DESC</code>. Vorher (4c) wurde ins Archiv verschoben – die Aufgaben bauen aufeinander auf.</div>
+
+  <!-- ======================= DB-10 ======================= -->
+  <h3 id="e-10">DB-10 · SQL: Benutzer und Rechte (CREATE USER, GRANT, REVOKE) <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfung: S23 (T2 4d, 4 P)</p>
+<pre class="sql">CREATE USER rezeption IDENTIFIED BY 'Passwort';           -- MySQL genauer: 'rezeption'@'localhost'
+GRANT SELECT, INSERT, UPDATE ON fitness.Mitglied TO rezeption;
+GRANT SELECT ON fitness.Kurs TO rezeption;                  -- je Tabelle ein GRANT (oder fitness.* für alle)
+REVOKE UPDATE ON fitness.Mitglied FROM rezeption;
+
+CREATE ROLE trainer_rolle;                                 -- Rolle = Bündel von Rechten
+GRANT SELECT ON fitness.* TO trainer_rolle;
+GRANT trainer_rolle TO lisa;                               -- Benutzer erhält die Rolle
+DROP USER rezeption;</pre>
+  <table>
+    <tr><th>Recht</th><th>erlaubt</th></tr>
+    <tr><td><code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code></td><td>lesen, einfügen, ändern, löschen (UPDATE auch spaltenweise: <code>GRANT UPDATE (Email) ON …</code>)</td></tr>
+    <tr><td><code>ALL PRIVILEGES</code></td><td>alle Rechte auf dem Objekt</td></tr>
+    <tr><td><code>WITH GRANT OPTION</code></td><td>Benutzer darf seine Rechte an andere weitergeben – nur sehr sparsam vergeben</td></tr>
+  </table>
+  <div class="merke"><span class="kastentitel">Merke – Prinzip der minimalen Rechte (Least Privilege)</span>
+    Jeder Benutzer und jede Anwendung erhält <strong>nur die Rechte, die für die jeweilige Aufgabe zwingend nötig sind</strong> – nicht mehr. So wird der Schaden bei Fehlbedienung, gestohlenen Zugangsdaten oder SQL-Injection begrenzt, und personenbezogene Daten sind nur für Berechtigte sichtbar (Datenschutz, DSGVO).</div>
+  <ul>
+    <li><strong>Rollen</strong> bündeln Rechte für eine Tätigkeit (z. B. „Rezeption“). Neue Mitarbeiter bekommen nur die Rolle; ändern sich die Anforderungen, wird nur die Rolle angepasst → weniger Aufwand, weniger Fehler, besser nachvollziehbar.</li>
+    <li><strong>Anwendungsbenutzer:</strong> Eine Web-Anwendung verbindet sich mit einem eigenen DB-Benutzer, der nur die benötigten DML-Rechte hat – nie mit dem Administrator (root) und ohne DDL-Rechte.</li>
+  </ul>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>S23 T2 4d (4 P):</strong> Benutzer anlegen und ihm ein Leserecht geben. Die Syntax (<code>CREATE … IDENTIFIED BY</code>, <code>GRANT … ON … TO</code>, <code>REVOKE … ON … FROM</code>) steht im Belegsatz.</div>
+
+  <!-- ======================= DB-11 ======================= -->
+  <h3 id="e-11">DB-11 · Trigger, Stored Procedure, View <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfung: S22 (T2 4aa/4ab, je 2 P)</p>
+  <table>
+    <tr><th></th><th>View (Sicht)</th><th>Stored Procedure</th><th>Trigger</th></tr>
+    <tr><td>Was?</td><td>gespeicherte SELECT-Abfrage, die wie eine (virtuelle) Tabelle benutzt wird; speichert selbst keine Daten</td><td>in der Datenbank gespeicherte, benannte Folge von SQL-Anweisungen mit Parametern (auch Variablen, Verzweigungen)</td><td>SQL-Code, der <strong>automatisch</strong> bei einem Ereignis (INSERT, UPDATE, DELETE) auf einer Tabelle ausgeführt wird</td></tr>
+    <tr><td>Auslösung</td><td><code>SELECT * FROM v_name</code></td><td>expliziter Aufruf <code>CALL name(…)</code></td><td>durch das Ereignis, <code>BEFORE</code> oder <code>AFTER</code>, je Zeile (<code>FOR EACH ROW</code>); Zugriff auf alte/neue Werte mit <code>OLD</code>/<code>NEW</code></td></tr>
+    <tr><td>Zweck</td><td>komplexe Abfragen vereinfachen; Zugriffsschutz (nur bestimmte Spalten/Zeilen freigeben); stabile Schnittstelle trotz Tabellenänderung</td><td>Geschäftslogik zentral in der DB; weniger Netzwerkverkehr; Rechte nur auf die Prozedur statt auf Tabellen</td><td>Protokollierung (Audit), Plausibilitätsprüfungen, abgeleitete Werte aktuell halten, Integritätsregeln</td></tr>
+  </table>
+<pre class="sql">CREATE VIEW v_kursuebersicht AS
+SELECT k.Titel, t.Name AS Trainer, k.Preis
+FROM   Kurs k
+  LEFT JOIN Trainer t ON t.TrainerNr = k.TrainerNr;
+
+DELIMITER //
+CREATE PROCEDURE kurs_buchen(IN p_mitglied INT, IN p_kurs INT)
+BEGIN
+  INSERT INTO Buchung (MitgliedNr, KursNr, Datum)
+  VALUES (p_mitglied, p_kurs, CURDATE());
+END //
+DELIMITER ;
+CALL kurs_buchen(4, 12);
+
+CREATE TRIGGER trg_preis_protokoll
+AFTER UPDATE ON Kurs
+FOR EACH ROW
+INSERT INTO Preis_Log (KursNr, PreisAlt, PreisNeu, Zeitpunkt)
+VALUES (OLD.KursNr, OLD.Preis, NEW.Preis, NOW());</pre>
+  <p class="klein">Ein <code>BEFORE</code>-Trigger kann eine Änderung auch verhindern, in MySQL mit <code>SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '…'</code>. <code>DELIMITER</code> ist nur im MySQL-Client nötig, damit das Semikolon im Rumpf die Anweisung nicht vorzeitig beendet.</p>
+  <table>
+    <tr><th>Logik in der DB (Trigger/Procedure)</th><th></th></tr>
+    <tr><td><strong>Vorteile</strong></td><td>gilt für alle Anwendungen, die auf die DB zugreifen; Datenintegrität unabhängig vom Client; weniger Datenübertragung; Performance</td></tr>
+    <tr><td><strong>Nachteile</strong></td><td>herstellerspezifische Syntax (Bindung an ein DBMS); schwerer zu testen, zu debuggen und zu versionieren; Trigger laufen „unsichtbar“ – Seiteneffekte werden leicht übersehen; Last liegt auf dem DB-Server</td></tr>
+  </table>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>S22 T2 4aa/4ab (je 2 P):</strong> „Erläutern Sie, was man unter einer Stored Procedure / einem Trigger versteht.“ Die Syntax steht nicht im Belegsatz – gefragt ist vor allem die Erklärung (Was? Wann ausgelöst? Wozu?).</div>
+
+  <!-- ======================= DB-12 ======================= -->
+  <h3 id="e-12">DB-12 · Datenqualität beim Import von Altdaten <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfung: W24 (T2 3b, 13 P)</p>
+  <h4>Kriterien der Datenqualität</h4>
+  <table>
+    <tr><th>Kriterium</th><th>Frage</th></tr>
+    <tr><td>Vollständigkeit</td><td>Sind alle Pflichtangaben vorhanden?</td></tr>
+    <tr><td>Korrektheit (Richtigkeit)</td><td>Stimmen die Werte mit der Realität überein (keine Tippfehler)?</td></tr>
+    <tr><td>Konsistenz</td><td>Sind die Daten widerspruchsfrei (gleiche Sache überall gleich)?</td></tr>
+    <tr><td>Einheitlichkeit</td><td>Sind Formate und Schreibweisen einheitlich (Datum, Zahlen, Einheiten)?</td></tr>
+    <tr><td>Eindeutigkeit</td><td>Gibt es keine Dubletten?</td></tr>
+    <tr><td>Atomarität</td><td>Steht in jedem Feld genau ein Wert?</td></tr>
+    <tr><td>Gültigkeit / Plausibilität</td><td>Liegen die Werte im zulässigen Bereich (kein 31.02., kein negativer Preis)?</td></tr>
+    <tr><td>Aktualität</td><td>Sind die Daten auf dem neuesten Stand?</td></tr>
+  </table>
+  <h4>Typische Probleme manuell gepflegter Altdaten</h4>
+  <p>Beispiel: Mitgliederliste eines Sportvereins (Excel):</p>
+  <table class="daten">
+    <tr><th>Name</th><th>Geburtstag</th><th>Abteilung</th><th>Beitrag</th></tr>
+    <tr><td>Meier, Anna</td><td>03.04.1990</td><td>Tennis</td><td>120 €</td></tr>
+    <tr><td>Jan Schulz</td><td>1985</td><td>Tennis, Fußball</td><td>12o</td></tr>
+    <tr><td>A. Meier</td><td>3.4.90</td><td>Tennis</td><td>120,00</td></tr>
+    <tr><td>Kemal Öztürk</td><td></td><td>Fussball</td><td>frei</td></tr>
+  </table>
+  <table>
+    <tr><th>Problem</th><th>Beispiel</th><th>Folge beim Import</th></tr>
+    <tr><td>uneinheitliche Formate und Schreibweisen</td><td>03.04.1990 / 3.4.90 / 1985; Fußball / Fussball; „120 €“ / „120,00“</td><td>Import in DATE/DECIMAL schlägt fehl oder liefert falsche Werte; Auswertungen je Abteilung werden falsch, weil „Fussball“ als eigene Abteilung gilt</td></tr>
+    <tr><td>mehrere Werte in einem Feld (nicht atomar)</td><td>„Tennis, Fußball“; Vor- und Nachname in einem Feld, mal „Nachname, Vorname“, mal umgekehrt</td><td>keine Zuordnung zu einem Fremdschlüssel möglich; Suchen/Sortieren nach Nachname unmöglich</td></tr>
+    <tr><td>fehlende Werte</td><td>leeres Geburtsdatum</td><td>Verletzung von NOT NULL, unvollständige Datensätze</td></tr>
+    <tr><td>Dubletten</td><td>„Meier, Anna“ und „A. Meier“</td><td>dieselbe Person doppelt im System → doppelte Rechnungen, falsche Statistik, PK-/UNIQUE-Verletzung</td></tr>
+    <tr><td>ungültige Werte, Tippfehler, Text statt Wert</td><td>„12o“ (Buchstabe o), „frei“</td><td>Typfehler beim Import; Werte müssen per Regel übersetzt werden („frei“ → 0)</td></tr>
+  </table>
+  <h4>ETL und Vorgehen beim Import</h4>
+  <p><strong>ETL</strong> = <strong>E</strong>xtract (Daten aus der Quelle lesen, z. B. CSV-Export der Excel-Datei) – <strong>T</strong>ransform (bereinigen, vereinheitlichen, aufteilen, Dubletten zusammenführen, Schlüssel zuordnen, prüfen) – <strong>L</strong>oad (in die Zieltabellen laden, Reihenfolge der Fremdschlüssel beachten).</p>
+  <ol>
+    <li><strong>Analyse (Profiling):</strong> Formate, Leerwerte, Ausreißer und Dubletten feststellen und zählen.</li>
+    <li><strong>Zielstruktur</strong> festlegen (Tabellen in 3NF, Datentypen).</li>
+    <li>Rohdaten unverändert in eine <strong>Staging-Tabelle</strong> laden (alle Spalten als Text).</li>
+    <li><strong>Transformationsregeln</strong> festlegen und per Skript/SQL anwenden: Datum parsen, Felder aufteilen, Zuordnungstabellen für Schreibweisen („Fussball“ → „Fußball“), Zahlen normieren.</li>
+    <li>Nicht automatisch lösbare Fälle in eine <strong>Fehlerliste</strong> → manuelle Klärung durch die Fachabteilung.</li>
+    <li><strong>Prüfen:</strong> Plausibilitätsregeln, Stichproben, Summen-/Anzahlabgleich; erst Testimport, dann produktiver Import.</li>
+  </ol>
+  <h4>Bewertung: Lohnt sich der Import?</h4>
+  <p>Abzuwägen sind <strong>Aufwand</strong> (Datenmenge, Fehlerquote, Anteil manueller Nacharbeit) und <strong>Nutzen</strong> (Bedeutung der Historie für Auswertungen, Gewährleistung, gesetzliche Aufbewahrungspflichten, Risiko falscher Daten im neuen System). Mögliche Ergebnisse: vollständiger Import nach Bereinigung, <strong>Teilimport</strong> (z. B. nur Stammdaten oder nur die letzten Jahre) oder <strong>kein Import</strong> (Altdaten schreibgeschützt archivieren, Neuerfassung).</p>
+  <div class="merke"><span class="kastentitel">Merke</span>Bei „Beurteilen Sie …“ zählt die <strong>begründete</strong> Entscheidung. Ob du für oder gegen den Import argumentierst, ist egal – es müssen Argumente aus der Situation kommen (Datenmenge, Fehlerarten, Nutzen).</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>W24 T2 3ba (9 P):</strong> Drei Probleme bezüglich der Datenqualität beschreiben und je eine Folge des Imports nennen (3 × 3 P). <strong>3bb (2 P):</strong> Einen Weg aufzeigen, wie die Daten dennoch importiert werden können. <strong>3bc (2 P):</strong> Die Importidee beurteilen.</div>
+</section>
+
+<!-- ===================== TEIL B: BELEGSATZ ===================== -->
+<section class="teil" id="belegsatz">
+  <h2>B · Belegsatz</h2>
+  <p class="klein">Enthält nur, was dir auch die IHK beilegen würde: Notationshilfen und Anlagen (Ausgangssituation, Tabellen, Formulare, Texte). Keine Erklärungen. Tipp: Diesen Teil separat ausdrucken und beim Lösen daneben legen.</p>
+
+  <h3 id="notation">Notationshilfen</h3>
+  <h4>Entity-Relationship-Modell (ER-Modell)</h4>
+  <figure>
+<svg viewBox="0 0 570 76" width="570" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+<rect x="20" y="18" width="130" height="38" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="85.0" y="42.0" text-anchor="middle" font-weight="bold">Entität</text>
+<polygon points="225,37 300,11 375,37 300,63" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="300" y="41" text-anchor="middle">Beziehung</text>
+<ellipse cx="480" cy="37" rx="66" ry="22" fill="#fff" stroke="#222"/><text x="480" y="41" text-anchor="middle">Attribut</text>
+</svg>
+<figcaption>Entity-Relationship-Modell (ER-Modell): Notation</figcaption>
+</figure>
+
+
+  <h4>SQL-Syntax (Auszug)</h4>
+  <table class="syntax">
+    <tr><th style="width:56%">Syntax</th><th>Beschreibung</th></tr>
+    <tr class="gruppe"><td colspan="2">Tabellen und Objekte</td></tr>
+    <tr><td><strong>CREATE TABLE</strong> Tabellenname (
+  Spaltenname Datentyp [<strong>NOT NULL</strong>] [<strong>DEFAULT</strong> Wert] [<strong>UNIQUE</strong>],
+  …,
+  <strong>PRIMARY KEY</strong> (Spaltenname[, …]),
+  <strong>FOREIGN KEY</strong> (Spaltenname) <strong>REFERENCES</strong> Tabellenname (Spaltenname),
+  <strong>CHECK</strong> (Bedingung) )</td><td>Erzeugt eine neue, leere Tabelle</td></tr>
+    <tr><td><strong>ALTER TABLE</strong> Tabellenname
+  <strong>ADD COLUMN</strong> Spaltenname Datentyp
+  <strong>DROP COLUMN</strong> Spaltenname
+  <strong>MODIFY COLUMN</strong> Spaltenname Datentyp
+  <strong>ADD CONSTRAINT</strong> Name <strong>UNIQUE</strong> (Spaltenname)
+  <strong>ADD FOREIGN KEY</strong> (Spaltenname) <strong>REFERENCES</strong> Tabellenname (Spaltenname)</td><td>Ändert die Struktur einer Tabelle:<br>Spalte hinzufügen<br>Spalte entfernen<br>Datentyp ändern<br>Eindeutigkeit festlegen<br>Fremdschlüssel festlegen</td></tr>
+    <tr><td><strong>DROP TABLE</strong> Tabellenname</td><td>Löscht eine Tabelle</td></tr>
+    <tr><td><strong>CREATE</strong> [<strong>UNIQUE</strong>] <strong>INDEX</strong> Indexname <strong>ON</strong> Tabellenname (Spaltenname[, …])</td><td>Erzeugt einen Index</td></tr>
+    <tr><td><strong>CREATE VIEW</strong> Viewname <strong>AS SELECT</strong> …</td><td>Erzeugt eine Sicht</td></tr>
+    <tr><td><strong>INTEGER</strong>
+<strong>DECIMAL</strong>(p, s)
+<strong>DOUBLE</strong>
+<strong>CHAR</strong>(n) / <strong>VARCHAR</strong>(n)
+<strong>DATE</strong> / <strong>DATETIME</strong>
+<strong>BOOLEAN</strong></td><td>Ganzzahl<br>Festkommazahl (p Stellen, davon s Nachkommastellen)<br>Gleitkommazahl<br>Text fester / variabler Länge<br>Datum (JJJJ-MM-TT) / Datum mit Uhrzeit<br>Wahrheitswert</td></tr>
+    <tr class="gruppe"><td colspan="2">Abfragen</td></tr>
+    <tr><td><strong>SELECT</strong> [<strong>DISTINCT</strong>] * | Spalte [<strong>AS</strong> Alias][, …]</td><td>Auswahl der Spalten; DISTINCT entfernt doppelte Zeilen</td></tr>
+    <tr><td><strong>FROM</strong> Tabellenname [[<strong>AS</strong>] Alias][, …]</td><td>Tabelle(n), aus denen die Daten stammen</td></tr>
+    <tr><td>[<strong>INNER</strong>] <strong>JOIN</strong> Tabellenname <strong>ON</strong> Bedingung</td><td>Nur Datensätze mit passendem Partner in beiden Tabellen</td></tr>
+    <tr><td><strong>LEFT</strong> [<strong>OUTER</strong>] <strong>JOIN</strong> Tabellenname <strong>ON</strong> Bedingung</td><td>Alle Datensätze der linken Tabelle und die passenden der rechten</td></tr>
+    <tr><td><strong>RIGHT</strong> [<strong>OUTER</strong>] <strong>JOIN</strong> Tabellenname <strong>ON</strong> Bedingung</td><td>Alle Datensätze der rechten Tabelle und die passenden der linken</td></tr>
+    <tr><td><strong>WHERE</strong> Bedingung</td><td>Auswahl von Datensätzen</td></tr>
+    <tr><td><strong>GROUP BY</strong> Spaltenname[, …]</td><td>Gruppierung</td></tr>
+    <tr><td><strong>HAVING</strong> Bedingung</td><td>Auswahl von Gruppen</td></tr>
+    <tr><td><strong>ORDER BY</strong> Spaltenname [<strong>ASC</strong> | <strong>DESC</strong>][, …]</td><td>Sortierung aufsteigend / absteigend</td></tr>
+    <tr><td><strong>SELECT</strong> … <strong>UNION</strong> [<strong>ALL</strong>] <strong>SELECT</strong> …</td><td>Vereinigung zweier Ergebnismengen (ALL: mit Duplikaten)</td></tr>
+    <tr><td><strong>WHERE</strong> Spalte [<strong>NOT</strong>] <strong>IN</strong> (<strong>SELECT</strong> …)</td><td>Wert ist (nicht) in der Ergebnismenge der Unterabfrage</td></tr>
+    <tr><td><strong>WHERE</strong> [<strong>NOT</strong>] <strong>EXISTS</strong> (<strong>SELECT</strong> …)</td><td>Unterabfrage liefert (k)eine Zeile</td></tr>
+    <tr><td><strong>WHERE</strong> Spalte &gt; (<strong>SELECT</strong> …)</td><td>Vergleich mit dem Ergebnis einer Unterabfrage</td></tr>
+    <tr><td><strong>SELECT</strong> … <strong>FROM</strong> (<strong>SELECT</strong> … ) <strong>AS</strong> tbl</td><td>Unterabfrage als Tabelle</td></tr>
+    <tr class="gruppe"><td colspan="2">Datenmanipulation</td></tr>
+    <tr><td><strong>INSERT INTO</strong> Tabellenname [(Spalte1, Spalte2, …)]
+  <strong>VALUES</strong> (Wert1, Wert2, …)[, (…)]
+oder
+  <strong>SELECT</strong> … <strong>FROM</strong> … <strong>WHERE</strong> …</td><td>Fügt Datensätze ein – mit festen Werten oder als Ergebnis einer Abfrage</td></tr>
+    <tr><td><strong>UPDATE</strong> Tabellenname <strong>SET</strong> Spalte = Wert[, …] [<strong>WHERE</strong> Bedingung]</td><td>Ändert Datensätze</td></tr>
+    <tr><td><strong>DELETE FROM</strong> Tabellenname [<strong>WHERE</strong> Bedingung]</td><td>Löscht Datensätze</td></tr>
+    <tr><td><strong>START TRANSACTION</strong> / <strong>COMMIT</strong> / <strong>ROLLBACK</strong></td><td>Transaktion beginnen / bestätigen / zurücksetzen</td></tr>
+    <tr class="gruppe"><td colspan="2">Berechtigungen</td></tr>
+    <tr><td><strong>CREATE USER</strong> Benutzer <strong>IDENTIFIED BY</strong> 'Passwort'
+<strong>CREATE ROLE</strong> Rolle</td><td>Erzeugt einen Benutzer mit Passwort<br>Erzeugt eine Rolle</td></tr>
+    <tr><td><strong>GRANT</strong> Recht[, …] | <strong>ALL</strong> <strong>ON</strong> Datenbank.Objekt | Datenbank.*
+  <strong>TO</strong> Benutzer | Rolle [<strong>WITH GRANT OPTION</strong>]
+<strong>GRANT</strong> Rolle <strong>TO</strong> Benutzer</td><td>Vergibt Rechte (SELECT, INSERT, UPDATE, DELETE) auf ein Objekt<br><br>Weist einem Benutzer eine Rolle zu</td></tr>
+    <tr><td><strong>REVOKE</strong> Recht[, …] <strong>ON</strong> Datenbank.Objekt <strong>FROM</strong> Benutzer | Rolle</td><td>Entzieht Rechte</td></tr>
+    <tr class="gruppe"><td colspan="2">Aggregatfunktionen</td></tr>
+    <tr><td><strong>COUNT</strong>(* | Spalte | <strong>DISTINCT</strong> Spalte)</td><td>Anzahl Zeilen / Nicht-NULL-Werte / verschiedener Werte</td></tr>
+    <tr><td><strong>SUM</strong>(Spalte | Formel), <strong>AVG</strong>(Spalte | Formel)</td><td>Summe, arithmetisches Mittel</td></tr>
+    <tr><td><strong>MIN</strong>(Spalte | Formel), <strong>MAX</strong>(Spalte | Formel)</td><td>kleinster, größter Wert</td></tr>
+    <tr class="gruppe"><td colspan="2">Funktionen</td></tr>
+    <tr><td><strong>YEAR</strong>(Datum), <strong>MONTH</strong>(Datum), <strong>DAY</strong>(Datum)</td><td>Jahr, Monat, Tag eines Datums</td></tr>
+    <tr><td><strong>CURDATE</strong>(), <strong>NOW</strong>()</td><td>aktuelles Datum, aktuelles Datum mit Uhrzeit</td></tr>
+    <tr><td><strong>DATEDIFF</strong>(Datum1, Datum2)</td><td>Anzahl Tage Datum1 − Datum2</td></tr>
+    <tr><td><strong>DATE_ADD</strong>(Datum, <strong>INTERVAL</strong> n <strong>DAY</strong> | <strong>MONTH</strong> | <strong>YEAR</strong>)</td><td>addiert ein Intervall zu einem Datum</td></tr>
+    <tr><td><strong>LEFT</strong>(Text, n), <strong>RIGHT</strong>(Text, n)</td><td>n Zeichen von links / rechts</td></tr>
+    <tr><td><strong>SUBSTRING</strong>(Text, Start, Länge)</td><td>Teilzeichenkette ab Position Start (erstes Zeichen = 1)</td></tr>
+    <tr><td><strong>LENGTH</strong>(Text), <strong>CONCAT</strong>(Text1, Text2, …), <strong>UPPER</strong>(Text), <strong>LOWER</strong>(Text), <strong>TRIM</strong>(Text)</td><td>Länge, Verketten, Groß-/Kleinschreibung, Leerzeichen entfernen</td></tr>
+    <tr><td><strong>ROUND</strong>(Zahl, n), <strong>COALESCE</strong>(Wert1, Wert2, …)</td><td>Runden auf n Stellen; erster Wert, der nicht NULL ist</td></tr>
+    <tr class="gruppe"><td colspan="2">Operatoren</td></tr>
+    <tr><td>=, &lt;&gt;, &lt;, &gt;, &lt;=, &gt;=</td><td>Vergleich (&lt;&gt;: ungleich)</td></tr>
+    <tr><td><strong>AND</strong>, <strong>OR</strong>, <strong>NOT</strong></td><td>logisches UND, ODER, NICHT</td></tr>
+    <tr><td><strong>BETWEEN</strong> Wert1 <strong>AND</strong> Wert2</td><td>Wert im Bereich (Grenzen eingeschlossen)</td></tr>
+    <tr><td><strong>IN</strong> (Wert1, Wert2, …)</td><td>Wert ist in der Liste enthalten</td></tr>
+    <tr><td><strong>LIKE</strong> 'Muster'</td><td>Textvergleich mit Platzhaltern: % beliebig viele Zeichen, _ genau ein Zeichen</td></tr>
+    <tr><td><strong>IS NULL</strong>, <strong>IS NOT NULL</strong></td><td>Überprüfung auf NULL</td></tr>
+    <tr><td>+, −, *, /</td><td>Grundrechenarten</td></tr>
+  </table>
+
+  <h3 id="anlagen">Anlagen</h3>
+
+  <div class="anlage" id="anlage-1">
+    <h4>Anlage 1 · Ausgangssituation</h4>
+    <p>Die <strong>VeloPunkt GmbH</strong> mit Sitz in Freiburg im Breisgau vermietet an fünf Stationen in Südbaden E-Bikes, E-Lastenräder und Kinderräder an Privat- und Firmenkunden. Zum Unternehmen gehören außerdem eine <strong>Werkstatt</strong>, die die eigene Flotte wartet und Fahrräder von Privatkunden repariert, sowie ein Angebot an <strong>geführten E-Bike-Touren</strong>.</p>
+    <p>Bisher werden Ausleihen, Wartungen, Schichtpläne und Kundendaten in mehreren Excel-Listen und auf Papierformularen geführt. Die <strong>DataWerk Software GmbH</strong>, Ihr Ausbildungsbetrieb, wurde beauftragt, das webbasierte Verleih- und Werkstattsystem <strong>„VeloManager“</strong> mit Online-Buchung zu entwickeln. Kernstück ist eine relationale Datenbank (MySQL). Ein Teil der Datenbank ist bereits im Testbetrieb (Anlagen 2 und 3).</p>
+    <p>Sie arbeiten im Projektteam mit und sind für den Datenbankentwurf, die SQL-Abfragen und die Übernahme der Altdaten zuständig.</p>
+    <p class="klein">Hinweise: Heute ist der 10.10.2026. Datumswerte sind im Format JJJJ-MM-TT gespeichert, Geldbeträge in Euro.</p>
+  </div>
+
+  <div class="anlage" id="anlage-2">
+    <h4>Anlage 2 · Datenbank „VeloManager“ – Tabellen mit Beispieldaten</h4>
+    <div class="nebeneinander">
+      <div><h4 class="tabtitel">Tabelle: Station</h4><table class="daten ergebnis">
+<tr><th>StationNr</th><th>Name</th><th>PLZ</th><th>Ort</th></tr>
+<tr><td>1</td><td>Hauptbahnhof</td><td>79098</td><td>Freiburg</td></tr>
+<tr><td>2</td><td>Messe</td><td>79108</td><td>Freiburg</td></tr>
+<tr><td>3</td><td>Titisee</td><td>79822</td><td>Titisee-Neustadt</td></tr>
+<tr><td>4</td><td>Kaiserstuhl</td><td>79235</td><td>Vogtsburg</td></tr>
+<tr><td>5</td><td>Schauinsland</td><td>79254</td><td>Oberried</td></tr>
+</table></div>
+      <div><h4 class="tabtitel">Tabelle: Kategorie</h4><table class="daten ergebnis">
+<tr><th>KategorieNr</th><th>Bezeichnung</th><th>Tagespreis</th></tr>
+<tr><td>1</td><td>City-E-Bike</td><td>25.00</td></tr>
+<tr><td>2</td><td>Trekking-E-Bike</td><td>30.00</td></tr>
+<tr><td>3</td><td>E-Mountainbike</td><td>39.00</td></tr>
+<tr><td>4</td><td>E-Lastenrad</td><td>45.00</td></tr>
+<tr><td>5</td><td>Kinderrad</td><td>12.00</td></tr>
+<tr><td>6</td><td>Tandem</td><td>35.00</td></tr>
+</table></div>
+    </div>
+    <h4 class="tabtitel">Tabelle: Fahrrad</h4>
+    <table class="daten ergebnis">
+<tr><th>FahrradNr</th><th>Rahmennummer</th><th>Modell</th><th>KategorieNr</th><th>StationNr</th><th>Kaufdatum</th><th>Kaufpreis</th></tr>
+<tr><td>101</td><td>WAW-23-0017</td><td>Urban C5</td><td>1</td><td>1</td><td>2023-03-15</td><td>2499.00</td></tr>
+<tr><td>102</td><td>WAW-23-0018</td><td>Urban C5</td><td>1</td><td>1</td><td>2023-03-15</td><td>2499.00</td></tr>
+<tr><td>103</td><td>KTX-24-1120</td><td>Tour T7</td><td>2</td><td>2</td><td>2024-04-02</td><td>3199.00</td></tr>
+<tr><td>104</td><td>KTX-24-1121</td><td>Tour T7</td><td>2</td><td>3</td><td>2024-04-02</td><td>3199.00</td></tr>
+<tr><td>105</td><td>MTN-22-0456</td><td>Trail X9</td><td>3</td><td>3</td><td>2022-05-20</td><td>4290.00</td></tr>
+<tr><td>106</td><td>MTN-25-0811</td><td>Trail X9</td><td>3</td><td>4</td><td>2025-03-10</td><td>4490.00</td></tr>
+<tr><td>107</td><td>CRG-24-0033</td><td>Cargo L2</td><td>4</td><td>1</td><td>2024-06-12</td><td>5390.00</td></tr>
+<tr><td>108</td><td>CRG-25-0090</td><td>Cargo L2</td><td>4</td><td>2</td><td>2025-04-28</td><td>5590.00</td></tr>
+<tr><td>109</td><td>KID-23-0301</td><td>Kiddy 20</td><td>5</td><td>3</td><td>2023-05-02</td><td>649.00</td></tr>
+<tr><td>110</td><td>WAW-26-0002</td><td>Urban C6</td><td>1</td><td>4</td><td>2026-02-20</td><td>2799.00</td></tr>
+</table>
+    <h4 class="tabtitel">Tabelle: Kunde</h4>
+    <table class="daten ergebnis">
+<tr><th>KundenNr</th><th>Vorname</th><th>Nachname</th><th>PLZ</th><th>Ort</th><th>Email</th></tr>
+<tr><td>1001</td><td>Lena</td><td>Hoffmann</td><td>79098</td><td>Freiburg</td><td>lena.hoffmann@mail.de</td></tr>
+<tr><td>1002</td><td>Jonas</td><td>Albrecht</td><td>79102</td><td>Freiburg</td><td>j.albrecht@web.de</td></tr>
+<tr><td>1003</td><td>Mira</td><td>Schulze</td><td>79211</td><td>Denzlingen</td><td>NULL</td></tr>
+<tr><td>1004</td><td>Paul</td><td>Wagner</td><td>79822</td><td>Titisee-Neustadt</td><td>paul.wagner@gmx.de</td></tr>
+<tr><td>1005</td><td>Sofia</td><td>Keller</td><td>79100</td><td>Freiburg</td><td>s.keller@posteo.de</td></tr>
+<tr><td>1006</td><td>Tim</td><td>Brandt</td><td>77933</td><td>Lahr</td><td>tim.brandt@mail.de</td></tr>
+<tr><td>1007</td><td>Emma</td><td>Vogel</td><td>79098</td><td>Freiburg</td><td>NULL</td></tr>
+<tr><td>1008</td><td>David</td><td>Roth</td><td>01067</td><td>Dresden</td><td>d.roth@web.de</td></tr>
+<tr><td>1009</td><td>Hannah</td><td>Krüger</td><td>79194</td><td>Gundelfingen</td><td>hannah.k@gmx.de</td></tr>
+<tr><td>1010</td><td>Felix</td><td>Neumann</td><td>79108</td><td>Freiburg</td><td>f.neumann@mail.de</td></tr>
+</table>
+    <h4 class="tabtitel">Tabelle: Ausleihe</h4>
+    <table class="daten ergebnis">
+<tr><th>AusleiheNr</th><th>KundenNr</th><th>FahrradNr</th><th>Beginn</th><th>Ende</th><th>Kilometer</th><th>Betrag</th></tr>
+<tr><td>5001</td><td>1001</td><td>101</td><td>2025-08-02</td><td>2025-08-03</td><td>64</td><td>50.00</td></tr>
+<tr><td>5002</td><td>1002</td><td>105</td><td>2025-09-13</td><td>2025-09-13</td><td>38</td><td>39.00</td></tr>
+<tr><td>5003</td><td>1004</td><td>107</td><td>2025-10-04</td><td>2025-10-06</td><td>41</td><td>135.00</td></tr>
+<tr><td>5004</td><td>1001</td><td>103</td><td>2026-03-21</td><td>2026-03-22</td><td>92</td><td>60.00</td></tr>
+<tr><td>5005</td><td>1003</td><td>109</td><td>2026-04-11</td><td>2026-04-11</td><td>12</td><td>12.00</td></tr>
+<tr><td>5006</td><td>1005</td><td>107</td><td>2026-05-01</td><td>2026-05-03</td><td>57</td><td>135.00</td></tr>
+<tr><td>5007</td><td>1002</td><td>106</td><td>2026-05-30</td><td>2026-06-01</td><td>118</td><td>117.00</td></tr>
+<tr><td>5008</td><td>1006</td><td>104</td><td>2026-06-14</td><td>2026-06-20</td><td>315</td><td>210.00</td></tr>
+<tr><td>5009</td><td>1001</td><td>108</td><td>2026-07-18</td><td>2026-07-18</td><td>23</td><td>45.00</td></tr>
+<tr><td>5010</td><td>1006</td><td>105</td><td>2026-08-08</td><td>2026-08-09</td><td>76</td><td>78.00</td></tr>
+<tr><td>5011</td><td>1007</td><td>102</td><td>2026-08-22</td><td>2026-08-24</td><td>49</td><td>75.00</td></tr>
+<tr><td>5012</td><td>1005</td><td>103</td><td>2026-10-08</td><td>NULL</td><td>NULL</td><td>NULL</td></tr>
+</table>
+    <p class="klein">Ende, Kilometer und Betrag sind NULL, solange das Fahrrad noch nicht zurückgegeben wurde. Abholung und Rückgabe am selben Tag zählen als ein Miettag.</p>
+    <h4 class="tabtitel">Tabelle: Wartung</h4>
+    <table class="daten ergebnis">
+<tr><th>WartungNr</th><th>FahrradNr</th><th>Datum</th><th>Art</th><th>Kosten</th></tr>
+<tr><td>1</td><td>101</td><td>2025-11-20</td><td>Inspektion</td><td>89.00</td></tr>
+<tr><td>2</td><td>105</td><td>2025-11-25</td><td>Bremsen</td><td>145.50</td></tr>
+<tr><td>3</td><td>107</td><td>2026-01-14</td><td>Inspektion</td><td>119.00</td></tr>
+<tr><td>4</td><td>103</td><td>2026-02-03</td><td>Inspektion</td><td>89.00</td></tr>
+<tr><td>5</td><td>105</td><td>2026-04-20</td><td>Akku-Check</td><td>35.00</td></tr>
+<tr><td>6</td><td>109</td><td>2026-05-07</td><td>Reifen</td><td>42.90</td></tr>
+<tr><td>7</td><td>107</td><td>2026-07-01</td><td>Bremsen</td><td>168.00</td></tr>
+<tr><td>8</td><td>104</td><td>2026-09-15</td><td>Reifen</td><td>55.00</td></tr>
+<tr><td>9</td><td>105</td><td>2026-09-30</td><td>Inspektion</td><td>NULL</td></tr>
+</table>
+    <p class="klein">Kosten = NULL: Werkstattauftrag noch nicht abgerechnet.</p>
+    <p><strong>Primärschlüssel</strong> (jeweils erste Spalte): StationNr, KategorieNr, FahrradNr, KundenNr, AusleiheNr, WartungNr.<br>
+      <strong>Fremdschlüssel</strong> (ohne ON DELETE CASCADE):
+      Fahrrad.KategorieNr → Kategorie.KategorieNr · Fahrrad.StationNr → Station.StationNr ·
+      Ausleihe.KundenNr → Kunde.KundenNr · Ausleihe.FahrradNr → Fahrrad.FahrradNr ·
+      Wartung.FahrradNr → Fahrrad.FahrradNr</p>
+  </div>
+
+  <div class="anlage" id="anlage-3">
+    <h4>Anlage 3 · Archivtabellen</h4>
+    <p>Abgeschlossene Ausleihen werden regelmäßig archiviert, ausgemusterte Fahrräder in Fahrrad_Archiv übernommen. Die Archivtabellen haben <strong>keine Fremdschlüssel</strong>.</p>
+    <h4 class="tabtitel">Tabelle: Ausleihe_Archiv (gleiche Struktur wie Ausleihe)</h4>
+    <table class="daten ergebnis">
+<tr><th>AusleiheNr</th><th>KundenNr</th><th>FahrradNr</th><th>Beginn</th><th>Ende</th><th>Kilometer</th><th>Betrag</th></tr>
+<tr><td>4001</td><td>1001</td><td>101</td><td>2024-05-10</td><td>2024-05-11</td><td>55</td><td>50.00</td></tr>
+<tr><td>4002</td><td>1009</td><td>105</td><td>2024-06-22</td><td>2024-06-23</td><td>81</td><td>78.00</td></tr>
+<tr><td>4003</td><td>1002</td><td>102</td><td>2024-07-06</td><td>2024-07-06</td><td>31</td><td>25.00</td></tr>
+<tr><td>4004</td><td>1004</td><td>109</td><td>2024-08-15</td><td>2024-08-17</td><td>20</td><td>36.00</td></tr>
+<tr><td>4005</td><td>1009</td><td>107</td><td>2024-09-28</td><td>2024-09-28</td><td>18</td><td>45.00</td></tr>
+<tr><td>4006</td><td>1006</td><td>103</td><td>2024-10-12</td><td>2024-10-13</td><td>104</td><td>60.00</td></tr>
+<tr><td>4007</td><td>1003</td><td>104</td><td>2025-04-19</td><td>2025-04-20</td><td>66</td><td>60.00</td></tr>
+<tr><td>4008</td><td>1001</td><td>101</td><td>2025-06-07</td><td>2025-06-08</td><td>64</td><td>50.00</td></tr>
+</table>
+    <h4 class="tabtitel">Tabelle: Fahrrad_Archiv</h4>
+    <table class="daten ergebnis">
+<tr><th>FahrradNr</th><th>Rahmennummer</th><th>Modell</th><th>Kategorie</th><th>Kaufdatum</th><th>Ausmusterung</th><th>GesamtKm</th></tr>
+<tr><td>95</td><td>WAW-21-0004</td><td>Urban C4</td><td>City-E-Bike</td><td>2021-04-01</td><td>2025-12-31</td><td>4120</td></tr>
+<tr><td>98</td><td>MTN-21-0102</td><td>Trail X8</td><td>E-Mountainbike</td><td>2021-06-15</td><td>2026-01-15</td><td>2875</td></tr>
+</table>
+    <p class="klein">Kategorie enthält die Bezeichnung der Kategorie im Klartext, GesamtKm die Summe der Kilometer aller Ausleihen des Fahrrads.</p>
+  </div>
+
+  <div class="anlage" id="anlage-4">
+    <h4>Anlage 4 · Werkstattrechnung (bisheriges Papierformular)</h4>
+    <div class="formular">
+      <table style="margin:0">
+        <tr><td style="border:none; padding:0"><strong style="font-size:16px">VeloPunkt GmbH – Werkstatt</strong><br>Freiburg im Breisgau</td>
+            <td style="border:none; padding:0; text-align:right"><strong style="font-size:18px">RECHNUNG</strong><br>Rechnungs-Nr.: W-2026-0815<br>Rechnungsdatum: 18.09.2026</td></tr>
+      </table>
+      <table>
+        <tr><th style="width:24%">Kunde</th><td>Kunden-Nr. 3307 · Frau Julia Hartmann · Wiesenweg 4 · 79117 Freiburg · Tel. 0761 28349911</td></tr>
+        <tr><th>Fahrrad</th><td>Hersteller: Stadtrad · Modell: Avanti E8 · Rahmennummer: STR-19-77812</td></tr>
+        <tr><th>Bearbeitet von</th><td>Mechaniker-Nr. 7 · Erik Petersen</td></tr>
+      </table>
+      <table>
+        <tr><th>Pos.</th><th>Art.-Nr.</th><th>Bezeichnung</th><th class="re">Menge</th><th>Einheit</th><th class="re">Einzelpreis</th><th class="re">Gesamt</th></tr>
+        <tr><td>1</td><td>L-100</td><td>Arbeitszeit Werkstatt</td><td class="re">1,5</td><td>Std.</td><td class="re">64,00 €</td><td class="re">96,00 €</td></tr>
+        <tr><td>2</td><td>E-2201</td><td>Bremsbelag Scheibenbremse</td><td class="re">2</td><td>Stück</td><td class="re">18,90 €</td><td class="re">37,80 €</td></tr>
+        <tr><td>3</td><td>E-3105</td><td>Kette 11-fach</td><td class="re">1</td><td>Stück</td><td class="re">29,90 €</td><td class="re">29,90 €</td></tr>
+        <tr><td>4</td><td>E-4410</td><td>Schlauch 28 Zoll</td><td class="re">2</td><td>Stück</td><td class="re">7,50 €</td><td class="re">15,00 €</td></tr>
+        <tr><td colspan="6" class="re">Nettobetrag</td><td class="re">178,70 €</td></tr>
+        <tr><td colspan="6" class="re">zzgl. 19 % Umsatzsteuer</td><td class="re">33,95 €</td></tr>
+        <tr><td colspan="6" class="re"><strong>Rechnungsbetrag</strong></td><td class="re"><strong>212,65 €</strong></td></tr>
+      </table>
+      <p style="margin:4px 0 0">Zahlungsart: EC-Karte</p>
+    </div>
+    <p><strong>Informationen aus dem Gespräch mit der Werkstattleitung:</strong></p>
+    <ul>
+      <li>Kunden bringen oft mehrere eigene Fahrräder zur Reparatur. Jede Rechnung bezieht sich auf genau ein Fahrrad und wird von genau einem Mechaniker erstellt.</li>
+      <li>Arbeitsleistungen und Ersatzteile werden einheitlich als Artikel mit Artikelnummer, Bezeichnung, Einheit und aktuellem Verkaufspreis geführt. Die Preise ändern sich gelegentlich; auf der Rechnung muss der zum Rechnungszeitpunkt gültige Preis erhalten bleiben.</li>
+    </ul>
+  </div>
+
+  <div class="anlage" id="anlage-5">
+    <h4>Anlage 5 · Schichtplan der Stationen (bisherige Excel-Liste, Auszug)</h4>
+    <table class="daten">
+      <tr><th>Datum</th><th>PersNr</th><th>Mitarbeiter</th><th>Telefon</th><th>StationNr</th><th>Station</th><th>Ort</th><th>Schicht</th><th>Stunden</th></tr>
+      <tr><td>01.09.2026</td><td>12</td><td>Weber, Tom</td><td>0761 445-12</td><td>1</td><td>Hauptbahnhof</td><td>Freiburg</td><td>Früh</td><td>6,0</td></tr>
+      <tr><td>01.09.2026</td><td>15</td><td>Sanchez, Ana</td><td>0761 445-15</td><td>2</td><td>Messe</td><td>Freiburg</td><td>Früh</td><td>6,0</td></tr>
+      <tr><td>01.09.2026</td><td>17</td><td>Yilmaz, Can</td><td>0761 445-17</td><td>1</td><td>Hauptbahnhof</td><td>Freiburg</td><td>Spät</td><td>7,5</td></tr>
+      <tr><td>02.09.2026</td><td>12</td><td>Weber, Tom</td><td>0761 445-12</td><td>3</td><td>Titisee</td><td>Titisee-Neustadt</td><td>Früh</td><td>6,0</td></tr>
+      <tr><td>02.09.2026</td><td>15</td><td>Sanchez, Ana</td><td>0761 445-15</td><td>1</td><td>Hauptbahnhof</td><td>Freiburg</td><td>Spät</td><td>7,5</td></tr>
+      <tr><td>02.09.2026</td><td>21</td><td>Frey, Lisa</td><td>0761 445-21</td><td>4</td><td>Kaiserstuhl</td><td>Vogtsburg</td><td>Früh</td><td>6,0</td></tr>
+      <tr><td>03.09.2026</td><td>17</td><td>Yilmaz, Can</td><td>0761 445-17</td><td>2</td><td>Messe</td><td>Freiburg</td><td>Früh</td><td>6,0</td></tr>
+      <tr><td>03.09.2026</td><td>12</td><td>Weber, Tom</td><td>0761 445-12</td><td>1</td><td>Hauptbahnhof</td><td>Freiburg</td><td>Spät</td><td>7,5</td></tr>
+    </table>
+    <p class="klein">Ein Mitarbeiter arbeitet pro Tag höchstens eine Schicht. Eine Frühschicht dauert immer 6,0 Stunden, eine Spätschicht immer 7,5 Stunden.</p>
+  </div>
+
+  <div class="anlage" id="anlage-6">
+    <h4>Anlage 6 · Werkstattbuch (Excel-Datei seit 2019, ca. 1.800 Zeilen, Auszug)</h4>
+    <table class="daten">
+      <tr><th>Datum</th><th>Rad</th><th>Mechaniker</th><th>Arbeiten</th><th>Kosten</th></tr>
+      <tr><td>03.02.2025</td><td>101</td><td>Weber</td><td>Inspektion</td><td>89,00 €</td></tr>
+      <tr><td>4.2.</td><td>Urban C5 blau</td><td>T. Weber</td><td>Bremsen vorne + hinten</td><td>145,5</td></tr>
+      <tr><td>2025-02-07</td><td>WAW-23-0018</td><td>Weber, Sanchez</td><td>Insp. + Reifen</td><td>ca. 130</td></tr>
+      <tr><td>11.02.25</td><td>105</td><td></td><td>Akku geprüft</td><td>inkl.</td></tr>
+      <tr><td>11.02.25</td><td>105</td><td></td><td>Akku geprüft</td><td>inkl.</td></tr>
+      <tr><td>Feb 25</td><td>103/104</td><td>Sanchez</td><td>Inspektion</td><td>2x 89 €</td></tr>
+      <tr><td>14.13.2025</td><td>Tour T7</td><td>A. Sanchez</td><td>Kette gewechselt</td><td>29.90 EUR</td></tr>
+    </table>
+  </div>
+
+  <div class="anlage" id="anlage-7">
+    <h4>Anlage 7 · Kundenkartei (Excel-Datei, ca. 950 Zeilen, Auszug)</h4>
+    <table class="daten">
+      <tr><th>Nr</th><th>Name</th><th>Adresse</th><th>Telefon</th><th>E-Mail</th><th>Kunde seit</th><th>Bemerkung</th></tr>
+      <tr><td>1</td><td>Hoffmann, Lena</td><td>Kartäuserstr. 12, 79098 Freiburg</td><td>0761/1234567</td><td>lena.hoffmann@mail.de</td><td>04/2024</td><td></td></tr>
+      <tr><td>2</td><td>Jonas Albrecht</td><td>Habsburgerstraße 3 79102 Freiburg</td><td>+49 761 7654321</td><td>j.albrecht@web,de</td><td>2024</td><td>Stammkunde</td></tr>
+      <tr><td>3</td><td>Schulze Mira</td><td>Denzlingen</td><td>–</td><td></td><td>2.8.24</td><td>Tel. folgt</td></tr>
+      <tr><td>4</td><td>Wagner, Paul</td><td>Seestr. 5, Titisee-Neustadt</td><td>07651-4711; 0170 5551234</td><td>paul.wagner@gmx.de</td><td>10.08.2024</td><td></td></tr>
+      <tr><td>5</td><td>Hoffmann, L.</td><td>Kartäuserstraße 12, Freiburg</td><td>0761 1234567</td><td>lena.hoffmann@mail.de</td><td>18.04.2024</td><td>doppelt?</td></tr>
+      <tr><td>6</td><td>Keller, Sofia</td><td>Wiehre, Freiburg</td><td></td><td>s.keller(at)posteo.de</td><td>Mai 25</td><td></td></tr>
+      <tr><td>7</td><td>Brandt Tim</td><td>77933 Lahr</td><td>07821/99880</td><td></td><td></td><td>Firma?</td></tr>
+    </table>
+    <p class="klein">Die Daten sollen in die Tabelle Kunde (Anlage 2) übernommen werden.</p>
+  </div>
+
+  <div class="anlage" id="anlage-8">
+    <h4>Anlage 8 · Fachtext (Auszug aus einem Whitepaper)</h4>
+    <div class="englisch">
+      <p><strong>Document Databases at a Glance</strong></p>
+      <p>A document database stores data as self-describing documents, usually in JSON or a binary variant of it. Related documents are grouped in collections. Unlike the rows of a table in a relational database, the documents in one collection do not have to share the same structure: a new field can be added to some documents without changing a schema or migrating existing data.</p>
+      <p>Data that is read together is often stored together. Instead of splitting an order into several tables and joining them at query time, the order lines can be embedded directly in the order document. This makes typical read operations fast and simple. On the other hand, embedded data may be duplicated in many documents, and changing it later means updating every copy.</p>
+      <p>Document databases are designed to scale horizontally: a large collection can be distributed across many servers (sharding). Many products guarantee atomic writes only for a single document; transactions that span several documents are either not available or noticeably slower. For data with many relationships and strict consistency requirements, such as accounting, a relational database is often the better choice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TEIL C: AUFGABEN ===================== -->
+<section class="teil" id="aufgaben">
+  <h2>C · Aufgaben</h2>
+  <p class="klein">Alle Aufgaben beziehen sich auf die Ausgangssituation in Anlage 1. SQL-Anweisungen in Standard-SQL/MySQL wie im Belegsatz. Gehen Sie – wenn nichts anderes angegeben ist – immer vom Datenbestand in den Anlagen 2 und 3 aus (Aufgaben bauen nicht aufeinander auf).</p>
+
+  <!-- ======================= DB-01 ======================= -->
+  <h3 id="a-01">DB-01 · ER-/Relationenmodell</h3>
+
+  <div class="aufgabe" id="DB-01-1" style="break-inside: auto">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-01.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Für den VeloManager werden Sachverhalte aus dem Fachkonzept modelliert.</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Bestimmen Sie für die folgenden Sachverhalte jeweils die Kardinalität (1:1, 1:n oder m:n) und begründen Sie Ihre Angabe kurz.</div>
+    <table class="ausfuellen">
+      <tr><th style="width:5%">Nr.</th><th style="width:57%">Sachverhalt</th><th style="width:12%">Kardinalität</th><th>Begründung</th></tr>
+      <tr><td>1</td><td>Fahrrad – Station: Jedes Fahrrad ist genau einer Heimatstation zugeordnet; an einer Station sind mehrere Fahrräder stationiert.</td><td></td><td></td></tr>
+      <tr><td>2</td><td>Station – Mitarbeiter (Stationsleitung): Jede Station wird von genau einem Mitarbeiter geleitet; ein Mitarbeiter leitet höchstens eine Station.</td><td></td><td></td></tr>
+      <tr><td>3</td><td>Ausleihe – Zubehör: Zu einer Ausleihe können mehrere Zubehörteile (Helm, Schloss, Kindersitz) gebucht werden; jedes Zubehörteil wird bei vielen Ausleihen gebucht.</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Gegeben ist folgender Ausschnitt aus dem ER-Modell. Die Entität Kategorie hat die Attribute KategorieNr (Schlüssel), Bezeichnung und Tagespreis, die Entität Fahrrad die Attribute FahrradNr (Schlüssel), Modell und Kaufpreis.</div>
+    <figure>
+<svg viewBox="0 0 520 70" width="520" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+<rect x="20" y="15" width="130" height="40" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="85.0" y="40.0" text-anchor="middle" font-weight="bold">Kategorie</text>
+<polygon points="200,35 260,11 320,35 260,59" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="260" y="39" text-anchor="middle">umfasst</text>
+<rect x="370" y="15" width="130" height="40" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="435.0" y="40.0" text-anchor="middle" font-weight="bold">Fahrrad</text>
+<line x1="150" y1="35" x2="200" y2="35" stroke="#222"/>
+<line x1="320" y1="35" x2="370" y2="35" stroke="#222"/>
+<text x="158" y="28" font-weight="bold">1</text>
+<text x="354" y="28" font-weight="bold">n</text>
+</svg>
+<figcaption>ER-Modell-Ausschnitt zu Aufgabe DB-01.1 b</figcaption>
+</figure>
+
+    <p>Geben Sie das zugehörige Relationenmodell in Textnotation an (Primärschlüssel unterstrichen, Fremdschlüssel mit ↑) und begründen Sie, in welche Tabelle der Fremdschlüssel aufgenommen wird.</p>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 2b; W23 Teil 1, Aufgabe 4a (Kardinalitäten)</p>
+  </div>
+
+  <div class="aufgabe" id="DB-01-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-01.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">12 Punkte</span>
+    </div>
+    <p>VeloPunkt bietet künftig geführte E-Bike-Touren an. Aus einem Gespräch mit der Tourenleitung liegen folgende Informationen vor:</p>
+    <ul>
+      <li>Jede Tour hat eine Tournummer, einen Titel, ein Datum, eine Länge in Kilometern und einen Schwierigkeitsgrad.</li>
+      <li>Jede Tour startet an genau einer Station (StationNr, Name). An einer Station können viele Touren starten.</li>
+      <li>Jede Tour wird von genau einem Mitarbeiter (PersNr, Name, Telefon) geleitet. Ein Mitarbeiter kann viele Touren leiten.</li>
+      <li>Kunden (KundenNr, Name, E-Mail) können an beliebig vielen Touren teilnehmen; an einer Tour nehmen mehrere Kunden teil. Zu jeder Teilnahme wird gespeichert, ob bereits bezahlt wurde und welche Bewertung (1 bis 5 Sterne) der Kunde nach der Tour abgegeben hat.</li>
+      <li>Jeder Mitarbeiter hat höchstens einen Vorgesetzten, der ebenfalls Mitarbeiter von VeloPunkt ist. Ein Vorgesetzter führt mehrere Mitarbeiter.</li>
+    </ul>
+    <div class="teilaufgabe"><span class="tp">12 P</span>Erstellen Sie ein ER-Modell in der Notation des Belegsatzes mit allen Entitätstypen, Attributen (Schlüsselattribute unterstrichen), Beziehungen und Kardinalitäten.</div>
+    <div class="zeichenflaeche gross" style="height:560px"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 2b (rekursive Beziehung, m:n); W23 Teil 1, Aufgabe 4a (m:n mit Attributen)</p>
+  </div>
+
+  <div class="aufgabe" id="DB-01-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-01.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">22 Punkte</span>
+    </div>
+    <p>Die Online-Buchung des VeloManagers soll um Zubehör (z. B. Helm, Kindersitz, Packtasche) erweitert werden. Für die Datenhaltung liegt folgendes ER-Modell vor:</p>
+    <figure>
+<svg viewBox="0 0 690 70" width="690" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+<rect x="10" y="15" width="110" height="40" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="65.0" y="40.0" text-anchor="middle" font-weight="bold">Kunde</text>
+<polygon points="145,35 195,11 245,35 195,59" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="195" y="39" text-anchor="middle">bucht</text>
+<rect x="270" y="15" width="110" height="40" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="325.0" y="40.0" text-anchor="middle" font-weight="bold">Buchung</text>
+<polygon points="410,35 470,11 530,35 470,59" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="470" y="39" text-anchor="middle">umfasst</text>
+<rect x="560" y="15" width="110" height="40" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="615.0" y="40.0" text-anchor="middle" font-weight="bold">Zubehör</text>
+<line x1="120" y1="35" x2="145" y2="35" stroke="#222"/>
+<line x1="245" y1="35" x2="270" y2="35" stroke="#222"/>
+<line x1="380" y1="35" x2="410" y2="35" stroke="#222"/>
+<line x1="530" y1="35" x2="560" y2="35" stroke="#222"/>
+<text x="126" y="28" font-weight="bold">1</text>
+<text x="256" y="28" font-weight="bold">n</text>
+<text x="386" y="28" font-weight="bold">m</text>
+<text x="544" y="28" font-weight="bold">n</text>
+</svg>
+<figcaption>Gegebenes ER-Modell (Online-Buchung mit Zubehör)</figcaption>
+</figure>
+
+    <p>Informationen aus der Ist-Analyse:</p>
+    <ul>
+      <li>Von Kunden werden KundenNr, Vorname, Nachname und E-Mail-Adresse gespeichert, von Buchungen BuchungsNr, Buchungsdatum, Abholdatum und Rückgabedatum, von Zubehör ZubehoerNr, Bezeichnung und Tagespreis.</li>
+      <li>Für jedes Zubehör einer Buchung wird die gebuchte Anzahl gespeichert (z. B. 2 Helme).</li>
+      <li>Jede Buchung hat genau eine Abholstation und genau eine Rückgabestation; beide dürfen verschieden sein. Von Stationen werden StationNr, Name und Ort gespeichert.</li>
+      <li>Pro Buchung kann höchstens ein Gutschein eingelöst werden. Ein Gutschein hat einen Code, einen Rabatt in Prozent und ein Datum „gültig bis“. Jeder Gutschein kann nur ein einziges Mal eingelöst werden.</li>
+    </ul>
+    <div class="teilaufgabe"><span class="tp">18 P</span>a) Überführen Sie das ER-Modell in ein relationales Datenmodell in der 3. Normalform und erweitern Sie es anhand der Ist-Analyse. Übernehmen Sie alle genannten Attribute, kennzeichnen Sie Primärschlüssel (PK) und Fremdschlüssel (FK) und stellen Sie alle Beziehungen zwischen den Tabellen mit ihren Kardinalitäten dar.</div>
+    <div class="zeichenflaeche gross"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Erläutern Sie, wie im Datenmodell technisch sichergestellt werden kann, dass ein Gutschein nur ein einziges Mal eingelöst wird.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Begründen Sie, warum das Attribut „Anzahl“ weder in der Tabelle Buchung noch in der Tabelle Zubehör gespeichert werden kann.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S26 Teil 2, Aufgabe 3a (ER-Modell überführen und erweitern)</p>
+  </div>
+
+  <!-- ======================= DB-02 ======================= -->
+  <h3 id="a-02">DB-02 · Normalisierung</h3>
+
+  <div class="aufgabe" id="DB-02-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-02.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Erläutern Sie den Begriff „funktionale Abhängigkeit“ und geben Sie ein Beispiel aus der Tabelle Kunde (Anlage 2) an.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Jede der folgenden Aussagen beschreibt einen Verstoß gegen eine Normalform. Geben Sie jeweils die verletzte Normalform an.</div>
+    <table class="ausfuellen">
+      <tr><th style="width:5%">Nr.</th><th>Aussage</th><th style="width:18%">verletzte NF</th></tr>
+      <tr><td>1</td><td>In einer Kundentabelle stehen bei manchen Kunden zwei Telefonnummern im Feld „Telefon“, getrennt durch ein Semikolon.</td><td></td></tr>
+      <tr><td>2</td><td>Tabelle AusleiheKunde(<u>AusleiheNr</u>, Beginn, KundenNr, Nachname): Nachname hängt von KundenNr ab.</td><td></td></tr>
+      <tr><td>3</td><td>Tabelle Zubehoerbuchung(<u>AusleiheNr, ZubehoerNr</u>, Anzahl, Bezeichnung): Bezeichnung hängt nur von ZubehoerNr ab.</td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">1 P</span>c) Begründen Sie, warum eine Tabelle in der 1NF, deren Primärschlüssel aus genau einem Attribut besteht, immer auch in der 2NF ist.</div>
+    <div class="antwort z3"></div>
+  </div>
+
+  <div class="aufgabe" id="DB-02-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-02.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">12 Punkte</span>
+    </div>
+    <p>Der Schichtplan der Stationen (Anlage 5) wird bisher als Excel-Liste geführt und soll in den VeloManager übernommen werden.</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Erläutern Sie anhand von Anlage 5, was man unter Redundanz versteht.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">6 P</span>b) Beschreiben Sie jeweils an einem konkreten Beispiel aus Anlage 5, wie es zu einer Einfüge-, einer Änderungs- und einer Löschanomalie kommen kann.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Überführen Sie die Daten in die 3. Normalform. Geben Sie die Tabellen in Textnotation an (Primärschlüssel unterstrichen, Fremdschlüssel mit ↑).</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W25 Teil 1, Aufgabe 4a/4b; S23 Teil 1, Aufgabe 4ca</p>
+  </div>
+
+  <div class="aufgabe" id="DB-02-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-02.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">20 Punkte</span>
+    </div>
+    <p>Die Werkstatt soll ihre Rechnungen künftig im VeloManager erstellen. Grundlage sind das bisherige Rechnungsformular und die Informationen der Werkstattleitung in Anlage 4.</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Nennen Sie zwei Angaben des Formulars, die nicht als Attribut gespeichert werden sollten, und begründen Sie dies.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">18 P</span>b) Erstellen Sie ein relationales Datenmodell in der 3. Normalform für die Werkstattrechnungen. Geben Sie alle Tabellen mit ihren Attributen an, kennzeichnen Sie Primär- und Fremdschlüssel und stellen Sie die Beziehungen mit ihren Kardinalitäten dar.</div>
+    <div class="zeichenflaeche gross"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 2, Aufgabe 3; S22 Teil 2, Aufgabe 3; W25 Teil 1, Aufgabe 4c (Datenmodell in 3NF aus Beleg bzw. Beispieldaten)</p>
+  </div>
+
+  <!-- ======================= DB-03 ======================= -->
+  <h3 id="a-03">DB-03 · SQL: SELECT mit JOIN</h3>
+
+  <div class="aufgabe" id="DB-03-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-03.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Erstellen Sie jeweils eine SQL-Anweisung für die folgenden Auswertungen (Anlage 2).</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) KundenNr, Vorname und Nachname aller Kunden, für die keine E-Mail-Adresse gespeichert ist.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) FahrradNr, Modell und Kaufpreis aller Fahrräder, die im Jahr 2024 gekauft wurden, absteigend nach Kaufpreis sortiert (bei gleichem Preis aufsteigend nach FahrradNr).</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) KundenNr, Nachname, PLZ und Ort aller Kunden, deren Postleitzahl mit „791“ beginnt.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W22 Teil 2, Aufgabe 4c (LIKE-Muster PLZ); S23 Teil 2, Aufgabe 4a (YEAR, IS NULL)</p>
+  </div>
+
+  <div class="aufgabe" id="DB-03-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-03.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">9 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>a) Erstellen Sie eine SQL-Abfrage, die alle Ausleihen ausgibt, die im Juli oder August 2026 begonnen haben: AusleiheNr, Beginn, Nachname des Kunden und Modell des Fahrrads, aufsteigend nach Beginn sortiert.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Erstellen Sie eine Liste aller Fahrräder (FahrradNr, Modell) mit Datum und Art ihrer Wartungen. Fahrräder, die noch nie gewartet wurden, sollen ebenfalls aufgeführt werden. Sortieren Sie nach FahrradNr und Datum.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 2, Aufgabe 4e (Join über mehrere Tabellen); S22 Teil 2, Aufgabe 4bc (LEFT JOIN)</p>
+  </div>
+
+  <div class="aufgabe" id="DB-03-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-03.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">14 Punkte</span>
+    </div>
+    <p>Die Geschäftsführung möchte die abgerechneten Mietbeträge kontrollieren und einen Überblick über die Kundenaktivität im Jahr 2026 erhalten.</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Erstellen Sie eine SQL-Abfrage, die für alle <strong>abgeschlossenen</strong> Ausleihen, die im Jahr 2026 begonnen haben, folgende Spalten ausgibt: AusleiheNr, Nachname des Kunden, Modell, Bezeichnung der Kategorie, Mietdauer in Tagen, Tagespreis und Sollbetrag (Mietdauer × Tagespreis). Abholung und Rückgabe am selben Tag zählen als ein Miettag. Sortieren Sie absteigend nach dem Sollbetrag.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>b) Erstellen Sie eine Liste aller Kunden (KundenNr, Nachname) mit AusleiheNr und Beginn ihrer Ausleihen, die im Jahr 2026 begonnen haben. Kunden ohne Ausleihe im Jahr 2026 sollen ebenfalls (mit leeren Feldern) aufgeführt werden. Sortieren Sie nach KundenNr.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Ein Kollege schreibt in b) die Bedingung für das Jahr 2026 in die WHERE-Klausel. Erläutern Sie, welche Kunden aus Anlage 2 dann im Ergebnis fehlen, und begründen Sie dies.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W24 Teil 2, Aufgabe 4c (Datumsdifferenz); W22 Teil 2, Aufgabe 4a und S26 Teil 2, Aufgabe 4b (LEFT JOIN)</p>
+  </div>
+
+  <!-- ======================= DB-04 ======================= -->
+  <h3 id="a-04">DB-04 · SQL: Aggregatfunktionen, GROUP BY, HAVING</h3>
+
+  <div class="aufgabe" id="DB-04-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-04.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Ermitteln Sie mit einer SQL-Abfrage für alle abgeschlossenen Ausleihen der Tabelle Ausleihe die Anzahl, die Summe der gefahrenen Kilometer und den Durchschnitt der Kilometer.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Erläutern Sie den Unterschied zwischen WHERE und HAVING.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Geben Sie das Ergebnis der Abfrage <code>SELECT COUNT(*), COUNT(Kosten) FROM Wartung;</code> an und begründen Sie den Unterschied.</div>
+    <div class="antwort z3"></div>
+  </div>
+
+  <div class="aufgabe" id="DB-04-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-04.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>a) Erstellen Sie eine SQL-Abfrage, die für jede Kategorie, in der es Ausleihen gibt, die Bezeichnung, die Anzahl der Ausleihen und den Umsatz (Summe der Beträge) ausgibt – absteigend nach Umsatz sortiert.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>b) Erstellen Sie eine SQL-Abfrage, die alle Kunden mit mindestens zwei Ausleihen in der Tabelle Ausleihe ausgibt: KundenNr, Vorname, Nachname und Anzahl der Ausleihen – absteigend nach Anzahl, bei Gleichstand alphabetisch nach Nachname.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W25 Teil 2, Aufgabe 4c (HAVING) und 4e (SUM je Kategorie)</p>
+  </div>
+
+  <div class="aufgabe" id="DB-04-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-04.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">16 Punkte</span>
+    </div>
+    <p>Für die Planung der Flotte und der Werkstatt werden Auswertungen benötigt.</p>
+    <div class="teilaufgabe"><span class="tp">5 P</span>a) Erstellen Sie eine SQL-Abfrage, die für jede Station die StationNr, den Namen und die Anzahl der dort stationierten Fahrräder ausgibt. Stationen ohne Fahrräder sollen mit der Anzahl 0 erscheinen.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">6 P</span>b) Erstellen Sie eine SQL-Abfrage, die für jedes Fahrrad, das im Jahr 2026 gewartet wurde, FahrradNr, Modell, die Anzahl der Wartungen 2026 und die Summe ihrer Kosten ausgibt – aber nur, wenn diese Summe 50 € übersteigt. Sortieren Sie absteigend nach der Kostensumme.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>c) Die folgende Abfrage soll alle Kunden liefern, die keine Ausleihe in der Tabelle Ausleihe haben. Sie erzeugt jedoch einen Fehler.</div>
+<pre class="sql">SELECT k.KundenNr, k.Nachname, COUNT(a.AusleiheNr) AS Anzahl
+FROM   Kunde k
+  LEFT JOIN Ausleihe a ON k.KundenNr = a.KundenNr
+WHERE  COUNT(a.AusleiheNr) = 0
+GROUP BY k.KundenNr;</pre>
+    <p>Nennen Sie zwei Fehler und geben Sie die korrigierte Abfrage an. Erläutern Sie außerdem, welches Ergebnis entstünde, wenn in der korrigierten Abfrage <code>COUNT(*)</code> statt <code>COUNT(a.AusleiheNr)</code> verwendet würde.</p>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: S22 Teil 2, Aufgabe 4bc (LEFT JOIN mit COUNT); W21 Teil 2, Aufgabe 4d (HAVING)</p>
+  </div>
+
+  <!-- ======================= DB-05 ======================= -->
+  <h3 id="a-05">DB-05 · SQL: INSERT, UPDATE, DELETE</h3>
+
+  <div class="aufgabe" id="DB-05-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-05.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">5 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Die Kundin Clara Fischer, 79104 Freiburg, E-Mail c.fischer@mail.de, soll mit der KundenNr 1011 gespeichert werden. Erstellen Sie die SQL-Anweisung.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>b) Paul Wagner (KundenNr 1004) hat die neue E-Mail-Adresse paul.wagner@posteo.de. Erstellen Sie die SQL-Anweisung.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Die Anweisung <code>DELETE FROM Kunde WHERE KundenNr = 1004;</code> wird vom Datenbanksystem abgewiesen. Erläutern Sie den Grund und nennen Sie eine Möglichkeit, den Kunden dennoch zu löschen.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W25 Teil 2, Aufgabe 4a; S24 Teil 2, Aufgabe 4a</p>
+  </div>
+
+  <div class="aufgabe" id="DB-05-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-05.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>a) Die Tagespreise aller Kategorien, in denen im Jahr 2026 mindestens zwei Ausleihen begonnen haben, sollen um 10 % erhöht werden. Erstellen Sie die SQL-Anweisung.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>b) Alle Fahrräder der Kategorie „E-Lastenrad“ werden an die Station „Messe“ verlegt. Erstellen Sie die SQL-Anweisung. KategorieNr und StationNr dürfen dabei nicht als feste Werte verwendet werden.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 2, Aufgabe 4c (UPDATE mit Unterabfrage); W23 Teil 2, Aufgabe 4c (UPDATE mit JOIN)</p>
+  </div>
+
+  <div class="aufgabe" id="DB-05-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-05.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">16 Punkte</span>
+    </div>
+    <p>Die Tabelle Ausleihe soll regelmäßig bereinigt werden. Gehen Sie bei allen Teilaufgaben vom Datenbestand der Anlagen 2 und 3 aus.</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Alle Ausleihen, die vor dem 01.01.2026 beendet wurden, sollen in die Tabelle Ausleihe_Archiv übertragen und anschließend aus der Tabelle Ausleihe gelöscht werden. Erstellen Sie die SQL-Anweisungen.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Begründen Sie, warum die Anweisungen aus a) in einer Transaktion und in genau dieser Reihenfolge ausgeführt werden sollten.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>c) Das Fahrrad 105 wird am 10.10.2026 ausgemustert. Erstellen Sie eine SQL-Anweisung, die das Fahrrad in die Tabelle Fahrrad_Archiv überträgt. Die Kategorie ist als Bezeichnung zu speichern, GesamtKm als Summe der Kilometer aller Ausleihen des Fahrrads aus den Tabellen Ausleihe und Ausleihe_Archiv.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>d) Anschließend sollen das Fahrrad 105 und alle Datensätze, die darauf verweisen, gelöscht werden. Geben Sie die DELETE-Anweisungen in der richtigen Reihenfolge an und begründen Sie die Reihenfolge.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W22 Teil 2, Aufgabe 4b; S24 Teil 2, Aufgabe 4c; S26 Teil 2, Aufgabe 4ca/4cb (Archivierung)</p>
+  </div>
+
+  <!-- ======================= DB-06 ======================= -->
+  <h3 id="a-06">DB-06 · Datenbank-Theorie</h3>
+
+  <div class="aufgabe" id="DB-06-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-06.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Nennen und erläutern Sie die vier ACID-Eigenschaften von Transaktionen.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Nennen Sie je einen Vorteil und einen Nachteil eines Datenbankindex.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 3a (ACID); S22 Teil 2, Aufgabe 4ac (Index)</p>
+  </div>
+
+  <div class="aufgabe" id="DB-06-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-06.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Bei der Rückgabe eines Fahrrads führt der VeloManager drei Schritte aus: (1) In der Ausleihe werden Ende, Kilometer und Betrag eingetragen. (2) Eine Rechnung wird erzeugt. (3) Hat das Fahrrad seit der letzten Wartung mehr als 1.000 km zurückgelegt, wird automatisch ein Wartungsauftrag angelegt.</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Erläutern Sie den Begriff Transaktion und beschreiben Sie, was passieren könnte, wenn die Rückgabe nicht als Transaktion ausgeführt wird und der Server nach Schritt 1 abstürzt.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Erläutern Sie den Begriff referenzielle Integrität am Beispiel der Tabellen Ausleihe und Fahrrad (Anlage 2). Nennen Sie außerdem zwei Möglichkeiten, wie das Datenbanksystem reagieren kann, wenn ein Fahrrad gelöscht werden soll, auf das noch Ausleihen verweisen.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Im Kundenportal wird sehr häufig die Abfrage „alle Ausleihen eines Kunden“ ausgeführt. Nennen Sie die Spalte, für die ein Index angelegt werden sollte, und begründen Sie Ihre Wahl.</div>
+    <div class="antwort z3"></div>
+  </div>
+
+  <div class="aufgabe" id="DB-06-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-06.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">16 Punkte</span>
+    </div>
+    <p>Für eine geplante Smartphone-App wird überlegt, Kundendaten und Ausleihen zusätzlich in einer dokumentenorientierten Datenbank bereitzustellen.</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Ordnen Sie den Begriffen einer relationalen Datenbank die entsprechenden Begriffe einer dokumentenorientierten Datenbank zu.</div>
+    <table class="ausfuellen kompakt">
+      <tr><th style="width:240px">Relationale Datenbank</th><th style="width:300px">Dokumentenorientierte Datenbank</th></tr>
+      <tr><td>Tabelle</td><td></td></tr>
+      <tr><td>Datensatz (Zeile)</td><td></td></tr>
+      <tr><td>Spalte (Attribut)</td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">7 P</span>b) Stellen Sie die Kundin mit der KundenNr 1001 mit allen ihren Ausleihen aus der Tabelle Ausleihe (Anlage 2) als JSON-Dokument dar. Die Ausleihen sollen als Array eingebettet werden und neben AusleiheNr, Beginn, Ende, Kilometer und Betrag auch das Modell des Fahrrads enthalten.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">6 P</span>c) Erläutern Sie mithilfe des Fachtextes in Anlage 8 zwei Vorteile und einen Nachteil einer dokumentenorientierten Datenbank für den VeloManager.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 3b/3c (Begriffe, JSON, Einbettung); S22 Teil 1, Aufgabe 2c (NoSQL aus englischem Text)</p>
+  </div>
+
+  <!-- ======================= DB-07 ======================= -->
+  <h3 id="a-07">DB-07 · SQL: Unterabfragen</h3>
+
+  <div class="aufgabe" id="DB-07-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-07.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">5 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Erstellen Sie eine SQL-Abfrage, die FahrradNr und Modell aller Fahrräder ausgibt, die noch nie ausgeliehen wurden (Tabelle Ausleihe). Verwenden Sie eine Unterabfrage mit NOT IN.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Erläutern Sie den Unterschied zwischen einer korrelierten und einer nicht korrelierten Unterabfrage.</div>
+    <div class="antwort z3"></div>
+  </div>
+
+  <div class="aufgabe" id="DB-07-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-07.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">9 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Erstellen Sie eine SQL-Abfrage, die alle Ausleihen ausgibt, bei denen mehr Kilometer gefahren wurden als im Durchschnitt aller Ausleihen der Tabelle Ausleihe: AusleiheNr, KundenNr und Kilometer.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>b) Erstellen Sie eine SQL-Abfrage, die KundenNr, Vorname und Nachname aller Kunden ausgibt, die mindestens einmal ein Fahrrad der Kategorie „E-Lastenrad“ ausgeliehen haben (Tabelle Ausleihe). Lösen Sie die Aufgabe mit Unterabfragen; die KategorieNr darf nicht als fester Wert verwendet werden.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: W23 Teil 2, Aufgabe 4d (Vergleich mit AVG); S22 Teil 2, Aufgabe 4bb (Unterabfrage mit IN)</p>
+  </div>
+
+  <div class="aufgabe" id="DB-07-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-07.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">14 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Erstellen Sie eine SQL-Abfrage, die alle Fahrräder ausgibt, deren Kaufpreis über dem durchschnittlichen Kaufpreis der Fahrräder ihrer <strong>eigenen</strong> Kategorie liegt: FahrradNr, Modell und Kaufpreis.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>b) Im Rahmen der Datenpflege sollen alle Kunden gelöscht werden, die weder in der Tabelle Ausleihe noch in der Tabelle Ausleihe_Archiv vorkommen. Erstellen Sie die SQL-Anweisung mit NOT EXISTS und geben Sie an, welche Kunden aus Anlage 2 gelöscht werden.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Ermitteln Sie, wie viele Ausleihen ein Kunde im Durchschnitt hat. Berücksichtigt werden nur Kunden mit mindestens einer Ausleihe in der Tabelle Ausleihe. Verwenden Sie eine Unterabfrage in der FROM-Klausel.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W23 Teil 2, Aufgabe 4d (korrelierte Unterabfrage); S22 Teil 2, Aufgabe 4bb (DELETE mit NOT EXISTS)</p>
+  </div>
+
+  <!-- ======================= DB-08 ======================= -->
+  <h3 id="a-08">DB-08 · SQL: DDL</h3>
+
+  <div class="aufgabe" id="DB-08-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-08.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">5 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Ordnen Sie die SQL-Befehle CREATE TABLE, UPDATE, GRANT, ALTER TABLE, DELETE und REVOKE den Teilsprachen DDL, DML und DCL zu.</div>
+    <table class="ausfuellen">
+      <tr><th style="width:33%">DDL</th><th style="width:33%">DML</th><th>DCL</th></tr>
+      <tr><td style="height:4.5em"></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Legen Sie für die Spalten Kunde.PLZ, Fahrrad.Kaufpreis und Ausleihe.Beginn geeignete Datentypen fest und begründen Sie Ihre Wahl für die Spalte PLZ.</div>
+    <table class="ausfuellen kompakt">
+      <tr><th style="width:200px">Spalte</th><th style="width:220px">Datentyp</th></tr>
+      <tr><td>Kunde.PLZ</td><td></td></tr>
+      <tr><td>Fahrrad.Kaufpreis</td><td></td></tr>
+      <tr><td>Ausleihe.Beginn</td><td></td></tr>
+    </table>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S26 Teil 2, Aufgabe 4a; W22 Teil 2, Aufgabe 3c</p>
+  </div>
+
+  <div class="aufgabe" id="DB-08-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-08.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">9 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Erstellen Sie die SQL-Anweisung, mit der die Tabelle Wartung (Anlage 2) angelegt wird. Anforderungen: WartungNr ist Primärschlüssel, FahrradNr ist Fremdschlüssel auf die Tabelle Fahrrad; FahrradNr, Datum und Art sind Pflichtfelder; Art hat den Standardwert 'Inspektion'; Kosten dürfen nicht negativ sein. Wählen Sie geeignete Datentypen.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Die Mitarbeiter an den Stationen suchen Kunden häufig über den Nachnamen. Erstellen Sie einen passenden Index und nennen Sie einen Nachteil, der durch den Index entsteht.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 2, Aufgabe 4a (CREATE TABLE); S22 Teil 2, Aufgabe 4ba (CREATE INDEX)</p>
+  </div>
+
+  <div class="aufgabe" id="DB-08-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-08.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">13 Punkte</span>
+    </div>
+    <p>Die Datenbank soll erweitert werden. Erstellen Sie jeweils die SQL-Anweisung(en).</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Die Tabelle Fahrrad wird um die Spalte Hersteller erweitert (Herstellerkürzel aus genau drei Zeichen).</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Die ersten drei Zeichen der Rahmennummer sind das Herstellerkürzel. Füllen Sie die neue Spalte für alle vorhandenen Fahrräder.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Künftig darf jede E-Mail-Adresse nur bei einem Kunden vorkommen. Ergänzen Sie eine entsprechende Einschränkung und erläutern Sie kurz, ob die Kunden 1003 und 1007 (ohne E-Mail-Adresse) dabei ein Problem darstellen.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">6 P</span>d) Für die Vermietung von Zubehör (Helm, Schloss, Kindersitz …) werden zwei neue Tabellen benötigt: Zubehoer mit ZubehoerNr, Bezeichnung und Tagespreis sowie Ausleihe_Zubehoer, in der gespeichert wird, wie viele Stück eines Zubehörs zu einer Ausleihe gehören (Standardwert 1). Erstellen Sie beide Tabellen mit allen Primär- und Fremdschlüsseln.</div>
+    <div class="antwort z12"></div>
+    <p class="quelle">Angelehnt an: W25 Teil 2, Aufgabe 4d (ALTER TABLE ADD/DROP und UPDATE mit SUBSTRING)</p>
+  </div>
+
+  <!-- ======================= DB-09 ======================= -->
+  <h3 id="a-09">DB-09 · SQL: UNION</h3>
+
+  <div class="aufgabe" id="DB-09-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-09.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">3 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Erläutern Sie den Unterschied zwischen UNION und UNION ALL.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>b) Nennen Sie eine Voraussetzung, die zwei SELECT-Anweisungen erfüllen müssen, damit sie mit UNION verbunden werden können.</div>
+    <div class="antwort z3"></div>
+  </div>
+
+  <div class="aufgabe" id="DB-09-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-09.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">7 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Erstellen Sie eine SQL-Abfrage, die alle Ausleihen der Kundin 1001 aus den Tabellen Ausleihe und Ausleihe_Archiv ausgibt: AusleiheNr, FahrradNr, Beginn und Betrag, sortiert nach Beginn.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Geben Sie an, wie viele Zeilen die Abfrage <code>SELECT KundenNr FROM Ausleihe UNION SELECT KundenNr FROM Ausleihe_Archiv;</code> liefert und wie viele es mit UNION ALL wären. Begründen Sie den Unterschied.</div>
+    <div class="antwort z5"></div>
+  </div>
+
+  <div class="aufgabe" id="DB-09-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-09.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">13 Punkte</span>
+    </div>
+    <p>Für den Jahresbericht wird eine Statistik über alle Ausleihen benötigt – aktuelle und archivierte (Anlagen 2 und 3).</p>
+    <div class="teilaufgabe"><span class="tp">8 P</span>a) Erstellen Sie eine SQL-Abfrage, die je Jahr (Jahr des Beginns) die Anzahl der Ausleihen, den Umsatz (Summe der Beträge) und die gefahrenen Kilometer aus beiden Tabellen ausgibt, aufsteigend nach Jahr sortiert. Jedes Jahr soll genau einmal erscheinen.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Begründen Sie, warum in a) UNION ALL und nicht UNION verwendet werden muss. Nennen Sie ein konkretes Beispiel aus den Anlagen.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Ein Kollege schlägt folgende Abfrage vor:</div>
+<pre class="sql">SELECT YEAR(Beginn) AS Jahr, COUNT(*), SUM(Betrag), SUM(Kilometer)
+FROM   Ausleihe
+GROUP BY YEAR(Beginn)
+UNION ALL
+SELECT YEAR(Beginn), COUNT(*), SUM(Betrag), SUM(Kilometer)
+FROM   Ausleihe_Archiv
+GROUP BY YEAR(Beginn)
+ORDER BY Jahr;</pre>
+    <p>Erläutern Sie, warum diese Abfrage die Anforderung aus a) mit den vorliegenden Daten nicht erfüllt.</p>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: S24 Teil 2, Aufgabe 4d (UNION ALL mit GROUP BY YEAR)</p>
+  </div>
+
+  <!-- ======================= DB-10 ======================= -->
+  <h3 id="a-10">DB-10 · SQL: Benutzer und Rechte</h3>
+
+  <div class="aufgabe" id="DB-10-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-10.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">3 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Erläutern Sie das Prinzip der minimalen Rechte.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>b) Nennen Sie den SQL-Befehl, mit dem einem Benutzer ein Recht wieder entzogen wird.</div>
+    <div class="antwort z3"></div>
+  </div>
+
+  <div class="aufgabe" id="DB-10-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-10.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Die Werkstatt erhält einen eigenen Zugang zur Datenbank <code>velomanager</code>. Erstellen Sie die SQL-Anweisungen.</p>
+    <div class="teilaufgabe"><span class="tp">1 P</span>a) Legen Sie den Benutzer werkstatt mit einem Passwort an.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Der Benutzer soll die Tabellen Fahrrad und Kategorie lesen sowie in der Tabelle Wartung Datensätze lesen, einfügen und ändern dürfen.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>c) Das Recht, Datensätze der Tabelle Wartung zu ändern, soll wieder entzogen werden.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>d) Begründen Sie, warum der Benutzer kein DELETE-Recht auf die Tabelle Wartung erhalten sollte.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S23 Teil 2, Aufgabe 4d (CREATE USER, GRANT SELECT)</p>
+  </div>
+
+  <div class="aufgabe" id="DB-10-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-10.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Im VeloManager arbeiten verschiedene Personengruppen. Folgende Anforderungen wurden aufgenommen:</p>
+    <ul>
+      <li><strong>Stationspersonal:</strong> Kunden lesen, anlegen und ändern; Ausleihen lesen, anlegen und ändern; Fahrräder lesen.</li>
+      <li><strong>Werkstatt:</strong> Fahrräder lesen; Wartungen lesen, anlegen und ändern.</li>
+      <li><strong>Controlling:</strong> alle vier Tabellen nur lesen.</li>
+    </ul>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Vervollständigen Sie die Rechtematrix (S = SELECT, I = INSERT, U = UPDATE, D = DELETE; kein Recht = –).</div>
+    <table class="ausfuellen">
+      <tr><th style="width:24%">Rolle</th><th>Kunde</th><th>Fahrrad</th><th>Ausleihe</th><th>Wartung</th></tr>
+      <tr><td>Stationspersonal</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Werkstatt</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Controlling</td><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Erstellen Sie die SQL-Anweisungen, mit denen die Rolle stationspersonal angelegt, mit den Rechten aus a) ausgestattet und dem Mitarbeiter mit dem (bereits vorhandenen) Benutzernamen mueller zugewiesen wird.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Erläutern Sie zwei Vorteile der Rechtevergabe über Rollen gegenüber der Vergabe an einzelne Benutzer.</div>
+    <div class="antwort z5"></div>
+  </div>
+
+  <!-- ======================= DB-11 ======================= -->
+  <h3 id="a-11">DB-11 · Trigger, Stored Procedure, View</h3>
+
+  <div class="aufgabe" id="DB-11-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-11.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">4 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Erläutern Sie, was man unter einer Stored Procedure versteht.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Erläutern Sie, was man unter einem Trigger versteht.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S22 Teil 2, Aufgabe 4aa/4ab</p>
+  </div>
+
+  <div class="aufgabe" id="DB-11-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-11.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Erstellen Sie eine View <code>v_laufende_ausleihen</code>, die für alle noch nicht beendeten Ausleihen die AusleiheNr, den Beginn, den Nachnamen des Kunden, das Modell und den Namen der Heimatstation des Fahrrads (Spaltenname „Station“) enthält. Geben Sie außerdem an, welche Zeile(n) die View mit den Daten aus Anlage 2 liefert.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Nennen Sie zwei Vorteile von Views.</div>
+    <div class="antwort z3"></div>
+  </div>
+
+  <div class="aufgabe" id="DB-11-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-11.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Ein Trigger soll verhindern, dass ein Fahrrad ausgeliehen wird, das noch nicht zurückgegeben wurde. Beschreiben Sie den Trigger, indem Sie die Tabelle ausfüllen.</div>
+    <table class="ausfuellen">
+      <tr><th style="width:22%">Tabelle</th><th style="width:22%">Ereignis</th><th style="width:22%">Zeitpunkt (BEFORE/AFTER)</th></tr>
+      <tr><td></td><td></td><td></td></tr>
+      <tr><th colspan="2">Bedingung</th><th>Aktion</th></tr>
+      <tr><td colspan="2" style="height:4em"></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Gegeben ist folgende Stored Procedure (MySQL):</div>
+<pre class="sql">CREATE PROCEDURE rueckgabe(IN p_nr INT, IN p_km INT)
+BEGIN
+  UPDATE Ausleihe a
+    INNER JOIN Fahrrad f   ON f.FahrradNr   = a.FahrradNr
+    INNER JOIN Kategorie k ON k.KategorieNr = f.KategorieNr
+  SET a.Ende      = CURDATE(),
+      a.Kilometer = p_km,
+      a.Betrag    = (DATEDIFF(CURDATE(), a.Beginn) + 1) * k.Tagespreis
+  WHERE a.AusleiheNr = p_nr
+    AND a.Ende IS NULL;
+END</pre>
+    <p>Beschreiben Sie, was die Prozedur bewirkt. Geben Sie den Aufruf für die Rückgabe der laufenden Ausleihe 5012 mit 84 gefahrenen Kilometern an und berechnen Sie den Betrag, der bei einer Rückgabe am heutigen Tag (10.10.2026) gespeichert wird.</p>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Nennen Sie je einen Vorteil und einen Nachteil, Geschäftslogik als Trigger oder Stored Procedure in der Datenbank statt im Anwendungsprogramm umzusetzen.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S22 Teil 2, Aufgabe 4a (Trigger, Stored Procedure)</p>
+  </div>
+
+  <!-- ======================= DB-12 ======================= -->
+  <h3 id="a-12">DB-12 · Datenqualität beim Import</h3>
+
+  <div class="aufgabe" id="DB-12-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-12.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">5 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Nennen Sie vier Kriterien der Datenqualität.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Beim Import von Altdaten wird häufig nach dem ETL-Prinzip vorgegangen. Erläutern Sie die drei Schritte.</div>
+    <div class="antwort z5"></div>
+  </div>
+
+  <div class="aufgabe" id="DB-12-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-12.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">9 Punkte</span>
+    </div>
+    <p>Die Werkstatt möchte die Einträge ihres bisherigen Werkstattbuchs (Anlage 6) in die Tabelle Wartung (Anlage 2) importieren.</p>
+    <div class="teilaufgabe"><span class="tp">9 P</span>Beschreiben Sie drei Probleme bezüglich der Qualität der Daten in Anlage 6 und nennen Sie jeweils eine Folge, die sich durch den Import der mangelhaften Daten ergeben würde.</div>
+    <div class="antwort z12"></div>
+    <p class="quelle">Angelehnt an: W24 Teil 2, Aufgabe 3ba</p>
+  </div>
+
+  <div class="aufgabe" id="DB-12-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe DB-12.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">12 Punkte</span>
+    </div>
+    <p>Die Kundenkartei (Anlage 7) soll in die Tabelle Kunde (Anlage 2) übernommen werden.</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Beschreiben Sie für die Spalten „Name“, „Adresse“ und „E-Mail“ der Kundenkartei jeweils das Problem und die notwendige Transformation (Bereinigungsregel) für den Import.</div>
+    <table class="ausfuellen">
+      <tr><th style="width:14%">Spalte</th><th style="width:40%">Problem</th><th>Transformation</th></tr>
+      <tr><td>Name</td><td style="height:5em"></td><td></td></tr>
+      <tr><td>Adresse</td><td style="height:5em"></td><td></td></tr>
+      <tr><td>E-Mail</td><td style="height:5em"></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Beschreiben Sie ein Vorgehen, mit dem Dubletten wie in den Zeilen 1 und 5 erkannt und bereinigt werden können.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Beurteilen Sie, ob die Kundenkartei importiert oder die Kunden neu erfasst werden sollten, und begründen Sie Ihre Entscheidung.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W24 Teil 2, Aufgabe 3bb/3bc</p>
+  </div>
+
+  <!-- ======================= Originalaufgaben ======================= -->
+  <h3 id="originale">Originalaufgaben zum Üben</h3>
+  <p class="klein">Alle Dateien liegen im Ordner <code>Prüfungsvorbereitung</code>. Lösungen gibt es nur für 2023 Sommer, 2023 Winter, 2024 Sommer und 2025 Winter. Den originalen SQL-Syntax-Auszug findest du in den Belegsätzen von W21, S22, W22, S24 und W25 (z. B. <code>2024/sommer/AE Sommer 2024 Belegsatz.pdf</code>).</p>
+  <table style="font-size:13px">
+    <tr><th>Prüfung</th><th>Aufgaben (Block Datenbanken)</th><th>Datei</th><th>Lösung</th></tr>
+    <tr><td>Winter 2021/22</td><td>T1 A2b: ER-Modell (rekursiv, m:n), 16 P · T2 A3: Relationenmodell 3NF, 25 P · T2 A4: CREATE TABLE, SELECT, UPDATE mit Unterabfrage, GROUP BY/HAVING, Join über 4 Tabellen, 25 P</td><td><code>2021/winter/AE 2021 Winter Teil 1.pdf</code>, <code>… Teil 2.pdf</code></td><td>–</td></tr>
+    <tr><td>Sommer 2022</td><td>T1 A2c: NoSQL aus engl. Text, 9 P · T2 A3: 3NF aus Tarifübersicht, 20 P · T2 A4: Stored Procedure, Trigger, Index, CREATE INDEX, DELETE mit NOT IN, LEFT JOIN + COUNT, 30 P</td><td><code>2022/sommer/AE 2022 Sommer Teil 1.pdf</code>, <code>… Teil 2.pdf</code></td><td>–</td></tr>
+    <tr><td>Winter 2022/23</td><td>T1 A4c: NoSQL vs. relational, 5 P · T2 A3: ER-Modell erweitern, 3NF, Datentypen, 25 P · T2 A4: LEFT JOIN + GROUP BY, INSERT…SELECT + DELETE (Archiv), LIKE, 25 P</td><td><code>2022/winter/AE 2022 Winter Teil 1.pdf</code>, <code>… Teil 2.pdf</code></td><td>–</td></tr>
+    <tr><td>Sommer 2023</td><td>T1 A4c: Änderungsanomalie, Relationenmodell 3NF mit JSON-Daten, 16 P · T2 A4: COUNT/YEAR/IS NULL, 3-Tabellen-Join, LEFT JOIN + COUNT, CREATE USER/GRANT, 25 P</td><td><code>2023/sommer/AE Sommer 2023 Teil 1.pdf</code>, <code>… Teil 2.pdf</code></td><td><code>2023/sommer/AE Sommer 2023 Teil 1+2 Lösungen.pdf</code></td></tr>
+    <tr><td>Winter 2023/24</td><td>T1 A3: ACID, Dokument-DB, JSON, 25 P · T1 A4a: ER-Diagramm m:n mit Attributen, 14 P · T2 A3a: Relationenmodell 3NF, 18 P · T2 A4: BETWEEN, GROUP BY, UPDATE mit JOIN, korrelierte Unterabfrage, 25 P</td><td><code>2023/winter/AE Winter 2023 Teil 1.pdf</code>, <code>… Teil 2.pdf</code></td><td><code>2023/winter/AE Winter 2023 Teil 1 Lösungen.pdf</code>, <code>… Teil 2 Lösungen.pdf</code></td></tr>
+    <tr><td>Sommer 2024</td><td>T1 A4a: ER-Modell erweitern (Soft Delete, m:n), 10 P · T2 A4: DELETE, MIN/MAX/AVG/COUNT je Gruppe, Archiv INSERT…SELECT + DELETE, UNION ALL + GROUP BY YEAR, 30 P</td><td><code>2024/sommer/AE Sommer 2024 Teil 1+2+3.pdf</code></td><td><code>2024/sommer/AE Sommer 2024 Teil 1 Lösungen.pdf</code>, <code>… Teil 2 Lösungen.pdf</code></td></tr>
+    <tr><td>Winter 2024/25</td><td>T2 A3a: Relationenmodell 3NF (m:n), 16 P · T2 A3b: Datenqualität beim Import, 13 P · T2 A4: SELECT/JOIN, Datumsdifferenz, 21 P</td><td><code>2024/winter/AE Winter 2024 Teil 2.pdf</code></td><td>–</td></tr>
+    <tr><td>Winter 2025/26</td><td>T1 A4: Redundanz, Anomalien, Tabelle in 3NF, 24 P · T2 A4: INSERT, SUM über 4 Tabellen, HAVING, ALTER TABLE + UPDATE mit SUBSTRING, SUM je Kategorie, 25 P</td><td><code>2025/winter/AE Winter 2025 Teil 1.pdf</code>, <code>… Teil 2.pdf</code></td><td><code>2025/winter/AE Winter 2025 Lösungserleuterungen.pdf</code></td></tr>
+    <tr><td>Sommer 2026</td><td>T2 A3a: ER-Modell → Relationenmodell 3NF erweitern, 20 P · T2 A4: CRUD → DDL/DML, LEFT JOIN + GROUP BY (MAX/AVG), Archiv INSERT…SELECT, DELETE-Reihenfolge (FK), 25 P</td><td><code>2026/sommer/AE Sommer 2026 Teil 2.pdf</code></td><td>–</td></tr>
+  </table>
+</section>
+
+</body>
+</html>

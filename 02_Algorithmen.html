@@ -1,0 +1,2136 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02 Algorithmen &amp; Programmierung – Übungen</title>
+<link rel="stylesheet" href="style.css">
+<script src="uebungen.js"></script>
+<style>
+  /* Zusatzregeln Block 02 */
+  nav.toc ol ol { columns: 2; column-gap: 24px; font-size: 13px; }
+  table.kompakt td, table.kompakt th { padding: 2px 6px; }
+  table.leer td { height: 30px; }
+  td.mono, th.mono { font-family: Consolas, "Courier New", monospace; font-size: 13px; }
+  .zweispaltig { display: flex; gap: 16px; flex-wrap: wrap; }
+  .zweispaltig > * { flex: 1 1 300px; min-width: 0; }
+  table.eng td, table.eng th { white-space: nowrap; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<!-- ===================== KOPF ===================== -->
+<header class="blockkopf">
+  <h1>Block 02 · Algorithmen &amp; Programmierung</h1>
+  <div class="unter">
+    <span class="badge k-immer">Immer</span> 9/9 Prüfungen · Ø 42 von 200 Punkten · vor allem Teil 2 (dort immer eine 25–30-Punkte-Algorithmusaufgabe), in mehreren Prüfungen auch Teil 1
+    · Lösungen: <a href="02_Algorithmen_Loesungen.html">02_Algorithmen_Loesungen.html</a>
+  </div>
+</header>
+
+<nav class="toc">
+  <strong>Inhalt</strong>
+  <ol>
+    <li><a href="#erklaerung">Erklärungssatz</a>
+      <ol>
+        <li><a href="#e-01">ALG-01 Algorithmus in Pseudocode</a></li>
+        <li><a href="#e-02">ALG-02 Arrays und Listen</a></li>
+        <li><a href="#e-03">ALG-03 Minimum/Maximum, Suche</a></li>
+        <li><a href="#e-04">ALG-04 Speicherbedarf, Zahlensysteme</a></li>
+        <li><a href="#e-05">ALG-05 Sortieren</a></li>
+        <li><a href="#e-06">ALG-06 Zeichenketten</a></li>
+        <li><a href="#e-07">ALG-07 Exceptions</a></li>
+        <li><a href="#e-08">ALG-08 Rekursion</a></li>
+        <li><a href="#e-09">ALG-09 Nebenläufigkeit</a></li>
+      </ol>
+    </li>
+    <li><a href="#belegsatz">Belegsatz</a> (Pseudocode-Konventionen, Anlagen 1–6)</li>
+    <li><a href="#aufgaben">Aufgaben</a>
+      <ol>
+        <li><a href="#a-01">ALG-01 (3 Aufgaben)</a></li>
+        <li><a href="#a-02">ALG-02 (3 Aufgaben)</a></li>
+        <li><a href="#a-03">ALG-03 (3 Aufgaben)</a></li>
+        <li><a href="#a-04">ALG-04 (3 Aufgaben)</a></li>
+        <li><a href="#a-05">ALG-05 (3 Aufgaben)</a></li>
+        <li><a href="#a-06">ALG-06 (3 Aufgaben)</a></li>
+        <li><a href="#a-07">ALG-07 (3 Aufgaben)</a></li>
+        <li><a href="#a-08">ALG-08 (3 Aufgaben)</a></li>
+        <li><a href="#a-09">ALG-09 (3 Aufgaben)</a></li>
+        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+
+<div class="info no-print">
+  <span class="kastentitel">So arbeitest du mit diesem Block</span>
+  Erst den Erklärungssatz lesen, dann die Aufgaben mit dem Belegsatz daneben lösen (Belegsatz am besten separat ausdrucken und neben die Aufgaben legen). Zeitrichtwert: 1 Punkt ≈ 0,9 Minuten.
+  Lösungen erst danach in der separaten Lösungsdatei nachsehen. Zu jeder Code-Aufgabe gibt es dort Pseudocode <em>und</em> eine lauffähige Java-Datei im Ordner <code>java\02_Algorithmen\</code>.
+</div>
+
+<!-- ===================== TEIL A: ERKLÄRUNGSSATZ ===================== -->
+<section class="teil" id="erklaerung">
+  <h2>A · Erklärungssatz</h2>
+
+  <p>In <strong>jeder</strong> der 9 ausgewerteten Prüfungen steht in Teil 2 (Aufgabe 1 oder 2) eine große Algorithmusaufgabe mit 25–30 Punkten. Fast immer bekommst du ein Klassendiagramm mit Attributen („Getter sind vorhanden“), eine Beispieltabelle mit Daten und eine Methodensignatur. Gesucht ist eine Methode, die eine Liste oder ein Array von Objekten durchläuft und dabei <strong>zählt, summiert, filtert, ein Ergebnis-Array füllt oder ein Minimum sucht</strong>. Ob du das in Pseudocode, als Struktogramm oder in einer Programmiersprache schreibst, ist meist freigestellt. Der Belegsatz enthält nur die Pseudocode-Konventionen, nicht die Muster. Die musst du können.</p>
+
+  <table class="kompakt">
+    <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
+    <tr><td>ALG-01 Algorithmus in Pseudocode</td><td><span class="badge k-immer">Immer</span></td><td>25–30 (T2), 4–15 (T1)</td><td>Grundmuster sicher anwenden, sauber initialisieren</td></tr>
+    <tr><td>ALG-02 Arrays und Listen</td><td><span class="badge k-immer">Immer</span></td><td>in ALG-01 enthalten</td><td>Indexgrenzen, 2D-Arrays, <code>List&lt;T&gt;</code>-Methoden</td></tr>
+    <tr><td>ALG-03 Minimum/Maximum, Suche</td><td><span class="badge k-oft">Oft</span></td><td>10–25</td><td>richtig initialisieren, Objekt statt Wert merken</td></tr>
+    <tr><td>ALG-04 Speicherbedarf, Zahlensysteme</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>3–7</td><td>1024er-Präfixe, Bit/Byte, Rechenweg mit Einheiten</td></tr>
+    <tr><td>ALG-05 Sortieren</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>10–25</td><td>Bubblesort, Vergleichsfunktion</td></tr>
+    <tr><td>ALG-06 Zeichenketten</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>5–8</td><td>Zeichen prüfen, Text zerlegen</td></tr>
+    <tr><td>ALG-07 Exceptions</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>2–6</td><td>Fehlerfälle erkennen und behandeln</td></tr>
+    <tr><td>ALG-08 Rekursion</td><td><span class="badge k-sonstige">Sonstige</span></td><td>bis 12</td><td>Basisfall, Schreibtischtest</td></tr>
+    <tr><td>ALG-09 Nebenläufigkeit</td><td><span class="badge k-sonstige">Sonstige</span></td><td>4</td><td>Race Condition, Sperren</td></tr>
+  </table>
+
+  <!-- ===================== ALG-01 ===================== -->
+  <h3 id="e-01">ALG-01 · Algorithmus in Pseudocode schreiben <span class="badge k-immer">Immer</span></h3>
+  <p class="klein">Vorkommen: 9/9 · Prüfungen: alle (W21–S26), Teil 2 Aufgabe 1 oder 2 mit 25–30 Punkten · zusätzlich kleinere Methoden in Teil 1 (S22, S23, S24, W24)</p>
+
+  <h4>So sieht die Aufgabe aus</h4>
+  <ul>
+    <li><strong>Klassendiagramm</strong> (oft nur ein Kasten) mit privaten Attributen, dazu der Satz „Für alle Attribute existieren Get-Methoden“. Du greifst deshalb immer über Getter zu: <code>k.getPreis()</code>, nicht <code>k.preis</code>.</li>
+    <li><strong>Beispieldaten</strong> als Tabelle, oft mit „vorher → nachher“ (z. B. links die Rohdaten, rechts die erwartete Ergebnisliste). Diese Tabelle ist dein Testfall.</li>
+    <li><strong>Methodensignatur</strong>, manchmal schon mit erster und letzter Zeile (<code>... return ergebnis</code>). Halte dich an die vorgegebenen Namen und Typen.</li>
+    <li><strong>Hilfsmethoden</strong>, die du benutzen darfst, z. B. <code>date.between(start, ende)</code> (S26) oder <code>DateTime.compare()</code> (W24). Steht eine solche Methode in der Aufgabe, wird ihre Verwendung erwartet.</li>
+    <li>Für Listen ein Kasten <code>List&lt;T&gt;</code> mit <code>add</code>, <code>get</code>, <code>size</code>, <code>contains</code> (eventuell <code>remove</code>). Andere Listenmethoden solltest du nicht voraussetzen.</li>
+  </ul>
+
+  <h4>Pseudocode-Bausteine (IHK-Stil) und ihre Java-Entsprechung</h4>
+  <p>Der Belegsatz (S24) gibt nur die Grundformen vor. Für alles andere gilt: lesbar, eindeutig und konsequent. Diese Schreibweise wird in diesem Block durchgehend verwendet:</p>
+  <table class="kompakt">
+    <tr><th>Baustein</th><th>Pseudocode</th><th>Java</th></tr>
+    <tr><td>Variable anlegen</td><td><code>anzahl : integer := 0</code></td><td><code>int anzahl = 0;</code></td></tr>
+    <tr><td>Zuweisung</td><td><code>summe := summe + x</code></td><td><code>summe = summe + x;</code></td></tr>
+    <tr><td>Vergleich</td><td><code>=  &lt;&gt;  &lt;  &gt;  &lt;=  &gt;=</code></td><td><code>==  !=  &lt;  &gt;  &lt;=  &gt;=</code></td></tr>
+    <tr><td>Logik</td><td><code>und  oder  nicht</code></td><td><code>&amp;&amp;  ||  !</code></td></tr>
+    <tr><td>Verzweigung</td><td><code>wenn … dann … sonst … Ende wenn</code></td><td><code>if (…) { … } else { … }</code></td></tr>
+    <tr><td>Zählschleife</td><td><code>zähle i von 0 bis n - 1 … Ende zähle</code></td><td><code>for (int i = 0; i &lt;= n - 1; i++)</code></td></tr>
+    <tr><td>Kopfgesteuert</td><td><code>solange … Ende solange</code></td><td><code>while (…) { … }</code></td></tr>
+    <tr><td>Fußgesteuert</td><td><code>wiederhole … solange …</code></td><td><code>do { … } while (…);</code></td></tr>
+    <tr><td>Ganzzahldivision / Rest</td><td><code>a div b</code>, <code>a mod b</code></td><td><code>a / b</code> (bei int), <code>a % b</code></td></tr>
+    <tr><td>Objekt erzeugen</td><td><code>new Artikel(…)</code>, <code>new List&lt;Artikel&gt;()</code></td><td><code>new Artikel(…)</code>, <code>new ArrayList&lt;&gt;()</code></td></tr>
+    <tr><td>Array anlegen / Länge</td><td><code>new integer[5]</code>, <code>feld.length</code></td><td><code>new int[5]</code>, <code>feld.length</code></td></tr>
+    <tr><td>Methode / Rückgabe</td><td><code>funktion name(p : typ) : typ … rückgabe x … Ende funktion</code></td><td><code>typ name(typ p) { … return x; }</code></td></tr>
+    <tr><td>„kein Objekt“</td><td><code>null</code></td><td><code>null</code></td></tr>
+  </table>
+
+  <div class="merke"><span class="kastentitel">Merke</span>Bewertet wird die <strong>Logik</strong>: richtige Schleife, richtige Bedingung, richtige Initialisierung, Rückgabe. Ein fehlendes Semikolon oder <code>Ende zähle</code> statt <code>Ende-zähle</code> kostet praktisch nie Punkte. Ein Zähler, der in der falschen Schleife auf 0 gesetzt wird, kostet dagegen viele.</div>
+
+  <h4>Die fünf Grundmuster</h4>
+  <p>Fast jede Prüfungsaufgabe ist eine Kombination dieser Muster. Beispiel-Szenario hier: ein Lager mit Objekten der Klasse <code>Artikel</code> (Attribute <code>artikelNr</code>, <code>bezeichnung</code>, <code>kategorie</code> (1–4), <code>bestand</code>, <code>mindestbestand</code>, <code>preis</code>; Getter vorhanden).</p>
+
+  <p><strong>Muster 1 – Zählen mit Bedingung</strong> (Rückgabe <code>integer</code>): Zähler vor der Schleife auf 0, in der Schleife bei erfüllter Bedingung um 1 erhöhen.</p>
+  <pre class="pseudo">funktion zaehleNachbestellung(artikel : List&lt;Artikel&gt;) : integer
+  anzahl : integer := 0
+  zähle i von 0 bis artikel.size() - 1
+    a : Artikel := artikel.get(i)
+    wenn a.getBestand() &lt; a.getMindestbestand() dann
+      anzahl := anzahl + 1
+    Ende wenn
+  Ende zähle
+  rückgabe anzahl
+Ende funktion</pre>
+
+  <p><strong>Muster 2 – Summe und Durchschnitt</strong> (Rückgabe <code>double</code>): Summe <em>und</em> Anzahl mitführen, erst nach der Schleife teilen und den Fall „keine passenden Elemente“ abfangen.</p>
+  <pre class="pseudo">funktion durchschnittspreis(artikel : List&lt;Artikel&gt;, kategorie : integer) : double
+  summe : double := 0.0
+  anzahl : integer := 0
+  zähle i von 0 bis artikel.size() - 1
+    wenn artikel.get(i).getKategorie() = kategorie dann
+      summe := summe + artikel.get(i).getPreis()
+      anzahl := anzahl + 1
+    Ende wenn
+  Ende zähle
+  wenn anzahl = 0 dann
+    rückgabe 0.0                      // keine Division durch 0
+  Ende wenn
+  rückgabe summe / anzahl
+Ende funktion</pre>
+
+  <p><strong>Muster 3 – Filtern in eine neue Liste</strong> (Rückgabe <code>List&lt;T&gt;</code>): leere Ergebnisliste anlegen, passende Objekte mit <code>add</code> anhängen. Die Originalliste bleibt unverändert.</p>
+  <pre class="pseudo">funktion nachbestellListe(artikel : List&lt;Artikel&gt;) : List&lt;Artikel&gt;
+  ergebnis : List&lt;Artikel&gt; := new List&lt;Artikel&gt;()
+  zähle i von 0 bis artikel.size() - 1
+    a : Artikel := artikel.get(i)
+    wenn a.getBestand() &lt; a.getMindestbestand() dann
+      ergebnis.add(a)
+    Ende wenn
+  Ende zähle
+  rückgabe ergebnis
+Ende funktion</pre>
+
+  <p><strong>Muster 4 – Ergebnis-Array „je …“</strong> (Rückgabe <code>integer[]</code>): Ein Array, in dem jeder Index für eine Gruppe steht (Kategorie, Stunde, Strecke …). Der Wert des Datensatzes bestimmt den Index. Achte auf die Verschiebung, wenn die Gruppen bei 1 beginnen, der Index aber bei 0.</p>
+  <pre class="pseudo">funktion artikelJeKategorie(artikel : Artikel[]) : integer[]
+  ergebnis : integer[] := new integer[4]     // Index 0..3 = Kategorie 1..4, alle 0
+  zähle i von 0 bis artikel.length - 1
+    k : integer := artikel[i].getKategorie()
+    ergebnis[k - 1] := ergebnis[k - 1] + 1
+  Ende zähle
+  rückgabe ergebnis
+Ende funktion</pre>
+
+  <p><strong>Muster 5 – Eindeutige Liste und verschachtelte Schleifen.</strong> Aus Rohdaten mit Wiederholungen (viele Bestellungen je Lieferant) soll eine Liste mit genau einem Objekt je Schlüssel entstehen, danach wird für jedes dieser Objekte ein Wert aus allen Rohdaten berechnet. Beispiel: <code>List&lt;Bestellung&gt;</code> (Attribute <code>lieferant</code>, <code>betrag</code>) wird zu <code>List&lt;LieferantSumme&gt;</code> (Attribute <code>lieferant</code>, <code>summe</code>; Konstruktor <code>LieferantSumme(lieferant)</code> setzt <code>summe</code> auf 0).</p>
+  <pre class="pseudo">// Schritt 1: jeden Lieferanten genau einmal aufnehmen
+funktion erzeugeUebersicht(bestellungen : List&lt;Bestellung&gt;) : List&lt;LieferantSumme&gt;
+  uebersicht : List&lt;LieferantSumme&gt; := new List&lt;LieferantSumme&gt;()
+  zähle i von 0 bis bestellungen.size() - 1
+    name : string := bestellungen.get(i).getLieferant()
+    gefunden : boolean := false
+    zähle j von 0 bis uebersicht.size() - 1
+      wenn uebersicht.get(j).getLieferant() = name dann
+        gefunden := true
+      Ende wenn
+    Ende zähle
+    wenn nicht gefunden dann
+      uebersicht.add(new LieferantSumme(name))
+    Ende wenn
+  Ende zähle
+  rückgabe uebersicht
+Ende funktion
+
+// Schritt 2: für jedes Übersichtsobjekt (außen) alle Bestellungen (innen) durchlaufen
+funktion berechneSummen(bestellungen : List&lt;Bestellung&gt;,
+                        uebersicht : List&lt;LieferantSumme&gt;)
+  zähle i von 0 bis uebersicht.size() - 1
+    ls : LieferantSumme := uebersicht.get(i)
+    summe : double := 0.0                      // für JEDES Objekt neu auf 0!
+    zähle j von 0 bis bestellungen.size() - 1
+      wenn bestellungen.get(j).getLieferant() = ls.getLieferant() dann
+        summe := summe + bestellungen.get(j).getBetrag()
+      Ende wenn
+    Ende zähle
+    ls.setSumme(summe)
+  Ende zähle
+Ende funktion</pre>
+
+  <figure>
+    <svg viewBox="0 0 660 250" width="660" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e01a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10" fill="none" stroke="#222" stroke-width="1.5"/>
+        </marker>
+      </defs>
+      <text x="100" y="20" text-anchor="middle" font-weight="bold">uebersicht (außen, i)</text>
+      <rect x="20" y="40" width="160" height="32" fill="#eef3fa" stroke="#222" stroke-width="2"/>
+      <text x="100" y="61" text-anchor="middle">i = 0: Lieferant A</text>
+      <rect x="20" y="84" width="160" height="32" fill="#fff" stroke="#222"/>
+      <text x="100" y="105" text-anchor="middle">i = 1: Lieferant B</text>
+      <rect x="20" y="128" width="160" height="32" fill="#fff" stroke="#222"/>
+      <text x="100" y="149" text-anchor="middle">i = 2: Lieferant C</text>
+
+      <text x="530" y="20" text-anchor="middle" font-weight="bold">bestellungen (innen, j)</text>
+      <rect x="430" y="32" width="200" height="28" fill="#fff" stroke="#222"/>
+      <text x="440" y="51">j = 0: A · 120,00 €</text>
+      <rect x="430" y="68" width="200" height="28" fill="#fff" stroke="#222"/>
+      <text x="440" y="87">j = 1: B · 80,00 €</text>
+      <rect x="430" y="104" width="200" height="28" fill="#fff" stroke="#222"/>
+      <text x="440" y="123">j = 2: A · 45,50 €</text>
+      <rect x="430" y="140" width="200" height="28" fill="#fff" stroke="#222"/>
+      <text x="440" y="159">j = 3: C · 300,00 €</text>
+      <rect x="430" y="176" width="200" height="28" fill="#fff" stroke="#222"/>
+      <text x="440" y="195">j = 4: A · 19,90 €</text>
+
+      <line x1="180" y1="56" x2="428" y2="46" stroke="#222" stroke-width="1.6" marker-end="url(#e01a-pfeil)"/>
+      <line x1="180" y1="56" x2="428" y2="82" stroke="#222" stroke-dasharray="5,4" marker-end="url(#e01a-pfeil)"/>
+      <line x1="180" y1="56" x2="428" y2="118" stroke="#222" stroke-width="1.6" marker-end="url(#e01a-pfeil)"/>
+      <line x1="180" y1="56" x2="428" y2="154" stroke="#222" stroke-dasharray="5,4" marker-end="url(#e01a-pfeil)"/>
+      <line x1="180" y1="56" x2="428" y2="190" stroke="#222" stroke-width="1.6" marker-end="url(#e01a-pfeil)"/>
+      <text x="20" y="188" font-size="12">durchgezogen: Bedingung erfüllt, wird addiert</text>
+      <text x="20" y="204" font-size="12">gestrichelt: geprüft, aber nicht addiert</text>
+      <text x="20" y="242" font-weight="bold">i = 0: summe := 120,00 + 45,50 + 19,90 = 185,40 → danach i = 1, summe wieder 0</text>
+    </svg>
+    <figcaption>Abb. A-1: Verschachtelte Schleifen – für jedes Element außen wird die innere Liste komplett durchlaufen (n × m Prüfungen)</figcaption>
+  </figure>
+
+  <h4>So gehst du vor</h4>
+  <ol>
+    <li><strong>Signatur lesen:</strong> Was kommt hinein (Parameter), was muss heraus? <code>integer</code> → Zähler oder Summe, <code>double</code> → Durchschnitt, <code>List</code> → Filter, Array → „je Index“, Objekt → Suche/Minimum, <code>void</code> → vorhandene Objekte per Setter ändern.</li>
+    <li><strong>Beispieldaten von Hand durchrechnen.</strong> Wenn du das erwartete Ergebnis der Beispieltabelle nicht selbst ausrechnen kannst, hast du die Aufgabe noch nicht verstanden.</li>
+    <li><strong>Muster wählen</strong> (eins oder mehrere der fünf oben, dazu Minimum/Maximum aus ALG-03).</li>
+    <li><strong>Variablen vor der Schleife anlegen und initialisieren</strong>. Bei verschachtelten Schleifen: Was gilt für alle Durchläufe (außen anlegen), was nur für ein äußeres Element (innen zurücksetzen)?</li>
+    <li><strong>Schleife über alle Elemente:</strong> <code>zähle i von 0 bis liste.size() - 1</code> bzw. <code>bis feld.length - 1</code>.</li>
+    <li><strong>Bedingung</strong> mit Gettern formulieren. Jede Bedingung aus dem Aufgabentext einzeln abhaken („nicht defekt“, „im Zeitraum“, „mehr als …“: <code>&gt;</code> oder <code>&gt;=</code>?).</li>
+    <li><strong>Nach der Schleife:</strong> Sonderfälle (Division durch 0, nichts gefunden → <code>null</code>), dann <code>rückgabe</code>.</li>
+    <li><strong>Schreibtischtest</strong> mit zwei, drei Datensätzen aus der Tabelle der Aufgabe.</li>
+  </ol>
+
+  <div class="falle"><span class="kastentitel">Typische Fehler</span>
+    <ul>
+      <li><strong>Zähler/Summe an der falschen Stelle initialisiert:</strong> in der inneren Schleife (wird ständig auf 0 gesetzt) oder nur einmal ganz am Anfang (läuft über alle äußeren Elemente weiter).</li>
+      <li><strong>Ganzzahldivision:</strong> <code>summe / anzahl</code> mit zwei <code>integer</code> liefert in Java <code>7 / 2 = 3</code>. Summe als <code>double</code> führen oder umwandeln (<code>(double) summe / anzahl</code>).</li>
+      <li><strong>Division durch 0</strong>, wenn kein Element passt.</li>
+      <li><strong>Off-by-one:</strong> <code>zähle i von 0 bis liste.size()</code> greift auf ein Element zu, das es nicht gibt. Richtig: <code>bis liste.size() - 1</code>.</li>
+      <li><strong><code>rückgabe</code> in der Schleife</strong> beendet die Methode beim ersten Treffer. Das ist nur bei einer Suche gewollt.</li>
+      <li><code>=</code> (Vergleich) und <code>:=</code> (Zuweisung) verwechselt; Attribut direkt statt über den Getter gelesen.</li>
+      <li>Ergebnisobjekt zwar erzeugt, aber nicht mit <code>add</code> in die Liste gelegt, oder Liste/Array am Ende nicht zurückgegeben.</li>
+    </ul>
+  </div>
+
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li><strong>S26 T2 A1 (30 P):</strong> aus einer Liste von Tagesdaten erst eine Liste mit genau einem Objekt je Name erzeugen (<code>contains</code>), dann je Objekt den Durchschnitt in einem Zeitraum berechnen (Muster 5 + 2, verschachtelte Schleifen, Hilfsmethode <code>between</code>).</li>
+      <li><strong>W24 T2 A1 (25 P):</strong> Abfahrtszeiten in einem Objekt-Array, Ergebnis-Array „Anzahl Verspätungen je Streckenabschnitt“ (Muster 4 + Differenz benachbarter Elemente).</li>
+      <li><strong>S24 T2 A2b (8 P):</strong> Zählfunktion über ein Array (Tage, an denen ein Wert größer als ein Vergleichswert ist).</li>
+      <li><strong>W25 T2 A1a (20 P):</strong> freie Tische aus verschachtelten Listen filtern (Muster 3 + verschachtelte Schleifen).</li>
+      <li>In Teil 1 kommen kleinere Methoden zu einem Klassendiagramm vor (S24 T1 A3b: drei Methoden à 5 P; S23 T1 A2bc/bd; S22 T1 A3cb).</li>
+      <li>Hinweise im Aufgabentext genau lesen: „String-Werte können mit == verglichen werden“ (S26) heißt, du musst dich nicht um <code>equals</code> kümmern.</li>
+    </ul>
+  </div>
+
+  <!-- ===================== ALG-02 ===================== -->
+  <h3 id="e-02">ALG-02 · Arrays und Listen durchlaufen <span class="badge k-immer">Immer</span></h3>
+  <p class="klein">Vorkommen: 9/9 · Arrays in 8/9 (2D-Arrays: W21, S22, S23), Listen <code>List&lt;T&gt;</code> in 5/9 mit steigender Tendenz (S22, W22, S24, W25, S26)</p>
+
+  <h4>Eindimensionales Array</h4>
+  <ul>
+    <li>Feste Anzahl von Elementen <strong>eines</strong> Datentyps, festgelegt beim Anlegen: <code>new integer[24]</code>. Die Größe kann sich danach nicht mehr ändern.</li>
+    <li>Index von <strong>0 bis length − 1</strong>. Ein Array mit 24 Elementen hat die Indizes 0 … 23.</li>
+    <li>Neu angelegte Zahlen-Arrays sind in Java mit 0 gefüllt (Objekt-Arrays mit <code>null</code>). In Pseudocode schreibst du die Vorbelegung zur Sicherheit dazu, wenn du dich darauf verlässt.</li>
+    <li>Zugriff auf einen ungültigen Index führt in Java zur <code>ArrayIndexOutOfBoundsException</code>, das Programm bricht ab (siehe ALG-07).</li>
+    <li><strong>Nachbarelemente</strong> (Differenz zwischen Element i und i + 1, wie die Fahrzeit zwischen zwei Haltestellen in W24): Die Schleife darf dann nur bis <code>length - 2</code> laufen, sonst greift <code>feld[i + 1]</code> im letzten Durchlauf ins Leere.</li>
+  </ul>
+
+  <h4>Zweidimensionales Array (Tabelle)</h4>
+  <p>Ein 2D-Array ist eine Tabelle: <code>daten[zeile][spalte]</code>. <code>daten.length</code> ist die Anzahl der Zeilen, <code>daten[0].length</code> die Anzahl der Spalten. Typische Prüfungsbeispiele: Tag × Stunde, Monat × Verbraucher. Beispiel hier: Kino mit 3 Sälen (Zeilen) und 4 Vorstellungen am Tag (Spalten), gespeichert wird die Besucherzahl.</p>
+
+  <figure>
+    <svg viewBox="0 0 640 245" width="640" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <!-- Spaltenköpfe -->
+      <text x="215" y="22" text-anchor="middle" font-weight="bold">[0]</text>
+      <text x="290" y="22" text-anchor="middle" font-weight="bold">[1]</text>
+      <text x="365" y="22" text-anchor="middle" font-weight="bold">[2]</text>
+      <text x="440" y="22" text-anchor="middle" font-weight="bold">[3]</text>
+      <text x="215" y="38" text-anchor="middle" font-size="11">14 Uhr</text>
+      <text x="290" y="38" text-anchor="middle" font-size="11">17 Uhr</text>
+      <text x="365" y="38" text-anchor="middle" font-size="11">20 Uhr</text>
+      <text x="440" y="38" text-anchor="middle" font-size="11">23 Uhr</text>
+      <text x="535" y="30" text-anchor="middle" font-weight="bold">Zeilensumme</text>
+      <!-- Zeilenköpfe -->
+      <text x="170" y="69" text-anchor="end"><tspan font-weight="bold">[0]</tspan> Saal 1</text>
+      <text x="170" y="103" text-anchor="end"><tspan font-weight="bold">[1]</tspan> Saal 2</text>
+      <text x="170" y="137" text-anchor="end"><tspan font-weight="bold">[2]</tspan> Saal 3</text>
+      <text x="170" y="175" text-anchor="end" font-weight="bold">Spaltensumme</text>
+      <!-- Gitter Daten -->
+      <rect x="178" y="48" width="300" height="102" fill="#fff" stroke="#222"/>
+      <line x1="253" y1="48" x2="253" y2="150" stroke="#222"/>
+      <line x1="328" y1="48" x2="328" y2="150" stroke="#222"/>
+      <line x1="403" y1="48" x2="403" y2="150" stroke="#222"/>
+      <line x1="178" y1="82" x2="478" y2="82" stroke="#222"/>
+      <line x1="178" y1="116" x2="478" y2="116" stroke="#222"/>
+      <text x="215" y="69" text-anchor="middle">45</text><text x="290" y="69" text-anchor="middle">80</text><text x="365" y="69" text-anchor="middle">120</text><text x="440" y="69" text-anchor="middle">60</text>
+      <text x="215" y="103" text-anchor="middle">30</text><text x="290" y="103" text-anchor="middle">55</text><text x="440" y="103" text-anchor="middle">40</text>
+      <text x="215" y="137" text-anchor="middle">12</text><text x="290" y="137" text-anchor="middle">25</text><text x="365" y="137" text-anchor="middle">70</text><text x="440" y="137" text-anchor="middle">33</text>
+      <!-- hervorgehobene Zelle [1][2] -->
+      <rect x="329.5" y="83.5" width="72" height="31" fill="#eef3fa" stroke="#1f4e79" stroke-width="3"/>
+      <text x="365" y="103" text-anchor="middle" font-weight="bold">90</text>
+      <!-- Zeilensummen -->
+      <rect x="495" y="48" width="80" height="102" fill="#f3f4f6" stroke="#222"/>
+      <line x1="495" y1="82" x2="575" y2="82" stroke="#222"/>
+      <line x1="495" y1="116" x2="575" y2="116" stroke="#222"/>
+      <text x="535" y="69" text-anchor="middle">305</text><text x="535" y="103" text-anchor="middle">215</text><text x="535" y="137" text-anchor="middle">140</text>
+      <!-- Spaltensummen -->
+      <rect x="178" y="158" width="300" height="28" fill="#f3f4f6" stroke="#222"/>
+      <line x1="253" y1="158" x2="253" y2="186" stroke="#222"/>
+      <line x1="328" y1="158" x2="328" y2="186" stroke="#222"/>
+      <line x1="403" y1="158" x2="403" y2="186" stroke="#222"/>
+      <text x="215" y="177" text-anchor="middle">87</text><text x="290" y="177" text-anchor="middle">160</text><text x="365" y="177" text-anchor="middle">280</text><text x="440" y="177" text-anchor="middle">133</text>
+      <rect x="495" y="158" width="80" height="28" fill="#f3f4f6" stroke="#222"/>
+      <text x="535" y="177" text-anchor="middle" font-weight="bold">660</text>
+      <text x="20" y="214">besucher[1][2] = 90 → Zeile 1 (Saal 2), Spalte 2 (20 Uhr)</text>
+      <text x="20" y="234">besucher.length = 3 (Zeilen) · besucher[0].length = 4 (Spalten) · 12 Elemente</text>
+    </svg>
+    <figcaption>Abb. A-2: 2D-Array <code>besucher[saal][vorstellung]</code> mit Zeilen- und Spaltensummen</figcaption>
+  </figure>
+
+  <div class="zweispaltig">
+    <div>
+      <p class="codelabel">Zeilensummen (außen Zeilen)</p>
+      <pre class="pseudo">zeilen : integer[]
+zeilen := new integer[besucher.length]
+zähle z von 0 bis besucher.length - 1
+  summe : integer := 0
+  zähle s von 0 bis besucher[z].length - 1
+    summe := summe + besucher[z][s]
+  Ende zähle
+  zeilen[z] := summe
+Ende zähle</pre>
+    </div>
+    <div>
+      <p class="codelabel">Spaltensummen (außen Spalten)</p>
+      <pre class="pseudo">spalten : integer[]
+spalten := new integer[besucher[0].length]
+zähle s von 0 bis besucher[0].length - 1
+  summe : integer := 0
+  zähle z von 0 bis besucher.length - 1
+    summe := summe + besucher[z][s]
+  Ende zähle
+  spalten[s] := summe
+Ende zähle</pre>
+    </div>
+  </div>
+  <p>Merkhilfe: <strong>Die äußere Schleife läuft über das, wofür du je ein Ergebnis willst.</strong> Willst du je Saal eine Summe, läuft außen der Saal. Für eine Gesamtsumme oder ein Maximum über alle Zellen ist die Reihenfolge egal, dann reicht eine Variable außerhalb beider Schleifen.</p>
+
+  <h4>Listen: <code>List&lt;T&gt;</code></h4>
+  <p>Eine Liste wächst und schrumpft dynamisch. In der Prüfung ist sie meist als Klasse <code>List&lt;T&gt;</code> mit wenigen Methoden vorgegeben (<code>T</code> steht für den Elementtyp, z. B. <code>List&lt;Artikel&gt;</code>). In Java entspricht das <code>List&lt;T&gt;</code> bzw. <code>ArrayList&lt;T&gt;</code>.</p>
+  <table class="kompakt">
+    <tr><th>Methode</th><th>Wirkung</th><th>Beispiel</th></tr>
+    <tr><td><code>add(t : T) : void</code></td><td>hängt t hinten an</td><td><code>ergebnis.add(a)</code></td></tr>
+    <tr><td><code>get(i : integer) : T</code></td><td>liefert das Element an Position i (ab 0)</td><td><code>artikel.get(0)</code></td></tr>
+    <tr><td><code>size() : integer</code></td><td>Anzahl der Elemente</td><td><code>zähle i von 0 bis artikel.size() - 1</code></td></tr>
+    <tr><td><code>contains(t : T) : boolean</code></td><td>true, wenn ein gleiches Element enthalten ist</td><td><code>wenn nicht namen.contains(n) dann …</code></td></tr>
+    <tr><td><code>remove(i : integer) : void</code></td><td>entfernt Element i, alle folgenden rücken eine Position nach vorn</td><td><code>liste.remove(3)</code></td></tr>
+  </table>
+
+  <p><strong>Duplikate vermeiden:</strong> Vor dem <code>add</code> prüfen, ob das Element schon da ist. Bei einfachen Werten (Zahlen, Strings) geht das direkt mit <code>contains</code>. Bei Objekten vergleicht <code>contains</code> in Java mit <code>equals</code>, und das prüft ohne Überschreiben nur, ob es <em>dasselbe</em> Objekt ist. Wenn die Aufgabe nicht ausdrücklich sagt, dass <code>contains</code> z. B. „namensgleiche“ Objekte erkennt (so in S26), suchst du mit einer eigenen inneren Schleife nach dem Schlüssel (Muster 5 in ALG-01).</p>
+  <pre class="pseudo">namen : List&lt;string&gt; := new List&lt;string&gt;()
+zähle i von 0 bis bestellungen.size() - 1
+  n : string := bestellungen.get(i).getLieferant()
+  wenn nicht namen.contains(n) dann
+    namen.add(n)
+  Ende wenn
+Ende zähle</pre>
+
+  <p><strong>Elemente beim Durchlaufen entfernen:</strong> Nach <code>remove(i)</code> rutscht das nächste Element auf Position i. Zählt die Schleife danach normal weiter (i + 1), wird dieses Element <strong>nie geprüft</strong>.</p>
+  <figure>
+    <svg viewBox="0 0 640 175" width="640" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e02b-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10" fill="none" stroke="#222" stroke-width="1.5"/>
+        </marker>
+      </defs>
+      <text x="10" y="30" font-weight="bold">vorher</text>
+      <text x="10" y="48" font-size="12">i = 1, remove(1)</text>
+      <rect x="140" y="15" width="90" height="34" fill="#fff" stroke="#222"/><text x="185" y="37" text-anchor="middle">[0] Milch</text>
+      <rect x="230" y="15" width="90" height="34" fill="#fdf0ef" stroke="#222" stroke-width="2"/><text x="275" y="37" text-anchor="middle">[1] Brot ✗</text>
+      <rect x="320" y="15" width="90" height="34" fill="#fdf0ef" stroke="#222"/><text x="365" y="37" text-anchor="middle">[2] Käse ✗</text>
+      <rect x="410" y="15" width="90" height="34" fill="#fff" stroke="#222"/><text x="455" y="37" text-anchor="middle">[3] Tee</text>
+      <text x="275" y="66" text-anchor="middle" font-size="12">↑ i = 1</text>
+
+      <text x="10" y="112" font-weight="bold">nachher</text>
+      <text x="10" y="130" font-size="12">i := i + 1 = 2</text>
+      <rect x="140" y="97" width="90" height="34" fill="#fff" stroke="#222"/><text x="185" y="119" text-anchor="middle">[0] Milch</text>
+      <rect x="230" y="97" width="90" height="34" fill="#fdf0ef" stroke="#222"/><text x="275" y="119" text-anchor="middle">[1] Käse ✗</text>
+      <rect x="320" y="97" width="90" height="34" fill="#fff" stroke="#222" stroke-width="2"/><text x="365" y="119" text-anchor="middle">[2] Tee</text>
+      <text x="365" y="148" text-anchor="middle" font-size="12">↑ i = 2</text>
+      <line x1="365" y1="50" x2="282" y2="95" stroke="#222" stroke-dasharray="4,3" marker-end="url(#e02b-pfeil)"/>
+      <line x1="455" y1="50" x2="372" y2="95" stroke="#222" stroke-dasharray="4,3" marker-end="url(#e02b-pfeil)"/>
+      <text x="425" y="112" font-size="12">„Käse“ rückt auf [1]</text>
+      <text x="425" y="128" font-size="12">und wird übersprungen</text>
+    </svg>
+    <figcaption>Abb. A-3: Index-Verschiebung nach <code>remove</code> (✗ = soll entfernt werden)</figcaption>
+  </figure>
+  <p>Drei saubere Lösungen: (1) <strong>rückwärts</strong> laufen (von <code>size() - 1</code> bis 0), dann betrifft die Verschiebung nur schon geprüfte Elemente; (2) mit <code>solange</code> laufen und <code>i</code> nur erhöhen, wenn nichts entfernt wurde; (3) gar nicht entfernen, sondern die gewünschten Elemente in eine <strong>neue Liste</strong> filtern (Muster 3).</p>
+  <pre class="pseudo">i : integer := liste.size() - 1
+solange i &gt;= 0
+  wenn liste.get(i).istAbgelaufen() dann
+    liste.remove(i)
+  Ende wenn
+  i := i - 1
+Ende solange</pre>
+
+  <h4>Array oder Liste?</h4>
+  <table class="kompakt">
+    <tr><th>Kriterium</th><th>Array</th><th>Liste (<code>List&lt;T&gt;</code>)</th></tr>
+    <tr><td>Größe</td><td>fest beim Anlegen</td><td>dynamisch, wächst mit <code>add</code></td></tr>
+    <tr><td>Anzahl Elemente</td><td><code>feld.length</code> (Attribut)</td><td><code>liste.size()</code> (Methode)</td></tr>
+    <tr><td>Zugriff</td><td><code>feld[i]</code></td><td><code>liste.get(i)</code></td></tr>
+    <tr><td>Einfügen/Löschen</td><td>nur durch Umkopieren</td><td><code>add</code>, <code>remove</code> eingebaut</td></tr>
+    <tr><td>Elementtypen (Java)</td><td>auch primitive Typen (<code>int[]</code>)</td><td>nur Objekte (<code>List&lt;Integer&gt;</code>)</td></tr>
+    <tr><td>Geeignet für</td><td>feste Struktur: 24 Stunden, 12 Monate, 7 Tage</td><td>unbekannte Anzahl: Ergebnislisten, Filter</td></tr>
+  </table>
+
+  <div class="falle"><span class="kastentitel">Typische Fehler</span>
+    <ul>
+      <li><code>length</code> (Array, Attribut), <code>length()</code> (String, Methode) und <code>size()</code> (Liste, Methode) verwechselt. In Pseudocode wird das toleriert, in Java nicht.</li>
+      <li>Zeilen und Spalten vertauscht: <code>daten[stunde][tag]</code> statt <code>daten[tag][stunde]</code>. Immer an der Deklaration der Aufgabe orientieren.</li>
+      <li>Schleife für die Spalten mit <code>daten.length</code> begrenzt (das ist die Zeilenzahl!).</li>
+      <li>Index-Verschiebung beim Entfernen (siehe oben); <code>get(i)</code> auf eine leere Liste.</li>
+    </ul>
+  </div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li><strong>S23 T2 A2 (25 P):</strong> 2D-Array Besucher je Tag × Stunde, gesucht eine Zählmethode über einen Zeitraum.</li>
+      <li><strong>S22 T2 A1 (30 P):</strong> Statistik aus einem 2D-Array (Monat × Verbraucher) inklusive Minimum/Maximum, Ergebnis in eine Liste.</li>
+      <li><strong>W21 T2 A2 (25 P):</strong> Terminplan als 2D-Array, Suche nach einem freien Termin.</li>
+      <li><strong>S26 T2 A1a (12 P):</strong> Liste mit genau einem Objekt je Name aufbauen (<code>contains</code>).</li>
+      <li>Trend: Seit S24 kommen vor allem <strong>Objektlisten</strong> vor, 2D-Arrays zuletzt in S23. Beides können!</li>
+    </ul>
+  </div>
+
+  <!-- ===================== ALG-03 ===================== -->
+  <h3 id="e-03">ALG-03 · Minimum/Maximum, lineare Suche <span class="badge k-oft">Oft</span></h3>
+  <p class="klein">Vorkommen: 4/9 · Prüfungen: W21, W23, S24, W25 (dazu Min/Max in S22 innerhalb der 2D-Aufgabe) · Ø 21 Punkte</p>
+
+  <h4>Minimum und Maximum</h4>
+  <p>Prinzip: Man merkt sich den „bisher besten“ Wert und vergleicht jedes weitere Element damit. Entscheidend ist der <strong>Startwert</strong>.</p>
+  <table class="kompakt">
+    <tr><th>Startwert</th><th>So geht's</th><th>Geeignet, wenn …</th><th>Risiko</th></tr>
+    <tr><td>erstes Element</td><td><code>min := feld[0]…</code>, Schleife ab Index 1</td><td>alle Elemente zählen und mindestens eins da ist</td><td>leere Liste/Array → Laufzeitfehler</td></tr>
+    <tr><td><code>null</code> bzw. Merker</td><td><code>bestes := null</code>, Vergleich <code>wenn bestes = null oder …</code></td><td>nur Elemente mit Bedingung zählen (z. B. nur freie)</td><td>Aufrufer muss <code>null</code> behandeln</td></tr>
+    <tr><td>Extremwert</td><td><code>min := 999999</code> bzw. <code>Integer.MAX_VALUE</code></td><td>Obergrenze der Werte ist sicher bekannt</td><td>wirkt geraten; falscher Wert, wenn nichts passt</td></tr>
+    <tr><td class="nowrap">0 (!)</td><td><code>min := 0</code></td><td><strong>nie</strong> für ein Minimum positiver Werte</td><td>Ergebnis ist immer 0</td></tr>
+  </table>
+  <pre class="pseudo">funktion kleinsterBestand(artikel : Artikel[]) : integer
+  min : integer := artikel[0].getBestand()       // Startwert: erstes Element
+  zähle i von 1 bis artikel.length - 1
+    wenn artikel[i].getBestand() &lt; min dann
+      min := artikel[i].getBestand()
+    Ende wenn
+  Ende zähle
+  rückgabe min
+Ende funktion</pre>
+  <p>Wird nicht der Wert, sondern <strong>das Objekt oder seine Position</strong> gesucht („welcher Artikel hat den kleinsten Bestand?“), merkst du dir den Index (<code>minIndex := i</code>) oder das Objekt selbst und vergleichst mit dessen Getter. Bei Gleichstand entscheidet <code>&lt;</code> (erstes gefundenes bleibt) oder <code>&lt;=</code> (letztes gewinnt).</p>
+
+  <div class="falle"><span class="kastentitel">Typische Falle: Initialisierung mit 0</span>
+    <code>min := 0</code> und dann <code>wenn wert &lt; min</code>: Bei positiven Werten ist die Bedingung nie erfüllt, das Ergebnis ist immer 0. Genau diesen Fehler sollte man in W25 T2 A3 in einer gegebenen Minimum-Funktion finden. Beim Maximum geht 0 als Startwert nur gut, wenn alle Werte sicher ≥ 0 sind; bei Temperaturen im Winter z. B. nicht.
+  </div>
+
+  <h4>Lineare Suche</h4>
+  <p>Die Elemente werden der Reihe nach geprüft, bis das gesuchte gefunden ist. Aufwand im schlechtesten Fall: alle n Elemente (O(n)). Wird nichts gefunden, gibt man ein vereinbartes „nicht gefunden“ zurück: <code>null</code> bei Objekten, <code>-1</code> bei Indizes, <code>false</code> bei Ja/Nein-Fragen.</p>
+  <pre class="pseudo">funktion sucheArtikel(artikel : List&lt;Artikel&gt;, nr : integer) : Artikel
+  i : integer := 0
+  solange i &lt; artikel.size() und artikel.get(i).getArtikelNr() &lt;&gt; nr
+    i := i + 1
+  Ende solange
+  wenn i &lt; artikel.size() dann
+    rückgabe artikel.get(i)
+  Ende wenn
+  rückgabe null                                   // nicht gefunden
+Ende funktion</pre>
+  <p>Wichtig ist die <strong>Reihenfolge der Bedingungen</strong>: erst den Index prüfen, dann zugreifen. Bei <code>und</code> wird der zweite Teil nicht mehr ausgewertet, wenn der erste falsch ist (Kurzschlussauswertung). Alternativen mit gleicher Wirkung: eine Zählschleife mit <code>rückgabe</code> direkt beim Treffer, oder eine boolesche Variable <code>gefunden</code> als Abbruchbedingung. Eine Zählschleife <em>ohne</em> Abbruch funktioniert auch, prüft aber unnötig alle weiteren Elemente.</p>
+
+  <h4>Nächster Nachbar (Minimum einer berechneten Größe)</h4>
+  <p>Gesucht ist das Objekt mit der kleinsten Entfernung zu einem Punkt. Die Entfernung wird für jedes Element erst berechnet (Satz des Pythagoras), dann wie ein normales Minimum behandelt. Kommt eine Bedingung dazu („nur freie Taxis“), brauchst du den Startwert <code>null</code>, weil das erste Element vielleicht gar nicht in Frage kommt.</p>
+  <p class="nowrap" style="text-align:center"><strong>d = √((x₂ − x₁)² + (y₂ − y₁)²)</strong></p>
+
+  <figure>
+    <svg viewBox="0 0 600 360" width="600" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <!-- Achsen: Ursprung (60,320), 50 px je Einheit -->
+      <line x1="60" y1="320" x2="480" y2="320" stroke="#222"/>
+      <line x1="60" y1="320" x2="60" y2="20" stroke="#222"/>
+      <g font-size="11" fill="#555">
+        <text x="60" y="336" text-anchor="middle">0</text><text x="110" y="336" text-anchor="middle">1</text><text x="160" y="336" text-anchor="middle">2</text><text x="210" y="336" text-anchor="middle">3</text><text x="260" y="336" text-anchor="middle">4</text><text x="310" y="336" text-anchor="middle">5</text><text x="360" y="336" text-anchor="middle">6</text><text x="410" y="336" text-anchor="middle">7</text><text x="460" y="336" text-anchor="middle">8</text>
+        <text x="50" y="274" text-anchor="end">1</text><text x="50" y="224" text-anchor="end">2</text><text x="50" y="174" text-anchor="end">3</text><text x="50" y="124" text-anchor="end">4</text><text x="50" y="74" text-anchor="end">5</text><text x="50" y="24" text-anchor="end">6</text>
+      </g>
+      <text x="490" y="324">x (km)</text>
+      <text x="66" y="16">y (km)</text>
+      <!-- Linien vom Fahrgast F (3|2) = (210,220) -->
+      <line x1="210" y1="220" x2="110" y2="70" stroke="#222" stroke-dasharray="5,4"/>
+      <line x1="210" y1="220" x2="260" y2="170" stroke="#999" stroke-dasharray="2,3"/>
+      <line x1="210" y1="220" x2="360" y2="270" stroke="#222" stroke-width="2.5"/>
+      <line x1="210" y1="220" x2="410" y2="70" stroke="#222" stroke-dasharray="5,4"/>
+      <!-- Punkte -->
+      <circle cx="210" cy="220" r="7" fill="#222"/>
+      <text x="196" y="246" font-weight="bold" text-anchor="end">Fahrgast F (3|2)</text>
+      <rect x="102" y="62" width="16" height="16" fill="#fff" stroke="#222" stroke-width="2"/>
+      <text x="124" y="76">T1 (1|5) frei · 3,61</text>
+      <rect x="252" y="162" width="16" height="16" fill="#ccc" stroke="#777" stroke-width="2"/>
+      <text x="274" y="196" fill="#555">T2 (4|3) besetzt · 1,41</text>
+      <rect x="352" y="262" width="16" height="16" fill="#eef3fa" stroke="#1f4e79" stroke-width="3"/>
+      <text x="376" y="300" font-weight="bold">T3 (6|1) frei · 3,16 ✓</text>
+      <rect x="402" y="62" width="16" height="16" fill="#fff" stroke="#222" stroke-width="2"/>
+      <text x="426" y="76">T4 (7|5) frei · 5,00</text>
+    </svg>
+    <figcaption>Abb. A-4: Nächstes <em>freies</em> Taxi – T2 ist am nächsten, kommt aber wegen der Bedingung nicht in Frage; Ergebnis T3</figcaption>
+  </figure>
+  <pre class="pseudo">funktion naechstesFreiesTaxi(taxis : List&lt;Taxi&gt;, fx : double, fy : double) : Taxi
+  bestes : Taxi := null
+  minAbstand : double := 0.0                      // erst gültig, wenn bestes &lt;&gt; null
+  zähle i von 0 bis taxis.size() - 1
+    t : Taxi := taxis.get(i)
+    wenn t.istFrei() dann
+      dx : double := t.getX() - fx
+      dy : double := t.getY() - fy
+      d : double := wurzel(dx * dx + dy * dy)
+      wenn bestes = null oder d &lt; minAbstand dann
+        bestes := t
+        minAbstand := d
+      Ende wenn
+    Ende wenn
+  Ende zähle
+  rückgabe bestes                                 // null, wenn kein Taxi frei ist
+Ende funktion</pre>
+
+  <h4>Beste Übereinstimmung („kleinste passende Differenz“)</h4>
+  <p>Variante der Minimumsuche, z. B. in W25 („Tisch, dessen Platzzahl am wenigsten über der Personenzahl liegt“). Eigenes Beispiel: Für einen Umzug mit 14,5 m³ Ladung wird der <em>kleinste</em> Transporter gesucht, der noch reicht. Zuerst filtert eine Bedingung die ungeeigneten aus (<code>volumen &gt;= bedarf</code>), dann wird unter den übrigen die kleinste Differenz gesucht.</p>
+  <pre class="pseudo">funktion passendesFahrzeug(fahrzeuge : List&lt;Fahrzeug&gt;, bedarf : double) : Fahrzeug
+  bestes : Fahrzeug := null
+  zähle i von 0 bis fahrzeuge.size() - 1
+    f : Fahrzeug := fahrzeuge.get(i)
+    wenn f.getVolumen() &gt;= bedarf dann
+      wenn bestes = null oder f.getVolumen() &lt; bestes.getVolumen() dann
+        bestes := f
+      Ende wenn
+    Ende wenn
+  Ende zähle
+  rückgabe bestes
+Ende funktion</pre>
+  <p>Ist die Abweichung in beide Richtungen erlaubt (z. B. „Wert, der am nächsten an 20 liegt“), vergleichst du den Betrag der Differenz: <code>abs(wert - 20)</code>.</p>
+
+  <div class="falle"><span class="kastentitel">Typische Fehler</span>
+    <ul>
+      <li>Startwert 0 (siehe oben) oder Startwert „erstes Element“, obwohl das erste Element die Bedingung gar nicht erfüllt.</li>
+      <li>Nur den kleinsten <em>Wert</em> gemerkt, obwohl das <em>Objekt</em> zurückgegeben werden soll.</li>
+      <li>Leere Liste bzw. „nichts passt“ nicht behandelt; Rückgabe <code>null</code> nicht dokumentiert.</li>
+      <li>Abbruchbedingung in falscher Reihenfolge (<code>liste.get(i)…</code> vor <code>i &lt; liste.size()</code>).</li>
+      <li>Die Wurzel kann man weglassen, weil sie die Reihenfolge der Entfernungen nicht ändert. Wird aber die Entfernung selbst ausgegeben oder mit einem Grenzwert verglichen, braucht man sie.</li>
+    </ul>
+  </div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li><strong>W23 T2 A2 (25 P):</strong> „Nearest Neighbour“ – zu einem Messpunkt das nächstgelegene Objekt in einem Objekt-Array finden (Entfernung + Minimumsuche).</li>
+      <li><strong>W25 T2 A1b (10 P):</strong> aus den freien Tischen den mit der kleinsten Platzdifferenz auswählen; <strong>W25 T2 A3b:</strong> fehlerhafte Minimum-Funktion durchspielen und korrigieren.</li>
+      <li><strong>S24 T1 A3bb (5 P):</strong> lineare Suche „ist dieser Teilnehmer angemeldet?“ (Rückgabe boolean).</li>
+      <li><strong>W21 T2 A2 (25 P):</strong> Suche im 2D-Terminplan.</li>
+    </ul>
+  </div>
+
+  <!-- ===================== ALG-04 ===================== -->
+  <h3 id="e-04">ALG-04 · Speicherbedarf berechnen / Zahlensysteme <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
+  <p class="klein">Vorkommen: 3/9 · Prüfungen: W22 (Dezimal → Binär, Datentypen), W23 (Speicherbedarf in GiB, 7 P), S26 (Speicherbedarf in TiB, 5 P) · W23 und S26 waren fast identisch</p>
+
+  <h4>Bit, Byte und die zwei Arten von Präfixen</h4>
+  <ul>
+    <li><strong>1 Bit</strong> = kleinste Einheit (0 oder 1). <strong>1 Byte = 8 Bit</strong>. Mit n Bit lassen sich <strong>2ⁿ</strong> verschiedene Werte darstellen (vorzeichenlos 0 … 2ⁿ − 1; mit Vorzeichen −2ⁿ⁻¹ … 2ⁿ⁻¹ − 1). Beispiel 10 Bit: 1 024 Werte.</li>
+    <li><strong>SI-Präfixe</strong> (dezimal, Faktor 1000): kB, MB, GB, TB. Benutzt von Festplattenherstellern und für Datenraten (Mbit/s).</li>
+    <li><strong>IEC-Binärpräfixe</strong> (Faktor 1024, erkennbar am „i“): KiB, MiB, GiB, TiB. Benutzt für Arbeitsspeicher und von Betriebssystemen (Windows zeigt GiB-Werte allerdings mit der Beschriftung „GB“ an).</li>
+  </ul>
+  <table class="kompakt">
+    <tr><th>SI (dezimal)</th><th>Byte</th><th>IEC (binär)</th><th>Byte</th><th>Unterschied</th></tr>
+    <tr><td>1 kB (Kilobyte)</td><td>10³ = 1 000</td><td>1 KiB (Kibibyte)</td><td>2¹⁰ = 1 024</td><td>2,4 %</td></tr>
+    <tr><td>1 MB (Megabyte)</td><td>10⁶ = 1 000 000</td><td>1 MiB (Mebibyte)</td><td>2²⁰ = 1 048 576</td><td>4,9 %</td></tr>
+    <tr><td>1 GB (Gigabyte)</td><td>10⁹</td><td>1 GiB (Gibibyte)</td><td>2³⁰ = 1 073 741 824</td><td>7,4 %</td></tr>
+    <tr><td>1 TB (Terabyte)</td><td>10¹²</td><td>1 TiB (Tebibyte)</td><td>2⁴⁰ = 1 099 511 627 776</td><td>10,0 %</td></tr>
+  </table>
+  <div class="merke"><span class="kastentitel">Merke</span>Von einer Einheit zur nächsten: bei SI <strong>÷ 1000</strong>, bei IEC <strong>÷ 1024</strong>. Bit → Byte immer <strong>÷ 8</strong>. Wird in der Aufgabe GiB/TiB verlangt, rechnest du durchgehend mit 1024. Eine Festplatte „8 TB“ hat 8 · 10¹² Byte = 7,28 TiB.</div>
+
+  <h4>Zahlensysteme umrechnen</h4>
+  <table class="kompakt">
+    <tr><th>Dezimal</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td></tr>
+    <tr><th>Binär</th><td class="mono">0000</td><td class="mono">0001</td><td class="mono">0010</td><td class="mono">0011</td><td class="mono">0100</td><td class="mono">0101</td><td class="mono">0110</td><td class="mono">0111</td><td class="mono">1000</td><td class="mono">1001</td><td class="mono">1010</td><td class="mono">1011</td><td class="mono">1100</td><td class="mono">1101</td><td class="mono">1110</td><td class="mono">1111</td></tr>
+    <tr><th>Hex</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td></tr>
+  </table>
+  <div class="zweispaltig">
+    <div>
+      <p><strong>Dezimal → Binär (Divisionsrestverfahren):</strong> fortlaufend durch 2 teilen, Reste notieren, <em>von unten nach oben</em> lesen. Beispiel 156:</p>
+      <pre>156 : 2 =  78  Rest 0
+ 78 : 2 =  39  Rest 0
+ 39 : 2 =  19  Rest 1
+ 19 : 2 =   9  Rest 1
+  9 : 2 =   4  Rest 1
+  4 : 2 =   2  Rest 0
+  2 : 2 =   1  Rest 0
+  1 : 2 =   0  Rest 1   ↑ lesen
+156 = 1001 1100 (binär)</pre>
+    </div>
+    <div>
+      <p><strong>Binär → Dezimal (Stellenwerte):</strong> jede 1 mit ihrem Stellenwert 2ᵏ multiplizieren und addieren:</p>
+      <pre>Stelle: 128 64 32 16  8  4  2  1
+Bit:      1  0  1  1  0  0  1  1
+= 128 + 32 + 16 + 2 + 1 = 179</pre>
+      <p><strong>Binär ↔ Hex:</strong> von rechts in 4er-Gruppen teilen, jede Gruppe ist eine Hex-Ziffer: <code>1011 0011</code> = <code>B3</code>; <code>1001 1100</code> = <code>9C</code>.</p>
+      <p><strong>Hex → Dezimal:</strong> <code>B3</code> = 11 · 16 + 3 = 179. <strong>Dezimal → Hex:</strong> durch 16 teilen: 179 : 16 = 11 Rest 3 → B3.</p>
+    </div>
+  </div>
+
+  <h4>Datentypen und ihr Speicherbedarf</h4>
+  <table class="kompakt">
+    <tr><th>Java-Typ</th><th>Größe</th><th>Wertebereich / Genauigkeit</th><th>typischer Einsatz</th><th>SQL-Gegenstück</th></tr>
+    <tr><td><code>boolean</code></td><td>logisch 1 Bit (JVM meist 1 Byte)</td><td>true / false</td><td>Merker, Status</td><td>BOOLEAN / TINYINT(1)</td></tr>
+    <tr><td><code>byte</code></td><td>1 Byte</td><td>−128 … 127</td><td>kleine Zähler, Prozent</td><td>TINYINT</td></tr>
+    <tr><td><code>short</code></td><td>2 Byte</td><td>−32 768 … 32 767</td><td>Jahreszahl, Minuten eines Tages</td><td>SMALLINT</td></tr>
+    <tr><td><code>int</code></td><td>4 Byte</td><td>ca. ±2,1 Milliarden</td><td>IDs, Mengen, Cent-Beträge</td><td>INT</td></tr>
+    <tr><td><code>long</code></td><td>8 Byte</td><td>ca. ±9,2 · 10¹⁸</td><td>Zeitstempel in ms, große Summen</td><td>BIGINT</td></tr>
+    <tr><td><code>float</code></td><td>4 Byte</td><td>ca. 7 signifikante Stellen</td><td>Messwerte, wenn Genauigkeit reicht</td><td>FLOAT</td></tr>
+    <tr><td><code>double</code></td><td>8 Byte</td><td>ca. 15–16 signifikante Stellen</td><td>Berechnungen, Durchschnitte</td><td>DOUBLE</td></tr>
+    <tr><td><code>char</code></td><td>2 Byte</td><td>ein UTF-16-Zeichen</td><td>einzelnes Zeichen</td><td>CHAR(1)</td></tr>
+    <tr><td><code>String</code></td><td>variabel</td><td>Java intern ca. 1–2 Byte je Zeichen</td><td>Texte</td><td>VARCHAR(n), CHAR(n)</td></tr>
+  </table>
+  <p>Auswahlregel: den <strong>kleinsten Typ, dessen Wertebereich sicher reicht</strong> (mit Reserve für die Zukunft). <strong>Geldbeträge</strong> nie als <code>float</code>/<code>double</code> (Rundungsfehler bei 0,1), sondern als <code>DECIMAL(10,2)</code> in der Datenbank bzw. in Cent als ganze Zahl. Nummern mit führenden Nullen oder Sonderzeichen (PLZ, Telefonnummer) sind Text.</p>
+
+  <h4>Speicherbedarf von Bildern, Video und Audio</h4>
+  <table class="kompakt">
+    <tr><th>Medium</th><th>Formel (unkomprimiert)</th></tr>
+    <tr><td>Bild</td><td>Breite × Höhe (Pixel) × Farbtiefe (Bit/Pixel) ÷ 8 = Byte. Farbtiefe = Kanäle × Bit je Kanal (RGB mit 8 Bit je Kanal = 24 Bit)</td></tr>
+    <tr><td>Video</td><td>Bildgröße (Byte) × Bilder pro Sekunde (fps) × Sekunden</td></tr>
+    <tr><td>Audio</td><td>Abtastrate (Hz) × Bittiefe (Bit) × Kanäle × Sekunden ÷ 8</td></tr>
+    <tr><td>Komprimiert</td><td>unkomprimierte Größe ÷ Kompressionsfaktor (z. B. „1 : 10“ → ÷ 10)</td></tr>
+  </table>
+  <p><strong>Beispiel Dokumentenscanner:</strong> A4-Seite mit 300 dpi = 2 480 × 3 508 Pixel, 24 Bit Farbtiefe, 400 Seiten pro Tag, 250 Arbeitstage.</p>
+  <pre>Pixel je Seite   = 2 480 · 3 508                     =      8 699 840 Pixel
+Bit je Seite     = 8 699 840 Pixel · 24 Bit/Pixel    =    208 796 160 Bit
+Byte je Seite    = 208 796 160 Bit : 8 Bit/Byte      =     26 099 520 Byte
+MiB je Seite     = 26 099 520 : 1 024 : 1 024        ≈          24,89 MiB
+Byte pro Jahr    = 26 099 520 · 400 · 250            = 2 609 952 000 000 Byte
+GiB pro Jahr     = 2 609 952 000 000 : 1 024³        ≈       2 430,71 GiB
+TiB pro Jahr     = 2 430,71 : 1 024                  ≈           2,37 TiB</pre>
+  <p><strong>Video:</strong> Full HD 1 920 × 1 080, 24 Bit, 25 fps, 1 Minute: 1 920 · 1 080 · 3 Byte = 6 220 800 Byte je Bild; · 25 · 60 = 9 331 200 000 Byte ≈ 8,69 GiB pro Minute. Als Datenrate: 155 520 000 Byte/s · 8 = 1 244,16 Mbit/s (Datenraten immer mit SI-Präfix).
+  <strong>Audio:</strong> CD-Qualität 44 100 Hz · 16 Bit · 2 Kanäle = 1 411 200 Bit/s = 176 400 Byte/s; 3 Minuten = 31 752 000 Byte ≈ 30,28 MiB.</p>
+
+  <h4>So gehst du vor</h4>
+  <ol>
+    <li>Alle Angaben <strong>mit Einheit</strong> herausschreiben (Pixel, Bit/Kanal, Kanäle, Bilder/Tag, Tage/Jahr, Kompression).</li>
+    <li>Größe <strong>eines</strong> Elements in Bit berechnen, dann ÷ 8 in Byte.</li>
+    <li>Hochrechnen (× Anzahl × Zeitraum). Wochen: 52, Jahr: 365 Tage, sofern nichts anderes angegeben ist.</li>
+    <li>In die verlangte Einheit umrechnen: je Stufe ÷ 1024 (bzw. ÷ 1000 bei SI).</li>
+    <li>Runden wie verlangt; Speicherbedarf und Anzahl Datenträger <strong>aufrunden</strong>.</li>
+    <li>Antwortsatz mit Einheit. Jede Zeile des Rechenwegs mit Einheiten zeigt dem Prüfer, dass du verstanden hast. Das bringt Teilpunkte, auch wenn sich ein Rechenfehler einschleicht.</li>
+  </ol>
+  <div class="falle"><span class="kastentitel">Typische Fehler</span>
+    <ul>
+      <li>÷ 8 vergessen (Ergebnis in Bit statt Byte) oder Mbit/s mit MB/s verwechselt.</li>
+      <li>Mit 1000 statt 1024 gerechnet, obwohl GiB/TiB verlangt ist (oder umgekehrt bei Herstellerangaben in TB).</li>
+      <li>Farbtiefe falsch: „8 Bit je Farbkanal, 3 Kanäle“ sind 24 Bit pro Pixel, nicht 8.</li>
+      <li>Zwischenergebnisse zu früh grob gerundet (0,06 statt 0,05587 GiB) – das verfälscht die Hochrechnung deutlich.</li>
+      <li>„Speicherbedarf“ abgerundet: 581,1 GiB passen nicht auf 581 GiB.</li>
+    </ul>
+  </div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li><strong>W23 T2 A3b (7 P)</strong> und <strong>S26 T2 A3b (5 P):</strong> Speicherbedarf für Fotos (Megapixel, 8 Bit je Farbkanal, 3 Kanäle, Anzahl Bilder pro Woche/Jahr) in GiB bzw. TiB. Die offizielle Lösung rechnet Bit → Byte → ÷ 1024 je Stufe und rundet am Ende auf; Rundungsdifferenzen werden toleriert.</li>
+      <li><strong>W22 T2 A2:</strong> Dezimal → Binär (rekursiv und iterativ, siehe ALG-08); <strong>W22 T2 A3c:</strong> passende Datentypen für Attribute festlegen.</li>
+      <li>Deckblatt-Hinweis der IHK: Wer ein gerundetes Ergebnis einträgt und damit weiterrechnen muss, rechnet nur mit diesem gerundeten Wert weiter.</li>
+    </ul>
+  </div>
+
+  <!-- ===================== ALG-05 ===================== -->
+  <h3 id="e-05">ALG-05 · Sortieren <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
+  <p class="klein">Vorkommen: 2/9 · Prüfungen: W22 (T2 A1, 25 P: Bubblesort → Vergleichsfunktion → generisch), S24 (T2 A2a, 12 P: Sortieren mit übergebener Vergleichsfunktion) · Tendenz eher fallend</p>
+
+  <h4>Bubblesort</h4>
+  <p>Benachbarte Elemente werden verglichen und vertauscht, wenn sie in der falschen Reihenfolge stehen. Nach jedem Durchlauf ist das größte noch unsortierte Element ganz hinten angekommen („aufgestiegen wie eine Blase“). Deshalb kann die innere Schleife mit jedem Durchlauf ein Element früher aufhören.</p>
+  <pre class="pseudo">funktion bubbleSort(zahlen : integer[])
+  zähle i von 0 bis zahlen.length - 2
+    zähle j von 0 bis zahlen.length - 2 - i
+      wenn zahlen[j] &gt; zahlen[j + 1] dann
+        hilf : integer := zahlen[j]              // Dreieckstausch
+        zahlen[j] := zahlen[j + 1]
+        zahlen[j + 1] := hilf
+      Ende wenn
+    Ende zähle
+  Ende zähle
+Ende funktion</pre>
+  <figure>
+    <svg viewBox="0 0 680 205" width="680" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <text x="10" y="35">Start</text>
+      <text x="10" y="80">nach Durchlauf 1</text>
+      <text x="10" y="125">nach Durchlauf 2</text>
+      <text x="10" y="170">nach Durchlauf 3</text>
+      <!-- Start -->
+      <rect x="170" y="15" width="50" height="30" fill="#fff" stroke="#222"/><text x="195" y="35" text-anchor="middle">29</text>
+      <rect x="220" y="15" width="50" height="30" fill="#fff" stroke="#222"/><text x="245" y="35" text-anchor="middle">11</text>
+      <rect x="270" y="15" width="50" height="30" fill="#fff" stroke="#222"/><text x="295" y="35" text-anchor="middle">37</text>
+      <rect x="320" y="15" width="50" height="30" fill="#fff" stroke="#222"/><text x="345" y="35" text-anchor="middle">4</text>
+      <text x="390" y="35" font-size="12">29↔11 tauschen · 29/37 ok · 37↔4 tauschen</text>
+      <!-- D1 -->
+      <rect x="170" y="60" width="50" height="30" fill="#fff" stroke="#222"/><text x="195" y="80" text-anchor="middle">11</text>
+      <rect x="220" y="60" width="50" height="30" fill="#fff" stroke="#222"/><text x="245" y="80" text-anchor="middle">29</text>
+      <rect x="270" y="60" width="50" height="30" fill="#fff" stroke="#222"/><text x="295" y="80" text-anchor="middle">4</text>
+      <rect x="320" y="60" width="50" height="30" fill="#e8ecf1" stroke="#222" stroke-width="2"/><text x="345" y="80" text-anchor="middle" font-weight="bold">37</text>
+      <text x="390" y="80" font-size="12">11/29 ok · 29↔4 tauschen</text>
+      <!-- D2 -->
+      <rect x="170" y="105" width="50" height="30" fill="#fff" stroke="#222"/><text x="195" y="125" text-anchor="middle">11</text>
+      <rect x="220" y="105" width="50" height="30" fill="#fff" stroke="#222"/><text x="245" y="125" text-anchor="middle">4</text>
+      <rect x="270" y="105" width="50" height="30" fill="#e8ecf1" stroke="#222" stroke-width="2"/><text x="295" y="125" text-anchor="middle" font-weight="bold">29</text>
+      <rect x="320" y="105" width="50" height="30" fill="#e8ecf1" stroke="#222" stroke-width="2"/><text x="345" y="125" text-anchor="middle" font-weight="bold">37</text>
+      <text x="390" y="125" font-size="12">11↔4 tauschen</text>
+      <!-- D3 -->
+      <rect x="170" y="150" width="50" height="30" fill="#e8ecf1" stroke="#222" stroke-width="2"/><text x="195" y="170" text-anchor="middle" font-weight="bold">4</text>
+      <rect x="220" y="150" width="50" height="30" fill="#e8ecf1" stroke="#222" stroke-width="2"/><text x="245" y="170" text-anchor="middle" font-weight="bold">11</text>
+      <rect x="270" y="150" width="50" height="30" fill="#e8ecf1" stroke="#222" stroke-width="2"/><text x="295" y="170" text-anchor="middle" font-weight="bold">29</text>
+      <rect x="320" y="150" width="50" height="30" fill="#e8ecf1" stroke="#222" stroke-width="2"/><text x="345" y="170" text-anchor="middle" font-weight="bold">37</text>
+      <text x="390" y="170" font-size="12">sortiert</text>
+      <text x="170" y="198" font-size="12">grau/fett = Element steht an seiner endgültigen Position</text>
+    </svg>
+    <figcaption>Abb. A-5: Bubblesort auf [29, 11, 37, 4] – nach jedem Durchlauf ist ein weiteres Element fertig</figcaption>
+  </figure>
+  <p><strong>Optimierung mit Abbruch:</strong> Eine boolesche Variable <code>getauscht</code> wird zu Beginn jedes Durchlaufs auf <code>false</code> gesetzt und beim Tauschen auf <code>true</code>. Wurde in einem Durchlauf nichts getauscht, ist das Feld sortiert und man kann aufhören (äußere Schleife dann als <code>solange getauscht</code> bzw. <code>wiederhole … solange getauscht</code>). Bei bereits sortierten Daten braucht Bubblesort so nur einen Durchlauf.</p>
+
+  <h4>Selectionsort und Insertionsort (zum Verständnis)</h4>
+  <div class="zweispaltig">
+    <div>
+      <p><strong>Selectionsort:</strong> Im unsortierten Rest das Minimum suchen und mit dem ersten Element des Rests tauschen.</p>
+      <pre class="pseudo">zähle i von 0 bis n - 2
+  minPos : integer := i
+  zähle j von i + 1 bis n - 1
+    wenn feld[j] &lt; feld[minPos] dann
+      minPos := j
+    Ende wenn
+  Ende zähle
+  tausche feld[i] und feld[minPos]
+Ende zähle</pre>
+    </div>
+    <div>
+      <p><strong>Insertionsort:</strong> wie beim Kartenspielen – das nächste Element nehmen, größere nach rechts schieben, in die Lücke einfügen.</p>
+      <pre class="pseudo">zähle i von 1 bis n - 1
+  wert : integer := feld[i]
+  j : integer := i - 1
+  solange j &gt;= 0 und feld[j] &gt; wert
+    feld[j + 1] := feld[j]
+    j := j - 1
+  Ende solange
+  feld[j + 1] := wert
+Ende zähle</pre>
+    </div>
+  </div>
+  <table class="kompakt">
+    <tr><th>Verfahren</th><th>Idee</th><th>bester Fall</th><th>schlechtester Fall</th><th>stabil?</th></tr>
+    <tr><td>Bubblesort</td><td>Nachbarn tauschen</td><td>O(n) mit Abbruch</td><td>O(n²)</td><td>ja</td></tr>
+    <tr><td>Selectionsort</td><td>Minimum nach vorne</td><td>O(n²)</td><td>O(n²)</td><td>nein (Tausch über Distanz)</td></tr>
+    <tr><td>Insertionsort</td><td>einsortieren</td><td>O(n)</td><td>O(n²)</td><td>ja</td></tr>
+    <tr><td>Mergesort</td><td>halbieren, sortieren, zusammenmischen</td><td>O(n log n)</td><td>O(n log n)</td><td>ja (braucht Zusatzspeicher)</td></tr>
+    <tr><td>Quicksort</td><td>Pivot wählen, aufteilen</td><td>O(n log n)</td><td>O(n²) (im Mittel n log n)</td><td>nein</td></tr>
+  </table>
+  <p>Größenordnung: Bei 1 000 Elementen sind n² = 1 000 000 Vergleiche, n · log₂ n ≈ 10 000. Für große Datenmengen nimmt man deshalb die Sortierfunktion der Bibliothek (Java: <code>List.sort</code>, <code>Arrays.sort</code>; für Objekte stabil).</p>
+  <p><strong>Stabilität:</strong> Ein Verfahren ist stabil, wenn Elemente mit <em>gleichem</em> Sortierschlüssel ihre bisherige Reihenfolge behalten. Beispiel: Eine Bücherliste ist alphabetisch nach Titel sortiert und wird danach stabil nach Preis sortiert → Bücher mit gleichem Preis stehen weiterhin alphabetisch. Bubblesort ist stabil, solange nur bei <code>&gt;</code> (nicht bei <code>&gt;=</code>) getauscht wird.</p>
+
+  <h4>Objekte sortieren und die Vergleichsfunktion</h4>
+  <p>Bei Objekten vergleichst du ein Attribut über den Getter, tauschst aber <strong>das ganze Objekt</strong>: <code>wenn buecher[j].getPreis() &gt; buecher[j + 1].getPreis() dann</code> … Hilfsvariable vom Typ <code>Buch</code>.</p>
+  <p>Soll derselbe Algorithmus nach verschiedenen Kriterien sortieren können, übergibt man ihm eine <strong>Vergleichsfunktion</strong> (Java: <code>Comparator</code>). Der Algorithmus fragt nur noch „steht a vor b?“, das Kriterium steckt in der Funktion. Vertrag der Vergleichsfunktion <code>vergleiche(a, b) : integer</code>:</p>
+  <table class="kompakt">
+    <tr><th>Rückgabe</th><th>Bedeutung</th><th>Sortieralgorithmus</th></tr>
+    <tr><td>negativ (z. B. −1)</td><td>a gehört vor b</td><td>nicht tauschen</td></tr>
+    <tr><td>0</td><td>gleichwertig</td><td>nicht tauschen (Stabilität)</td></tr>
+    <tr><td>positiv (z. B. 1)</td><td>a gehört hinter b</td><td><strong>tauschen</strong>: <code>wenn vergleiche(feld[j], feld[j + 1]) &gt; 0 dann …</code></td></tr>
+  </table>
+  <pre class="pseudo">funktion nachPreisAufsteigend(a : Buch, b : Buch) : integer
+  wenn a.getPreis() &lt; b.getPreis() dann
+    rückgabe -1
+  Ende wenn
+  wenn a.getPreis() &gt; b.getPreis() dann
+    rückgabe 1
+  Ende wenn
+  rückgabe 0
+Ende funktion
+
+// mehrstufig: erst Autor, bei gleichem Autor nach Titel
+funktion nachAutorDannTitel(a : Buch, b : Buch) : integer
+  wenn a.getAutor() &lt;&gt; b.getAutor() dann
+    rückgabe a.getAutor().compareTo(b.getAutor())
+  Ende wenn
+  rückgabe a.getTitel().compareTo(b.getTitel())
+Ende funktion</pre>
+  <p><strong>Absteigend</strong> sortieren: die Rückgabewerte vertauschen (1 statt −1) oder die Funktion mit <code>(b, a)</code> statt <code>(a, b)</code> rechnen. In Java:</p>
+  <pre class="java">Comparator&lt;Buch&gt; nachPreis = (a, b) -&gt; Double.compare(a.getPreis(), b.getPreis());
+Comparator&lt;Buch&gt; nachAutorDannTitel =
+        Comparator.comparing(Buch::getAutor).thenComparing(Buch::getTitel);
+buecher.sort(nachPreis.reversed());          // teuerstes zuerst
+
+// generische Sortiermethode (W22): für jede Liste mit passendem Comparator
+static &lt;T&gt; void sortiere(List&lt;T&gt; liste, Comparator&lt;T&gt; vergleiche) {
+    ... wenn vergleiche.compare(a, b) &gt; 0 ist, a und b tauschen ...
+}</pre>
+  <p>Vorteile der übergebenen Vergleichsfunktion: <strong>ein</strong> getesteter Sortieralgorithmus für beliebig viele Sortierkriterien (keine Code-Duplikate), neue Kriterien ohne Änderung am Algorithmus (Open-Closed-Prinzip, Strategie-Muster), mit Generics für beliebige Klassen nutzbar.</p>
+
+  <div class="falle"><span class="kastentitel">Typische Fehler</span>
+    <ul>
+      <li>Innere Schleife bis <code>length - 1</code> → <code>feld[j + 1]</code> greift über das Ende hinaus.</li>
+      <li>Nur die Attributwerte getauscht statt der Objekte (dann gehören Preis und Titel nicht mehr zusammen).</li>
+      <li>Tausch ohne Hilfsvariable (<code>a := b; b := a</code> überschreibt a).</li>
+      <li>Vergleichsrichtung verdreht (<code>&lt; 0</code> statt <code>&gt; 0</code>) → absteigend statt aufsteigend.</li>
+      <li>Vergleichsfunktion gibt <code>boolean</code> zurück statt einer Zahl; bei <code>double</code>-Werten <code>(int)(a - b)</code> rechnen (0,4 wird zu 0 → „gleich“).</li>
+    </ul>
+  </div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li><strong>W22 T2 A1 (25 P):</strong> a) Bubblesort für Objekte nach einem Attribut (10 P), b) Vergleichsfunktion schreiben (5 P), c) generische Klasse erläutern (3 P), d) generischen Sortieralgorithmus mit <code>List&lt;T&gt;</code> (7 P).</li>
+      <li><strong>S24 T2 A2a (12 P):</strong> Sortieralgorithmus nach Wahl, der eine übergebene Vergleichsfunktion nutzt (Lösungsbeispiel der IHK: Bubblesort mit <code>wenn vergleiche(…) &gt; 0</code>).</li>
+      <li>Häufige Zusatzfrage: Laufzeit O(n²) vs. O(n log n), stabil/instabil.</li>
+    </ul>
+  </div>
+
+  <!-- ===================== ALG-06 ===================== -->
+  <h3 id="e-06">ALG-06 · Zeichenketten verarbeiten <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
+  <p class="klein">Vorkommen: 2/9 · Prüfungen: W21 (Passwortprüfung im Struktogramm, Fehler finden), W25 (Namensspalte per SUBSTRING aufteilen)</p>
+
+  <p>Ein String ist eine Folge von Zeichen (<code>char</code>). Wie beim Array beginnt der Index bei 0, das letzte Zeichen hat den Index <code>length() - 1</code>. Strings sind in Java unveränderlich: Methoden wie <code>trim()</code> oder <code>substring()</code> liefern einen <em>neuen</em> String.</p>
+  <figure>
+    <svg viewBox="0 0 560 150" width="560" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <g font-family="Consolas, Courier New, monospace" font-size="16">
+        <rect x="40" y="30" width="44" height="36" fill="#fff" stroke="#222"/><text x="62" y="54" text-anchor="middle">1</text>
+        <rect x="84" y="30" width="44" height="36" fill="#fff" stroke="#222"/><text x="106" y="54" text-anchor="middle">4</text>
+        <rect x="128" y="30" width="44" height="36" fill="#fff" stroke="#222" stroke-width="2"/><text x="150" y="54" text-anchor="middle">.</text>
+        <rect x="172" y="30" width="44" height="36" fill="#eef3fa" stroke="#222"/><text x="194" y="54" text-anchor="middle">0</text>
+        <rect x="216" y="30" width="44" height="36" fill="#eef3fa" stroke="#222"/><text x="238" y="54" text-anchor="middle">9</text>
+        <rect x="260" y="30" width="44" height="36" fill="#fff" stroke="#222"/><text x="282" y="54" text-anchor="middle">.</text>
+        <rect x="304" y="30" width="44" height="36" fill="#fff" stroke="#222"/><text x="326" y="54" text-anchor="middle">2</text>
+        <rect x="348" y="30" width="44" height="36" fill="#fff" stroke="#222"/><text x="370" y="54" text-anchor="middle">0</text>
+        <rect x="392" y="30" width="44" height="36" fill="#fff" stroke="#222"/><text x="414" y="54" text-anchor="middle">2</text>
+        <rect x="436" y="30" width="44" height="36" fill="#fff" stroke="#222"/><text x="458" y="54" text-anchor="middle">6</text>
+      </g>
+      <g font-size="12" fill="#555">
+        <text x="62" y="20" text-anchor="middle">0</text><text x="106" y="20" text-anchor="middle">1</text><text x="150" y="20" text-anchor="middle">2</text><text x="194" y="20" text-anchor="middle">3</text><text x="238" y="20" text-anchor="middle">4</text><text x="282" y="20" text-anchor="middle">5</text><text x="326" y="20" text-anchor="middle">6</text><text x="370" y="20" text-anchor="middle">7</text><text x="414" y="20" text-anchor="middle">8</text><text x="458" y="20" text-anchor="middle">9</text>
+      </g>
+      <path d="M173,74 L173,82 L259,82 L259,74" fill="none" stroke="#1f4e79" stroke-width="2"/>
+      <text x="216" y="100" text-anchor="middle">substring(3, 5) = "09"  (Index 3 bis 4, 5 ist ausgeschlossen)</text>
+      <text x="150" y="124" text-anchor="middle">indexOf('.') = 2</text>
+      <text x="400" y="124" text-anchor="middle">length() = 10, charAt(9) = '6'</text>
+      <text x="20" y="54" text-anchor="end" font-size="12">d =</text>
+    </svg>
+    <figcaption>Abb. A-6: String <code>d = "14.09.2026"</code> mit Indizes</figcaption>
+  </figure>
+
+  <table class="kompakt">
+    <tr><th>Methode (Java, im Pseudocode genauso)</th><th>Wirkung</th><th>Beispiel mit d = "14.09.2026"</th></tr>
+    <tr><td><code>length()</code></td><td>Anzahl Zeichen</td><td>10</td></tr>
+    <tr><td><code>charAt(i)</code></td><td>Zeichen an Position i</td><td><code>charAt(0)</code> = '1'</td></tr>
+    <tr><td><code>substring(von, bis)</code></td><td>Teilstring von <em>von</em> bis <em>bis − 1</em></td><td><code>substring(6, 10)</code> = "2026"</td></tr>
+    <tr><td><code>indexOf(x)</code></td><td>erste Position von x, sonst −1</td><td><code>indexOf('-')</code> = −1</td></tr>
+    <tr><td><code>split(trenner)</code></td><td>zerlegt in ein String-Array</td><td>3 Teile "14", "09", "2026" (Java: <code>split("\\.")</code>, weil der Punkt ein Regex-Zeichen ist)</td></tr>
+    <tr><td><code>trim()</code></td><td>Leerzeichen am Anfang/Ende entfernen</td><td><code>" Bonn ".trim()</code> = "Bonn"</td></tr>
+    <tr><td><code>equals(t)</code>, <code>equalsIgnoreCase(t)</code></td><td>Inhaltsvergleich</td><td><code>d.equals("14.09.2026")</code> = true</td></tr>
+    <tr><td><code>compareTo(t)</code></td><td>alphabetischer Vergleich (&lt;0, 0, &gt;0)</td><td><code>"Abel".compareTo("Berg")</code> &lt; 0</td></tr>
+    <tr><td><code>startsWith</code>, <code>endsWith</code>, <code>contains</code></td><td>Teiltext prüfen</td><td><code>d.endsWith("2026")</code> = true</td></tr>
+    <tr><td><code>toUpperCase()</code>, <code>replace(a, b)</code></td><td>umwandeln, ersetzen</td><td><code>d.replace('.', '/')</code> = "14/09/2026"</td></tr>
+    <tr><td><code>Character.isDigit(c)</code>, <code>isLetter</code>, <code>isUpperCase</code>, <code>isLowerCase</code></td><td>Zeichenklasse prüfen</td><td><code>isDigit('4')</code> = true</td></tr>
+    <tr><td><code>c - '0'</code>, <code>Integer.parseInt(s)</code></td><td>Ziffer bzw. Text in Zahl</td><td><code>'7' - '0'</code> = 7, <code>parseInt("2026")</code> = 2026</td></tr>
+  </table>
+
+  <h4>Muster 1: Zeichen für Zeichen prüfen</h4>
+  <p>Zwei Varianten, die man auseinanderhalten muss:</p>
+  <ul>
+    <li><strong>„Alle Zeichen müssen …“</strong> (nur erlaubte Zeichen): Beim ersten Verstoß sofort <code>false</code> zurückgeben, nach der Schleife <code>true</code>.</li>
+    <li><strong>„Mindestens ein Zeichen muss …“</strong> (mindestens eine Ziffer): Merker (<code>boolean</code>) vor der Schleife auf <code>false</code>, bei Treffer auf <code>true</code>, <strong>erst nach der Schleife</strong> auswerten.</li>
+  </ul>
+  <p>Beispiel Benutzername: 5 bis 20 Zeichen, beginnt mit einem Buchstaben, danach nur Buchstaben, Ziffern oder Unterstrich, mindestens eine Ziffer.</p>
+  <pre class="pseudo">funktion pruefeBenutzername(name : string) : boolean
+  wenn name.length() &lt; 5 oder name.length() &gt; 20 dann
+    rückgabe false
+  Ende wenn
+  wenn nicht istBuchstabe(name.charAt(0)) dann
+    rückgabe false
+  Ende wenn
+  hatZiffer : boolean := false
+  zähle i von 1 bis name.length() - 1
+    c : char := name.charAt(i)
+    wenn istZiffer(c) dann
+      hatZiffer := true
+    sonst
+      wenn nicht istBuchstabe(c) und c &lt;&gt; '_' dann
+        rückgabe false                        // unerlaubtes Zeichen: sofort Schluss
+      Ende wenn
+    Ende wenn
+  Ende zähle
+  rückgabe hatZiffer                      // "mindestens eine": erst nach der Schleife
+Ende funktion</pre>
+
+  <h4>Muster 2: Text zerlegen</h4>
+  <p>Trennzeichen suchen (<code>indexOf</code>), links und rechts davon mit <code>substring</code> herausschneiden, Leerzeichen mit <code>trim</code> entfernen. Immer überlegen, was passiert, wenn das Trennzeichen fehlt (<code>indexOf</code> liefert −1).</p>
+  <pre class="pseudo">// "53111 Bonn" -&gt; PLZ und Ort
+pos : integer := adresse.indexOf(' ')
+wenn pos = -1 dann
+  // Fehlerfall: kein Leerzeichen -&gt; z. B. Ausnahme oder Rückgabe null
+sonst
+  plz : string := adresse.substring(0, pos)
+  ort : string := adresse.substring(pos + 1, adresse.length()).trim()
+Ende wenn</pre>
+  <p>Mit <code>split</code> geht es kürzer, wenn das Trennzeichen eindeutig ist: <code>teile := "14.09.2026".split(".")</code> → <code>teile[0]</code> = "14", <code>teile.length</code> = 3.</p>
+
+  <h4>Strings vergleichen</h4>
+  <p>In Java vergleicht <code>==</code> bei Objekten die <strong>Referenzen</strong> (dasselbe Objekt im Speicher?), <code>equals</code> den <strong>Inhalt</strong>. Zwei inhaltsgleiche Strings, die z. B. aus einer Eingabe oder Datei stammen, sind verschiedene Objekte → <code>==</code> liefert <code>false</code>. Deshalb Strings in Java immer mit <code>equals</code> vergleichen. Im Pseudocode der Prüfung wird <code>=</code> meist akzeptiert (S26 erlaubt ausdrücklich <code>==</code>). Alphabetische Reihenfolge: <code>compareTo</code>. Zahlen, die als Text vorliegen, werden alphabetisch verglichen: <code>"10" &lt; "9"</code>! Vorher umwandeln.</p>
+  <p><strong>Zusammenhang mit SQL</strong> (W25 T2 A4d): Dort zerlegt man Spalten mit <code>SUBSTRING(spalte, start, länge)</code> – Achtung, in SQL beginnt die Zählung bei <strong>1</strong> und der dritte Parameter ist die <strong>Länge</strong>, nicht das Ende. Position eines Zeichens: <code>LOCATE(' ', name)</code> bzw. <code>INSTR</code>.</p>
+
+  <div class="falle"><span class="kastentitel">Typische Fehler</span>
+    <ul>
+      <li><code>substring(von, bis)</code>: <em>bis</em> ist ausgeschlossen. <code>substring(0, 3)</code> liefert 3 Zeichen.</li>
+      <li><code>charAt(length())</code> → Indexfehler; letzter Index ist <code>length() - 1</code>.</li>
+      <li><code>'A'</code> (ein Zeichen, <code>char</code>) und <code>"A"</code> (String) verwechselt; in Java ist <code>c == "A"</code> ein Compilerfehler.</li>
+      <li>„Mindestens eine Ziffer“ in der Schleife sofort mit <code>sonst rückgabe false</code> beantwortet → schon das erste Nicht-Ziffer-Zeichen führt zu <code>false</code>.</li>
+      <li>Leerzeichen nicht entfernt („ Tom“ ≠ „Tom“), Groß-/Kleinschreibung nicht beachtet.</li>
+    </ul>
+  </div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li><strong>W21 T2 A1c (6 P):</strong> In einem Struktogramm zur Passwortprüfung (Mindestlänge, mindestens ein Buchstabe, eine Ziffer, ein Sonderzeichen) drei Fehler finden und korrigieren – typisch: falscher Vergleich bei der Länge, falsche Schleifengrenze, ein Merker, der im sonst-Zweig wieder zurückgesetzt wird.</li>
+      <li><strong>W25 T2 A4d (8 P):</strong> Eine Spalte mit vollständigem Namen per <code>ALTER TABLE</code> um Vor-/Nachname ergänzen und per <code>UPDATE … SUBSTRING</code> befüllen.</li>
+      <li>Strings tauchen auch in jeder großen Algorithmusaufgabe als Vergleichsschlüssel auf (Namen, Kennungen).</li>
+    </ul>
+  </div>
+
+  <!-- ===================== ALG-07 ===================== -->
+  <h3 id="e-07">ALG-07 · Exceptions / Fehlerbehandlung <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
+  <p class="klein">Vorkommen: 2/9 · Prüfungen: W21, W25 (Fehlerfall bzw. <code>null</code> behandeln) · verwandt: W24 T2 A2a (Fehlerantwort mit HTTP-Statuscode erzeugen)</p>
+
+  <p>Eine <strong>Exception</strong> (Ausnahme) ist ein Objekt, das einen Fehlerzustand beschreibt. Sie wird an der Fehlerstelle <strong>geworfen</strong> (<code>throw</code>) und wandert die Aufrufkette hinauf, bis ein passender <code>catch</code>-Block sie <strong>fängt</strong>. Fängt sie niemand, bricht das Programm mit einer Fehlermeldung (Stacktrace) ab. Vorteil gegenüber Fehlercodes: Normaler Ablauf und Fehlerbehandlung sind getrennt, und ein Fehler kann nicht „aus Versehen“ ignoriert werden.</p>
+
+  <div class="zweispaltig">
+    <div>
+      <p class="codelabel">Java</p>
+      <pre class="java">try {
+    int menge = Integer.parseInt(eingabe);
+    lager.entnehmen(artikelNr, menge);
+    System.out.println("Gebucht.");
+} catch (NumberFormatException e) {
+    System.out.println("Bitte eine ganze Zahl eingeben.");
+} catch (BestandZuNiedrigException e) {
+    System.out.println(e.getMessage());
+} finally {
+    protokoll.schliessen();   // läuft IMMER
+}</pre>
+    </div>
+    <div>
+      <p class="codelabel">Pseudocode (eine mögliche Schreibweise)</p>
+      <pre class="pseudo">try
+  menge : integer := zuZahl(eingabe)
+  lager.entnehmen(artikelNr, menge)
+  ausgabe("Gebucht.")
+catch (NumberFormatException e)
+  ausgabe("Bitte eine ganze Zahl eingeben.")
+catch (BestandZuNiedrigException e)
+  ausgabe(e.getMessage())
+finally
+  protokoll.schliessen()
+Ende try</pre>
+    </div>
+  </div>
+
+  <figure>
+    <svg viewBox="0 0 720 395" width="720" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e07a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10" fill="none" stroke="#222" stroke-width="1.5"/>
+        </marker>
+      </defs>
+      <circle cx="350" cy="10" r="0" fill="#222"/>
+      <rect x="260" y="15" width="180" height="34" rx="10" fill="#fff" stroke="#222"/>
+      <text x="350" y="37" text-anchor="middle">try-Block ausführen</text>
+      <line x1="350" y1="49" x2="350" y2="71" stroke="#222" marker-end="url(#e07a-pfeil)"/>
+      <polygon points="350,72 420,95 350,118 280,95" fill="#fff" stroke="#222"/>
+      <text x="350" y="100" text-anchor="middle">Ausnahme?</text>
+      <!-- nein -->
+      <polyline points="280,95 140,95 140,139" fill="none" stroke="#222" marker-end="url(#e07a-pfeil)"/>
+      <text x="215" y="88" text-anchor="middle">[nein]</text>
+      <rect x="40" y="140" width="200" height="34" rx="10" fill="#fff" stroke="#222"/>
+      <text x="140" y="162" text-anchor="middle">try-Block läuft bis zum Ende</text>
+      <!-- ja -->
+      <polyline points="420,95 560,95 560,124" fill="none" stroke="#222" marker-end="url(#e07a-pfeil)"/>
+      <text x="470" y="88" text-anchor="middle">[ja]</text>
+      <text x="575" y="88" font-size="11" fill="#555">Rest des try-Blocks</text>
+      <text x="575" y="101" font-size="11" fill="#555">wird übersprungen</text>
+      <polygon points="560,125 650,148 560,171 470,148" fill="#fff" stroke="#222"/>
+      <text x="560" y="153" text-anchor="middle">passender catch?</text>
+      <polyline points="560,171 560,199" fill="none" stroke="#222" marker-end="url(#e07a-pfeil)"/>
+      <text x="568" y="190">[ja]</text>
+      <rect x="470" y="200" width="180" height="34" rx="10" fill="#fff" stroke="#222"/>
+      <text x="560" y="222" text-anchor="middle">catch-Block ausführen</text>
+      <polyline points="650,148 700,148 700,355 691,355" fill="none" stroke="#222" marker-end="url(#e07a-pfeil)"/>
+      <text x="656" y="140">[nein]</text>
+      <!-- zusammen zu finally -->
+      <polyline points="140,174 140,287 259,287" fill="none" stroke="#222" marker-end="url(#e07a-pfeil)"/>
+      <polyline points="560,234 560,252 350,252 350,269" fill="none" stroke="#222" marker-end="url(#e07a-pfeil)"/>
+      <rect x="260" y="270" width="180" height="34" rx="10" fill="#eef3fa" stroke="#222" stroke-width="2"/>
+      <text x="350" y="292" text-anchor="middle" font-weight="bold">finally-Block</text>
+      <line x1="350" y1="304" x2="350" y2="329" stroke="#222" marker-end="url(#e07a-pfeil)"/>
+      <rect x="240" y="330" width="220" height="34" rx="10" fill="#fff" stroke="#222"/>
+      <text x="350" y="352" text-anchor="middle">weiter nach try/catch/finally</text>
+      <rect x="470" y="330" width="220" height="50" rx="10" fill="#eef3fa" stroke="#222" stroke-width="2"/>
+      <text x="580" y="351" text-anchor="middle" font-weight="bold">finally-Block, danach</text>
+      <text x="580" y="369" text-anchor="middle">Ausnahme an Aufrufer weiter</text>
+    </svg>
+    <figcaption>Abb. A-7: Ablauf von try/catch/finally – der finally-Block läuft in jedem Fall (auch bei <code>return</code> im try-Block)</figcaption>
+  </figure>
+
+  <h4>Checked und unchecked Exceptions (Java)</h4>
+  <table class="kompakt">
+    <tr><th></th><th>checked (geprüft)</th><th>unchecked (ungeprüft)</th></tr>
+    <tr><td>Oberklasse</td><td><code>Exception</code> (aber nicht <code>RuntimeException</code>)</td><td><code>RuntimeException</code> (und <code>Error</code>)</td></tr>
+    <tr><td>Compiler verlangt Behandlung?</td><td><strong>ja</strong>: fangen (<code>try/catch</code>) oder mit <code>throws</code> in der Methodensignatur weiterreichen</td><td>nein</td></tr>
+    <tr><td>Ursache typischerweise</td><td>äußere Umstände, die auch korrekter Code nicht verhindern kann</td><td>Programmierfehler, die man durch Prüfungen vermeiden kann</td></tr>
+    <tr><td>Beispiele</td><td><code>IOException</code>, <code>FileNotFoundException</code>, <code>SQLException</code>, eigene fachliche Ausnahmen</td><td><code>NullPointerException</code>, <code>ArithmeticException</code>, <code>ArrayIndexOutOfBoundsException</code>, <code>IllegalArgumentException</code>, <code>NumberFormatException</code></td></tr>
+  </table>
+  <p><code>throw</code> wirft eine Ausnahme (<code>throw new IllegalArgumentException("Menge muss positiv sein")</code>), <code>throws</code> kündigt in der Signatur an, dass eine Methode eine checked Exception weiterreichen kann. Eigene Ausnahmen erben von <code>Exception</code> (checked) oder <code>RuntimeException</code> (unchecked):</p>
+  <pre class="java">public class BestandZuNiedrigException extends Exception {
+    public BestandZuNiedrigException(String meldung) { super(meldung); }
+}
+
+public void entnehmen(int menge) throws BestandZuNiedrigException {
+    if (menge &lt;= 0) {
+        throw new IllegalArgumentException("Menge muss positiv sein");   // unchecked
+    }
+    if (menge &gt; bestand) {
+        throw new BestandZuNiedrigException("Nur " + bestand + " Stück"); // checked
+    }
+    bestand = bestand - menge;
+}</pre>
+
+  <h4>Typische Fehlerfälle in Prüfungsalgorithmen</h4>
+  <table class="kompakt">
+    <tr><th>Fehlerfall</th><th>erkennen</th><th>sinnvolle Reaktion</th></tr>
+    <tr><td>Parameter ist <code>null</code></td><td><code>wenn liste = null dann</code></td><td><code>IllegalArgumentException</code> werfen (sonst später <code>NullPointerException</code>)</td></tr>
+    <tr><td>leere Liste / nichts passt</td><td><code>size() = 0</code>, Zähler = 0</td><td>dokumentierten Sonderwert zurückgeben (<code>null</code>, 0.0, leere Liste) <em>oder</em> eigene Exception</td></tr>
+    <tr><td>Division durch 0</td><td>Nenner vorher prüfen</td><td>bei <code>int</code> wirft Java <code>ArithmeticException</code>; bei <code>double</code> entsteht <strong>ohne Fehler</strong> <code>Infinity</code> bzw. <code>NaN</code> – also selbst prüfen!</td></tr>
+    <tr><td>ungültiger Wert (negativ, außerhalb des Bereichs)</td><td>Bereichsprüfung am Methodenanfang</td><td><code>IllegalArgumentException</code></td></tr>
+    <tr><td>ungültiger Index</td><td><code>i &lt; 0 oder i &gt;= size()</code></td><td>vorher prüfen; sonst <code>IndexOutOfBoundsException</code></td></tr>
+    <tr><td>Text ist keine Zahl</td><td><code>Integer.parseInt</code></td><td><code>NumberFormatException</code> fangen, Benutzer informieren</td></tr>
+    <tr><td>Datei, Datenbank, Netzwerk nicht erreichbar</td><td>checked Exceptions</td><td>fangen: Meldung, Protokoll, ggf. erneuter Versuch; Ressourcen im <code>finally</code> schließen</td></tr>
+  </table>
+  <p><strong>Exception oder Sonderwert?</strong> Ein Sonderwert (<code>null</code>, −1) ist einfach und in der Prüfung oft verlangt („liefert null, wenn kein Tisch frei ist“), muss aber vom Aufrufer geprüft werden – vergisst er es, knallt es später an anderer Stelle. Eine Exception erzwingt die Behandlung (checked) und trägt eine Fehlermeldung, ist aber für „normale“ Ergebnisse wie „nichts gefunden“ oft zu schwer. Faustregel: <em>erwartbares Ergebnis → Sonderwert, echter Fehler/Vertragsbruch → Exception.</em> Prüfungen am Methodenanfang („Wächter“, <em>fail fast</em>) halten den eigentlichen Algorithmus übersichtlich.</p>
+
+  <div class="falle"><span class="kastentitel">Typische Fehler</span>
+    <ul>
+      <li><strong>Leerer catch-Block</strong> (<code>catch (Exception e) { }</code>): Der Fehler wird verschluckt, das Programm rechnet mit falschen Daten weiter, die Ursache ist später kaum zu finden.</li>
+      <li>Überall nur <code>catch (Exception e)</code>: fängt auch Programmierfehler, die man eigentlich beheben müsste; keine gezielte Reaktion möglich.</li>
+      <li>Reihenfolge: speziellere Exceptions müssen <strong>vor</strong> allgemeineren gefangen werden (sonst Compilerfehler „bereits gefangen“).</li>
+      <li>Annahme, Code nach dem <code>try/catch</code> laufe immer: Wird die Ausnahme nicht gefangen, läuft nur noch der <code>finally</code>-Block, danach geht es beim Aufrufer weiter.</li>
+    </ul>
+  </div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <ul>
+      <li>Meist nicht als eigene Aufgabe, sondern als <strong>Teil der großen Algorithmusaufgabe</strong>: Punkte gibt es dafür, dass Sonderfälle behandelt werden (leere Liste, nichts gefunden → <code>null</code>, keine Division durch 0). Beispiele: W25 T2 A1 (bester Tisch, wenn keiner passt), W21 T2 A2.</li>
+      <li>W24 T2 A2a: Methode, die bei einem Fehler eine HTTP-Antwort mit Statuscode und Fehlermeldung erzeugt – Fehlerbehandlung an der Schnittstelle.</li>
+      <li>Mögliche Theoriefragen: checked vs. unchecked, Zweck von <code>finally</code>, warum leere catch-Blöcke schlecht sind.</li>
+    </ul>
+  </div>
+
+  <!-- ===================== ALG-08 ===================== -->
+  <h3 id="e-08">ALG-08 · Rekursion <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfung: W22 T2 A2 (25 P, davon 12 P Rekursion: Schreibtischtest einer rekursiven Umwandlung Dezimal → Binär, Fehler korrigieren, Rekursion vs. Iteration; dazu iterative Lösung)</p>
+  <p>Eine Funktion ist <strong>rekursiv</strong>, wenn sie sich selbst aufruft. Das funktioniert nur mit zwei Bestandteilen: dem <strong>Basisfall</strong> (Abbruchbedingung, liefert direkt ein Ergebnis) und dem <strong>Rekursionsfall</strong> (ruft sich mit einem <em>kleineren</em> Problem auf und baut aus dessen Ergebnis das eigene). Jeder Aufruf bekommt eigene Parameter und lokale Variablen auf dem <strong>Aufrufstapel (Stack)</strong>.</p>
+  <div class="zweispaltig">
+    <div>
+      <pre class="pseudo">funktion fakultaet(n : integer) : integer
+  wenn n &lt;= 1 dann        // Basisfall
+    rückgabe 1
+  Ende wenn
+  // Rekursionsfall:
+  rückgabe n * fakultaet(n - 1)
+Ende funktion</pre>
+    </div>
+    <div>
+      <pre class="pseudo">funktion quersumme(n : integer) : integer
+  wenn n &lt; 10 dann        // Basisfall:
+    rückgabe n            // nur eine Ziffer
+  Ende wenn
+  // Rekursionsfall:
+  rückgabe (n mod 10) + quersumme(n div 10)
+Ende funktion</pre>
+    </div>
+  </div>
+  <figure>
+    <svg viewBox="0 0 680 235" width="680" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e08a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10" fill="none" stroke="#222" stroke-width="1.5"/>
+        </marker>
+      </defs>
+      <text x="20" y="18" font-weight="bold">Abstieg: Aufrufe</text>
+      <text x="660" y="18" font-weight="bold" text-anchor="end">Aufstieg: Rückgaben</text>
+      <rect x="20" y="30" width="270" height="32" fill="#fff" stroke="#222"/>
+      <text x="30" y="51">fakultaet(4) = 4 * fakultaet(3)</text>
+      <rect x="60" y="80" width="270" height="32" fill="#fff" stroke="#222"/>
+      <text x="70" y="101">fakultaet(3) = 3 * fakultaet(2)</text>
+      <rect x="100" y="130" width="270" height="32" fill="#fff" stroke="#222"/>
+      <text x="110" y="151">fakultaet(2) = 2 * fakultaet(1)</text>
+      <rect x="140" y="180" width="270" height="32" fill="#eef3fa" stroke="#222" stroke-width="2"/>
+      <text x="150" y="201">fakultaet(1) = 1   (Basisfall)</text>
+      <line x1="45" y1="62" x2="85" y2="79" stroke="#222" marker-end="url(#e08a-pfeil)"/>
+      <line x1="85" y1="112" x2="125" y2="129" stroke="#222" marker-end="url(#e08a-pfeil)"/>
+      <line x1="125" y1="162" x2="165" y2="179" stroke="#222" marker-end="url(#e08a-pfeil)"/>
+      <text x="460" y="201">liefert 1</text>
+      <text x="460" y="151">liefert 2 · 1 = 2</text>
+      <text x="460" y="101">liefert 3 · 2 = 6</text>
+      <text x="460" y="51" font-weight="bold">liefert 4 · 6 = 24</text>
+      <line x1="420" y1="196" x2="384" y2="152" stroke="#222" stroke-dasharray="5,4" marker-end="url(#e08a-pfeil)"/>
+      <line x1="420" y1="146" x2="344" y2="102" stroke="#222" stroke-dasharray="5,4" marker-end="url(#e08a-pfeil)"/>
+      <line x1="420" y1="96" x2="304" y2="52" stroke="#222" stroke-dasharray="5,4" marker-end="url(#e08a-pfeil)"/>
+    </svg>
+    <figcaption>Abb. A-8: Aufrufstapel von <code>fakultaet(4)</code> – erst bis zum Basisfall absteigen, dann die Ergebnisse rückwärts zusammensetzen</figcaption>
+  </figure>
+  <p><strong>Schreibtischtest einer Rekursion:</strong> Eine Zeile je Aufruf; erst alle Aufrufe nach unten notieren, dann die Rückgabewerte von unten nach oben eintragen. Beispiel <code>quersumme(4721)</code>:</p>
+  <table class="kompakt">
+    <tr><th>Aufruf</th><th>n</th><th>n mod 10</th><th>n div 10</th><th>Rückgabe</th></tr>
+    <tr><td>1</td><td>4721</td><td>1</td><td>472</td><td>1 + 13 = 14</td></tr>
+    <tr><td>2</td><td>472</td><td>2</td><td>47</td><td>2 + 11 = 13</td></tr>
+    <tr><td>3</td><td>47</td><td>7</td><td>4</td><td>7 + 4 = 11</td></tr>
+    <tr><td>4</td><td>4</td><td colspan="2">Basisfall (n &lt; 10)</td><td>4</td></tr>
+  </table>
+  <table class="kompakt">
+    <tr><th></th><th>Rekursion</th><th>Iteration (Schleife)</th></tr>
+    <tr><td>Lesbarkeit</td><td>oft kürzer und nah an der mathematischen Definition; natürlich für Bäume, Verzeichnisse, „Teile und herrsche“ (Mergesort, binäre Suche)</td><td>bei einfachen Abläufen leichter nachzuvollziehen</td></tr>
+    <tr><td>Speicher</td><td>jeder Aufruf belegt Platz auf dem Stack; sehr tiefe Rekursion → <code>StackOverflowError</code></td><td>konstanter Speicher</td></tr>
+    <tr><td>Laufzeit</td><td>Overhead durch Funktionsaufrufe; naive Varianten rechnen Teilprobleme mehrfach (Fibonacci)</td><td>meist schneller</td></tr>
+    <tr><td>Fehlersuche</td><td>schwerer zu debuggen</td><td>einfacher</td></tr>
+  </table>
+  <p>Jede Rekursion lässt sich iterativ umschreiben (ggf. mit eigenem Stack bzw. einer Liste). Iterative Fakultät: <code>ergebnis := 1; zähle i von 2 bis n: ergebnis := ergebnis * i</code>.</p>
+  <div class="falle"><span class="kastentitel">Typische Fehler</span>Basisfall fehlt oder wird nie erreicht (Parameter wird nicht kleiner, z. B. <code>fakultaet(n)</code> statt <code>fakultaet(n - 1)</code>) → Endlosrekursion und <code>StackOverflowError</code>. Basisfall liefert für einen Randwert ein falsches Ergebnis (z. B. leeren Text statt „0“). Ergebnis des rekursiven Aufrufs nicht verwendet bzw. nicht zurückgegeben.</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>W22 T2 A2:</strong> gegebene rekursive Funktion (Dezimal → Binär) per Schreibtischtest durchspielen, einen Fehler für einen Randfall finden und korrigieren, Mindestzahl Testfälle für Anweisungsüberdeckung, je einen Vor- und Nachteil von Rekursion vs. Iteration nennen, iterative Lösung mit einer Liste schreiben.</div>
+
+  <!-- ===================== ALG-09 ===================== -->
+  <h3 id="e-09">ALG-09 · Nebenläufigkeit <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfung: W21 T2 A1b (4 P: Variante zum Blockieren von Terminen bei gleichzeitigen Buchungen wählen und begründen)</p>
+  <p>Webanwendungen bearbeiten viele Anfragen <strong>gleichzeitig</strong> (in eigenen Threads oder auf mehreren Servern), alle greifen auf dieselbe Datenbank zu. Solange nur gelesen wird, ist das unproblematisch. Kritisch wird es, wenn zwei Abläufe denselben Datensatz <strong>lesen, prüfen und dann ändern</strong>.</p>
+  <table class="kompakt">
+    <tr><th>Begriff</th><th>Bedeutung</th></tr>
+    <tr><td>gemeinsame Ressource</td><td>Daten, auf die mehrere Abläufe zugreifen (Platzstatus, Kontostand, Lagerbestand)</td></tr>
+    <tr><td>kritischer Abschnitt</td><td>Codebereich, in dem die Ressource gelesen <em>und</em> abhängig davon verändert wird; darf nicht von zwei Abläufen gleichzeitig durchlaufen werden</td></tr>
+    <tr><td>Race Condition</td><td>Ergebnis hängt von der zufälligen zeitlichen Reihenfolge („Wettlauf“) der Abläufe ab</td></tr>
+    <tr><td>Lost Update</td><td>eine Änderung überschreibt eine andere, die dazwischen passiert ist; Folge z. B. <strong>Doppelbuchung</strong></td></tr>
+    <tr><td>Deadlock</td><td>zwei Abläufe warten gegenseitig auf eine Sperre des anderen – beide hängen</td></tr>
+  </table>
+
+  <figure>
+    <svg viewBox="0 0 680 335" width="680" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e09a-voll" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#222"/>
+        </marker>
+        <marker id="e09a-offen" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10" fill="none" stroke="#222" stroke-width="1.5"/>
+        </marker>
+      </defs>
+      <rect x="40" y="10" width="160" height="34" fill="#fff" stroke="#222"/><text x="120" y="32" text-anchor="middle">Kasse A</text>
+      <rect x="260" y="10" width="160" height="34" fill="#fff" stroke="#222"/><text x="340" y="32" text-anchor="middle">Datenbank</text>
+      <rect x="480" y="10" width="160" height="34" fill="#fff" stroke="#222"/><text x="560" y="32" text-anchor="middle">Kasse B</text>
+      <line x1="120" y1="44" x2="120" y2="306" stroke="#222" stroke-dasharray="6,4"/>
+      <line x1="340" y1="44" x2="340" y2="306" stroke="#222" stroke-dasharray="6,4"/>
+      <line x1="560" y1="44" x2="560" y2="306" stroke="#222" stroke-dasharray="6,4"/>
+      <g font-size="11" fill="#555"><text x="8" y="70">t1</text><text x="8" y="120">t2</text><text x="8" y="170">t3</text><text x="8" y="215">t4</text><text x="8" y="260">t5</text><text x="8" y="300">t6</text></g>
+      <line x1="120" y1="66" x2="338" y2="66" stroke="#222" marker-end="url(#e09a-voll)"/><text x="130" y="61" font-size="12">lies Platz 7/12</text>
+      <line x1="340" y1="84" x2="122" y2="84" stroke="#222" stroke-dasharray="5,3" marker-end="url(#e09a-offen)"/><text x="200" y="98" font-size="12">„frei“</text>
+      <line x1="560" y1="116" x2="342" y2="116" stroke="#222" marker-end="url(#e09a-voll)"/><text x="440" y="111" font-size="12">lies Platz 7/12</text>
+      <line x1="340" y1="134" x2="558" y2="134" stroke="#222" stroke-dasharray="5,3" marker-end="url(#e09a-offen)"/><text x="460" y="148" font-size="12">„frei“</text>
+      <rect x="60" y="158" width="120" height="22" fill="#fff" stroke="#222"/><text x="120" y="174" text-anchor="middle" font-size="12">frei → verkaufen</text>
+      <rect x="500" y="200" width="120" height="22" fill="#fff" stroke="#222"/><text x="560" y="216" text-anchor="middle" font-size="12">frei → verkaufen</text>
+      <line x1="120" y1="256" x2="338" y2="256" stroke="#222" marker-end="url(#e09a-voll)"/><text x="130" y="251" font-size="12">setze „verkauft an A“</text>
+      <line x1="560" y1="296" x2="342" y2="296" stroke="#222" marker-end="url(#e09a-voll)"/><text x="400" y="291" font-size="12">setze „verkauft an B“</text>
+      <text x="340" y="326" text-anchor="middle" font-size="12" font-weight="bold">→ Platz zweimal verkauft, A’s Buchung überschrieben</text>
+    </svg>
+    <figcaption>Abb. A-9: Race Condition beim Kartenverkauf – beide lesen „frei“, bevor einer schreibt</figcaption>
+  </figure>
+
+  <h4>Lösungen: Sperren und atomare Operationen</h4>
+  <table class="kompakt">
+    <tr><th></th><th>Pessimistisches Sperren</th><th>Optimistisches Sperren</th></tr>
+    <tr><td>Annahme</td><td>Konflikte sind wahrscheinlich</td><td>Konflikte sind selten</td></tr>
+    <tr><td>Ablauf</td><td>Datensatz <strong>vor</strong> dem Lesen sperren (DB: <code>SELECT … FOR UPDATE</code> in einer Transaktion; Java: <code>synchronized</code>/Lock). Andere warten, bis die Sperre freigegeben wird.</td><td>ohne Sperre lesen und Versionsnummer merken. Beim Schreiben nur ändern, wenn die Version noch dieselbe ist: <code>UPDATE platz SET status = 'verkauft', version = version + 1 WHERE id = 712 AND version = 5</code>. 0 geänderte Zeilen = Konflikt.</td></tr>
+    <tr><td>Vorteil</td><td>Konflikt kann gar nicht entstehen; einfach zu verstehen</td><td>keine Wartezeiten, gute Parallelität, keine Deadlocks</td></tr>
+    <tr><td>Nachteil</td><td>Wartezeiten, schlechtere Skalierung, Deadlock-Gefahr; zu lange gehaltene Sperren blockieren andere</td><td>Konflikt fällt erst beim Speichern auf → Vorgang muss wiederholt oder abgelehnt werden</td></tr>
+  </table>
+  <ul>
+    <li><strong>Atomare Operation:</strong> Prüfen und Ändern in <em>einem</em> Datenbankbefehl: <code>UPDATE platz SET status = 'verkauft' WHERE id = 712 AND status = 'frei'</code> und danach die Anzahl geänderter Zeilen auswerten. Zusätzlich kann ein <strong>UNIQUE-Constraint</strong> (z. B. auf Veranstaltung + Platz in der Buchungstabelle) Doppelbuchungen in der Datenbank selbst verhindern.</li>
+    <li><strong>Transaktion</strong> (ACID): mehrere zusammengehörige Änderungen (Platz sperren, Buchung anlegen, Zahlung vermerken) werden ganz oder gar nicht ausgeführt; Isolation sorgt dafür, dass parallele Transaktionen sich nicht in die Quere kommen.</li>
+    <li><strong>Sinnvolle Sperrdauer:</strong> so kurz wie möglich. Eine Sperre darf nicht auf eine Benutzereingabe warten (der Nutzer geht Kaffee holen, alle anderen sind blockiert). Muss etwas für den Benutzer „festgehalten“ werden, nimmt man eine <strong>zeitlich begrenzte Reservierung</strong> mit Ablaufzeit (z. B. 10 Minuten im Warenkorb), die ein Hintergrundprozess oder die nächste Abfrage wieder freigibt.</li>
+  </ul>
+  <div class="falle"><span class="kastentitel">Typische Fehler</span>Verfügbarkeit nur in der App (Client) prüfen statt auf dem Server bzw. in der Datenbank; „lesen – prüfen – schreiben“ in getrennten Schritten ohne Sperre; Sperre über die ganze Bedienzeit des Nutzers halten; ganze Tabelle statt einzelner Zeile sperren.</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>W21 T2 A1b (4 P):</strong> Für eine Online-Terminvergabe sind zwei Abläufe beschrieben: Variante 1 blockiert erst den vom Patienten gewählten Termin (und meldet, falls er inzwischen weg ist), Variante 2 blockiert schon während der Auswahl alle freien Termine eines ganzen Monats. Eine Variante ist im Hinblick auf die Praxistauglichkeit auszuwählen und zu begründen. Erwartet wird eine Abwägung: Doppelbuchungen verhindern, aber andere Nutzer nicht unnötig lange und umfangreich blockieren (Sperrumfang, Sperrdauer, Freigabe).</div>
+</section>
+
+<!-- ===================== TEIL B: BELEGSATZ ===================== -->
+<section class="teil" id="belegsatz">
+  <h2>B · Belegsatz</h2>
+  <p class="klein">Enthält nur, was dir auch die IHK beilegen würde: die Pseudocode-Konventionen (wie im Belegsatz S24) und die Anlagen zur Ausgangssituation (Klassen, Testdaten, Hilfsfunktionen). Keine Erklärungen.</p>
+
+  <h3>Pseudocode, prozedurale Programmierung</h3>
+  <table>
+    <tr><th style="width:55%">Pseudocode</th><th>Beschreibung</th></tr>
+    <tr><td><pre style="margin:0;border:none;background:none;padding:0">wenn [ Bedingung ] dann
+   [ Anweisung ]
+sonst
+   [ Anweisung ]
+Ende wenn</pre></td><td>Verzweigung</td></tr>
+    <tr><td><pre style="margin:0;border:none;background:none;padding:0">zähle [ Variable ] von [ Startwert ] bis [ Endwert ]
+   [ Schleifeninhalt ]
+Ende zähle</pre></td><td>Zählschleife (Iteration)</td></tr>
+    <tr><td><pre style="margin:0;border:none;background:none;padding:0">solange [ Bedingung ]
+   [ Schleifeninhalt ]
+Ende solange</pre></td><td>Kopfgesteuerte Schleife</td></tr>
+    <tr><td><pre style="margin:0;border:none;background:none;padding:0">wiederhole
+   [ Schleifeninhalt ]
+solange [ Bedingung ]</pre></td><td>Fußgesteuerte Schleife</td></tr>
+    <tr><td><pre style="margin:0;border:none;background:none;padding:0">:=</pre></td><td>Zuweisung</td></tr>
+    <tr><td><pre style="margin:0;border:none;background:none;padding:0">=; &lt;; &gt;; &lt;=; &gt;=; &lt;&gt;</pre></td><td>Vergleiche</td></tr>
+    <tr><td><pre style="margin:0;border:none;background:none;padding:0">integer
+double
+string
+boolean
+array</pre></td><td>Datentypen</td></tr>
+  </table>
+
+  <div class="anlage" id="anlage-1">
+    <h4>Anlage 1 · Ausgangssituation</h4>
+    <p><strong>Die Aufgaben dieses Blocks beziehen sich auf die folgende Ausgangssituation:</strong></p>
+    <p>Die <strong>Auenrad GmbH</strong> betreibt in der Stadt Auenfeld ein Verleihsystem für E-Bikes und elektrische Lastenräder mit sechs Stationen. Kundinnen und Kunden leihen die Räder per App aus und geben sie an einer beliebigen Station wieder zurück. Das veraltete System soll durch die Plattform <strong>„Auenrad 2.0“</strong> ersetzt werden (Kunden-App, Server mit Datenbank, Steuerung der Stationen).</p>
+    <p>Sie sind Auszubildende/r zum Fachinformatiker/zur Fachinformatikerin Anwendungsentwicklung bei der <strong>Kessler Softwaresysteme GmbH</strong>, die die Plattform entwickelt. Sie arbeiten in folgenden Teilprojekten mit:</p>
+    <ul>
+      <li>Auswertungen für die Disposition und das Kundenportal (Ausleihen, Auslastung, Akkustände)</li>
+      <li>Suche nach Stationen und Rädern in der App</li>
+      <li>Fotodokumentation von Schäden bei der Rückgabe</li>
+      <li>Kundenkonto (Registrierung, Passwortrichtlinie, Übernahme der Kundendaten aus dem Altsystem)</li>
+      <li>Reservierung von Lastenrädern</li>
+    </ul>
+    <p><strong>Tarife:</strong> Basis: 1,00 € je Ausleihe plus 0,20 € je Minute · Student: 0,10 € je Minute · Abo: je Ausleihe 30 Freiminuten, danach 0,10 € je Minute.</p>
+    <p><strong>Einsatzbereit</strong> ist ein Rad, wenn es nicht defekt ist und sein Akkustand mindestens 30 % beträgt.</p>
+    <p><strong>Koordinaten:</strong> Stationen und Standorte werden in einem Stadtraster in Kilometern angegeben (x nach Osten, y nach Norden). Die Entfernung ist die Luftlinie.</p>
+  </div>
+
+  <div class="anlage" id="anlage-2">
+    <h4>Anlage 2 · Klassen der Plattform „Auenrad 2.0“ (Auszug)</h4>
+    <figure>
+      <svg viewBox="0 0 760 450" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <defs>
+          <marker id="b02-raute-hohl" viewBox="0 0 20 10" refX="0" refY="5" markerWidth="20" markerHeight="10" orient="auto">
+            <path d="M0,5 L10,0 L20,5 L10,10 Z" fill="#fff" stroke="#222"/>
+          </marker>
+        </defs>
+        <!-- Station -->
+        <rect x="10" y="10" width="235" height="168" fill="#fff" stroke="#222"/>
+        <text x="127" y="28" text-anchor="middle" font-weight="bold">Station</text>
+        <line x1="10" y1="36" x2="245" y2="36" stroke="#222"/>
+        <text x="18" y="52">- stationNr : integer</text>
+        <text x="18" y="70">- name : string</text>
+        <text x="18" y="88">- x : double</text>
+        <text x="18" y="106">- y : double</text>
+        <text x="18" y="124">- kapazitaet : integer</text>
+        <text x="18" y="142">- raeder : List&lt;Fahrrad&gt;</text>
+        <line x1="10" y1="150" x2="245" y2="150" stroke="#222"/>
+        <text x="18" y="168">+ getRaeder() : List&lt;Fahrrad&gt;</text>
+        <!-- Fahrrad -->
+        <rect x="325" y="10" width="185" height="150" fill="#fff" stroke="#222"/>
+        <text x="417" y="28" text-anchor="middle" font-weight="bold">Fahrrad</text>
+        <line x1="325" y1="36" x2="510" y2="36" stroke="#222"/>
+        <text x="333" y="52">- radNr : integer</text>
+        <text x="333" y="70">- typ : string</text>
+        <text x="333" y="88">- akkuStand : integer</text>
+        <text x="333" y="106">- kmStand : double</text>
+        <text x="333" y="124">- defekt : boolean</text>
+        <line x1="325" y1="132" x2="510" y2="132" stroke="#222"/>
+        <text x="333" y="150">+ isDefekt() : boolean</text>
+        <!-- Aggregation Station <>- Fahrrad -->
+        <line x1="245" y1="60" x2="325" y2="60" stroke="#222" marker-start="url(#b02-raute-hohl)"/>
+        <text x="250" y="80" font-size="12">0..1</text>
+        <text x="279" y="53" font-size="12">raeder</text>
+        <text x="316" y="80" font-size="12">*</text>
+        <!-- List<T> -->
+        <rect x="530" y="10" width="225" height="134" fill="#fff" stroke="#222"/>
+        <text x="642" y="28" text-anchor="middle" font-weight="bold">List&lt;T&gt;</text>
+        <line x1="530" y1="36" x2="755" y2="36" stroke="#222"/>
+        <line x1="530" y1="46" x2="755" y2="46" stroke="#222"/>
+        <text x="538" y="62">+ add(t : T) : void</text>
+        <text x="538" y="80">+ get(i : integer) : T</text>
+        <text x="538" y="98">+ size() : integer</text>
+        <text x="538" y="116">+ contains(t : T) : boolean</text>
+        <text x="538" y="134">+ remove(i : integer) : void</text>
+        <!-- Ausleihe -->
+        <rect x="10" y="200" width="235" height="240" fill="#fff" stroke="#222"/>
+        <text x="127" y="218" text-anchor="middle" font-weight="bold">Ausleihe</text>
+        <line x1="10" y1="226" x2="245" y2="226" stroke="#222"/>
+        <text x="18" y="242">- ausleihNr : integer</text>
+        <text x="18" y="260">- kundenNr : integer</text>
+        <text x="18" y="278">- radNr : integer</text>
+        <text x="18" y="296">- startStation : integer</text>
+        <text x="18" y="314">- zielStation : integer</text>
+        <text x="18" y="332">- datum : Datum</text>
+        <text x="18" y="350">- startMinute : integer</text>
+        <text x="18" y="368">- dauer : integer</text>
+        <text x="18" y="386">- strecke : double</text>
+        <text x="18" y="404">- preis : double</text>
+        <line x1="10" y1="412" x2="245" y2="412" stroke="#222"/>
+        <text x="18" y="430">…</text>
+        <!-- KundenStatistik -->
+        <rect x="270" y="200" width="300" height="130" fill="#fff" stroke="#222"/>
+        <text x="420" y="218" text-anchor="middle" font-weight="bold">KundenStatistik</text>
+        <line x1="270" y1="226" x2="570" y2="226" stroke="#222"/>
+        <text x="278" y="242">- kundenNr : integer</text>
+        <text x="278" y="260">- anzahl : integer</text>
+        <text x="278" y="278">- gesamtDauer : integer</text>
+        <text x="278" y="296">- durchschnitt : double</text>
+        <line x1="270" y1="304" x2="570" y2="304" stroke="#222"/>
+        <text x="278" y="322">+ KundenStatistik(kundenNr : integer)</text>
+        <!-- Kunde -->
+        <rect x="590" y="200" width="165" height="112" fill="#fff" stroke="#222"/>
+        <text x="672" y="218" text-anchor="middle" font-weight="bold">Kunde</text>
+        <line x1="590" y1="226" x2="755" y2="226" stroke="#222"/>
+        <text x="598" y="242">- kundenNr : integer</text>
+        <text x="598" y="260">- name : string</text>
+        <text x="598" y="278">- tarif : string</text>
+        <line x1="590" y1="286" x2="755" y2="286" stroke="#222"/>
+        <text x="598" y="302">…</text>
+        <!-- Datum -->
+        <rect x="270" y="350" width="420" height="80" fill="#fff" stroke="#222"/>
+        <text x="480" y="368" text-anchor="middle" font-weight="bold">Datum</text>
+        <line x1="270" y1="376" x2="690" y2="376" stroke="#222"/>
+        <line x1="270" y1="386" x2="690" y2="386" stroke="#222"/>
+        <text x="278" y="402">+ liegtZwischen(von : Datum, bis : Datum) : boolean</text>
+        <text x="278" y="420">+ toString() : string</text>
+      </svg>
+      <figcaption>Anlage 2: Klassendiagramm (Auszug)</figcaption>
+    </figure>
+    <ul>
+      <li>Für alle Attribute existieren öffentliche Get-Methoden, z. B. <code>getAkkuStand()</code>, <code>getStartStation()</code>, <code>getRaeder()</code>; für boolean-Attribute heißt die Get-Methode <code>is…()</code>, z. B. <code>isDefekt()</code>.</li>
+      <li>Die Klasse <code>KundenStatistik</code> besitzt zusätzlich Set-Methoden für <code>anzahl</code>, <code>gesamtDauer</code> und <code>durchschnitt</code>. Der Konstruktor belegt diese drei Attribute mit 0.</li>
+      <li><code>startMinute</code>: Beginn der Ausleihe in Minuten seit Mitternacht (z. B. 462 = 07:42 Uhr). <code>dauer</code> in Minuten, <code>strecke</code> in km, <code>preis</code> in Euro.</li>
+      <li><code>typ</code> ist <code>"E-Bike"</code> oder <code>"Lastenrad"</code>; <code>akkuStand</code> in Prozent (0 bis 100); <code>tarif</code> ist <code>"Basis"</code>, <code>"Student"</code> oder <code>"Abo"</code>.</li>
+      <li><code>d.liegtZwischen(von, bis)</code> liefert <code>true</code>, wenn das Datum d im Zeitraum von <code>von</code> bis <code>bis</code> liegt (beide Tage eingeschlossen), sonst <code>false</code>.</li>
+    </ul>
+    <p><strong>Methoden der Klasse <code>List&lt;T&gt;</code>:</strong></p>
+    <ul>
+      <li><code>add(t)</code> fügt das Objekt t am Ende der Liste hinzu.</li>
+      <li><code>get(i)</code> liefert das Objekt an Position i; das erste Objekt hat die Position 0.</li>
+      <li><code>size()</code> liefert die Anzahl der Objekte in der Liste.</li>
+      <li><code>contains(t)</code> liefert <code>true</code>, wenn die Liste ein Element enthält, das gleich t ist. Zahlen und Zeichenketten gelten als gleich, wenn ihr Wert gleich ist; Objekte anderer Klassen nur, wenn es sich um dasselbe Objekt handelt.</li>
+      <li><code>remove(i)</code> entfernt das Objekt an Position i; alle nachfolgenden Objekte rücken um eine Position nach vorn.</li>
+      <li>Eine neue, leere Liste wird mit <code>new List&lt;T&gt;()</code> erzeugt, z. B. <code>new List&lt;Fahrrad&gt;()</code>.</li>
+    </ul>
+  </div>
+
+  <div class="anlage" id="anlage-3">
+    <h4>Anlage 3 · Testdaten (Stand: 18.09.2026, 06:00 Uhr, nach der nächtlichen Umverteilung)</h4>
+    <p class="klein">Listen und Arrays enthalten die Objekte in der Reihenfolge der Tabellenzeilen.</p>
+    <table class="daten kompakt">
+      <caption>Stationen (List&lt;Station&gt; stationen)</caption>
+      <tr><th>stationNr</th><th>name</th><th>x</th><th>y</th><th>kapazitaet</th><th>raeder (Radnummern)</th></tr>
+      <tr><td>1</td><td>Hauptbahnhof</td><td>2.0</td><td>1.0</td><td>20</td><td>101, 102, 103</td></tr>
+      <tr><td>2</td><td>Marktplatz</td><td>3.5</td><td>2.5</td><td>12</td><td>104, 105</td></tr>
+      <tr><td>3</td><td>Uni-Campus</td><td>6.0</td><td>4.0</td><td>16</td><td>106, 107, 108</td></tr>
+      <tr><td>4</td><td>Hafen</td><td>1.0</td><td>5.5</td><td>10</td><td>109</td></tr>
+      <tr><td>5</td><td>Klinikum</td><td>5.0</td><td>7.0</td><td>8</td><td>110</td></tr>
+      <tr><td>6</td><td>Seepark</td><td>8.5</td><td>1.5</td><td>10</td><td>111, 112</td></tr>
+    </table>
+    <table class="daten kompakt">
+      <caption>Fahrräder (List&lt;Fahrrad&gt; raeder – alle Räder)</caption>
+      <tr><th>radNr</th><th>typ</th><th>akkuStand</th><th>kmStand</th><th>defekt</th><th>steht an Station</th></tr>
+      <tr><td>101</td><td>E-Bike</td><td>85</td><td>1234.5</td><td>false</td><td>1</td></tr>
+      <tr><td>102</td><td>E-Bike</td><td>15</td><td>2210.0</td><td>false</td><td>1</td></tr>
+      <tr><td>103</td><td>Lastenrad</td><td>60</td><td>540.2</td><td>true</td><td>1</td></tr>
+      <tr><td>104</td><td>E-Bike</td><td>22</td><td>980.7</td><td>false</td><td>2</td></tr>
+      <tr><td>105</td><td>E-Bike</td><td>95</td><td>310.0</td><td>false</td><td>2</td></tr>
+      <tr><td>106</td><td>Lastenrad</td><td>40</td><td>1502.3</td><td>false</td><td>3</td></tr>
+      <tr><td>107</td><td>E-Bike</td><td>8</td><td>3120.9</td><td>false</td><td>3</td></tr>
+      <tr><td>108</td><td>E-Bike</td><td>71</td><td>875.4</td><td>true</td><td>3</td></tr>
+      <tr><td>109</td><td>E-Bike</td><td>55</td><td>455.0</td><td>false</td><td>4</td></tr>
+      <tr><td>110</td><td>Lastenrad</td><td>28</td><td>760.8</td><td>false</td><td>5</td></tr>
+      <tr><td>111</td><td>E-Bike</td><td>90</td><td>120.3</td><td>false</td><td>6</td></tr>
+      <tr><td>112</td><td>E-Bike</td><td>33</td><td>1999.9</td><td>false</td><td>6</td></tr>
+    </table>
+    <table class="daten kompakt">
+      <caption>Kunden</caption>
+      <tr><th>kundenNr</th><th>name (Altsystem)</th><th>tarif</th></tr>
+      <tr><td>5001</td><td>Yilmaz, Deniz</td><td>Abo</td></tr>
+      <tr><td>5002</td><td>Lorenz, Jana</td><td>Basis</td></tr>
+      <tr><td>5003</td><td>Nowak, Piotr</td><td>Student</td></tr>
+      <tr><td>5004</td><td>Schulze-Ebert, Anna Lena</td><td>Abo</td></tr>
+      <tr><td>5005</td><td>Haas, Tom</td><td>Basis</td></tr>
+    </table>
+    <table class="daten kompakt eng">
+      <caption>Ausleihen vom 14.09. bis 17.09.2026 (List&lt;Ausleihe&gt; ausleihen)</caption>
+      <tr><th>ausleihNr</th><th>kundenNr</th><th>radNr</th><th>startStation</th><th>zielStation</th><th>datum</th><th>startMinute</th><th>dauer</th><th>strecke</th><th>preis</th></tr>
+      <tr><td>1</td><td>5001</td><td>101</td><td>1</td><td>3</td><td>2026-09-14</td><td>462</td><td>18</td><td>4.6</td><td>0.00</td></tr>
+      <tr><td>2</td><td>5002</td><td>105</td><td>2</td><td>1</td><td>2026-09-14</td><td>485</td><td>12</td><td>2.1</td><td>3.40</td></tr>
+      <tr><td>3</td><td>5003</td><td>106</td><td>3</td><td>5</td><td>2026-09-14</td><td>750</td><td>75</td><td>9.8</td><td>7.50</td></tr>
+      <tr><td>4</td><td>5001</td><td>104</td><td>3</td><td>1</td><td>2026-09-14</td><td>1030</td><td>22</td><td>4.9</td><td>0.00</td></tr>
+      <tr><td>5</td><td>5004</td><td>110</td><td>5</td><td>4</td><td>2026-09-15</td><td>555</td><td>95</td><td>12.4</td><td>6.50</td></tr>
+      <tr><td>6</td><td>5005</td><td>109</td><td>4</td><td>2</td><td>2026-09-15</td><td>1008</td><td>31</td><td>5.0</td><td>7.20</td></tr>
+      <tr><td>7</td><td>5002</td><td>111</td><td>6</td><td>3</td><td>2026-09-15</td><td>1055</td><td>64</td><td>8.7</td><td>13.80</td></tr>
+      <tr><td>8</td><td>5003</td><td>107</td><td>3</td><td>3</td><td>2026-09-16</td><td>785</td><td>40</td><td>6.2</td><td>4.00</td></tr>
+      <tr><td>9</td><td>5001</td><td>101</td><td>1</td><td>6</td><td>2026-09-16</td><td>475</td><td>26</td><td>7.3</td><td>0.00</td></tr>
+      <tr><td>10</td><td>5004</td><td>112</td><td>6</td><td>1</td><td>2026-09-16</td><td>1100</td><td>33</td><td>7.1</td><td>0.30</td></tr>
+      <tr><td>11</td><td>5005</td><td>102</td><td>1</td><td>2</td><td>2026-09-17</td><td>492</td><td>9</td><td>1.9</td><td>2.80</td></tr>
+      <tr><td>12</td><td>5003</td><td>106</td><td>5</td><td>3</td><td>2026-09-17</td><td>640</td><td>58</td><td>9.1</td><td>5.80</td></tr>
+    </table>
+  </div>
+
+  <div class="anlage" id="anlage-4">
+    <h4>Anlage 4 · Ausleihen an Station 1 (Hauptbahnhof) in KW 38/2026</h4>
+    <p>Zweidimensionales Array <code>daten : integer[][]</code> mit 7 Zeilen (Wochentag, 0 = Montag … 6 = Sonntag) und 6 Spalten (Zeitfenster zu je 4 Stunden). Jedes Element enthält die Anzahl der Ausleihen, die in diesem Zeitfenster an Station 1 begonnen haben.</p>
+    <table class="daten kompakt" style="width:auto">
+      <tr><th></th><th>[0]<br>0–4 Uhr</th><th>[1]<br>4–8 Uhr</th><th>[2]<br>8–12 Uhr</th><th>[3]<br>12–16 Uhr</th><th>[4]<br>16–20 Uhr</th><th>[5]<br>20–24 Uhr</th></tr>
+      <tr><th>[0] Mo</th><td>1</td><td>14</td><td>9</td><td>11</td><td>18</td><td>4</td></tr>
+      <tr><th>[1] Di</th><td>0</td><td>16</td><td>8</td><td>10</td><td>21</td><td>3</td></tr>
+      <tr><th>[2] Mi</th><td>2</td><td>15</td><td>11</td><td>9</td><td>19</td><td>5</td></tr>
+      <tr><th>[3] Do</th><td>0</td><td>13</td><td>10</td><td>12</td><td>22</td><td>6</td></tr>
+      <tr><th>[4] Fr</th><td>3</td><td>12</td><td>12</td><td>15</td><td>17</td><td>9</td></tr>
+      <tr><th>[5] Sa</th><td>5</td><td>2</td><td>14</td><td>20</td><td>16</td><td>11</td></tr>
+      <tr><th>[6] So</th><td>6</td><td>1</td><td>10</td><td>18</td><td>13</td><td>7</td></tr>
+    </table>
+  </div>
+
+  <div class="anlage" id="anlage-5">
+    <h4>Anlage 5 · Operatoren und Hilfsfunktionen</h4>
+    <table class="kompakt">
+      <tr><th>Ausdruck / Funktion</th><th>Ergebnis</th></tr>
+      <tr><td><code>a div b</code></td><td>ganzzahliger Anteil der Division zweier integer-Werte (17 div 5 = 3)</td></tr>
+      <tr><td><code>a mod b</code></td><td>Rest der ganzzahligen Division (17 mod 5 = 2)</td></tr>
+      <tr><td><code>und</code>, <code>oder</code>, <code>nicht</code></td><td>logische Verknüpfungen</td></tr>
+      <tr><td><code>wurzel(x : double) : double</code></td><td>Quadratwurzel von x</td></tr>
+      <tr><td><code>abs(x : double) : double</code></td><td>Betrag von x</td></tr>
+      <tr><td><code>entfernung(x1 : double, y1 : double, x2 : double, y2 : double) : double</code></td><td>Luftlinie zwischen (x1|y1) und (x2|y2) in km: √((x2 − x1)² + (y2 − y1)²)</td></tr>
+      <tr><td><code>feld.length</code></td><td>Anzahl der Elemente des Arrays feld; gültige Indizes 0 bis feld.length − 1</td></tr>
+      <tr><td><code>new integer[n]</code></td><td>neues integer-Array mit n Elementen, alle mit 0 belegt</td></tr>
+      <tr><td><code>s.length() : integer</code></td><td>Anzahl der Zeichen der Zeichenkette s</td></tr>
+      <tr><td><code>s.charAt(i : integer) : char</code></td><td>Zeichen an Position i (erstes Zeichen: Position 0)</td></tr>
+      <tr><td><code>s.substring(von : integer, bis : integer) : string</code></td><td>Teilzeichenkette von Position von bis Position bis − 1</td></tr>
+      <tr><td><code>s.indexOf(c : char) : integer</code></td><td>erste Position des Zeichens c in s; −1, wenn c nicht vorkommt</td></tr>
+      <tr><td><code>s.trim() : string</code></td><td>s ohne Leerzeichen am Anfang und am Ende</td></tr>
+      <tr><td><code>istGrossbuchstabe(c : char) : boolean</code></td><td>true für A–Z, Ä, Ö, Ü</td></tr>
+      <tr><td><code>istKleinbuchstabe(c : char) : boolean</code></td><td>true für a–z, ä, ö, ü, ß</td></tr>
+      <tr><td><code>istBuchstabe(c : char) : boolean</code></td><td>true für Groß- und Kleinbuchstaben</td></tr>
+      <tr><td><code>istZiffer(c : char) : boolean</code></td><td>true für 0–9</td></tr>
+      <tr><td><code>zahlwert(c : char) : integer</code></td><td>Zahlenwert einer Ziffer, z. B. zahlwert('7') = 7</td></tr>
+      <tr><td><code>+</code> bei Zeichenketten</td><td>verkettet; Zahlen werden dabei in Text umgewandelt ("A" + 1 = "A1")</td></tr>
+    </table>
+    <p class="klein">Einzelne Zeichen (Typ <code>char</code>) stehen in einfachen Anführungszeichen ('A'), Zeichenketten in doppelten ("AR-"). Zeichen und Zeichenketten können im Pseudocode mit = und &lt;&gt; verglichen werden.</p>
+  </div>
+
+  <div class="anlage" id="anlage-6">
+    <h4>Anlage 6 · Datenbankzugriff für die Reservierung von Lastenrädern</h4>
+    <figure>
+      <svg viewBox="0 0 760 175" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <defs>
+          <marker id="b06-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10" fill="none" stroke="#222" stroke-width="1.5"/>
+          </marker>
+        </defs>
+        <rect x="10" y="10" width="500" height="150" fill="#fff" stroke="#222"/>
+        <text x="260" y="28" text-anchor="middle" font-weight="bold">RadDB</text>
+        <line x1="10" y1="36" x2="510" y2="36" stroke="#222"/>
+        <line x1="10" y1="46" x2="510" y2="46" stroke="#222"/>
+        <text x="18" y="64">+ leseRad(radNr : integer) : RadInfo</text>
+        <text x="18" y="88">+ setzeStatusWennVersion(radNr : integer, neuerStatus : string,</text>
+        <text x="40" y="106">erwarteteVersion : integer) : boolean</text>
+        <text x="18" y="130">+ legeReservierungAn(radNr : integer, kundenNr : integer) : void</text>
+        <rect x="560" y="30" width="190" height="104" fill="#fff" stroke="#222"/>
+        <text x="655" y="48" text-anchor="middle" font-weight="bold">RadInfo</text>
+        <line x1="560" y1="56" x2="750" y2="56" stroke="#222"/>
+        <text x="568" y="72">- status : string</text>
+        <text x="568" y="90">- version : integer</text>
+        <line x1="560" y1="98" x2="750" y2="98" stroke="#222"/>
+        <text x="568" y="114">+ getStatus() : string</text>
+        <text x="568" y="130">+ getVersion() : integer</text>
+        <line x1="510" y1="64" x2="558" y2="64" stroke="#222" stroke-dasharray="6,4" marker-end="url(#b06-pfeil)"/>
+      </svg>
+      <figcaption>Anlage 6: Klassen für den Datenbankzugriff (Auszug)</figcaption>
+    </figure>
+    <ul>
+      <li>Jeder Rad-Datensatz hat einen <code>status</code> (<code>"frei"</code>, <code>"reserviert"</code> oder <code>"ausgeliehen"</code>) und eine Versionsnummer <code>version</code>. Jede Änderung des Datensatzes erhöht die Versionsnummer um 1.</li>
+      <li><code>leseRad(radNr)</code> liest Status und Versionsnummer des Rades, ohne den Datensatz zu sperren.</li>
+      <li><code>setzeStatusWennVersion(radNr, neuerStatus, erwarteteVersion)</code> wird von der Datenbank als <strong>eine unteilbare Operation</strong> ausgeführt: Nur wenn die gespeicherte Versionsnummer noch <code>erwarteteVersion</code> ist, wird der Status geändert, die Versionsnummer erhöht und <code>true</code> zurückgegeben. Andernfalls bleibt der Datensatz unverändert und die Methode liefert <code>false</code>.</li>
+      <li><code>legeReservierungAn(radNr, kundenNr)</code> speichert eine neue Reservierung.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== TEIL C: AUFGABEN ===================== -->
+<section class="teil" id="aufgaben">
+  <h2>C · Aufgaben</h2>
+  <p class="klein">Alle Aufgaben beziehen sich auf die Ausgangssituation in Anlage 1. Algorithmen sind – sofern nicht anders angegeben – in Pseudocode nach den Konventionen des Belegsatzes zu entwickeln; eine Programmiersprache (z. B. Java) ist ebenfalls zulässig. Für alle Attribute stehen Get-Methoden zur Verfügung (Anlage 2).</p>
+
+  <!-- ===================== ALG-01 ===================== -->
+  <h3 id="a-01">ALG-01 · Algorithmus in Pseudocode schreiben</h3>
+
+  <div class="aufgabe" id="ALG-01-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-01.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Die Disposition möchte wissen, wie viele Räder dringend geladen werden müssen. Gezählt werden alle Räder, die <strong>nicht defekt</strong> sind und einen <strong>Akkustand unter 25 %</strong> haben (Klasse <code>Fahrrad</code>, Anlage 2). Der folgende Pseudocode ist unvollständig.</p>
+    <pre class="pseudo">funktion zaehleLadebedarf(raeder : List&lt;Fahrrad&gt;) : integer
+  anzahl : integer := ____(1)____
+  zähle i von 0 bis ____(2)____
+    r : Fahrrad := raeder.get(i)
+    wenn ____(3)____ dann
+      ____(4)____
+    Ende wenn
+  Ende zähle
+  rückgabe ____(5)____
+Ende funktion</pre>
+    <div class="teilaufgabe"><span class="tp">5 P</span>a) Ergänzen Sie die Lücken (1) bis (5).</div>
+    <table class="leer kompakt">
+      <tr><th style="width:12%">Lücke</th><th>Inhalt</th></tr>
+      <tr><td>(1)</td><td></td></tr>
+      <tr><td>(2)</td><td></td></tr>
+      <tr><td>(3)</td><td></td></tr>
+      <tr><td>(4)</td><td></td></tr>
+      <tr><td>(5)</td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">1 P</span>b) Geben Sie an, welchen Wert die Funktion für die Liste aller Räder aus Anlage 3 zurückgibt, und nennen Sie die betroffenen Radnummern.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S24 Teil 2, Aufgabe 2b (Zählfunktion über ein Array)</p>
+  </div>
+
+  <div class="aufgabe" id="ALG-01-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-01.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Die App soll anzeigen, welche Räder eines Typs sofort genutzt werden können. Die Disposition benötigt außerdem die durchschnittliche Fahrstrecke je Station.</p>
+    <div class="teilaufgabe"><span class="tp">5 P</span>a) Entwickeln Sie eine Funktion <code>einsatzbereit(raeder : List&lt;Fahrrad&gt;, typ : string, minAkku : integer) : List&lt;Fahrrad&gt;</code>. Sie gibt eine <strong>neue</strong> Liste mit allen Rädern des übergebenen Typs zurück, die nicht defekt sind und mindestens den Akkustand <code>minAkku</code> haben. Die übergebene Liste darf nicht verändert werden.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>b) Entwickeln Sie eine Funktion <code>durchschnittsStrecke(ausleihen : List&lt;Ausleihe&gt;, stationNr : integer) : double</code>. Sie liefert die durchschnittliche Strecke aller Ausleihen, die an der Station <code>stationNr</code> begonnen haben. Gibt es keine solche Ausleihe, wird 0.0 zurückgegeben.</div>
+    <div class="antwort z12"></div>
+    <p class="quelle">Angelehnt an: S26 Teil 2, Aufgabe 2ba (Liste filtern) und W25 Teil 2, Aufgabe 1a</p>
+  </div>
+
+  <div class="aufgabe" id="ALG-01-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-01.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">30 Punkte</span>
+    </div>
+    <p>Im Kundenportal von Auenrad 2.0 soll eine Statistik zum Nutzungsverhalten angezeigt werden. Außerdem möchte die Disposition wissen, an welchen Stationen lange Fahrten beginnen. Die Ausleihen liegen als Objekte der Klasse <code>Ausleihe</code> in einer Liste <code>List&lt;Ausleihe&gt; ausleihen</code> vor (Anlage 2, Testdaten in Anlage 3). Verwenden Sie die Klassen <code>KundenStatistik</code> und <code>Datum</code> aus Anlage 2.</p>
+
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Entwickeln Sie eine Funktion <code>langeFahrtenJeStation(ausleihen : List&lt;Ausleihe&gt;, anzahlStationen : integer) : integer[]</code>. Sie liefert ein Array mit <code>anzahlStationen</code> Elementen. Das Element mit dem Index i enthält die Anzahl der Ausleihen mit einer Dauer von <strong>mehr als 60 Minuten</strong>, die an der Station mit der Nummer <strong>i + 1</strong> begonnen haben.<br>Für die Testdaten und <code>anzahlStationen = 6</code> ergibt sich: <code>[0, 0, 1, 0, 1, 1]</code>.</div>
+    <div class="antwort z12"></div>
+
+    <div class="teilaufgabe"><span class="tp">10 P</span>b) Entwickeln Sie eine Funktion <code>erzeugeStatistik(ausleihen : List&lt;Ausleihe&gt;) : List&lt;KundenStatistik&gt;</code>. Sie erzeugt für jede Kundennummer, die in den Ausleihen vorkommt, <strong>genau ein</strong> Objekt der Klasse <code>KundenStatistik</code>, fügt es einer neuen Liste hinzu und gibt diese Liste zurück. Die Reihenfolge entspricht dem ersten Auftreten der Kundennummer. Die Werte <code>anzahl</code>, <code>gesamtDauer</code> und <code>durchschnitt</code> bleiben vorerst 0.</div>
+    <div class="zweispaltig">
+      <table class="daten kompakt">
+        <caption>ausleihen (Auszug)</caption>
+        <tr><th>ausleihNr</th><th>kundenNr</th><th>…</th></tr>
+        <tr><td>1</td><td>5001</td><td>…</td></tr>
+        <tr><td>2</td><td>5002</td><td>…</td></tr>
+        <tr><td>3</td><td>5003</td><td>…</td></tr>
+        <tr><td>4</td><td>5001</td><td>…</td></tr>
+        <tr><td>5</td><td>5004</td><td>…</td></tr>
+        <tr><td>…</td><td>…</td><td>…</td></tr>
+      </table>
+      <table class="daten kompakt">
+        <caption>Ergebnis: List&lt;KundenStatistik&gt;</caption>
+        <tr><th>kundenNr</th><th>anzahl</th><th>gesamtDauer</th><th>durchschnitt</th></tr>
+        <tr><td>5001</td><td>0</td><td>0</td><td>0.0</td></tr>
+        <tr><td>5002</td><td>0</td><td>0</td><td>0.0</td></tr>
+        <tr><td>5003</td><td>0</td><td>0</td><td>0.0</td></tr>
+        <tr><td>5004</td><td>0</td><td>0</td><td>0.0</td></tr>
+        <tr><td>5005</td><td>0</td><td>0</td><td>0.0</td></tr>
+      </table>
+    </div>
+    <div class="antwort z18"></div>
+
+    <div class="teilaufgabe"><span class="tp">14 P</span>c) Entwickeln Sie eine Funktion <code>berechneStatistik(ausleihen : List&lt;Ausleihe&gt;, statistik : List&lt;KundenStatistik&gt;, von : Datum, bis : Datum) : void</code>. Sie setzt für <strong>jedes</strong> Objekt der Liste <code>statistik</code> die Werte
+      <ul>
+        <li><code>anzahl</code>: Anzahl der Ausleihen dieses Kunden, deren Datum im Zeitraum von <code>von</code> bis <code>bis</code> liegt,</li>
+        <li><code>gesamtDauer</code>: Summe der Dauer dieser Ausleihen in Minuten,</li>
+        <li><code>durchschnitt</code>: durchschnittliche Dauer dieser Ausleihen als Kommazahl; hat der Kunde im Zeitraum nichts ausgeliehen, ist der Wert 0.0.</li>
+      </ul>
+      Beispiel für <code>von</code> = 16.09.2026 und <code>bis</code> = 17.09.2026:</div>
+    <table class="daten kompakt" style="width:auto">
+      <tr><th>kundenNr</th><th>anzahl</th><th>gesamtDauer</th><th>durchschnitt</th></tr>
+      <tr><td>5001</td><td>1</td><td>26</td><td>26.0</td></tr>
+      <tr><td>5002</td><td>0</td><td>0</td><td>0.0</td></tr>
+      <tr><td>5003</td><td>2</td><td>98</td><td>49.0</td></tr>
+      <tr><td>5004</td><td>1</td><td>33</td><td>33.0</td></tr>
+      <tr><td>5005</td><td>1</td><td>9</td><td>9.0</td></tr>
+    </table>
+    <div class="antwort z18"></div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: S26 Teil 2, Aufgabe 1 (Liste eindeutiger Objekte, Durchschnitt im Zeitraum) und W24 Teil 2, Aufgabe 1 (Ergebnis-Array je Streckenabschnitt)</p>
+  </div>
+
+  <!-- ===================== ALG-02 ===================== -->
+  <h3 id="a-02">ALG-02 · Arrays und Listen durchlaufen</h3>
+
+  <div class="aufgabe" id="ALG-02-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-02.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">5 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Nennen Sie zwei Unterschiede zwischen einem Array und einer Liste (<code>List&lt;T&gt;</code>).</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>b) In Java wird für die Ausleihen je Stunde ein Array angelegt: <code>int[] belegung = new int[24];</code> Geben Sie den kleinsten und den größten gültigen Index an.</div>
+    <div class="antwort"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>c) Beschreiben Sie, was beim Ausführen der Anweisung <code>belegung[24] = 5;</code> passiert.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>d) Für <code>int[][] zaehler = new int[7][24];</code> (Wochentag × Stunde) ist die Anzahl der Elemente anzugeben und der Zugriff auf das Element für Freitag (Index 4), Stunde 17 aufzuschreiben.</div>
+    <div class="antwort z3"></div>
+  </div>
+
+  <div class="aufgabe" id="ALG-02-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-02.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Für die Planung des Serviceteams werden die Ausleihen an Station 1 ausgewertet (Anlage 4, Array <code>daten : integer[][]</code>).</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Entwickeln Sie eine Funktion <code>summeJeTag(daten : integer[][]) : integer[]</code>, die für jeden Wochentag (Zeile) die Summe der Ausleihen liefert. Der Index des Ergebnis-Arrays entspricht dem Wochentag.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Entwickeln Sie eine Funktion <code>summeJeZeitfenster(daten : integer[][]) : integer[]</code>, die für jedes Zeitfenster (Spalte) die Summe über alle Wochentage liefert. Die Funktion soll für Arrays beliebiger Größe funktionieren, d. h. keine festen Werte 7 oder 6 enthalten.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Geben Sie die Rückgabewerte beider Funktionen für die Daten aus Anlage 4 an.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S23 Teil 2, Aufgabe 2 und S22 Teil 2, Aufgabe 1 (2D-Arrays Tag × Stunde bzw. Monat × Verbraucher)</p>
+  </div>
+
+  <div class="aufgabe" id="ALG-02-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-02.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">16 Punkte</span>
+    </div>
+    <p>Die Werkstatt plant eine Inspektion aller Räder, die im Auswertungszeitraum genutzt wurden. Außerdem sollen defekte Räder aus der Liste der verleihbaren Räder entfernt werden. Verwenden Sie ausschließlich die Methoden der Klasse <code>List&lt;T&gt;</code> aus Anlage 2.</p>
+    <div class="teilaufgabe"><span class="tp">5 P</span>a) Entwickeln Sie eine Funktion <code>genutzteRaeder(ausleihen : List&lt;Ausleihe&gt;) : List&lt;integer&gt;</code>. Sie liefert die Nummern aller Räder, die in den Ausleihen vorkommen – jede Radnummer <strong>genau einmal</strong>, in der Reihenfolge ihres ersten Auftretens.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>b) Geben Sie das Ergebnis von <code>genutzteRaeder</code> für die Testdaten aus Anlage 3 an.</div>
+    <div class="antwort"></div>
+    <div class="teilaufgabe"><span class="tp">7 P</span>c) Entwickeln Sie eine Funktion <code>entferneDefekte(raeder : List&lt;Fahrrad&gt;) : integer</code>. Sie entfernt alle defekten Räder mit der Methode <code>remove</code> aus der übergebenen Liste und gibt die Anzahl der entfernten Räder zurück.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>d) Ein Kollege hat c) in Java so gelöst:
+      <pre class="java">int entfernt = 0;
+for (int i = 0; i &lt; raeder.size(); i++) {
+    if (raeder.get(i).isDefekt()) {
+        raeder.remove(i);
+        entfernt++;
+    }
+}
+return entfernt;</pre>
+      Für die Liste [107, 108 (defekt), 103 (defekt), 109] bleibt danach ein defektes Rad in der Liste. Erläutern Sie die Ursache.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: S26 Teil 2, Aufgabe 1a (eindeutige Liste mit contains) und S22 Teil 2, Aufgabe 1 (Listen)</p>
+  </div>
+
+  <!-- ===================== ALG-03 ===================== -->
+  <h3 id="a-03">ALG-03 · Minimum/Maximum, lineare Suche</h3>
+
+  <div class="aufgabe" id="ALG-03-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-03.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">5 Punkte</span>
+    </div>
+    <p>Die folgende Funktion soll den <strong>kleinsten Akkustand</strong> aller Räder eines Arrays liefern.</p>
+    <pre class="pseudo">funktion minAkku(raeder : Fahrrad[]) : integer
+  min : integer := 0
+  zähle i von 1 bis raeder.length - 1
+    wenn raeder[i].getAkkuStand() &lt; min dann
+      min := raeder[i].getAkkuStand()
+    Ende wenn
+  Ende zähle
+  rückgabe min
+Ende funktion</pre>
+    <div class="teilaufgabe"><span class="tp">1 P</span>a) Geben Sie an, welchen Wert die Funktion für ein Array mit den Rädern 101 bis 105 (Anlage 3) liefert.</div>
+    <div class="antwort"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Erläutern Sie den Fehler.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>c) Geben Sie die korrigierte Zeile an. Die Schleife soll weiterhin beim Index 1 beginnen.</div>
+    <div class="antwort"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>d) Nennen Sie eine Bedingung, die das übergebene Array nach Ihrer Korrektur erfüllen muss.</div>
+    <div class="antwort"></div>
+    <p class="quelle">Angelehnt an: W25 Teil 2, Aufgabe 3b (fehlerhafte Minimum-Funktion)</p>
+  </div>
+
+  <div class="aufgabe" id="ALG-03-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-03.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>a) Entwickeln Sie eine Funktion <code>findeRad(raeder : List&lt;Fahrrad&gt;, radNr : integer) : Fahrrad</code>, die das Rad mit der übergebenen Nummer liefert bzw. <code>null</code>, wenn es nicht in der Liste ist. Die Suche soll abbrechen, sobald das Rad gefunden wurde.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>b) Entwickeln Sie eine Funktion <code>vollstesRad(raeder : List&lt;Fahrrad&gt;, typ : string) : Fahrrad</code>. Sie liefert von allen <strong>nicht defekten</strong> Rädern des übergebenen Typs dasjenige mit dem <strong>höchsten</strong> Akkustand. Gibt es kein solches Rad, wird <code>null</code> zurückgegeben.</div>
+    <div class="antwort z12"></div>
+    <p class="quelle">Angelehnt an: S24 Teil 1, Aufgabe 3bb (lineare Suche) und W25 Teil 2, Aufgabe 1b</p>
+  </div>
+
+  <div class="aufgabe" id="ALG-03-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-03.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">20 Punkte</span>
+    </div>
+    <p>In der App gibt ein Kunde an, wie viele Räder er benötigt (z. B. für eine Familie). Die App soll ihm die <strong>nächstgelegene</strong> Station anzeigen, an der <strong>mindestens so viele einsatzbereite Räder</strong> stehen (Definition „einsatzbereit“ siehe Anlage 1). Die Stationen liegen in einer Liste <code>List&lt;Station&gt; stationen</code> vor; jede Station kennt ihre Räder (<code>getRaeder()</code>, Anlagen 2 und 3).</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Berechnen Sie die Entfernung zwischen einem Kunden am Standort (4,0 | 3,0) und Station 3. Der Rechenweg ist anzugeben.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">12 P</span>b) Entwickeln Sie eine Funktion <code>naechsteStation(stationen : List&lt;Station&gt;, kx : double, ky : double, benoetigt : integer) : Station</code>. Sie liefert die Station mit der kleinsten Entfernung zum Standort (kx | ky), an der mindestens <code>benoetigt</code> einsatzbereite Räder stehen. Gibt es keine solche Station, liefert sie <code>null</code>. Verwenden Sie die Funktion <code>entfernung</code> aus Anlage 5.</div>
+    <div class="antwort z18"></div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Ermitteln Sie mithilfe der Testdaten, welche Station Ihre Funktion für einen Kunden am Standort (4,0 | 3,0) mit <code>benoetigt = 2</code> liefert. Begründen Sie, warum es nicht die nächstgelegene Station ist.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>d) Ein Kollege möchte in b) die Variable für die bisher kleinste Entfernung mit 0 initialisieren. Begründen Sie, warum das falsch ist, und nennen Sie eine geeignete Alternative.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W23 Teil 2, Aufgabe 2 (Nearest Neighbour) und W25 Teil 2, Aufgabe 1b</p>
+  </div>
+
+  <!-- ===================== ALG-04 ===================== -->
+  <h3 id="a-04">ALG-04 · Speicherbedarf berechnen / Zahlensysteme</h3>
+
+  <div class="aufgabe" id="ALG-04-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-04.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Ergänzen Sie die Tabelle.</div>
+    <table class="leer kompakt" style="width:auto">
+      <tr><th>Einheit</th><th style="min-width:220px">Anzahl Byte</th></tr>
+      <tr><td>1 KiB</td><td></td></tr>
+      <tr><td>1 kB</td><td></td></tr>
+      <tr><td>1 MiB</td><td></td></tr>
+      <tr><td>1 GB</td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Wandeln Sie die Dezimalzahl 202 in eine Binärzahl und in eine Hexadezimalzahl um. Der Rechenweg muss erkennbar sein.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>c) Wandeln Sie die Hexadezimalzahl 7E und die Binärzahl 1011 0110 jeweils in eine Dezimalzahl um.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>d) Geben Sie an, wie viele verschiedene Werte sich mit 12 Bit darstellen lassen.</div>
+    <div class="antwort"></div>
+    <p class="quelle">Angelehnt an: W22 Teil 2, Aufgabe 2 (Dezimal → Binär)</p>
+  </div>
+
+  <div class="aufgabe" id="ALG-04-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-04.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">8 Punkte</span>
+    </div>
+    <p>Abgeschlossene Ausleihen werden platzsparend in einem Binärformat archiviert. Ein Datensatz besteht aus den folgenden Feldern. Zur Auswahl stehen die Java-Datentypen <code>byte</code>, <code>short</code>, <code>int</code>, <code>long</code>, <code>float</code> und <code>double</code>.</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Ergänzen Sie für jedes Feld den kleinstmöglichen geeigneten Datentyp und seinen Speicherbedarf in Byte.</div>
+    <table class="leer kompakt">
+      <tr><th>Feld</th><th>Wertebereich</th><th style="width:22%">Datentyp</th><th style="width:14%">Byte</th></tr>
+      <tr><td>ausleihNr</td><td>1 bis 3 000 000</td><td></td><td></td></tr>
+      <tr><td>kundenNr</td><td>1 bis 200 000</td><td></td><td></td></tr>
+      <tr><td>radNr</td><td>1 bis 5 000</td><td></td><td></td></tr>
+      <tr><td>startStation</td><td>1 bis 60</td><td></td><td></td></tr>
+      <tr><td>startZeit</td><td>Zeitstempel in Millisekunden seit 01.01.1970 (zurzeit ca. 1,8 · 10¹²)</td><td></td><td></td></tr>
+      <tr><td>dauer</td><td>0 bis 1 440 (Minuten)</td><td></td><td></td></tr>
+      <tr><td>strecke</td><td>Kommazahl, einfache Genauigkeit reicht aus</td><td></td><td></td></tr>
+      <tr><td>preisCent</td><td>0 bis 50 000 (Preis in Cent)</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Berechnen Sie den Speicherbedarf eines Datensatzes sowie den Speicherbedarf aller Datensätze eines Jahres (365 Tage) bei durchschnittlich 2 400 Ausleihen pro Tag in MiB. Runden Sie das Ergebnis auf zwei Nachkommastellen.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: W22 Teil 2, Aufgabe 3c (Datentypen festlegen)</p>
+  </div>
+
+  <div class="aufgabe" id="ALG-04-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-04.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">12 Punkte</span>
+    </div>
+    <p>Bei jeder Rückgabe fotografieren zwei Kameras an der Station das Rad, damit Schäden dokumentiert werden (je Kamera ein Foto). Technische Daten:</p>
+    <ul>
+      <li>Auflösung 4 000 × 3 000 Pixel, 3 Farbkanäle mit je 8 Bit, Rohdaten unkomprimiert</li>
+      <li>im Durchschnitt 2 400 Rückgaben pro Tag über alle Stationen</li>
+      <li>Betrieb an 365 Tagen im Jahr</li>
+    </ul>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Berechnen Sie den Speicherbedarf eines Fotos in MiB sowie den Speicherbedarf aller Fotos eines Jahres in TiB. Der Rechenweg ist anzugeben. Runden Sie die Ergebnisse auf zwei Nachkommastellen.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Die Fotos werden im JPEG-Format gespeichert; dadurch sinkt der Speicherbedarf im Mittel auf 1/15 der Rohdaten. Die Fotos sollen zwei Jahre aufbewahrt werden. Berechnen Sie, wie viele Festplatten mit der Herstellerangabe „8 TB“ mindestens benötigt werden (ohne Redundanz).</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Im Betriebssystem wird eine dieser Festplatten mit einer Kapazität von etwa „7,27 TB“ angezeigt. Erläutern Sie die Abweichung.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W23 Teil 2, Aufgabe 3b (GiB) und S26 Teil 2, Aufgabe 3b (TiB)</p>
+  </div>
+
+  <!-- ===================== ALG-05 ===================== -->
+  <h3 id="a-05">ALG-05 · Sortieren</h3>
+
+  <div class="aufgabe" id="ALG-05-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-05.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">5 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Das Array <code>[42, 17, 8, 33, 25]</code> wird mit Bubblesort aufsteigend sortiert: In jedem Durchlauf werden benachbarte Elemente von links nach rechts verglichen und bei Bedarf getauscht. Das Verfahren bricht ab, sobald in einem Durchlauf nicht getauscht wurde. Tragen Sie den Inhalt des Arrays nach jedem Durchlauf und die Anzahl der Vertauschungen ein (nicht benötigte Zeilen bleiben leer).</div>
+    <table class="leer kompakt">
+      <tr><th style="width:16%">Durchlauf</th><th>Inhalt des Arrays nach dem Durchlauf</th><th style="width:22%">Vertauschungen</th></tr>
+      <tr><td>1</td><td></td><td></td></tr>
+      <tr><td>2</td><td></td><td></td></tr>
+      <tr><td>3</td><td></td><td></td></tr>
+      <tr><td>4</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Geben Sie die Zeitkomplexität von Bubblesort im schlechtesten Fall an und nennen Sie ein Sortierverfahren mit besserer Zeitkomplexität.</div>
+    <div class="antwort z3"></div>
+  </div>
+
+  <div class="aufgabe" id="ALG-05-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-05.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Das Serviceteam lädt die Räder in der Reihenfolge ihres Akkustands – die leersten zuerst. Die Räder liegen in einem Array <code>raeder : Fahrrad[]</code> vor.</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Entwickeln Sie eine Funktion <code>sortiereNachAkku(raeder : Fahrrad[]) : void</code>, die das Array mit Bubblesort aufsteigend nach dem Akkustand sortiert.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Erweitern Sie Ihre Lösung so, dass der Algorithmus abbricht, sobald in einem Durchlauf keine Vertauschung mehr stattgefunden hat. Geben Sie die geänderten bzw. neuen Zeilen an.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Erläutern Sie den Begriff „stabiles Sortierverfahren“ und geben Sie an, ob Ihr Verfahren stabil ist.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W22 Teil 2, Aufgabe 1a (Bubblesort für Objekte)</p>
+  </div>
+
+  <div class="aufgabe" id="ALG-05-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-05.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">18 Punkte</span>
+    </div>
+    <p>Im Kundenportal und in der Disposition sollen Ausleihen nach unterschiedlichen Kriterien sortiert angezeigt werden. Statt für jedes Kriterium eine eigene Sortierfunktion zu schreiben, soll ein Sortieralgorithmus eine <strong>Vergleichsfunktion als Parameter</strong> erhalten.</p>
+    <p>Eine Vergleichsfunktion <code>vergleiche(a : Ausleihe, b : Ausleihe) : integer</code> liefert einen <strong>negativen</strong> Wert, wenn a vor b einzuordnen ist, <strong>0</strong>, wenn a und b gleichwertig sind, und einen <strong>positiven</strong> Wert, wenn a hinter b einzuordnen ist. Sie wird wie eine normale Funktion aufgerufen: <code>vergleiche(x, y)</code>.</p>
+    <div class="teilaufgabe"><span class="tp">7 P</span>a) Entwickeln Sie eine Funktion <code>sortiere(ausleihen : Ausleihe[], vergleiche : Function) : void</code>, die das Array mit einem Sortierverfahren Ihrer Wahl unter Verwendung der übergebenen Vergleichsfunktion sortiert.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Entwickeln Sie die Vergleichsfunktion <code>nachDauerAbsteigend(a : Ausleihe, b : Ausleihe) : integer</code> (längste Ausleihe zuerst).</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>c) Entwickeln Sie die Vergleichsfunktion <code>nachStationDannPreis(a : Ausleihe, b : Ausleihe) : integer</code>: aufsteigend nach Startstation, bei gleicher Startstation absteigend nach Preis.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>d) Geben Sie für die Testdaten aus Anlage 3 die Reihenfolge der Ausleihnummern an, die sich bei einer Sortierung mit <code>nachStationDannPreis</code> und einem <strong>stabilen</strong> Verfahren ergibt. Erläutern Sie, an welcher Stelle sich die Stabilität auswirkt.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: S24 Teil 2, Aufgabe 2a und W22 Teil 2, Aufgabe 1b–d</p>
+  </div>
+
+  <!-- ===================== ALG-06 ===================== -->
+  <h3 id="a-06">ALG-06 · Zeichenketten verarbeiten</h3>
+
+  <div class="aufgabe" id="ALG-06-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-06.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">4 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Gegeben ist <code>code : string := "AR-0107-8"</code>. Geben Sie die Ergebnisse der Ausdrücke an (Methoden siehe Anlage 5).</div>
+    <table class="leer kompakt">
+      <tr><th style="width:40%">Ausdruck</th><th>Ergebnis</th></tr>
+      <tr><td class="mono">code.length()</td><td></td></tr>
+      <tr><td class="mono">code.charAt(3)</td><td></td></tr>
+      <tr><td class="mono">code.substring(3, 7)</td><td></td></tr>
+      <tr><td class="mono">code.indexOf('-')</td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Erläutern Sie, warum Zeichenketten in Java mit <code>equals()</code> und nicht mit <code>==</code> verglichen werden sollten.</div>
+    <div class="antwort z5"></div>
+  </div>
+
+  <div class="aufgabe" id="ALG-06-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-06.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Bei der Registrierung in der App muss ein Passwort folgende Regeln erfüllen:</p>
+    <ul>
+      <li>mindestens 10 Zeichen,</li>
+      <li>mindestens ein Großbuchstabe, mindestens ein Kleinbuchstabe und mindestens eine Ziffer,</li>
+      <li>mindestens ein Sonderzeichen aus der Menge <code>! ? # + - _ *</code>,</li>
+      <li>keine Leerzeichen.</li>
+    </ul>
+    <div class="teilaufgabe"><span class="tp">8 P</span>a) Entwickeln Sie eine Funktion <code>pruefePasswort(pw : string) : boolean</code>, die <code>true</code> liefert, wenn alle Regeln erfüllt sind, sonst <code>false</code>. Verwenden Sie die Hilfsfunktionen aus Anlage 5.</div>
+    <div class="antwort z18"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Geben Sie für die folgenden Passwörter das Ergebnis Ihrer Funktion an.</div>
+    <table class="leer kompakt" style="width:auto">
+      <tr><th>Passwort</th><th style="min-width:160px">Ergebnis</th></tr>
+      <tr><td class="mono">Rad2026!</td><td></td></tr>
+      <tr><td class="mono">auenrad#2026</td><td></td></tr>
+      <tr><td class="mono">Auenrad#2026</td><td></td></tr>
+      <tr><td class="mono">Auen Rad#2026</td><td></td></tr>
+    </table>
+    <p class="quelle">Angelehnt an: W21 Teil 2, Aufgabe 1c (Passwortprüfung)</p>
+  </div>
+
+  <div class="aufgabe" id="ALG-06-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-06.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">14 Punkte</span>
+    </div>
+    <p>Die Kundendaten werden aus dem Altsystem übernommen. Dort ist der Name in <strong>einem</strong> Feld im Format „Nachname, Vorname“ gespeichert (Anlage 3, Tabelle Kunden). In Auenrad 2.0 werden Vor- und Nachname getrennt gespeichert. Außerdem trägt jedes Rad einen aufgeklebten Code, den Kunden bei einer Störung in der App eintippen. Der Code soll vor dem Absenden geprüft werden.</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Entwickeln Sie eine Funktion <code>zerlegeName(vollname : string) : string[]</code>. Sie liefert ein Array mit zwei Elementen: Index 0 = Vorname, Index 1 = Nachname, jeweils ohne Leerzeichen am Anfang und Ende. Enthält <code>vollname</code> kein Komma, werden der gesamte (bereinigte) Text als Nachname und ein leerer Vorname <code>""</code> zurückgegeben.<br>Beispiele: <code>"Schulze-Ebert, Anna Lena"</code> → <code>["Anna Lena", "Schulze-Ebert"]</code>; <code>"Haas,Tom"</code> → <code>["Tom", "Haas"]</code>.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">6 P</span>b) Entwickeln Sie eine Funktion <code>pruefeRadCode(code : string) : boolean</code>. Ein gültiger Code besteht aus genau 9 Zeichen im Format <code>AR-nnnn-p</code>: die Zeichen „AR-“, vier Ziffern, ein Bindestrich und eine Prüfziffer p. Die Prüfziffer ist die Summe der vier Ziffern mod 10.<br>Beispiel: <code>"AR-0107-8"</code> ist gültig (0 + 1 + 0 + 7 = 8), <code>"AR-0107-7"</code> und <code>"AR-01O7-8"</code> (Buchstabe O) sind ungültig.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Nennen Sie zwei Probleme, die beim automatischen Zerlegen der Namen aus dem Altsystem auftreten können.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: W25 Teil 2, Aufgabe 4d (Namen per SUBSTRING aufteilen) und W21 Teil 2, Aufgabe 1c</p>
+  </div>
+
+  <!-- ===================== ALG-07 ===================== -->
+  <h3 id="a-07">ALG-07 · Exceptions / Fehlerbehandlung</h3>
+
+  <div class="aufgabe" id="ALG-07-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-07.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">5 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Erläutern Sie den Unterschied zwischen <em>checked</em> und <em>unchecked</em> Exceptions in Java und nennen Sie zu jeder Art ein Beispiel.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Beschreiben Sie, wann der <code>finally</code>-Block ausgeführt wird, und nennen Sie einen typischen Einsatzzweck.</div>
+    <div class="antwort z3"></div>
+  </div>
+
+  <div class="aufgabe" id="ALG-07-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-07.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">9 Punkte</span>
+    </div>
+    <p>Eine Hilfsmethode der Abrechnung berechnet aus einem als Text übergebenen Betrag (in Cent) den Preis pro Minute:</p>
+    <pre class="java">static int centProMinute(String betragText, int minuten) {
+    int ergebnis = -1;
+    try {
+        System.out.print("A ");
+        if (minuten &lt; 0) {
+            throw new IllegalArgumentException("Minuten negativ");
+        }
+        int betrag = Integer.parseInt(betragText);   // NumberFormatException bei Nicht-Zahl
+        ergebnis = betrag / minuten;                 // Ganzzahldivision
+        System.out.print("B ");
+    } catch (NumberFormatException e) {
+        System.out.print("C ");
+    } catch (ArithmeticException e) {
+        System.out.print("D ");
+        ergebnis = 0;
+    } finally {
+        System.out.print("E ");
+    }
+    System.out.print("F ");
+    return ergebnis;
+}</pre>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Geben Sie für die vier Aufrufe die Bildschirmausgabe der Methode und den Rückgabewert an. Gibt die Methode keinen Wert zurück, beschreiben Sie, was stattdessen geschieht.</div>
+    <table class="leer kompakt">
+      <tr><th style="width:32%">Aufruf</th><th style="width:30%">Ausgabe</th><th>Rückgabewert</th></tr>
+      <tr><td class="mono">centProMinute("750", 30)</td><td></td><td></td></tr>
+      <tr><td class="mono">centProMinute("7,50", 30)</td><td></td><td></td></tr>
+      <tr><td class="mono">centProMinute("750", 0)</td><td></td><td></td></tr>
+      <tr><td class="mono">centProMinute("750", -5)</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Ein Kollege schlägt vor, statt der beiden catch-Blöcke einen einzigen Block <code>catch (Exception e) { }</code> zu verwenden. Beurteilen Sie den Vorschlag.</div>
+    <div class="antwort z5"></div>
+  </div>
+
+  <div class="aufgabe" id="ALG-07-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-07.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">14 Punkte</span>
+    </div>
+    <p>Für den Stationsbericht soll die durchschnittliche Ausleihdauer je Station berechnet werden. Die Funktion wird von verschiedenen Programmteilen aufgerufen und soll robust gegen falsche Aufrufe und fehlende Daten sein. Für die Fehlerbehandlung stehen zur Verfügung:</p>
+    <ul>
+      <li><code>IllegalArgumentException</code> (unchecked) und die eigene, geprüfte Ausnahme <code>KeineDatenException</code> (checked); beide besitzen einen Konstruktor mit einer Meldung und die Methode <code>getMessage() : string</code>,</li>
+      <li>Schreibweise zum Auslösen: <code>throw new IllegalArgumentException("Text")</code>; Schreibweise zum Behandeln: <code>try … catch (Ausnahmetyp e) … Ende try</code>,</li>
+      <li><code>ausgabe(text : string)</code> zeigt einen Text an, <code>protokolliere(text : string)</code> schreibt einen Eintrag in die Fehlerprotokolldatei.</li>
+    </ul>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Nennen Sie drei Fehlerfälle bzw. Sonderfälle, die beim Aufruf von <code>durchschnittsDauer(ausleihen : List&lt;Ausleihe&gt;, stationNr : integer) : double</code> auftreten können.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">7 P</span>b) Entwickeln Sie die Funktion <code>durchschnittsDauer</code>. Sie liefert die durchschnittliche Dauer (in Minuten, als Kommazahl) aller Ausleihen, die an der Station <code>stationNr</code> begonnen haben. Ist <code>ausleihen</code> gleich <code>null</code> oder <code>stationNr</code> kleiner als 1, wird eine <code>IllegalArgumentException</code> ausgelöst. Gibt es keine Ausleihe für diese Station, wird eine <code>KeineDatenException</code> ausgelöst.</div>
+    <div class="antwort z18"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Entwickeln Sie eine Funktion <code>zeigeStationsbericht(ausleihen : List&lt;Ausleihe&gt;, stationNr : integer) : void</code>. Sie ruft <code>durchschnittsDauer</code> auf und gibt das Ergebnis aus. Bei einer <code>KeineDatenException</code> soll der Text „Für diese Station liegen keine Ausleihen vor.“ ausgegeben werden, bei einer <code>IllegalArgumentException</code> wird die Meldung der Ausnahme protokolliert.</div>
+    <div class="antwort z12"></div>
+    <p class="quelle">Angelehnt an: W25 Teil 2, Aufgabe 1 und W21 Teil 2, Aufgabe 2 (Fehlerfall bzw. null behandeln)</p>
+  </div>
+
+  <!-- ===================== ALG-08 ===================== -->
+  <h3 id="a-08">ALG-08 · Rekursion</h3>
+
+  <div class="aufgabe" id="ALG-08-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-08.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">4 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Erläutern Sie die Begriffe Basisfall und Rekursionsfall.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Beschreiben Sie, was geschieht, wenn eine rekursive Funktion keinen erreichbaren Basisfall hat.</div>
+    <div class="antwort z3"></div>
+  </div>
+
+  <div class="aufgabe" id="ALG-08-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-08.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">8 Punkte</span>
+    </div>
+    <p>Die folgende Funktion soll eine nicht negative ganze Zahl n als Binärzahl (Zeichenkette) liefern. Der Operator <code>+</code> verkettet Zeichenketten; Zahlen werden dabei in Text umgewandelt.</p>
+    <pre class="pseudo">funktion binaer(n : integer) : string
+  wenn n = 0 dann
+    rückgabe ""
+  Ende wenn
+  rückgabe binaer(n div 2) + (n mod 2)
+Ende funktion</pre>
+    <div class="teilaufgabe"><span class="tp">5 P</span>a) Führen Sie einen Schreibtischtest für den Aufruf <code>binaer(13)</code> durch. Tragen Sie jeden Aufruf (auch die rekursiven) in eine Zeile der Tabelle ein. Nicht benötigte Zeilen bleiben leer.</div>
+    <table class="leer kompakt">
+      <tr><th style="width:12%">Aufruf</th><th style="width:12%">n</th><th style="width:16%">n div 2</th><th style="width:16%">n mod 2</th><th>Rückgabewert</th></tr>
+      <tr><td>1</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>2</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>3</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>4</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>5</td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>6</td><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Für einen zulässigen Aufrufwert liefert die Funktion ein falsches Ergebnis. Geben Sie diesen Wert an und korrigieren Sie die Funktion.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: W22 Teil 2, Aufgabe 2a (Schreibtischtest und Korrektur einer rekursiven Umwandlung)</p>
+  </div>
+
+  <div class="aufgabe" id="ALG-08-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-08.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">12 Punkte</span>
+    </div>
+    <p>Die Radnummern des gesamten Bestands werden aufsteigend sortiert in einem Array <code>nummern : integer[]</code> gespeichert. Für die Suche nach einer Radnummer soll die <strong>binäre Suche rekursiv</strong> umgesetzt werden: Das mittlere Element des Suchbereichs (<code>mitte := (links + rechts) div 2</code>) wird mit dem gesuchten Wert verglichen. Ist es nicht der gesuchte Wert, wird nur noch in der linken bzw. rechten Hälfte weitergesucht.</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Entwickeln Sie eine rekursive Funktion <code>suche(nummern : integer[], gesucht : integer, links : integer, rechts : integer) : integer</code>, die den Index von <code>gesucht</code> liefert bzw. −1, wenn der Wert nicht enthalten ist. Der erste Aufruf lautet <code>suche(nummern, gesucht, 0, nummern.length - 1)</code>.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Gegeben ist <code>nummern = [101, 102, 103, …, 112]</code> (12 Elemente, lückenlos). Geben Sie für <code>gesucht = 112</code> alle Aufrufe von <code>suche</code> mit den Werten von <code>links</code>, <code>rechts</code> und <code>mitte</code> an.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Nennen Sie je einen Vorteil und einen Nachteil der rekursiven Lösung gegenüber einer iterativen Lösung und begründen Sie diese kurz.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: W22 Teil 2, Aufgabe 2b (Rekursion vs. Iteration)</p>
+  </div>
+
+  <!-- ===================== ALG-09 ===================== -->
+  <h3 id="a-09">ALG-09 · Nebenläufigkeit</h3>
+
+  <div class="aufgabe" id="ALG-09-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-09.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">4 Punkte</span>
+    </div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Erläutern Sie den Begriff Race Condition.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Nennen Sie zwei Stellen in der Plattform Auenrad 2.0, an denen gleichzeitige Zugriffe zu Fehlern führen können.</div>
+    <div class="antwort z3"></div>
+  </div>
+
+  <div class="aufgabe" id="ALG-09-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-09.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">8 Punkte</span>
+    </div>
+    <p>An Station 3 ist nur noch ein Lastenrad frei. Jana Lorenz und Tom Haas tippen fast gleichzeitig in der App auf „Reservieren“. Der Server verarbeitet beide Anfragen in parallelen Threads. Jeder Thread führt aus: (1) Anzahl freier Lastenräder aus der Datenbank lesen, (2) prüfen, ob die Anzahl größer als 0 ist, (3) die gelesene Anzahl um 1 verringert zurückschreiben und eine Reservierung speichern. Es ergibt sich folgender Ablauf:</p>
+    <table class="kompakt">
+      <tr><th>Zeit</th><th>Thread A (Jana)</th><th>Thread B (Tom)</th><th>freieLastenraeder in der DB</th></tr>
+      <tr><td>t1</td><td>liest freieLastenraeder → 1</td><td></td><td>1</td></tr>
+      <tr><td>t2</td><td></td><td>liest freieLastenraeder → 1</td><td>1</td></tr>
+      <tr><td>t3</td><td>prüft 1 &gt; 0 → ja</td><td></td><td>1</td></tr>
+      <tr><td>t4</td><td></td><td>prüft 1 &gt; 0 → ja</td><td>1</td></tr>
+      <tr><td>t5</td><td>schreibt 1 − 1 = 0, speichert Reservierung</td><td></td><td>0</td></tr>
+      <tr><td>t6</td><td></td><td>schreibt 1 − 1 = 0, speichert Reservierung</td><td>0</td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Erläutern Sie anhand des Ablaufs, welches Problem entsteht und wodurch es verursacht wird.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Erläutern Sie, wie pessimistisches Sperren das Problem verhindert, und beschreiben Sie den geänderten Ablauf.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 2, Aufgabe 1b (Blockieren von Terminen bei gleichzeitigen Buchungen)</p>
+  </div>
+
+  <div class="aufgabe" id="ALG-09-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe ALG-09.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">14 Punkte</span>
+    </div>
+    <p>Lastenräder sollen künftig über die App im Voraus reserviert werden können. Das Entwicklungsteam diskutiert zwei Varianten:</p>
+    <ul>
+      <li><strong>Variante A:</strong> Sobald ein Kunde die Detailansicht eines Lastenrads öffnet, wird der Datensatz des Rades in der Datenbank gesperrt – bis der Kunde reserviert oder die Ansicht verlässt, höchstens aber 10 Minuten. Andere Kunden sehen das Rad in dieser Zeit als „nicht verfügbar“.</li>
+      <li><strong>Variante B:</strong> Die Detailansicht liest Status und Versionsnummer ohne Sperre. Erst beim Tippen auf „Reservieren“ wird geprüft, ob sich der Datensatz inzwischen geändert hat (optimistisches Sperren mit Versionsnummer, Anlage 6).</li>
+    </ul>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Beschreiben Sie für beide Varianten je einen Vorteil und einen Nachteil.</div>
+    <table class="leer kompakt">
+      <tr><th style="width:14%">Variante</th><th>Vorteil</th><th>Nachteil</th></tr>
+      <tr><td>A</td><td style="height:80px"></td><td></td></tr>
+      <tr><td>B</td><td style="height:80px"></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Entscheiden Sie sich begründet für eine Variante. Gehen Sie dabei auch auf die Sperrdauer ein.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">5 P</span>c) Entwickeln Sie mithilfe der Klassen aus Anlage 6 eine Funktion <code>reserviere(db : RadDB, radNr : integer, kundenNr : integer) : boolean</code> für Variante B. Sie liefert <code>true</code>, wenn die Reservierung gespeichert wurde, und <code>false</code>, wenn das Rad nicht frei ist oder ein anderer Kunde schneller war.</div>
+    <div class="antwort z12"></div>
+    <p class="quelle">Angelehnt an: W21 Teil 2, Aufgabe 1b</p>
+  </div>
+
+  <!-- ===================== ORIGINALAUFGABEN ===================== -->
+  <h3 id="originale">Originalaufgaben zum Üben</h3>
+  <p>Diese echten Prüfungsaufgaben passen zu diesem Block (Dateien im Ordner <code>Prüfungsvorbereitung</code>). Lösungen gibt es nur für 2023 Sommer, 2023 Winter, 2024 Sommer und 2025 Winter (dort vom u-form-Verlag).</p>
+  <table class="kompakt" style="break-inside:auto">
+    <tr><th>Prüfung</th><th>Aufgabe</th><th>Thema</th><th>Datei · Lösung</th></tr>
+    <tr><td>Winter 2021</td><td>T2 A2 (25 P)</td><td>Pseudocode im 2D-Terminplan (Suche)</td><td><code>2021/winter/AE 2021 Winter Teil 2.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Winter 2021</td><td>T2 A1b (4 P), A1c (6 P)</td><td>Nebenläufigkeit (Termine blockieren); Passwortprüfung im Struktogramm, Fehler finden</td><td>wie oben · keine Lösung</td></tr>
+    <tr><td>Sommer 2022</td><td>T2 A1 (30 P)</td><td>Statistik aus 2D-Array, Min/Max, Liste</td><td><code>2022/sommer/AE 2022 Sommer Teil 2.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Sommer 2022</td><td>T1 A3cb (4 P)</td><td>notifyObservers in Pseudocode (Liste durchlaufen)</td><td><code>2022/sommer/AE 2022 Sommer Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Winter 2022</td><td>T2 A1 (25 P)</td><td>Bubblesort, Vergleichsfunktion, generisches Sortieren</td><td><code>2022/winter/AE 2022 Winter Teil 2.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Winter 2022</td><td>T2 A2 (25 P), A3c (3 P)</td><td>Rekursion Dezimal → Binär, Schreibtischtest, iterative Variante; Datentypen</td><td>wie oben · keine Lösung</td></tr>
+    <tr><td>Sommer 2023</td><td>T2 A2 (25 P)</td><td>2D-Array Besucher Tag × Stunde</td><td><code>2023/sommer/AE Sommer 2023 Teil 2.pdf</code> · Lösung: <code>AE Sommer 2023 Teil 1+2 Lösungen.pdf</code></td></tr>
+    <tr><td>Sommer 2023</td><td>T1 A2bc, A2bd (9 P)</td><td>Methoden zu einem Klassendiagramm in Pseudocode</td><td><code>2023/sommer/AE Sommer 2023 Teil 1.pdf</code> · Lösung wie oben</td></tr>
+    <tr><td>Winter 2023</td><td>T2 A2 (25 P)</td><td>Nearest Neighbour (Minimumsuche im Objekt-Array)</td><td><code>2023/winter/AE Winter 2023 Teil 2.pdf</code> · Lösung: <code>AE Winter 2023 Teil 2 Lösungen.pdf</code></td></tr>
+    <tr><td>Winter 2023</td><td>T2 A3b (7 P)</td><td>Speicherbedarf in GiB</td><td>wie oben</td></tr>
+    <tr><td>Sommer 2024</td><td>T1 A3b (15 P)</td><td>Methoden mit Listen, lineare Suche</td><td><code>2024/sommer/AE Sommer 2024 Teil 1+2+3.pdf</code> · Lösung: <code>AE Sommer 2024 Teil 1 Lösungen.pdf</code></td></tr>
+    <tr><td>Sommer 2024</td><td>T2 A2 (20 P)</td><td>Sortieren mit Vergleichsfunktion, Zählfunktion</td><td>wie oben · Lösung: <code>AE Sommer 2024 Teil 2 Lösungen.pdf</code></td></tr>
+    <tr><td>Winter 2024</td><td>T1 A2c (8 P)</td><td>Skript: Subnetz durchlaufen, JSON-Ausgabe</td><td><code>2024/winter/AE Winter 2024 Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Winter 2024</td><td>T2 A1 (25 P), A2 (25 P)</td><td>Verspätungen je Strecke zählen (Ergebnis-Array); HTTP-Antwort bauen, nächste Abfahrten filtern</td><td><code>2024/winter/AE Winter 2024 Teil 2.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Winter 2025</td><td>T2 A1 (30 P)</td><td>freie Tische filtern (verschachtelte Listen), bester Tisch (Minimum)</td><td><code>2025/winter/AE Winter 2025 Teil 2.pdf</code> · Lösung: <code>AE Winter 2025 Lösungserleuterungen.pdf</code> (u-form)</td></tr>
+    <tr><td>Winter 2025</td><td>T2 A3b (14 P), A4d (8 P)</td><td>fehlerhafte Minimum-Funktion; Namen per SUBSTRING aufteilen</td><td>wie oben</td></tr>
+    <tr><td>Sommer 2026</td><td>T2 A1 (30 P), A2ba (4 P)</td><td>Liste eindeutiger Objekte, Durchschnitt im Zeitraum; Liste filtern</td><td><code>2026/sommer/AE Sommer 2026 Teil 2.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Sommer 2026</td><td>T2 A3b (5 P)</td><td>Speicherbedarf in TiB</td><td>wie oben</td></tr>
+  </table>
+</section>
+
+</body>
+</html>

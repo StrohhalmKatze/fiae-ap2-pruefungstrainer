@@ -1,0 +1,1508 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>12 Querschnitt – Übungen</title>
+<link rel="stylesheet" href="style.css">
+<script src="uebungen.js"></script>
+<style>
+  /* Zusatzregeln Block 12 */
+  nav.toc ol ol { columns: 2; column-gap: 24px; font-size: 13px; }
+  table.kompakt td, table.kompakt th { padding: 2px 6px; }
+  table.vokabel { font-size: 13px; }
+  table.vokabel td, table.vokabel th { padding: 2px 6px; }
+  table.vokabel td.en { font-style: italic; width: 24%; }
+  table.vokabel td.de { width: 26%; }
+  table.leer td { height: 32px; }
+  .zweispaltig { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+  .zweispaltig > * { flex: 1 1 300px; min-width: 0; }
+  /* Arbeitsblätter der Tabellenkalkulation */
+  table.sheet { width: auto; font-family: Consolas, "Courier New", monospace; font-size: 13px; margin: 6px 0 2px; }
+  table.sheet th { background: #e8ecf1; text-align: center; font-weight: 600; color: #444; padding: 2px 8px; }
+  table.sheet th.ecke { width: 26px; }
+  table.sheet td { padding: 2px 8px; }
+  table.sheet td.n { text-align: right; }
+  table.sheet td.k { font-weight: 700; }
+  table.sheet td.ziel { background: #d4d4d4; outline: 2px solid #222; outline-offset: -2px; }
+  .blattname { display: inline-block; font-size: 12px; font-weight: 700; border: 1px solid #888; border-top: none; padding: 0 10px; margin: 0 0 12px 30px; background: #f3f4f6; }
+  /* Englische Fachtexte */
+  .engtext { font-family: Georgia, "Times New Roman", serif; font-size: 14.5px; line-height: 1.5; }
+  .engtext h5 { font-family: "Segoe UI", Arial, sans-serif; font-size: 15px; margin: 10px 0 2px; }
+  .engtext p { margin: 4px 0 8px; text-align: justify; hyphens: auto; }
+  .engtext ul { margin: 2px 0 8px; }
+  .formel { font-family: Consolas, "Courier New", monospace; font-size: 13px; background: var(--soft); padding: 1px 4px; border-radius: 3px; white-space: nowrap; }
+  td.mono, th.mono { font-family: Consolas, "Courier New", monospace; font-size: 13px; }
+  .unter ul { margin: 4px 0 0; padding-left: 18px; }
+  .unter li { margin: 1px 0; }
+  table.sheet td { white-space: nowrap; }
+  table.sheet td.k { white-space: normal; }
+  table.nw td, table.nw th { white-space: nowrap; }
+  table.leer.hoch td { height: 70px; }
+  table.orig td:nth-child(1), table.orig td:nth-child(2) { white-space: nowrap; }
+  table.orig { font-size: 13px; }
+  @media print {
+    .anlage { break-inside: auto; }
+    .anlage.ganz, .block { break-inside: avoid; }
+    table.vokabel, table.lang { break-inside: auto; }
+    .zweispaltig { break-inside: avoid; }
+    #e-02, #e-03, #e-04, #e-05 { break-before: page; margin-top: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== KOPF ===================== -->
+<header class="blockkopf">
+  <h1>Block 12 · Querschnitt</h1>
+  <div class="unter">
+    Sammelblock für die Themen ohne eigenen Block · Kategorie je Unterthema (statt einer Block-Kategorie) · fast nur Teil 1
+    <ul>
+      <li>QU-01 Englischer Fachtext <span class="badge k-oft">Oft ↑</span> 5/9 Prüfungen (S22, W23, S24, W25, S26) · Ø 7 Punkte</li>
+      <li>QU-02 Tabellenkalkulation <span class="badge k-sonstige">Sonstige</span> 1/9 (S23) · 16 Punkte</li>
+      <li>QU-03 Ticketsystem / IT-Service <span class="badge k-sonstige">Sonstige</span> 1/9 (S22) · 12 Punkte</li>
+      <li>QU-04 Künstliche Intelligenz <span class="badge k-sonstige">Sonstige</span> 1/9 (W23, dazu S26 als Kontext) · 6 Punkte</li>
+      <li>QU-05 Green IT <span class="badge k-sonstige">Sonstige</span> 1/9 (W23) · 4 Punkte</li>
+    </ul>
+    Lösungen: <a href="12_Querschnitt_Loesungen.html">12_Querschnitt_Loesungen.html</a>
+  </div>
+</header>
+
+<nav class="toc">
+  <strong>Inhalt</strong>
+  <ol>
+    <li><a href="#erklaerung">Erklärungssatz</a>
+      <ol>
+        <li><a href="#e-01">QU-01 Englischer Fachtext</a></li>
+        <li><a href="#e-02">QU-02 Tabellenkalkulation</a></li>
+        <li><a href="#e-03">QU-03 Ticketsystem / IT-Service</a></li>
+        <li><a href="#e-04">QU-04 Künstliche Intelligenz</a></li>
+        <li><a href="#e-05">QU-05 Green IT</a></li>
+      </ol>
+    </li>
+    <li><a href="#belegsatz">Belegsatz</a> (Anlagen 1–12: Ausgangssituation, englische Texte, Funktionsliste, Arbeitsblätter, Support, KI, Green IT)</li>
+    <li><a href="#aufgaben">Aufgaben</a>
+      <ol>
+        <li><a href="#a-01">QU-01 (3 Aufgaben)</a></li>
+        <li><a href="#a-02">QU-02 (3 Aufgaben)</a></li>
+        <li><a href="#a-03">QU-03 (3 Aufgaben)</a></li>
+        <li><a href="#a-04">QU-04 (3 Aufgaben)</a></li>
+        <li><a href="#a-05">QU-05 (3 Aufgaben)</a></li>
+        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+
+<div class="info no-print">
+  <span class="kastentitel">So arbeitest du mit diesem Block</span>
+  Erst den Erklärungssatz lesen, dann die Aufgaben mit dem Belegsatz daneben lösen (Belegsatz am besten separat ausdrucken). Zeitrichtwert: 1 Punkt ≈ 0,9 Minuten.
+  Die fünf Unterthemen sind unabhängig voneinander – du kannst sie einzeln bearbeiten. Lösungen erst danach in der separaten Lösungsdatei nachsehen.
+</div>
+
+<!-- ===================== TEIL A: ERKLÄRUNGSSATZ ===================== -->
+<section class="teil" id="erklaerung">
+  <h2>A · Erklärungssatz</h2>
+
+  <p>Dieser Block sammelt die Themen, die in der Themenanalyse keinem Fachblock zugeordnet sind. Der <strong>englische Fachtext</strong> ist dabei der wichtigste: Er kam in fünf der letzten neun Prüfungen vor, zuletzt in vier Prüfungen hintereinander mit steigender Tendenz. Die übrigen vier Themen kamen je einmal dran, meist als 4- bis 16-Punkte-Teilaufgabe in Teil 1. Sie sind schnell gelernt und bringen sichere Punkte, wenn sie wieder auftauchen. KI und Green IT stehen außerdem in den Szenarien neuerer Prüfungen (Drohnenbilder, KI-Auswertung, Energieverbrauch).</p>
+
+  <table class="kompakt">
+    <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
+    <tr><td>QU-01 Englischer Fachtext</td><td><span class="badge k-oft">Oft ↑</span></td><td>3–12</td><td>Text gezielt auswerten, Antwort auf Deutsch erläutern, auf das Szenario übertragen</td></tr>
+    <tr><td>QU-02 Tabellenkalkulation</td><td><span class="badge k-sonstige">Sonstige</span></td><td>16</td><td>Formeln mit $-Bezügen, WENN, SVERWEIS, WOCHENTAG; Grenzen der Tabellenkalkulation</td></tr>
+    <tr><td>QU-03 Ticketsystem / IT-Service</td><td><span class="badge k-sonstige">Sonstige</span></td><td>12</td><td>Vor- und Nachteile erläutern, Priorität und SLA bestimmen, Support-Level</td></tr>
+    <tr><td>QU-04 Künstliche Intelligenz</td><td><span class="badge k-sonstige">Sonstige</span></td><td>4–8</td><td>Begriffe, Trainings-/Testdaten, Bias, AI Act, Akzeptanz</td></tr>
+    <tr><td>QU-05 Green IT</td><td><span class="badge k-sonstige">Sonstige</span></td><td>4</td><td>Begriff und Ziele, PUE berechnen, Maßnahmen bewerten</td></tr>
+  </table>
+
+  <!-- ===================== QU-01 ===================== -->
+  <h3 id="e-01">QU-01 · Englischer Fachtext <span class="badge k-oft">Oft ↑</span></h3>
+  <p class="klein">Vorkommen: 5/9 · Prüfungen: S22 T1 A2c (NoSQL/MongoDB, 9 P), W23 T1 A2a (User Stories/INVEST, 1 P direkt aus dem Text), S24 T2 A3b (Überdeckungsmaße, 12 P), W25 T1 A2b (eRechnung/EU-Richtlinie, 9 P), S26 T1 A3a (LoRa, 3 P) · in den letzten vier Prüfungen jedes Mal</p>
+
+  <h4>So sieht die Aufgabe aus</h4>
+  <ul>
+    <li>Mitten in einer Fachaufgabe steht ein <strong>englischer Text</strong> von ½ bis 1 Seite, meist aus einer Hersteller- oder Informationsseite mit Quellenangabe (z. B. MongoDB, eine EU-Seite, ein Testing-Blog). Oft ist er mit fett gedruckten Zwischenüberschriften gegliedert.</li>
+    <li>Die Fragen sind <strong>deutsch</strong>, du antwortest <strong>deutsch</strong>. Englische Fachbegriffe darfst du benutzen (Failover, Throughput), solltest sie aber kurz erklären.</li>
+    <li>Typische Operatoren: „Erläutern Sie drei Vorteile … anhand des Textes“, „Beschreiben Sie …“, „Nennen Sie … laut Text“. Häufig kommt ein <strong>Transfer</strong> dazu: „… und beziehen Sie sie auf das Projekt“, „Begründen Sie, ob … für das Szenario geeignet ist“.</li>
+    <li>Punkte: meist <strong>3 bis 4 Punkte je erläutertem Aspekt</strong> (S22: drei Vorteile = 9 P; S24: drei Überdeckungsmaße = 12 P).</li>
+    <li>Der Text liefert die Argumente. Fachwissen aus anderen Blöcken (Datenbanken, Testen, Netzwerk) hilft beim Verstehen und beim Übertragen, ersetzt aber nicht den Textbezug.</li>
+  </ul>
+
+  <h4>So gehst du vor</h4>
+  <figure>
+    <svg viewBox="0 0 760 112" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e01a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10" fill="none" stroke="#222" stroke-width="1.6"/>
+        </marker>
+      </defs>
+      <rect x="1" y="6" width="170" height="98" rx="6" fill="#fff" stroke="#222"/>
+      <text x="86" y="28" text-anchor="middle" font-weight="bold">1  Aufgabe zuerst</text>
+      <text x="86" y="50" text-anchor="middle">Operator, Anzahl,</text>
+      <text x="86" y="68" text-anchor="middle">„laut Text“ oder</text>
+      <text x="86" y="86" text-anchor="middle">Szenariobezug?</text>
+      <rect x="197" y="6" width="170" height="98" rx="6" fill="#fff" stroke="#222"/>
+      <text x="282" y="28" text-anchor="middle" font-weight="bold">2  Überfliegen</text>
+      <text x="282" y="50" text-anchor="middle">Überschriften und</text>
+      <text x="282" y="68" text-anchor="middle">erste Sätze: Wo</text>
+      <text x="282" y="86" text-anchor="middle">steht was?</text>
+      <rect x="393" y="6" width="170" height="98" rx="6" fill="#fff" stroke="#222"/>
+      <text x="478" y="28" text-anchor="middle" font-weight="bold">3  Gezielt lesen</text>
+      <text x="478" y="50" text-anchor="middle">Fundstellen markieren</text>
+      <text x="478" y="68" text-anchor="middle">und nummerieren,</text>
+      <text x="478" y="86" text-anchor="middle">Signalwörter beachten</text>
+      <rect x="589" y="6" width="170" height="98" rx="6" fill="#eef3fa" stroke="#222" stroke-width="1.5"/>
+      <text x="674" y="28" text-anchor="middle" font-weight="bold">4  Deutsch antworten</text>
+      <text x="674" y="50" text-anchor="middle">eigene Worte: Aussage</text>
+      <text x="674" y="68" text-anchor="middle">+ Begründung</text>
+      <text x="674" y="86" text-anchor="middle">+ Bezug zum Projekt</text>
+      <line x1="172" y1="55" x2="195" y2="55" stroke="#222" stroke-width="1.5" marker-end="url(#e01a-pfeil)"/>
+      <line x1="368" y1="55" x2="391" y2="55" stroke="#222" stroke-width="1.5" marker-end="url(#e01a-pfeil)"/>
+      <line x1="564" y1="55" x2="587" y2="55" stroke="#222" stroke-width="1.5" marker-end="url(#e01a-pfeil)"/>
+    </svg>
+    <figcaption>Abb. A-1: Lesestrategie für den englischen Fachtext – nicht übersetzen, sondern gezielt auswerten</figcaption>
+  </figure>
+  <ol>
+    <li><strong>Aufgabe zuerst lesen.</strong> Was ist gefragt (Vorteile? Unterschiede? Voraussetzungen?), wie viele Punkte, welcher Operator? <em>Nennen</em> = Stichwort genügt; <em>beschreiben</em> = Sachverhalt in ganzen Sätzen; <em>erläutern</em> = Aussage + Begründung oder Beispiel; <em>beurteilen/begründen</em> = eigene Entscheidung mit Argumenten.</li>
+    <li><strong>Text überfliegen (Skimming).</strong> Überschriften und jeweils den ersten Satz eines Absatzes lesen. Viele Prüfungstexte sind schon nach Vorteilen gegliedert: Die Zwischenüberschriften sind dann dein Antwortgerüst.</li>
+    <li><strong>Gezielt lesen (Scanning).</strong> Nur die Stellen genau lesen, die zur Frage passen. Fundstellen am Rand nummerieren (①, ②, ③), Signalwörter unterstreichen: <em>however, whereas, provided that, unless</em> – dort stehen Gegensätze, Bedingungen und Einschränkungen.</li>
+    <li><strong>Antwort formulieren.</strong> Deutsch, in eigenen Worten, ganze Sätze. Pro Punkt: Was sagt der Text? Warum ist das ein Vorteil (oder Nachteil)? Was bedeutet es für das Projekt? Unbekannte Wörter aus dem Zusammenhang erschließen.</li>
+    <li><strong>Kontrollieren.</strong> Stimmt die Anzahl? Ist jeder Punkt eigenständig, oder hast du dasselbe Argument zweimal formuliert?</li>
+  </ol>
+  <div class="merke"><span class="kastentitel">Merke</span>Übersetzen ist nicht Erläutern. Wer nur die Überschrift „Fast queries“ mit „schnelle Abfragen“ übersetzt, bekommt höchstens 1 von 3 Punkten. Volle Punkte gibt es für <strong>Aussage + Begründung aus dem Text</strong> (+ Szenariobezug, falls verlangt).</div>
+
+  <h4>Beispiel (eigenes Thema, nicht aus den Aufgaben)</h4>
+  <div class="anlage engtext" lang="en">
+    <h5>Two-Factor Authentication</h5>
+    <p>Two-factor authentication (2FA) requires users to provide two different types of evidence before they are granted access: something they know, such as a password, and something they have, such as a smartphone that receives a one-time code. Even if attackers steal a password in a phishing attack, they cannot log in unless they also control the second factor. 2FA therefore significantly reduces the risk of account takeover. However, codes sent by SMS can be intercepted, whereas authenticator apps or hardware security keys are considered more secure.</p>
+  </div>
+  <p><strong>Frage:</strong> „Erläutern Sie anhand des Textes, wie die Zwei-Faktor-Authentifizierung vor Phishing schützt, und nennen Sie die laut Text sichersten Varianten.“ (4 P)</p>
+  <p><strong>Vorgehen:</strong> Fundstelle ① = Satz 2 (<em>„cannot log in unless they also control the second factor“</em>), Fundstelle ② = Satz 4 (<em>„whereas … more secure“</em>). Das Signalwort <em>unless</em> zeigt die Bedingung, <em>whereas</em> den Gegensatz.</p>
+  <p><strong>Musterantwort:</strong> Bei 2FA muss man sich mit zwei verschiedenen Faktoren ausweisen, z. B. mit Wissen (Passwort) und Besitz (Smartphone mit Einmalcode). Erbeutet ein Angreifer per Phishing nur das Passwort, kann er sich trotzdem nicht anmelden, weil ihm der zweite Faktor fehlt. Das Risiko einer Kontoübernahme sinkt deshalb deutlich. Als sicherer als SMS-Codes, die abgefangen werden können, nennt der Text Authenticator-Apps und Hardware-Sicherheitsschlüssel.</p>
+
+  <h4>IT-Fachvokabular Englisch–Deutsch (rund 80 Begriffe)</h4>
+  <table class="vokabel">
+    <tr><th colspan="4">Softwareentwicklung und Qualität</th></tr>
+    <tr><td class="en">requirement</td><td class="de">Anforderung</td><td class="en">feature</td><td class="de">Funktion, Merkmal</td></tr>
+    <tr><td class="en">release</td><td class="de">(veröffentlichte) Version</td><td class="en">to deploy / deployment</td><td class="de">bereitstellen / Auslieferung</td></tr>
+    <tr><td class="en">code base</td><td class="de">gesamter Quellcode</td><td class="en">maintainability</td><td class="de">Wartbarkeit</td></tr>
+    <tr><td class="en">to implement</td><td class="de">umsetzen, programmieren</td><td class="en">bug / defect / fault</td><td class="de">Fehler (im Code)</td></tr>
+    <tr><td class="en">failure</td><td class="de">Ausfall, Fehlerwirkung</td><td class="en">to fix</td><td class="de">beheben</td></tr>
+    <tr><td class="en">to scale / scalability</td><td class="de">skalieren / Skalierbarkeit</td><td class="en">load</td><td class="de">Last, Belastung</td></tr>
+    <tr><td class="en">throughput</td><td class="de">Durchsatz</td><td class="en">latency</td><td class="de">Verzögerung, Antwortzeit</td></tr>
+    <tr><td class="en">legacy system</td><td class="de">Altsystem</td><td class="en">dependency</td><td class="de">Abhängigkeit</td></tr>
+    <tr><td class="en">backward compatible</td><td class="de">abwärtskompatibel</td><td class="en">library / framework</td><td class="de">Bibliothek / Programmiergerüst</td></tr>
+    <tr><td class="en">interface</td><td class="de">Schnittstelle</td><td class="en">request / response</td><td class="de">Anfrage / Antwort</td></tr>
+    <tr><td class="en">to retrieve</td><td class="de">abrufen</td><td class="en">to store</td><td class="de">speichern</td></tr>
+    <tr><td class="en">to validate</td><td class="de">prüfen, validieren</td><td class="en">edge case</td><td class="de">Grenzfall</td></tr>
+    <tr><td class="en">test coverage</td><td class="de">Testabdeckung</td><td class="en">statement / branch / path coverage</td><td class="de">Anweisungs- / Zweig- / Pfadüberdeckung</td></tr>
+    <tr><td class="en">unit test</td><td class="de">Komponenten-, Modultest</td><td class="en">regression test</td><td class="de">Regressionstest</td></tr>
+    <tr><td class="en">to refactor</td><td class="de">Code umstrukturieren (ohne Funktionsänderung)</td><td class="en">version control</td><td class="de">Versionsverwaltung</td></tr>
+    <tr><td class="en">continuous integration</td><td class="de">fortlaufendes Zusammenführen und automatisches Testen</td><td class="en">to automate</td><td class="de">automatisieren</td></tr>
+    <tr><th colspan="4">Datenbanken</th></tr>
+    <tr><td class="en">database management system (DBMS)</td><td class="de">Datenbankmanagementsystem</td><td class="en">query</td><td class="de">Abfrage</td></tr>
+    <tr><td class="en">table / row / column</td><td class="de">Tabelle / Zeile (Datensatz) / Spalte (Attribut)</td><td class="en">primary key / foreign key</td><td class="de">Primärschlüssel / Fremdschlüssel</td></tr>
+    <tr><td class="en">to normalize</td><td class="de">normalisieren</td><td class="en">redundancy</td><td class="de">Redundanz (doppelte Daten)</td></tr>
+    <tr><td class="en">consistency</td><td class="de">Konsistenz, Widerspruchsfreiheit</td><td class="en">integrity</td><td class="de">Integrität, Unversehrtheit</td></tr>
+    <tr><td class="en">transaction</td><td class="de">Transaktion</td><td class="en">schema</td><td class="de">Schema (Struktur der Daten)</td></tr>
+    <tr><td class="en">index</td><td class="de">Index (Suchverzeichnis)</td><td class="en">backup / to restore</td><td class="de">Datensicherung / wiederherstellen</td></tr>
+    <tr><td class="en">stale data</td><td class="de">veraltete Daten</td><td class="en">document / collection</td><td class="de">Dokument / Sammlung (NoSQL)</td></tr>
+    <tr><th colspan="4">Netzwerk, Cloud und Betrieb</th></tr>
+    <tr><td class="en">node</td><td class="de">Knoten (Rechner im Verbund)</td><td class="en">bandwidth</td><td class="de">Bandbreite</td></tr>
+    <tr><td class="en">range</td><td class="de">Reichweite; Bereich</td><td class="en">data rate</td><td class="de">Datenrate</td></tr>
+    <tr><td class="en">power consumption</td><td class="de">Leistungsaufnahme, Stromverbrauch</td><td class="en">battery life</td><td class="de">Akkulaufzeit</td></tr>
+    <tr><td class="en">gateway</td><td class="de">Übergang, Vermittler zwischen Netzen/Systemen</td><td class="en">availability</td><td class="de">Verfügbarkeit</td></tr>
+    <tr><td class="en">data center</td><td class="de">Rechenzentrum</td><td class="en">on-premises</td><td class="de">im eigenen Haus betrieben</td></tr>
+    <tr><td class="en">provider</td><td class="de">Anbieter</td><td class="en">to provision</td><td class="de">(Ressourcen) bereitstellen</td></tr>
+    <tr><td class="en">instance</td><td class="de">Instanz (laufende Kopie eines Dienstes)</td><td class="en">to monitor</td><td class="de">überwachen</td></tr>
+    <tr><th colspan="4">Sicherheit und Recht</th></tr>
+    <tr><td class="en">confidentiality</td><td class="de">Vertraulichkeit</td><td class="en">authentication / authorization</td><td class="de">Authentifizierung (wer?) / Autorisierung (was darf er?)</td></tr>
+    <tr><td class="en">encryption / to encrypt</td><td class="de">Verschlüsselung / verschlüsseln</td><td class="en">signature</td><td class="de">Signatur</td></tr>
+    <tr><td class="en">certificate</td><td class="de">Zertifikat</td><td class="en">vulnerability</td><td class="de">Schwachstelle</td></tr>
+    <tr><td class="en">threat</td><td class="de">Bedrohung</td><td class="en">access control</td><td class="de">Zugriffskontrolle</td></tr>
+    <tr><td class="en">compliance</td><td class="de">Einhaltung von Regeln und Gesetzen</td><td class="en">directive / regulation</td><td class="de">Richtlinie (national umzusetzen) / Verordnung (gilt direkt)</td></tr>
+    <tr><td class="en">invoice</td><td class="de">Rechnung</td><td class="en">personal data</td><td class="de">personenbezogene Daten</td></tr>
+    <tr><th colspan="4">Projektmanagement und Organisation</th></tr>
+    <tr><td class="en">stakeholder</td><td class="de">Beteiligter, Interessengruppe</td><td class="en">scope</td><td class="de">Umfang (des Projekts)</td></tr>
+    <tr><td class="en">deadline / milestone</td><td class="de">Termin, Frist / Meilenstein</td><td class="en">to estimate / estimate</td><td class="de">schätzen / Schätzung</td></tr>
+    <tr><td class="en">effort</td><td class="de">Aufwand</td><td class="en">user story</td><td class="de">Anforderung aus Nutzersicht</td></tr>
+    <tr><td class="en">acceptance criteria</td><td class="de">Abnahmekriterien</td><td class="en">backlog</td><td class="de">(priorisierte) Aufgabenliste</td></tr>
+    <tr><td class="en">iteration</td><td class="de">Durchlauf, Entwicklungszyklus</td><td class="en">issue</td><td class="de">Vorgang, Problem (im Tracker)</td></tr>
+    <tr><td class="en">lessons learned</td><td class="de">gewonnene Erkenntnisse</td><td class="en">bottleneck</td><td class="de">Engpass</td></tr>
+  </table>
+
+  <h4>Typische Formulierungen und Signalwörter</h4>
+  <table class="kompakt lang">
+    <tr><th>Englisch</th><th>Deutsch</th><th>Funktion im Text</th></tr>
+    <tr><td><em>whereas, while</em></td><td>wohingegen, während</td><td rowspan="3">Gegensatz – hier stehen oft Unterschiede und Nachteile</td></tr>
+    <tr><td><em>in contrast to, unlike</em></td><td>im Gegensatz zu</td></tr>
+    <tr><td><em>however, but, on the other hand</em></td><td>jedoch, aber, andererseits</td></tr>
+    <tr><td><em>although, even though, despite</em></td><td>obwohl, trotz</td><td>Einräumung</td></tr>
+    <tr><td><em>provided that, as long as</em></td><td>vorausgesetzt, dass / solange</td><td rowspan="3">Bedingung – Voraussetzung für einen Vorteil</td></tr>
+    <tr><td><em>unless</em></td><td>es sei denn, außer wenn</td></tr>
+    <tr><td><em>if, in case of, once</em></td><td>wenn, im Fall von, sobald</td></tr>
+    <tr><td><em>therefore, thus, hence, consequently</em></td><td>daher, deshalb, folglich</td><td rowspan="3">Folge / Begründung – Argumentationskette</td></tr>
+    <tr><td><em>due to, because of, since</em></td><td>aufgrund, wegen, da</td></tr>
+    <tr><td><em>in order to, so that</em></td><td>um … zu, damit</td></tr>
+    <tr><td><em>such as, e.g., for instance</em></td><td>wie zum Beispiel</td><td rowspan="2">Beispiel / Erklärung</td></tr>
+    <tr><td><em>i.e., that is, in other words</em></td><td>das heißt, mit anderen Worten</td></tr>
+    <tr><td><em>in addition, furthermore, moreover</em></td><td>zusätzlich, außerdem</td><td>Aufzählung – ein weiterer Punkt beginnt</td></tr>
+    <tr><td><em>instead of, rather than</em></td><td>anstatt, statt</td><td>Alternative</td></tr>
+    <tr><td><em>at least / at most / up to</em></td><td>mindestens / höchstens / bis zu</td><td rowspan="2">Mengenangaben genau übernehmen</td></tr>
+    <tr><td><em>less than / more than</em></td><td>weniger als / mehr als</td></tr>
+    <tr><td><em>respectively</em></td><td>beziehungsweise (jeweils, in der genannten Reihenfolge)</td><td>Zuordnung</td></tr>
+    <tr><td><em>regardless of, whether</em></td><td>unabhängig von / ob</td><td>Bedingung</td></tr>
+    <tr><td><em>must, shall, is required</em> · <em>should</em> · <em>may, can</em></td><td>muss (Pflicht) · soll (Empfehlung) · darf/kann (optional)</td><td>Verbindlichkeit bei Anforderungen und Normen</td></tr>
+  </table>
+
+  <h4>Falsche Freunde und Zahlen</h4>
+  <table class="kompakt">
+    <tr><th>Englisch</th><th>bedeutet</th><th>nicht</th></tr>
+    <tr><td><em>eventually</em></td><td>schließlich, irgendwann</td><td>eventuell (= <em>possibly</em>)</td></tr>
+    <tr><td><em>actual, actually</em></td><td>tatsächlich</td><td>aktuell (= <em>current</em>)</td></tr>
+    <tr><td><em>to become</em></td><td>werden</td><td>bekommen (= <em>to get, to receive</em>)</td></tr>
+    <tr><td><em>sensible</em> / <em>sensitive</em></td><td>vernünftig / empfindlich, vertraulich (<em>sensitive data</em>)</td><td>–</td></tr>
+    <tr><td><em>to control</em></td><td>steuern, beherrschen</td><td>nur „kontrollieren“ im Sinne von prüfen (= <em>to check</em>)</td></tr>
+    <tr><td><em>billion</em></td><td>Milliarde</td><td>Billion (= <em>trillion</em>)</td></tr>
+    <tr><td><em>1,000.50</em></td><td>tausend Komma fünf (1.000,50)</td><td>eins Komma null null null</td></tr>
+  </table>
+  <div class="falle"><span class="kastentitel">Typische Fehler</span>Den ganzen Text Satz für Satz übersetzen (kostet zu viel Zeit) · englische Sätze abschreiben · denselben Vorteil zweimal in anderen Worten nennen · Bedingungen überlesen (<em>provided that</em>, <em>unless</em> – genau dort stehen oft die Voraussetzungen und Nachteile) · Informationen ergänzen, die nicht im Text stehen, obwohl „laut Text“ gefragt ist · Zahlenformat verwechseln.</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
+    <strong>S22 T1 A2c:</strong> Text zu MongoDB mit drei Zwischenüberschriften, „Erläutern Sie drei Vorteile beim Einsatz von MongoDB gegenüber relationalen Datenbanken“ (9 P). ·
+    <strong>W23 T1 A2a:</strong> Text zu User Stories; wer schreibt sie, wie sind sie aufgebaut, was bedeutet ein INVEST-Kriterium. ·
+    <strong>S24 T2 A3b:</strong> Text zu Überdeckungsmaßen; Anweisungs-, Zweig- und Pfadüberdeckung beschreiben (12 P). ·
+    <strong>W25 T1 A2b:</strong> Text zur EU-Richtlinie über elektronische Rechnungen; Hauptziel und Aspekte digitaler Rechnungen. ·
+    <strong>S26 T1 A3a:</strong> Text zu LoRa; Merkmale nennen und danach begründen, warum LoRa für die Sensoren geeignet ist.
+    Das Thema des Textes stammt immer aus dem Szenario der Prüfung. Die Aufgabe prüft also Lesekompetenz <em>und</em> Fachwissen.</div>
+
+  <!-- ===================== QU-02 ===================== -->
+  <h3 id="e-02">QU-02 · Tabellenkalkulation <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfung: S23 T1 A3 (16 P): Formel für den Folgetag (2 P), Grundpreis mit VLOOKUP aus einem anderen Arbeitsblatt (5 P), Endpreis mit IF und WEEKDAY (5 P), weitere Einsatzmöglichkeit (2 P), Problem beim Einsatz (2 P). Die Funktionen standen im Belegsatz, mit englischen Namen.</p>
+
+  <h4>Grundbegriffe</h4>
+  <ul>
+    <li><strong>Arbeitsmappe</strong> (Datei) → <strong>Arbeitsblätter</strong> (Tabellenblätter) → <strong>Zellen</strong> (Spalte + Zeile, z. B. <code>B3</code>) → <strong>Bereich</strong> (<code>B3:D8</code>).</li>
+    <li>Eine Formel beginnt mit <code>=</code>. In der deutschen Version werden Argumente mit <strong>Semikolon</strong> getrennt und Kommazahlen mit Komma geschrieben (<code>=RUNDEN(A1;2)</code>), in der englischen Version mit Komma und Dezimalpunkt (<code>=ROUND(A1,2)</code>). In der Prüfung schreibst du so wie im Belegsatz; beide Schreibweisen werden akzeptiert.</li>
+    <li><strong>Bezug auf ein anderes Arbeitsblatt:</strong> <code>Blattname!Zelle</code>, z. B. <code>Preise!B3</code> oder <code>Preise!$A$2:$C$8</code> (LibreOffice: <code>$Preise.B3</code>).</li>
+    <li><strong>Datumswerte sind Zahlen:</strong> Gespeichert wird die Anzahl der Tage seit dem 01.01.1900 (01.01.1900 = 1, der 08.10.2026 ist 46303). Deshalb kann man mit Datumswerten rechnen: Datum + 1 = Folgetag, Datum + 7 = eine Woche später, Datum − Datum = Abstand in Tagen. Das Zellformat (z. B. „Do, 08.10.2026“) ändert nur die Anzeige.</li>
+    <li>Text steht in Anführungszeichen (<code>"ja"</code>), Wahrheitswerte heißen WAHR/FALSCH (TRUE/FALSE), Vergleiche: <code>=  &lt;&gt;  &lt;  &gt;  &lt;=  &gt;=</code>, Texte verketten mit <code>&amp;</code>.</li>
+  </ul>
+
+  <h4>Zellbezüge: relativ, absolut, gemischt</h4>
+  <p>Beim Kopieren einer Formel passt die Tabellenkalkulation <strong>relative Bezüge</strong> an: Eine Formel in Zeile 2, die sich auf <code>B2</code> bezieht, bezieht sich nach dem Kopieren in Zeile 3 auf <code>B3</code>. Mit dem <strong>$-Zeichen</strong> wird die Spalte bzw. Zeile festgehalten (<kbd>F4</kbd> schaltet in Excel zwischen den Varianten um).</p>
+  <table class="kompakt">
+    <tr><th>Schreibweise</th><th>Art</th><th>nach unten kopiert</th><th>nach rechts kopiert</th><th>typischer Einsatz</th></tr>
+    <tr><td class="mono">B2</td><td>relativ</td><td class="mono">B3</td><td class="mono">C2</td><td>„die Zelle in derselben Zeile“ – der Normalfall</td></tr>
+    <tr><td class="mono">$B$2</td><td>absolut</td><td class="mono">$B$2</td><td class="mono">$B$2</td><td>fester Wert (Steuersatz, Zuschlag) oder Nachschlagetabelle</td></tr>
+    <tr><td class="mono">$B2</td><td>gemischt: Spalte fest</td><td class="mono">$B3</td><td class="mono">$B2</td><td>Werte aus einer festen Spalte</td></tr>
+    <tr><td class="mono">B$2</td><td>gemischt: Zeile fest</td><td class="mono">B$2</td><td class="mono">C$2</td><td>Werte aus einer festen Zeile</td></tr>
+  </table>
+  <div class="zweispaltig">
+    <div>
+      <p><strong>Beispiel Einmaleins:</strong> In <code>B2</code> steht <code>=$A2*B$1</code>. Die Formel wird nach <code>B2:F6</code> kopiert. In <code>D4</code> steht dann <code>=$A4*D$1</code> = 3 · 3 = 9: Die Spalte A und die Zeile 1 bleiben fest, weil dort die Faktoren stehen.</p>
+    </div>
+    <div>
+      <table class="sheet">
+        <tr><th class="ecke"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+        <tr><th>1</th><td></td><td class="n k">1</td><td class="n k">2</td><td class="n k">3</td><td class="n k">4</td><td class="n k">5</td></tr>
+        <tr><th>2</th><td class="n k">1</td><td class="n">1</td><td class="n">2</td><td class="n">3</td><td class="n">4</td><td class="n">5</td></tr>
+        <tr><th>3</th><td class="n k">2</td><td class="n">2</td><td class="n">4</td><td class="n">6</td><td class="n">8</td><td class="n">10</td></tr>
+        <tr><th>4</th><td class="n k">3</td><td class="n">3</td><td class="n">6</td><td class="n">9</td><td class="n">12</td><td class="n">15</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="merke"><span class="kastentitel">Merke</span>Frage dich bei jedem Bezug: <strong>Soll er beim Kopieren mitwandern?</strong> Nein → <code>$</code> davor. Einzelne Parameterzellen (Zuschlag, Rabatt, Stichtag) und Nachschlagebereiche (die Matrix im SVERWEIS) sind fast immer absolut.</div>
+
+  <h4>Wichtige Funktionen (deutsch – englisch)</h4>
+  <table class="kompakt lang">
+    <tr><th>Deutsch</th><th>Englisch</th><th>Wirkung, Beispiel</th></tr>
+    <tr><td>SUMME, MITTELWERT, MIN, MAX</td><td>SUM, AVERAGE, MIN, MAX</td><td><code>=MITTELWERT(D2:D40)</code></td></tr>
+    <tr><td>ANZAHL / ANZAHL2</td><td>COUNT / COUNTA</td><td>zählt Zellen mit Zahlen / alle nicht leeren Zellen</td></tr>
+    <tr><td>ZÄHLENWENN</td><td>COUNTIF</td><td>zählt Zellen, die ein Kriterium erfüllen: <code>=ZÄHLENWENN(B2:B40;"Jugend")</code>, <code>=ZÄHLENWENN(D2:D40;"&gt;=100")</code></td></tr>
+    <tr><td>SUMMEWENN</td><td>SUMIF</td><td>(Kriterienbereich; Kriterium; Summenbereich): <code>=SUMMEWENN(B2:B40;"Jugend";D2:D40)</code></td></tr>
+    <tr><td>ZÄHLENWENNS, SUMMEWENNS</td><td>COUNTIFS, SUMIFS</td><td>mehrere Kriterien; bei SUMMEWENNS steht der Summenbereich <em>vorn</em></td></tr>
+    <tr><td>RUNDEN, AUFRUNDEN, ABRUNDEN</td><td>ROUND, ROUNDUP, ROUNDDOWN</td><td><code>=RUNDEN(A2;2)</code> → 2 Nachkommastellen (kaufmännisch)</td></tr>
+    <tr><td>WENN, UND, ODER, NICHT</td><td>IF, AND, OR, NOT</td><td>Logik, siehe unten</td></tr>
+    <tr><td>WENNFEHLER</td><td>IFERROR</td><td><code>=WENNFEHLER(Formel;"unbekannt")</code> ersetzt Fehlerwerte</td></tr>
+    <tr><td>SVERWEIS, WVERWEIS, XVERWEIS</td><td>VLOOKUP, HLOOKUP, XLOOKUP</td><td>Werte in einer Tabelle nachschlagen, siehe unten</td></tr>
+    <tr><td>HEUTE, JETZT</td><td>TODAY, NOW</td><td>aktuelles Datum (bzw. mit Uhrzeit); ändert sich täglich</td></tr>
+    <tr><td>DATUM, TAG, MONAT, JAHR</td><td>DATE, DAY, MONTH, YEAR</td><td><code>=DATUM(JAHR(C2)+1;MONAT(C2);TAG(C2))</code> = gleiches Datum ein Jahr später</td></tr>
+    <tr><td>WOCHENTAG</td><td>WEEKDAY</td><td>Wochentag als Zahl, siehe unten</td></tr>
+    <tr><td>ARBEITSTAG, NETTOARBEITSTAGE</td><td>WORKDAY, NETWORKDAYS</td><td>Datum nach n Arbeitstagen / Anzahl Arbeitstage zwischen zwei Daten</td></tr>
+    <tr><td>VERKETTEN (bzw. <code>&amp;</code>), LINKS, RECHTS, TEIL, LÄNGE</td><td>CONCATENATE, LEFT, RIGHT, MID, LEN</td><td>Textfunktionen</td></tr>
+  </table>
+  <p><strong>Beispiel Sportverein</strong> (Arbeitsblätter <code>Mitglieder</code> und <code>Beiträge</code>):</p>
+  <div class="zweispaltig">
+    <div>
+      <table class="sheet">
+        <tr><th class="ecke"></th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+        <tr><th>1</th><td class="k">Name</td><td class="k">Mitgliedsart</td><td class="k">Eintritt</td><td class="k">Beitrag</td></tr>
+        <tr><th>2</th><td>Kaya</td><td>Erwachsene</td><td class="n">01.03.2019</td><td class="n">120</td></tr>
+        <tr><th>3</th><td>Brandt</td><td>Jugend</td><td class="n">15.08.2023</td><td class="n">60</td></tr>
+        <tr><th>4</th><td>Schulz</td><td>Familie</td><td class="n">10.01.2021</td><td class="n">220</td></tr>
+        <tr><th>5</th><td>Nowak</td><td>Erwachsene</td><td class="n">20.11.2025</td><td class="n">120</td></tr>
+      </table>
+      <span class="blattname">Mitglieder</span>
+    </div>
+    <div>
+      <table class="sheet">
+        <tr><th class="ecke"></th><th>A</th><th>B</th></tr>
+        <tr><th>1</th><td class="k">Mitgliedsart</td><td class="k">Jahresbeitrag</td></tr>
+        <tr><th>2</th><td>Erwachsene</td><td class="n">120</td></tr>
+        <tr><th>3</th><td>Jugend</td><td class="n">60</td></tr>
+        <tr><th>4</th><td>Familie</td><td class="n">220</td></tr>
+        <tr><th>5</th><td>Passiv</td><td class="n">30</td></tr>
+      </table>
+      <span class="blattname">Beiträge</span>
+    </div>
+  </div>
+  <table class="kompakt">
+    <tr><th>Gesucht</th><th>Formel (deutsch)</th><th>Ergebnis</th></tr>
+    <tr><td>Anzahl erwachsener Mitglieder</td><td class="mono">=ZÄHLENWENN(B2:B5;"Erwachsene")</td><td>2</td></tr>
+    <tr><td>Summe der Erwachsenenbeiträge</td><td class="mono">=SUMMEWENN(B2:B5;"Erwachsene";D2:D5)</td><td>240</td></tr>
+    <tr><td>Anzahl Beiträge ab 100 €</td><td class="mono">=ZÄHLENWENN(D2:D5;"&gt;=100")</td><td>3</td></tr>
+    <tr><td>Beitrag in D2 (nach unten kopierbar)</td><td class="mono">=SVERWEIS(B2;Beiträge!$A$2:$B$5;2;FALSCH)</td><td>120</td></tr>
+    <tr><td>ermäßigt oder voll? (Zeile 2)</td><td class="mono">=WENN(ODER(B2="Jugend";B2="Passiv");"ermäßigt";"voll")</td><td>voll</td></tr>
+    <tr><td>Ehrennadel für Erwachsene, die vor 2020 eingetreten sind</td><td class="mono">=WENN(UND(B2="Erwachsene";JAHR(C2)&lt;2020);"Ehrennadel";"")</td><td>Ehrennadel</td></tr>
+    <tr><td>Tage seit dem Eintritt</td><td class="mono">=HEUTE()-C2</td><td>Zahl, ändert sich täglich</td></tr>
+  </table>
+
+  <h4>WENN – auch verschachtelt</h4>
+  <p><code>WENN(Prüfung; Dann_Wert; Sonst_Wert)</code>. Für mehr als zwei Fälle wird im Sonst-Teil ein weiteres WENN eingesetzt. Bei Schwellenwerten von der höchsten Schwelle abwärts prüfen, dann braucht man keine Bereichsprüfung mit UND. <code>UND(…)</code> ist wahr, wenn alle Bedingungen gelten, <code>ODER(…)</code>, wenn mindestens eine gilt. Beispiel IHK-Notenschlüssel (Punkte in <code>B2</code>):</p>
+  <pre class="sql">=WENN(B2&gt;=92;1;WENN(B2&gt;=81;2;WENN(B2&gt;=67;3;WENN(B2&gt;=50;4;WENN(B2&gt;=30;5;6)))))</pre>
+  <p class="klein">74 Punkte → 3 · 50 Punkte → 4 · 29,5 Punkte → 6 (in Excel geprüft). Englisch: <code>=IF(B2&gt;=92,1,IF(B2&gt;=81,2, …))</code>. Jede öffnende Klammer braucht eine schließende: 5 × WENN → 5 Klammern am Ende.</p>
+
+  <h4>SVERWEIS und XVERWEIS</h4>
+  <p><code>SVERWEIS(Suchkriterium; Matrix; Spaltenindex; Bereich_Verweis)</code> sucht das Suchkriterium in der <strong>ersten Spalte</strong> der Matrix und liefert den Wert aus der Spalte <em>Spaltenindex</em> derselben Zeile. Der Spaltenindex zählt <strong>ab der ersten Spalte der Matrix</strong>, nicht ab Spalte A des Blattes.</p>
+  <ul>
+    <li><strong>Bereich_Verweis = FALSCH</strong> (oder 0): genaue Übereinstimmung. Wird nichts gefunden, erscheint <code>#NV</code>. Richtig für Schlüssel wie Artikelnummer, Zone, Mitgliedsart.</li>
+    <li><strong>Bereich_Verweis = WAHR</strong> (oder weggelassen): ungefähre Suche. Die erste Spalte muss <strong>aufsteigend sortiert</strong> sein; geliefert wird die Zeile mit dem größten Wert, der kleiner oder gleich dem Suchkriterium ist. Richtig für <strong>Staffeln</strong> (Versandkosten nach Gewicht, Rabatt nach Menge, Noten nach Punkten).</li>
+    <li>Die Matrix wird absolut angegeben, damit die Formel kopiert werden kann.</li>
+  </ul>
+  <div class="zweispaltig">
+    <div>
+      <table class="sheet">
+        <tr><th class="ecke"></th><th>A</th><th>B</th></tr>
+        <tr><th>30</th><td class="n">0</td><td class="n">4,99</td></tr>
+        <tr><th>31</th><td class="n">2</td><td class="n">6,49</td></tr>
+        <tr><th>32</th><td class="n">5</td><td class="n">8,99</td></tr>
+        <tr><th>33</th><td class="n">10</td><td class="n">14,99</td></tr>
+      </table>
+      <span class="blattname">Versandstaffel (ab kg → Preis)</span>
+    </div>
+    <div>
+      <p><code>=SVERWEIS(7,3;$A$30:$B$33;2;WAHR)</code> → <strong>8,99</strong> (größter Wert ≤ 7,3 ist 5)<br>
+      <code>=SVERWEIS(2;$A$30:$B$33;2;WAHR)</code> → 6,49<br>
+      <code>=SVERWEIS(7,3;$A$30:$B$33;2;FALSCH)</code> → <code>#NV</code> (7,3 steht nicht in der Liste)</p>
+    </div>
+  </div>
+  <p><strong>XVERWEIS</strong> (Excel 2021/365, neuere LibreOffice-Versionen): <code>XVERWEIS(Suchkriterium; Suchmatrix; Rückgabematrix; [wenn_nicht_gefunden]; …)</code>. Sucht standardmäßig genau, die Rückgabespalte darf auch links der Suchspalte liegen, und eingefügte Spalten verschieben keinen Spaltenindex. Beispiel: <code>=XVERWEIS(B2;Beiträge!$A$2:$A$5;Beiträge!$B$2:$B$5;"unbekannt")</code>. <strong>WVERWEIS</strong> arbeitet wie SVERWEIS, sucht aber in der ersten <em>Zeile</em>.</p>
+  <div class="falle"><span class="kastentitel">Typische Falle: Bereich_Verweis vergessen</span>Ohne viertes Argument sucht SVERWEIS <em>ungefähr</em>. Bei unsortierten Text-Schlüsseln kommt dann nicht <code>#NV</code>, sondern ein falscher Wert heraus: Im Beispiel liefert <code>=SVERWEIS("Senioren";Beiträge!$A$2:$B$5;2)</code> den Wert 30 (Passiv), obwohl es keine Mitgliedsart „Senioren“ gibt. Bei Schlüsseln also immer <code>FALSCH</code> angeben. Weitere Fehlerwerte: <code>#WERT!</code> (falscher Datentyp, z. B. Text + Zahl), <code>#DIV/0!</code>, <code>#BEZUG!</code> (Bezug gelöscht), <code>#NAME?</code> (Funktionsname falsch, z. B. englischer Name in der deutschen Version).</div>
+
+  <h4>Datumsfunktionen und WOCHENTAG</h4>
+  <p><code>WOCHENTAG(Zahl; [Typ])</code> liefert den Wochentag eines Datums als Zahl. Welche Zahl welcher Tag ist, hängt vom Typ ab:</p>
+  <table class="kompakt">
+    <tr><th>Typ</th><th>Mo</th><th>Di</th><th>Mi</th><th>Do</th><th>Fr</th><th>Sa</th><th>So</th><th>Hinweis</th></tr>
+    <tr><td>1 (Standard in Excel)</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>1</td><td>Woche beginnt am Sonntag</td></tr>
+    <tr><td>2</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>in Deutschland am praktischsten</td></tr>
+    <tr><td>3</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td></td></tr>
+  </table>
+  <p>Der 25.12.2026 ist ein Freitag: <code>=WOCHENTAG(DATUM(2026;12;25))</code> → 6, <code>=WOCHENTAG(DATUM(2026;12;25);2)</code> → 5. Mit Typ 2 heißt „Wochenende“ <code>WOCHENTAG(A2;2)&gt;5</code> und „Montag bis Freitag“ <code>WOCHENTAG(A2;2)&lt;=5</code>.</p>
+  <div class="falle"><span class="kastentitel">Achtung Belegsatz</span>Im Belegsatz von S23 war WEEKDAY so beschrieben, dass standardmäßig 1 = Montag gilt – anders als in Excel. Maßgeblich ist in der Prüfung immer die Beschreibung im Belegsatz. Am sichersten gibst du den Typ ausdrücklich an.</div>
+
+  <h4>Einsatzmöglichkeiten und Grenzen</h4>
+  <div class="zweispaltig">
+    <div>
+      <p><strong>Gut geeignet für</strong></p>
+      <ul>
+        <li>Kalkulationen und Angebote, Budget- und Kostenplanung</li>
+        <li>Simulationen, „Was-wäre-wenn“-Rechnungen (Preismodell durchspielen)</li>
+        <li>Auswertungen und Diagramme (Umsatz je Monat, Statistiken)</li>
+        <li>kleine Listen, die eine Person pflegt (Inventar, Schichtplan-Entwurf)</li>
+        <li>Prototyp einer Berechnungslogik, bevor sie programmiert wird</li>
+        <li>Datenimport, -prüfung und -bereinigung (z. B. CSV vor der Migration)</li>
+      </ul>
+    </div>
+    <div>
+      <p><strong>Probleme</strong></p>
+      <ul>
+        <li><strong>Fehleranfälligkeit:</strong> falsche oder überschriebene Formeln, falsche Bezüge nach dem Kopieren fallen nicht auf</li>
+        <li><strong>keine Datenintegrität:</strong> keine Datentypen, Pflichtfelder oder Fremdschlüssel</li>
+        <li><strong>Mehrbenutzerbetrieb:</strong> gleichzeitiges Bearbeiten führt zu Sperren oder Konflikten</li>
+        <li><strong>Versionierung:</strong> viele Kopien („Liste_final_neu2.xlsx“), unklar, welche gilt</li>
+        <li><strong>Zugriffsrechte</strong> nur für die ganze Datei, keine Protokollierung, wer was geändert hat</li>
+        <li><strong>Datenschutz:</strong> personenbezogene Daten in Dateien, die kopiert und per Mail verschickt werden</li>
+        <li><strong>Skalierung:</strong> langsam bei großen Datenmengen; Makros als Sicherheitsrisiko; Wissen bei einer Person</li>
+      </ul>
+    </div>
+  </div>
+  <table class="kompakt">
+    <tr><th>Kriterium</th><th>Tabellenkalkulation</th><th>Anwendung mit Datenbank</th></tr>
+    <tr><td>gleichzeitige Nutzung</td><td>eingeschränkt, Konflikte</td><td>viele Nutzer gleichzeitig, Transaktionen (ACID)</td></tr>
+    <tr><td>Datenqualität</td><td>jede Zelle frei editierbar</td><td>Datentypen, Pflichtfelder, Fremdschlüssel, Eingabeprüfung</td></tr>
+    <tr><td>Rechte, Nachvollziehbarkeit</td><td>Datei-Ebene, kein Protokoll</td><td>Rollen und Rechte je Funktion, Änderungsprotokoll</td></tr>
+    <tr><td>Logik</td><td>in Zellen verteilt, schwer testbar</td><td>zentral im Code, versioniert und getestet</td></tr>
+    <tr><td>Integration</td><td>manueller Export/Import</td><td>Schnittstellen (z. B. REST), Automatisierung</td></tr>
+  </table>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>S23 T1 A3:</strong> Zwei Arbeitsblätter (Grundpreise je Wettersituation, Wetterdaten je Datum) und ein Blatt „Buchung“ mit grau markierten Zellen. Gesucht waren die Formel für den Folgetag, ein Wert per VLOOKUP aus dem anderen Blatt und ein Endpreis mit IF und WEEKDAY (Rabatt Montag bis Freitag). Hinweise im Aufgabentext: Hilfswerte in anderen Spalten sind erlaubt, Bezüge auf andere Blätter mit <code>Blatt!Zelle</code>, Datumswerte als Tageszahl. Danach je 2 P: eine weitere Einsatzmöglichkeit und ein Problem von Tabellenkalkulationen beschreiben.</div>
+
+  <!-- ===================== QU-03 ===================== -->
+  <h3 id="e-03">QU-03 · Ticketsystem / IT-Service <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfung: S22 T1 A4a (12 P): drei Vorteile und einen Nachteil beim Einsatz eines Ticketsystems für den Support einer App erläutern (danach ging es mit dem Login per OAuth2 weiter)</p>
+  <p>Ein <strong>Ticketsystem</strong> (Helpdesk-, Service-Desk- oder Issue-Tracking-System) erfasst jede Anfrage als <strong>Ticket</strong> mit eindeutiger Nummer und verfolgt sie bis zur Erledigung. Anfragen kommen über mehrere Kanäle herein: E-Mail (wird automatisch zum Ticket), Webformular bzw. Self-Service-Portal, Telefon (der Service Desk legt das Ticket an), Chat oder ein Feedback-Knopf in der App. Bekannte Produkte sind Jira Service Management, Zammad, Znuny (früher OTRS) und ServiceNow; für Entwicklungsaufgaben die Issues in GitHub oder GitLab.</p>
+  <p><strong>Inhalt eines Tickets:</strong> Ticketnummer · Melder mit Kontaktdaten · Zeitstempel (Eingang, erste Reaktion, Lösung) · Kanal · Kategorie und betroffener Dienst · Beschreibung (Fehlerbild, Schritte, Screenshot, Gerät, App-Version) · Auswirkung und Dringlichkeit → Priorität · Status · zuständige Gruppe bzw. Bearbeiter · Verlauf mit Kommentaren · Lösung und Ursache · Verknüpfungen zu anderen Tickets · Zeitaufwand.</p>
+
+  <h4>ITIL-Grundbegriffe (kurz)</h4>
+  <p>ITIL ist eine Sammlung bewährter Praktiken für das IT-Service-Management. Für die Prüfung reichen diese Begriffe (Beispiele aus einer Hochschul-IT):</p>
+  <table class="kompakt lang">
+    <tr><th style="width:20%">Begriff</th><th>Bedeutung</th><th style="width:30%">Beispiel</th></tr>
+    <tr><td>Service Desk (SPOC)</td><td>zentrale Anlaufstelle (<em>Single Point of Contact</em>) für alle Anfragen der Nutzer</td><td>IT-Hotline der Hochschule</td></tr>
+    <tr><td>Incident (Störung)</td><td>ungeplante Unterbrechung oder Qualitätsminderung eines Services; Ziel: Service so schnell wie möglich wiederherstellen, notfalls mit Workaround</td><td>„Das Lernportal zeigt seit 9 Uhr eine Fehlerseite.“</td></tr>
+    <tr><td>Service Request</td><td>Standardanfrage ohne Störung: Zugang, Passwort zurücksetzen, Information, Gerät bestellen</td><td>„Bitte schalten Sie mir das Raumbuchungssystem frei.“</td></tr>
+    <tr><td>Problem</td><td>die (noch unbekannte) Ursache eines oder mehrerer Incidents; Ziel: Ursache finden und dauerhaft beseitigen</td><td>„Warum fällt das Lernportal jeden Montag aus?“</td></tr>
+    <tr><td>Known Error, Workaround</td><td>Problem mit bekannter Ursache; Workaround = dokumentierte Umgehungslösung bis zur endgültigen Behebung</td><td>„Bis zum Patch: Browser-Cache leeren.“</td></tr>
+    <tr><td>Change</td><td>geplante Änderung an einem Service oder System (Update, Konfiguration, neue Funktion); wird bewertet, genehmigt, geplant und dokumentiert</td><td>„Am Samstag wird das Betriebssystem der Webserver aktualisiert.“</td></tr>
+    <tr><td>SLA, OLA</td><td><em>Service Level Agreement</em>: Vereinbarung mit dem Kunden über Servicezeiten, Reaktions- und Lösungszeiten, Verfügbarkeit; OLA: entsprechende interne Vereinbarung zwischen Teams</td><td>„P1-Störungen werden innerhalb von 4 h behoben.“</td></tr>
+  </table>
+
+  <h4>Lebenszyklus eines Tickets</h4>
+  <figure>
+    <svg viewBox="0 0 760 275" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e03a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10" fill="none" stroke="#222" stroke-width="1.6"/>
+        </marker>
+      </defs>
+      <!-- Start -->
+      <circle cx="22" cy="70" r="8" fill="#222"/>
+      <line x1="30" y1="70" x2="46" y2="70" stroke="#222" marker-end="url(#e03a-pfeil)"/>
+      <!-- Zustände Reihe 1 -->
+      <rect x="48" y="50" width="100" height="40" rx="10" fill="#fff" stroke="#222"/>
+      <text x="98" y="75" text-anchor="middle">Neu</text>
+      <rect x="228" y="50" width="124" height="40" rx="10" fill="#fff" stroke="#222"/>
+      <text x="290" y="75" text-anchor="middle">Zugewiesen</text>
+      <rect x="428" y="50" width="144" height="40" rx="10" fill="#eef3fa" stroke="#222"/>
+      <text x="500" y="75" text-anchor="middle">In Bearbeitung</text>
+      <rect x="636" y="50" width="120" height="40" rx="10" fill="#fff" stroke="#222"/>
+      <text x="696" y="67" text-anchor="middle">Wartend</text>
+      <text x="696" y="82" text-anchor="middle" font-size="11">(SLA-Uhr ruht)</text>
+      <!-- Zustände Reihe 2 -->
+      <rect x="428" y="200" width="144" height="40" rx="10" fill="#fff" stroke="#222"/>
+      <text x="500" y="225" text-anchor="middle">Gelöst</text>
+      <rect x="228" y="200" width="124" height="40" rx="10" fill="#fff" stroke="#222"/>
+      <text x="290" y="225" text-anchor="middle">Geschlossen</text>
+      <!-- Ende -->
+      <circle cx="120" cy="220" r="10" fill="#fff" stroke="#222"/>
+      <circle cx="120" cy="220" r="6" fill="#222"/>
+      <!-- Übergänge -->
+      <line x1="148" y1="70" x2="226" y2="70" stroke="#222" marker-end="url(#e03a-pfeil)"/>
+      <text x="187" y="30" text-anchor="middle" font-size="12">kategorisiert,</text>
+      <text x="187" y="44" text-anchor="middle" font-size="12">priorisiert</text>
+      <line x1="352" y1="70" x2="426" y2="70" stroke="#222" marker-end="url(#e03a-pfeil)"/>
+      <text x="389" y="44" text-anchor="middle" font-size="12">angenommen</text>
+      <line x1="572" y1="62" x2="634" y2="62" stroke="#222" marker-end="url(#e03a-pfeil)"/>
+      <text x="603" y="44" text-anchor="middle" font-size="12">Rückfrage</text>
+      <line x1="634" y1="80" x2="574" y2="80" stroke="#222" marker-end="url(#e03a-pfeil)"/>
+      <text x="603" y="104" text-anchor="middle" font-size="12">Antwort</text>
+      <line x1="530" y1="90" x2="530" y2="198" stroke="#222" marker-end="url(#e03a-pfeil)"/>
+      <text x="538" y="140" font-size="12">Lösung</text>
+      <text x="538" y="154" font-size="12">dokumentiert</text>
+      <line x1="470" y1="200" x2="470" y2="92" stroke="#222" stroke-dasharray="5,4" marker-end="url(#e03a-pfeil)"/>
+      <text x="462" y="182" text-anchor="end" font-size="12">wiedereröffnet</text>
+      <path d="M440,90 Q380,150 334,92" fill="none" stroke="#222" marker-end="url(#e03a-pfeil)"/>
+      <text x="384" y="136" text-anchor="middle" font-size="12">eskaliert:</text>
+      <text x="384" y="150" text-anchor="middle" font-size="12">neu zuweisen</text>
+      <line x1="428" y1="220" x2="354" y2="220" stroke="#222" marker-end="url(#e03a-pfeil)"/>
+      <text x="391" y="262" text-anchor="middle" font-size="12">bestätigt oder Frist abgelaufen</text>
+      <line x1="228" y1="220" x2="132" y2="220" stroke="#222" marker-end="url(#e03a-pfeil)"/>
+    </svg>
+    <figcaption>Abb. A-2: Typische Status eines Tickets (als UML-Zustandsdiagramm; die Bezeichnungen unterscheiden sich je nach Produkt)</figcaption>
+  </figure>
+  <p>„Gelöst“ und „Geschlossen“ sind zwei verschiedene Status: Gelöst heißt, der Bearbeiter hat eine Lösung eingetragen. Geschlossen wird erst, wenn der Melder bestätigt oder sich innerhalb einer Frist (z. B. 5 Tage) nicht meldet. So kann ein Ticket wiedereröffnet werden, falls die Lösung nicht funktioniert.</p>
+
+  <h4>Priorität aus Auswirkung und Dringlichkeit</h4>
+  <p>Die Priorität wird nicht danach vergeben, wer am lautesten ruft, sondern aus zwei Fragen abgeleitet: <strong>Auswirkung</strong> (<em>Impact</em>): Wie viele Nutzer, welche Geschäftsprozesse sind betroffen? <strong>Dringlichkeit</strong> (<em>Urgency</em>): Wie schnell entsteht Schaden, gibt es einen Workaround? Eine typische Matrix nach ITIL (1 = höchste Priorität):</p>
+  <div class="zweispaltig">
+    <table class="kompakt nw" style="width:auto">
+      <tr><th>Dringlichkeit ↓ /<br>Auswirkung →</th><th>hoch</th><th>mittel</th><th>gering</th></tr>
+      <tr><th>hoch</th><td>1 kritisch</td><td>2 hoch</td><td>3 mittel</td></tr>
+      <tr><th>mittel</th><td>2 hoch</td><td>3 mittel</td><td>4 niedrig</td></tr>
+      <tr><th>gering</th><td>3 mittel</td><td>4 niedrig</td><td>5 Planung</td></tr>
+    </table>
+    <div>
+      <p><strong>Beispiele Hochschul-IT:</strong></p>
+      <ul>
+        <li>WLAN im ganzen Hörsaalgebäude ausgefallen, gleich beginnen Klausuren: Auswirkung hoch, Dringlichkeit hoch → <strong>1</strong>.</li>
+        <li>Beamer in einem Seminarraum flackert, ein Ersatzraum ist frei: Auswirkung gering, Dringlichkeit mittel → <strong>4</strong>.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="merke"><span class="kastentitel">Merke</span>Priorität = f(Auswirkung, Dringlichkeit). Aus der Priorität folgen die vereinbarten Reaktions- und Lösungszeiten im SLA. Begründe eine Einstufung immer mit beiden Größen (wer/was betroffen? wie schnell entsteht Schaden? gibt es einen Workaround?).</div>
+
+  <h4>SLA: Servicezeit, Reaktionszeit, Lösungszeit, Verfügbarkeit</h4>
+  <ul>
+    <li><strong>Servicezeit:</strong> Zeitraum, in dem der Support arbeitet (z. B. Mo–Fr 8–18 Uhr). SLA-Fristen laufen nur innerhalb der Servicezeit.</li>
+    <li><strong>Reaktionszeit:</strong> vom Eingang bis zur ersten <em>qualifizierten</em> Rückmeldung bzw. zum Bearbeitungsbeginn. Eine automatische Eingangsbestätigung zählt nicht.</li>
+    <li><strong>Lösungszeit</strong> (Wiederherstellungszeit): vom Eingang, bis der Service wieder funktioniert (Status „gelöst“). Im Status „Wartend auf Melder“ ruht die Uhr meist.</li>
+    <li><strong>Verfügbarkeit</strong> in Prozent der vereinbarten Betriebszeit. Beispiel 24/7-Betrieb, Monat mit 30 Tagen = 720 h: 99,5 % erlauben 0,5 % · 720 h = <strong>3,6 h</strong> Ausfall, 99,9 % nur 0,72 h = <strong>43,2 min</strong>.</li>
+  </ul>
+  <p><strong>So prüfst du ein SLA:</strong> Priorität bestimmen → Fristen aus der SLA-Tabelle ablesen → Dauer je Zeitpunkt berechnen (nur Servicezeit) → vergleichen. Beispiel: Eingang 9:10 Uhr, Priorität 2 mit 1 h Reaktions- und 8 h Lösungszeit, erste Rückmeldung 9:55 Uhr → 45 min ≤ 1 h, Reaktionszeit eingehalten.</p>
+
+  <h4>Support-Level und Eskalation</h4>
+  <figure>
+    <svg viewBox="0 0 760 250" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e03b-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10" fill="none" stroke="#222" stroke-width="1.6"/>
+        </marker>
+      </defs>
+      <!-- Management -->
+      <rect x="290" y="4" width="180" height="34" rx="4" fill="#fdf0ef" stroke="#222"/>
+      <text x="380" y="26" text-anchor="middle" font-size="12" font-weight="bold">Teamleitung / Management</text>
+      <text x="482" y="18" font-size="12">hierarchische (vertikale) Eskalation:</text>
+      <text x="482" y="33" font-size="12">Vorgesetzte informieren, Ressourcen</text>
+      <line x1="300" y1="72" x2="342" y2="40" stroke="#222" stroke-dasharray="5,4" marker-end="url(#e03b-pfeil)"/>
+      <line x1="460" y1="72" x2="418" y2="40" stroke="#222" stroke-dasharray="5,4" marker-end="url(#e03b-pfeil)"/>
+      <!-- Level-Kästen -->
+      <rect x="2" y="72" width="156" height="88" rx="4" fill="#fff" stroke="#222"/>
+      <text x="80" y="92" text-anchor="middle" font-weight="bold">Level 0</text>
+      <text x="80" y="112" text-anchor="middle" font-size="12">Self-Service:</text>
+      <text x="80" y="129" text-anchor="middle" font-size="12">Portal, FAQ,</text>
+      <text x="80" y="146" text-anchor="middle" font-size="12">Chatbot</text>
+      <rect x="202" y="72" width="156" height="88" rx="4" fill="#eef3fa" stroke="#222"/>
+      <text x="280" y="92" text-anchor="middle" font-weight="bold">1st Level</text>
+      <text x="280" y="112" text-anchor="middle" font-size="12">Service Desk (SPOC):</text>
+      <text x="280" y="129" text-anchor="middle" font-size="12">erfassen, einstufen,</text>
+      <text x="280" y="146" text-anchor="middle" font-size="12">Standardlösungen</text>
+      <rect x="402" y="72" width="156" height="88" rx="4" fill="#fff" stroke="#222"/>
+      <text x="480" y="92" text-anchor="middle" font-weight="bold">2nd Level</text>
+      <text x="480" y="112" text-anchor="middle" font-size="12">Fachspezialisten:</text>
+      <text x="480" y="129" text-anchor="middle" font-size="12">tiefe Analyse,</text>
+      <text x="480" y="146" text-anchor="middle" font-size="12">Konfiguration</text>
+      <rect x="602" y="72" width="156" height="88" rx="4" fill="#fff" stroke="#222"/>
+      <text x="680" y="92" text-anchor="middle" font-weight="bold">3rd Level</text>
+      <text x="680" y="112" text-anchor="middle" font-size="12">Entwicklung bzw.</text>
+      <text x="680" y="129" text-anchor="middle" font-size="12">Hersteller: Bugfix,</text>
+      <text x="680" y="146" text-anchor="middle" font-size="12">Patch, Update</text>
+      <line x1="160" y1="116" x2="200" y2="116" stroke="#222" marker-end="url(#e03b-pfeil)"/>
+      <line x1="360" y1="116" x2="400" y2="116" stroke="#222" marker-end="url(#e03b-pfeil)"/>
+      <line x1="560" y1="116" x2="600" y2="116" stroke="#222" marker-end="url(#e03b-pfeil)"/>
+      <!-- funktionale Eskalation -->
+      <line x1="20" y1="178" x2="740" y2="178" stroke="#222" stroke-width="1.5" marker-end="url(#e03b-pfeil)"/>
+      <text x="380" y="196" text-anchor="middle" font-size="12">funktionale (horizontale) Eskalation: weiter an die Stufe mit mehr Fachwissen</text>
+      <!-- Wissensdatenbank -->
+      <rect x="2" y="208" width="756" height="34" rx="4" fill="#eef6ee" stroke="#222"/>
+      <text x="380" y="230" text-anchor="middle" font-size="12">Wissensdatenbank: Lösungen dokumentieren – alle Stufen nutzen sie, damit mehr Fälle früher gelöst werden</text>
+    </svg>
+    <figcaption>Abb. A-3: Support-Level mit funktionaler und hierarchischer Eskalation</figcaption>
+  </figure>
+  <ul>
+    <li><strong>Funktionale (horizontale) Eskalation:</strong> Das Ticket wird an eine Stufe mit mehr Fachwissen oder Berechtigungen weitergegeben, weil die aktuelle Stufe es nicht lösen kann (1st → 2nd → 3rd Level).</li>
+    <li><strong>Hierarchische (vertikale) Eskalation:</strong> Vorgesetzte werden eingeschaltet, weil eine SLA-Frist zu reißen droht, die Auswirkung sehr groß ist oder Entscheidungen bzw. zusätzliche Ressourcen nötig sind. Sie kann gleichzeitig mit der funktionalen Eskalation stattfinden.</li>
+    <li><strong>Wissensdatenbank</strong> (<em>Knowledge Base</em>): Lösungsartikel, bekannte Fehler und Workarounds. Je besser sie gepflegt ist, desto mehr Tickets löst schon der 1st Level oder der Nutzer selbst (Level 0).</li>
+  </ul>
+
+  <h4>Kennzahlen (KPIs) im Support</h4>
+  <table class="kompakt lang">
+    <tr><th>Kennzahl</th><th>Berechnung</th><th>Aussage</th></tr>
+    <tr><td>Ticketvolumen</td><td>Anzahl neuer Tickets je Woche/Monat, je Kategorie</td><td>Personalbedarf, Schwachstellen eines Produkts</td></tr>
+    <tr><td>Erstlösungsquote (<em>First Contact Resolution</em>)</td><td>beim ersten Kontakt gelöste Tickets ÷ alle Tickets · 100</td><td>Effizienz des 1st Levels, Qualität der Wissensdatenbank</td></tr>
+    <tr><td>mittlere Reaktions- und Lösungszeit (MTTR)</td><td>Summe der Zeiten ÷ Anzahl Tickets</td><td>Schnelligkeit des Supports</td></tr>
+    <tr><td>SLA-Erfüllungsquote</td><td>Tickets innerhalb der SLA-Fristen ÷ alle Tickets · 100</td><td>Einhaltung der Vereinbarung mit dem Kunden</td></tr>
+    <tr><td>Backlog</td><td>offene Tickets, Alter der ältesten</td><td>Überlastung, Rückstau</td></tr>
+    <tr><td>Wiedereröffnungsquote</td><td>wiedereröffnete ÷ gelöste Tickets · 100</td><td>Qualität der Lösungen</td></tr>
+    <tr><td>Kundenzufriedenheit (CSAT)</td><td>Umfrage nach Abschluss, z. B. 1–5 Sterne</td><td>Sicht der Nutzer</td></tr>
+  </table>
+  <p class="klein">Beispiel: 400 Tickets im Monat, davon 248 beim ersten Kontakt gelöst → Erstlösungsquote 62 %; 372 innerhalb der SLA-Fristen → SLA-Erfüllungsquote 93 %.</p>
+
+  <h4>Vor- und Nachteile eines Ticketsystems</h4>
+  <table class="kompakt">
+    <tr><th style="width:50%">Vorteile</th><th>Nachteile / Risiken</th></tr>
+    <tr><td>
+      <ul>
+        <li><strong>Nichts geht verloren:</strong> zentrale Erfassung aller Anfragen aus allen Kanälen statt verstreuter Mails und Zettel</li>
+        <li><strong>Transparenz:</strong> Status jederzeit einsehbar, auch für den Melder (Portal, Benachrichtigung) → weniger Nachfragen</li>
+        <li><strong>Priorisierung und Zuweisung</strong> nach festen Regeln, Wichtiges zuerst</li>
+        <li><strong>Vertretung möglich:</strong> der Verlauf steht im Ticket, das Wissen nicht nur im Kopf einer Person</li>
+        <li><strong>Messbarkeit:</strong> Kennzahlen, SLA-Überwachung mit automatischer Eskalation</li>
+        <li><strong>Wissensaufbau:</strong> Lösungen werden wiederverwendbar, wiederkehrende Fehler fallen auf (Problemmanagement)</li>
+        <li><strong>Entlastung der Entwickler:</strong> keine direkten Anrufe, gebündelte und gut beschriebene Fehlermeldungen</li>
+        <li><strong>Nachweis:</strong> Dokumentation für Gewährleistung, Abrechnung, Audits</li>
+      </ul>
+    </td><td>
+      <ul>
+        <li><strong>Kosten:</strong> Lizenzen, Einführung, Anpassung, Betrieb</li>
+        <li><strong>Aufwand:</strong> Tickets müssen sauber erfasst und gepflegt werden, Schulung nötig</li>
+        <li><strong>Formalismus:</strong> wirkt unpersönlich, kleine Anliegen dauern gefühlt länger</li>
+        <li><strong>Akzeptanz:</strong> Nutzer umgehen das System („kurz mal anrufen“), dann fehlen Daten</li>
+        <li><strong>Fehleinstufung:</strong> falsche Kategorie oder Priorität verzögert die Lösung</li>
+        <li><strong>Datenschutz:</strong> personenbezogene Daten in Tickets (Löschfristen, Rechte, Auftragsverarbeitung bei Cloud-Lösungen)</li>
+        <li><strong>Abhängigkeit:</strong> fällt das System aus, ist der Support eingeschränkt</li>
+      </ul>
+    </td></tr>
+  </table>
+  <div class="falle"><span class="kastentitel">Typische Fehler</span>„Erläutern“ verlangt zu jedem Vorteil eine Begründung oder Wirkung, eine Liste von Stichwörtern reicht nicht. „Das Ticketsystem löst Probleme schneller“ ist zu pauschal: Das System schafft Überblick, Priorisierung und Wissen; lösen müssen weiterhin Menschen. Vorteile nicht doppelt zählen (Transparenz für den Kunden und Statusabfrage im Portal sind derselbe Punkt).</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>S22 T1 A4a:</strong> Für den Support einer neuen App stellt ein Energieversorger ein Ticketsystem bereit. „Erläutern Sie drei Vorteile und einen Nachteil beim Einsatz eines Ticketsystems“ – 12 P, also 3 P je erläutertem Punkt. Möglich sind auch Fragen nach Priorisierung, SLA-Zeiten oder dem Ablauf eines Tickets, oft verbunden mit einem UML-Diagramm (Zustands- oder Aktivitätsdiagramm des Ticketablaufs).</div>
+
+  <!-- ===================== QU-04 ===================== -->
+  <h3 id="e-04">QU-04 · Künstliche Intelligenz <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 als eigene Aufgabe · Prüfungen: W23 T1 A1b (6 P): Ziele eines Workshops beschreiben, der Widerstände gegen ein KI-System im Weinbau abbauen soll · S26: KI-Auswertung von Drohnenbildern als Teil des Szenarios (gefragt war dort der Speicherbedarf, Block 02) · Seit 2025 gelten schrittweise die Regeln des EU AI Act.</p>
+
+  <h4>Grundbegriffe</h4>
+  <figure>
+    <svg viewBox="0 0 760 250" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <rect x="2" y="2" width="756" height="246" rx="14" fill="#fff" stroke="#222"/>
+      <text x="16" y="24" font-weight="bold">Künstliche Intelligenz (KI)</text>
+      <text x="16" y="42" font-size="12">Oberbegriff: Systeme lösen Aufgaben, die sonst menschliche Intelligenz erfordern – auch rein regelbasiert</text>
+      <rect x="40" y="56" width="700" height="186" rx="14" fill="#f7f9fc" stroke="#222"/>
+      <text x="54" y="80" font-weight="bold">Machine Learning (ML)</text>
+      <text x="54" y="98" font-size="12">lernt Muster und Zusammenhänge aus Beispieldaten, statt dass ein Mensch die Regeln programmiert</text>
+      <rect x="80" y="112" width="640" height="124" rx="14" fill="#eef3fa" stroke="#222"/>
+      <text x="94" y="134" font-weight="bold">Deep Learning</text>
+      <text x="94" y="152" font-size="12">ML mit tiefen künstlichen neuronalen Netzen – stark bei Bildern, Sprache und Text</text>
+      <rect x="120" y="166" width="580" height="64" rx="14" fill="#e3ebf6" stroke="#222"/>
+      <text x="134" y="188" font-weight="bold">Generative KI, z. B. große Sprachmodelle (LLM)</text>
+      <text x="134" y="208" font-size="12">erzeugen neue Inhalte: Text, Bild, Code (Chatbots, Coding-Assistenten)</text>
+    </svg>
+    <figcaption>Abb. A-4: KI ist der Oberbegriff, Machine Learning ein Teilgebiet, Deep Learning ein Teil davon; generative KI beruht meist auf Deep Learning</figcaption>
+  </figure>
+  <table class="kompakt">
+    <tr><th style="width:24%">Begriff</th><th>Bedeutung</th></tr>
+    <tr><td>klassische Programmierung vs. ML</td><td>Klassisch schreibt ein Mensch die Regeln („wenn Temperatur &gt; 30 °C, dann Lüftung an“). Beim ML bekommt ein Lernalgorithmus <strong>Beispieldaten mit den richtigen Antworten</strong> und ermittelt die Regeln selbst. Ergebnis ist ein <strong>Modell</strong>.</td></tr>
+    <tr><td>Training / Inferenz</td><td>Training: Das Modell wird an Daten angepasst (rechenintensiv). Inferenz: Das fertige Modell wird auf neue Daten angewendet (z. B. ein Foto klassifizieren).</td></tr>
+    <tr><td>Label</td><td>die richtige Antwort zu einem Trainingsbeispiel, z. B. „Glas“ zu einem Foto. Labels werden meist von Menschen vergeben.</td></tr>
+    <tr><td>neuronales Netz</td><td>Modell aus vielen verbundenen Rechenknoten in Schichten; „tief“ = viele Schichten</td></tr>
+    <tr><td>LLM, Prompt</td><td><em>Large Language Model</em>: auf riesigen Textmengen trainiertes Sprachmodell, das wahrscheinliche Fortsetzungen eines Textes erzeugt; Prompt = Eingabe bzw. Anweisung an das Modell</td></tr>
+    <tr><td>Konfidenz</td><td>Wahrscheinlichkeitswert, mit dem das Modell sein Ergebnis angibt (z. B. „Glas: 0,93“); keine Garantie für Richtigkeit</td></tr>
+  </table>
+
+  <h4>Lernverfahren</h4>
+  <table class="kompakt">
+    <tr><th></th><th>überwachtes Lernen</th><th>unüberwachtes Lernen</th><th>bestärkendes Lernen</th></tr>
+    <tr><td>Daten</td><td>mit Labels (richtige Antwort bekannt)</td><td>ohne Labels</td><td>keine festen Daten; Agent probiert aus und erhält Belohnung oder Strafe</td></tr>
+    <tr><td>Ziel</td><td><strong>Klassifikation</strong> (Kategorie) oder <strong>Regression</strong> (Zahlenwert) für neue Fälle</td><td>Strukturen finden: <strong>Clustering</strong> (Gruppen), <strong>Anomalieerkennung</strong></td><td>Strategie lernen, die die Belohnung maximiert</td></tr>
+    <tr><td>Beispiel</td><td>Kamera im Recyclinghof sortiert Abfall in Glas/Papier/Kunststoff; Strombedarf von morgen vorhersagen</td><td>Kunden eines Onlineshops in Gruppen mit ähnlichem Kaufverhalten einteilen; ungewöhnliche Überweisungen erkennen</td><td>Roboterarm lernt Greifen; Spiel-KI</td></tr>
+  </table>
+
+  <h4>Trainings- und Testdaten</h4>
+  <figure>
+    <svg viewBox="0 0 760 150" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <defs>
+        <marker id="e04b-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10" fill="none" stroke="#222" stroke-width="1.6"/>
+        </marker>
+      </defs>
+      <rect x="1" y="40" width="108" height="56" rx="6" fill="#fff" stroke="#222"/>
+      <text x="55" y="63" text-anchor="middle">Daten</text>
+      <text x="55" y="81" text-anchor="middle">sammeln</text>
+      <rect x="130" y="40" width="108" height="56" rx="6" fill="#fff" stroke="#222"/>
+      <text x="184" y="63" text-anchor="middle">aufbereiten</text>
+      <text x="184" y="81" text-anchor="middle">und labeln</text>
+      <rect x="259" y="40" width="108" height="56" rx="6" fill="#eef3fa" stroke="#222"/>
+      <text x="313" y="63" text-anchor="middle">aufteilen:</text>
+      <text x="313" y="81" text-anchor="middle" font-size="12">Training / Test</text>
+      <rect x="388" y="40" width="108" height="56" rx="6" fill="#fff" stroke="#222"/>
+      <text x="442" y="63" text-anchor="middle">Modell</text>
+      <text x="442" y="81" text-anchor="middle">trainieren</text>
+      <rect x="517" y="40" width="108" height="56" rx="6" fill="#eef3fa" stroke="#222"/>
+      <text x="571" y="63" text-anchor="middle">mit Testdaten</text>
+      <text x="571" y="81" text-anchor="middle">bewerten</text>
+      <rect x="646" y="40" width="108" height="56" rx="6" fill="#fff" stroke="#222"/>
+      <text x="700" y="63" text-anchor="middle">einsetzen und</text>
+      <text x="700" y="81" text-anchor="middle">überwachen</text>
+      <line x1="110" y1="68" x2="128" y2="68" stroke="#222" marker-end="url(#e04b-pfeil)"/>
+      <line x1="239" y1="68" x2="257" y2="68" stroke="#222" marker-end="url(#e04b-pfeil)"/>
+      <line x1="368" y1="68" x2="386" y2="68" stroke="#222" marker-end="url(#e04b-pfeil)"/>
+      <line x1="497" y1="68" x2="515" y2="68" stroke="#222" marker-end="url(#e04b-pfeil)"/>
+      <line x1="626" y1="68" x2="644" y2="68" stroke="#222" marker-end="url(#e04b-pfeil)"/>
+      <path d="M571,40 C571,14 442,14 442,38" fill="none" stroke="#222" stroke-dasharray="5,4" marker-end="url(#e04b-pfeil)"/>
+      <text x="506" y="12" text-anchor="middle" font-size="12">nicht gut genug: Daten oder Modell verbessern</text>
+      <path d="M700,96 L700,118 L55,118 L55,98" fill="none" stroke="#222" stroke-dasharray="5,4" marker-end="url(#e04b-pfeil)"/>
+      <text x="378" y="136" text-anchor="middle" font-size="12">neue Daten, erkannte Fehler → regelmäßig nachtrainieren</text>
+    </svg>
+    <figcaption>Abb. A-5: Ablauf eines Machine-Learning-Projekts</figcaption>
+  </figure>
+  <ul>
+    <li>Die gelabelten Daten werden aufgeteilt, z. B. 70 % <strong>Trainingsdaten</strong> (damit lernt das Modell), 15 % Validierungsdaten (zum Einstellen während der Entwicklung) und 15 % <strong>Testdaten</strong> (nur für die abschließende Bewertung).</li>
+    <li>Testdaten dürfen im Training <strong>nicht</strong> vorkommen. Sonst misst man nur, ob das Modell die Beispiele auswendig gelernt hat (<strong>Overfitting</strong>: sehr gut auf bekannten, schlecht auf neuen Daten).</li>
+    <li>Die Daten müssen den späteren Einsatz <strong>repräsentieren</strong>: gleiche Kameras, Lichtverhältnisse, Jahreszeiten, Nutzergruppen, Varianten. Was das Modell nie gesehen hat, erkennt es schlecht.</li>
+  </ul>
+  <p><strong>Ergebnis bewerten (Beispiel Flaschenkontrolle):</strong> Eine Kamera-KI prüft 1.000 Flaschen, von denen 50 tatsächlich beschädigt sind.</p>
+  <div class="zweispaltig">
+    <table class="kompakt" style="width:auto">
+      <tr><th></th><th>KI: beschädigt</th><th>KI: in Ordnung</th><th>Summe</th></tr>
+      <tr><th>tatsächlich beschädigt</th><td>40 (erkannt)</td><td>10 (übersehen)</td><td>50</td></tr>
+      <tr><th>tatsächlich in Ordnung</th><td>19 (Fehlalarm)</td><td>931 (richtig)</td><td>950</td></tr>
+    </table>
+    <div>
+      <ul>
+        <li><strong>Genauigkeit</strong> (<em>Accuracy</em>) = richtige ÷ alle = (40 + 931) ÷ 1.000 = <strong>97,1 %</strong></li>
+        <li><strong>Trefferquote</strong> (<em>Recall</em>) = erkannte ÷ alle beschädigten = 40 ÷ 50 = 80 % → <strong>20 % werden übersehen</strong></li>
+        <li>Fehlalarme: 19 von 59 Alarmen (≈ 32 %) sind unbegründet</li>
+      </ul>
+    </div>
+  </div>
+  <div class="falle"><span class="kastentitel">Typische Falle: hohe Genauigkeit bei seltenen Fällen</span>Ein „Modell“, das immer „in Ordnung“ meldet, hätte hier 950 ÷ 1.000 = 95 % Genauigkeit und würde keine einzige beschädigte Flasche finden. Sind die gesuchten Fälle selten, aber wichtig (Krankheit, Defekt, Betrug), zählt vor allem, wie viele davon übersehen werden.</div>
+
+  <h4>Bias und Datenqualität</h4>
+  <p><strong>Bias</strong> (Verzerrung) heißt: Das Modell liefert für bestimmte Fälle oder Gruppen systematisch schlechtere oder unfaire Ergebnisse. Die Ursache liegt fast immer in den Daten („garbage in, garbage out“):</p>
+  <table class="kompakt">
+    <tr><th>Ursache</th><th>Beispiel</th><th>Gegenmaßnahme</th></tr>
+    <tr><td>nicht repräsentative Daten</td><td>Gesichtserkennung vor allem mit Fotos hellhäutiger Erwachsener trainiert</td><td>Daten aus allen Einsatzbedingungen und Gruppen sammeln</td></tr>
+    <tr><td>unausgewogene Klassen</td><td>99 % der Transaktionen sind legal, Betrugsfälle kaum vertreten</td><td>seltene Klassen gezielt ergänzen oder gewichten</td></tr>
+    <tr><td>historische Vorurteile</td><td>frühere Einstellungsentscheidungen bevorzugten eine Gruppe</td><td>Merkmale und Ergebnisse je Gruppe prüfen, sensible Merkmale entfernen</td></tr>
+    <tr><td>falsche oder uneinheitliche Labels</td><td>verschiedene Personen bewerten dasselbe Bild unterschiedlich</td><td>klare Label-Richtlinien, Fachleute, Vier-Augen-Prinzip</td></tr>
+    <tr><td>veraltete Daten (<em>Data Drift</em>)</td><td>Kaufverhalten ändert sich, Modell bleibt alt</td><td>im Betrieb überwachen, nachtrainieren</td></tr>
+  </table>
+
+  <h4>Generative KI: Halluzinationen und Erklärbarkeit</h4>
+  <ul>
+    <li><strong>Halluzination:</strong> Ein Sprachmodell erzeugt eine plausibel klingende, aber falsche Aussage (erfundene Fakten, Quellen, Paragraphen oder Programmfunktionen). Ursache: Das Modell berechnet wahrscheinliche Wortfolgen, prüft aber keine Fakten. <strong>Maßnahmen:</strong> Antworten auf geprüfte eigene Dokumente stützen (<em>Retrieval Augmented Generation</em>, RAG), Quellen anzeigen lassen, Themenbereich begrenzen, Unsicherheit zulassen („Das weiß ich nicht“), an einen Menschen übergeben, regelmäßig mit typischen Fragen testen, Nutzer auf mögliche Fehler hinweisen.</li>
+    <li><strong>Erklärbarkeit</strong> (<em>Explainable AI</em>): Bei neuronalen Netzen ist kaum nachvollziehbar, <em>warum</em> ein Ergebnis zustande kommt (Blackbox). Erklärbarkeit ist wichtig für Vertrauen und Akzeptanz, Fehlersuche, Haftung und die Rechte Betroffener (DSGVO Art. 22: keine rein automatisierte Entscheidung mit erheblicher Wirkung ohne Beteiligung eines Menschen). Hilfen: Konfidenz anzeigen, Heatmap mit den Bildbereichen, die das Ergebnis bestimmt haben, einfachere Modelle, wo sie ausreichen.</li>
+  </ul>
+
+  <h4>Datenschutz</h4>
+  <ul>
+    <li>Enthalten Trainings- oder Eingabedaten <strong>personenbezogene Daten</strong> (Gesichter auf Kamerabildern, Namen in Support-Texten, Stimmen), gilt die DSGVO: Rechtsgrundlage, Zweckbindung, Datenminimierung, Information der Betroffenen, Löschpflichten. Aus einem fertig trainierten Modell lassen sich einzelne Daten kaum wieder entfernen.</li>
+    <li><strong>Maßnahmen:</strong> anonymisieren oder pseudonymisieren, Personen auf Bildern unkenntlich machen, nur nötige Daten verwenden, Vertrag zur Auftragsverarbeitung mit dem KI-Anbieter, Verarbeitung in der EU, <strong>keine Kundendaten oder Geschäftsgeheimnisse in öffentliche KI-Chats</strong> eingeben.</li>
+    <li>Kameras und KI-Auswertungen am Arbeitsplatz eignen sich zur Leistungs- und Verhaltenskontrolle; der Betriebsrat hat deshalb ein Mitbestimmungsrecht (§ 87 Abs. 1 Nr. 6 BetrVG).</li>
+  </ul>
+
+  <h4>EU AI Act (KI-Verordnung)</h4>
+  <p>Die <strong>Verordnung (EU) 2024/1689</strong> gilt als Verordnung unmittelbar in allen EU-Staaten. Sie ist seit August 2024 in Kraft; ihre Pflichten greifen gestaffelt: Verbote und die Pflicht, für ausreichende <strong>KI-Kompetenz der Beschäftigten</strong> zu sorgen (Art. 4), seit Februar 2025; Regeln für Allzweck-KI-Modelle (z. B. große Sprachmodelle) seit August 2025; die meisten übrigen Pflichten (u. a. Transparenz, Hochrisiko-Bereiche) laut Verordnung ab August 2026, Hochrisiko-KI in regulierten Produkten ab August 2027. Die EU-Kommission hat Ende 2025 vorgeschlagen, Teile der Hochrisiko-Pflichten zu verschieben („digitaler Omnibus“). Für die Prüfung zählt das <strong>Prinzip</strong>, nicht das genaue Datum: Je höher das Risiko für Gesundheit, Sicherheit und Grundrechte, desto strenger die Regeln.</p>
+  <figure>
+    <svg viewBox="0 0 760 220" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <polygon points="130,10 250,10 280,60 100,60" fill="#fdf0ef" stroke="#222"/>
+      <text x="190" y="40" text-anchor="middle" font-weight="bold">Unannehmbar</text>
+      <polygon points="100,60 280,60 310,110 70,110" fill="#fbeee4" stroke="#222"/>
+      <text x="190" y="90" text-anchor="middle" font-weight="bold">Hohes Risiko</text>
+      <polygon points="70,110 310,110 340,160 40,160" fill="#fdf6e3" stroke="#222"/>
+      <text x="190" y="140" text-anchor="middle" font-weight="bold">Begrenztes Risiko</text>
+      <polygon points="40,160 340,160 370,210 10,210" fill="#eef6ee" stroke="#222"/>
+      <text x="190" y="190" text-anchor="middle" font-weight="bold">Minimales Risiko</text>
+      <line x1="285" y1="35" x2="380" y2="35" stroke="#999" stroke-dasharray="3,3"/>
+      <line x1="300" y1="85" x2="380" y2="85" stroke="#999" stroke-dasharray="3,3"/>
+      <line x1="330" y1="135" x2="380" y2="135" stroke="#999" stroke-dasharray="3,3"/>
+      <line x1="360" y1="185" x2="380" y2="185" stroke="#999" stroke-dasharray="3,3"/>
+      <text x="390" y="30" font-weight="bold">verboten</text>
+      <text x="390" y="48" font-size="12">z. B. Social Scoring, manipulative Techniken</text>
+      <text x="390" y="80" font-weight="bold">erlaubt, aber strenge Pflichten</text>
+      <text x="390" y="98" font-size="12">z. B. Prüfungsbewertung, Kreditwürdigkeit</text>
+      <text x="390" y="130" font-weight="bold">Transparenzpflichten</text>
+      <text x="390" y="148" font-size="12">z. B. Chatbots, Deepfakes, KI-erzeugte Texte</text>
+      <text x="390" y="180" font-weight="bold">keine besonderen Pflichten</text>
+      <text x="390" y="198" font-size="12">z. B. Spamfilter, Rechtschreibprüfung, Spiele</text>
+    </svg>
+    <figcaption>Abb. A-6: Der risikobasierte Ansatz des EU AI Act</figcaption>
+  </figure>
+  <table class="kompakt lang">
+    <tr><th style="width:16%">Stufe</th><th>Was fällt darunter (Auswahl)</th><th style="width:36%">Folgen</th></tr>
+    <tr><td>unannehmbares Risiko</td><td>Social Scoring; manipulative Techniken oder Ausnutzen von Schwächen (Alter, Behinderung); Emotionserkennung am Arbeitsplatz und in Bildungseinrichtungen (außer aus medizinischen oder Sicherheitsgründen); ungezieltes Sammeln von Gesichtsbildern aus dem Internet; biometrische Echtzeit-Fernidentifizierung im öffentlichen Raum (enge Ausnahmen für Strafverfolgung)</td><td><strong>verboten</strong>; Bußgeld bis 35 Mio. € oder 7 % des weltweiten Jahresumsatzes</td></tr>
+    <tr><td>hohes Risiko</td><td>KI als Sicherheitsbauteil regulierter Produkte (Medizinprodukte, Maschinen, Fahrzeuge); KI in kritischer Infrastruktur; Bildung (Zulassung, Prüfungsbewertung); <strong>Beschäftigung</strong> (Einstellung, Beförderung, Kündigung, Aufgabenverteilung, Leistungsbewertung); Kreditwürdigkeit, Tarife von Lebens- und Krankenversicherungen; Strafverfolgung, Migration, Justiz</td><td>erlaubt mit Pflichten: Risikomanagement, hochwertige und auf Bias geprüfte Daten, technische Dokumentation, Protokollierung, menschliche Aufsicht, Genauigkeit und Cybersicherheit, Konformitätsbewertung und CE-Kennzeichnung, Registrierung in einer EU-Datenbank; Betreiber müssen u. a. Beschäftigte vor dem Einsatz informieren</td></tr>
+    <tr><td>begrenztes Risiko</td><td>KI, die direkt mit Menschen interagiert (Chatbots); KI-erzeugte oder manipulierte Bilder, Videos, Texte (Deepfakes)</td><td><strong>Transparenz</strong>: Nutzer müssen erkennen können, dass sie mit einer KI kommunizieren bzw. dass Inhalte künstlich erzeugt sind</td></tr>
+    <tr><td>minimales Risiko</td><td>Spamfilter, KI in Videospielen, Rechtschreibprüfung, Lagerprognosen, Bilderkennung zur Qualitätskontrolle von Sachen</td><td>keine besonderen Pflichten; freiwillige Verhaltenskodizes; allgemeine Regeln (DSGVO, KI-Kompetenz) gelten trotzdem</td></tr>
+  </table>
+  <p class="klein">Rollen: <strong>Anbieter</strong> entwickeln ein KI-System und bringen es in Verkehr (auch ein Softwarehaus, das eine KI-Funktion in sein Produkt einbaut); <strong>Betreiber</strong> setzen es in eigener Verantwortung beruflich ein. Für Anbieter von Allzweck-KI-Modellen gelten eigene Pflichten (Dokumentation, Urheberrechtsstrategie, Zusammenfassung der Trainingsdaten).</p>
+  <div class="merke"><span class="kastentitel">So ordnest du ein</span>1. Wofür genau wird die KI eingesetzt, wer ist betroffen? 2. Ist es eine verbotene Praxis? 3. Liegt der Einsatz in einem Hochrisiko-Bereich (Beschäftigung, Bildung, Kredit, kritische Infrastruktur, Sicherheitsbauteil)? 4. Interagiert die KI mit Menschen oder erzeugt sie Inhalte? → Transparenz. 5. Sonst: minimales Risiko. Nenne immer die Folge (verboten / Pflichten / Kennzeichnung / keine).</div>
+
+  <h4>KI-Assistenten in der Softwareentwicklung</h4>
+  <table class="kompakt">
+    <tr><th style="width:50%">Chancen</th><th>Risiken</th></tr>
+    <tr><td>
+      <ul>
+        <li>Routinecode, Gerüste und Konvertierungen schneller schreiben</li>
+        <li>Unit-Tests und Dokumentation vorschlagen lassen</li>
+        <li>fremden oder alten Code erklären lassen</li>
+        <li>Hinweise auf Fehler und Verbesserungen (Refactoring)</li>
+        <li>Lernhilfe bei neuen Sprachen und Bibliotheken; schnelle Prototypen</li>
+      </ul>
+    </td><td>
+      <ul>
+        <li>fehlerhafter oder unsicherer Code (z. B. SQL-Injection), der plausibel aussieht</li>
+        <li>erfundene Methoden oder Pakete (Halluzination)</li>
+        <li>Abfluss von Quellcode, Zugangsdaten oder Kundendaten an den Anbieter</li>
+        <li>Lizenz- und Urheberrechtsfragen bei übernommenem Code</li>
+        <li>Abhängigkeit, Verlust eigener Kompetenz, Code, den niemand im Team versteht</li>
+      </ul>
+    </td></tr>
+  </table>
+  <p><strong>Regeln für den Einsatz:</strong> Die Verantwortung bleibt beim Entwickler – erzeugter Code durchläuft Code-Review und Tests wie jeder andere Code. Firmenlizenz mit Datenschutzvertrag statt privater Konten, keine Geheimnisse in Prompts, klare Richtlinie, welche Werkzeuge für welche Daten erlaubt sind, vorgeschlagene Abhängigkeiten prüfen.</p>
+
+  <h4>Akzeptanz bei Mitarbeitenden</h4>
+  <p>Wird KI eingeführt, entstehen Ängste und Widerstände. Hier gelten dieselben Regeln wie beim Change-Management (siehe Block 04 Projektmanagement):</p>
+  <div class="zweispaltig">
+    <div>
+      <p><strong>Typische Befürchtungen</strong></p>
+      <ul>
+        <li>Arbeitsplatzverlust, Entwertung der eigenen Erfahrung</li>
+        <li>Überwachung und Leistungskontrolle</li>
+        <li>Kontrollverlust: „Die Maschine entscheidet, keiner weiß warum“</li>
+        <li>Fehler der KI, für die man selbst geradestehen muss</li>
+        <li>Mehrarbeit und Überforderung in der Einführung</li>
+      </ul>
+    </div>
+    <div>
+      <p><strong>Maßnahmen</strong></p>
+      <ul>
+        <li>früh und ehrlich informieren: Ziel, Nutzen, was sich ändert und was nicht</li>
+        <li>Betroffene beteiligen: Workshop, Pilotgruppe, Erfahrungswissen beim Labeln und Testen nutzen</li>
+        <li>schulen (KI-Kompetenz), Ansprechpartner benennen</li>
+        <li>Mensch behält die Entscheidung (<em>human in the loop</em>)</li>
+        <li>Betriebsrat und Datenschutz einbinden, keine Leistungskontrolle</li>
+        <li>schrittweise einführen, Erfolge und Grenzen offen zeigen</li>
+      </ul>
+    </div>
+  </div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>W23 T1 A1b</strong> (6 P): Die Beschäftigten eines Weinguts sehen ein KI-System skeptisch; beschrieben werden sollten Ziele eines Workshops. Erwartet wurden sinngemäß: Ziele des Vorhabens vermitteln, Risiken des bisherigen Zustands bewusst machen, Vorteile der KI zeigen, Befürworter, Gegner und Unentschlossene erkennen, Befürworter bestärken. KI ist in neueren Szenarien häufig der <em>Kontext</em> (Drohnenbilder in W23 und S26). Rechne mit Fragen zu Trainingsdaten, Datenschutz, AI Act oder Akzeptanz.</div>
+
+  <!-- ===================== QU-05 ===================== -->
+  <h3 id="e-05">QU-05 · Green IT <span class="badge k-sonstige">Sonstige</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfung: W23 T1 A1c (4 P): den Begriff Green IT erläutern und Ziele nennen</p>
+  <p><strong>Green IT</strong> bezeichnet alle Bestrebungen, Informations- und Kommunikationstechnik <strong>über ihren gesamten Lebenszyklus</strong> (Herstellung, Betrieb, Entsorgung) umwelt- und ressourcenschonend zu gestalten – und IT so einzusetzen, dass sie auch in anderen Bereichen Energie und Ressourcen spart.</p>
+  <p><strong>Ziele:</strong> Energieverbrauch senken (Geräte, Rechenzentren, Kühlung) · CO₂-Emissionen verringern (Klimaschutz) · Rohstoffe schonen (Metalle, seltene Erden, Wasser) · Lebensdauer der Geräte verlängern und Elektroschrott vermeiden · Recycling und schadstoffarme Herstellung · Betriebskosten senken · gesetzliche Vorgaben und Nachhaltigkeitsberichte erfüllen, Image verbessern.</p>
+  <table class="kompakt">
+    <tr><th></th><th>Green <strong>in</strong> IT</th><th>Green <strong>by</strong> IT</th></tr>
+    <tr><td>Idee</td><td>Die IT selbst wird umweltfreundlicher.</td><td>IT hilft, in <em>anderen</em> Bereichen Energie und Ressourcen zu sparen.</td></tr>
+    <tr><td>Beispiele</td><td>effiziente Netzteile und Geräte, optimierte Kühlung, Geräte nachts ausschalten, sparsamer Code, Ökostrom für das Rechenzentrum</td><td>Routenoptimierung für Lieferfahrzeuge, intelligente Heizungssteuerung, digitale Akten statt Papier, Smart Grid, Homeoffice spart Pendelwege</td></tr>
+  </table>
+
+  <h4>Maßnahmen im Rechenzentrum und die Kennzahl PUE</h4>
+  <ul>
+    <li><strong>Virtualisierung und Konsolidierung:</strong> Physische Server sind oft nur zu 10–15 % ausgelastet. Viele virtuelle Server auf wenigen gut ausgelasteten Hosts sparen Strom, Kühlung, Platz und Hardware. Dasselbe Prinzip nutzt die Cloud.</li>
+    <li><strong>Kühlung:</strong> Kalt-/Warmgang-Einhausung, höhere Zulufttemperatur, freie Kühlung mit Außenluft, Flüssigkeitskühlung; Abwärme zum Heizen nutzen.</li>
+    <li>effiziente USV und Netzteile, Ökostrom, Messung und Monitoring, ungenutzte Systeme abschalten.</li>
+  </ul>
+  <figure>
+    <svg viewBox="0 0 760 168" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+      <text x="20" y="20" font-weight="bold">Beispiel: Serverraum mit 72 kW Gesamtleistung</text>
+      <rect x="20" y="32" width="400" height="50" fill="#eef3fa" stroke="#222"/>
+      <text x="220" y="62" text-anchor="middle">IT-Geräte (Server, Speicher, Netz): 40 kW</text>
+      <rect x="420" y="32" width="260" height="50" fill="#fdf0ef" stroke="#222"/>
+      <text x="550" y="62" text-anchor="middle">Kühlung: 26 kW</text>
+      <rect x="680" y="32" width="50" height="50" fill="#fdf6e3" stroke="#222"/>
+      <rect x="730" y="32" width="10" height="50" fill="#fff" stroke="#222"/>
+      <text x="740" y="100" text-anchor="end" font-size="12">USV/Verteilung 5 kW · Licht 1 kW</text>
+      <path d="M20,108 L20,116 L420,116 L420,108" fill="none" stroke="#222"/>
+      <text x="220" y="132" text-anchor="middle" font-size="12">Nutzen: Energie für die eigentliche IT</text>
+      <path d="M20,140 L20,148 L740,148 L740,140" fill="none" stroke="#222"/>
+      <text x="380" y="164" text-anchor="middle" font-size="12">Gesamtenergie des Rechenzentrums (laut Zähler)</text>
+    </svg>
+    <figcaption>Abb. A-7: Die PUE setzt die Gesamtenergie ins Verhältnis zur Energie der IT-Geräte</figcaption>
+  </figure>
+  <p><strong>PUE</strong> (<em>Power Usage Effectiveness</em>) = Gesamtenergie des Rechenzentrums ÷ Energie der IT-Geräte. Im Beispiel: 72 kW ÷ 40 kW = <strong>1,8</strong>. Für jede Kilowattstunde, die die Server nutzen, werden also 0,8 kWh zusätzlich für Kühlung, USV und Licht verbraucht. Der Idealwert 1,0 ist praktisch nicht erreichbar. Ältere Serverräume liegen oft bei 1,8–2,5, moderne Rechenzentren bei 1,2–1,4. In Deutschland schreibt das Energieeffizienzgesetz (EnEfG) größeren Rechenzentren (ab 300 kW) Grenzwerte vor, z. B. höchstens 1,2 für Neubauten ab Mitte 2026.</p>
+  <p><strong>So gehst du bei Berechnungen vor:</strong></p>
+  <ol>
+    <li>Leistungen in kW bestimmen (W ÷ 1.000), IT-Leistung und Gesamtleistung trennen.</li>
+    <li>PUE = Gesamtleistung ÷ IT-Leistung (eine Verhältniszahl, kein Prozentwert).</li>
+    <li>Energie (kWh) = Leistung (kW) · Betriebsstunden; Dauerbetrieb: 24 h · 365 = <strong>8.760 h</strong> pro Jahr.</li>
+    <li>Kosten = kWh · Strompreis; CO₂ = kWh · Emissionsfaktor (kg CO₂ je kWh).</li>
+    <li>Einsparung = alt − neu; Einheiten in jeder Zeile mitschreiben.</li>
+  </ol>
+  <p class="klein">Beispiel fortgesetzt: 72 kW · 8.760 h = 630.720 kWh pro Jahr. Senkt eine neue Kühlung die PUE auf 1,3, braucht der Raum 40 kW · 1,3 = 52 kW, also 455.520 kWh. Einsparung 175.200 kWh, bei 0,30 €/kWh 52.560 € und bei 0,38 kg CO₂/kWh rund 66,6 t CO₂ im Jahr.</p>
+  <div class="falle"><span class="kastentitel">Typische Fehler</span>Leistung (kW) und Energie (kWh) verwechseln · W nicht in kW umrechnen · mit 365 statt 8.760 Stunden rechnen. Außerdem: Die PUE sagt nichts über den <em>absoluten</em> Verbrauch. Werden Server konsolidiert, aber die Kühlung nicht angepasst, sinkt der Gesamtverbrauch, die PUE wird aber sogar schlechter (gleicher Kühlaufwand für weniger IT-Leistung).</div>
+
+  <h4>Nachhaltige Softwareentwicklung</h4>
+  <p>Software bestimmt, wie viel Hardware, Rechenzeit, Speicher und Datenübertragung gebraucht wird. Ansatzpunkte:</p>
+  <ul>
+    <li><strong>effiziente Algorithmen und Datenstrukturen</strong> (z. B. O(n log n) statt O(n²), Datenbankindex statt vollständigem Tabellendurchlauf)</li>
+    <li><strong>Datenmengen reduzieren:</strong> nur benötigte Felder abfragen und übertragen, Paginierung, Kompression (gzip), Bilder in passender Auflösung und modernem Format (WebP, AVIF), Lazy Loading</li>
+    <li><strong>Caching</strong> (Browser, Server, CDN) statt wiederholter Berechnung oder Übertragung</li>
+    <li><strong>ereignisgesteuert statt Polling:</strong> Push-Benachrichtigungen oder WebSockets statt ständiger Nachfragen beim Server</li>
+    <li>rechenintensive Aufgaben nur bei Bedarf und gebündelt ausführen, möglichst zu Zeiten mit viel Ökostrom</li>
+    <li><strong>Datensparsamkeit</strong> und Löschkonzepte, Protokolle begrenzen (passt auch zur DSGVO)</li>
+    <li>Cloud-Ressourcen bedarfsgerecht: automatisches Skalieren, Test- und Entwicklungsumgebungen außerhalb der Arbeitszeit abschalten</li>
+    <li>auch <strong>ältere Geräte und Betriebssysteme</strong> unterstützen, damit Software keinen Neukauf erzwingt; Energieverbrauch im Test messen</li>
+  </ul>
+
+  <h4>Hardware-Lebenszyklus und Zertifikate</h4>
+  <p>Bei Notebooks, Tablets und Smartphones entsteht oft der größere Teil der CO₂-Emissionen bereits bei der <strong>Herstellung</strong>, nicht im Betrieb. Deshalb wirkt eine <strong>längere Nutzung</strong> besonders stark: reparieren und aufrüsten (Akku, Arbeitsspeicher, SSD), gebrauchte („refurbished“) Geräte kaufen, Altgeräte nach sicherer Datenlöschung weitergeben, fachgerecht recyceln (Rücknahme nach Elektro- und Elektronikgerätegesetz). Bei der Beschaffung zählen Energieverbrauch, Reparierbarkeit, Ersatzteil- und Update-Zusagen, Schadstoffarmut und Rücknahme.</p>
+  <table class="kompakt">
+    <tr><th style="width:20%">Zeichen</th><th>Bedeutung</th></tr>
+    <tr><td>Blauer Engel</td><td>Umweltzeichen der Bundesregierung; Kriterien u. a. für Computer, Monitore, Drucker, Rechenzentren und (seit 2020) für ressourcen- und energieeffiziente Software</td></tr>
+    <tr><td>Energy Star</td><td>Energieeffizienz-Label der US-Umweltbehörde EPA, u. a. für PCs, Monitore und Server</td></tr>
+    <tr><td>TCO Certified</td><td>internationales Nachhaltigkeitszertifikat für IT-Produkte: Umwelt, Ergonomie, soziale Bedingungen in der Lieferkette</td></tr>
+    <tr><td>EU-Energielabel</td><td>Effizienzklassen A bis G, u. a. für Monitore und Fernseher</td></tr>
+    <tr><td>EPEAT, 80 PLUS</td><td>Umweltbewertung elektronischer Produkte; Wirkungsgrad von Netzteilen</td></tr>
+  </table>
+
+  <h4>Maßnahmen bewerten</h4>
+  <p>Eine Maßnahme ist gut, wenn sie viel einspart und wenig Nachteile hat. Kriterien: Einsparung (kWh, €, CO₂), Investition und <strong>Amortisationszeit</strong> (= Investition ÷ jährliche Einsparung; z. B. 30.000 € ÷ 12.000 €/Jahr = 2,5 Jahre), Umsetzungsaufwand und Risiko (z. B. weniger Server = Ausfall trifft mehr Dienste, Redundanz einplanen), Nebenwirkungen wie der <strong>Rebound-Effekt</strong> (effizientere Technik wird mehr genutzt, die Einsparung schrumpft).</p>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>W23 T1 A1c</strong> (4 P): „Erläutern Sie den Begriff Green IT“ und Ziele nennen. Erwartet wurde sinngemäß: umweltschonender Einsatz von IT über den gesamten Lebenszyklus, Energie effizienter nutzen, Ressourcen und Klima schonen, IT-Lösungen, die in anderen Bereichen Einsparungen ermöglichen. Mit Rechnungen (PUE, kWh, Kosten) oder Maßnahmen im Szenario ist bei künftigen Prüfungen zu rechnen, zumal neuere Szenarien Rechenzentren und Cloud-Datenbanken enthalten.</div>
+</section>
+
+<!-- ===================== TEIL B: BELEGSATZ ===================== -->
+<section class="teil" id="belegsatz">
+  <h2>B · Belegsatz</h2>
+  <p class="klein">Enthält nur, was dir auch die IHK beilegen würde: die Ausgangssituation, die englischen Fachtexte, eine Funktionsliste der Tabellenkalkulation (wie im Belegsatz S23) und die Daten zu den Aufgaben. Keine Erklärungen.</p>
+
+  <div class="anlage" id="anlage-1">
+    <h4>Anlage 1 · Ausgangssituation</h4>
+    <p><strong>Die Aufgaben dieses Blocks beziehen sich auf die folgende Ausgangssituation:</strong></p>
+    <p>Die <strong>Pflanzenhof Lindner GmbH</strong> in Osnabrück ist ein Gartenbaubetrieb mit rund 140 Beschäftigten. Zum Unternehmen gehören sechs Gewächshäuser (Zierpflanzen, Kräuter, Gemüsejungpflanzen), ein Gartencenter und ein Online-Shop mit eigenem Lieferdienst im Umkreis von 40 km. Lieferungen und Liefergebühren werden bisher mit Tabellenkalkulationen geplant, Störungen der IT werden per Telefon oder E-Mail gemeldet. In einem eigenen Serverraum laufen Warenwirtschaft, Kassensystem und Dateiserver.</p>
+    <p>Ihr Ausbildungsbetrieb, die <strong>Nordwind Software GmbH</strong> in Bremen (35 Beschäftigte), entwickelt für den Pflanzenhof die Plattform <strong>„GrünBlick“</strong>:</p>
+    <ul>
+      <li><strong>Online-Shop und Liefer-App:</strong> Bestellung, Wahl des Liefertermins, Berechnung der Liefergebühr; die Fahrerinnen und Fahrer scannen die Lieferungen mit Diensthandys.</li>
+      <li><strong>Gewächshaus-Monitoring:</strong> 600 Sensoren (Temperatur, Feuchte, Licht) und Kameras. Das KI-Modul <strong>„PflanzenCheck“</strong> soll Krankheiten und Schädlinge auf Fotos der Pflanzen erkennen.</li>
+      <li><strong>Support</strong> für Kundschaft und Beschäftigte über ein Ticketsystem.</li>
+    </ul>
+    <p>GrünBlick läuft bei einem Cloud-Anbieter mit Rechenzentren in Frankfurt; die Datenbank wird repliziert. Das Entwicklungsteam von Nordwind besteht aus sechs Personen und arbeitet nach Kanban. Der Pflanzenhof hat sich vorgenommen, bis 2030 klimaneutral zu werden, und will dafür auch seinen Serverraum modernisieren.</p>
+    <p>Sie arbeiten im Projektteam von Nordwind mit.</p>
+    <p class="klein">Hinweise: Heute ist Samstag, der 10.10.2026. Geldbeträge in Euro.</p>
+  </div>
+
+  <div class="anlage" id="anlage-2">
+    <h4>Anlage 2 · Englischer Fachtext A (zu QU-01.1)</h4>
+    <div class="engtext" lang="en">
+      <h5>Kanban for Software Teams</h5>
+      <p>Kanban is a method for managing knowledge work that has its roots in lean manufacturing. In contrast to Scrum, Kanban does not prescribe iterations of a fixed length, specific roles or a sprint backlog. Instead, a team starts with the process it already uses and improves it step by step.</p>
+      <p>The central tool is the Kanban board. Each work item is represented by a card that moves from left to right through columns such as “To Do”, “In Progress”, “Review” and “Done”. The board makes the flow of work visible to everyone, including stakeholders outside the team.</p>
+      <p>The most important practice is limiting work in progress (WIP). A WIP limit defines the maximum number of cards that may be in a column at the same time. When a column has reached its limit, team members must not pull new work into it; instead, they help to finish the items that are already in progress. Although this may feel slower at first, it reduces context switching, exposes bottlenecks and shortens the time a work item needs from start to finish.</p>
+      <p>Kanban is a pull system: work is pulled into the next column only when there is free capacity, rather than being pushed onto people by a manager.</p>
+      <p>Teams measure their performance with flow metrics. Lead time is the time between the moment a request is accepted and its delivery to the customer, whereas cycle time only covers the period in which the team is actively working on it. Throughput is the number of items completed per week.</p>
+    </div>
+    <p class="klein">Quelle: eigener Text für dieses Übungsmaterial</p>
+  </div>
+
+  <div class="anlage" id="anlage-3">
+    <h4>Anlage 3 · Englischer Fachtext B (zu QU-01.2)</h4>
+    <div class="engtext" lang="en">
+      <h5>Database Replication in the Cloud</h5>
+      <p>Replication means keeping copies of the same data on several database servers, so-called nodes. In the most common set-up, one node acts as the primary (sometimes called leader). All write operations (INSERT, UPDATE, DELETE) are sent to the primary, which then forwards the changes to one or more replicas.</p>
+      <p>Replication can be synchronous or asynchronous. With synchronous replication, the primary confirms a transaction to the application only after at least one replica has stored the change as well. No committed data is lost if the primary fails, but every write takes longer, especially when the replica is located in a different data center. With asynchronous replication, the primary confirms the transaction immediately and sends the changes to the replicas afterwards. Writes are fast, whereas the replicas may be slightly behind the primary. This delay is called replication lag. It is usually less than a second, but under heavy load it can grow to several seconds or even minutes.</p>
+      <p>Replicas are used for two main purposes. First, they increase availability: if the primary fails, a replica can be promoted to become the new primary (failover). Many cloud providers perform this automatically within one or two minutes. Second, read replicas improve performance, because read-only queries such as reports or product searches can be distributed across several nodes and do not slow down the primary.</p>
+      <p>However, replication is not a backup. If a user accidentally deletes a table, the DELETE statement is replicated to all nodes within seconds. Point-in-time backups are therefore still required.</p>
+      <p>Applications that read from asynchronous replicas must tolerate stale data. A typical problem is that a user saves a change and immediately reloads the page, but the read request is routed to a replica that has not yet received the change. A common solution is to send reads that must be up to date – for example, a user’s own recent changes or stock levels during checkout – to the primary (“read-your-writes” consistency).</p>
+    </div>
+    <p class="klein">Quelle: eigener Text für dieses Übungsmaterial</p>
+  </div>
+
+  <div class="anlage" id="anlage-4">
+    <h4>Anlage 4 · Englischer Fachtext C (zu QU-01.3)</h4>
+    <div class="engtext" lang="en">
+      <h5>From Monolith to Microservices</h5>
+      <p>A monolithic application is built and deployed as a single unit. All functions – for example user management, product catalogue, ordering and payment – share one code base and usually one database. Monoliths are simple to develop, test and deploy as long as the application and the team are small. As they grow, however, every change requires the whole application to be rebuilt and redeployed, and a fault in one module can bring down the entire system.</p>
+      <p>In a microservice architecture, an application is split into small, independent services. Each service covers one business capability, runs in its own process and owns its data; other services may access this data only through the service’s API, never directly through the database. Services communicate over the network, typically via REST APIs using HTTP and JSON, or asynchronously via a message broker.</p>
+      <p>The main benefits are:</p>
+      <ul>
+        <li><strong>Independent deployment:</strong> a team can release a new version of its service without coordinating a release of the whole system.</li>
+        <li><strong>Independent scaling:</strong> only the services under heavy load need additional instances. During a sales campaign, for example, a shop can scale the catalogue service while the accounting service keeps running on a single instance.</li>
+        <li><strong>Fault isolation:</strong> if one service fails, the others can continue to work, provided that they handle the failure gracefully, e.g. with timeouts and fallback values.</li>
+        <li><strong>Technology freedom:</strong> each team can choose the programming language and database that best fit its service.</li>
+      </ul>
+      <p>An API gateway is a single entry point for all clients such as mobile apps and web browsers. It routes each request to the responsible service and takes over cross-cutting tasks like authentication, rate limiting and logging, so that these functions do not have to be implemented in every service.</p>
+      <p>Microservices are not free, though. A distributed system is considerably more complex than a monolith: network calls can be slow or fail, data is spread across several databases, and transactions that span several services are difficult to implement. Testing and debugging require more effort, because a single user request may pass through many services. Operating dozens of services also requires automation, such as container orchestration, centralized logging and monitoring.</p>
+      <p>For these reasons, experts recommend that small teams start with a well-structured monolith (“modular monolith”) and extract services only when there is a clear need, for instance when parts of the system have very different load profiles or are developed by separate teams. An API should be designed carefully from the start: once external clients depend on it, changes must remain backward compatible, which is why many providers put a version number in the URL, e.g. <code>/api/v2/orders</code>.</p>
+    </div>
+    <p class="klein">Quelle: eigener Text für dieses Übungsmaterial</p>
+  </div>
+
+  <div class="anlage ganz" id="anlage-5">
+    <h4>Anlage 5 · Tabellenkalkulation: Funktionen (Auszug)</h4>
+    <p class="klein">Argumente werden durch Semikolon getrennt, optionale Argumente stehen in eckigen Klammern. Bezug auf eine Zelle in einem anderen Arbeitsblatt: <code>Blattname!Zelle</code> (Beispiel: <code>Zonen!C2</code>). Datumswerte werden intern als fortlaufende Zahl gespeichert (Anzahl der Tage seit dem 01.01.1900). Wahrheitswerte: WAHR / FALSCH (TRUE / FALSE).</p>
+    <table class="kompakt">
+      <tr><th>Funktion</th><th>englisch</th><th>Syntax</th></tr>
+      <tr><td>SUMME</td><td>SUM</td><td class="mono">SUMME(Zahl1; [Zahl2]; …)</td></tr>
+      <tr><td>MITTELWERT</td><td>AVERAGE</td><td class="mono">MITTELWERT(Zahl1; [Zahl2]; …)</td></tr>
+      <tr><td>MIN / MAX</td><td>MIN / MAX</td><td class="mono">MIN(Zahl1; [Zahl2]; …)</td></tr>
+      <tr><td>ANZAHL</td><td>COUNT</td><td class="mono">ANZAHL(Wert1; [Wert2]; …)</td></tr>
+      <tr><td>ZÄHLENWENN</td><td>COUNTIF</td><td class="mono">ZÄHLENWENN(Bereich; Suchkriterium)</td></tr>
+      <tr><td>SUMMEWENN</td><td>SUMIF</td><td class="mono">SUMMEWENN(Bereich; Suchkriterium; [Summe_Bereich])</td></tr>
+      <tr><td>RUNDEN</td><td>ROUND</td><td class="mono">RUNDEN(Zahl; Anzahl_Stellen)</td></tr>
+      <tr><td>WENN</td><td>IF</td><td class="mono">WENN(Prüfung; Dann_Wert; Sonst_Wert)</td></tr>
+      <tr><td>UND / ODER</td><td>AND / OR</td><td class="mono">UND(Wahrheitswert1; [Wahrheitswert2]; …)</td></tr>
+      <tr><td>SVERWEIS</td><td>VLOOKUP</td><td class="mono">SVERWEIS(Suchkriterium; Matrix; Spaltenindex; [Bereich_Verweis])<br>Bereich_Verweis: FALSCH = genaue Übereinstimmung, WAHR = ungefähre Übereinstimmung</td></tr>
+      <tr><td>XVERWEIS</td><td>XLOOKUP</td><td class="mono">XVERWEIS(Suchkriterium; Suchmatrix; Rückgabematrix; [wenn_nicht_gefunden])</td></tr>
+      <tr><td>HEUTE</td><td>TODAY</td><td class="mono">HEUTE()</td></tr>
+      <tr><td>DATUM</td><td>DATE</td><td class="mono">DATUM(Jahr; Monat; Tag)</td></tr>
+      <tr><td>TAG / MONAT / JAHR</td><td>DAY / MONTH / YEAR</td><td class="mono">JAHR(Zahl)</td></tr>
+      <tr><td>WOCHENTAG</td><td>WEEKDAY</td><td class="mono">WOCHENTAG(Zahl; [Typ])<br>Typ 2: 1 = Montag, 2 = Dienstag, … 7 = Sonntag</td></tr>
+    </table>
+  </div>
+
+  <div class="anlage ganz" id="anlage-6">
+    <h4>Anlage 6 · Arbeitsmappe „Angebot.xlsx“ (zu QU-02.1)</h4>
+    <p class="klein">Angebot des Gartencenters für einen Gewerbekunden. Der Rabatt in G2 gilt für alle Positionen. Grau markierte Zellen sollen Formeln enthalten.</p>
+    <table class="sheet">
+      <tr><th class="ecke"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th></tr>
+      <tr><th>1</th><td class="k">Artikel</td><td class="k">Einzelpreis</td><td class="k">Menge</td><td class="k">Gesamt</td><td class="k">Gesamt nach Rabatt</td><td></td><td class="k">Rabatt</td></tr>
+      <tr><th>2</th><td>Lavendel (Topf 12 cm)</td><td class="n">3,90</td><td class="n">40</td><td class="ziel"></td><td class="ziel"></td><td></td><td class="n">8 %</td></tr>
+      <tr><th>3</th><td>Buchsbaum-Kugel 30 cm</td><td class="n">24,90</td><td class="n">6</td><td></td><td></td><td></td><td></td></tr>
+      <tr><th>4</th><td>Hortensie (Topf 17 cm)</td><td class="n">12,50</td><td class="n">15</td><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <span class="blattname">Angebot</span>
+  </div>
+
+  <div class="anlage" id="anlage-7">
+    <div class="block">
+    <h4 style="margin-top:0">Anlage 7 · Arbeitsmappe „Lieferplanung.xlsx“ (zu QU-02.2 und QU-02.3)</h4>
+    <p class="klein">Grau markierte Zellen enthalten Formeln. Im Arbeitsblatt <code>Lieferung</code> werden die Ergebnisse so angezeigt, wie sie mit den Formeln entstehen sollen; die Formeln in Zeile 6 bzw. 7 werden bis Zeile 11 nach unten kopiert.</p>
+    <table class="sheet">
+      <tr><th class="ecke"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th></tr>
+      <tr><th>1</th><td class="k">BestellNr</td><td class="k">Datum</td><td class="k">Kundentyp</td><td class="k">Zone</td><td class="k">Warenwert</td><td class="k">Bezahlt</td><td class="k">Status</td></tr>
+      <tr><th>2</th><td class="n">5101</td><td class="n">14.09.2026</td><td>Privat</td><td class="n">1</td><td class="n">54,80</td><td>ja</td><td class="ziel"></td></tr>
+      <tr><th>3</th><td class="n">5102</td><td class="n">18.09.2026</td><td>Gewerbe</td><td class="n">3</td><td class="n">412,00</td><td>nein</td><td></td></tr>
+      <tr><th>4</th><td class="n">5103</td><td class="n">21.09.2026</td><td>Privat</td><td class="n">2</td><td class="n">89,90</td><td>ja</td><td></td></tr>
+      <tr><th>5</th><td class="n">5104</td><td class="n">25.09.2026</td><td>Privat</td><td class="n">2</td><td class="n">36,50</td><td>nein</td><td></td></tr>
+      <tr><th>6</th><td class="n">5105</td><td class="n">29.09.2026</td><td>Gewerbe</td><td class="n">1</td><td class="n">1.250,00</td><td>ja</td><td></td></tr>
+      <tr><th>7</th><td class="n">5106</td><td class="n">30.09.2026</td><td>Privat</td><td class="n">4</td><td class="n">149,00</td><td>nein</td><td></td></tr>
+      <tr><th>8</th><td class="n">5107</td><td class="n">02.10.2026</td><td>Privat</td><td class="n">1</td><td class="n">27,33</td><td>ja</td><td></td></tr>
+      <tr><th>9</th><td class="n">5108</td><td class="n">05.10.2026</td><td>Gewerbe</td><td class="n">2</td><td class="n">318,40</td><td>nein</td><td></td></tr>
+      <tr><th>10</th><td class="n">5109</td><td class="n">07.10.2026</td><td>Privat</td><td class="n">3</td><td class="n">64,90</td><td>nein</td><td></td></tr>
+      <tr><th>11</th><td class="n">5110</td><td class="n">09.10.2026</td><td>Privat</td><td class="n">2</td><td class="n">112,00</td><td>ja</td><td></td></tr>
+      <tr><th>12</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><th>13</th><td class="k" colspan="4">Auswertung</td><td></td><td></td><td></td></tr>
+      <tr><th>14</th><td colspan="4">Anzahl Bestellungen in Zone 2</td><td class="ziel"></td><td></td><td></td></tr>
+      <tr><th>15</th><td colspan="4">Summe Warenwert der Gewerbekunden</td><td class="ziel"></td><td></td><td></td></tr>
+      <tr><th>16</th><td colspan="4">Ø Warenwert (2 Nachkommastellen)</td><td class="ziel"></td><td></td><td></td></tr>
+    </table>
+    <span class="blattname">Bestellungen</span>
+    </div>
+
+    <table class="sheet">
+      <tr><th class="ecke"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th></tr>
+      <tr><th>1</th><td class="k">Zone</td><td class="k">Gebiet</td><td class="k">Grundgebühr</td><td class="k">Mindestbestellwert</td><td class="k">Lieferfrei ab</td><td></td><td class="k">Samstagszuschlag</td></tr>
+      <tr><th>2</th><td class="n">1</td><td>Osnabrück Stadt</td><td class="n">4,90</td><td class="n">20,00</td><td class="n">60,00</td><td></td><td class="n">5,00</td></tr>
+      <tr><th>3</th><td class="n">2</td><td>Landkreis Nord</td><td class="n">7,90</td><td class="n">30,00</td><td class="n">90,00</td><td></td><td></td></tr>
+      <tr><th>4</th><td class="n">3</td><td>Landkreis Süd</td><td class="n">9,90</td><td class="n">40,00</td><td class="n">120,00</td><td></td><td></td></tr>
+      <tr><th>5</th><td class="n">4</td><td>Umland bis 40 km</td><td class="n">14,90</td><td class="n">50,00</td><td class="n">150,00</td><td></td><td></td></tr>
+    </table>
+    <span class="blattname">Zonen</span>
+
+    <div class="block">
+    <table class="sheet">
+      <tr><th class="ecke"></th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+      <tr><th>1</th><td class="k">Bestelldatum</td><td class="n">Do, 08.10.2026</td><td></td><td></td></tr>
+      <tr><th>2</th><td class="k">Zone</td><td class="n">3</td><td></td><td></td></tr>
+      <tr><th>3</th><td class="k">Warenwert</td><td class="n">89,50</td><td></td><td></td></tr>
+      <tr><th>4</th><td class="k">Mindestbestellwert erreicht?</td><td class="ziel">ja</td><td></td><td></td></tr>
+      <tr><th>5</th><td class="k">Liefertag</td><td class="k">Wochentag</td><td class="k">Grundgebühr</td><td class="k">Liefergebühr</td></tr>
+      <tr><th>6</th><td class="ziel n">Fr, 09.10.2026</td><td class="ziel n">5</td><td class="ziel n">9,90</td><td class="ziel n">9,90</td></tr>
+      <tr><th>7</th><td class="ziel n">Sa, 10.10.2026</td><td class="n">6</td><td class="n">9,90</td><td class="n">14,90</td></tr>
+      <tr><th>8</th><td class="n">So, 11.10.2026</td><td class="n">7</td><td class="n">9,90</td><td class="n">keine Lieferung</td></tr>
+      <tr><th>9</th><td class="n">Mo, 12.10.2026</td><td class="n">1</td><td class="n">9,90</td><td class="n">9,90</td></tr>
+      <tr><th>10</th><td class="n">Di, 13.10.2026</td><td class="n">2</td><td class="n">9,90</td><td class="n">9,90</td></tr>
+      <tr><th>11</th><td class="n">Mi, 14.10.2026</td><td class="n">3</td><td class="n">9,90</td><td class="n">9,90</td></tr>
+    </table>
+    <span class="blattname">Lieferung</span>
+    <p class="klein">Regeln des Lieferdienstes: Geliefert wird frühestens am Tag nach der Bestellung, sonntags nicht. Die Grundgebühr hängt von der Zone ab und entfällt, wenn der Warenwert den Betrag „Lieferfrei ab“ der Zone erreicht. Für Lieferungen an Samstagen wird immer der Samstagszuschlag berechnet.</p>
+    </div>
+  </div>
+
+  <div class="anlage ganz" id="anlage-8">
+    <h4>Anlage 8 · Support für GrünBlick: Auszug aus dem Servicevertrag</h4>
+    <p><strong>Servicezeit:</strong> Montag bis Samstag 7:00–19:00 Uhr (außer an Feiertagen). Reaktions- und Lösungszeiten laufen nur innerhalb der Servicezeit. Im Status „Wartend auf Melder“ ruht die Frist.</p>
+    <div class="zweispaltig">
+      <table class="kompakt nw" style="width:auto">
+        <caption>Priorität (P1 = höchste)</caption>
+        <tr><th>Dringlichkeit ↓ /<br>Auswirkung →</th><th>hoch</th><th>mittel</th><th>gering</th></tr>
+        <tr><th>hoch</th><td>P1</td><td>P2</td><td>P3</td></tr>
+        <tr><th>mittel</th><td>P2</td><td>P3</td><td>P4</td></tr>
+        <tr><th>gering</th><td>P3</td><td>P4</td><td>P4</td></tr>
+      </table>
+      <table class="kompakt nw" style="width:auto">
+        <caption>Fristen</caption>
+        <tr><th>Priorität</th><th>Reaktionszeit</th><th>Lösungszeit</th></tr>
+        <tr><td>P1</td><td>15 Minuten</td><td>4 Stunden</td></tr>
+        <tr><td>P2</td><td>1 Stunde</td><td>8 Stunden</td></tr>
+        <tr><td>P3</td><td>4 Stunden</td><td>3 Servicetage</td></tr>
+        <tr><td>P4</td><td>1 Servicetag</td><td>nächstes Release (spätestens 30 Tage)</td></tr>
+      </table>
+    </div>
+    <table class="kompakt">
+      <tr><th style="width:14%"></th><th>Auswirkung</th><th>Dringlichkeit</th></tr>
+      <tr><td>hoch</td><td>eine Kernfunktion (Bestellung, Zahlung, Lieferung, Gewächshaussteuerung) ist für viele Nutzer ausgefallen oder es entsteht direkter Umsatzverlust</td><td>der Schaden wächst schnell (z. B. Gefahr für Pflanzen, laufende Bestellungen gehen verloren), kein Workaround</td></tr>
+      <tr><td>mittel</td><td>eine Teilfunktion ist gestört oder eine Abteilung bzw. Nutzergruppe ist betroffen</td><td>Lösung im Laufe des Tages nötig, ein Workaround ist mit Mehraufwand möglich</td></tr>
+      <tr><td>gering</td><td>einzelne Person betroffen oder Komfortfunktion; Arbeit ist normal möglich</td><td>Lösung kann geplant werden</td></tr>
+    </table>
+    <p><strong>Support-Organisation:</strong></p>
+    <ul>
+      <li><strong>1st Level:</strong> Service Desk der IT-Abteilung des Pflanzenhofs (zwei Personen; Telefon, E-Mail, Self-Service-Portal mit FAQ)</li>
+      <li><strong>2nd Level:</strong> Anwendungsbetreuung der Nordwind Software GmbH (Analyse, Konfiguration, Datenkorrekturen)</li>
+      <li><strong>3rd Level:</strong> Entwicklungsteam von Nordwind (Fehlerbehebung im Code, Hotfix) bzw. Sensorhersteller SensoTec AG (Sensoren, Gateways)</li>
+      <li><strong>Ansprechpartner für Eskalationen:</strong> Teamleitung Support (Nordwind) → Projektleitung GrünBlick → Geschäftsführung</li>
+    </ul>
+  </div>
+
+  <div class="anlage" id="anlage-9">
+    <h4>Anlage 9 · Ticketliste GrünBlick (Auszug, Oktober 2026)</h4>
+    <table class="kompakt" style="font-size:12.5px">
+      <tr><th>Ticket</th><th>Eingang</th><th>Meldung (gekürzt)</th><th>Auswir&shy;kung</th><th>Dring&shy;lichkeit</th><th>Status</th><th>erste Reaktion</th><th>gelöst</th></tr>
+      <tr><td>T-1041</td><td>Mo 05.10. 08:12</td><td>Kundin: Link zum Zurücksetzen des Passworts kommt nicht an</td><td>gering</td><td>mittel</td><td>geschlossen</td><td>08:40</td><td>09:05</td></tr>
+      <tr><td>T-1042</td><td>Mo 05.10. 10:30</td><td>Gartencenter: Kartenzahlung im Online-Shop schlägt für alle Kundinnen und Kunden fehl, Bestellungen brechen ab</td><td>hoch</td><td>hoch</td><td>geschlossen</td><td>10:52</td><td>13:10</td></tr>
+      <tr><td>T-1043</td><td>Di 06.10. 07:05</td><td>Gewächshaus 4: Dashboard zeigt seit 6:40 Uhr keine Temperaturwerte; die Lüftung läuft im Notprogramm, für mittags ist starke Sonne angesagt</td><td>–</td><td>–</td><td>in Bearbeitung</td><td>07:15</td><td>–</td></tr>
+      <tr><td>T-1044</td><td>Di 06.10. 14:05</td><td>Verkauf: neue Mitarbeiterin benötigt Zugang zum Auswertungsmodul</td><td>gering</td><td>gering</td><td>geschlossen</td><td>Mi 09:30</td><td>Mi 10:00</td></tr>
+      <tr><td>T-1045</td><td>Mi 07.10. 09:00</td><td>Kunde: Tippfehler in der Beschreibung einer Rosensorte</td><td>gering</td><td>gering</td><td>gelöst</td><td>11:20</td><td>Do 08:15</td></tr>
+      <tr><td>T-1046</td><td>Mi 07.10. 11:20</td><td>Lieferdienst: Seit dem Update vom 06.10. stürzt die Liefer-App bei allen Fahrern beim Scannen ab; Lieferungen werden auf Papier notiert und abends nachgetragen</td><td>–</td><td>–</td><td>in Bearbeitung</td><td>11:45</td><td>–</td></tr>
+      <tr><td>T-1047</td><td>Do 08.10. 07:12</td><td>Gewächshaus 2: Dashboard zeigt keine Temperaturwerte (gleiches Fehlerbild wie T-1043, dritter Fall seit September); behoben durch Neustart des Sensor-Gateways</td><td>mittel</td><td>hoch</td><td>gelöst</td><td>07:20</td><td>07:50</td></tr>
+    </table>
+    <p class="klein">„–“ in den Spalten Auswirkung/Dringlichkeit: noch nicht eingestuft. Zeitangaben ohne Wochentag beziehen sich auf den Eingangstag.</p>
+  </div>
+
+  <div class="anlage ganz" id="anlage-10">
+    <h4>Anlage 10 · KI-Modul „PflanzenCheck“</h4>
+    <p>Kameras fotografieren die Pflanzentische zweimal täglich. PflanzenCheck soll jedes Foto einer der Klassen <em>gesund</em>, <em>Echter Mehltau</em>, <em>Blattläuse</em> oder <em>Grauschimmel</em> zuordnen. Erkannte Krankheiten werden dem Gewächshausteam gemeldet; befallene Pflanzen werden behandelt oder aussortiert.</p>
+    <p><strong>Trainingsdaten (Stand September 2026):</strong></p>
+    <ul>
+      <li>12.000 Fotos aus den Gewächshäusern 1 und 2 (Rosen und Geranien), aufgenommen von Juni bis August 2026 bei Tageslicht</li>
+      <li>Verteilung der Labels: gesund 10.200 · Echter Mehltau 1.200 · Blattläuse 480 · Grauschimmel 120</li>
+      <li>Die Labels haben zwei Aushilfskräfte nach einer einstündigen Einweisung vergeben; eine Kontrolle durch Fachpersonal gab es nicht.</li>
+      <li>Auf einem Teil der Fotos sind Beschäftigte bei der Arbeit zu sehen.</li>
+    </ul>
+    <p><strong>Geplanter Einsatz:</strong> ab November 2026 in allen sechs Gewächshäusern (auch Kräuter und Gemüsejungpflanzen), in den Wintermonaten unter Kunstlicht.</p>
+    <p><strong>Testergebnis:</strong> 2.000 Fotos, die nicht für das Training verwendet wurden (ebenfalls aus den Gewächshäusern 1 und 2, Juli 2026); ausgewertet nur nach krank/gesund:</p>
+    <table class="kompakt" style="width:auto">
+      <tr><th></th><th>PflanzenCheck: krank</th><th>PflanzenCheck: gesund</th><th>Summe</th></tr>
+      <tr><th>tatsächlich krank</th><td class="n">210</td><td class="n">90</td><td class="n">300</td></tr>
+      <tr><th>tatsächlich gesund</th><td class="n">60</td><td class="n">1.640</td><td class="n">1.700</td></tr>
+    </table>
+  </div>
+
+  <div class="anlage ganz" id="anlage-11">
+    <h4>Anlage 11 · Serverraum des Pflanzenhofs: Kenndaten</h4>
+    <table class="kompakt">
+      <tr><th style="width:50%">Ist-Zustand (Messung September 2026)</th><th>Planung (Angebot eines Systemhauses)</th></tr>
+      <tr><td>
+        <ul>
+          <li>14 physische Server, Leistungsaufnahme im Mittel je 320 W, mittlere CPU-Auslastung 9 %</li>
+          <li>Speicher und Netzwerk (Storage, Switches, Firewall): zusammen 1,02 kW</li>
+          <li>Gesamtleistung des Serverraums laut Zähler (mit Klimagerät, USV, Beleuchtung): im Mittel 10,45 kW</li>
+          <li>Betrieb rund um die Uhr</li>
+        </ul>
+      </td><td>
+        <ul>
+          <li>Virtualisierung auf 3 Hosts mit je 550 W</li>
+          <li>Speicher und Netzwerk: zusammen 1,05 kW</li>
+          <li>neue Kühlung (Kalt-/Warmgang, freie Kühlung mit Außenluft): erwartete PUE 1,4</li>
+          <li>Investition einschließlich Einrichtung: 38.000 €</li>
+        </ul>
+      </td></tr>
+    </table>
+    <p class="klein">Kenndaten: Strompreis 0,28 € je kWh · Emissionsfaktor 0,38 kg CO₂ je kWh · 1 Jahr = 8.760 Stunden</p>
+  </div>
+
+  <div class="anlage" id="anlage-12">
+    <h4>Anlage 12 · GrünBlick: Beobachtungen aus dem Testbetrieb</h4>
+    <ol>
+      <li><strong>Produktbilder:</strong> Der Shop liefert in der Listenansicht die Originalfotos der Produktkamera aus (Ø 4,8 MB, 4000 × 3000 Pixel). Auf dem Smartphone werden sie mit 400 × 300 Pixeln angezeigt. Pro Tag werden rund 30.000 Produktbilder in der Listenansicht abgerufen. Ein für diese Größe optimiertes WebP-Bild hätte etwa 0,12 MB.</li>
+      <li><strong>Liefer-App:</strong> Jedes der 25 Diensthandys fragt alle 5 Sekunden beim Server nach, ob neue Aufträge vorliegen – rund um die Uhr, obwohl nur Montag bis Samstag von 8 bis 18 Uhr ausgeliefert wird.</li>
+      <li><strong>Sensordaten:</strong> 600 Sensoren senden jede Minute einen Messwert. Alle Rohwerte werden unbegrenzt gespeichert und jede Nacht vollständig (nicht nur die Änderungen) in eine zweite Cloud-Region kopiert.</li>
+      <li><strong>KI-Training:</strong> PflanzenCheck wird jede Nacht mit allen bisher gesammelten Fotos komplett neu trainiert, auch wenn keine neuen gelabelten Fotos hinzugekommen sind (Rechenzeit je Lauf: 6 GPU-Stunden).</li>
+      <li><strong>Testumgebung:</strong> Die Entwicklungs- und Testserver in der Cloud laufen rund um die Uhr; genutzt werden sie Montag bis Freitag von 8 bis 17 Uhr.</li>
+      <li><strong>Systemvoraussetzungen:</strong> Die Liefer-App läuft nur auf Smartphones ab Android 15 bzw. iOS 18. Neun der 25 Diensthandys müssten deshalb ersetzt werden, obwohl sie technisch einwandfrei sind.</li>
+    </ol>
+    <p class="klein">Annahmen: 1 GB = 1.000 MB · Energiebedarf der Datenübertragung (Netz und Rechenzentren) 0,03 kWh je GB</p>
+  </div>
+</section>
+
+<!-- ===================== TEIL C: AUFGABEN ===================== -->
+<section class="teil" id="aufgaben">
+  <h2>C · Aufgaben</h2>
+  <p class="klein">Alle Aufgaben beziehen sich auf die Ausgangssituation in Anlage 1. Antworten auf Fragen zu englischen Texten sind auf Deutsch zu formulieren. Formeln der Tabellenkalkulation dürfen in deutscher oder englischer Schreibweise angegeben werden (Funktionsliste in Anlage 5).</p>
+
+  <!-- ===================== QU-01 ===================== -->
+  <h3 id="a-01">QU-01 · Englischer Fachtext</h3>
+
+  <div class="aufgabe" id="QU-01-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe QU-01.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Das Entwicklungsteam von Nordwind arbeitet seit Kurzem nach Kanban. Eine neue Kollegin, die bisher nur Scrum kennt, hat den Text in Anlage 2 erhalten.</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Nennen Sie zwei Unterschiede zwischen Kanban und Scrum, die im Text genannt werden.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Erläutern Sie, was ein WIP-Limit ist und welche Wirkung es laut Text hat.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Erklären Sie den Unterschied zwischen „lead time“ und „cycle time“.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 2a (Fachbegriffe aus einem englischen Text zu agilen Methoden)</p>
+  </div>
+
+  <div class="aufgabe" id="QU-01-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe QU-01.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Die Datenbank von GrünBlick wird beim Cloud-Anbieter repliziert. Der Anbieter bietet synchrone und asynchrone Replikation an. Zur Entscheidung liegt Ihnen der Text in Anlage 3 vor.</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Erläutern Sie den Unterschied zwischen synchroner und asynchroner Replikation. Nennen Sie für beide Verfahren jeweils einen Vorteil und einen Nachteil laut Text.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Nennen Sie die beiden im Text beschriebenen Einsatzzwecke von Replikaten.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Die IT-Leitung des Pflanzenhofs schlägt vor, wegen der Replikation auf die nächtliche Datensicherung zu verzichten. Nehmen Sie mit Bezug auf den Text Stellung.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>d) Beschreiben Sie anhand des Textes ein Problem, das im Online-Shop von GrünBlick bei asynchroner Replikation auftreten kann, und die im Text genannte Lösung.</div>
+    <div class="antwort z5"></div>
+    <p class="quelle">Angelehnt an: S22 Teil 1, Aufgabe 2c (Datenbanktechnik aus englischem Text erläutern)</p>
+  </div>
+
+  <div class="aufgabe" id="QU-01-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe QU-01.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">16 Punkte</span>
+    </div>
+    <p>Für GrünBlick soll die Software-Architektur festgelegt werden. Ein Mitglied des Teams schlägt vor, Shop, Liefer-App, Gewächshaus-Monitoring und PflanzenCheck von Anfang an als Microservices umzusetzen. Das Team besteht aus sechs Entwicklerinnen und Entwicklern. Bei Aktionen wie dem Frühjahrsverkauf wird der Produktkatalog des Shops sehr stark genutzt, die übrigen Funktionen kaum stärker als sonst. Ihnen liegt der Text in Anlage 4 vor.</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Erläutern Sie den Unterschied zwischen einer monolithischen Anwendung und einer Microservice-Architektur.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Erläutern Sie zwei im Text genannte Vorteile von Microservices und beziehen Sie diese jeweils auf GrünBlick.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>c) Beschreiben Sie die Aufgaben eines API-Gateways.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>d) Die Geschäftsführung von Nordwind fragt, ob GrünBlick von Anfang an aus Microservices bestehen soll. Geben Sie mit Bezug auf den Text eine begründete Empfehlung ab (mindestens zwei Argumente).</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>e) Die Bestell-Schnittstelle soll unter <code>/api/v1/orders</code> erreichbar sein. Erklären Sie, warum die URL laut Text eine Versionsnummer enthält.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S22 Teil 1, Aufgabe 2c, und S24 Teil 2, Aufgabe 3b (Inhalte eines englischen Fachtextes erläutern und übertragen)</p>
+  </div>
+
+  <!-- ===================== QU-02 ===================== -->
+  <h3 id="a-02">QU-02 · Tabellenkalkulation</h3>
+
+  <div class="aufgabe" id="QU-02-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe QU-02.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Für ein Angebot an einen Gewerbekunden verwendet das Gartencenter das Arbeitsblatt <code>Angebot</code> (Anlage 6). Die Formeln in Zeile 2 sollen nach unten bis Zeile 4 kopiert werden können.</p>
+    <div class="teilaufgabe"><span class="tp">1 P</span>a) Geben Sie die Formel für Zelle D2 an.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Geben Sie die Formel für Zelle E2 an. Der Rabatt steht in Zelle G2.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Ein Kollege hat in E2 die Formel <code>=D2*(1-G2)</code> eingegeben und nach unten kopiert. Erläutern Sie, welche Formel dann in E3 steht und welchen Wert E3 anzeigt.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>d) Nennen Sie eine weitere sinnvolle Einsatzmöglichkeit für eine Tabellenkalkulation im Pflanzenhof.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S23 Teil 1, Aufgabe 3a und 3ba (Formeln, Einsatzmöglichkeit)</p>
+  </div>
+
+  <div class="aufgabe" id="QU-02-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe QU-02.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Im Arbeitsblatt <code>Bestellungen</code> (Anlage 7) sollen die grau markierten Zellen berechnet werden.</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Geben Sie die Formel für Zelle E14 an (Anzahl der Bestellungen in Zone 2).</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Geben Sie die Formel für Zelle E15 an (Summe der Warenwerte aller Gewerbekunden).</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Geben Sie die Formel für Zelle E16 an (durchschnittlicher Warenwert, auf zwei Nachkommastellen gerundet).</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>d) In Spalte G soll „Mahnung“ erscheinen, wenn eine Bestellung nicht bezahlt ist <strong>und</strong> das Bestelldatum mehr als 14 Tage vor dem aktuellen Tagesdatum liegt; sonst bleibt die Zelle leer. Geben Sie die Formel für Zelle G2 an, die nach unten kopiert werden kann.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">1 P</span>e) Geben Sie an, bei welchen Bestellungen am 10.10.2026 „Mahnung“ angezeigt wird.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Angelehnt an: S23 Teil 1, Aufgabe 3a (Formeln mit Funktionen aus dem Belegsatz)</p>
+  </div>
+
+  <div class="aufgabe" id="QU-02-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe QU-02.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">20 Punkte</span>
+    </div>
+    <p>Bevor die Berechnung der Liefergebühren in GrünBlick programmiert wird, soll die Logik mit einer Tabellenkalkulation simuliert werden. Nach Eingabe von Bestelldatum, Zone und Warenwert zeigt das Arbeitsblatt <code>Lieferung</code> die nächsten sechs möglichen Liefertage mit der jeweiligen Liefergebühr an. Die Gebühren stehen im Arbeitsblatt <code>Zonen</code> (Anlage 7, dort auch die Regeln des Lieferdienstes).</p>
+    <p>Geben Sie Formeln an, mit denen die Inhalte der grau markierten Zellen im Arbeitsblatt <code>Lieferung</code> bestimmt werden. Die Formeln in Zeile 6 bzw. 7 werden bis Zeile 11 kopiert. Verwenden Sie Funktionen aus Anlage 5; Hilfswerte in weiteren Spalten sind erlaubt.</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Zellen A6 und A7 (erster möglicher Liefertag bzw. jeweils der Folgetag).</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Zelle B6 (Wochentag als Zahl, Montag = 1).</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Zelle B4: „ja“, wenn der Warenwert den Mindestbestellwert der Zone erreicht, sonst „nein“.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>d) Zelle C6: Grundgebühr der Zone; sie ist 0, wenn der Warenwert den Betrag „Lieferfrei ab“ der Zone erreicht.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>e) Zelle D6: „keine Lieferung“ an Sonntagen; an Samstagen die Grundgebühr zuzüglich Samstagszuschlag; an allen anderen Tagen die Grundgebühr.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>f) Geben Sie an, welche Werte C6 und D7 anzeigen, wenn in B3 der Warenwert 125,00 eingetragen wird.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>g) Bisher pflegen vier Beschäftigte die Lieferplanung gemeinsam in einer Datei auf einem Netzlaufwerk. Beschreiben Sie zwei Probleme dieses Vorgehens und erläutern Sie jeweils, wie eine Anwendung mit zentraler Datenbank wie GrünBlick das Problem vermeidet.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: S23 Teil 1, Aufgabe 3 (Folgetag, VLOOKUP, IF mit WEEKDAY, Einsatzmöglichkeit und Problem)</p>
+  </div>
+
+  <!-- ===================== QU-03 ===================== -->
+  <h3 id="a-03">QU-03 · Ticketsystem / IT-Service</h3>
+
+  <div class="aufgabe" id="QU-03-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe QU-03.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Beim Service Desk des Pflanzenhofs gehen folgende Meldungen ein.</p>
+    <div class="teilaufgabe"><span class="tp">4 P</span>a) Ordnen Sie jede Meldung einer Kategorie zu: Incident, Service Request, Problem oder Change.</div>
+    <table class="kompakt leer">
+      <tr><th style="width:5%">Nr.</th><th>Meldung</th><th style="width:24%">Kategorie</th></tr>
+      <tr><td>1</td><td>„Seit heute Morgen kann sich niemand aus Gewächshaus 3 am Dashboard anmelden.“</td><td></td></tr>
+      <tr><td>2</td><td>„Bitte richten Sie für unsere neue Auszubildende ein Benutzerkonto für GrünBlick ein.“</td><td></td></tr>
+      <tr><td>3</td><td>„Die zehn Abstürze der Liefer-App im September sollen auf eine gemeinsame Ursache untersucht werden.“</td><td></td></tr>
+      <tr><td>4</td><td>„Der Online-Shop soll zusätzlich die Bezahlung per Rechnung anbieten.“</td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Erläutern Sie den Unterschied zwischen Reaktionszeit und Lösungszeit in einem Service Level Agreement.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Neu (Grundlagen zu S22 Teil 1, Aufgabe 4a)</p>
+  </div>
+
+  <div class="aufgabe" id="QU-03-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe QU-03.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Verwenden Sie den Auszug aus dem Servicevertrag (Anlage 8) und die Ticketliste (Anlage 9).</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Bestimmen Sie die Priorität der Tickets T-1042 und T-1044.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Die Tickets T-1043 und T-1046 sind noch nicht eingestuft. Schätzen Sie für beide Tickets Auswirkung und Dringlichkeit begründet ein und bestimmen Sie die Priorität.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Prüfen Sie, ob bei Ticket T-1042 die vereinbarte Reaktionszeit und die vereinbarte Lösungszeit eingehalten wurden.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>d) T-1047 wurde durch einen Neustart des Sensor-Gateways gelöst. Begründen Sie, warum der Service Desk trotzdem ein weiteres Ticket der Kategorie „Problem“ anlegen sollte.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Neu (Vertiefung zu S22 Teil 1, Aufgabe 4)</p>
+  </div>
+
+  <div class="aufgabe" id="QU-03-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe QU-03.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">18 Punkte</span>
+    </div>
+    <p>Bisher melden die Beschäftigten des Pflanzenhofs Störungen per Telefon oder E-Mail direkt an einzelne Entwickler von Nordwind. Mit dem Start von GrünBlick soll der Support über ein Ticketsystem laufen, das Nordwind als Webanwendung bereitstellt (Anlagen 8 und 9).</p>
+    <div class="teilaufgabe"><span class="tp">6 P</span>a) Erläutern Sie drei Vorteile, die die Einführung des Ticketsystems für den Pflanzenhof oder für Nordwind hat.</div>
+    <div class="antwort z12"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Erläutern Sie zwei Nachteile bzw. Risiken beim Einsatz des Ticketsystems.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Beschreiben Sie am Beispiel von Ticket T-1046 den Weg des Tickets durch die Support-Level. Gehen Sie dabei auf funktionale und hierarchische Eskalation ein.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>d) Die Projektleitung möchte die Qualität des Supports regelmäßig überprüfen. Nennen und erläutern Sie zwei geeignete Kennzahlen.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: S22 Teil 1, Aufgabe 4a (Vor- und Nachteile eines Ticketsystems für den App-Support)</p>
+  </div>
+
+  <!-- ===================== QU-04 ===================== -->
+  <h3 id="a-04">QU-04 · Künstliche Intelligenz</h3>
+
+  <div class="aufgabe" id="QU-04-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe QU-04.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>In einer Projektbesprechung mit dem Pflanzenhof fallen viele Begriffe rund um KI durcheinander.</p>
+    <div class="teilaufgabe"><span class="tp">3 P</span>a) Erläutern Sie die Begriffe Künstliche Intelligenz, Machine Learning und Deep Learning und deren Zusammenhang.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">3 P</span>b) Geben Sie für die folgenden Vorhaben an, ob überwachtes oder unüberwachtes Lernen eingesetzt wird, und begründen Sie kurz.</div>
+    <table class="kompakt leer">
+      <tr><th style="width:52%">Vorhaben</th><th>Lernverfahren und Begründung</th></tr>
+      <tr><td>1. PflanzenCheck lernt aus Fotos, die mit „gesund“ oder dem Namen der Krankheit beschriftet sind.</td><td></td></tr>
+      <tr><td>2. In den Sensordaten sollen ungewöhnliche Messverläufe (z. B. von defekten Sensoren) gefunden werden; Beispiele für Defekte liegen nicht vor.</td><td></td></tr>
+      <tr><td>3. Aus den Verkaufszahlen der letzten Jahre soll vorhergesagt werden, wie viele Weihnachtssterne im Dezember verkauft werden.</td><td></td></tr>
+    </table>
+    <p class="quelle">Neu (KI-Grundbegriffe; KI war in W23 und S26 Teil des Szenarios)</p>
+  </div>
+
+  <div class="aufgabe" id="QU-04-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe QU-04.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Das KI-Modul PflanzenCheck wurde trainiert und getestet (Anlage 10).</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Erläutern Sie, warum die Testfotos nicht für das Training verwendet werden dürfen.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Berechnen Sie die Genauigkeit (Anteil richtiger Ergebnisse) und den Anteil der kranken Pflanzen, den PflanzenCheck übersieht. Beurteilen Sie, ob das Ergebnis für den Einsatz ausreicht.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Beschreiben Sie zwei Probleme der Trainingsdaten, die beim geplanten Einsatz zu schlechten oder verzerrten Ergebnissen führen können, und nennen Sie jeweils eine Gegenmaßnahme.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Neu (Trainings- und Testdaten, Bias)</p>
+  </div>
+
+  <div class="aufgabe" id="QU-04-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe QU-04.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">20 Punkte</span>
+    </div>
+    <p>Der Pflanzenhof plant mehrere KI-Anwendungen und möchte wissen, was dabei zu beachten ist. Gleichzeitig will das Entwicklungsteam von Nordwind KI-Werkzeuge nutzen.</p>
+    <div class="teilaufgabe"><span class="tp">8 P</span>a) Ordnen Sie die geplanten Anwendungen jeweils einer Risikostufe des EU AI Act zu und nennen Sie die Folge für den Einsatz.</div>
+    <table class="kompakt leer hoch">
+      <tr><th style="width:46%">geplante Anwendung</th><th style="width:20%">Risikostufe</th><th>Folge</th></tr>
+      <tr><td>1. PflanzenCheck erkennt Krankheiten auf Fotos der Pflanzen.</td><td></td><td></td></tr>
+      <tr><td>2. Ein Chatbot im Online-Shop beantwortet Fragen zur Pflanzenpflege und zu Bestellungen.</td><td></td><td></td></tr>
+      <tr><td>3. Eine Software sortiert die Bewerbungen für 30 Saisonkräfte vor und erstellt eine Rangliste für die Personalabteilung.</td><td></td><td></td></tr>
+      <tr><td>4. Kameras an den Packtischen sollen per KI erkennen, ob Beschäftigte gestresst oder unmotiviert wirken, und das der Schichtleitung melden.</td><td></td><td></td></tr>
+    </table>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Beim Test des Chatbots empfiehlt er gegen Blattläuse ein Mittel, das es nicht gibt. Erläutern Sie, wie solche „Halluzinationen“ entstehen, und beschreiben Sie zwei Maßnahmen, die das Risiko verringern.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Das Entwicklungsteam von Nordwind möchte bei der Programmierung von GrünBlick einen KI-Coding-Assistenten einsetzen. Nennen Sie zwei Chancen und zwei Risiken.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>d) Mehrere Beschäftigte der Gewächshäuser befürchten, dass PflanzenCheck ihre Erfahrung überflüssig macht und ihre Arbeit überwacht. Beschreiben Sie zwei Maßnahmen, mit denen der Pflanzenhof die Akzeptanz erhöhen kann.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 1b (Widerstände gegen ein KI-System); AI Act und Halluzinationen neu</p>
+  </div>
+
+  <!-- ===================== QU-05 ===================== -->
+  <h3 id="a-05">QU-05 · Green IT</h3>
+
+  <div class="aufgabe" id="QU-05-1">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe QU-05.1</span> <span class="stufe">★☆☆ Grundlagen</span></span>
+      <span class="punkte">6 Punkte</span>
+    </div>
+    <p>Der Pflanzenhof möchte bis 2030 klimaneutral werden. Die Geschäftsführung hat den Begriff „Green IT“ gehört.</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Erläutern Sie den Begriff Green IT.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Nennen Sie zwei Ziele, die der Pflanzenhof mit Green IT verfolgen kann.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>c) Kreuzen Sie an, ob es sich um eine Maßnahme der Art „Green in IT“ oder „Green by IT“ handelt.</div>
+    <table class="kompakt leer">
+      <tr><th>Maßnahme</th><th style="width:15%">Green in IT</th><th style="width:15%">Green by IT</th></tr>
+      <tr><td>1. Die Server im Serverraum werden virtualisiert.</td><td></td><td></td></tr>
+      <tr><td>2. Bodenfeuchtesensoren steuern die Bewässerung; GrünBlick bewässert nur, wenn es nötig ist.</td><td></td><td></td></tr>
+      <tr><td>3. Abstimmungen mit Lieferanten finden per Videokonferenz statt statt mit Dienstreise.</td><td></td><td></td></tr>
+      <tr><td>4. Alte Notebooks erhalten neue Akkus und SSDs und werden zwei Jahre länger genutzt.</td><td></td><td></td></tr>
+    </table>
+    <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 1c (Green IT erläutern, Ziele nennen)</p>
+  </div>
+
+  <div class="aufgabe" id="QU-05-2">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe QU-05.2</span> <span class="stufe">★★☆ Anwendung</span></span>
+      <span class="punkte">10 Punkte</span>
+    </div>
+    <p>Der Serverraum des Pflanzenhofs soll modernisiert werden. Verwenden Sie die Kenndaten in Anlage 11. Geben Sie jeweils den Rechenweg an.</p>
+    <div class="teilaufgabe"><span class="tp">2 P</span>a) Berechnen Sie die PUE des Serverraums im Ist-Zustand.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>b) Berechnen Sie den jährlichen Energieverbrauch des Serverraums in kWh und die jährlichen Stromkosten im Ist-Zustand.</div>
+    <div class="antwort z3"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Berechnen Sie den jährlichen Energieverbrauch nach der geplanten Modernisierung sowie die jährliche Einsparung in kWh, in Euro und in kg CO₂.</div>
+    <div class="antwort z8"></div>
+    <div class="teilaufgabe"><span class="tp">2 P</span>d) Berechnen Sie, nach wie vielen Jahren sich die Investition durch die eingesparten Stromkosten amortisiert hat.</div>
+    <div class="antwort z3"></div>
+    <p class="quelle">Neu (Rechnung zu Green IT; Rechenweg wie bei Speicherbedarfsaufgaben in W23/S26)</p>
+  </div>
+
+  <div class="aufgabe" id="QU-05-3">
+    <div class="kopf">
+      <span><span class="nr">Aufgabe QU-05.3</span> <span class="stufe">★★★ Prüfungsniveau</span></span>
+      <span class="punkte">16 Punkte</span>
+    </div>
+    <p>GrünBlick soll das Umweltziel des Pflanzenhofs unterstützen und selbst möglichst ressourcenschonend arbeiten. Im Testbetrieb wurden die Beobachtungen in Anlage 12 festgehalten.</p>
+    <div class="teilaufgabe"><span class="tp">8 P</span>a) Wählen Sie vier der Beobachtungen 1 bis 6 aus. Beschreiben Sie jeweils, warum unnötig Energie oder Ressourcen verbraucht werden, und schlagen Sie eine Maßnahme vor.</div>
+    <div class="antwort z18"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>b) Berechnen Sie für Beobachtung 1 die tägliche Datenmenge der Produktbilder vor und nach der Optimierung sowie die jährliche Einsparung in GB und in kWh.</div>
+    <div class="antwort z5"></div>
+    <div class="teilaufgabe"><span class="tp">4 P</span>c) Für die Gewächshäuser sollen 40 robuste Tablets beschafft werden. Ein Mitarbeiter schlägt vor, die Tablets alle zwei Jahre durch neue Modelle zu ersetzen. Nennen Sie zwei Umweltkriterien für die Beschaffung sowie ein passendes Umweltzeichen, und nehmen Sie zu dem Vorschlag Stellung.</div>
+    <div class="antwort z8"></div>
+    <p class="quelle">Neu (nachhaltige Softwareentwicklung, Hardware-Lebenszyklus; Ergänzung zu W23 Teil 1, Aufgabe 1c)</p>
+  </div>
+
+  <!-- ===================== ORIGINALE ===================== -->
+  <h3 id="originale">Originalaufgaben zum Üben</h3>
+  <p>Diese echten Prüfungsaufgaben passen zu diesem Block (Dateien im Ordner <code>Prüfungsvorbereitung</code>). Lösungen gibt es nur für 2023 Sommer, 2023 Winter, 2024 Sommer und 2025 Winter (dort vom u-form-Verlag).</p>
+  <table class="kompakt orig" style="break-inside:auto">
+    <tr><th>Prüfung</th><th>Aufgabe</th><th>Thema</th><th>Datei · Lösung</th></tr>
+    <tr><td>Sommer 2022</td><td>T1 A2c (9 P)</td><td>Englischer Text zu MongoDB: drei Vorteile gegenüber relationalen Datenbanken</td><td><code>2022/sommer/AE 2022 Sommer Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Sommer 2022</td><td>T1 A4a (12 P)</td><td>Ticketsystem: drei Vorteile, ein Nachteil</td><td>wie oben · keine Lösung</td></tr>
+    <tr><td>Sommer 2023</td><td>T1 A3 (16 P)</td><td>Tabellenkalkulation: Folgetag, VLOOKUP, IF/WEEKDAY, Einsatz und Probleme (Funktionen im Belegsatz, Seite 4)</td><td><code>2023/sommer/AE Sommer 2023 Teil 1.pdf</code> · Lösung: <code>AE Sommer 2023 Teil 1+2 Lösungen.pdf</code></td></tr>
+    <tr><td>Winter 2023</td><td>T1 A1b (6 P), A1c (4 P)</td><td>Workshop gegen Widerstände bei einem KI-System; Green IT und Ziele</td><td><code>2023/winter/AE Winter 2023 Teil 1.pdf</code> · Lösung: <code>AE Winter 2023 Teil 1 Lösungen.pdf</code></td></tr>
+    <tr><td>Winter 2023</td><td>T1 A2a (7 P)</td><td>Englischer Text zu User Stories: Ersteller, Aufbau, INVEST</td><td>wie oben</td></tr>
+    <tr><td>Sommer 2024</td><td>T2 A3b (12 P)</td><td>Englischer Text: Anweisungs-, Zweig- und Pfadüberdeckung</td><td><code>2024/sommer/AE Sommer 2024 Teil 1+2+3.pdf</code> · Lösung: <code>AE Sommer 2024 Teil 2 Lösungen.pdf</code></td></tr>
+    <tr><td>Winter 2025</td><td>T1 A2b (9 P)</td><td>Englischer Text zur eRechnung (EU-Richtlinie): Hauptziel, Aspekte</td><td><code>2025/winter/AE Winter 2025 Teil 1.pdf</code> · Lösung: <code>AE Winter 2025 Lösungserleuterungen.pdf</code> (u-form)</td></tr>
+    <tr><td>Sommer 2026</td><td>T1 A3a (9 P)</td><td>Englischer Text zu LoRa: Merkmale nennen, Eignung für Sensoren begründen</td><td><code>2026/sommer/AE Sommer 2026 Teil 1.pdf</code> · keine Lösung</td></tr>
+    <tr><td>Sommer 2026</td><td>T2 A3b (5 P)</td><td>KI-Auswertung von Drohnenbildern als Kontext (Speicherbedarf berechnen)</td><td><code>2026/sommer/AE Sommer 2026 Teil 2.pdf</code> · keine Lösung</td></tr>
+  </table>
+</section>
+
+</body>
+</html>

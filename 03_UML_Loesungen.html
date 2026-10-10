@@ -1,0 +1,1534 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>03 UML-Modellierung – Lösungen</title>
+<link rel="stylesheet" href="style.css">
+<script src="uebungen.js"></script>
+<style>
+  /* Zusatzregeln Block 03 (Lösungen) */
+  nav.toc ol { columns: 3; column-gap: 24px; }
+  table.kompakt td, table.kompakt th { padding: 3px 6px; }
+  td.mono, th.mono { font-family: Consolas, "Courier New", monospace; font-size: 13px; }
+  td.c, th.c { text-align: center; }
+  pre { font-size: 12px; }
+  pre.ausgabe { background: #fff; border-style: dashed; }
+  .loesung .kopf { font-size: 16px; margin-bottom: 4px; break-after: avoid; page-break-after: avoid; }
+  .loesung h4 { margin: 12px 0 4px; font-size: 15px; break-after: avoid; }
+  .datei { font-size: 12px; color: var(--muted); }
+  .codelabel { break-after: avoid; page-break-after: avoid; }
+  @media print {
+    table { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="blockkopf">
+  <h1>Block 03 · UML-Modellierung – Lösungen</h1>
+  <div class="unter">
+    Lösungssatz zu <a href="03_UML.html">03_UML.html</a>
+    · Diagramme als Musterlösung; zu den Struktogramm-Aufgaben lauffähige Java-Dateien im Ordner <code>java\03_UML\</code> (Start mit <code>java Aufgabe_UML_07_k.java</code>)
+  </div>
+</header>
+
+<nav class="toc">
+  <strong>Inhalt</strong>
+  <ol>
+    <li><a href="#l-01">UML-01 Diagrammwahl</a></li>
+    <li><a href="#l-02">UML-02 Aktivität</a></li>
+    <li><a href="#l-03">UML-03 Klasse</a></li>
+    <li><a href="#l-04">UML-04 Zustand</a></li>
+    <li><a href="#l-05">UML-05 Use Case</a></li>
+    <li><a href="#l-06">UML-06 Sequenz</a></li>
+    <li><a href="#l-07">UML-07 Struktogramm/PAP</a></li>
+  </ol>
+</nav>
+
+<div class="info">
+  <span class="kastentitel">Hinweise zur Bewertung</span>
+  Wie in den IHK-Lösungshinweisen gilt: Andere sach- und fachgerechte Lösungen werden mit voller Punktzahl bewertet. Bei Diagrammen zählt der <strong>Inhalt</strong> (jeder Sachverhalt aus dem Text ist korrekt abgebildet) und die <strong>Notation</strong> (richtige Symbole, Pfeilspitzen, Bedingungen in eckigen Klammern). Anordnung, Namensvarianten („Rückgabe buchen“ statt „Rückgabe im BiblioNet buchen“) und die Zahl der Endknoten spielen keine Rolle. Die Punktzahlen unten zeigen eine mögliche IHK-typische Verteilung.
+</div>
+
+<section class="teil" id="loesungen">
+  <h2>Lösungen</h2>
+
+  <!-- ===================== UML-01 ===================== -->
+  <h3 id="l-01">UML-01 · Verhaltensdiagramme allgemein / Diagrammwahl</h3>
+
+  <div class="loesung" id="L-UML-01-1">
+    <div class="kopf">Aufgabe UML-01.1 · 5 Punkte</div>
+    <h4>a) Struktur oder Verhalten (2 P)</h4>
+    <table class="kompakt" style="width:auto">
+      <tr><th style="width:240px">Diagramm</th><th class="c" style="width:150px">Strukturdiagramm</th><th class="c" style="width:150px">Verhaltensdiagramm</th></tr>
+      <tr><td>Klassendiagramm</td><td class="c">X</td><td></td></tr>
+      <tr><td>Aktivitätsdiagramm</td><td></td><td class="c">X</td></tr>
+      <tr><td>Objektdiagramm</td><td class="c">X</td><td></td></tr>
+      <tr><td>Zustandsdiagramm</td><td></td><td class="c">X</td></tr>
+      <tr><td>Sequenzdiagramm</td><td></td><td class="c">X</td></tr>
+      <tr><td>Komponentendiagramm</td><td class="c">X</td><td></td></tr>
+      <tr><td>Anwendungsfalldiagramm</td><td></td><td class="c">X</td></tr>
+      <tr><td>Verteilungsdiagramm</td><td class="c">X</td><td></td></tr>
+    </table>
+    <h4>b) Geeignete Diagramme (3 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:4%">Nr.</th><th>Sachverhalt</th><th style="width:34%">Diagramm</th></tr>
+      <tr><td>1</td><td>Funktionen der App für Leser und Personal</td><td>Use-Case-Diagramm (Anwendungsfalldiagramm)</td></tr>
+      <tr><td>2</td><td>Zustände eines Leserkontos</td><td>Zustandsdiagramm</td></tr>
+      <tr><td>3</td><td>Ablauf der Fernleihe über mehrere Stellen</td><td>Aktivitätsdiagramm (mit Partitionen)</td></tr>
+      <tr><td>4</td><td>Reihenfolge der Methodenaufrufe App – KatalogService – Datenbank</td><td>Sequenzdiagramm</td></tr>
+      <tr><td>5</td><td>Klassen mit Attributen, Methoden, Beziehungen</td><td>Klassendiagramm</td></tr>
+      <tr><td>6</td><td>Software auf Server, Terminal, Smartphone</td><td>Verteilungsdiagramm</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Zeile 0,25 P. b) je Zeile 0,5 P; bei 4 wird auch „Kommunikationsdiagramm“ akzeptiert (ebenfalls ein Interaktionsdiagramm), bei 6 „Einsatz-/Deployment-Diagramm“.</div>
+    <p><strong>Erklärung:</strong> Häufigster Fehler: Das Anwendungsfalldiagramm wird für ein Strukturdiagramm gehalten, weil es keine Reihenfolge zeigt. Es beschreibt aber, was das System für seine Akteure <em>tut</em>, und gehört deshalb zu den Verhaltensdiagrammen.</p>
+  </div>
+
+  <div class="loesung" id="L-UML-01-2">
+    <div class="kopf">Aufgabe UML-01.2 · 10 Punkte</div>
+    <h4>a) Ablauf nach „Ausleihe verbuchen“ (2 P)</h4>
+    <p>Nach dem Verbuchen sollen zwei Schritte <strong>unabhängig voneinander (parallel)</strong> ausgeführt werden: Die Diebstahlsicherung des Mediums wird deaktiviert und das Rückgabedatum wird angezeigt. Erst wenn <strong>beides</strong> erledigt ist, fragt das Terminal, ob weitere Medien ausgeliehen werden sollen. Bei „ja“ legt der Leser das nächste Medium auf und der Ablauf wiederholt sich ab dort; bei „nein“ wird eine Quittung gedruckt und der Vorgang endet.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Parallelität beider Aktionen und das Warten auf beide 1 P; Schleife bzw. Quittung und Ende 1 P. (Die Lösung beschreibt den <em>gemeinten</em> Ablauf – dass das Diagramm ihn wegen der Fehler aus b) nicht korrekt ausdrückt, ist hier nicht gefragt.)</div>
+    <h4>b) Fehler, Auswirkung, Korrektur (8 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:4%">Nr.</th><th style="width:30%">Fehler</th><th style="width:34%">Auswirkung</th><th>Korrektur</th></tr>
+      <tr><td>1</td><td>Die Guards an der ersten Entscheidung <code>[offene Gebühren &gt; 10 €]</code> und <code>[&lt; 10 €]</code> decken den Fall „genau 10,00 €“ nicht ab.</td><td>Bei genau 10,00 € trifft keine Bedingung zu; der Ablauf ist nicht definiert (bleibt stehen). Laut Anlage 1 ist das Konto in diesem Fall gesperrt.</td><td><code>[offene Gebühren &gt;= 10 €]</code> und <code>[offene Gebühren &lt; 10 €]</code></td></tr>
+      <tr><td>2</td><td>Die Rückführung <code>[ja]</code> mündet direkt in die Aktion „Medium auflegen“, die damit zwei eingehende Kanten hat.</td><td>Mehrere eingehende Kanten einer Aktion wirken wie eine Synchronisation (UND): „Medium auflegen“ würde auf beide Kanten warten – der Ablauf verklemmt sich schon beim ersten Medium.</td><td>Eine Zusammenführung (Raute) vor „Medium auflegen“ einfügen, in die beide Kanten münden.</td></tr>
+      <tr><td>3</td><td>Nach „RFID-Etikett lesen“ steht eine Teilung (Balken) mit Guards statt einer Entscheidung.</td><td>Bei einer Teilung werden alle Zweige ausgeführt: Die Ausleihe würde gleichzeitig abgelehnt und verbucht. Guards sind an einer Teilung nicht zulässig.</td><td>Entscheidung (Raute) mit <code>[für andere Person vorgemerkt]</code> / <code>[nicht vorgemerkt]</code>.</td></tr>
+      <tr><td>4</td><td>Die parallelen Zweige (Diebstahlsicherung, Rückgabedatum) werden mit einer Zusammenführung (Raute) statt einer Synchronisation zusammengeführt.</td><td>Es wird nicht auf beide Zweige gewartet; beide Zweige laufen einzeln weiter. Die Frage „weitere Medien?“ und alles danach würde doppelt ausgeführt (z. B. zwei Quittungen).</td><td>Synchronisationsbalken (Join) statt der Raute.</td></tr>
+    </table>
+    <figure><svg viewBox="0 0 760 840" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><defs><marker id="l012-pfeil" viewBox="0 0 11 10" refX="10.5" refY="5" markerWidth="11" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0.5,0.5 L10.5,5 L0.5,9.5" fill="none" stroke="#222" stroke-width="1.3"/></marker></defs>
+<circle cx="380" cy="22" r="8" fill="#222" stroke="none"/>
+<rect x="276" y="48" width="208" height="36" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="380" y="70.7" text-anchor="middle">Bibliotheksausweis scannen</text>
+<rect x="307.5" y="106" width="145" height="36" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="380" y="128.7" text-anchor="middle">Leserkonto prüfen</text>
+<polygon points="380,165 395,180 380,195 365,180" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M380,30 L380,48" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<path d="M380,84 L380,106" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<path d="M380,142 L380,165" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<rect x="74" y="216" width="152" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="150" y="236.7" text-anchor="middle"><tspan x="150" dy="0">Hinweis „Konto</tspan><tspan x="150" dy="16">gesperrt“ anzeigen</tspan></text>
+<circle cx="150" cy="305" r="11" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<circle cx="150" cy="305" r="6.5" fill="#222" stroke="none"/>
+<path d="M365,180 L150,180 L150,216" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<path d="M150,264 L150,294" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<rect x="194.5" y="162" width="165.5" height="13" fill="#fff" stroke="none"/>
+<text x="358" y="172" text-anchor="end" font-size="12">[offene Gebühren &gt;= 10 €]</text>
+<rect x="386" y="202" width="159.1" height="13" fill="#fff" stroke="none"/>
+<text x="388" y="212" font-size="12">[offene Gebühren &lt; 10 €]</text>
+<polygon points="380,217 395,232 380,247 365,232" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M380,195 L380,217" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<rect x="314.5" y="272" width="131" height="36" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="380" y="294.7" text-anchor="middle">Medium auflegen</text>
+<path d="M380,247 L380,272" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<rect x="304" y="332" width="152" height="36" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="380" y="354.7" text-anchor="middle">RFID-Etikett lesen</text>
+<path d="M380,308 L380,332" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<polygon points="380,393 395,408 380,423 365,408" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M380,368 L380,393" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<path d="M365,408 L200,408 L200,452" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<path d="M395,408 L560,408 L560,452" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<rect x="162.2" y="390" width="197.8" height="13" fill="#fff" stroke="none"/>
+<text x="358" y="400" text-anchor="end" font-size="12">[für andere Person vorgemerkt]</text>
+<rect x="400" y="390" width="120.3" height="13" fill="#fff" stroke="none"/>
+<text x="402" y="400" font-size="12">[nicht vorgemerkt]</text>
+<rect x="127.5" y="452" width="145" height="36" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="200" y="474.7" text-anchor="middle">Ausleihe ablehnen</text>
+<rect x="484" y="452" width="152" height="36" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="560" y="474.7" text-anchor="middle">Ausleihe verbuchen</text>
+<rect x="420" y="523" width="280" height="6" fill="#222" stroke="#222" stroke-width="0.5"/>
+<path d="M560,488 L560,523" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<rect x="394" y="561" width="152" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="470" y="581.7" text-anchor="middle"><tspan x="470" dy="0">Diebstahlsicherung</tspan><tspan x="470" dy="16">deaktivieren</tspan></text>
+<rect x="591.5" y="561" width="117" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="650" y="581.7" text-anchor="middle"><tspan x="650" dy="0">Rückgabedatum</tspan><tspan x="650" dy="16">anzeigen</tspan></text>
+<path d="M470,529 L470,561" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<path d="M650,529 L650,561" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<rect x="420" y="649" width="280" height="6" fill="#222" stroke="#222" stroke-width="0.5"/>
+<path d="M470,609 L470,649" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<path d="M650,609 L650,649" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<polygon points="560,693 575,708 560,723 545,708" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M560,655 L560,693" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<text x="580" y="692" font-size="11" fill="#555">weitere Medien?</text>
+<path d="M200,488 L200,708 L545,708" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<path d="M575,708 L735,708 L735,232 L395,232" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<rect x="580" y="720" width="29.8" height="13" fill="#fff" stroke="none"/>
+<text x="582" y="730" font-size="12">[ja]</text>
+<rect x="491" y="752" width="138" height="36" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="560" y="774.7" text-anchor="middle">Quittung drucken</text>
+<path d="M560,723 L560,752" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+<text x="532" y="740" text-anchor="end" font-size="12">[nein]</text>
+<circle cx="560" cy="825" r="11" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<circle cx="560" cy="825" r="6.5" fill="#222" stroke="none"/>
+<path d="M560,788 L560,814" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l012-pfeil)"/>
+</svg><figcaption>Lösung UML-01.2: korrigiertes Aktivitätsdiagramm (Guards vollständig, Zusammenführung vor „Medium auflegen“, Entscheidung statt Teilung, Synchronisation statt Zusammenführung)</figcaption></figure>
+    <div class="bewertung"><strong>Bewertung:</strong> je Fehler 2 P (Fehler mit Auswirkung 1 P, Korrektur 1 P). Eine Zeichnung ist nicht verlangt; die Abbildung zeigt das korrigierte Diagramm zur Kontrolle. Weitere sinnvolle Verbesserungen (z. B. Hinweis bei abgelehnter Ausleihe) werden nicht zusätzlich bewertet.</div>
+    <p><strong>Erklärung:</strong> Mit dem Marken-Modell (Erklärungssatz UML-02) lassen sich alle vier Fehler begründen: Raute = ein Weg (ODER), Balken = alle Wege (UND). Eine Aktion mit zwei Eingängen wartet auf beide – deshalb laufen Schleifen immer über eine Zusammenführung.</p>
+  </div>
+
+  <div class="loesung" id="L-UML-01-3">
+    <div class="kopf">Aufgabe UML-01.3 · 20 Punkte</div>
+    <h4>a) Diagrammwahl (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:8%">Aspekt</th><th style="width:26%">Diagramm</th><th>Begründung</th></tr>
+      <tr><td>A1</td><td>Sequenzdiagramm</td><td>zeigt den Nachrichtenaustausch (Methodenaufrufe und Antworten) zwischen mehreren Objekten bzw. Systemen in zeitlicher Reihenfolge.</td></tr>
+      <tr><td>A2</td><td>Zustandsdiagramm</td><td>beschreibt ein einzelnes Objekt (ein Fach), seine möglichen Zustände und die Ereignisse (Sensormeldungen, Codeeingabe, Fristablauf), die Zustandswechsel auslösen.</td></tr>
+      <tr><td>A3</td><td>Use-Case-Diagramm</td><td>Übersicht über Akteure (Leser, Personal, Techniker, Server) und die Funktionen, die sie nutzen – aus Außensicht, ohne Ablauf.</td></tr>
+      <tr><td>A4</td><td>Aktivitätsdiagramm mit Partitionen</td><td>stellt einen Ablauf mit Verzweigungen über mehrere Beteiligte dar; die Partitionen zeigen die Zuständigkeiten.</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je Aspekt 1,5 P (Diagramm 1 P, Begründung 0,5 P).</div>
+    <h4>b) Zustandsdiagramm eines Fachs (10 P)</h4>
+    <figure><svg viewBox="0 0 760 465" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><defs><marker id="l013-pfeil" viewBox="0 0 11 10" refX="10.5" refY="5" markerWidth="11" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0.5,0.5 L10.5,5 L0.5,9.5" fill="none" stroke="#222" stroke-width="1.3"/></marker></defs>
+<circle cx="25" cy="255" r="8" fill="#222" stroke="none"/>
+<rect x="50" y="230" width="130" height="50" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="115" y="260" text-anchor="middle" font-weight="bold" font-size="13">Frei</text>
+<path d="M33,255 L50,255" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l013-pfeil)"/>
+<rect x="50" y="40" width="130" height="50" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="115" y="70" text-anchor="middle" font-weight="bold" font-size="13">Reserviert</text>
+<path d="M115,230 L115,90" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l013-pfeil)"/>
+<text x="123" y="150" font-size="12"><tspan x="123" dy="0">vormerkungZugeordnet</tspan><tspan x="123" dy="14">/ Fach reservieren</tspan></text>
+<rect x="470" y="20" width="280" height="86" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="610" y="38" text-anchor="middle" font-weight="bold" font-size="13">Belegt</text>
+<line x1="470" y1="46" x2="750" y2="46" stroke="#222" stroke-width="1.2"/>
+<text x="478" y="62" font-size="12">entry / Abholcode an Leser senden</text>
+<text x="478" y="77" font-size="12">fristVerlängern [noch nicht verlängert]</text>
+<text x="478" y="92" font-size="12">      / Abholfrist + 2 Tage</text>
+<path d="M180,65 L470,65" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l013-pfeil)"/>
+<text x="325" y="57" text-anchor="middle" font-size="12">türGeschlossen [Fach belegt]</text>
+<rect x="320" y="200" width="190" height="62" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="415" y="218" text-anchor="middle" font-weight="bold" font-size="13">Abholfrist abgelaufen</text>
+<line x1="320" y1="226" x2="510" y2="226" stroke="#222" stroke-width="1.2"/>
+<text x="328" y="242" font-size="12">entry / Personal benachrichtigen</text>
+<path d="M530,106 L530,231 L510,231" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l013-pfeil)"/>
+<text x="538" y="170" font-size="12">abholfristAbgelaufen</text>
+<path d="M320,245 L180,245" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l013-pfeil)"/>
+<text x="250" y="213" text-anchor="middle" font-size="12"><tspan x="250" dy="0">medienEntnommen</tspan><tspan x="250" dy="14">/ Vormerkung löschen</tspan></text>
+<rect x="400" y="400" width="150" height="50" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="475" y="430" text-anchor="middle" font-weight="bold" font-size="13">Geöffnet</text>
+<path d="M700,106 L700,425 L550,425" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l013-pfeil)"/>
+<text x="692" y="300" text-anchor="end" font-size="12"><tspan x="692" dy="0">codeEingegeben</tspan><tspan x="692" dy="14">[Code gültig]</tspan><tspan x="692" dy="14">/ Tür entriegeln,</tspan><tspan x="692" dy="14">Medien verbuchen</tspan></text>
+<path d="M400,425 L265,425 L265,268 L180,268" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l013-pfeil)"/>
+<text x="330" y="417" text-anchor="middle" font-size="12">türGeschlossen</text>
+<rect x="20" y="360" width="150" height="50" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="95" y="390" text-anchor="middle" font-weight="bold" font-size="13">Außer Betrieb</text>
+<path d="M60,280 L60,360" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l013-pfeil)"/>
+<text x="66" y="318" font-size="12">sensorFehler</text>
+<path d="M140,360 L140,280" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l013-pfeil)"/>
+<text x="146" y="338" font-size="12">reparaturBestätigt</text>
+<circle cx="85" cy="170" r="11" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<circle cx="85" cy="170" r="6.5" fill="#222" stroke="none"/>
+<path d="M85,230 L85,182" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l013-pfeil)"/>
+<text x="77" y="205" text-anchor="end" font-size="12">stilllegen</text>
+</svg><figcaption>Lösung UML-01.3 b): Zustandsdiagramm eines Fachs der Abholstation</figcaption></figure>
+    <ul>
+      <li>Die Abholfrist wird als Ereignis <code>abholfristAbgelaufen</code> modelliert, weil sie durch die Verlängerung verschoben werden kann. Die Verlängerung ist eine <strong>interne Transition</strong> im Zustand „Belegt“: Das Fach bleibt belegt, die entry-Aktion (neuer Abholcode) wird nicht erneut ausgeführt.</li>
+      <li>„Geöffnet“ ist ein eigener Zustand, weil das Fach zwischen dem Entriegeln und dem Schließen der Tür weder belegt noch frei ist und das Ereignis <code>türGeschlossen</code> hier eine andere Wirkung hat als im Zustand „Reserviert“.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> Zustände Frei, Reserviert, Belegt, Geöffnet, Abholfrist abgelaufen, Außer Betrieb je 0,5 P (3 P); Start- und Endzustand 1 P; Transitionen mit passenden Ereignissen und Bedingungen 4 P; Aktionen (entry / Abholcode senden, Verlängerung, Tür entriegeln und Medien verbuchen, Personal benachrichtigen, Vormerkung löschen) 2 P. Akzeptiert werden auch <code>after(3 Tage)</code> statt <code>abholfristAbgelaufen</code> (mit Hinweis auf die Verlängerung), eine interne Transition <code>codeEingegeben [Code ungültig] / Hinweis anzeigen</code> in „Belegt“ sowie andere sinnvolle Ereignisnamen.</div>
+    <h4>c) Zustands- statt Aktivitätsdiagramm (4 P)</h4>
+    <ul>
+      <li><strong>Ereignisgesteuertes Verhalten eines Objekts:</strong> Ein Fach „wartet“ die meiste Zeit in einem Zustand (frei, belegt) auf Ereignisse, die in beliebiger Reihenfolge eintreffen können (Sensor, Code, Fristablauf). Das Zustandsdiagramm zeigt genau das; ein Aktivitätsdiagramm beschreibt eine Folge von Tätigkeiten und kann dieses Warten nur umständlich darstellen.</li>
+      <li><strong>Gleiches Ereignis, unterschiedliche Wirkung:</strong> „Tür geschlossen“ führt im Zustand „Reserviert“ zu „Belegt“, im Zustand „Geöffnet“ zu „Frei“. Im Zustandsdiagramm ist das direkt ablesbar; im Aktivitätsdiagramm wären viele Verzweigungen nötig.</li>
+      <li>(weiterer möglicher Grund) Zeitereignisse und entry-Aktionen lassen sich direkt notieren, und das Diagramm kann fast unverändert als Zustandsautomat (z. B. Aufzählungstyp + <code>switch</code>) programmiert werden.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> je sachlich richtig erläutertem Grund 2 P (max. 4 P).</div>
+  </div>
+
+  <!-- ===================== UML-02 ===================== -->
+  <h3 id="l-02">UML-02 · Aktivitätsdiagramm</h3>
+
+  <div class="loesung" id="L-UML-02-1">
+    <div class="kopf">Aufgabe UML-02.1 · 6 Punkte</div>
+    <h4>a) Elemente (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:8%">Nr.</th><th>Bezeichnung</th><th style="width:8%">Nr.</th><th>Bezeichnung</th></tr>
+      <tr><td>①</td><td>Startknoten</td><td>⑤</td><td>Zusammenführung</td></tr>
+      <tr><td>②</td><td>Partition (Schwimmbahn, Swimlane)</td><td>⑥</td><td>Teilung (Gabelung, Fork)</td></tr>
+      <tr><td>③</td><td>Entscheidung (Verzweigung)</td><td>⑦</td><td>Synchronisation (Vereinigung, Join)</td></tr>
+      <tr><td>④</td><td>Bedingung (Guard, Wächterbedingung)</td><td>⑧</td><td>Endknoten (Aktivitätsende)</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je Element 0,5 P.</div>
+    <h4>b) Wann wird „Ausweis aushändigen“ ausgeführt? (2 P)</h4>
+    <p>Erst wenn <strong>beide</strong> parallelen Aktionen „Ausweis drucken“ und „Zugangsdaten für die App senden“ abgeschlossen sind. Die Synchronisation ⑦ wartet, bis an allen eingehenden Kanten der Ablauf angekommen ist (UND-Verknüpfung), und setzt den Ablauf dann einmal fort.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Zeitpunkt 1 P, Bedeutung der Synchronisation 1 P.</div>
+  </div>
+
+  <div class="loesung" id="L-UML-02-2">
+    <div class="kopf">Aufgabe UML-02.2 · 10 Punkte</div>
+    <figure><svg viewBox="0 0 760 770" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><defs><marker id="l022-pfeil" viewBox="0 0 11 10" refX="10.5" refY="5" markerWidth="11" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0.5,0.5 L10.5,5 L0.5,9.5" fill="none" stroke="#222" stroke-width="1.3"/></marker></defs>
+<circle cx="400" cy="22" r="8" fill="#222" stroke="none"/>
+<polygon points="400,51 415,66 400,81 385,66" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<rect x="334.5" y="100" width="131" height="36" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="400" y="122.7" text-anchor="middle">Medium einlegen</text>
+<rect x="324" y="158" width="152" height="36" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="400" y="180.7" text-anchor="middle">RFID-Etikett lesen</text>
+<polygon points="400,219 415,234 400,249 385,234" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M400,30 L400,51" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<path d="M400,81 L400,100" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<path d="M400,136 L400,158" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<path d="M400,194 L400,219" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<rect x="44.5" y="282" width="131" height="36" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="110" y="304.7" text-anchor="middle">Medium ausgeben</text>
+<rect x="16.5" y="338" width="187" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="110" y="358.7" text-anchor="middle"><tspan x="110" dy="0">Hinweis „Bitte an der</tspan><tspan x="110" dy="16">Theke abgeben“ anzeigen</tspan></text>
+<path d="M385,234 L110,234 L110,282" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<path d="M110,318 L110,338" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<rect x="233.8" y="216" width="146.2" height="13" fill="#fff" stroke="none"/>
+<text x="378" y="226" text-anchor="end" font-size="12">[Etikett nicht lesbar]</text>
+<rect x="225" y="287" width="350" height="6" fill="#222" stroke="#222" stroke-width="0.5"/>
+<path d="M400,249 L400,287" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<rect x="406" y="256" width="113.8" height="13" fill="#fff" stroke="none"/>
+<text x="408" y="266" font-size="12">[Etikett gelesen]</text>
+<rect x="241" y="326" width="138" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="310" y="346.7" text-anchor="middle"><tspan x="310" dy="0">Rückgabe im</tspan><tspan x="310" dy="16">BiblioNet buchen</tspan></text>
+<rect x="408.5" y="326" width="173" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="495" y="346.7" text-anchor="middle"><tspan x="495" dy="0">Medium zur Sortier-</tspan><tspan x="495" dy="16">anlage transportieren</tspan></text>
+<path d="M310,293 L310,326" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<path d="M495,293 L495,326" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<rect x="225" y="409" width="350" height="6" fill="#222" stroke="#222" stroke-width="0.5"/>
+<path d="M310,374 L310,409" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<path d="M495,374 L495,409" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<rect x="327.5" y="444" width="145" height="36" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="400" y="466.7" text-anchor="middle">Rückgabe anzeigen</text>
+<path d="M400,415 L400,444" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<polygon points="400,509 415,524 400,539 385,524" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M400,480 L400,509" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<path d="M110,386 L110,524 L385,524" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<polygon points="400,565 415,580 400,595 385,580" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M400,539 L400,565" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<path d="M415,580 L720,580 L720,66 L415,66" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<rect x="428" y="562" width="113.8" height="13" fill="#fff" stroke="none"/>
+<text x="430" y="572" font-size="12">[weiteres Medium]</text>
+<polygon points="400,625 415,640 400,655 385,640" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M400,595 L400,625" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<rect x="247.8" y="602" width="146.2" height="13" fill="#fff" stroke="none"/>
+<text x="392" y="612" text-anchor="end" font-size="12">[kein weiteres Medium]</text>
+<rect x="551" y="622" width="138" height="36" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="620" y="644.7" text-anchor="middle">Quittung drucken</text>
+<path d="M415,640 L551,640" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<rect x="420" y="648" width="133.2" height="13" fill="#fff" stroke="none"/>
+<text x="422" y="658" font-size="12">[Quittung gewünscht]</text>
+<polygon points="400,685 415,700 400,715 385,700" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M400,655 L400,685" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<rect x="286.6" y="666" width="107.4" height="13" fill="#fff" stroke="none"/>
+<text x="392" y="676" text-anchor="end" font-size="12">[keine Quittung]</text>
+<path d="M620,658 L620,700 L415,700" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+<circle cx="400" cy="750" r="11" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<circle cx="400" cy="750" r="6.5" fill="#222" stroke="none"/>
+<path d="M400,715 L400,739" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l022-pfeil)"/>
+</svg><figcaption>Lösung UML-02.2: Aktivitätsdiagramm „Rückgabe am Rückgabeautomaten“</figcaption></figure>
+    <div class="bewertung"><strong>Bewertung:</strong> Start und Ende 1 P; Aktionen vollständig und sinnvoll benannt 2 P; Entscheidung „Etikett lesbar?“ mit Guards und Fehlerzweig (ausgeben, Hinweis) 2 P; Teilung/Synchronisation für Buchen und Transport 2 P; Schleife über eine Zusammenführung <em>vor</em> „Medium einlegen“ mit Guards 2 P; optionale Quittung mit Entscheidung und Zusammenführung 1 P. Die Zusammenführung nach „Rückgabe anzeigen“ und die folgende Entscheidung dürfen zu einer Raute „Entscheidung und Zusammenführung“ zusammengefasst werden.</div>
+    <p><strong>Erklärung:</strong> Signalwörter: „gleichzeitig“ → Teilung, „sind beide Schritte abgeschlossen“ → Synchronisation, „in beiden Fällen“ → Zusammenführung der beiden Wege, „wiederholt sich ab dem Einlegen“ → Rückführung in eine Zusammenführung vor „Medium einlegen“, „sofern gewünscht“ → Entscheidung mit einem Weg ohne Aktion.</p>
+  </div>
+
+  <div class="loesung" id="L-UML-02-3">
+    <div class="kopf">Aufgabe UML-02.3 · 25 Punkte</div>
+    <figure><svg viewBox="0 0 760 1048" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13" style="max-width:90%"><defs><marker id="l023-pfeil" viewBox="0 0 11 10" refX="10.5" refY="5" markerWidth="11" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0.5,0.5 L10.5,5 L0.5,9.5" fill="none" stroke="#222" stroke-width="1.3"/></marker></defs>
+<rect x="2" y="2" width="756" height="1042" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="2" y1="32" x2="758" y2="32" stroke="#222" stroke-width="1.2"/>
+<text x="62" y="22" text-anchor="middle" font-weight="bold" font-size="12">Leser (App)</text>
+<line x1="122" y1="2" x2="122" y2="1044" stroke="#222" stroke-width="1.2"/>
+<text x="229.5" y="22" text-anchor="middle" font-weight="bold" font-size="12">BiblioNet</text>
+<line x1="337" y1="2" x2="337" y2="1044" stroke="#222" stroke-width="1.2"/>
+<text x="482" y="22" text-anchor="middle" font-weight="bold" font-size="12">Fernleihstelle</text>
+<line x1="627" y1="2" x2="627" y2="1044" stroke="#222" stroke-width="1.2"/>
+<text x="692.5" y="22" text-anchor="middle" font-weight="bold" font-size="12">Partnerbibl.</text>
+<circle cx="62" cy="56" r="8" fill="#222" stroke="none"/>
+<rect x="12" y="82" width="100" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="62" y="102.7" text-anchor="middle"><tspan x="62" dy="0">Fernleihe</tspan><tspan x="62" dy="16">bestellen</tspan></text>
+<path d="M62,64 L62,82" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="179" y="82" width="100" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="229" y="102.7" text-anchor="middle"><tspan x="229" dy="0">Leserkonto</tspan><tspan x="229" dy="16">prüfen</tspan></text>
+<path d="M112,106 L179,106" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<polygon points="229,149 244,164 229,179 214,164" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M229,130 L229,149" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="14" y="140" width="96" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="62" y="160.7" text-anchor="middle"><tspan x="62" dy="0">Ablehnung</tspan><tspan x="62" dy="16">anzeigen</tspan></text>
+<path d="M214,164 L110,164" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="142.4" y="146" width="68.6" height="13" fill="#fff" stroke="none"/>
+<text x="209" y="156" text-anchor="end" font-size="12">[gesperrt]</text>
+<circle cx="62" cy="220" r="11" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<circle cx="62" cy="220" r="6.5" fill="#222" stroke="none"/>
+<path d="M62,188 L62,209" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="179" y="200" width="100" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="229" y="220.7" text-anchor="middle"><tspan x="229" dy="0">Bestand</tspan><tspan x="229" dy="16">prüfen</tspan></text>
+<path d="M229,179 L229,200" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="235" y="188" width="107.4" height="13" fill="#fff" stroke="none"/>
+<text x="237" y="198" font-size="12">[nicht gesperrt]</text>
+<polygon points="229,269 244,284 229,299 214,284" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M229,248 L229,269" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="124" y="320" width="96" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="172" y="340.7" text-anchor="middle"><tspan x="172" dy="0">Vormerkung</tspan><tspan x="172" dy="16">anlegen</tspan></text>
+<path d="M214,284 L172,284 L172,320" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="92.9" y="267" width="75.1" height="12" fill="#fff" stroke="none"/>
+<text x="166" y="276" text-anchor="end" font-size="11">[im Bestand]</text>
+<rect x="124" y="382" width="96" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="172" y="402.7" text-anchor="middle"><tspan x="172" dy="0">Leser</tspan><tspan x="172" dy="16">informieren</tspan></text>
+<path d="M172,368 L172,382" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<circle cx="172" cy="460" r="11" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<circle cx="172" cy="460" r="6.5" fill="#222" stroke="none"/>
+<path d="M172,430 L172,449" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="249.5" y="329" width="200" height="6" fill="#222" stroke="#222" stroke-width="0.5"/>
+<path d="M244,284 L287,284 L287,329" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="291" y="267" width="110.6" height="12" fill="#fff" stroke="none"/>
+<text x="293" y="276" font-size="11">[nicht im Bestand]</text>
+<rect x="239" y="368" width="96" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="287" y="388.7" text-anchor="middle"><tspan x="287" dy="0">Fernleih-</tspan><tspan x="287" dy="16">gebühr buchen</tspan></text>
+<rect x="362" y="364" width="100" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="412" y="384.7" text-anchor="middle"><tspan x="412" dy="0">Bestellung</tspan><tspan x="412" dy="16">prüfen</tspan></text>
+<rect x="362" y="418" width="100" height="64" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="412" y="438.7" text-anchor="middle"><tspan x="412" dy="0">Partner-</tspan><tspan x="412" dy="16">bibliothek</tspan><tspan x="412" dy="16">auswählen</tspan></text>
+<path d="M287,335 L287,368" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<path d="M412,335 L412,364" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<path d="M412,412 L412,418" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="263.5" y="505" width="320" height="6" fill="#222" stroke="#222" stroke-width="0.5"/>
+<path d="M287,416 L287,505" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<path d="M412,482 L412,505" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<polygon points="560,533 575,548 560,563 545,548" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M560,511 L560,533" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="510" y="576" width="100" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="560" y="596.7" text-anchor="middle"><tspan x="560" dy="0">Bestellung</tspan><tspan x="560" dy="16">absenden</tspan></text>
+<path d="M560,563 L560,576" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="637" y="576" width="110" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="692" y="596.7" text-anchor="middle"><tspan x="692" dy="0">Verleihbarkeit</tspan><tspan x="692" dy="16">prüfen</tspan></text>
+<path d="M610,600 L637,600" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<polygon points="692,647 707,662 692,677 677,662" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M692,624 L692,647" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<polygon points="412,647 427,662 412,677 397,662" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M677,662 L427,662" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="563.4" y="645" width="110.6" height="12" fill="#fff" stroke="none"/>
+<text x="672" y="654" text-anchor="end" font-size="11">[nicht verleihbar]</text>
+<rect x="353" y="574" width="118" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="412" y="594.7" text-anchor="middle"><tspan x="412" dy="0">nächste Partner-</tspan><tspan x="412" dy="16">bibliothek wählen</tspan></text>
+<path d="M412,647 L412,622" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<text x="430" y="640" font-size="11"><tspan x="430" dy="0">[weitere Partner-</tspan><tspan x="430" dy="12">bibliothek vorhanden]</tspan></text>
+<path d="M412,574 L412,548 L545,548" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="362" y="714" width="100" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="412" y="734.7" text-anchor="middle"><tspan x="412" dy="0">Bestellung</tspan><tspan x="412" dy="16">stornieren</tspan></text>
+<path d="M412,677 L412,714" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="418" y="689" width="92.8" height="12" fill="#fff" stroke="none"/>
+<text x="420" y="698" font-size="11">[keine weitere]</text>
+<rect x="154" y="714" width="150" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="229" y="734.7" text-anchor="middle"><tspan x="229" dy="0">Gebühr erstatten,</tspan><tspan x="229" dy="16">Leser benachrichtigen</tspan></text>
+<path d="M362,738 L304,738" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<circle cx="229" cy="794" r="11" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<circle cx="229" cy="794" r="6.5" fill="#222" stroke="none"/>
+<path d="M229,762 L229,783" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="642" y="714" width="100" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="692" y="734.7" text-anchor="middle"><tspan x="692" dy="0">Medium</tspan><tspan x="692" dy="16">versenden</tspan></text>
+<path d="M692,677 L692,714" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="612.9" y="691" width="75.1" height="12" fill="#fff" stroke="none"/>
+<text x="686" y="700" text-anchor="end" font-size="11">[verleihbar]</text>
+<rect x="510" y="782" width="100" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="560" y="802.7" text-anchor="middle"><tspan x="560" dy="0">Medium</tspan><tspan x="560" dy="16">erfassen</tspan></text>
+<path d="M692,762 L692,806 L610,806" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="204.5" y="847" width="380" height="6" fill="#222" stroke="#222" stroke-width="0.5"/>
+<path d="M560,830 L560,847" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="170" y="870" width="118" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="229" y="890.7" text-anchor="middle"><tspan x="229" dy="0">Push-Nachricht</tspan><tspan x="229" dy="16">senden</tspan></text>
+<rect x="496" y="870" width="128" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="560" y="890.7" text-anchor="middle"><tspan x="560" dy="0">Medium ins</tspan><tspan x="560" dy="16">Abholregal stellen</tspan></text>
+<path d="M229,853 L229,870" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<path d="M560,853 L560,870" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="204.5" y="935" width="380" height="6" fill="#222" stroke="#222" stroke-width="0.5"/>
+<path d="M229,918 L229,935" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<path d="M560,918 L560,935" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<rect x="14" y="954" width="96" height="48" rx="10" ry="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="62" y="974.7" text-anchor="middle"><tspan x="62" dy="0">Medium</tspan><tspan x="62" dy="16">abholen</tspan></text>
+<path d="M229,941 L229,978 L110,978" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+<circle cx="62" cy="1028" r="11" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<circle cx="62" cy="1028" r="6.5" fill="#222" stroke="none"/>
+<path d="M62,1002 L62,1017" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l023-pfeil)"/>
+</svg><figcaption>Lösung UML-02.3: Aktivitätsdiagramm „Fernleihe“ mit vier Partitionen</figcaption></figure>
+    <div class="bewertung"><strong>Bewertung (IHK-typisch nach Sachverhalten):</strong>
+      <ul>
+        <li>Partitionen korrekt genutzt (jede Aktion in der Bahn des Ausführenden) – 2 P</li>
+        <li>Start beim Leser, „Fernleihe bestellen“ – 1 P</li>
+        <li>„Leserkonto prüfen“, Entscheidung <code>[gesperrt]</code>/<code>[nicht gesperrt]</code>, Ablehnung, Ende – 3 P</li>
+        <li>„Bestand prüfen“, Entscheidung, Vormerkung anlegen, Leser informieren, Ende – 3 P</li>
+        <li>Teilung: Gebühr buchen parallel zu „Bestellung prüfen“ und „Partnerbibliothek auswählen“, Synchronisation vor dem Absenden – 4 P</li>
+        <li>„Bestellung absenden“, „Verleihbarkeit prüfen“ (Partnerbibliothek), Entscheidung – 2 P</li>
+        <li>Schleife: <code>[weitere Partnerbibliothek]</code> → nächste auswählen → Zusammenführung vor „Bestellung absenden“ – 3 P</li>
+        <li><code>[keine weitere]</code>: stornieren (Fernleihstelle), Gebühr erstatten und Leser benachrichtigen (BiblioNet), Ende – 2 P</li>
+        <li>„Medium versenden“ (Partnerbibliothek), „Medium erfassen“ (Fernleihstelle) – 2 P</li>
+        <li>Teilung: Push-Nachricht parallel zu „ins Abholregal stellen“ mit Synchronisation – 2 P</li>
+        <li>„Medium abholen“ (Leser) und Endknoten – 1 P</li>
+      </ul>
+      Gleichwertig: Ablehnung als „Ablehnung senden“ bei BiblioNet plus „Ablehnung erhalten“ beim Leser; ein gemeinsamer Endknoten über Zusammenführungen statt mehrerer Endknoten; „Gebühr erstatten“ und „Leser benachrichtigen“ als zwei Aktionen.
+    </div>
+    <p><strong>Erklärung:</strong> Die Schleife ist der schwierigste Teil: Der Text sagt „wähle die nächste Partnerbibliothek aus und sende die Bestellung dorthin“ – deshalb führt der Rückweg vor „Bestellung absenden“ und nicht vor die Teilung (die Gebühr wird nur einmal gebucht). Die Entscheidung „weitere Partnerbibliothek vorhanden?“ trifft die Fernleihstelle und steht deshalb in deren Bahn.</p>
+  </div>
+
+  <!-- ===================== UML-03 ===================== -->
+  <h3 id="l-03">UML-03 · Klassendiagramm</h3>
+
+  <div class="loesung" id="L-UML-03-1">
+    <div class="kopf">Aufgabe UML-03.1 · 6 Punkte</div>
+    <h4>a) Multiplizitäten (3 P)</h4>
+    <ol>
+      <li><strong>Leser – Ausleihe:</strong> Ein Leser hat beliebig viele (auch keine) Ausleihen (<code>0..*</code>). Jede Ausleihe gehört zu genau einem Leser (<code>1</code>).</li>
+      <li><strong>Medium – Exemplar:</strong> Ein Medium hat mindestens ein Exemplar (<code>1..*</code>). Jedes Exemplar gehört zu genau einem Medium (<code>1</code>); als Komposition werden die Exemplare mit ihrem Medium gelöscht.</li>
+      <li><strong>Leser – Leser:</strong> Ein Leser kann als Hauptkonto bis zu vier Mitleser haben (<code>0..4</code> an der Rolle <em>mitleser</em>). Ein Leser hat höchstens ein Hauptkonto (<code>0..1</code> an der Rolle <em>hauptkonto</em>) – er ist also entweder eigenständig oder Mitleser genau eines Familienkontos.</li>
+    </ol>
+    <div class="bewertung"><strong>Bewertung:</strong> je Beziehung 1 P, nur wenn beide Richtungen richtig gedeutet sind (sonst 0,5 P).</div>
+    <h4>b) Notationen (3 P)</h4>
+    <ol>
+      <li><code>#</code> = <strong>protected</strong>: Auf <code>titel</code> dürfen die Klasse Medium und ihre Unterklassen (Buch, Film) zugreifen (in Java zusätzlich Klassen im selben Paket), andere Klassen nicht.</li>
+      <li>Unterstrichen = <strong>statisch</strong> (Klassenattribut): Der Wert gehört der Klasse, nicht dem einzelnen Objekt; alle Ausleihen teilen sich denselben Wert 2 (hier eine Konstante).</li>
+      <li>Kursiv = <strong>abstrakt</strong>: Von Medium können keine Objekte erzeugt werden, nur von den Unterklassen. <code>getLeihfrist()</code> hat in Medium keine Implementierung und muss in Buch und Film überschrieben werden.</li>
+    </ol>
+    <div class="bewertung"><strong>Bewertung:</strong> je Notation 1 P.</div>
+  </div>
+
+  <div class="loesung" id="L-UML-03-2">
+    <div class="kopf">Aufgabe UML-03.2 · 12 Punkte</div>
+    <h4>a) Klassendiagramm (9 P)</h4>
+    <figure><svg viewBox="0 0 760 620" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><defs><marker id="l032-dreieck" viewBox="0 0 16 16" refX="15" refY="8" markerWidth="16" markerHeight="16" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M1,1 L15,8 L1,15 Z" fill="#fff" stroke="#222" stroke-width="1.2"/></marker><marker id="l032-raute" viewBox="0 0 22 12" refX="21" refY="6" markerWidth="22" markerHeight="12" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M1,6 L11,1 L21,6 L11,11 Z" fill="#fff" stroke="#222" stroke-width="1.2"/></marker><marker id="l032-rautevoll" viewBox="0 0 22 12" refX="21" refY="6" markerWidth="22" markerHeight="12" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M1,6 L11,1 L21,6 L11,11 Z" fill="#222" stroke="#222" stroke-width="1.2"/></marker></defs>
+<rect x="250" y="10" width="260" height="158" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="380" y="28" text-anchor="middle" font-weight="bold" font-style="italic" font-size="13">Foerdermodul</text>
+<text x="380" y="44" text-anchor="middle" font-size="12">{abstract}</text>
+<line x1="250" y1="52" x2="510" y2="52" stroke="#222" stroke-width="1.2"/>
+<text x="258" y="69" font-size="13"># modulNr : int</text>
+<text x="258" y="85" font-size="13">- aktiv : boolean</text>
+<line x1="250" y1="94" x2="510" y2="94" stroke="#222" stroke-width="1.2"/>
+<text x="258" y="111" font-size="13">+ Foerdermodul(modulNr : int)</text>
+<text x="258" y="127" font-style="italic" font-size="13">+ starten() : void</text>
+<text x="258" y="143" font-size="13">+ isAktiv() : boolean</text>
+<text x="258" y="159" font-size="13"># setAktiv(aktiv : boolean) : void</text>
+<rect x="560" y="30" width="190" height="84" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="655" y="48" text-anchor="middle" font-size="13">«interface»</text>
+<text x="655" y="64" text-anchor="middle" font-weight="bold" font-style="italic" font-size="13">Wartbar</text>
+<line x1="560" y1="72" x2="750" y2="72" stroke="#222" stroke-width="1.2"/>
+<text x="568" y="89" font-size="13">+ warten() : void</text>
+<text x="568" y="105" font-size="13">+ getBetriebsstunden() : int</text>
+<rect x="230" y="230" width="360" height="142" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="410" y="248" text-anchor="middle" font-weight="bold" font-size="13">Foerderband</text>
+<line x1="230" y1="256" x2="590" y2="256" stroke="#222" stroke-width="1.2"/>
+<text x="238" y="273" font-size="13">- geschwindigkeit : double</text>
+<text x="238" y="289" font-size="13">- betriebsstunden : int</text>
+<line x1="230" y1="298" x2="590" y2="298" stroke="#222" stroke-width="1.2"/>
+<text x="238" y="315" font-size="13">+ Foerderband(modulNr : int, geschwindigkeit : double)</text>
+<text x="238" y="331" font-size="13">+ starten() : void</text>
+<text x="238" y="347" font-size="13">+ warten() : void</text>
+<text x="238" y="363" font-size="13">+ getBetriebsstunden() : int</text>
+<rect x="10" y="440" width="350" height="126" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="185" y="458" text-anchor="middle" font-weight="bold" font-size="13">Sortieranlage</text>
+<line x1="10" y1="466" x2="360" y2="466" stroke="#222" stroke-width="1.2"/>
+<text x="18" y="483" text-decoration="underline" font-size="13">- anzahlAnlagen : int</text>
+<text x="18" y="499" font-size="13">- standort : String</text>
+<line x1="10" y1="508" x2="360" y2="508" stroke="#222" stroke-width="1.2"/>
+<text x="18" y="525" font-size="13">+ Sortieranlage(standort : String, band : Foerderband)</text>
+<text x="18" y="541" font-size="13">+ sortiere(barcode : String, zielKiste : int) : int</text>
+<text x="18" y="557" text-decoration="underline" font-size="13">+ getAnzahlAnlagen() : int</text>
+<rect x="520" y="440" width="235" height="158" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="637.5" y="458" text-anchor="middle" font-weight="bold" font-size="13">Kiste</text>
+<line x1="520" y1="466" x2="755" y2="466" stroke="#222" stroke-width="1.2"/>
+<text x="528" y="483" font-size="13">- nummer : int</text>
+<text x="528" y="499" font-size="13">- kapazitaet : int</text>
+<text x="528" y="515" font-size="13">- barcodes : List&lt;String&gt;</text>
+<line x1="520" y1="524" x2="755" y2="524" stroke="#222" stroke-width="1.2"/>
+<text x="528" y="541" font-size="13">+ Kiste(nummer : int, kapazitaet : int)</text>
+<text x="528" y="557" font-size="13">+ istVoll() : boolean</text>
+<text x="528" y="573" font-size="13">+ ablegen(barcode : String) : void</text>
+<text x="528" y="589" font-size="13">~ leeren() : void</text>
+<path d="M380,230 L380,168" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l032-dreieck)"/>
+<path d="M590,290 L655,290 L655,114" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#l032-dreieck)"/>
+<path d="M300,372 L300,440" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l032-raute)"/>
+<text x="308" y="434" font-size="12">0..1</text>
+<text x="308" y="388" font-size="12">1</text>
+<text x="292" y="406" text-anchor="end" font-style="italic" font-size="12">band</text>
+<path d="M520,500 L360,500" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l032-rautevoll)"/>
+<text x="386" y="494" font-size="12">1</text>
+<text x="512" y="494" text-anchor="end" font-size="12">6</text>
+<text x="512" y="518" text-anchor="end" font-style="italic" font-size="12">kisten</text>
+</svg><figcaption>Lösung UML-03.2 a): Klassendiagramm zum Quelltext der Sortieranlage</figcaption></figure>
+    <ul>
+      <li><code>Foerdermodul</code> ist abstrakt (Name kursiv bzw. <code>{abstract}</code>), ebenso die Methode <code>starten()</code>. <code>Wartbar</code> ist ein Interface.</li>
+      <li><code>anzahlAnlagen</code> und <code>getAnzahlAnlagen()</code> sind <code>static</code> → unterstrichen (oder <code>{static}</code>). <code>leeren()</code> hat keinen Modifizierer → Sichtbarkeit package <code>~</code>.</li>
+      <li>Die Attribute <code>band</code> und <code>kisten</code> werden als Beziehungen dargestellt (Rollennamen am Linienende), nicht zusätzlich als Attribute. <code>barcodes</code> ist eine Liste von Strings und bleibt ein Attribut.</li>
+      <li>Multiplizität der Kisten: Der Konstruktor erzeugt genau 6 Kisten → <code>6</code>; <code>1..*</code> oder <code>*</code> wird ebenfalls akzeptiert.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung a):</strong> Klassen/Interface mit Attributen inkl. Sichtbarkeit und Typ 2,5 P; Methoden und Konstruktoren mit Parametern und Rückgabetyp 2,5 P; abstract und static korrekt gekennzeichnet 1 P; Vererbung und Realisierung 1 P; Komposition und Aggregation mit Multiplizitäten 2 P. Werden <code>band</code> und <code>kisten</code> als Attribute <em>statt</em> als Beziehung eingetragen, gibt es für die Beziehung höchstens die Hälfte der Punkte.</div>
+    <h4>b) Aggregation oder Komposition? (3 P)</h4>
+    <ul>
+      <li><strong>Sortieranlage – Kiste: Komposition.</strong> Die Sortieranlage erzeugt ihre Kisten selbst im Konstruktor (<code>new Kiste(i, 40)</code>) und gibt keine Referenzen nach außen. Die Kisten existieren nur als Teil dieser Anlage und werden mit ihr gelöscht.</li>
+      <li><strong>Sortieranlage – Foerderband: Aggregation.</strong> Das Förderband wird außerhalb erzeugt und dem Konstruktor übergeben. Es existiert unabhängig von der Sortieranlage und kann an eine andere Anlage übergeben werden.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung b):</strong> je Beziehung 1,5 P (Art 0,5 P, Begründung am Quelltext 1 P).</div>
+  </div>
+
+  <div class="loesung" id="L-UML-03-3">
+    <div class="kopf">Aufgabe UML-03.3 · 22 Punkte</div>
+    <h4>a) Klassendiagramm (16 P)</h4>
+    <figure><svg viewBox="0 0 760 500" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><defs><marker id="l033-pfeil" viewBox="0 0 11 10" refX="10.5" refY="5" markerWidth="11" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0.5,0.5 L10.5,5 L0.5,9.5" fill="none" stroke="#222" stroke-width="1.3"/></marker><marker id="l033-dreieck" viewBox="0 0 16 16" refX="15" refY="8" markerWidth="16" markerHeight="16" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M1,1 L15,8 L1,15 Z" fill="#fff" stroke="#222" stroke-width="1.2"/></marker><marker id="l033-raute" viewBox="0 0 22 12" refX="21" refY="6" markerWidth="22" markerHeight="12" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M1,6 L11,1 L21,6 L11,11 Z" fill="#fff" stroke="#222" stroke-width="1.2"/></marker><marker id="l033-rautevoll" viewBox="0 0 22 12" refX="21" refY="6" markerWidth="22" markerHeight="12" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M1,6 L11,1 L21,6 L11,11 Z" fill="#222" stroke="#222" stroke-width="1.2"/></marker></defs>
+<g transform="translate(0,-150)"><rect x="10" y="170" width="180" height="68" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="100" y="188" text-anchor="middle" font-weight="bold" font-size="13">Standort</text>
+<line x1="10" y1="196" x2="190" y2="196" stroke="#222" stroke-width="1.2"/>
+<text x="18" y="213" font-size="13">- name : String</text>
+<text x="18" y="229" font-size="13">- adresse : String</text>
+<rect x="280" y="160" width="220" height="100" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="390" y="178" text-anchor="middle" font-weight="bold" font-style="italic" font-size="13">Veranstaltung</text>
+<text x="390" y="194" text-anchor="middle" font-size="12">{abstract}</text>
+<line x1="280" y1="202" x2="500" y2="202" stroke="#222" stroke-width="1.2"/>
+<text x="288" y="219" font-size="13"># titel : String</text>
+<text x="288" y="235" font-size="13"># beschreibung : String</text>
+<text x="288" y="251" font-size="13"># preis : double</text>
+<rect x="590" y="170" width="160" height="84" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="670" y="188" text-anchor="middle" font-weight="bold" font-size="13">Referent</text>
+<line x1="590" y1="196" x2="750" y2="196" stroke="#222" stroke-width="1.2"/>
+<text x="598" y="213" font-size="13">- name : String</text>
+<text x="598" y="229" font-size="13">- email : String</text>
+<text x="598" y="245" font-size="13">- honorar : double</text>
+<rect x="10" y="370" width="200" height="84" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="110" y="388" text-anchor="middle" font-weight="bold" font-size="13">Raum</text>
+<line x1="10" y1="396" x2="210" y2="396" stroke="#222" stroke-width="1.2"/>
+<text x="18" y="413" font-size="13">- bezeichnung : String</text>
+<text x="18" y="429" font-size="13">- kapazitaet : int</text>
+<text x="18" y="445" font-size="13">- barrierefrei : boolean</text>
+<rect x="280" y="370" width="230" height="110" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="395" y="388" text-anchor="middle" font-weight="bold" font-size="13">Termin</text>
+<line x1="280" y1="396" x2="510" y2="396" stroke="#222" stroke-width="1.2"/>
+<text x="288" y="413" font-size="13">- datum : Date</text>
+<text x="288" y="429" font-size="13">- beginn : Time</text>
+<text x="288" y="445" font-size="13">- ende : Time</text>
+<line x1="280" y1="454" x2="510" y2="454" stroke="#222" stroke-width="1.2"/>
+<text x="288" y="471" font-size="13">+ berechneAuslastung() : double</text>
+<rect x="560" y="330" width="195" height="52" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="657.5" y="348" text-anchor="middle" font-weight="bold" font-size="13">Lesung</text>
+<line x1="560" y1="356" x2="755" y2="356" stroke="#222" stroke-width="1.2"/>
+<text x="568" y="373" font-size="13">- buchtitel : String</text>
+<rect x="560" y="420" width="195" height="68" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="657.5" y="438" text-anchor="middle" font-weight="bold" font-size="13">Workshop</text>
+<line x1="560" y1="446" x2="755" y2="446" stroke="#222" stroke-width="1.2"/>
+<text x="568" y="463" font-size="13">- materialkosten : double</text>
+<text x="568" y="479" font-size="13">- mindestalter : int</text>
+<rect x="10" y="560" width="180" height="68" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="100" y="578" text-anchor="middle" font-weight="bold" font-size="13">Leser</text>
+<line x1="10" y1="586" x2="190" y2="586" stroke="#222" stroke-width="1.2"/>
+<text x="18" y="603" font-size="13">- leserNr : int</text>
+<text x="18" y="619" font-size="13">- name : String</text>
+<rect x="280" y="560" width="230" height="68" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="395" y="578" text-anchor="middle" font-weight="bold" font-size="13">Anmeldung</text>
+<line x1="280" y1="586" x2="510" y2="586" stroke="#222" stroke-width="1.2"/>
+<text x="288" y="603" font-size="13">- anmeldedatum : Date</text>
+<text x="288" y="619" font-size="13">- status : String</text>
+<path d="M100,370 L100,238" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l033-rautevoll)"/>
+<text x="108" y="266" font-size="12">1</text>
+<text x="108" y="364" font-size="12">1..*</text>
+<path d="M390,370 L390,260" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l033-rautevoll)"/>
+<text x="398" y="288" font-size="12">1</text>
+<text x="398" y="364" font-size="12">1..*</text>
+<path d="M280,410 L210,410" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l033-pfeil)"/>
+<text x="274" y="404" text-anchor="end" font-size="12">0..*</text>
+<text x="216" y="426" font-size="12">1</text>
+<path d="M590,205 L500,205" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l033-raute)"/>
+<text x="528" y="199" font-size="12">0..*</text>
+<text x="584" y="223" text-anchor="end" font-size="12">0..*</text>
+<line x1="560" y1="356" x2="532" y2="356" stroke="#222" stroke-width="1.2"/>
+<line x1="560" y1="454" x2="532" y2="454" stroke="#222" stroke-width="1.2"/>
+<line x1="532" y1="454" x2="532" y2="245" stroke="#222" stroke-width="1.2"/>
+<path d="M532,245 L500,245" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l033-dreieck)"/>
+<path d="M395,480 L395,560" fill="none" stroke="#222" stroke-width="1.2"/>
+<text x="403" y="496" font-size="12">1</text>
+<text x="403" y="554" font-size="12">0..*  {ordered}</text>
+<path d="M190,594 L280,594" fill="none" stroke="#222" stroke-width="1.2"/>
+<text x="196" y="588" font-size="12">1</text>
+<text x="274" y="588" text-anchor="end" font-size="12">0..*</text></g>
+</svg><figcaption>Lösung UML-03.3 a): Klassendiagramm „Veranstaltungen“</figcaption></figure>
+    <div class="bewertung"><strong>Bewertung a):</strong> Klassen mit Attributen und Datentypen: Standort, Veranstaltung (abstrakt), Lesung, Workshop, Termin (mit <code>berechneAuslastung() : double</code>), Referent, Leser, Anmeldung je 1 P (8 P). Beziehungen mit Multiplizitäten: Standort ◆ Raum, Veranstaltung ◆ Termin, Termin – Raum, Veranstaltung ◇ Referent, Vererbung Lesung/Workshop, Leser – Anmeldung, Termin – Anmeldung je 1 P, Kennzeichnung <code>{abstract}</code> 1 P (8 P).
+      Gleichwertig: <code>Anmeldung</code> als Assoziationsklasse zwischen Leser und Termin; Termin ◆ Anmeldung als Komposition; Termin – Raum ungerichtet; <code>status</code> als Aufzählungstyp (<code>«enumeration» Anmeldestatus</code>); Datentypen wie <code>LocalDate</code>, <code>LocalTime</code>, <code>Integer</code>, <code>Boolean</code>.</div>
+    <h4>b) Reihenfolge der Anmeldungen (2 P)</h4>
+    <p>Am Assoziationsende bei <code>Anmeldung</code> (Beziehung Termin – Anmeldung) steht die Eigenschaft <code>{ordered}</code>: Die Anmeldungen eines Termins bilden eine geordnete Liste (Reihenfolge des Eingangs), z. B. umgesetzt als <code>List&lt;Anmeldung&gt;</code>.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> <code>{ordered}</code> 1 P, richtige Stelle/Bedeutung 1 P.</div>
+    <h4>c) Gewählte Beziehungsarten (4 P)</h4>
+    <ul>
+      <li><strong>Standort – Raum: Komposition</strong> (gefüllte Raute am Standort). Räume sind existenzabhängig: Wird ein Standort aufgegeben, werden seine Räume gelöscht. Ein Raum gehört zu genau einem Standort.</li>
+      <li><strong>Veranstaltung – Referent: Aggregation</strong> (hohle Raute an der Veranstaltung). Referenten existieren unabhängig, können bei mehreren Veranstaltungen mitwirken (<code>0..*</code> am Ganzen) und bleiben beim Löschen einer Veranstaltung erhalten.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> je Beziehung 2 P (Art 1 P, Begründung 1 P). Eine einfache Assoziation für Veranstaltung – Referent wird mit nachvollziehbarer Begründung ebenfalls akzeptiert.</div>
+  </div>
+
+  <!-- ===================== UML-04 ===================== -->
+  <h3 id="l-04">UML-04 · Zustandsdiagramm</h3>
+
+  <div class="loesung" id="L-UML-04-1">
+    <div class="kopf">Aufgabe UML-04.1 · 5 Punkte</div>
+    <h4>a) Folgezustand und Aktionen (2 P)</h4>
+    <p>Der Saldo steigt auf 10,50 €. Das Ereignis <code>gebuehrGebucht</code> trifft auf die Transition mit <code>[saldo &gt;= 10]</code> → Folgezustand <strong>Gesperrt</strong>. Reihenfolge: (Aktiv hat keine exit-Aktion) → Aktion an der Transition <strong>„Sperrhinweis senden“</strong> → entry-Aktion von Gesperrt <strong>„Ausleihe sperren“</strong>.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Folgezustand 1 P, beide Aktionen in richtiger Reihenfolge 1 P.</div>
+    <h4>b) Bestandteile der Beschriftung (2 P)</h4>
+    <ul>
+      <li><code>gebuehrGebucht</code> – <strong>Ereignis</strong> (Auslöser): löst die Transition aus.</li>
+      <li><code>[saldo &gt;= 10]</code> – <strong>Bedingung</strong> (Guard): muss beim Eintreten des Ereignisses erfüllt sein, sonst schaltet diese Transition nicht (dann greift die Selbsttransition mit <code>[saldo &lt; 10]</code>).</li>
+      <li><code>/ Sperrhinweis senden</code> – <strong>Aktion</strong> (Effekt): wird beim Schalten der Transition ausgeführt.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> zwei Bestandteile richtig 1 P, alle drei 2 P.</div>
+    <h4>c) entry und exit (1 P)</h4>
+    <p><code>entry</code> wird bei jedem Betreten des Zustands Gesperrt ausgeführt (Ausleihe sperren), <code>exit</code> bei jedem Verlassen (Ausleihe freigeben) – unabhängig davon, über welche Transition der Zustand betreten oder verlassen wird.</p>
+  </div>
+
+  <div class="loesung" id="L-UML-04-2">
+    <div class="kopf">Aufgabe UML-04.2 · 10 Punkte</div>
+    <figure><svg viewBox="0 0 760 500" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><defs><marker id="l042-pfeil" viewBox="0 0 11 10" refX="10.5" refY="5" markerWidth="11" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0.5,0.5 L10.5,5 L0.5,9.5" fill="none" stroke="#222" stroke-width="1.3"/></marker></defs>
+<circle cx="22" cy="120" r="8" fill="#222" stroke="none"/>
+<rect x="45" y="95" width="150" height="50" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="120" y="125" text-anchor="middle" font-weight="bold" font-size="13">Verfügbar</text>
+<path d="M30,120 L45,120" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l042-pfeil)"/>
+<circle cx="100" cy="30" r="11" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<circle cx="100" cy="30" r="6.5" fill="#222" stroke="none"/>
+<path d="M100,95 L100,42" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l042-pfeil)"/>
+<text x="108" y="66" font-size="12">aussondern</text>
+<rect x="370" y="95" width="170" height="50" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="455" y="125" text-anchor="middle" font-weight="bold" font-size="13">Ausgeliehen</text>
+<path d="M195,108 L370,108" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l042-pfeil)"/>
+<text x="282" y="100" text-anchor="middle" font-size="12">ausleihen / Fälligkeit setzen</text>
+<path d="M370,134 L195,134" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l042-pfeil)"/>
+<text x="282" y="152" text-anchor="middle" font-size="12"><tspan x="282" dy="0">zurückgeben</tspan><tspan x="282" dy="14">[keine Vormerkung]</tspan></text>
+<path d="M490,95 L490,68 L530,68 L530,95" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l042-pfeil)"/>
+<text x="540" y="30" font-size="12"><tspan x="540" dy="0">verlängern [verlängerungen &lt; 2</tspan><tspan x="540" dy="14">und keine Vormerkung]</tspan><tspan x="540" dy="14">/ Fälligkeit + Leihfrist</tspan></text>
+<rect x="370" y="260" width="200" height="62" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="470" y="278" text-anchor="middle" font-weight="bold" font-size="13">Zurückgelegt</text>
+<line x1="370" y1="286" x2="570" y2="286" stroke="#222" stroke-width="1.2"/>
+<text x="378" y="302" font-size="12">entry / Leser benachrichtigen</text>
+<path d="M400,145 L400,260" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l042-pfeil)"/>
+<text x="392" y="196" text-anchor="end" font-size="12"><tspan x="392" dy="0">zurückgeben</tspan><tspan x="392" dy="14">[Vormerkung</tspan><tspan x="392" dy="14">vorhanden]</tspan></text>
+<path d="M480,260 L480,145" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l042-pfeil)"/>
+<text x="488" y="196" font-size="12"><tspan x="488" dy="0">ausleihen [durch</tspan><tspan x="488" dy="14">vormerkenden Leser]</tspan></text>
+<path d="M570,275 L600,275 L600,305 L570,305" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l042-pfeil)"/>
+<text x="608" y="276" font-size="12"><tspan x="608" dy="0">after(7 Tage)</tspan><tspan x="608" dy="14">[weitere Vormerkung]</tspan><tspan x="608" dy="14">/ Vormerkung löschen</tspan></text>
+<path d="M370,300 L150,300 L150,145" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l042-pfeil)"/>
+<text x="258" y="248" text-anchor="middle" font-size="12"><tspan x="258" dy="0">after(7 Tage)</tspan><tspan x="258" dy="14">[keine weitere Vormerkung]</tspan><tspan x="258" dy="14">/ Vormerkung löschen</tspan></text>
+<rect x="370" y="390" width="150" height="50" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="445" y="420" text-anchor="middle" font-weight="bold" font-size="13">Vermisst</text>
+<path d="M540,120 L700,120 L700,415 L520,415" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l042-pfeil)"/>
+<text x="692" y="180" text-anchor="end" font-size="12">dritteMahnungErfolglos</text>
+<path d="M370,415 L85,415 L85,145" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l042-pfeil)"/>
+<text x="230" y="408" text-anchor="middle" font-size="12">zurückgeben</text>
+<circle cx="445" cy="482" r="11" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<circle cx="445" cy="482" r="6.5" fill="#222" stroke="none"/>
+<path d="M445,440 L445,471" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l042-pfeil)"/>
+<text x="453" y="462" font-size="12">after(1 Jahr) / ausbuchen</text>
+</svg><figcaption>Lösung UML-04.2: Zustandsdiagramm eines Exemplars</figcaption></figure>
+    <ul>
+      <li>Die Selbsttransition an „Zurückgelegt“ ist gewollt: Sie verlässt den Zustand und betritt ihn neu, dadurch wird die entry-Aktion erneut ausgeführt und automatisch der <em>nächste</em> Leser benachrichtigt („bei jedem Zurücklegen“).</li>
+      <li>Für das Verlängern ist auch eine interne Transition im Zustand „Ausgeliehen“ korrekt (der Zustand hat keine entry-Aktion, das Verhalten ist gleich).</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> Zustände Verfügbar, Ausgeliehen, Zurückgelegt, Vermisst je 0,5 P (2 P); Startzustand und Endzustände (aussondern, ausbuchen) 1 P; ausleihen/zurückgeben mit Bedingungen zwischen Verfügbar, Ausgeliehen und Zurückgelegt 2 P; Selbsttransition „verlängern“ mit Bedingung und Aktion 1,5 P; Zurückgelegt mit entry-Aktion und beiden <code>after(7 Tage)</code>-Transitionen 2 P; Vermisst mit beiden Ausgängen 1,5 P. Ein eigener Zustand „Ausgesondert“ vor dem Endzustand wird ebenfalls akzeptiert.</div>
+  </div>
+
+  <div class="loesung" id="L-UML-04-3">
+    <div class="kopf">Aufgabe UML-04.3 · 25 Punkte</div>
+    <h4>a) Zustandsdiagramm (19 P)</h4>
+    <figure><svg viewBox="0 0 760 670" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><defs><marker id="l043-pfeil" viewBox="0 0 11 10" refX="10.5" refY="5" markerWidth="11" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0.5,0.5 L10.5,5 L0.5,9.5" fill="none" stroke="#222" stroke-width="1.3"/></marker></defs>
+<circle cx="25" cy="55" r="8" fill="#222" stroke="none"/>
+<rect x="50" y="30" width="180" height="52" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="140" y="48" text-anchor="middle" font-weight="bold" font-size="13">Selbsttest</text>
+<line x1="50" y1="56" x2="230" y2="56" stroke="#222" stroke-width="1.2"/>
+<text x="58" y="72" font-size="12">do / Sensoren prüfen</text>
+<path d="M33,55 L50,55" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043-pfeil)"/>
+<rect x="480" y="22" width="260" height="72" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="610" y="40" text-anchor="middle" font-weight="bold" font-size="13">Störung</text>
+<line x1="480" y1="48" x2="740" y2="48" stroke="#222" stroke-width="1.2"/>
+<text x="488" y="64" font-size="12">entry / Förderband stoppen</text>
+<text x="488" y="79" font-size="12">entry / Störmeldung senden</text>
+<path d="M230,44 L480,44" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043-pfeil)"/>
+<text x="355" y="36" text-anchor="middle" font-size="12">[Selbsttest fehlerhaft]</text>
+<path d="M480,72 L230,72" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043-pfeil)"/>
+<text x="355" y="90" text-anchor="middle" font-size="12">störungQuittiert</text>
+<rect x="50" y="180" width="240" height="70" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="170" y="198" text-anchor="middle" font-weight="bold" font-size="13">Bereit</text>
+<line x1="50" y1="206" x2="290" y2="206" stroke="#222" stroke-width="1.2"/>
+<text x="58" y="222" font-size="12">entry / Klappe entriegeln</text>
+<text x="58" y="237" font-size="12">entry / Hinweis „Medium einlegen“</text>
+<path d="M140,82 L140,180" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043-pfeil)"/>
+<text x="148" y="135" font-size="12">[Selbsttest ok]</text>
+<circle cx="270" cy="128" r="11" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<circle cx="270" cy="128" r="6.5" fill="#222" stroke="none"/>
+<path d="M270,180 L270,139" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043-pfeil)"/>
+<text x="278" y="158" font-size="12">ausschalten</text>
+<rect x="480" y="180" width="260" height="60" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="610" y="198" text-anchor="middle" font-weight="bold" font-size="13">Kiste voll</text>
+<line x1="480" y1="206" x2="740" y2="206" stroke="#222" stroke-width="1.2"/>
+<text x="488" y="222" font-size="12">entry / „Außer Betrieb“ anzeigen</text>
+<path d="M480,198 L290,198" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043-pfeil)"/>
+<text x="385" y="190" text-anchor="middle" font-size="12">kisteGetauscht</text>
+<rect x="50" y="370" width="220" height="70" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="160" y="388" text-anchor="middle" font-weight="bold" font-size="13">Prüfung</text>
+<line x1="50" y1="396" x2="270" y2="396" stroke="#222" stroke-width="1.2"/>
+<text x="58" y="412" font-size="12">entry / Klappe verriegeln</text>
+<text x="58" y="427" font-size="12">do / RFID-Etikett lesen</text>
+<path d="M110,250 L110,370" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043-pfeil)"/>
+<text x="118" y="315" font-size="12">mediumErkannt</text>
+<rect x="480" y="370" width="260" height="56" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="610" y="388" text-anchor="middle" font-weight="bold" font-size="13">Transport</text>
+<line x1="480" y1="396" x2="740" y2="396" stroke="#222" stroke-width="1.2"/>
+<text x="488" y="412" font-size="12">do / Medium zur Sortieranlage</text>
+<path d="M480,386 L380,386 L380,235 L290,235" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043-pfeil)"/>
+<text x="372" y="300" text-anchor="end" font-size="12"><tspan x="372" dy="0">mediumAbgelegt</tspan><tspan x="372" dy="14">[Kiste nicht voll]</tspan></text>
+<path d="M650,370 L650,240" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043-pfeil)"/>
+<text x="642" y="290" text-anchor="end" font-size="12"><tspan x="642" dy="0">mediumAbgelegt</tspan><tspan x="642" dy="14">[Kiste voll]</tspan><tspan x="642" dy="14">/ Personal informieren</tspan></text>
+<rect x="30" y="560" width="200" height="70" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="130" y="578" text-anchor="middle" font-weight="bold" font-size="13">Auswurf</text>
+<line x1="30" y1="586" x2="230" y2="586" stroke="#222" stroke-width="1.2"/>
+<text x="38" y="602" font-size="12">entry / Hinweis anzeigen</text>
+<text x="38" y="617" font-size="12">do / Medium zurückschieben</text>
+<path d="M70,440 L70,560" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043-pfeil)"/>
+<text x="76" y="500" font-size="12">after(5 s)</text>
+<path d="M170,440 L170,560" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043-pfeil)"/>
+<text x="176" y="496" font-size="12"><tspan x="176" dy="0">etikettGelesen</tspan><tspan x="176" dy="14">[fremdes Medium]</tspan></text>
+<path d="M30,595 L14,595 L14,215 L50,215" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043-pfeil)"/>
+<text x="10" y="400" text-anchor="middle" font-size="12" transform="rotate(-90 10 400)">mediumEntnommen</text>
+<rect x="480" y="570" width="230" height="52" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="595" y="588" text-anchor="middle" font-weight="bold" font-size="13">Verbuchung</text>
+<line x1="480" y1="596" x2="710" y2="596" stroke="#222" stroke-width="1.2"/>
+<text x="488" y="612" font-size="12">do / Rückgabe buchen</text>
+<path d="M270,420 L330,420 L330,596 L480,596" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043-pfeil)"/>
+<text x="338" y="470" font-size="12"><tspan x="338" dy="0">etikettGelesen</tspan><tspan x="338" dy="14">[eigenes Medium]</tspan></text>
+<path d="M520,570 L520,426" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043-pfeil)"/>
+<text x="512" y="512" text-anchor="end" font-size="12">buchungBestätigt</text>
+<path d="M600,570 L600,426" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043-pfeil)"/>
+<text x="608" y="494" font-size="12"><tspan x="608" dy="0">after(10 s)</tspan><tspan x="608" dy="14">/ Rückgabe lokal</tspan><tspan x="608" dy="14">speichern</tspan></text>
+</svg><figcaption>Lösung UML-04.3 a): Zustandsdiagramm des Rückgabeautomaten</figcaption></figure>
+    <div class="bewertung"><strong>Bewertung a):</strong>
+      <ul>
+        <li>Zustände mit inneren Aktionen: Prüfung (entry, do), Verbuchung (do), Auswurf (entry, do), Transport (do), Kiste voll (entry), Störung (entry) – je 1 P (6 P)</li>
+        <li>Selbsttest → Störung <code>[Selbsttest fehlerhaft]</code> – 1 P</li>
+        <li>Bereit → Prüfung <code>mediumErkannt</code> – 1 P</li>
+        <li>Prüfung → Verbuchung <code>etikettGelesen [eigenes Medium]</code> – 1 P</li>
+        <li>Prüfung → Auswurf mit <code>etikettGelesen [fremdes Medium]</code> und <code>after(5 s)</code> – 2 P</li>
+        <li>Auswurf → Bereit <code>mediumEntnommen</code> – 1 P</li>
+        <li>Verbuchung → Transport mit <code>buchungBestätigt</code> und <code>after(10 s) / Rückgabe lokal speichern</code> – 2 P</li>
+        <li>Transport → Bereit <code>[Kiste nicht voll]</code> und → Kiste voll <code>[Kiste voll] / Personal informieren</code> (Ereignis <code>mediumAbgelegt</code>) – 2 P</li>
+        <li>Kiste voll → Bereit <code>kisteGetauscht</code> – 1 P</li>
+        <li>Störung → Selbsttest <code>störungQuittiert</code> – 1 P</li>
+        <li>Bereit → Endzustand <code>ausschalten</code> – 1 P</li>
+      </ul>
+      Andere Ereignisnamen mit gleicher Bedeutung sind zulässig. Wer die Prüfung des Etiketts mit einer Entscheidung (Raute) nach <code>etikettGelesen</code> modelliert, erhält die Punkte ebenfalls.
+    </div>
+    <h4>b) entry statt Transitionsaktion (2 P)</h4>
+    <p>„Bereit“ wird über viele Transitionen betreten (nach dem Selbsttest, nach dem Auswurf, nach dem Transport, nach dem Kistentausch). Mit <code>entry</code> wird die Klappe bei <strong>jedem</strong> Betreten entriegelt, ohne die Aktion an jede eingehende Transition schreiben zu müssen. Das Diagramm bleibt übersichtlich, und bei neuen Transitionen nach „Bereit“ kann die Aktion nicht vergessen werden.</p>
+    <h4>c) Not-Aus mit zusammengesetztem Zustand (4 P)</h4>
+    <figure><svg viewBox="0 0 760 372" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><defs><marker id="l043c-pfeil" viewBox="0 0 11 10" refX="10.5" refY="5" markerWidth="11" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0.5,0.5 L10.5,5 L0.5,9.5" fill="none" stroke="#222" stroke-width="1.3"/></marker></defs>
+<circle cx="25" cy="50" r="8" fill="#222" stroke="none"/>
+<rect x="50" y="25" width="160" height="50" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="130" y="55" text-anchor="middle" font-weight="bold" font-size="13">Selbsttest</text>
+<path d="M33,50 L50,50" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043c-pfeil)"/>
+<rect x="560" y="20" width="180" height="60" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="650" y="38" text-anchor="middle" font-weight="bold" font-size="13">Störung</text>
+<line x1="560" y1="46" x2="740" y2="46" stroke="#222" stroke-width="1.2"/>
+<text x="568" y="62" font-size="12">entry / Förderband stoppen</text>
+<path d="M210,40 L560,40" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043c-pfeil)"/>
+<text x="385" y="32" text-anchor="middle" font-size="12">[Selbsttest fehlerhaft]</text>
+<path d="M560,66 L210,66" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043c-pfeil)"/>
+<text x="385" y="82" text-anchor="middle" font-size="12">störungQuittiert</text>
+<rect x="20" y="140" width="500" height="222" rx="14" ry="14" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="32" y="160" font-weight="bold">Betrieb</text>
+<path d="M130,75 L130,140" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043c-pfeil)"/>
+<text x="138" y="112" font-size="12">[Selbsttest ok]</text>
+<path d="M470,140 L470,108 L650,108 L650,80" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043c-pfeil)"/>
+<text x="478" y="128" font-weight="bold" font-size="12">notAus</text>
+<circle cx="38" cy="200" r="7" fill="#222" stroke="none"/>
+<rect x="60" y="180" width="110" height="40" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="115" y="205" text-anchor="middle" font-weight="bold" font-size="13">Bereit</text>
+<path d="M45,200 L60,200" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043c-pfeil)"/>
+<rect x="60" y="280" width="110" height="40" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="115" y="305" text-anchor="middle" font-weight="bold" font-size="13">Prüfung</text>
+<rect x="210" y="280" width="110" height="40" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="265" y="305" text-anchor="middle" font-weight="bold" font-size="13">Auswurf</text>
+<rect x="370" y="280" width="120" height="40" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="430" y="305" text-anchor="middle" font-weight="bold" font-size="13">Verbuchung</text>
+<rect x="370" y="180" width="120" height="40" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="430" y="205" text-anchor="middle" font-weight="bold" font-size="13">Transport</text>
+<path d="M115,220 L115,280" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043c-pfeil)"/>
+<path d="M170,300 L210,300" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043c-pfeil)"/>
+<path d="M265,280 L265,208 L170,208" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043c-pfeil)"/>
+<path d="M140,320 L140,342 L430,342 L430,320" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043c-pfeil)"/>
+<path d="M430,280 L430,220" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043c-pfeil)"/>
+<path d="M370,190 L170,190" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043c-pfeil)"/>
+<text x="300" y="166" font-size="11" fill="#555">(Transitionen wie in a)</text>
+<rect x="610" y="260" width="130" height="50" rx="12" ry="12" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="675" y="290" text-anchor="middle" font-weight="bold" font-size="13">Kiste voll</text>
+<path d="M490,200 L675,200 L675,260" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043c-pfeil)"/>
+<text x="580" y="192" text-anchor="middle" font-size="11">mediumAbgelegt [Kiste voll]</text>
+<path d="M610,290 L520,290" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l043c-pfeil)"/>
+<text x="565" y="306" text-anchor="middle" font-size="11">kisteGetauscht</text>
+</svg><figcaption>Lösung UML-04.3 c): Zusammengesetzter Zustand „Betrieb“ – die Transition „notAus“ am Rand gilt für alle Unterzustände</figcaption></figure>
+    <p>Die fünf Zustände werden zu einem zusammengesetzten Zustand „Betrieb“ zusammengefasst; sein innerer Startzustand führt zu „Bereit“. Eine <strong>einzige</strong> Transition <code>notAus</code> geht vom Rand des zusammengesetzten Zustands nach „Störung“ und gilt damit für jeden Unterzustand. <strong>Vorteil:</strong> eine Transition statt fünf, übersichtlicher und weniger fehleranfällig; ein später ergänzter Unterzustand erhält das Not-Aus automatisch. Der Pfeil <code>kisteGetauscht</code> endet am Rand von „Betrieb“: Der Automat beginnt dann wieder beim inneren Startzustand, also in „Bereit“.</p>
+    <div class="bewertung"><strong>Bewertung c):</strong> zusammengesetzter Zustand mit den fünf Unterzuständen und innerem Startzustand 2 P, Transition <code>notAus</code> vom Rand nach Störung 1 P, Vorteil 1 P. „Kiste voll“ darf auch innerhalb liegen, wenn begründet.</div>
+  </div>
+
+  <!-- ===================== UML-05 ===================== -->
+  <h3 id="l-05">UML-05 · Use-Case-Diagramm</h3>
+
+  <div class="loesung" id="L-UML-05-1">
+    <div class="kopf">Aufgabe UML-05.1 · 5 Punkte</div>
+    <h4>a) include und extend (2 P)</h4>
+    <p><strong>«include»:</strong> Der Basis-Anwendungsfall bindet einen anderen Anwendungsfall <strong>immer</strong> ein (Pflichtbestandteil, oft von mehreren Fällen gemeinsam genutzt). Pfeil vom <strong>Basisfall zum eingebundenen</strong> Fall.<br>
+    <strong>«extend»:</strong> Ein erweiternder Anwendungsfall wird nur <strong>optional</strong>, unter einer Bedingung und an einem Erweiterungspunkt, in den Basisfall eingefügt; der Basisfall ist auch ohne ihn vollständig. Pfeil vom <strong>erweiternden Fall zum Basisfall</strong>.</p>
+    <h4>b) Zuordnung (2 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:4%">Nr.</th><th style="width:34%">Beziehung</th><th>Umsetzung</th></tr>
+      <tr><td>1</td><td>include</td><td>„Zu Veranstaltung anmelden“ → «include» → „Freie Plätze prüfen“</td></tr>
+      <tr><td>2</td><td>extend</td><td>„Auf Warteliste setzen“ → «extend» → „Zu Veranstaltung anmelden“, Condition {Termin ausgebucht}</td></tr>
+      <tr><td>3</td><td>Generalisierung von Akteuren</td><td>Lesepate —▷ Leser (Dreieck am Leser)</td></tr>
+      <tr><td>4</td><td>Generalisierung von Anwendungsfällen</td><td>„Veranstaltung per QR-Code finden“ —▷ „Veranstaltung suchen“</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Beziehung 1 P (Bedeutung und Richtung). b) je Zeile 0,5 P.</div>
+    <h4>c) Systemgrenze (1 P)</h4>
+    <p>Das Rechteck um die Anwendungsfälle grenzt das betrachtete System (seinen Funktionsumfang) von der Umgebung ab: Was innerhalb liegt, leistet das System; die Akteure stehen außerhalb und nutzen es.</p>
+  </div>
+
+  <div class="loesung" id="L-UML-05-2">
+    <div class="kopf">Aufgabe UML-05.2 · 10 Punkte</div>
+    <h4>a) Fehler und Korrekturen (6 P, vier von sechs genügen)</h4>
+    <table class="kompakt">
+      <tr><th style="width:4%">Nr.</th><th style="width:48%">Fehler</th><th>Korrektur</th></tr>
+      <tr><td>1</td><td>Der «include»-Pfeil zeigt von „Abholcode eingeben“ zu „Medien abholen“.</td><td>Richtung umkehren: vom Basisfall „Medien abholen“ zum eingebundenen Fall „Abholcode eingeben“.</td></tr>
+      <tr><td>2</td><td>Der «extend»-Pfeil zeigt von „Medien abholen“ zu „Abholbeleg drucken“.</td><td>Richtung umkehren: von „Abholbeleg drucken“ (Erweiterung) zu „Medien abholen“; Bedingung als Notiz (Condition: {Leser wünscht Beleg}).</td></tr>
+      <tr><td>3</td><td>„„OK“-Taste drücken“ ist ein Bedienschritt der Oberfläche, kein Anwendungsfall mit eigenem Nutzen.</td><td>Entfernen (gehört in die Beschreibung von „Abholcode eingeben“).</td></tr>
+      <tr><td>4</td><td>Einfache Linie (Assoziation) zwischen den Anwendungsfällen „Fach befüllen“ und „Fach öffnen“ – Assoziationen gibt es nur zwischen Akteur und Anwendungsfall.</td><td>Durch «include» von „Fach befüllen“ zu „Fach öffnen“ ersetzen (oder entfernen).</td></tr>
+      <tr><td>5</td><td>Der Akteur „BiblioNet-Server“ steht innerhalb der Systemgrenze.</td><td>Als externes System außerhalb der Systemgrenze anordnen.</td></tr>
+      <tr><td>6</td><td>Linie zwischen den Akteuren Leser und Thekenpersonal.</td><td>Entfernen – Akteure werden im Use-Case-Diagramm nicht miteinander verbunden (nur Generalisierung wäre zulässig).</td></tr>
+    </table>
+    <figure><svg viewBox="0 0 760 470" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><defs><marker id="l052-pfeil" viewBox="0 0 11 10" refX="10.5" refY="5" markerWidth="11" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0.5,0.5 L10.5,5 L0.5,9.5" fill="none" stroke="#222" stroke-width="1.3"/></marker></defs>
+<rect x="165" y="10" width="485" height="450" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="178" y="32" font-weight="bold">Abholstation</text>
+<circle cx="70" cy="48" r="8" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="70" y1="56" x2="70" y2="78" stroke="#222" stroke-width="1.2"/>
+<line x1="55" y1="64" x2="85" y2="64" stroke="#222" stroke-width="1.2"/>
+<line x1="70" y1="78" x2="58" y2="96" stroke="#222" stroke-width="1.2"/>
+<line x1="70" y1="78" x2="82" y2="96" stroke="#222" stroke-width="1.2"/>
+<text x="70" y="112" text-anchor="middle" font-size="13">Leser</text>
+<circle cx="70" cy="298" r="8" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="70" y1="306" x2="70" y2="328" stroke="#222" stroke-width="1.2"/>
+<line x1="55" y1="314" x2="85" y2="314" stroke="#222" stroke-width="1.2"/>
+<line x1="70" y1="328" x2="58" y2="346" stroke="#222" stroke-width="1.2"/>
+<line x1="70" y1="328" x2="82" y2="346" stroke="#222" stroke-width="1.2"/>
+<text x="70" y="362" text-anchor="middle" font-size="13">Thekenpersonal</text>
+<ellipse cx="320" cy="75" rx="75" ry="21" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="320" y="79.7" text-anchor="middle" font-size="13">Medien abholen</text>
+<ellipse cx="545" cy="75" rx="89" ry="21" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="545" y="79.7" text-anchor="middle" font-size="13">Abholcode eingeben</text>
+<ellipse cx="330" cy="185" rx="89" ry="21" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="330" y="189.7" text-anchor="middle" font-size="13">Abholbeleg drucken</text>
+<ellipse cx="320" cy="315" rx="71.5" ry="21" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="320" y="319.7" text-anchor="middle" font-size="13">Fach befüllen</text>
+<ellipse cx="330" cy="410" rx="64.5" ry="21" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="330" y="414.7" text-anchor="middle" font-size="13">Fach öffnen</text>
+<path d="M87,64 L246,71.5" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M87,314 L248.5,314.7" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M87,320 L287.4,394.2" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M395,75 L456,75" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#l052-pfeil)"/>
+<rect x="394.4" y="59" width="62.2" height="13" fill="#fff" stroke="none"/>
+<text x="425.5" y="69" text-anchor="middle" font-size="12">«include»</text>
+<path d="M328.1,164 L321.9,96" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#l052-pfeil)"/>
+<rect x="337.2" y="124" width="55.7" height="13" fill="#fff" stroke="none"/>
+<text x="365" y="134" text-anchor="middle" font-size="12">«extend»</text>
+<path d="M322.2,336 L327.8,389" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#l052-pfeil)"/>
+<rect x="333.9" y="356.5" width="62.2" height="13" fill="#fff" stroke="none"/>
+<text x="365" y="366.5" text-anchor="middle" font-size="12">«include»</text>
+<circle cx="708" cy="278" r="8" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="708" y1="286" x2="708" y2="308" stroke="#222" stroke-width="1.2"/>
+<line x1="693" y1="294" x2="723" y2="294" stroke="#222" stroke-width="1.2"/>
+<line x1="708" y1="308" x2="696" y2="326" stroke="#222" stroke-width="1.2"/>
+<line x1="708" y1="308" x2="720" y2="326" stroke="#222" stroke-width="1.2"/>
+<text x="708" y="342" text-anchor="middle" font-size="13"><tspan x="708" dy="0">BiblioNet-</tspan><tspan x="708" dy="15">Server</tspan></text>
+<path d="M691,294 L390.2,311" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M700,268 L561.6,95.6" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M430,150 L570,150 L580,160 L580,194 L430,194 Z" fill="#fff" stroke="#222" stroke-width="1.1"/>
+<path d="M570,150 L570,160 L580,160" fill="none" stroke="#222" stroke-width="1.1"/>
+<text x="436" y="165" font-size="11"><tspan x="436" dy="0">Condition:</tspan><tspan x="436" dy="14">{Leser wünscht Beleg}</tspan></text>
+<line x1="430" y1="175" x2="327" y2="130" stroke="#222" stroke-width="1" stroke-dasharray="3,3"/>
+</svg><figcaption>Lösung UML-05.2 a): korrigiertes Use-Case-Diagramm „Abholstation“</figcaption></figure>
+    <div class="bewertung"><strong>Bewertung:</strong> je Fehler mit Korrektur 1,5 P (Fehler 0,5 P, Korrektur 1 P), höchstens 6 P.</div>
+    <h4>b) Use-Case-Beschreibung „Medien abholen“ (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:24%">Feld</th><th>Inhalt</th></tr>
+      <tr><td>Name</td><td>Medien abholen</td></tr>
+      <tr><td>Akteur(e)</td><td>Leser (primär), BiblioNet-Server (sekundär)</td></tr>
+      <tr><td>Vorbedingung</td><td>Das Fach ist belegt, der Leser hat den Abholcode erhalten, die Abholfrist ist nicht abgelaufen.</td></tr>
+      <tr><td>Standardablauf</td><td>1. Leser gibt am Bedienterminal den Abholcode ein. 2. Terminal lässt den Code vom BiblioNet-Server prüfen. 3. Code ist gültig: Die Fachsteuerung entriegelt die Tür, die Medien werden auf das Leserkonto verbucht. 4. Leser entnimmt die Medien und schließt die Tür. 5. (optional, extend) Terminal druckt einen Abholbeleg.</td></tr>
+      <tr><td>Alternative / Ausnahme</td><td>3a. Code ungültig: Terminal zeigt einen Hinweis, weiter mit Schritt 1.</td></tr>
+      <tr><td>Nachbedingung</td><td>Die Medien sind auf das Leserkonto verbucht, das Fach ist wieder frei.</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung b):</strong> Akteur und Vorbedingung 1 P, Standardablauf 2 P, Ausnahme und Nachbedingung 1 P.</div>
+  </div>
+
+  <div class="loesung" id="L-UML-05-3">
+    <div class="kopf">Aufgabe UML-05.3 · 20 Punkte</div>
+    <h4>a) Use-Case-Diagramm (16 P)</h4>
+    <figure><svg viewBox="0 0 760 700" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><defs><marker id="l053-pfeil" viewBox="0 0 11 10" refX="10.5" refY="5" markerWidth="11" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0.5,0.5 L10.5,5 L0.5,9.5" fill="none" stroke="#222" stroke-width="1.3"/></marker><marker id="l053-dreieck" viewBox="0 0 16 16" refX="15" refY="8" markerWidth="16" markerHeight="16" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M1,1 L15,8 L1,15 Z" fill="#fff" stroke="#222" stroke-width="1.2"/></marker></defs>
+<rect x="150" y="10" width="470" height="680" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="162" y="32" font-weight="bold">LeseLink</text>
+<circle cx="60" cy="38" r="8" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="60" y1="46" x2="60" y2="68" stroke="#222" stroke-width="1.2"/>
+<line x1="45" y1="54" x2="75" y2="54" stroke="#222" stroke-width="1.2"/>
+<line x1="60" y1="68" x2="48" y2="86" stroke="#222" stroke-width="1.2"/>
+<line x1="60" y1="68" x2="72" y2="86" stroke="#222" stroke-width="1.2"/>
+<text x="60" y="102" text-anchor="middle" font-size="13">Besucher</text>
+<circle cx="60" cy="233" r="8" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="60" y1="241" x2="60" y2="263" stroke="#222" stroke-width="1.2"/>
+<line x1="45" y1="249" x2="75" y2="249" stroke="#222" stroke-width="1.2"/>
+<line x1="60" y1="263" x2="48" y2="281" stroke="#222" stroke-width="1.2"/>
+<line x1="60" y1="263" x2="72" y2="281" stroke="#222" stroke-width="1.2"/>
+<text x="60" y="297" text-anchor="middle" font-size="13">Leser</text>
+<path d="M60,225 L60,118" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l053-dreieck)"/>
+<circle cx="60" cy="503" r="8" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="60" y1="511" x2="60" y2="533" stroke="#222" stroke-width="1.2"/>
+<line x1="45" y1="519" x2="75" y2="519" stroke="#222" stroke-width="1.2"/>
+<line x1="60" y1="533" x2="48" y2="551" stroke="#222" stroke-width="1.2"/>
+<line x1="60" y1="533" x2="72" y2="551" stroke="#222" stroke-width="1.2"/>
+<text x="60" y="567" text-anchor="middle" font-size="13">Thekenpersonal</text>
+<circle cx="60" cy="618" r="8" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="60" y1="626" x2="60" y2="648" stroke="#222" stroke-width="1.2"/>
+<line x1="45" y1="634" x2="75" y2="634" stroke="#222" stroke-width="1.2"/>
+<line x1="60" y1="648" x2="48" y2="666" stroke="#222" stroke-width="1.2"/>
+<line x1="60" y1="648" x2="72" y2="666" stroke="#222" stroke-width="1.2"/>
+<text x="60" y="682" text-anchor="middle" font-size="13"><tspan x="60" dy="0">Fernleih-</tspan><tspan x="60" dy="15">personal</tspan></text>
+<path d="M60,610 L60,580" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l053-dreieck)"/>
+<circle cx="700" cy="328" r="8" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="700" y1="336" x2="700" y2="358" stroke="#222" stroke-width="1.2"/>
+<line x1="685" y1="344" x2="715" y2="344" stroke="#222" stroke-width="1.2"/>
+<line x1="700" y1="358" x2="688" y2="376" stroke="#222" stroke-width="1.2"/>
+<line x1="700" y1="358" x2="712" y2="376" stroke="#222" stroke-width="1.2"/>
+<text x="700" y="392" text-anchor="middle" font-size="13"><tspan x="700" dy="0">PayFix</tspan><tspan x="700" dy="15">(Zahlungs-</tspan><tspan x="700" dy="15">dienstleister)</tspan></text>
+<circle cx="700" cy="456" r="8" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="700" y1="464" x2="700" y2="486" stroke="#222" stroke-width="1.2"/>
+<line x1="685" y1="472" x2="715" y2="472" stroke="#222" stroke-width="1.2"/>
+<line x1="700" y1="486" x2="688" y2="504" stroke="#222" stroke-width="1.2"/>
+<line x1="700" y1="486" x2="712" y2="504" stroke="#222" stroke-width="1.2"/>
+<text x="700" y="520" text-anchor="middle" font-size="13"><tspan x="700" dy="0">Verbund-</tspan><tspan x="700" dy="15">katalog</tspan></text>
+<ellipse cx="285" cy="60" rx="64.5" ry="29" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="285" y="57.2" text-anchor="middle" font-size="13"><tspan x="285" dy="0">Katalog</tspan><tspan x="285" dy="15">durchsuchen</tspan></text>
+<ellipse cx="500" cy="60" rx="82" ry="29" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="500" y="57.2" text-anchor="middle" font-size="13"><tspan x="500" dy="0">Per Barcode-Scan</tspan><tspan x="500" dy="15">suchen</tspan></text>
+<ellipse cx="280" cy="150" rx="57.5" ry="29" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="280" y="147.2" text-anchor="middle" font-size="13"><tspan x="280" dy="0">Medium</tspan><tspan x="280" dy="15">vormerken</tspan></text>
+<ellipse cx="505" cy="200" rx="61" ry="29" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="505" y="197.2" text-anchor="middle" font-size="13"><tspan x="505" dy="0">Leserkonto</tspan><tspan x="505" dy="15">prüfen</tspan></text>
+<ellipse cx="285" cy="252" rx="112" ry="32" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="285" y="244" text-anchor="middle" font-size="13">Ausleihe verlängern</text>
+<line x1="173.2" y1="250" x2="396.8" y2="250" stroke="#222" stroke-width="1.2"/>
+<text x="285" y="265" text-anchor="middle" font-size="11">extension points: Kontosperre</text>
+<ellipse cx="300" cy="355" rx="54" ry="29" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="300" y="352.2" text-anchor="middle" font-size="13"><tspan x="300" dy="0">Gebühren</tspan><tspan x="300" dy="15">bezahlen</tspan></text>
+<ellipse cx="290" cy="445" rx="57.5" ry="29" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="290" y="442.2" text-anchor="middle" font-size="13"><tspan x="290" dy="0">Fernleihe</tspan><tspan x="290" dy="15">bestellen</tspan></text>
+<ellipse cx="290" cy="530" rx="61" ry="29" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="290" y="527.2" text-anchor="middle" font-size="13"><tspan x="290" dy="0">Leserkonto</tspan><tspan x="290" dy="15">anlegen</tspan></text>
+<ellipse cx="480" cy="600" rx="54" ry="29" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="480" y="597.2" text-anchor="middle" font-size="13"><tspan x="480" dy="0">Gebühren</tspan><tspan x="480" dy="15">erlassen</tspan></text>
+<ellipse cx="300" cy="640" rx="61" ry="29" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="300" y="637.2" text-anchor="middle" font-size="13"><tspan x="300" dy="0">Fernleihe</tspan><tspan x="300" dy="15">bearbeiten</tspan></text>
+<path d="M77,54 L220.6,58.1" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M77,245 L237.9,169.7" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M77,247 L178,243" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M77,253 L258.9,336.2" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M77,257 L261.5,419.8" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M77,519 L229.4,526.9" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M77,523 L429.1,590.3" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M77,634 L239.1,638.4" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M683,344 L353.9,353.5" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M683,472 L347,448.9" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M418,60 L349.5,60" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l053-dreieck)"/>
+<path d="M332.6,161.7 L449.7,187.7" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#l053-pfeil)"/>
+<rect x="362.5" y="159.7" width="57.3" height="12" fill="#fff" stroke="none"/>
+<text x="391.2" y="168.7" text-anchor="middle" font-size="11">«include»</text>
+<path d="M371.3,231.6 L450.4,212.9" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#l053-pfeil)"/>
+<rect x="390.2" y="227.3" width="57.3" height="12" fill="#fff" stroke="none"/>
+<text x="418.8" y="236.3" text-anchor="middle" font-size="11">«include»</text>
+<path d="M295.8,326.1 L289.7,284" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#l053-pfeil)"/>
+<rect x="233" y="300" width="51.4" height="12" fill="#fff" stroke="none"/>
+<text x="258.7" y="309" text-anchor="middle" font-size="11">«extend»</text>
+<path d="M420,280 L600,280 L610,290 L610,328 L420,328 Z" fill="#fff" stroke="#222" stroke-width="1.1"/>
+<path d="M600,280 L600,290 L610,290" fill="none" stroke="#222" stroke-width="1.1"/>
+<text x="426" y="295" font-size="11"><tspan x="426" dy="0">Condition: {Konto wegen offener</tspan><tspan x="426" dy="14">Gebühren gesperrt}</tspan><tspan x="426" dy="14">extension point: Kontosperre</tspan></text>
+<line x1="420" y1="312" x2="294.7" y2="305" stroke="#222" stroke-width="1" stroke-dasharray="3,3"/>
+</svg><figcaption>Lösung UML-05.3 a): Use-Case-Diagramm der App „LeseLink“</figcaption></figure>
+    <ul>
+      <li>Leser erben von Besucher (Generalisierung, Dreieck beim Besucher) und dürfen deshalb auch den Katalog durchsuchen, ohne dass eine eigene Linie nötig ist. Ebenso erbt das Fernleihpersonal vom Thekenpersonal.</li>
+      <li>„Gebühren bezahlen“ hat eine eigene Assoziation zum Leser („unabhängig davon jederzeit“) <em>und</em> erweitert „Ausleihe verlängern“ am Erweiterungspunkt „Kontosperre“.</li>
+      <li>„Leserkonto prüfen“ wird von „Medium vormerken“ und „Ausleihe verlängern“ eingebunden (include – „immer“).</li>
+      <li>PayFix und der Verbundkatalog sind externe Systeme und stehen als Akteure außerhalb der Systemgrenze. Die Anmeldung wird laut Anlage nicht modelliert.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung a):</strong> Systemgrenze mit Namen 1 P; sechs Akteure je 0,5 P (3 P); Generalisierung Leser → Besucher und Fernleihpersonal → Thekenpersonal 2 P; Anwendungsfälle mit korrekten Assoziationen 5 P; zwei include-Beziehungen 2 P; extend mit Richtung, Condition und Extension Point 2 P; Generalisierung „Per Barcode-Scan suchen“ → „Katalog durchsuchen“ 1 P.</div>
+    <h4>b) User Stories (4 P)</h4>
+    <ul>
+      <li>Als <strong>Leser</strong> möchte ich <strong>eine Ausleihe in der App verlängern</strong>, damit <strong>ich das Medium länger nutzen kann, ohne in die Bibliothek zu kommen</strong>.<br>
+      Akzeptanzkriterien: Eine Verlängerung ist höchstens zweimal möglich und nur, wenn keine Vormerkung vorliegt. Nach der Verlängerung wird das neue Fälligkeitsdatum angezeigt. Bei gesperrtem Konto erscheint ein Hinweis mit der Möglichkeit, die Gebühren direkt zu bezahlen.</li>
+      <li>Als <strong>Besucher</strong> möchte ich <strong>ein Buch per Barcode-Scan im Katalog suchen</strong>, damit <strong>ich schnell sehe, ob die Bibliothek es hat</strong>.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung b):</strong> je User Story 1,5 P (Rolle, Funktion, Nutzen), Akzeptanzkriterien 1 P. Andere Stories aus dem Diagramm sind gleichwertig.</div>
+  </div>
+
+  <!-- ===================== UML-06 ===================== -->
+  <h3 id="l-06">UML-06 · Sequenzdiagramm</h3>
+
+  <div class="loesung" id="L-UML-06-1">
+    <div class="kopf">Aufgabe UML-06.1 · 5 Punkte</div>
+    <h4>a) synchron und asynchron (2 P)</h4>
+    <p><code>verlaengern(exemplarNr)</code> ist eine <strong>synchrone</strong> Nachricht (gefüllte Pfeilspitze): Die App wartet, bis der KontoService die Verlängerung bearbeitet hat und das neue Datum bzw. „abgelehnt“ zurückgibt. <code>sendeBestaetigung(leserNr)</code> ist <strong>asynchron</strong> (offene Spitze): Der KontoService beauftragt den PushDienst und arbeitet sofort weiter, ohne auf eine Antwort zu warten.</p>
+    <h4>b) Fragment alt (1 P)</h4>
+    <p>Von den beiden Bereichen wird genau einer ausgeführt: Ist das Konto nicht gesperrt, wird die Fälligkeit aktualisiert, eine Bestätigung gesendet und das neue Datum zurückgegeben; andernfalls (<code>[else]</code>) wird „abgelehnt“ zurückgegeben.</p>
+    <h4>c) Rechtecke und gestrichelte Pfeile (1 P)</h4>
+    <p>Die Rechtecke sind <strong>Aktivierungsbalken</strong> (das Objekt führt gerade eine Methode aus); die gestrichelten Pfeile sind <strong>Antworten</strong> (Rückgabewerte) auf synchrone Nachrichten.</p>
+    <h4>d) Fragmente (1 P)</h4>
+    <p>(1) <code>opt</code>, (2) <code>loop</code>.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Nachricht 1 P; b), c), d) je 1 P (d nur mit beiden Fragmenten).</div>
+  </div>
+
+  <div class="loesung" id="L-UML-06-2">
+    <div class="kopf">Aufgabe UML-06.2 · 10 Punkte</div>
+    <figure><svg viewBox="0 0 760 560" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><defs><marker id="l062-pfeil" viewBox="0 0 11 10" refX="10.5" refY="5" markerWidth="11" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0.5,0.5 L10.5,5 L0.5,9.5" fill="none" stroke="#222" stroke-width="1.3"/></marker><marker id="l062-voll" viewBox="0 0 12 10" refX="12" refY="5" markerWidth="12" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0,0 L12,5 L0,10 Z" fill="#222"/></marker></defs>
+<rect x="35" y="10" width="130" height="34" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="100" y="32" text-anchor="middle">:Selbstverbucher</text>
+<line x1="100" y1="44" x2="100" y2="545" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/>
+<rect x="190" y="10" width="160" height="34" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="270" y="32" text-anchor="middle">server:BiblioNetClient</text>
+<line x1="270" y1="44" x2="270" y2="545" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/>
+<rect x="370" y="10" width="100" height="34" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="420" y="32" text-anchor="middle">leser:Leser</text>
+<line x1="420" y1="44" x2="420" y2="545" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/>
+<rect x="630" y="10" width="120" height="34" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="690" y="32" text-anchor="middle">drucker:Drucker</text>
+<line x1="690" y1="44" x2="690" y2="545" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/>
+<path d="M4,82 L95,82" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l062-voll)"/>
+<rect x="4" y="66" width="184.9" height="13" fill="#fff" stroke="none"/>
+<text x="6" y="76" font-size="12">ausleihen(leserNr, barcodes)</text>
+<rect x="95" y="82" width="10" height="446" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M105,112 L265,112" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l062-voll)"/>
+<rect x="124.8" y="95" width="120.3" height="13" fill="#fff" stroke="none"/>
+<text x="185" y="105" text-anchor="middle" font-size="12">ladeLeser(leserNr)</text>
+<rect x="265" y="112" width="10" height="22" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M265,134 L105,134" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#l062-pfeil)"/>
+<rect x="166.8" y="117" width="36.3" height="13" fill="#fff" stroke="none"/>
+<text x="185" y="127" text-anchor="middle" font-size="12">leser</text>
+<path d="M105,162 L415,162" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l062-voll)"/>
+<rect x="216" y="145" width="88" height="13" fill="#fff" stroke="none"/>
+<text x="260" y="155" text-anchor="middle" font-size="12">istGesperrt()</text>
+<rect x="415" y="162" width="10" height="20" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M415,182 L105,182" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#l062-pfeil)"/>
+<rect x="232.2" y="165" width="55.7" height="13" fill="#fff" stroke="none"/>
+<text x="260" y="175" text-anchor="middle" font-size="12">gesperrt</text>
+<rect x="30" y="198" width="715" height="322" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M30,198 L73,198 L73,209 L65,217 L30,217" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="36" y="212" font-weight="bold" font-size="12">alt</text>
+<rect x="110" y="206" width="74.2" height="13" fill="#fff" stroke="none"/>
+<text x="112" y="216" font-weight="bold" font-size="12">[gesperrt]</text>
+<rect x="110" y="290" width="46.1" height="13" fill="#fff" stroke="none"/>
+<text x="112" y="300" font-weight="bold" font-size="12">[else]</text>
+<line x1="30" y1="284" x2="745" y2="284" stroke="#222" stroke-width="1.2" stroke-dasharray="7,4"/>
+<rect x="100" y="246" width="10" height="20" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M105,232 L140,232 L140,246 L110,246" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l062-voll)"/>
+<text x="148" y="254" font-size="12">zeigeHinweis("Konto gesperrt …")</text>
+<path d="M105,330 L510,330" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#l062-pfeil)"/>
+<rect x="257" y="313" width="100.9" height="13" fill="#fff" stroke="none"/>
+<text x="307.5" y="323" text-anchor="middle" font-size="12">create(leserNr)</text>
+<rect x="510" y="316" width="100" height="30" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="560" y="336" text-anchor="middle">q:Quittung</text>
+<line x1="560" y1="346" x2="560" y2="545" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/>
+<rect x="42" y="360" width="598" height="98" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M42,360 L92.1,360 L92.1,371 L84.1,379 L42,379" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="48" y="374" font-weight="bold" font-size="12">loop</text>
+<rect x="110" y="366" width="200.4" height="13" fill="#fff" stroke="none"/>
+<text x="112" y="376" font-weight="bold" font-size="12">[für jeden code in barcodes]</text>
+<path d="M105,404 L265,404" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l062-voll)"/>
+<rect x="108.7" y="387" width="152.6" height="13" fill="#fff" stroke="none"/>
+<text x="185" y="397" text-anchor="middle" font-size="12">verbuche(leserNr, code)</text>
+<rect x="265" y="404" width="10" height="20" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M265,424 L105,424" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#l062-pfeil)"/>
+<rect x="160.4" y="407" width="49.2" height="13" fill="#fff" stroke="none"/>
+<text x="185" y="417" text-anchor="middle" font-size="12">faellig</text>
+<path d="M105,446 L555,446" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l062-voll)"/>
+<rect x="384" y="429" width="172" height="13" fill="#fff" stroke="none"/>
+<text x="470" y="439" text-anchor="middle" font-size="12">hinzufuegen(code, faellig)</text>
+<rect x="555" y="446" width="10" height="10" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M105,490 L685,490" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l062-voll)"/>
+<rect x="593.9" y="473" width="62.2" height="13" fill="#fff" stroke="none"/>
+<text x="625" y="483" text-anchor="middle" font-size="12">drucke(q)</text>
+<rect x="685" y="490" width="10" height="18" fill="#fff" stroke="#222" stroke-width="1.2"/>
+</svg><figcaption>Lösung UML-06.2: Sequenzdiagramm zur Methode ausleihen()</figcaption></figure>
+    <ul>
+      <li><code>leser:Leser</code> ist das Objekt, das <code>ladeLeser()</code> zurückgibt; <code>istGesperrt()</code> wird an dieses Objekt geschickt.</li>
+      <li><code>if/else</code> → <code>alt</code>; <code>zeigeHinweis()</code> ist eine eigene Methode → Selbstaufruf.</li>
+      <li><code>new Quittung(leserNr)</code> → <code>create</code>-Pfeil auf den Kopf der Lebenslinie <code>q:Quittung</code>, die erst dort beginnt.</li>
+      <li><code>for (String code : barcodes)</code> → <code>loop</code> mit zwei Nachrichten pro Durchlauf.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> Lebenslinien korrekt benannt 1,5 P; <code>ladeLeser</code> und <code>istGesperrt</code> mit Antworten 2 P; <code>alt</code> mit Bedingungen und Selbstaufruf 2 P; <code>create</code> der Quittung 1 P; <code>loop</code> mit <code>verbuche</code> (Antwort <code>faellig</code>) und <code>hinzufuegen</code> 2,5 P; <code>drucke(q)</code> 1 P.</div>
+  </div>
+
+  <div class="loesung" id="L-UML-06-3">
+    <div class="kopf">Aufgabe UML-06.3 · 20 Punkte</div>
+    <h4>a) Sequenzdiagramm (16 P)</h4>
+    <figure><svg viewBox="0 0 760 720" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><defs><marker id="l063-pfeil" viewBox="0 0 11 10" refX="10.5" refY="5" markerWidth="11" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0.5,0.5 L10.5,5 L0.5,9.5" fill="none" stroke="#222" stroke-width="1.3"/></marker><marker id="l063-voll" viewBox="0 0 12 10" refX="12" refY="5" markerWidth="12" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0,0 L12,5 L0,10 Z" fill="#222"/></marker></defs>
+<circle cx="35" cy="14.8" r="6.8" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="35" y1="21.6" x2="35" y2="40.3" stroke="#222" stroke-width="1.2"/>
+<line x1="22.2" y1="28.4" x2="47.8" y2="28.4" stroke="#222" stroke-width="1.2"/>
+<line x1="35" y1="40.3" x2="24.8" y2="55.6" stroke="#222" stroke-width="1.2"/>
+<line x1="35" y1="40.3" x2="45.2" y2="55.6" stroke="#222" stroke-width="1.2"/>
+<text x="35" y="74" text-anchor="middle" font-size="12">Leser</text>
+<line x1="35" y1="80" x2="35" y2="705" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/>
+<rect x="91" y="12" width="118" height="34" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="150" y="34" text-anchor="middle">:LeseLinkApp</text>
+<line x1="150" y1="46" x2="150" y2="705" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/>
+<rect x="255" y="12" width="130" height="34" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="320" y="34" text-anchor="middle">:KatalogService</text>
+<line x1="320" y1="46" x2="320" y2="705" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/>
+<rect x="405" y="12" width="80" height="34" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="445" y="34" text-anchor="middle">:Cache</text>
+<line x1="445" y1="46" x2="445" y2="705" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/>
+<rect x="508" y="12" width="104" height="34" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="560" y="34" text-anchor="middle">:Datenbank</text>
+<line x1="560" y1="46" x2="560" y2="705" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/>
+<rect x="625" y="12" width="130" height="34" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="690" y="34" text-anchor="middle">:Verbundkatalog</text>
+<line x1="690" y1="46" x2="690" y2="705" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/>
+<path d="M35,98 L145,98" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l063-voll)"/>
+<rect x="39.5" y="81" width="100.9" height="13" fill="#fff" stroke="none"/>
+<text x="90" y="91" text-anchor="middle" font-size="12">suchen(begriff)</text>
+<rect x="145" y="98" width="10" height="582" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M155,124 L315,124" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l063-voll)"/>
+<rect x="187.8" y="107" width="94.5" height="13" fill="#fff" stroke="none"/>
+<text x="235" y="117" text-anchor="middle" font-size="12">suche(begriff)</text>
+<rect x="315" y="124" width="10" height="286" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M325,150 L440,150" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l063-voll)"/>
+<rect x="315.9" y="133" width="133.2" height="13" fill="#fff" stroke="none"/>
+<text x="382.5" y="143" text-anchor="middle" font-size="12">holeTreffer(begriff)</text>
+<rect x="440" y="150" width="10" height="20" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M440,170 L325,170" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#l063-pfeil)"/>
+<rect x="357.9" y="153" width="49.2" height="13" fill="#fff" stroke="none"/>
+<text x="382.5" y="163" text-anchor="middle" font-size="12">treffer</text>
+<rect x="215" y="186" width="537" height="104" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M215,186 L258,186 L258,197 L250,205 L215,205" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="221" y="200" font-weight="bold" font-size="12">opt</text>
+<rect x="330" y="192" width="116.2" height="13" fill="#fff" stroke="none"/>
+<text x="332" y="202" font-weight="bold" font-size="12">[treffer = null]</text>
+<path d="M325,226 L555,226" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l063-voll)"/>
+<rect x="449.1" y="209" width="126.8" height="13" fill="#fff" stroke="none"/>
+<text x="512.5" y="219" text-anchor="middle" font-size="12">sucheTitel(begriff)</text>
+<rect x="555" y="226" width="10" height="20" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M555,246 L325,246" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#l063-pfeil)"/>
+<rect x="487.9" y="229" width="49.2" height="13" fill="#fff" stroke="none"/>
+<text x="512.5" y="239" text-anchor="middle" font-size="12">treffer</text>
+<path d="M325,272 L440,272" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l063-pfeil)"/>
+<rect x="328" y="255" width="178.5" height="13" fill="#fff" stroke="none"/>
+<text x="330" y="265" font-size="12">speichere(begriff, treffer)</text>
+<rect x="215" y="302" width="537" height="90" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M215,302 L258,302 L258,313 L250,321 L215,321" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="221" y="316" font-weight="bold" font-size="12">opt</text>
+<rect x="330" y="308" width="130.3" height="13" fill="#fff" stroke="none"/>
+<text x="332" y="318" font-weight="bold" font-size="12">[treffer ist leer]</text>
+<path d="M325,346 L685,346" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l063-voll)"/>
+<rect x="558.4" y="329" width="133.2" height="13" fill="#fff" stroke="none"/>
+<text x="625" y="339" text-anchor="middle" font-size="12">sucheExtern(begriff)</text>
+<rect x="685" y="346" width="10" height="22" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M685,368 L325,368" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#l063-pfeil)"/>
+<rect x="577.8" y="351" width="94.5" height="13" fill="#fff" stroke="none"/>
+<text x="625" y="361" text-anchor="middle" font-size="12">externeTreffer</text>
+<path d="M315,410 L155,410" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#l063-pfeil)"/>
+<rect x="194.2" y="393" width="81.5" height="13" fill="#fff" stroke="none"/>
+<text x="235" y="403" text-anchor="middle" font-size="12">trefferliste</text>
+<rect x="44" y="426" width="596" height="134" fill="none" stroke="#222" stroke-width="1.2"/>
+<path d="M44,426 L136.2,426 L136.2,437 L128.2,445 L44,445" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="50" y="440" font-weight="bold" font-size="12">loop(1,10)</text>
+<rect x="160" y="432" width="221.5" height="13" fill="#fff" stroke="none"/>
+<text x="162" y="442" font-weight="bold" font-size="12">[für jeden angezeigten Treffer]</text>
+<path d="M155,470 L315,470" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l063-voll)"/>
+<rect x="155.5" y="453" width="159.1" height="13" fill="#fff" stroke="none"/>
+<text x="235" y="463" text-anchor="middle" font-size="12">verfuegbarkeit(medienNr)</text>
+<rect x="315" y="470" width="10" height="70" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M325,496 L555,496" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l063-voll)"/>
+<rect x="341.1" y="479" width="197.8" height="13" fill="#fff" stroke="none"/>
+<text x="440" y="489" text-anchor="middle" font-size="12">zaehleFreieExemplare(medienNr)</text>
+<rect x="555" y="496" width="10" height="20" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M555,516 L325,516" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#l063-pfeil)"/>
+<rect x="418.6" y="499" width="42.8" height="13" fill="#fff" stroke="none"/>
+<text x="440" y="509" text-anchor="middle" font-size="12">anzahl</text>
+<path d="M315,540 L155,540" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#l063-pfeil)"/>
+<rect x="213.6" y="523" width="42.8" height="13" fill="#fff" stroke="none"/>
+<text x="235" y="533" text-anchor="middle" font-size="12">status</text>
+<rect x="150" y="596" width="10" height="20" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<path d="M155,580 L190,580 L190,596 L160,596" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l063-voll)"/>
+<text x="198" y="604" font-size="12">anzeigen(trefferliste)</text>
+<path d="M145,664 L35,664" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#l063-pfeil)"/>
+<rect x="7.7" y="647" width="152.6" height="13" fill="#fff" stroke="none"/>
+<text x="84" y="657" text-anchor="middle" font-size="12">Trefferliste mit Status</text>
+</svg><figcaption>Lösung UML-06.3 a): Sequenzdiagramm „Katalogsuche mit Cache“</figcaption></figure>
+    <div class="bewertung"><strong>Bewertung a):</strong> Aufrufe Leser → App → KatalogService mit Aktivierungen 2 P; Cache-Abfrage mit Antwort 2 P; <code>opt [treffer = null]</code> mit Datenbankabfrage, Antwort und <strong>asynchronem</strong> <code>speichere</code> 4 P; <code>opt [treffer ist leer]</code> mit Verbundkatalog und Antwort 2 P; Antwort Trefferliste an die App 1 P; <code>loop(1,10)</code> mit Verfügbarkeitsabfrage, Datenbankabfrage und beiden Antworten 4 P; Selbstaufruf <code>anzeigen</code> 1 P. Die Antwort an den Leser am Ende ist optional.</div>
+    <h4>b) speichere() asynchron (2 P)</h4>
+    <p>Der KatalogService braucht vom Cache keine Antwort, um weiterzuarbeiten – laut Anlage 10 wartet er nicht auf eine Bestätigung. Das Speichern im Cache soll die Antwortzeit für den Leser nicht verlängern; deshalb wird die Nachricht asynchron (offene Pfeilspitze, keine Antwort) modelliert.</p>
+    <h4>c) opt und alt (2 P)</h4>
+    <p><code>opt</code> hat einen Bereich mit einer Bedingung, der nur ausgeführt wird, wenn sie zutrifft – sonst passiert nichts. <code>alt</code> hat mehrere Bereiche mit Bedingungen, von denen genau einer ausgeführt wird. Für die Schritte 4/5 wurde <code>opt [treffer = null]</code> verwendet, weil bei einem Cache-Treffer keine Nachrichten anfallen. Ein <code>alt</code> mit leerem Bereich <code>[treffer vorhanden]</code> und <code>[else]</code> ist gleichwertig.</p>
+  </div>
+
+  <!-- ===================== UML-07 ===================== -->
+  <h3 id="l-07">UML-07 · Struktogramm / PAP</h3>
+
+  <div class="loesung" id="L-UML-07-1">
+    <div class="kopf">Aufgabe UML-07.1 · 4 Punkte</div>
+    <h4>a) Rückgabewerte (2 P)</h4>
+    <table class="kompakt" style="width:auto">
+      <tr><th>Aufruf</th><th>Rückgabewert</th><th>Rechnung</th></tr>
+      <tr><td class="mono">gebuehrGesamt([4, 15, 0, 9], falsch)</td><td>11,50</td><td>2,00 + 5,00 (7,50 gedeckelt) + 0,00 + 4,50</td></tr>
+      <tr><td class="mono">gebuehrGesamt([12], wahr)</td><td>0,00</td><td>Kind – Schleife wird nicht ausgeführt</td></tr>
+      <tr><td class="mono">gebuehrGesamt([10, 11], falsch)</td><td>10,00</td><td>5,00 (genau 5,00, nicht &gt; 5,00) + 5,00 (5,50 gedeckelt)</td></tr>
+      <tr><td class="mono">gebuehrGesamt([], falsch)</td><td>0,00</td><td>leeres Array – kein Schleifendurchlauf</td></tr>
+    </table>
+    <h4>b) Strukturblöcke (1 P)</h4>
+    <p>Sequenz (Folge von Anweisungen), Verzweigung (zweiseitig bzw. einseitig mit leerem Zweig ∅), Zählschleife.</p>
+    <h4>c) Strukturblock für den Medientyp (1 P)</h4>
+    <p>Fallauswahl (Mehrfachverzweigung) über den Medientyp.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Aufruf 0,5 P; b) alle drei Strukturen 1 P; c) 1 P.</div>
+    <p class="codelabel">Java · Aufgabe_UML_07_1.java (Auszug)</p>
+    <pre class="java">static double gebuehrGesamt(int[] tage, boolean istKind) {
+    double summe = 0.00;
+    if (istKind) {
+        // leerer Zweig
+    } else {
+        for (int i = 0; i &lt;= tage.length - 1; i++) {
+            double g = tage[i] * 0.50;
+            if (g &gt; 5.00) {
+                g = 5.00;
+            }
+            summe = summe + g;
+        }
+    }
+    return summe;
+}</pre>
+    <p class="codelabel">Ausgabe</p>
+    <pre class="ausgabe">gebuehrGesamt([4, 15, 0, 9], falsch)   -&gt;  11,50  (erwartet  11,50) OK
+gebuehrGesamt([12], wahr)              -&gt;   0,00  (erwartet   0,00) OK
+gebuehrGesamt([10, 11], falsch)        -&gt;  10,00  (erwartet  10,00) OK
+gebuehrGesamt([], falsch)              -&gt;   0,00  (erwartet   0,00) OK</pre>
+    <p class="datei">Datei: <code>java\03_UML\Aufgabe_UML_07_1.java</code></p>
+  </div>
+
+  <div class="loesung" id="L-UML-07-2">
+    <div class="kopf">Aufgabe UML-07.2 · 8 Punkte</div>
+    <h4>a) Struktogramm (6 P)</h4>
+    <figure><svg viewBox="0 0 640 232" width="640" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+<text x="20" y="18" font-weight="bold" font-size="12" font-family="Consolas, Courier New, monospace">faelligkeit(medientyp : string, ausleihTag : integer, geschlossen : boolean[]) : integer</text>
+<rect x="20" y="30" width="600" height="64" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="20" y1="30" x2="470" y2="94" stroke="#222" stroke-width="1.2"/>
+<line x1="620" y1="30" x2="470" y2="94" stroke="#222" stroke-width="1.2"/>
+<line x1="170" y1="51.3" x2="170" y2="94" stroke="#222" stroke-width="1.2"/>
+<line x1="320" y1="72.7" x2="320" y2="94" stroke="#222" stroke-width="1.2"/>
+<line x1="470" y1="94" x2="470" y2="94" stroke="#222" stroke-width="1.2"/>
+<text x="470" y="46" text-anchor="middle" font-size="13">medientyp</text>
+<text x="24" y="90" font-size="12">Buch, Hörbuch</text>
+<rect x="20" y="94" width="150" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="26" y="112" font-size="13">frist := 28</text>
+<text x="174" y="90" font-size="12">Film, Spiel</text>
+<rect x="170" y="94" width="150" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="176" y="112" font-size="13">frist := 14</text>
+<text x="324" y="90" font-size="11">Zeitschrift</text>
+<rect x="320" y="94" width="150" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="326" y="112" font-size="13">frist := 7</text>
+<text x="614" y="89" text-anchor="end" font-size="12">sonst</text>
+<rect x="470" y="94" width="150" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="476" y="112" font-size="13">frist := 21</text>
+<rect x="20" y="120" width="600" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="26" y="138" font-size="13">tag := ausleihTag + frist</text>
+<rect x="20" y="146" width="600" height="52" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="26" y="164" font-size="13">solange geschlossen[tag] = wahr</text>
+<rect x="46" y="172" width="574" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="52" y="190" font-size="13">tag := tag + 1</text>
+<rect x="20" y="198" width="600" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="26" y="216" font-size="13">rückgabe tag</text>
+</svg><figcaption>Lösung UML-07.2 a): Struktogramm „faelligkeit“ mit Fallauswahl und kopfgesteuerter Schleife</figcaption></figure>
+    <div class="bewertung"><strong>Bewertung a):</strong> Fallauswahl mit vier Fällen einschließlich „sonst“ 3 P; Berechnung von <code>tag</code> 1 P; kopfgesteuerte Schleife mit Bedingung und Rumpf 1,5 P; Rückgabe 0,5 P.</div>
+    <h4>b) Warum kopfgesteuert? (2 P)</h4>
+    <p>Ist der berechnete Tag bereits ein Öffnungstag, darf er nicht verändert werden – der Schleifenrumpf darf also gar nicht ausgeführt werden. Eine kopfgesteuerte Schleife prüft die Bedingung vor dem ersten Durchlauf. Eine fußgesteuerte Schleife führt den Rumpf mindestens einmal aus; die Fälligkeit läge dann immer mindestens einen Tag zu spät (Beispiel: Buch, ausgeliehen an Tag 100 → richtig 128, fußgesteuert 129).</p>
+    <p class="codelabel">Java · Aufgabe_UML_07_2.java (Auszug)</p>
+    <pre class="java">static int faelligkeit(String medientyp, int ausleihTag, boolean[] geschlossen) {
+    int frist;
+    switch (medientyp) {                        // Fallauswahl
+        case "Buch", "Hörbuch" -&gt; frist = 28;
+        case "Film", "Spiel" -&gt; frist = 14;
+        case "Zeitschrift" -&gt; frist = 7;
+        default -&gt; frist = 21;
+    }
+    int tag = ausleihTag + frist;
+    while (geschlossen[tag]) {                  // kopfgesteuert
+        tag = tag + 1;
+    }
+    return tag;
+}</pre>
+    <p class="codelabel">Ausgabe (Testdaten: Tage 114, 115 und 121 geschlossen)</p>
+    <pre class="ausgabe">Film, ausgeliehen an Tag 100        -&gt; 116 (erwartet 116)
+Buch, ausgeliehen an Tag 100        -&gt; 128 (erwartet 128)
+Zeitschrift, ausgeliehen an Tag 114 -&gt; 122 (erwartet 122)
+Noten, ausgeliehen an Tag 100       -&gt; 122 (erwartet 122)
+fußgesteuert, Buch an Tag 100       -&gt; 129 (falsch: 129 statt 128, ein Tag zu spät)</pre>
+    <p class="datei">Datei: <code>java\03_UML\Aufgabe_UML_07_2.java</code></p>
+  </div>
+
+  <div class="loesung" id="L-UML-07-3">
+    <div class="kopf">Aufgabe UML-07.3 · 14 Punkte</div>
+    <h4>a) Schreibtischtest des fehlerhaften Struktogramms mit 40517287 (4 P)</h4>
+    <table class="kompakt" style="width:auto">
+      <tr><th class="c" style="width:70px">i</th><th class="c" style="width:110px">gewicht</th><th class="c" style="width:120px">ziffer(nr, i)</th><th class="c" style="width:110px">summe</th></tr>
+      <tr><td class="c">0</td><td class="c">3</td><td class="c">4</td><td class="c">12</td></tr>
+      <tr><td class="c">1</td><td class="c">1</td><td class="c">0</td><td class="c">0</td></tr>
+      <tr><td class="c">2</td><td class="c">3</td><td class="c">5</td><td class="c">15</td></tr>
+      <tr><td class="c">3</td><td class="c">1</td><td class="c">1</td><td class="c">1</td></tr>
+      <tr><td class="c">4</td><td class="c">3</td><td class="c">7</td><td class="c">21</td></tr>
+      <tr><td class="c">5</td><td class="c">1</td><td class="c">2</td><td class="c">2</td></tr>
+      <tr><td class="c">6</td><td class="c">3</td><td class="c">8</td><td class="c">24</td></tr>
+      <tr><td class="c">7</td><td class="c">1</td><td class="c">7</td><td class="c">7</td></tr>
+      <tr><td colspan="2">pz = (10 − 7 mod 10) mod 10 = 3</td><td colspan="2">ziffer(nr, 7) = 7 → Rückgabe: <strong>falsch</strong></td></tr>
+    </table>
+    <p>Richtig wäre: 4·1 + 0·3 + 5·1 + 1·3 + 7·1 + 2·3 + 8·1 = 33 → pz = (10 − 3) mod 10 = 7 = letzte Ziffer → <code>wahr</code>.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Werte der acht Durchläufe 3 P (je fehlerhafte Zeile −0,5 P), pz und Rückgabewert 1 P.</div>
+    <h4>b) Fehler und Korrekturen (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:4%">Nr.</th><th style="width:48%">Fehler</th><th>Korrektur</th></tr>
+      <tr><td>1</td><td>Die Zählschleife läuft bis 7 – die Prüfziffer selbst wird mitgezählt.</td><td><code>zähle i von 0 bis 6</code></td></tr>
+      <tr><td>2</td><td><code>summe := 0</code> steht im Schleifenrumpf – die Summe wird in jedem Durchlauf zurückgesetzt.</td><td><code>summe := 0</code> vor die Schleife setzen.</td></tr>
+      <tr><td>3</td><td>Die Gewichte sind vertauscht: Bei <code>i mod 2 = 0</code> (1., 3., 5., 7. Ziffer) wird mit 3 statt mit 1 gewichtet.</td><td>ja-Zweig <code>gewicht := 1</code>, nein-Zweig <code>gewicht := 3</code> (oder Bedingung <code>i mod 2 = 1</code>).</td></tr>
+    </table>
+    <figure><svg viewBox="0 0 600 352" width="600" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+<text x="20" y="18" font-weight="bold" font-size="13" font-family="Consolas, Courier New, monospace">pruefeAusweis(nr : string) : boolean</text>
+<rect x="20" y="30" width="560" height="44" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="20" y1="30" x2="300" y2="74" stroke="#222" stroke-width="1.2"/>
+<line x1="580" y1="30" x2="300" y2="74" stroke="#222" stroke-width="1.2"/>
+<text x="300" y="46" text-anchor="middle" font-size="13">nr.length() &lt;&gt; 8</text>
+<text x="26" y="68" font-size="12">ja</text>
+<text x="574" y="68" text-anchor="end" font-size="12">nein</text>
+<rect x="20" y="74" width="280" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="26" y="92" font-size="13">rückgabe falsch</text>
+<rect x="300" y="74" width="280" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="306" y="92" font-size="13">∅</text>
+<rect x="20" y="100" width="560" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="26" y="118" font-size="13">summe := 0</text>
+<rect x="20" y="126" width="560" height="122" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="26" y="144" font-size="13">zähle i von 0 bis 6</text>
+<rect x="46" y="152" width="534" height="44" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="46" y1="152" x2="313" y2="196" stroke="#222" stroke-width="1.2"/>
+<line x1="580" y1="152" x2="313" y2="196" stroke="#222" stroke-width="1.2"/>
+<text x="313" y="168" text-anchor="middle" font-size="13">i mod 2 = 0</text>
+<text x="52" y="190" font-size="12">ja</text>
+<text x="574" y="190" text-anchor="end" font-size="12">nein</text>
+<rect x="46" y="196" width="267" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="52" y="214" font-size="13">gewicht := 1</text>
+<rect x="313" y="196" width="267" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="319" y="214" font-size="13">gewicht := 3</text>
+<rect x="46" y="222" width="534" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="52" y="240" font-size="13">summe := summe + ziffer(nr, i) * gewicht</text>
+<rect x="20" y="248" width="560" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="26" y="266" font-size="13">pz := (10 - summe mod 10) mod 10</text>
+<rect x="20" y="274" width="560" height="44" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="20" y1="274" x2="300" y2="318" stroke="#222" stroke-width="1.2"/>
+<line x1="580" y1="274" x2="300" y2="318" stroke="#222" stroke-width="1.2"/>
+<text x="300" y="290" text-anchor="middle" font-size="13">pz = ziffer(nr, 7)</text>
+<text x="26" y="312" font-size="12">ja</text>
+<text x="574" y="312" text-anchor="end" font-size="12">nein</text>
+<rect x="20" y="318" width="280" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="26" y="336" font-size="13">rückgabe wahr</text>
+<rect x="300" y="318" width="280" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="306" y="336" font-size="13">rückgabe falsch</text>
+</svg><figcaption>Lösung UML-07.3 b): korrigiertes Struktogramm „pruefeAusweis“</figcaption></figure>
+    <div class="bewertung"><strong>Bewertung b):</strong> je Fehler 2 P (Fehler 1 P, Korrektur 1 P).</div>
+    <h4>c) PAP des korrigierten Algorithmus (4 P)</h4>
+    <figure><svg viewBox="0 0 640 870" width="640" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><defs><marker id="l073p-pfeil" viewBox="0 0 11 10" refX="10.5" refY="5" markerWidth="11" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse" overflow="visible"><path d="M0.5,0.5 L10.5,5 L0.5,9.5" fill="none" stroke="#222" stroke-width="1.3"/></marker></defs>
+<ellipse cx="250" cy="30" rx="85" ry="18" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="250" y="35" text-anchor="middle" font-size="12">pruefeAusweis(nr)</text>
+<polygon points="250,77 340,105 250,133 160,105" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="250" y="110" text-anchor="middle" font-size="12">nr.length() &lt;&gt; 8</text>
+<path d="M250,48 L250,77" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l073p-pfeil)"/>
+<ellipse cx="500" cy="105" rx="70" ry="18" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="500" y="110" text-anchor="middle" font-size="12">Rückgabe falsch</text>
+<path d="M340,105 L430,105" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l073p-pfeil)"/>
+<text x="346" y="98" font-size="12">ja</text>
+<rect x="135" y="167" width="230" height="36" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="250" y="190" text-anchor="middle" font-size="12">summe := 0</text>
+<path d="M250,133 L250,167" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l073p-pfeil)"/>
+<text x="256" y="150" font-size="12">nein</text>
+<rect x="135" y="222" width="230" height="36" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="250" y="245" text-anchor="middle" font-size="12">i := 0</text>
+<path d="M250,203 L250,222" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l073p-pfeil)"/>
+<polygon points="250,292 335,320 250,348 165,320" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="250" y="325" text-anchor="middle" font-size="12">i &lt;= 6</text>
+<path d="M250,258 L250,292" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l073p-pfeil)"/>
+<polygon points="250,382 335,410 250,438 165,410" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="250" y="415" text-anchor="middle" font-size="12">i mod 2 = 0</text>
+<path d="M250,348 L250,382" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l073p-pfeil)"/>
+<text x="256" y="362" font-size="12">ja</text>
+<rect x="410" y="392" width="120" height="36" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="470" y="415" text-anchor="middle" font-size="12">gewicht := 1</text>
+<rect x="190" y="472" width="120" height="36" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="250" y="495" text-anchor="middle" font-size="12">gewicht := 3</text>
+<path d="M335,410 L410,410" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l073p-pfeil)"/>
+<text x="342" y="403" font-size="12">ja</text>
+<path d="M250,438 L250,472" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l073p-pfeil)"/>
+<text x="256" y="456" font-size="12">nein</text>
+<path d="M470,428 L470,528 L251,528" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l073p-pfeil)"/>
+<line x1="250" y1="508" x2="250" y2="528" stroke="#222" stroke-width="1.2"/>
+<rect x="105" y="547" width="290" height="36" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="250" y="570" text-anchor="middle" font-size="12">summe := summe + ziffer(nr, i) * gewicht</text>
+<path d="M250,528 L250,547" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l073p-pfeil)"/>
+<rect x="135" y="604" width="230" height="36" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="250" y="627" text-anchor="middle" font-size="12">i := i + 1</text>
+<path d="M250,583 L250,604" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l073p-pfeil)"/>
+<path d="M135,622 L60,622 L60,280 L249,280" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l073p-pfeil)"/>
+<path d="M335,320 L560,320 L560,672" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l073p-pfeil)"/>
+<text x="342" y="313" font-size="12">nein</text>
+<rect x="375" y="672" width="250" height="36" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="500" y="695" text-anchor="middle" font-size="12">pz := (10 - summe mod 10) mod 10</text>
+<polygon points="500,742 590,770 500,798 410,770" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="500" y="775" text-anchor="middle" font-size="12">pz = ziffer(nr, 7)</text>
+<path d="M500,708 L500,742" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l073p-pfeil)"/>
+<ellipse cx="500" cy="845" rx="65" ry="18" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="500" y="850" text-anchor="middle" font-size="12">Rückgabe wahr</text>
+<path d="M500,798 L500,827" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l073p-pfeil)"/>
+<text x="506" y="812" font-size="12">ja</text>
+<ellipse cx="230" cy="770" rx="70" ry="18" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<text x="230" y="775" text-anchor="middle" font-size="12">Rückgabe falsch</text>
+<path d="M410,770 L300,770" fill="none" stroke="#222" stroke-width="1.2" marker-end="url(#l073p-pfeil)"/>
+<text x="404" y="763" text-anchor="end" font-size="12">nein</text>
+</svg><figcaption>Lösung UML-07.3 c): korrigierter Algorithmus als PAP</figcaption></figure>
+    <div class="bewertung"><strong>Bewertung c):</strong> Grenzstellen für Beginn und alle Rückgaben 1 P; Längenprüfung als Verzweigung 0,5 P; Initialisierung, Schleifenbedingung, <code>i := i + 1</code> und Rücksprung 1,5 P; Gewichtung als Verzweigung 0,5 P; Prüfziffer und Vergleich 0,5 P.</div>
+    <p class="codelabel">Java · Aufgabe_UML_07_3.java (korrigierte Fassung)</p>
+    <pre class="java">static boolean pruefeAusweis(String nr) {
+    if (nr.length() != 8) {
+        return false;
+    }
+    int summe = 0;                       // Korrektur 2: vor der Schleife
+    int gewicht;
+    for (int i = 0; i &lt;= 6; i++) {       // Korrektur 1: nur sieben Ziffern
+        if (i % 2 == 0) {
+            gewicht = 1;                 // Korrektur 3: Gewichte 1, 3, 1, ...
+        } else {
+            gewicht = 3;
+        }
+        summe = summe + ziffer(nr, i) * gewicht;
+    }
+    int pz = (10 - summe % 10) % 10;
+    return pz == ziffer(nr, 7);
+}</pre>
+    <p class="codelabel">Ausgabe</p>
+    <pre class="ausgabe">Schreibtischtest fehlerhafte Fassung mit 40517287:
+  i=0  gewicht=3  ziffer=4  summe=12
+  i=1  gewicht=1  ziffer=0  summe=0
+  i=2  gewicht=3  ziffer=5  summe=15
+  i=3  gewicht=1  ziffer=1  summe=1
+  i=4  gewicht=3  ziffer=7  summe=21
+  i=5  gewicht=1  ziffer=2  summe=2
+  i=6  gewicht=3  ziffer=8  summe=24
+  i=7  gewicht=1  ziffer=7  summe=7
+  pz=3  ziffer(nr,7)=7
+  Rückgabe: false  (erwartet laut Spezifikation: true)
+
+korrigiert: pruefeAusweis("40517287") = true  OK
+korrigiert: pruefeAusweis("40517280") = false  OK
+korrigiert: pruefeAusweis("12345678") = true  OK
+korrigiert: pruefeAusweis("1234567") = false  OK
+korrigiert: pruefeAusweis("00000000") = true  OK</pre>
+    <p class="datei">Datei: <code>java\03_UML\Aufgabe_UML_07_3.java</code> (enthält die fehlerhafte und die korrigierte Fassung)</p>
+  </div>
+</section>
+
+</body>
+</html>
