@@ -40,7 +40,7 @@
 <header class="blockkopf">
   <h1>Block 08 · Objektorientierung &amp; Entwurfsmuster</h1>
   <div class="unter">
-    <span class="badge k-meistens">Meistens</span> 6/9 Prüfungen · Ø 16 von 200 Punkten · Teil 1 (4×) + Teil 2 (2×)
+    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 4, Teil 2 in 3 Prüfungen.">Prüfungskern – 6/9 – S26, W24, S24, S23, W22, S22</span> · Ø 12 von 200 Punkten · Teil 1 (4×) + Teil 2 (3×)
     · Lösungen: <a href="08_OOP_Entwurfsmuster_Loesungen.html">08_OOP_Entwurfsmuster_Loesungen.html</a>
   </div>
 </header>
@@ -83,22 +83,23 @@
   <h2>A · Erklärungssatz</h2>
 
   <p>Objektorientierung kommt in der AP2 selten als „reine Theorie“ vor, sondern fast immer als <strong>Kette in einer größeren Aufgabe</strong>: Zuerst wird ein Klassendiagramm gezeichnet oder ergänzt (oft mit abstrakter Klasse oder Interface), dann soll ein Begriff wie <em>Polymorphie</em> erläutert werden, und zum Schluss werden einzelne Methoden in Pseudocode implementiert. Entwurfsmuster tauchen in derselben Form auf: Muster erkennen, im Klassendiagramm umsetzen, Ablauf zeigen, Methode programmieren. Beispiele: S22 Teil 1 Aufgabe 3 (Observer, 30 P), S23 Teil 1 Aufgabe 2b (Polymorphie und Fabrikmethode, 22 P), S26 Teil 2 Aufgabe 2 (abstrakte Klasse und dynamische Bindung, 20 P), W24 Teil 1 Aufgabe 4b (Entwurfsmuster, 10 P).</p>
+  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
 
   <table class="kompakt">
     <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
-    <tr><td>OOP-01 Grundkonzepte</td><td><span class="badge k-oft">Oft</span></td><td>2–7 (Teil einer größeren Aufgabe)</td><td>Klasse aus Text oder Diagramm umsetzen: Sichtbarkeiten, Konstruktor, <code>static</code>, Getter/Setter</td></tr>
-    <tr><td>OOP-02 Vererbung, abstrakte Klassen, Interfaces</td><td><span class="badge k-oft">Oft</span></td><td>4–12</td><td>Hierarchie modellieren, Fallunterscheidungen nach einem Typ-Attribut durch Vererbung ersetzen</td></tr>
-    <tr><td>OOP-03 Polymorphie, Überladen/Überschreiben, Generics</td><td><span class="badge k-oft">Oft</span></td><td>3–10</td><td>Dynamische Bindung erklären, Aufrufe richtig auswerten, generische Klasse erläutern</td></tr>
-    <tr><td>OOP-04 Erzeugungsmuster und Musterkategorien</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>2–14</td><td>Vorteile von Mustern, Kategorien mit Beispielen, Singleton, Fabrikmethode</td></tr>
-    <tr><td>OOP-05 Verhaltens- und Strukturmuster</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>4–30</td><td>Observer vollständig (Klassendiagramm, Ablauf, Code), Muster zu einem Szenario wählen und begründen</td></tr>
+    <tr><td>OOP-01 Grundkonzepte</td><td><span class="relevanz r-kern" title="Belege: S26 T2 A2a (12 P); S24 T1 A3bc (5 P); S23 T1 A2bb, A2bc, A2bd (18 P); S22 T1 A3a, A3cb (11 P). Grenzwertig, nicht mitgezählt: W25 (T2 A1b: null bei leerer Liste im Algorithmus, keine OOP-Frage); W23 (T2 A2: vorgegebene {static}-Methode getDistance, nicht gefragt).">Prüfungskern – 4/9 – S26, S24, S23, S22</span></td><td>2–7 (Teil einer größeren Aufgabe)</td><td>Klasse aus Text oder Diagramm umsetzen: Sichtbarkeiten, Konstruktor, <code>static</code>, Getter/Setter</td></tr>
+    <tr><td>OOP-02 Vererbung, abstrakte Klassen, Interfaces</td><td><span class="relevanz r-kern" title="Belege: S26 T2 A2a (12 P); S23 T1 A2bb (9 P); S22 T1 A3ba, A3bb, A3bc (10 P).">Prüfungskern – 3/9 – S26, S23, S22</span></td><td>4–12</td><td>Hierarchie modellieren, Fallunterscheidungen nach einem Typ-Attribut durch Vererbung ersetzen</td></tr>
+    <tr><td>OOP-03 Polymorphie, Überladen/Überschreiben, Generics</td><td><span class="relevanz r-kern" title="Belege: S26 T2 A2bb, A2a (16 P); S24 T1 A3bc (5 P), T2 A2a (12 P); S23 T1 A2ba, A2bd (8 P); W22 T2 A1c, A1d, A1b (15 P).">Prüfungskern – 4/9 – S26, S24, S23, W22</span></td><td>3–10</td><td>Dynamische Bindung erklären, Aufrufe richtig auswerten, generische Klasse erläutern</td></tr>
+    <tr><td>OOP-04 Erzeugungsmuster und Musterkategorien</td><td><span class="relevanz r-vor" title="Belege: W24 T1 A4ba, A4bb (6 P); S23 T1 A2bb, A2bc (14 P).">Kam vor – 2/9 – W24, S23</span></td><td>2–14</td><td>Vorteile von Mustern, Kategorien mit Beispielen, Singleton, Fabrikmethode</td></tr>
+    <tr><td>OOP-05 Verhaltens- und Strukturmuster</td><td><span class="relevanz r-vor" title="Belege: W24 T1 A4bc (4 P); S22 T1 A3ba, A3bb, A3bc, A3ca, A3cb (23 P).">Kam vor – 2/9 – W24, S22</span></td><td>4–30</td><td>Observer vollständig (Klassendiagramm, Ablauf, Code), Muster zu einem Szenario wählen und begründen</td></tr>
   </table>
   <p class="klein">Kategorien laut Themenanalyse: Der ganze Block kommt in 6 von 9 Prüfungen vor („Meistens“). Die Unterthemen OOP-01 bis OOP-03 gehören zu „OOP-Konzepte“ (5/9, Oft), OOP-04 und OOP-05 zu „Entwurfsmuster“ (3/9, Wahrscheinlich).</p>
 
   <!-- ===================== OOP-01 ===================== -->
-  <h3 id="e-01">OOP-01 · Grundkonzepte: Klasse, Objekt, Kapselung <span class="badge k-oft">Oft</span></h3>
-  <p class="klein">Vorkommen: Teil von „OOP-Konzepte“ (5/9: S22, W22, S23, S24, S26) · ausdrücklich gefragt in S22 T1 A3a (Sichtbarkeiten im Klassendiagramm), S24 T1 A3bc (Objekt über überladenen Konstruktor erzeugen), S26 T2 A2a (Klassen mit vollständigen Signaturen und Sichtbarkeiten) · vorausgesetzt in jeder Algorithmusaufgabe mit Klassengerüst</p>
+  <h3 id="e-01">OOP-01 · Grundkonzepte: Klasse, Objekt, Kapselung <span class="relevanz r-kern" title="Belege: S26 T2 A2a (12 P); S24 T1 A3bc (5 P); S23 T1 A2bb, A2bc, A2bd (18 P); S22 T1 A3a, A3cb (11 P). Grenzwertig, nicht mitgezählt: W25 (T2 A1b: null bei leerer Liste im Algorithmus, keine OOP-Frage); W23 (T2 A2: vorgegebene {static}-Methode getDistance, nicht gefragt).">Prüfungskern – 4/9 – S26, S24, S23, S22</span></h3>
+  <p class="klein">Vorkommen: 4/9 · Prüfungen: S26, S24, S23, S22 · Teil 1, Aufgabe 3 (außerdem Aufgabe 2 in S23) und Teil 2 (S26) · Hinweis: Klassen, Objekte und Getter/Setter werden in jeder Algorithmusaufgabe mit Klassengerüst vorausgesetzt (zählt nicht mit)</p>
 
-  <h4>Klasse und Objekt</h4>
+  <h4>Klasse und Objekt <span class="relevanz r-hinter" title="Begriffe Klasse/Objekt nie einzeln abgefragt (vorausgesetzt)">Hintergrund – 0/9</span></h4>
   <p>Eine <strong>Klasse</strong> ist der Bauplan (Datentyp) für gleichartige Objekte. Sie legt fest, welche <strong>Attribute</strong> (Daten, Eigenschaften) und welche <strong>Methoden</strong> (Operationen, Verhalten) jedes Objekt hat. Ein <strong>Objekt</strong> (Instanz, Exemplar) ist ein konkretes Exemplar einer Klasse, das zur Laufzeit mit <code>new</code> erzeugt wird. Jedes Objekt hat eigene Attributwerte (seinen <strong>Zustand</strong>) und eine eigene <strong>Identität</strong> – zwei Objekte mit gleichen Werten sind trotzdem zwei verschiedene Objekte.</p>
   <figure>
     <svg viewBox="0 0 700 266" width="700" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><rect x="10" y="55" width="231" height="148" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="125.5" y="73" text-anchor="middle" font-weight="bold">Konto</text><line x1="10" y1="81" x2="241" y2="81" stroke="#222" stroke-width="1.2"/><text x="19" y="99">- kontoNr : string</text><text x="19" y="116">- inhaber : string</text><text x="19" y="133">- saldo : double</text><text x="19" y="150">- dispo : double</text><line x1="10" y1="159" x2="241" y2="159" stroke="#222" stroke-width="1.2"/><text x="19" y="177">+ abheben(betrag : double) : boolean</text><text x="19" y="194">+ getSaldo() : double</text><rect x="450" y="28" width="210" height="106" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="555" y="47" text-anchor="middle" font-weight="bold" text-decoration="underline">k1 : Konto</text><line x1="450" y1="56" x2="660" y2="56" stroke="#222" stroke-width="1.2"/><text x="459" y="74">kontoNr = "DE01"</text><text x="459" y="91">inhaber = "Yilmaz"</text><text x="459" y="108">saldo = 250.00</text><text x="459" y="125">dispo = 500.00</text><rect x="450" y="152" width="210" height="106" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="555" y="171" text-anchor="middle" font-weight="bold" text-decoration="underline">k2 : Konto</text><line x1="450" y1="180" x2="660" y2="180" stroke="#222" stroke-width="1.2"/><text x="459" y="198">kontoNr = "DE02"</text><text x="459" y="215">inhaber = "Novak"</text><text x="459" y="232">saldo = 0.00</text><text x="459" y="249">dispo = 0.00</text><polyline points="450,81 241,95" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="251.6,88.3 241,95 252.4,100.3" fill="none" stroke="#222" stroke-width="1.3"/><polyline points="450,205 241,163" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="253,159.3 241,163 250.6,171" fill="none" stroke="#222" stroke-width="1.3"/><text x="370" y="78" text-anchor="middle" font-size="12">«instanceOf»</text><text x="370" y="168" text-anchor="middle" font-size="12">«instanceOf»</text><text x="125.5" y="42" text-anchor="middle" font-size="12" font-weight="bold">Klasse (Bauplan)</text><text x="555" y="18" text-anchor="middle" font-size="12" font-weight="bold">Objekte (Instanzen)</text></svg>
@@ -113,7 +114,7 @@
     <tr><td>Instanziierung</td><td>Erzeugen eines Objekts mit <code>new</code>; dabei läuft der Konstruktor</td><td><code>k1 := new Konto("DE01", "Yilmaz")</code></td></tr>
   </table>
 
-  <h4>Kapselung und Sichtbarkeiten</h4>
+  <h4>Kapselung und Sichtbarkeiten <span class="relevanz r-vor" title="Sichtbarkeiten ausdrücklich in S22 T1 3a und S26 T2 2a (W21 T1 3b und W24 T1 3a: Klassen zeichnen, zählt bei UML-Klassendiagramm)">Kam vor – 2/9 – S26, S22</span></h4>
   <p><strong>Datenkapselung</strong> (Geheimnisprinzip, <em>information hiding</em>) bedeutet: Die Attribute eines Objekts sind nach außen verborgen (<code>private</code>). Andere Objekte greifen nur über die öffentlichen Methoden zu. Dadurch entscheidet allein die Klasse, welche Änderungen erlaubt sind – ein Konto lässt sich nur über <code>abheben</code> verringern, und <code>abheben</code> prüft das Limit.</p>
   <table class="kompakt">
     <tr><th>UML</th><th>Java</th><th>Bedeutung</th><th class="mitte">eigene Klasse</th><th class="mitte">gleiches Paket</th><th class="mitte">Unterklasse</th><th class="mitte">überall</th></tr>
@@ -126,15 +127,15 @@
   <div class="merke"><span class="kastentitel">Merke</span>Faustregel für jedes Klassendiagramm: <strong>Attribute <code>-</code> (private), Methoden <code>+</code> (public)</strong>. Reine Hilfsmethoden, die nur intern gebraucht werden, sind <code>-</code>. Attribute, auf die Unterklassen direkt zugreifen sollen, sind <code>#</code>.<br>
   <strong>Vorteile der Kapselung:</strong> (1) Gültigkeit der Daten – Setter und Methoden prüfen Werte, bevor sie gespeichert werden; (2) Wartbarkeit – die interne Darstellung (z. B. Saldo in Cent statt Euro) kann geändert werden, ohne dass andere Klassen angepasst werden müssen; (3) geringe Kopplung – andere Klassen hängen nur von der öffentlichen Schnittstelle ab; (4) Fehler lassen sich leichter eingrenzen, weil nur die Klasse selbst ihren Zustand ändert.</div>
 
-  <h4>Getter und Setter</h4>
+  <h4>Getter und Setter <span class="relevanz r-vor" title="Set/Get ausdrücklich modellieren (S22 T1 3a); der Aufruf von Gettern in den Algorithmus-Aufgaben (W22, S24, W24, W25, S26) ist Voraussetzung und zählt nicht">Kam vor – 1/9 – S22</span></h4>
   <ul>
     <li><strong>Getter</strong> lesen ein Attribut: <code>getSaldo() : double</code>, bei <code>boolean</code> üblich <code>isGesperrt() : boolean</code>.</li>
     <li><strong>Setter</strong> ändern ein Attribut: <code>setDispo(dispo : double) : void</code>. Ein guter Setter <strong>prüft</strong> den Wert und lehnt ungültige Werte ab.</li>
     <li>Nicht jedes Attribut braucht einen Setter. Werte, die sich nach der Erzeugung nicht ändern dürfen (Kontonummer), werden nur im Konstruktor gesetzt; in Java zusätzlich mit <code>final</code> gekennzeichnet.</li>
-    <li>In IHK-Aufgaben steht oft „Für alle Attribute existieren Get-Methoden“. Dann benutzt du in deinem Code immer die Getter (<code>k.getSaldo()</code>), nie das Attribut direkt (<code>k.saldo</code>).</li>
+    <li>In IHK-Aufgaben steht oft sinngemäß „Für alle Attribute existieren Get-Methoden“ (S26 wörtlich: „… für alle Attribute in den jeweiligen Klassen Getter und Setter vorhanden sind“). Dann benutzt du in deinem Code immer die Getter (<code>k.getSaldo()</code>), nie das Attribut direkt (<code>k.saldo</code>).</li>
   </ul>
 
-  <h4>Konstruktor, Überladen und <code>this</code></h4>
+  <h4>Konstruktor, Überladen und <code>this</code> <span class="relevanz r-vor" title="Konstruktor modellieren (S22 T1 3a), überladenen Konstruktor aufrufen (S24 T1 3bc); grenzwertig: S26 T2 1a (new KuhData(…) als Voraussetzung)">Kam vor – 2/9 – S24, S22</span></h4>
   <ul>
     <li>Der <strong>Konstruktor</strong> ist eine besondere Methode mit dem Namen der Klasse und <strong>ohne Rückgabetyp</strong>. Er wird bei <code>new</code> automatisch aufgerufen und bringt das neue Objekt in einen gültigen Anfangszustand (Attribute setzen, Startwerte, Zähler erhöhen).</li>
     <li>Schreibt man keinen Konstruktor, gibt es automatisch einen parameterlosen <strong>Standardkonstruktor</strong>. Sobald man selbst einen Konstruktor schreibt, entfällt er.</li>
@@ -148,7 +149,7 @@
     </li>
   </ul>
 
-  <h4>Statische Attribute und Methoden (Klassenattribute, Klassenmethoden)</h4>
+  <h4>Statische Attribute und Methoden (Klassenattribute, Klassenmethoden) <span class="relevanz r-vor" title="statische Fabrikmethode (S23 2bb/2bc); {static}-Methode getDistance im vorgegebenen Klassendiagramm (W23 2, grenzwertig)">Kam vor – 1/9 – S23</span></h4>
   <p>Ein mit <code>static</code> gekennzeichnetes Attribut gehört zur <strong>Klasse</strong>, nicht zu einem einzelnen Objekt. Es existiert genau einmal und wird von allen Objekten geteilt. Eine statische Methode wird über den Klassennamen aufgerufen (<code>Konto.getAnzahlKonten()</code>), auch wenn noch kein Objekt existiert. Sie hat kein <code>this</code> und kann deshalb nicht direkt auf Instanzattribute zugreifen.</p>
   <ul>
     <li>Typische Verwendung: Zähler für erzeugte Objekte, fortlaufende Nummern, Konstanten (<code>static final</code>), Hilfsmethoden (<code>Math.sqrt</code>), Fabrikmethoden und Singleton (OOP-04).</li>
@@ -156,7 +157,7 @@
   </ul>
   <div class="falle"><span class="kastentitel">Typische Falle bei static</span>Wird ein Attribut, das je Objekt verschieden sein muss, versehentlich <code>static</code> deklariert (z. B. <code>saldo</code>), teilen sich <em>alle</em> Konten einen einzigen Saldo. Umgekehrt zählt ein nicht-statischer Zähler nur im eigenen Objekt und steht bei jedem neuen Objekt wieder auf dem Startwert.</div>
 
-  <h4>Beispiel: vom Klassendiagramm zu Pseudocode und Java</h4>
+  <h4>Beispiel: vom Klassendiagramm zu Pseudocode und Java <span class="relevanz r-kern" title="Methoden einer Klasse in Pseudocode, die eine OOP-Frage enthalten: S22 T1 3cb (notifyObservers), S23 T1 2bc/2bd (Fabrikmethode, überschreibende Methoden), S24 T1 3bc (überladener Konstruktor); grenzwertig: S26 T2 2ba (Aufruf der polymorphen Methode)">Prüfungskern – 3/9 – S24, S23, S22</span></h4>
   <figure>
     <svg viewBox="0 0 520 251" width="520" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><rect x="40" y="10" width="440" height="233" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="260" y="28" text-anchor="middle" font-weight="bold">Konto</text><line x1="40" y1="36" x2="480" y2="36" stroke="#222" stroke-width="1.2"/><text x="49" y="54" text-decoration="underline">- anzahlKonten : integer</text><text x="49" y="71">- kontoNr : string {final}</text><text x="49" y="88">- inhaber : string</text><text x="49" y="105">- saldo : double</text><text x="49" y="122">- dispo : double</text><line x1="40" y1="131" x2="480" y2="131" stroke="#222" stroke-width="1.2"/><text x="49" y="149">+ Konto(kontoNr : string, inhaber : string, dispo : double)</text><text x="49" y="166">+ Konto(kontoNr : string, inhaber : string)</text><text x="49" y="183">+ setDispo(dispo : double) : void</text><text x="49" y="200">+ abheben(betrag : double) : boolean</text><text x="49" y="217">+ getSaldo() : double</text><text x="49" y="234" text-decoration="underline">+ getAnzahlKonten() : integer</text></svg>
     <figcaption>Abb. A-2: Klasse <code>Konto</code> mit statischem Zähler (unterstrichen), unveränderlicher Kontonummer und zwei Konstruktoren</figcaption>
@@ -251,7 +252,7 @@ Ende klasse</pre>
 }</pre>
   <p>Aufruf: <code>Konto k1 = new Konto("DE01", "Yilmaz", 500.0);</code> und <code>Konto k2 = new Konto("DE02", "Novak");</code> – danach liefert <code>Konto.getAnzahlKonten()</code> den Wert 2. <code>k2.abheben(50.0)</code> liefert <code>false</code>, weil k2 keinen Dispo hat.</p>
 
-  <h4>Klassen in Pseudocode – Schreibweise in diesem Block</h4>
+  <h4>Klassen in Pseudocode – Schreibweise in diesem Block <span class="relevanz r-hinter" title="für Klassen im Pseudocode ist die Schreibweise frei (Belegsatz regelt nur Kontrollstrukturen)">Hintergrund – 0/9</span></h4>
   <p>Der IHK-Belegsatz legt nur die Kontrollstrukturen fest. Für Klassen ist jede eindeutige Schreibweise zulässig. Diese wird in den Lösungen verwendet:</p>
   <table class="kompakt">
     <tr><th>Element</th><th>Pseudocode</th><th>Java</th></tr>
@@ -270,7 +271,7 @@ Ende klasse</pre>
   </table>
   <div class="merke"><span class="kastentitel">Merke</span>Bewertet wird die Logik, nicht die Schreibweise. Ob du <code>methode</code> oder <code>funktion</code>, <code>rückgabe</code> oder <code>return</code> schreibst, ist egal – Hauptsache eindeutig und durchgehend gleich. Wenn die Aufgabe die Methode nur „in Pseudocode implementieren“ lässt, genügt die Methode selbst; die umgebende Klasse musst du nicht hinschreiben.</div>
 
-  <h4>Referenzen, <code>null</code>, Identität und Gleichheit</h4>
+  <h4>Referenzen, <code>null</code>, Identität und Gleichheit <span class="relevanz r-hinter" title="grenzwertig, nicht gezählt: null als Rückgabe (W25 T2 1b), equals im Lösungscode (S24 T1 3bb), Namensvergleich (S26 T2 1a); in keiner Prüfung ausdrücklich als OOP-Frage gestellt">Hintergrund – 0/9</span></h4>
   <p>Eine Variable vom Typ einer Klasse enthält nicht das Objekt selbst, sondern einen <strong>Verweis (Referenz)</strong> darauf. Eine Zuweisung <code>k3 := k1</code> kopiert nur den Verweis: Danach zeigen beide Variablen auf <strong>dasselbe</strong> Objekt (Aliasing), und eine Änderung über <code>k3</code> ist auch über <code>k1</code> sichtbar. <code>null</code> bedeutet „zeigt auf kein Objekt“; ein Methodenaufruf auf <code>null</code> führt zur <code>NullPointerException</code>.</p>
   <figure>
     <svg viewBox="0 0 560 212" width="560" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><rect x="330" y="15" width="190" height="72" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="425" y="34" text-anchor="middle" font-weight="bold" text-decoration="underline">: Konto</text><line x1="330" y1="43" x2="520" y2="43" stroke="#222" stroke-width="1.2"/><text x="339" y="61">kontoNr = "DE01"</text><text x="339" y="78">saldo = 250.00</text><rect x="330" y="120" width="190" height="72" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="425" y="139" text-anchor="middle" font-weight="bold" text-decoration="underline">: Konto</text><line x1="330" y1="148" x2="520" y2="148" stroke="#222" stroke-width="1.2"/><text x="339" y="166">kontoNr = "DE02"</text><text x="339" y="183">saldo = 0.00</text><text x="20" y="48" font-weight="bold">k1</text><rect x="52" y="30" width="44" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/><circle cx="74" cy="43" r="3.5" fill="#222" stroke="#222" stroke-width="1.2"/><polyline points="78,43 330,37" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="319.1,43.3 330,37 318.9,31.3" fill="none" stroke="#222" stroke-width="1.3"/><text x="20" y="90" font-weight="bold">k3</text><rect x="52" y="72" width="44" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/><circle cx="74" cy="85" r="3.5" fill="#222" stroke="#222" stroke-width="1.2"/><polyline points="78,85 330,65" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="319.5,71.9 330,65 318.6,59.9" fill="none" stroke="#222" stroke-width="1.3"/><text x="20" y="153" font-weight="bold">k2</text><rect x="52" y="135" width="44" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/><circle cx="74" cy="148" r="3.5" fill="#222" stroke="#222" stroke-width="1.2"/><polyline points="78,148 330,142" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="319.1,148.3 330,142 318.9,136.3" fill="none" stroke="#222" stroke-width="1.3"/><text x="20" y="196" font-weight="bold">k4</text><rect x="52" y="178" width="44" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="74" y="196" text-anchor="middle" font-size="12">null</text><text x="52" y="12" font-size="12" font-weight="bold">Variablen (Referenzen)</text></svg>
@@ -283,7 +284,7 @@ Ende klasse</pre>
     <tr><td><code>==</code> bei <code>int</code>, <code>double</code>, <code>boolean</code></td><td>Wertvergleich (primitive Typen haben keine Identität)</td><td><code>3 == 3</code> → true</td></tr>
   </table>
 
-  <h4>So gehst du vor: Klasse aus Text oder Klassendiagramm umsetzen</h4>
+  <h4>So gehst du vor: Klasse aus Text oder Klassendiagramm umsetzen <span class="relevanz r-kern" title="Klasse mit Attributen/Methoden und OOP-Elementen entwerfen: S22 T1 3a, S23 T1 2bb, S26 T2 2a (W21 T1 3b und W24 T1 3a zählen bei UML-Klassendiagramm)">Prüfungskern – 3/9 – S26, S23, S22</span></h4>
   <ol>
     <li><strong>Attribute sammeln:</strong> Jedes Substantiv mit einem Wert („Fachnummer“, „ob gesperrt“) wird ein Attribut mit passendem Typ (<code>integer</code>, <code>double</code>, <code>string</code>, <code>boolean</code>, eine Klasse oder <code>List&lt;…&gt;</code>). Sichtbarkeit <code>-</code>.</li>
     <li><strong>Klassenweite Werte erkennen:</strong> „für alle Objekte gemeinsam“, „Anzahl aller …“, „ohne dass ein Objekt existiert“ → <code>static</code> (unterstrichen).</li>
@@ -307,17 +308,17 @@ Ende klasse</pre>
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
     <ul>
       <li><strong>S26 T2 A2a (12 P):</strong> Aus einer Textbeschreibung ein Klassendiagramm mit Attributen, Methoden mit vollständiger Signatur und Sichtbarkeiten zeichnen (dort zusammen mit Vererbung, siehe OOP-02).</li>
-      <li><strong>S22 T1 A3a (7 P):</strong> Klassendiagramm mit korrekten Sichtbarkeiten vervollständigen.</li>
+      <li><strong>S22 T1 A3a (7 P):</strong> Klassendiagramm der Klasse SmartMeter mit korrekten Sichtbarkeiten selbst zeichnen (erstellen, nicht ergänzen).</li>
       <li><strong>S24 T1 A3bc (5 P):</strong> eine Methode schreiben, die ein Objekt über einen überladenen Konstruktor erzeugt und in eine Liste einfügt.</li>
       <li><strong>W21 T1 A3b (7 P):</strong> eine Klasse mit Attributen und Methoden zu einer beschriebenen Anforderung entwerfen.</li>
     </ul>
   </div>
 
   <!-- ===================== OOP-02 ===================== -->
-  <h3 id="e-02">OOP-02 · Vererbung, abstrakte Klassen und Interfaces <span class="badge k-oft">Oft</span></h3>
-  <p class="klein">Vorkommen: Teil von „OOP-Konzepte“ (5/9) · S23 T1 A2bb (9 P: abstrakte Klasse mit Unterklassen statt Fallunterscheidungen), S23 T1 A2bd (4 P: überschreibende Methoden), S26 T2 A2a (12 P: abstrakte Klasse, Vererbung, Aggregation), S22 T1 A3bb/bc (6 P: Interface-Methoden ergänzen, Realisierung erläutern)</p>
+  <h3 id="e-02">OOP-02 · Vererbung, abstrakte Klassen und Interfaces <span class="relevanz r-kern" title="Belege: S26 T2 A2a (12 P); S23 T1 A2bb (9 P); S22 T1 A3ba, A3bb, A3bc (10 P).">Prüfungskern – 3/9 – S26, S23, S22</span></h3>
+  <p class="klein">Vorkommen: 3/9 · Prüfungen: S26, S23, S22 · Teil 1, Aufgabe 2 oder 3 und Teil 2 (S26)</p>
 
-  <h4>Vererbung (Generalisierung und Spezialisierung)</h4>
+  <h4>Vererbung (Generalisierung und Spezialisierung) <span class="relevanz r-vor" title="S23 T1 2bb (abstrakte Klasse mit Unterklassen), S26 T2 2a (Vererbung, 12 P)">Kam vor – 2/9 – S26, S23</span></h4>
   <p>Vererbung ist eine <strong>„ist-ein“-Beziehung</strong>: Die <strong>Unterklasse</strong> (abgeleitete Klasse, Subklasse) übernimmt alle Attribute und Methoden der <strong>Oberklasse</strong> (Basisklasse, Superklasse), kann neue hinzufügen und geerbte Methoden <strong>überschreiben</strong>. Gemeinsamkeiten stehen nur einmal in der Oberklasse (Generalisierung), Besonderheiten in den Unterklassen (Spezialisierung).</p>
   <ul>
     <li>Java: <code>class Azubi extends Mitarbeiter</code> – genau <strong>eine</strong> Oberklasse. UML: durchgezogene Linie mit <strong>hohlem Dreieck an der Oberklasse</strong>.</li>
@@ -326,7 +327,7 @@ Ende klasse</pre>
     <li><strong>Vorteile:</strong> keine Redundanz, Wiederverwendung, Erweiterbarkeit durch neue Unterklassen, Grundlage für Polymorphie (OOP-03). <strong>Nachteile:</strong> enge Kopplung (eine Änderung der Oberklasse wirkt auf alle Unterklassen), tiefe Hierarchien sind schwer zu überblicken.</li>
   </ul>
 
-  <h4>Konstruktoren und <code>super</code></h4>
+  <h4>Konstruktoren und <code>super</code> <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <p>Konstruktoren werden <strong>nicht</strong> vererbt. Jeder Konstruktor einer Unterklasse ruft als <strong>erste Anweisung</strong> einen Konstruktor der Oberklasse auf: ausdrücklich mit <code>super(…)</code> oder – wenn man nichts schreibt – automatisch mit <code>super()</code>. Das automatische <code>super()</code> funktioniert nur, wenn die Oberklasse einen parameterlosen Konstruktor hat. Der Oberklassenteil eines Objekts wird also immer <strong>zuerst</strong> initialisiert („von oben nach unten“).</p>
 <pre class="java">class Person {
     private String name;
@@ -364,13 +365,13 @@ Kunde 4711 angelegt
 Firmenkunde Kaya Bau GmbH angelegt</pre>
       <p class="klein">Mit <code>super.methode()</code> ruft eine Unterklasse außerdem die Oberklassen-Version einer überschriebenen Methode auf, z. B. <code>rückgabe super.urlaubstage() + 2</code>.</p>
 
-  <h4><code>protected</code> und <code>final</code></h4>
+  <h4><code>protected</code> und <code>final</code> <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <ul>
     <li><code>protected</code> (<code>#</code>): sichtbar in der eigenen Klasse und in allen Unterklassen – für Attribute, die Unterklassen direkt lesen oder setzen sollen.</li>
     <li><code>final</code> bei einer <strong>Klasse</strong>: keine Unterklassen möglich (Beispiel <code>String</code>). Bei einer <strong>Methode</strong>: darf nicht überschrieben werden. Bei einem <strong>Attribut</strong>: darf nur einmal zugewiesen werden; <code>static final</code> = Konstante.</li>
   </ul>
 
-  <h4>Abstrakte Klassen</h4>
+  <h4>Abstrakte Klassen <span class="relevanz r-vor" title="S23 2bb (9 P), S26 2a (abstrakte Klasse/Methode im Klassendiagramm)">Kam vor – 2/9 – S26, S23</span></h4>
   <ul>
     <li>Kennzeichnung: Java <code>abstract</code>; UML: Klassenname <em>kursiv</em> und/oder <code>{abstract}</code>, abstrakte Methoden ebenfalls kursiv bzw. mit <code>{abstract}</code>.</li>
     <li>Von einer abstrakten Klasse können <strong>keine Objekte</strong> erzeugt werden (<code>new Mitarbeiter(…)</code> ist verboten). Variablen, Parameter und Listen dürfen aber diesen Typ haben (<code>List&lt;Mitarbeiter&gt;</code>).</li>
@@ -379,7 +380,7 @@ Firmenkunde Kaya Bau GmbH angelegt</pre>
     <li><strong>Wann?</strong> Wenn es einen Oberbegriff gibt, von dem es keine „allgemeinen“ Objekte geben soll (es gibt nur Angestellte, Aushilfen und Azubis, aber keinen „Mitarbeiter an sich“), die Unterklassen aber gemeinsame Attribute und gemeinsamen Code haben.</li>
   </ul>
 
-  <h4>Interfaces (Schnittstellen)</h4>
+  <h4>Interfaces (Schnittstellen) <span class="relevanz r-vor" title="S22 T1 3b: Beziehung zum Interface Observer, Methoden ergänzen, Realisierung erläutern">Kam vor – 1/9 – S22</span></h4>
   <ul>
     <li>Ein Interface ist ein <strong>Vertrag</strong>: Jede Klasse, die es implementiert, garantiert die vorgegebenen Methoden. Es enthält nur Methodensignaturen (implizit <code>public abstract</code>) und Konstanten, <strong>keine Instanzattribute und keinen Konstruktor</strong>. (Seit Java 8 sind <code>default</code>-Methoden möglich – für die Prüfung nicht nötig.)</li>
     <li>Eine Klasse kann <strong>beliebig viele</strong> Interfaces implementieren: <code>class Rechnung implements Druckbar, Exportierbar</code>.</li>
@@ -391,7 +392,7 @@ Firmenkunde Kaya Bau GmbH angelegt</pre>
     <figcaption>Abb. A-4: <code>Rechnung</code> erbt von <code>Dokument</code> und realisiert zwei Interfaces; <code>Mahnung</code> realisiert nur <code>Druckbar</code></figcaption>
   </figure>
 
-  <h4>Abstrakte Klasse oder Interface?</h4>
+  <h4>Abstrakte Klasse oder Interface? <span class="relevanz r-hinter" title="Wahl abstrakte Klasse vs. Interface musste nie begründet werden (jeweils vorgegeben)">Hintergrund – 0/9</span></h4>
   <table class="kompakt">
     <tr><th></th><th>Abstrakte Klasse</th><th>Interface</th></tr>
     <tr><td>Beziehung</td><td>„ist ein“ – gemeinsamer Oberbegriff einer Familie verwandter Klassen</td><td>„kann“ – Fähigkeit/Rolle, auch für nicht verwandte Klassen</td></tr>
@@ -405,14 +406,14 @@ Firmenkunde Kaya Bau GmbH angelegt</pre>
   </table>
   <div class="merke"><span class="kastentitel">Merke</span>Gemeinsamer <strong>Zustand und Code</strong> einer Familie → abstrakte Klasse. Gemeinsame <strong>Fähigkeit</strong> ohne gemeinsamen Zustand, oder die Klassen erben schon von einer anderen Klasse → Interface. Beides lässt sich kombinieren: eine abstrakte Oberklasse für die Familie, zusätzlich Interfaces für Fähigkeiten, die nur einige Unterklassen haben.</div>
 
-  <h4>Keine Mehrfachvererbung von Klassen</h4>
+  <h4>Keine Mehrfachvererbung von Klassen <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <p>In Java und C# kann eine Klasse nur von <strong>einer</strong> Klasse erben. Grund ist das <strong>Diamond-Problem</strong>: Erben <code>B</code> und <code>C</code> von <code>A</code> und überschreiben beide die Methode <code>m()</code>, wäre bei einer Klasse <code>D extends B, C</code> unklar, welches <code>m()</code> gilt und ob die Attribute von <code>A</code> einmal oder doppelt vorhanden sind. Interfaces haben dieses Problem nicht, weil sie weder Zustand noch (verpflichtende) Implementierung mitbringen: Die implementierende Klasse schreibt die Methode selbst, es gibt also nur eine Implementierung. Deshalb gilt: <strong>eine Oberklasse, beliebig viele Interfaces</strong>. (C++ erlaubt Mehrfachvererbung und muss den Konflikt mit zusätzlichen Regeln lösen.)</p>
   <figure>
     <svg viewBox="0 0 440 258" width="440" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><rect x="160" y="10" width="110" height="53" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="215" y="28" text-anchor="middle" font-weight="bold">A</text><line x1="160" y1="36" x2="270" y2="36" stroke="#222" stroke-width="1.2"/><text x="169" y="54">+ m()</text><rect x="30" y="100" width="110" height="53" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="85" y="118" text-anchor="middle" font-weight="bold">B</text><line x1="30" y1="126" x2="140" y2="126" stroke="#222" stroke-width="1.2"/><text x="39" y="144">+ m()</text><rect x="290" y="100" width="110" height="53" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="345" y="118" text-anchor="middle" font-weight="bold">C</text><line x1="290" y1="126" x2="400" y2="126" stroke="#222" stroke-width="1.2"/><text x="299" y="144">+ m()</text><rect x="160" y="190" width="110" height="53" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="215" y="208" text-anchor="middle" font-weight="bold">D</text><line x1="160" y1="216" x2="270" y2="216" stroke="#222" stroke-width="1.2"/><text x="169" y="234">m() = ?</text><polyline points="85,100 85,80 195,80 195,63" fill="none" stroke="#222" stroke-width="1.2"/><polygon points="195,63 203,78 187,78" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="345,100 345,80 235,80 235,63" fill="none" stroke="#222" stroke-width="1.2"/><polygon points="235,63 243,78 227,78" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="195,190 195,170 85,170 85,153" fill="none" stroke="#222" stroke-width="1.2"/><polygon points="85,153 93,168 77,168" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="235,190 235,170 345,170 345,153" fill="none" stroke="#222" stroke-width="1.2"/><polygon points="345,153 353,168 337,168" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="300" y="230" font-size="12">in Java nicht erlaubt:</text><text x="300" y="246" font-size="12" font-family="Consolas, monospace">class D extends B, C</text></svg>
     <figcaption>Abb. A-5: Diamond-Problem – welches <code>m()</code> erbt <code>D</code>?</figcaption>
   </figure>
 
-  <h4>Redundante Fallunterscheidungen durch Vererbung ersetzen</h4>
+  <h4>Redundante Fallunterscheidungen durch Vererbung ersetzen <span class="relevanz r-vor" title="S23 T1 2bb: abstrakte Klasse statt redundanter Fallunterscheidungen">Kam vor – 1/9 – S23</span></h4>
   <p>Ein klassischer Prüfungsfall (S23): Eine Klasse hat ein Attribut <code>typ</code> und <strong>mehrere Methoden</strong>, die alle mit derselben Fallunterscheidung (<code>wenn typ = … dann …</code>) arbeiten. Jeder neue Typ zwingt dazu, <em>alle</em> diese Methoden zu ändern – vergisst man eine, entsteht ein Fehler. Beispiel aus einer Personalverwaltung:</p>
   <figure>
     <svg viewBox="0 0 460 217" width="460" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><rect x="40" y="10" width="380" height="199" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="230" y="28" text-anchor="middle" font-weight="bold">Mitarbeiter</text><line x1="40" y1="36" x2="420" y2="36" stroke="#222" stroke-width="1.2"/><text x="49" y="54">- name : string</text><text x="49" y="71">- typ : string</text><text x="49" y="88">- monatsgehalt : double</text><text x="49" y="105">- stundenlohn : double</text><text x="49" y="122">- stunden : double</text><text x="49" y="139">- lehrjahr : integer</text><line x1="40" y1="148" x2="420" y2="148" stroke="#222" stroke-width="1.2"/><text x="49" y="166">+ Mitarbeiter(name : string, typ : string)</text><text x="49" y="183">+ gehalt() : double</text><text x="49" y="200">+ urlaubstage() : integer</text></svg>
@@ -452,7 +453,7 @@ Firmenkunde Kaya Bau GmbH angelegt</pre>
   Ende methode
 Ende klasse</pre>
   <p class="klein">In Java entspricht <code>erbt von</code> dem Schlüsselwort <code>extends</code>, die überschreibenden Methoden werden mit <code>@Override</code> markiert.</p>
-  <h4>So gehst du vor</h4>
+  <h4>So gehst du vor <span class="relevanz r-vor" title="S23 2bb (Fallunterscheidung → Vererbung); S26 2a (Aufgabe-Hierarchie) grenzwertig">Kam vor – 1/9 – S23</span></h4>
   <ol>
     <li>Jeder Wert des Typ-Attributs wird eine <strong>Unterklasse</strong> (Name aus dem Fachbegriff: "AZUBI" → <code>Azubi</code>, "ANGESTELLT" → <code>Angestellter</code>).</li>
     <li>Die Oberklasse wird <strong>abstrakt</strong>, das Attribut <code>typ</code> entfällt (auch aus dem Konstruktor).</li>
@@ -485,10 +486,10 @@ Ende klasse</pre>
   </div>
 
   <!-- ===================== OOP-03 ===================== -->
-  <h3 id="e-03">OOP-03 · Polymorphie, Überladen/Überschreiben, Generics <span class="badge k-oft">Oft</span></h3>
-  <p class="klein">Vorkommen: Teil von „OOP-Konzepte“ (5/9) · Polymorphie: S23 T1 A2ba (4 P: Begriff erläutern), S26 T2 A2bb (4 P: Mechanismus nennen und erklären) · überschreibende Methoden: S23 T1 A2bd · Generics: W22 T2 A1c (3 P: generische Klasse erläutern), W22 T2 A1d (7 P: Sortieren einer <code>List&lt;T&gt;</code>) · Vergleichsfunktion als Parameter: W22 T2 A1b, S24 T2 A2a</p>
+  <h3 id="e-03">OOP-03 · Polymorphie, Überladen/Überschreiben, Generics <span class="relevanz r-kern" title="Belege: S26 T2 A2bb, A2a (16 P); S24 T1 A3bc (5 P), T2 A2a (12 P); S23 T1 A2ba, A2bd (8 P); W22 T2 A1c, A1d, A1b (15 P).">Prüfungskern – 4/9 – S26, S24, S23, W22</span></h3>
+  <p class="klein">Vorkommen: 4/9 · Prüfungen: S26, S24, S23, W22 · Teil 2, Aufgabe 2 (außerdem Aufgabe 1 in W22) und Teil 1 (S24, S23)</p>
 
-  <h4>Polymorphie (Vielgestaltigkeit)</h4>
+  <h4>Polymorphie (Vielgestaltigkeit) <span class="relevanz r-vor" title="Polymorphie erläutern: S23 T1 2ba (4 P), S26 T2 2bb (4 P)">Kam vor – 2/9 – S26, S23</span></h4>
   <div class="merke"><span class="kastentitel">Definition (prüfungsreif)</span><strong>Polymorphie</strong> bedeutet, dass eine Variable vom Typ einer Oberklasse oder eines Interfaces auf Objekte <strong>verschiedener Unterklassen</strong> verweisen kann und <strong>derselbe Methodenaufruf</strong> je nach tatsächlichem Objekt <strong>unterschiedliches Verhalten</strong> auslöst. Möglich wird das durch das Überschreiben von Methoden: Welche Implementierung ausgeführt wird, entscheidet sich erst <strong>zur Laufzeit</strong> anhand des Objekts (<strong>dynamische</strong> oder <strong>späte Bindung</strong>). Der aufrufende Code muss die konkreten Unterklassen nicht kennen und braucht keine Fallunterscheidungen.</div>
   <p>Beispiel Stadtbibliothek: Die abstrakte Klasse <code>Medium</code> hat die abstrakte Methode <code>leihfrist() : integer</code>. <code>Buch</code> liefert 28 Tage, <code>DVD</code> 7 Tage, <code>Zeitschrift</code> 14 Tage. Eine Methode, die alle Medien einer Ausleihe durchläuft, ruft einfach <code>m.leihfrist()</code> auf – jedes Objekt antwortet mit seiner eigenen Implementierung:</p>
   <div class="zweispaltig">
@@ -519,7 +520,7 @@ Ende methode</pre>
     <tr><td>parametrische Polymorphie</td><td>Generics (<code>List&lt;T&gt;</code>)</td><td>beim Übersetzen</td></tr>
   </table>
 
-  <h4>Statischer und dynamischer Typ</h4>
+  <h4>Statischer und dynamischer Typ <span class="relevanz r-vor" title="S26 T2 2bb: Entscheidung zur Laufzeit (dynamische Bindung)">Kam vor – 1/9 – S26</span></h4>
   <p>Bei <code>Medium m := new DVD("Metropolis")</code> ist <code>Medium</code> der <strong>statische Typ</strong> (deklarierter Typ der Variablen) und <code>DVD</code> der <strong>dynamische Typ</strong> (Klasse des Objekts, auf das <code>m</code> gerade zeigt).</p>
   <div class="merke"><span class="kastentitel">Merke: zwei Fragen, zwei Typen</span>
     <ol>
@@ -529,7 +530,7 @@ Ende methode</pre>
     </ol>
   </div>
 
-  <h4>Überschreiben und Überladen</h4>
+  <h4>Überschreiben und Überladen <span class="relevanz r-kern" title="Überschreiben: S23 2bd, S26 2a/2bb; Überladen: S24 3bc">Prüfungskern – 3/9 – S26, S24, S23</span></h4>
   <table class="kompakt">
     <tr><th></th><th>Überschreiben (Overriding)</th><th>Überladen (Overloading)</th></tr>
     <tr><td>Wo?</td><td>Oberklasse und Unterklasse (bzw. Interface und implementierende Klasse)</td><td>meist in derselben Klasse; auch eine Unterklasse kann eine geerbte Methode überladen</td></tr>
@@ -549,7 +550,7 @@ drucker.drucke(b);   // Ausgabe: Buch</pre>
   </div>
   <div class="falle"><span class="kastentitel">Falle: Unterklasse überlädt statt zu überschreiben</span>Schreibt eine Unterklasse eine Methode mit gleichem Namen, aber anderer Parameterliste (<code>leihfrist(verlaengert : boolean)</code>), ist das <strong>kein</strong> Überschreiben. Die geerbte <code>leihfrist()</code> bleibt unverändert und wird weiterhin aufgerufen. <code>@Override</code> würde diesen Fehler beim Übersetzen melden.</div>
 
-  <h4>Upcast, Downcast und <code>instanceof</code></h4>
+  <h4>Upcast, Downcast und <code>instanceof</code> <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <ul>
     <li><strong>Upcast</strong> (Unterklasse → Oberklasse) geschieht automatisch und ist immer sicher: <code>Medium m := new DVD(…)</code>.</li>
     <li><strong>Downcast</strong> (Oberklasse → Unterklasse) muss ausdrücklich geschrieben werden: <code>DVD d = (DVD) m;</code>. Der Compiler erlaubt ihn, wenn die Typen verwandt sind. Zeigt <code>m</code> zur Laufzeit aber nicht auf eine <code>DVD</code>, entsteht eine <code>ClassCastException</code>.</li>
@@ -557,7 +558,7 @@ drucker.drucke(b);   // Ausgabe: Buch</pre>
     <li>Viele <code>instanceof</code>-Abfragen sind ein Zeichen für schlechten Entwurf – meist gehört das Verhalten als überschriebene Methode in die Unterklassen.</li>
   </ul>
 
-  <h4>Generics: generische Klassen und Methoden</h4>
+  <h4>Generics: generische Klassen und Methoden <span class="relevanz r-vor" title="W22 T2 1c (generische Klasse erläutern), 1d (List&lt;T&gt; sortieren)">Kam vor – 1/9 – W22</span></h4>
   <p>Eine <strong>generische Klasse</strong> hat einen oder mehrere <strong>Typparameter</strong> (Platzhalter für einen Datentyp), z. B. <code>class Warteschlange&lt;T&gt;</code>. Erst beim Verwenden wird der konkrete Typ festgelegt: <code>Warteschlange&lt;Patient&gt;</code>, <code>Warteschlange&lt;String&gt;</code>. Die bekanntesten generischen Klassen sind die Collections: <code>List&lt;T&gt;</code>, <code>Map&lt;K, V&gt;</code>.</p>
   <div class="zweispaltig">
     <div>
@@ -605,7 +606,7 @@ Patient naechster = praxis.naechster();   // kein Cast nötig
   </ul>
   <p>Weitere Formen: <strong>generische Methode</strong> mit eigenem Typparameter (<code>&lt;T&gt; T letztes(List&lt;T&gt; liste)</code>), <strong>beschränkter Typparameter</strong> <code>&lt;T extends Medium&gt;</code> – dann dürfen auf <code>T</code> die Methoden von <code>Medium</code> aufgerufen werden. Typparameter stehen nur für Referenztypen: <code>List&lt;Integer&gt;</code>, nicht <code>List&lt;int&gt;</code>.</p>
 
-  <h4>Funktionsobjekte: eine Vergleichsfunktion als Parameter</h4>
+  <h4>Funktionsobjekte: eine Vergleichsfunktion als Parameter <span class="relevanz r-vor" title="Vergleichsfunktion als Parameter: W22 1b/1d, S24 2a">Kam vor – 2/9 – S24, W22</span></h4>
   <p>Ein generischer Algorithmus (Sortieren, Minimum, „ist die Liste sortiert?“) weiß nicht, wie zwei Objekte vom Typ <code>T</code> zu vergleichen sind. Deshalb bekommt er ein <strong>Objekt mit einer Vergleichsmethode</strong> übergeben – in Java das Interface <code>Comparator&lt;T&gt;</code> mit <code>compare(a, b)</code>:</p>
   <ul>
     <li>Ergebnis <strong>negativ</strong>: <code>a</code> kommt vor <code>b</code> (a ist „kleiner“), <strong>0</strong>: gleichwertig, <strong>positiv</strong>: <code>a</code> kommt nach <code>b</code>.</li>
@@ -648,10 +649,10 @@ boolean ok = istAufsteigend(buecher, nachJahr);   // true</pre>
   </div>
 
   <!-- ===================== OOP-04 ===================== -->
-  <h3 id="e-04">OOP-04 · Entwurfsmuster: Grundlagen, Kategorien, Erzeugungsmuster <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
-  <p class="klein">Vorkommen: Teil von „Entwurfsmuster“ (3/9: S22, S23, W24) · W24 T1 A4ba (4 P: zwei Vorteile von Entwurfsmustern), W24 T1 A4bb (2 P: Beispiele für Erzeugungs- und Verhaltensmuster) · S23 T1 A2bb/bc (statische Fabrikmethode im Klassendiagramm modellieren und in Pseudocode implementieren)</p>
+  <h3 id="e-04">OOP-04 · Entwurfsmuster: Grundlagen, Kategorien, Erzeugungsmuster <span class="relevanz r-vor" title="Belege: W24 T1 A4ba, A4bb (6 P); S23 T1 A2bb, A2bc (14 P).">Kam vor – 2/9 – W24, S23</span></h3>
+  <p class="klein">Vorkommen: 2/9 · Prüfungen: W24, S23 · Teil 1, Aufgabe 2 oder 4</p>
 
-  <h4>Was ist ein Entwurfsmuster?</h4>
+  <h4>Was ist ein Entwurfsmuster? <span class="relevanz r-vor" title="W24 T1 4ba: zwei Vorteile von Entwurfsmustern">Kam vor – 1/9 – W24</span></h4>
   <p>Ein <strong>Entwurfsmuster</strong> (<em>Design Pattern</em>) ist eine <strong>bewährte, wiederverwendbare Lösungsvorlage für ein wiederkehrendes Entwurfsproblem</strong> der Softwareentwicklung. Es ist kein fertiger Code und keine Bibliothek, sondern eine Idee mit typischer Struktur (beteiligte Klassen, Interfaces und ihre Beziehungen), die auf die konkrete Situation übertragen wird. Bekannt wurde das Konzept durch den Katalog der „Gang of Four“ (Gamma, Helm, Johnson, Vlissides, 1994) mit 23 Mustern. Jedes Muster wird beschrieben durch <strong>Name, Problem, Lösung</strong> und <strong>Konsequenzen</strong> (Vor- und Nachteile).</p>
   <table class="kompakt">
     <tr><th>Vorteil</th><th>Erläuterung</th></tr>
@@ -663,7 +664,7 @@ boolean ok = istAufsteigend(buecher, nachJahr);   // true</pre>
   </table>
   <p><strong>Nachteile:</strong> zusätzliche Klassen und Indirektion (mehr Komplexität), Gefahr des „Overengineering“ (Muster ohne echtes Problem), Einarbeitungsaufwand, falsch gewählte Muster erschweren die Wartung.</p>
 
-  <h4>Die drei Kategorien</h4>
+  <h4>Die drei Kategorien <span class="relevanz r-vor" title="W24 T1 4bb: je ein Muster aus Erzeugungs- und Verhaltensmuster nennen">Kam vor – 1/9 – W24</span></h4>
   <table class="kompakt">
     <tr><th>Kategorie</th><th>Leitfrage</th><th>Beispiele</th></tr>
     <tr><td><strong>Erzeugungsmuster</strong></td><td>Wie werden Objekte erzeugt? Die Erzeugung wird vom Rest des Programms getrennt.</td><td>Singleton, Fabrikmethode, Abstrakte Fabrik, Builder (Erbauer), Prototyp</td></tr>
@@ -672,7 +673,7 @@ boolean ok = istAufsteigend(buecher, nachJahr);   // true</pre>
   </table>
   <div class="merke"><span class="kastentitel">Merke</span><strong>Erzeugen – Zusammensetzen – Zusammenarbeiten.</strong> Für die Prüfung reicht es, je Kategorie zwei Muster sicher zu kennen: Singleton und Fabrikmethode (Erzeugung), Adapter und Fassade (Struktur), Observer und Strategie (Verhalten). <strong>MVC</strong> (Model-View-Controller) ist kein GoF-Muster dieser drei Kategorien, sondern ein <strong>Architekturmuster</strong>, das intern Observer und Strategie verwendet.</div>
 
-  <h4>Singleton</h4>
+  <h4>Singleton <span class="relevanz r-hinter" title="Aufbau von Singleton nie gefragt (höchstens als Beispielnennung in W24 4bb)">Hintergrund – 0/9</span></h4>
   <p><strong>Zweck:</strong> Von einer Klasse darf es <strong>höchstens ein Objekt</strong> geben, und alle Programmteile sollen über einen <strong>globalen Zugriffspunkt</strong> genau dieses Objekt erhalten. Typische Einsätze: zentrales Protokoll (Logger), Konfiguration, Verbindungspool, Druckwarteschlange.</p>
   <p><strong>Aufbau</strong> (drei Bausteine):</p>
   <ol>
@@ -706,7 +707,7 @@ boolean ok = istAufsteigend(buecher, nachJahr);   // true</pre>
   <p><strong>Thread-Sicherheit:</strong> Rufen zwei Threads <code>getInstance()</code> gleichzeitig zum ersten Mal auf, können beide <code>instanz = null</code> sehen und je ein Objekt erzeugen – dann gibt es zwei. Abhilfe: die Methode <code>synchronized</code> deklarieren (nur ein Thread gleichzeitig), das Objekt schon beim Laden der Klasse erzeugen (<code>private static final Protokoll INSTANZ = new Protokoll();</code>, „eager“) oder in Java ein <code>enum</code> mit genau einem Wert verwenden.</p>
   <p><strong>Nachteile:</strong> globaler Zustand und versteckte Abhängigkeiten (man sieht einer Methode nicht an, dass sie das Singleton benutzt), schlecht testbar (das Objekt lässt sich nicht durch eine Testattrappe ersetzen), Probleme bei Nebenläufigkeit, die Klasse kümmert sich zusätzlich um ihre eigene Erzeugung.</p>
 
-  <h4>Fabrikmethode (Factory Method) und statische Fabrikmethode</h4>
+  <h4>Fabrikmethode (Factory Method) und statische Fabrikmethode <span class="relevanz r-vor" title="S23 T1 2bb/2bc: statische Fabrikmethode modellieren und implementieren">Kam vor – 1/9 – S23</span></h4>
   <p><strong>Problem:</strong> An vielen Stellen im Code steht eine Fallunterscheidung, die je nach Parameter eine andere konkrete Klasse mit <code>new</code> erzeugt. Kommt eine Klasse hinzu, müssen alle diese Stellen geändert werden, und der aufrufende Code hängt von allen konkreten Klassen ab.</p>
   <p><strong>Lösung (statische Fabrikmethode, wie in S23):</strong> Eine einzige – meist statische – Methode in der Oberklasse oder in einer eigenen Fabrikklasse entscheidet anhand eines Parameters, welches Objekt erzeugt wird, und gibt es mit dem Typ der <strong>Oberklasse bzw. des Interfaces</strong> zurück. Der aufrufende Code kennt nur noch die Abstraktion.</p>
   <p>Beispiel: Berichte sollen als CSV, JSON oder XML exportiert werden.</p>
@@ -731,7 +732,7 @@ e.exportiere(bericht)</pre>
   <p><strong>Vorteile:</strong> Die Erzeugungslogik steht an <strong>einer</strong> Stelle (eine neue Klasse = eine Änderung in der Fabrik), der aufrufende Code ist unabhängig von den konkreten Klassen (lose Kopplung), redundante Fallunterscheidungen verschwinden, die Fabrik kann Parameter prüfen und Standardwerte setzen.</p>
   <p><strong>Fabrikmethode im Sinne der Gang of Four:</strong> Statt einer statischen Methode deklariert eine abstrakte „Erzeuger“-Klasse eine abstrakte Methode <code>erzeugeProdukt()</code>; jede Unterklasse des Erzeugers überschreibt sie und entscheidet so, welches konkrete Produkt entsteht. Die <strong>Abstrakte Fabrik</strong> erweitert die Idee auf ganze Familien zusammengehöriger Objekte (z. B. alle Bedienelemente im hellen oder dunklen Design). In der Prüfung genügt meist die statische Variante.</p>
 
-  <h4>Builder (Erbauer) – kurz</h4>
+  <h4>Builder (Erbauer) – kurz <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <p><strong>Problem:</strong> Ein Objekt hat viele, teils optionale Angaben. Konstruktoren mit vielen Parametern sind unlesbar (<code>new Reise("Rom", null, true, false, 2, null)</code>) oder man braucht unzählige überladene Konstruktoren. <strong>Lösung:</strong> Eine eigene Builder-Klasse sammelt die Angaben Schritt für Schritt über sprechende Methoden und erzeugt mit <code>build()</code> das fertige, vollständig geprüfte Objekt.</p>
 <pre class="java">Reise r = new Reise.Builder("Rom")      // Pflichtangabe
         .hotel("Albergo Sole")          // optionale Angaben
@@ -756,10 +757,10 @@ e.exportiere(bericht)</pre>
   </div>
 
   <!-- ===================== OOP-05 ===================== -->
-  <h3 id="e-05">OOP-05 · Verhaltens- und Strukturmuster: Observer, Strategie, MVC, Adapter, Fassade, Decorator <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
-  <p class="klein">Vorkommen: Teil von „Entwurfsmuster“ (3/9) · Observer: S22 T1 A3 (durchgängig: Beziehung im Klassendiagramm, Interface-Methoden, Realisierung erläutern, Sequenzdiagramm, <code>notifyObservers</code> in Pseudocode – 23 der 30 P), W24 T1 A4bc (4 P: geeignetes Muster für die Aktualisierung aller Anzeigen nennen und begründen)</p>
+  <h3 id="e-05">OOP-05 · Verhaltens- und Strukturmuster: Observer, Strategie, MVC, Adapter, Fassade, Decorator <span class="relevanz r-vor" title="Belege: W24 T1 A4bc (4 P); S22 T1 A3ba, A3bb, A3bc, A3ca, A3cb (23 P).">Kam vor – 2/9 – W24, S22</span></h3>
+  <p class="klein">Vorkommen: 2/9 · Prüfungen: W24, S22 · Teil 1, Aufgabe 3 oder 4</p>
 
-  <h4>Observer (Beobachter)</h4>
+  <h4>Observer (Beobachter) <span class="relevanz r-vor" title="S22 T1 3 (Observer durchgängig, 30 P), W24 T1 4bc (Observer wählen und begründen)">Kam vor – 2/9 – W24, S22</span></h4>
   <p><strong>Problem:</strong> Ein Objekt ändert seinen Zustand, und <strong>beliebig viele andere Objekte</strong> sollen darüber <strong>automatisch</strong> informiert werden – ohne dass das geänderte Objekt deren konkrete Klassen kennen muss (1:n-Abhängigkeit, lose Kopplung). <strong>Signalwörter</strong> in der Aufgabe: „sobald sich … ändert, sollen alle Anzeigen aktualisiert werden“, „weitere Anzeigen sollen später hinzukommen“, „App, Display und Verwaltung zeigen denselben Wert“.</p>
   <table class="kompakt">
     <tr><th>Rolle</th><th>Aufgabe</th><th>Methoden (englisch / deutsch)</th></tr>
@@ -812,7 +813,7 @@ Ende methode</pre>
     Aufbau: <strong>Muster nennen → Rollen zuordnen → Ablauf in einem Satz → Vorteil für genau diese Situation.</strong>
   </div>
 
-  <h4>Strategie (Strategy)</h4>
+  <h4>Strategie (Strategy) <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <p><strong>Problem:</strong> Für eine Aufgabe gibt es mehrere Verfahren (Algorithmen), die austauschbar sein sollen – auch zur Laufzeit – ohne dass die nutzende Klasse lange <code>wenn … sonst wenn …</code>-Ketten enthält. <strong>Lösung:</strong> Jedes Verfahren wird in eine eigene Klasse gekapselt, die ein gemeinsames Interface realisiert. Die nutzende Klasse (Kontext) hat ein Attribut vom Typ des Interfaces und <strong>delegiert</strong> die Arbeit an das gerade eingesetzte Strategie-Objekt.</p>
   <figure>
     <svg viewBox="0 0 760 304" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><rect x="10" y="10" width="360" height="114" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="190" y="28" text-anchor="middle" font-weight="bold">Navigation</text><line x1="10" y1="36" x2="370" y2="36" stroke="#222" stroke-width="1.2"/><text x="19" y="54">- strategie : Routenstrategie</text><line x1="10" y1="63" x2="370" y2="63" stroke="#222" stroke-width="1.2"/><text x="19" y="81">+ Navigation(s : Routenstrategie)</text><text x="19" y="98">+ setStrategie(s : Routenstrategie) : void</text><text x="19" y="115">+ planeRoute(start : string, ziel : string) : Route</text><rect x="385" y="120" width="368" height="69" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="569" y="138" text-anchor="middle" font-size="12">«interface»</text><text x="569" y="154" text-anchor="middle" font-weight="bold">Routenstrategie</text><line x1="385" y1="162" x2="753" y2="162" stroke="#222" stroke-width="1.2"/><text x="394" y="180">+ berechneRoute(start : string, ziel : string) : Route</text><polyline points="260,124 260,165 385,165" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="374,171 385,165 374,159" fill="none" stroke="#222" stroke-width="1.3"/><text x="268" y="159" font-size="12">strategie</text><text x="373" y="182" text-anchor="end" font-size="12">1</text><rect x="330" y="270" width="140" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="400" y="288" text-anchor="middle" font-weight="bold">SchnellsteRoute</text><rect x="480" y="270" width="140" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="550" y="288" text-anchor="middle" font-weight="bold">KuerzesteRoute</text><rect x="628" y="270" width="125" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="690.5" y="288" text-anchor="middle" font-weight="bold">Fahrradroute</text><polyline points="400,270 400,245" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="550,270 550,245" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="690.5,270 690.5,245" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="400,245 690.5,245" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="569,245 569,189" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polygon points="569,189 577,204 561,204" fill="#fff" stroke="#222" stroke-width="1.2"/><polygon points="10,220 250,220 260,230 260,277 10,277" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="250,220 250,230 260,230" fill="none" stroke="#222" stroke-width="1.2"/><text x="18" y="239" font-size="12">Jede Strategie-Klasse implementiert</text><text x="18" y="254" font-size="12">berechneRoute(start, ziel) mit</text><text x="18" y="269" font-size="12">ihrem eigenen Verfahren.</text></svg>
@@ -832,7 +833,7 @@ nav.setStrategie(new Fahrradroute());   // Wechsel zur Laufzeit
 Route r2 = nav.planeRoute("Kiel", "Lübeck");</pre>
   <p><strong>Strategie statt Unterklassen des Kontexts:</strong> Das Verfahren kann zur Laufzeit gewechselt werden; es entstehen keine Unterklassen für jede Kombination (Navigation für Auto mit schnellster Route, Navigation für Fahrrad …); jedes Verfahren ist einzeln test- und wiederverwendbar; neue Verfahren ändern den Kontext nicht. Das Prinzip dahinter: <em>Komposition statt Vererbung</em>. (Ähnlich aufgebaut ist das Zustandsmuster; dort wechselt das Objekt sein Verhalten aber selbst, je nach Zustand.)</p>
 
-  <h4>MVC (Model-View-Controller)</h4>
+  <h4>MVC (Model-View-Controller) <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <p>Architekturmuster für Anwendungen mit Benutzeroberfläche. Es trennt die Anwendung in drei Teile mit klaren Zuständigkeiten:</p>
   <div class="zweispaltig">
     <ul>
@@ -847,14 +848,14 @@ Route r2 = nav.planeRoute("Kiel", "Lübeck");</pre>
   </div>
   <p><strong>Vorteile:</strong> Trennung der Zuständigkeiten, Oberfläche austauschbar (Web, App) bei gleichem Model, mehrere Ansichten derselben Daten, parallele Entwicklung im Team, Model ohne Oberfläche testbar.</p>
 
-  <h4>Adapter</h4>
+  <h4>Adapter <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <p><strong>Problem:</strong> Eine vorhandene Klasse (Fremdbibliothek, Altsystem) bietet die benötigte Funktion, aber mit einer <strong>anderen Schnittstelle</strong> als erwartet, und sie darf oder kann nicht geändert werden. <strong>Lösung:</strong> Eine Adapter-Klasse realisiert die erwartete Schnittstelle und leitet jeden Aufruf – übersetzt – an das vorhandene Objekt weiter. Beispiel: Die Kühlhaus-Software erwartet <code>Temperaturquelle.getCelsius()</code>, ein neu gekaufter Sensor liefert über seine Bibliothek nur <code>readFahrenheit()</code>.</p>
   <figure>
     <svg viewBox="0 0 740 248" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><rect x="10" y="30" width="146" height="53" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="83" y="48" text-anchor="middle" font-weight="bold">Kuehlhaussteuerung</text><line x1="10" y1="56" x2="156" y2="56" stroke="#222" stroke-width="1.2"/><text x="19" y="74">+ regeln() : void</text><rect x="300" y="10" width="200" height="69" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="400" y="28" text-anchor="middle" font-size="12">«interface»</text><text x="400" y="44" text-anchor="middle" font-weight="bold">Temperaturquelle</text><line x1="300" y1="52" x2="500" y2="52" stroke="#222" stroke-width="1.2"/><text x="309" y="70">+ getCelsius() : double</text><rect x="300" y="160" width="200" height="80" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="400" y="178" text-anchor="middle" font-weight="bold">FahrenheitAdapter</text><line x1="300" y1="186" x2="500" y2="186" stroke="#222" stroke-width="1.2"/><text x="309" y="204">- sensor : FahrenheitSensor</text><line x1="300" y1="213" x2="500" y2="213" stroke="#222" stroke-width="1.2"/><text x="309" y="231">+ getCelsius() : double</text><rect x="558" y="160" width="180" height="69" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="648" y="178" text-anchor="middle" font-size="12">«Fremdbibliothek»</text><text x="648" y="194" text-anchor="middle" font-weight="bold">FahrenheitSensor</text><line x1="558" y1="202" x2="738" y2="202" stroke="#222" stroke-width="1.2"/><text x="567" y="220">+ readFahrenheit() : double</text><polyline points="156,56.5 300,56.5" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="289,62.5 300,56.5 289,50.5" fill="none" stroke="#222" stroke-width="1.3"/><polyline points="400,160 400,79" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polygon points="400,79 408,94 392,94" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="500,205 558,205" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="547,211 558,205 547,199" fill="none" stroke="#222" stroke-width="1.3"/><text x="529" y="199" text-anchor="middle" font-size="12">sensor</text><text x="552" y="222" text-anchor="end" font-size="12">1</text><polygon points="10,170 255,170 265,180 265,227 10,227" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="255,170 255,180 265,180" fill="none" stroke="#222" stroke-width="1.2"/><text x="18" y="189" font-size="12">getCelsius():</text><text x="18" y="204" font-size="12">f := sensor.readFahrenheit()</text><text x="18" y="219" font-size="12">rückgabe (f - 32) * 5 / 9</text><line x1="265" y1="200" x2="300" y2="210" stroke="#222" stroke-width="1" stroke-dasharray="6,4"/></svg>
     <figcaption>Abb. A-16: Objektadapter – <code>FahrenheitAdapter</code> übersetzt zwischen erwarteter und vorhandener Schnittstelle</figcaption>
   </figure>
 
-  <h4>Fassade (Facade)</h4>
+  <h4>Fassade (Facade) <span class="relevanz r-hinter" title="nie abgefragt (in W24 4bb als Strukturmuster-Beispiel vorgegeben)">Hintergrund – 0/9</span></h4>
   <p><strong>Problem:</strong> Ein Teilsystem besteht aus vielen Klassen, die in einer bestimmten Reihenfolge benutzt werden müssen. Jeder Nutzer müsste alle kennen. <strong>Lösung:</strong> Eine Fassadenklasse bietet eine <strong>einfache, vereinheitlichte Schnittstelle</strong> und ruft intern die Klassen des Teilsystems auf. Beispiel: Ein Reiseportal ruft nur <code>ReiseFassade.bucheReise(kunde, angebot)</code> auf; die Fassade reserviert Flug und Hotel, zieht die Zahlung ein und verschickt die Bestätigung.</p>
   <figure>
     <svg viewBox="0 0 700 248" width="700" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><rect x="10" y="30" width="115" height="53" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="67.5" y="48" text-anchor="middle" font-weight="bold">Reiseportal</text><line x1="10" y1="56" x2="125" y2="56" stroke="#222" stroke-width="1.2"/><text x="19" y="74">+ buchen() : void</text><rect x="200" y="20" width="400" height="53" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="400" y="38" text-anchor="middle" font-weight="bold">ReiseFassade</text><line x1="200" y1="46" x2="600" y2="46" stroke="#222" stroke-width="1.2"/><text x="209" y="64">+ bucheReise(kunde : Kunde, angebot : Angebot) : boolean</text><polyline points="125,56.5 200,56.5" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="189,62.5 200,56.5 189,50.5" fill="none" stroke="#222" stroke-width="1.3"/><rect x="140" y="110" width="550" height="130" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="5,3"/><text x="150" y="232" font-size="12" font-weight="bold">Teilsystem Buchung</text><rect x="160" y="170" width="118" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="219" y="188" text-anchor="middle" font-weight="bold">FlugService</text><polyline points="260,73 260,150 219,150 219,170" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="213,159 219,170 225,159" fill="none" stroke="#222" stroke-width="1.3"/><rect x="292" y="170" width="118" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="351" y="188" text-anchor="middle" font-weight="bold">HotelService</text><polyline points="355,73 355,150 351,150 351,170" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="345,159 351,170 357,159" fill="none" stroke="#222" stroke-width="1.3"/><rect x="424" y="170" width="118" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="483" y="188" text-anchor="middle" font-weight="bold">Zahlungsdienst</text><polyline points="450,73 450,150 483,150 483,170" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="477,159 483,170 489,159" fill="none" stroke="#222" stroke-width="1.3"/><rect x="556" y="170" width="118" height="26" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="615" y="188" text-anchor="middle" font-weight="bold">MailService</text><polyline points="545,73 545,150 615,150 615,170" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="609,159 615,170 621,159" fill="none" stroke="#222" stroke-width="1.3"/></svg>
@@ -862,14 +863,14 @@ Route r2 = nav.planeRoute("Kiel", "Lübeck");</pre>
   </figure>
   <p class="klein">Abgrenzung: Ein <strong>Adapter</strong> macht <em>eine</em> vorhandene Schnittstelle passend zu einer <em>erwarteten</em>. Eine <strong>Fassade</strong> vereinfacht <em>viele</em> Schnittstellen zu einer <em>neuen</em>, einfacheren.</p>
 
-  <h4>Decorator (Dekorierer)</h4>
+  <h4>Decorator (Dekorierer) <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <p><strong>Problem:</strong> Objekte sollen zur Laufzeit <strong>beliebig kombinierbare Zusatzfunktionen</strong> erhalten. Eine Unterklasse für jede Kombination würde zur „Klassenexplosion“ führen. <strong>Lösung:</strong> Ein Decorator realisiert <strong>dieselbe Schnittstelle</strong> wie das Objekt, das er „umhüllt“, hält eine Referenz darauf, leitet Aufrufe weiter und ergänzt eigenes Verhalten. Decorator lassen sich beliebig verschachteln. Beispiel Café: <code>new Sirup(new Milch(new Kaffee()))</code> – <code>preis()</code> ergibt 2,50 + 0,30 + 0,50 = 3,30 €. Bekanntes Java-Beispiel: <code>new BufferedReader(new FileReader("daten.txt"))</code>.</p>
   <figure>
     <svg viewBox="0 0 640 326" width="640" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13"><rect x="220" y="10" width="160" height="69" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="300" y="28" text-anchor="middle" font-size="12">«interface»</text><text x="300" y="44" text-anchor="middle" font-weight="bold">Getraenk</text><line x1="220" y1="52" x2="380" y2="52" stroke="#222" stroke-width="1.2"/><text x="229" y="70">+ preis() : double</text><rect x="30" y="140" width="150" height="53" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="105" y="158" text-anchor="middle" font-weight="bold">Kaffee</text><line x1="30" y1="166" x2="180" y2="166" stroke="#222" stroke-width="1.2"/><text x="39" y="184">+ preis() : double</text><rect x="330" y="130" width="200" height="96" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="430" y="148" text-anchor="middle" font-weight="bold" font-style="italic">Zutat</text><text x="430" y="164" text-anchor="middle" font-size="12">{abstract}</text><line x1="330" y1="172" x2="530" y2="172" stroke="#222" stroke-width="1.2"/><text x="339" y="190"># getraenk : Getraenk</text><line x1="330" y1="199" x2="530" y2="199" stroke="#222" stroke-width="1.2"/><text x="339" y="217">+ Zutat(g : Getraenk)</text><rect x="250" y="265" width="150" height="53" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="325" y="283" text-anchor="middle" font-weight="bold">Milch</text><line x1="250" y1="291" x2="400" y2="291" stroke="#222" stroke-width="1.2"/><text x="259" y="309">+ preis() : double</text><rect x="450" y="265" width="150" height="53" fill="#fff" stroke="#222" stroke-width="1.2"/><text x="525" y="283" text-anchor="middle" font-weight="bold">Sirup</text><line x1="450" y1="291" x2="600" y2="291" stroke="#222" stroke-width="1.2"/><text x="459" y="309">+ preis() : double</text><polyline points="105,140 105,112" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="400,130 400,112" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="105,112 400,112" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polyline points="300,112 300,79" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="6,4"/><polygon points="300,79 308,94 292,94" fill="#fff" stroke="#222" stroke-width="1.2"/><polyline points="530,180 600,180 600,45 380,45" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="391,39 380,45 391,51" fill="none" stroke="#222" stroke-width="1.3"/><text x="390" y="39" font-size="12">getraenk</text><text x="390" y="62" font-size="12">1</text><polyline points="325,265 325,248" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="525,265 525,248" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="325,248 525,248" fill="none" stroke="#222" stroke-width="1.2"/><polyline points="450,248 450,226" fill="none" stroke="#222" stroke-width="1.2"/><polygon points="450,226 458,241 442,241" fill="#fff" stroke="#222" stroke-width="1.2"/></svg>
     <figcaption>Abb. A-18: Decorator – <code>Zutat</code> ist ein <code>Getraenk</code> und enthält ein <code>Getraenk</code></figcaption>
   </figure>
 
-  <h4>Welches Muster passt? Signalwörter</h4>
+  <h4>Welches Muster passt? Signalwörter <span class="relevanz r-vor" title="W24 T1 4bc: passendes Muster nennen und begründen">Kam vor – 1/9 – W24</span></h4>
   <table class="kompakt">
     <tr><th>Situation in der Aufgabe</th><th>Muster</th><th>Kategorie</th></tr>
     <tr><td>„Es darf nur ein Objekt geben“, zentrale Konfiguration, globaler Zugriff</td><td>Singleton</td><td>Erzeugung</td></tr>

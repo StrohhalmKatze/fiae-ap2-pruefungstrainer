@@ -260,3 +260,30 @@ textarea.ap2-eingabe.ap2-code { font-family: Consolas, "Courier New", monospace;
 @media screen {
   html[data-theme="dark"] .blattname { background: var(--soft); color: var(--text); border-color: #6b7280; }
 }
+
+/* =====================================================================
+   Ergänzung: Prüfungsrelevanz-Etiketten an den h4-Abschnitten im Erklärungssatz (Teil A)
+   Kern = in mindestens 3 der 9 Prüfungen direkt gebraucht, Kam vor = in 1-2 Prüfungen, Hintergrund = nie.
+   Dunkelvarianten wie oben über html[data-theme="dark"] (uebungen.js setzt es auch nach der Systemeinstellung).
+   Druck: auch in Schwarzweiß unterscheidbar (Kern = Doppelrahmen und fett, Kam vor = einfacher Rahmen, Hintergrund = gestrichelt).
+   ===================================================================== */
+.relevanz {
+  display: inline-block; margin-left: 4px; padding: 0 7px; border: 1px solid currentColor; border-radius: 9px;
+  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  font-size: 11px; font-weight: 600; font-style: normal; line-height: 1.55; letter-spacing: .01em;
+  vertical-align: middle; white-space: nowrap; cursor: help;
+}
+.r-kern { background: #1f4e79; border-color: #1f4e79; color: #fff; font-weight: 700; }
+.r-vor { background: #fdf0d0; border-color: #b7791f; color: #7a4b06; }
+.r-hinter { background: transparent; border: 1px dashed #8a919c; color: #5b6370; font-weight: 500; }
+@media screen {
+  html[data-theme="dark"] .r-kern { background: #3b6ea8; border-color: #6aa0e0; color: #fff; }
+  html[data-theme="dark"] .r-vor { background: #3a2c10; border-color: #b8893a; color: #f0c36a; }
+  html[data-theme="dark"] .r-hinter { background: transparent; border-color: #6b7280; color: #9aa3b1; }
+}
+@media print {
+  .relevanz { font-size: 8pt; padding: 0 5px; cursor: auto; }
+  .r-kern { background: #fff; color: #000; border: 3px double #000; font-weight: 800; }
+  .r-vor { background: #fff; color: #000; border: 1.5px solid #000; font-weight: 600; }
+  .r-hinter { background: #fff; color: #444; border: 1px dashed #555; font-weight: 400; }
+}

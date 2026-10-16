@@ -23,7 +23,7 @@
 <header class="blockkopf">
   <h1>Block 02 · Algorithmen &amp; Programmierung</h1>
   <div class="unter">
-    <span class="badge k-immer">Immer</span> 9/9 Prüfungen · Ø 42 von 200 Punkten · vor allem Teil 2 (dort immer eine 25–30-Punkte-Algorithmusaufgabe), in mehreren Prüfungen auch Teil 1
+    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 4, Teil 2 in 9 Prüfungen.">Prüfungskern – 9/9 – alle</span> · Ø 41 von 200 Punkten · vor allem Teil 2 (dort immer eine 20–30-Punkte-Algorithmusaufgabe), in mehreren Prüfungen auch Teil 1
     · Lösungen: <a href="02_Algorithmen_Loesungen.html">02_Algorithmen_Loesungen.html</a>
   </div>
 </header>
@@ -72,26 +72,27 @@
 <section class="teil" id="erklaerung">
   <h2>A · Erklärungssatz</h2>
 
-  <p>In <strong>jeder</strong> der 9 ausgewerteten Prüfungen steht in Teil 2 (Aufgabe 1 oder 2) eine große Algorithmusaufgabe mit 25–30 Punkten. Fast immer bekommst du ein Klassendiagramm mit Attributen („Getter sind vorhanden“), eine Beispieltabelle mit Daten und eine Methodensignatur. Gesucht ist eine Methode, die eine Liste oder ein Array von Objekten durchläuft und dabei <strong>zählt, summiert, filtert, ein Ergebnis-Array füllt oder ein Minimum sucht</strong>. Ob du das in Pseudocode, als Struktogramm oder in einer Programmiersprache schreibst, ist meist freigestellt. Der Belegsatz enthält nur die Pseudocode-Konventionen, nicht die Muster. Die musst du können.</p>
+  <p>In <strong>jeder</strong> der 9 ausgewerteten Prüfungen steht in Teil 2 (Aufgabe 1 oder 2) eine große Algorithmusaufgabe mit 20–30 Punkten (nur S24 mit 20 P, aufgeteilt in zwei Teilaufgaben). Fast immer bekommst du ein Klassendiagramm mit Attributen („Getter sind vorhanden“), eine Beispieltabelle mit Daten und eine Methodensignatur. Gesucht ist eine Methode, die eine Liste oder ein Array von Objekten durchläuft und dabei <strong>zählt, summiert, filtert, ein Ergebnis-Array füllt oder ein Minimum sucht</strong>. Ob du das in Pseudocode, als Struktogramm oder in einer Programmiersprache schreibst, ist meist freigestellt. Der Belegsatz enthält nur die Pseudocode-Konventionen, nicht die Muster. Die musst du können.</p>
+  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
 
   <table class="kompakt">
     <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
-    <tr><td>ALG-01 Algorithmus in Pseudocode</td><td><span class="badge k-immer">Immer</span></td><td>25–30 (T2), 4–15 (T1)</td><td>Grundmuster sicher anwenden, sauber initialisieren</td></tr>
-    <tr><td>ALG-02 Arrays und Listen</td><td><span class="badge k-immer">Immer</span></td><td>in ALG-01 enthalten</td><td>Indexgrenzen, 2D-Arrays, <code>List&lt;T&gt;</code>-Methoden</td></tr>
-    <tr><td>ALG-03 Minimum/Maximum, Suche</td><td><span class="badge k-oft">Oft</span></td><td>10–25</td><td>richtig initialisieren, Objekt statt Wert merken</td></tr>
-    <tr><td>ALG-04 Speicherbedarf, Zahlensysteme</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>3–7</td><td>1024er-Präfixe, Bit/Byte, Rechenweg mit Einheiten</td></tr>
-    <tr><td>ALG-05 Sortieren</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>10–25</td><td>Bubblesort, Vergleichsfunktion</td></tr>
-    <tr><td>ALG-06 Zeichenketten</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>5–8</td><td>Zeichen prüfen, Text zerlegen</td></tr>
-    <tr><td>ALG-07 Exceptions</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>2–6</td><td>Fehlerfälle erkennen und behandeln</td></tr>
-    <tr><td>ALG-08 Rekursion</td><td><span class="badge k-sonstige">Sonstige</span></td><td>bis 12</td><td>Basisfall, Schreibtischtest</td></tr>
-    <tr><td>ALG-09 Nebenläufigkeit</td><td><span class="badge k-sonstige">Sonstige</span></td><td>4</td><td>Race Condition, Sperren</td></tr>
+    <tr><td>ALG-01 Algorithmus in Pseudocode</td><td><span class="relevanz r-kern" title="Belege: S26 T2 A1a, A1b, A2ba (34 P); W25 T2 A1a, A1b (30 P); W24 T2 A1, A2a, A2b (50 P), T1 A2c (8 P); S24 T2 A2a, A2b (20 P), T1 A3ba, A3bb, A3bc (15 P); W23 T2 A2 (25 P); S23 T2 A2, A3ab (38 P), T1 A2bc, A2bd (9 P); W22 T2 A1a, A1b, A1d, A2c (32 P); S22 T2 A1 (30 P), T1 A3cb (4 P); W21 T2 A2 (25 P).">Prüfungskern – 9/9 – alle</span></td><td>20–30 (T2), 4–15 (T1)</td><td>Grundmuster sicher anwenden, sauber initialisieren</td></tr>
+    <tr><td>ALG-02 Arrays und Listen</td><td><span class="relevanz r-kern" title="Belege: S26 T2 A1a, A1b, A2ba (34 P); W25 T2 A3bb, A1a, A1b (34 P); W24 T2 A1, A2b (40 P); S24 T2 A2a, A2b (20 P), T1 A3ba, A3bb, A3bc (15 P); W23 T2 A2 (25 P); S23 T2 A2 (25 P); W22 T2 A1a, A1d, A2c (27 P); S22 T2 A1 (30 P), T1 A3cb (4 P); W21 T2 A2 (25 P).">Prüfungskern – 9/9 – alle</span></td><td>in ALG-01 enthalten</td><td>Indexgrenzen, 2D-Arrays, <code>List&lt;T&gt;</code>-Methoden</td></tr>
+    <tr><td>ALG-03 Minimum/Maximum, Suche</td><td><span class="relevanz r-kern" title="Belege: W25 T2 A1b, A3bb, A1a (34 P); S24 T1 A3bb (5 P); W23 T2 A2 (25 P); S22 T2 A1 (30 P); W21 T2 A2 (25 P).">Prüfungskern – 5/9 – W25, S24, W23, S22, W21</span></td><td>10–25</td><td>richtig initialisieren, Objekt statt Wert merken</td></tr>
+    <tr><td>ALG-04 Speicherbedarf, Zahlensysteme</td><td><span class="relevanz r-kern" title="Belege: S26 T2 A3b (5 P); W23 T2 A3b (7 P); W22 T2 A2aa, A2c, A3c (17 P).">Prüfungskern – 3/9 – S26, W23, W22</span></td><td>3–7</td><td>1024er-Präfixe, Bit/Byte, Rechenweg mit Einheiten</td></tr>
+    <tr><td>ALG-05 Sortieren</td><td><span class="relevanz r-vor" title="Belege: S24 T2 A2a (12 P); W22 T2 A1a, A1b, A1d (22 P).">Kam vor – 2/9 – S24, W22</span></td><td>10–25</td><td>Bubblesort, Vergleichsfunktion</td></tr>
+    <tr><td>ALG-06 Zeichenketten</td><td><span class="relevanz r-vor" title="Belege: W25 T2 A4d (8 P); W21 T2 A1c (6 P). Grenzwertig, nicht mitgezählt: S26 (T2 A1a: Namensvergleich mit == ausdrücklich erlaubt; T2 A1b: Namensvergleich mit == ausdrücklich erlaubt).">Kam vor – 2/9 – W25, W21</span></td><td>5–8</td><td>Zeichen prüfen, Text zerlegen</td></tr>
+    <tr><td>ALG-07 Exceptions</td><td><span class="relevanz r-vor" title="Belege: W25 T2 A1b (10 P).">Kam vor – 1/9 – W25</span></td><td>2–6</td><td>Fehlerfälle erkennen und behandeln</td></tr>
+    <tr><td>ALG-08 Rekursion</td><td><span class="relevanz r-vor" title="Belege: W22 T2 A2aa, A2ab, A2b (12 P).">Kam vor – 1/9 – W22</span></td><td>bis 12</td><td>Basisfall, Schreibtischtest</td></tr>
+    <tr><td>ALG-09 Nebenläufigkeit</td><td><span class="relevanz r-vor" title="Belege: W21 T2 A1b (4 P).">Kam vor – 1/9 – W21</span></td><td>4</td><td>Race Condition, Sperren</td></tr>
   </table>
 
   <!-- ===================== ALG-01 ===================== -->
-  <h3 id="e-01">ALG-01 · Algorithmus in Pseudocode schreiben <span class="badge k-immer">Immer</span></h3>
-  <p class="klein">Vorkommen: 9/9 · Prüfungen: alle (W21–S26), Teil 2 Aufgabe 1 oder 2 mit 25–30 Punkten · zusätzlich kleinere Methoden in Teil 1 (S22, S23, S24, W24)</p>
+  <h3 id="e-01">ALG-01 · Algorithmus in Pseudocode schreiben <span class="relevanz r-kern" title="Belege: S26 T2 A1a, A1b, A2ba (34 P); W25 T2 A1a, A1b (30 P); W24 T2 A1, A2a, A2b (50 P), T1 A2c (8 P); S24 T2 A2a, A2b (20 P), T1 A3ba, A3bb, A3bc (15 P); W23 T2 A2 (25 P); S23 T2 A2, A3ab (38 P), T1 A2bc, A2bd (9 P); W22 T2 A1a, A1b, A1d, A2c (32 P); S22 T2 A1 (30 P), T1 A3cb (4 P); W21 T2 A2 (25 P).">Prüfungskern – 9/9 – alle</span></h3>
+  <p class="klein">Vorkommen: 9/9 · Prüfungen: alle · Teil 2, Aufgabe 1 oder 2 (außerdem Aufgabe 3 in S23) und Teil 1 (W24, S24, S23, S22)</p>
 
-  <h4>So sieht die Aufgabe aus</h4>
+  <h4>So sieht die Aufgabe aus <span class="relevanz r-kern" title="große Pseudocode-Aufgabe mit Klassengerüst, Getter und Beispieltabelle in jeder Prüfung (T2)">Prüfungskern – 9/9 – alle</span></h4>
   <ul>
     <li><strong>Klassendiagramm</strong> (oft nur ein Kasten) mit privaten Attributen, dazu der Satz „Für alle Attribute existieren Get-Methoden“. Du greifst deshalb immer über Getter zu: <code>k.getPreis()</code>, nicht <code>k.preis</code>.</li>
     <li><strong>Beispieldaten</strong> als Tabelle, oft mit „vorher → nachher“ (z. B. links die Rohdaten, rechts die erwartete Ergebnisliste). Diese Tabelle ist dein Testfall.</li>
@@ -100,7 +101,7 @@
     <li>Für Listen ein Kasten <code>List&lt;T&gt;</code> mit <code>add</code>, <code>get</code>, <code>size</code>, <code>contains</code> (eventuell <code>remove</code>). Andere Listenmethoden solltest du nicht voraussetzen.</li>
   </ul>
 
-  <h4>Pseudocode-Bausteine (IHK-Stil) und ihre Java-Entsprechung</h4>
+  <h4>Pseudocode-Bausteine (IHK-Stil) und ihre Java-Entsprechung <span class="relevanz r-kern" title="Pseudocode in jeder Prüfung (Belegsatz-Konventionen S22, W22, S24, S23)">Prüfungskern – 9/9 – alle</span></h4>
   <p>Der Belegsatz (S24) gibt nur die Grundformen vor. Für alles andere gilt: lesbar, eindeutig und konsequent. Diese Schreibweise wird in diesem Block durchgehend verwendet:</p>
   <table class="kompakt">
     <tr><th>Baustein</th><th>Pseudocode</th><th>Java</th></tr>
@@ -121,7 +122,7 @@
 
   <div class="merke"><span class="kastentitel">Merke</span>Bewertet wird die <strong>Logik</strong>: richtige Schleife, richtige Bedingung, richtige Initialisierung, Rückgabe. Ein fehlendes Semikolon oder <code>Ende zähle</code> statt <code>Ende-zähle</code> kostet praktisch nie Punkte. Ein Zähler, der in der falschen Schleife auf 0 gesetzt wird, kostet dagegen viele.</div>
 
-  <h4>Die fünf Grundmuster</h4>
+  <h4>Die fünf Grundmuster <span class="relevanz r-kern" title="Zählen, Summe/Durchschnitt, Filtern, Min/Max über Array oder Liste in jeder Prüfung">Prüfungskern – 9/9 – alle</span></h4>
   <p>Fast jede Prüfungsaufgabe ist eine Kombination dieser Muster. Beispiel-Szenario hier: ein Lager mit Objekten der Klasse <code>Artikel</code> (Attribute <code>artikelNr</code>, <code>bezeichnung</code>, <code>kategorie</code> (1–4), <code>bestand</code>, <code>mindestbestand</code>, <code>preis</code>; Getter vorhanden).</p>
 
   <p><strong>Muster 1 – Zählen mit Bedingung</strong> (Rückgabe <code>integer</code>): Zähler vor der Schleife auf 0, in der Schleife bei erfüllter Bedingung um 1 erhöhen.</p>
@@ -247,7 +248,7 @@ Ende funktion</pre>
     <figcaption>Abb. A-1: Verschachtelte Schleifen – für jedes Element außen wird die innere Liste komplett durchlaufen (n × m Prüfungen)</figcaption>
   </figure>
 
-  <h4>So gehst du vor</h4>
+  <h4>So gehst du vor <span class="relevanz r-kern" title="Vorgehen für die große Algorithmus-Aufgabe in jeder Prüfung">Prüfungskern – 9/9 – alle</span></h4>
   <ol>
     <li><strong>Signatur lesen:</strong> Was kommt hinein (Parameter), was muss heraus? <code>integer</code> → Zähler oder Summe, <code>double</code> → Durchschnitt, <code>List</code> → Filter, Array → „je Index“, Objekt → Suche/Minimum, <code>void</code> → vorhandene Objekte per Setter ändern.</li>
     <li><strong>Beispieldaten von Hand durchrechnen.</strong> Wenn du das erwartete Ergebnis der Beispieltabelle nicht selbst ausrechnen kannst, hast du die Aufgabe noch nicht verstanden.</li>
@@ -274,7 +275,7 @@ Ende funktion</pre>
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
     <ul>
       <li><strong>S26 T2 A1 (30 P):</strong> aus einer Liste von Tagesdaten erst eine Liste mit genau einem Objekt je Name erzeugen (<code>contains</code>), dann je Objekt den Durchschnitt in einem Zeitraum berechnen (Muster 5 + 2, verschachtelte Schleifen, Hilfsmethode <code>between</code>).</li>
-      <li><strong>W24 T2 A1 (25 P):</strong> Abfahrtszeiten in einem Objekt-Array, Ergebnis-Array „Anzahl Verspätungen je Streckenabschnitt“ (Muster 4 + Differenz benachbarter Elemente).</li>
+      <li><strong>W24 T2 A1 (25 P):</strong> Abfahrtszeiten in einem Objekt-Array, Ergebnis-Array „Anzahl Verspätungen … auf der Strecke n“ (Muster 4 + Differenz benachbarter Elemente).</li>
       <li><strong>S24 T2 A2b (8 P):</strong> Zählfunktion über ein Array (Tage, an denen ein Wert größer als ein Vergleichswert ist).</li>
       <li><strong>W25 T2 A1a (20 P):</strong> freie Tische aus verschachtelten Listen filtern (Muster 3 + verschachtelte Schleifen).</li>
       <li>In Teil 1 kommen kleinere Methoden zu einem Klassendiagramm vor (S24 T1 A3b: drei Methoden à 5 P; S23 T1 A2bc/bd; S22 T1 A3cb).</li>
@@ -283,10 +284,10 @@ Ende funktion</pre>
   </div>
 
   <!-- ===================== ALG-02 ===================== -->
-  <h3 id="e-02">ALG-02 · Arrays und Listen durchlaufen <span class="badge k-immer">Immer</span></h3>
-  <p class="klein">Vorkommen: 9/9 · Arrays in 8/9 (2D-Arrays: W21, S22, S23), Listen <code>List&lt;T&gt;</code> in 5/9 mit steigender Tendenz (S22, W22, S24, W25, S26)</p>
+  <h3 id="e-02">ALG-02 · Arrays und Listen durchlaufen <span class="relevanz r-kern" title="Belege: S26 T2 A1a, A1b, A2ba (34 P); W25 T2 A3bb, A1a, A1b (34 P); W24 T2 A1, A2b (40 P); S24 T2 A2a, A2b (20 P), T1 A3ba, A3bb, A3bc (15 P); W23 T2 A2 (25 P); S23 T2 A2 (25 P); W22 T2 A1a, A1d, A2c (27 P); S22 T2 A1 (30 P), T1 A3cb (4 P); W21 T2 A2 (25 P).">Prüfungskern – 9/9 – alle</span></h3>
+  <p class="klein">Vorkommen: 9/9 · Prüfungen: alle · Teil 2, Aufgabe 1 oder 2 (außerdem Aufgabe 3 in W25) und Teil 1 (S24, S22)</p>
 
-  <h4>Eindimensionales Array</h4>
+  <h4>Eindimensionales Array <span class="relevanz r-kern" title="Arrays in 8 Prüfungen (nur S26 arbeitet ausschließlich mit Listen)">Prüfungskern – 8/9 – alle außer S26</span></h4>
   <ul>
     <li>Feste Anzahl von Elementen <strong>eines</strong> Datentyps, festgelegt beim Anlegen: <code>new integer[24]</code>. Die Größe kann sich danach nicht mehr ändern.</li>
     <li>Index von <strong>0 bis length − 1</strong>. Ein Array mit 24 Elementen hat die Indizes 0 … 23.</li>
@@ -295,8 +296,8 @@ Ende funktion</pre>
     <li><strong>Nachbarelemente</strong> (Differenz zwischen Element i und i + 1, wie die Fahrzeit zwischen zwei Haltestellen in W24): Die Schleife darf dann nur bis <code>length - 2</code> laufen, sonst greift <code>feld[i + 1]</code> im letzten Durchlauf ins Leere.</li>
   </ul>
 
-  <h4>Zweidimensionales Array (Tabelle)</h4>
-  <p>Ein 2D-Array ist eine Tabelle: <code>daten[zeile][spalte]</code>. <code>daten.length</code> ist die Anzahl der Zeilen, <code>daten[0].length</code> die Anzahl der Spalten. Typische Prüfungsbeispiele: Tag × Stunde, Monat × Verbraucher. Beispiel hier: Kino mit 3 Sälen (Zeilen) und 4 Vorstellungen am Tag (Spalten), gespeichert wird die Besucherzahl.</p>
+  <h4>Zweidimensionales Array (Tabelle) <span class="relevanz r-kern" title="2D-Array: W21 T2 2, S22 T2 1, S23 T2 2 (seit S24 nicht mehr)">Prüfungskern – 3/9 – S23, S22, W21</span></h4>
+  <p>Ein 2D-Array ist eine Tabelle: <code>daten[zeile][spalte]</code>. <code>daten.length</code> ist die Anzahl der Zeilen, <code>daten[0].length</code> die Anzahl der Spalten. Typische Prüfungsbeispiele: Tag × Stunde, Verbraucher × Monat. Beispiel hier: Kino mit 3 Sälen (Zeilen) und 4 Vorstellungen am Tag (Spalten), gespeichert wird die Besucherzahl.</p>
 
   <figure>
     <svg viewBox="0 0 640 245" width="640" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
@@ -375,7 +376,7 @@ Ende zähle</pre>
   </div>
   <p>Merkhilfe: <strong>Die äußere Schleife läuft über das, wofür du je ein Ergebnis willst.</strong> Willst du je Saal eine Summe, läuft außen der Saal. Für eine Gesamtsumme oder ein Maximum über alle Zellen ist die Reihenfolge egal, dann reicht eine Variable außerhalb beider Schleifen.</p>
 
-  <h4>Listen: <code>List&lt;T&gt;</code></h4>
+  <h4>Listen: <code>List&lt;T&gt;</code> <span class="relevanz r-kern" title="List&lt;T&gt; mit add/get/size/contains in 5 Prüfungen">Prüfungskern – 5/9 – S26, W25, S24, W22, S22</span></h4>
   <p>Eine Liste wächst und schrumpft dynamisch. In der Prüfung ist sie meist als Klasse <code>List&lt;T&gt;</code> mit wenigen Methoden vorgegeben (<code>T</code> steht für den Elementtyp, z. B. <code>List&lt;Artikel&gt;</code>). In Java entspricht das <code>List&lt;T&gt;</code> bzw. <code>ArrayList&lt;T&gt;</code>.</p>
   <table class="kompakt">
     <tr><th>Methode</th><th>Wirkung</th><th>Beispiel</th></tr>
@@ -433,7 +434,7 @@ solange i &gt;= 0
   i := i - 1
 Ende solange</pre>
 
-  <h4>Array oder Liste?</h4>
+  <h4>Array oder Liste? <span class="relevanz r-kern" title="Zugriff per length/size()/get(i) in jeder Algorithmus-Aufgabe">Prüfungskern – 9/9 – alle</span></h4>
   <table class="kompakt">
     <tr><th>Kriterium</th><th>Array</th><th>Liste (<code>List&lt;T&gt;</code>)</th></tr>
     <tr><td>Größe</td><td>fest beim Anlegen</td><td>dynamisch, wächst mit <code>add</code></td></tr>
@@ -455,7 +456,7 @@ Ende solange</pre>
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
     <ul>
       <li><strong>S23 T2 A2 (25 P):</strong> 2D-Array Besucher je Tag × Stunde, gesucht eine Zählmethode über einen Zeitraum.</li>
-      <li><strong>S22 T2 A1 (30 P):</strong> Statistik aus einem 2D-Array (Monat × Verbraucher) inklusive Minimum/Maximum, Ergebnis in eine Liste.</li>
+      <li><strong>S22 T2 A1 (30 P):</strong> Statistik aus einem 2D-Array (Verbraucher × Monat) inklusive Minimum/Maximum, Ergebnis in eine Liste.</li>
       <li><strong>W21 T2 A2 (25 P):</strong> Terminplan als 2D-Array, Suche nach einem freien Termin.</li>
       <li><strong>S26 T2 A1a (12 P):</strong> Liste mit genau einem Objekt je Name aufbauen (<code>contains</code>).</li>
       <li>Trend: Seit S24 kommen vor allem <strong>Objektlisten</strong> vor, 2D-Arrays zuletzt in S23. Beides können!</li>
@@ -463,10 +464,10 @@ Ende solange</pre>
   </div>
 
   <!-- ===================== ALG-03 ===================== -->
-  <h3 id="e-03">ALG-03 · Minimum/Maximum, lineare Suche <span class="badge k-oft">Oft</span></h3>
-  <p class="klein">Vorkommen: 4/9 · Prüfungen: W21, W23, S24, W25 (dazu Min/Max in S22 innerhalb der 2D-Aufgabe) · Ø 21 Punkte</p>
+  <h3 id="e-03">ALG-03 · Minimum/Maximum, lineare Suche <span class="relevanz r-kern" title="Belege: W25 T2 A1b, A3bb, A1a (34 P); S24 T1 A3bb (5 P); W23 T2 A2 (25 P); S22 T2 A1 (30 P); W21 T2 A2 (25 P).">Prüfungskern – 5/9 – W25, S24, W23, S22, W21</span></h3>
+  <p class="klein">Vorkommen: 5/9 · Prüfungen: W25, S24, W23, S22, W21 · Teil 2, Aufgabe 1 oder 2 (außerdem Aufgabe 3 in W25) und Teil 1 (S24)</p>
 
-  <h4>Minimum und Maximum</h4>
+  <h4>Minimum und Maximum <span class="relevanz r-kern" title="Min/Max: S22 T2 1, Minimumsuche W23 T2 2, W25 T2 1b und 3ba/3bb">Prüfungskern – 3/9 – W25, W23, S22</span></h4>
   <p>Prinzip: Man merkt sich den „bisher besten“ Wert und vergleicht jedes weitere Element damit. Entscheidend ist der <strong>Startwert</strong>.</p>
   <table class="kompakt">
     <tr><th>Startwert</th><th>So geht's</th><th>Geeignet, wenn …</th><th>Risiko</th></tr>
@@ -490,7 +491,7 @@ Ende funktion</pre>
     <code>min := 0</code> und dann <code>wenn wert &lt; min</code>: Bei positiven Werten ist die Bedingung nie erfüllt, das Ergebnis ist immer 0. Genau diesen Fehler sollte man in W25 T2 A3 in einer gegebenen Minimum-Funktion finden. Beim Maximum geht 0 als Startwert nur gut, wenn alle Werte sicher ≥ 0 sind; bei Temperaturen im Winter z. B. nicht.
   </div>
 
-  <h4>Lineare Suche</h4>
+  <h4>Lineare Suche <span class="relevanz r-kern" title="Suche: W21 T2 2, W23 T2 2, S24 T1 3bb, W25 T2 1a/1b">Prüfungskern – 4/9 – W25, S24, W23, W21</span></h4>
   <p>Die Elemente werden der Reihe nach geprüft, bis das gesuchte gefunden ist. Aufwand im schlechtesten Fall: alle n Elemente (O(n)). Wird nichts gefunden, gibt man ein vereinbartes „nicht gefunden“ zurück: <code>null</code> bei Objekten, <code>-1</code> bei Indizes, <code>false</code> bei Ja/Nein-Fragen.</p>
   <pre class="pseudo">funktion sucheArtikel(artikel : List&lt;Artikel&gt;, nr : integer) : Artikel
   i : integer := 0
@@ -504,7 +505,7 @@ Ende funktion</pre>
 Ende funktion</pre>
   <p>Wichtig ist die <strong>Reihenfolge der Bedingungen</strong>: erst den Index prüfen, dann zugreifen. Bei <code>und</code> wird der zweite Teil nicht mehr ausgewertet, wenn der erste falsch ist (Kurzschlussauswertung). Alternativen mit gleicher Wirkung: eine Zählschleife mit <code>rückgabe</code> direkt beim Treffer, oder eine boolesche Variable <code>gefunden</code> als Abbruchbedingung. Eine Zählschleife <em>ohne</em> Abbruch funktioniert auch, prüft aber unnötig alle weiteren Elemente.</p>
 
-  <h4>Nächster Nachbar (Minimum einer berechneten Größe)</h4>
+  <h4>Nächster Nachbar (Minimum einer berechneten Größe) <span class="relevanz r-vor" title="W23 T2 2: calculateFlight (nächste Position, 25 P)">Kam vor – 1/9 – W23</span></h4>
   <p>Gesucht ist das Objekt mit der kleinsten Entfernung zu einem Punkt. Die Entfernung wird für jedes Element erst berechnet (Satz des Pythagoras), dann wie ein normales Minimum behandelt. Kommt eine Bedingung dazu („nur freie Taxis“), brauchst du den Startwert <code>null</code>, weil das erste Element vielleicht gar nicht in Frage kommt.</p>
   <p class="nowrap" style="text-align:center"><strong>d = √((x₂ − x₁)² + (y₂ − y₁)²)</strong></p>
 
@@ -556,8 +557,8 @@ Ende funktion</pre>
   rückgabe bestes                                 // null, wenn kein Taxi frei ist
 Ende funktion</pre>
 
-  <h4>Beste Übereinstimmung („kleinste passende Differenz“)</h4>
-  <p>Variante der Minimumsuche, z. B. in W25 („Tisch, dessen Platzzahl am wenigsten über der Personenzahl liegt“). Eigenes Beispiel: Für einen Umzug mit 14,5 m³ Ladung wird der <em>kleinste</em> Transporter gesucht, der noch reicht. Zuerst filtert eine Bedingung die ungeeigneten aus (<code>volumen &gt;= bedarf</code>), dann wird unter den übrigen die kleinste Differenz gesucht.</p>
+  <h4>Beste Übereinstimmung („kleinste passende Differenz“) <span class="relevanz r-vor" title="W25 T2 1b: besterTisch (minimale Differenz, 10 P)">Kam vor – 1/9 – W25</span></h4>
+  <p>Variante der Minimumsuche, z. B. in W25 (W25 wörtlich: „Ein Tisch gilt als ‚am besten passend‘, wenn die Differenz tisch.getMaxPersonen() - anzahlPersonen minimal ist“). Eigenes Beispiel: Für einen Umzug mit 14,5 m³ Ladung wird der <em>kleinste</em> Transporter gesucht, der noch reicht. Zuerst filtert eine Bedingung die ungeeigneten aus (<code>volumen &gt;= bedarf</code>), dann wird unter den übrigen die kleinste Differenz gesucht.</p>
   <pre class="pseudo">funktion passendesFahrzeug(fahrzeuge : List&lt;Fahrzeug&gt;, bedarf : double) : Fahrzeug
   bestes : Fahrzeug := null
   zähle i von 0 bis fahrzeuge.size() - 1
@@ -591,10 +592,10 @@ Ende funktion</pre>
   </div>
 
   <!-- ===================== ALG-04 ===================== -->
-  <h3 id="e-04">ALG-04 · Speicherbedarf berechnen / Zahlensysteme <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
-  <p class="klein">Vorkommen: 3/9 · Prüfungen: W22 (Dezimal → Binär, Datentypen), W23 (Speicherbedarf in GiB, 7 P), S26 (Speicherbedarf in TiB, 5 P) · W23 und S26 waren fast identisch</p>
+  <h3 id="e-04">ALG-04 · Speicherbedarf berechnen / Zahlensysteme <span class="relevanz r-kern" title="Belege: S26 T2 A3b (5 P); W23 T2 A3b (7 P); W22 T2 A2aa, A2c, A3c (17 P).">Prüfungskern – 3/9 – S26, W23, W22</span></h3>
+  <p class="klein">Vorkommen: 3/9 · Prüfungen: S26, W23, W22 · Teil 2, Aufgabe 3 (außerdem Aufgabe 2 in W22) · Hinweis: W23 und S26 waren fast identisch (Speicherbedarf von Drohnenbildern)</p>
 
-  <h4>Bit, Byte und die zwei Arten von Präfixen</h4>
+  <h4>Bit, Byte und die zwei Arten von Präfixen <span class="relevanz r-vor" title="1024er-Rechnung GiB/TiB: W23 T2 3b, S26 T2 3b">Kam vor – 2/9 – S26, W23</span></h4>
   <ul>
     <li><strong>1 Bit</strong> = kleinste Einheit (0 oder 1). <strong>1 Byte = 8 Bit</strong>. Mit n Bit lassen sich <strong>2ⁿ</strong> verschiedene Werte darstellen (vorzeichenlos 0 … 2ⁿ − 1; mit Vorzeichen −2ⁿ⁻¹ … 2ⁿ⁻¹ − 1). Beispiel 10 Bit: 1 024 Werte.</li>
     <li><strong>SI-Präfixe</strong> (dezimal, Faktor 1000): kB, MB, GB, TB. Benutzt von Festplattenherstellern und für Datenraten (Mbit/s).</li>
@@ -609,7 +610,7 @@ Ende funktion</pre>
   </table>
   <div class="merke"><span class="kastentitel">Merke</span>Von einer Einheit zur nächsten: bei SI <strong>÷ 1000</strong>, bei IEC <strong>÷ 1024</strong>. Bit → Byte immer <strong>÷ 8</strong>. Wird in der Aufgabe GiB/TiB verlangt, rechnest du durchgehend mit 1024. Eine Festplatte „8 TB“ hat 8 · 10¹² Byte = 7,28 TiB.</div>
 
-  <h4>Zahlensysteme umrechnen</h4>
+  <h4>Zahlensysteme umrechnen <span class="relevanz r-vor" title="Dezimal → Binär: W22 T2 2aa (Schreibtischtest), 2c (iterativ)">Kam vor – 1/9 – W22</span></h4>
   <table class="kompakt">
     <tr><th>Dezimal</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td></tr>
     <tr><th>Binär</th><td class="mono">0000</td><td class="mono">0001</td><td class="mono">0010</td><td class="mono">0011</td><td class="mono">0100</td><td class="mono">0101</td><td class="mono">0110</td><td class="mono">0111</td><td class="mono">1000</td><td class="mono">1001</td><td class="mono">1010</td><td class="mono">1011</td><td class="mono">1100</td><td class="mono">1101</td><td class="mono">1110</td><td class="mono">1111</td></tr>
@@ -638,7 +639,7 @@ Bit:      1  0  1  1  0  0  1  1
     </div>
   </div>
 
-  <h4>Datentypen und ihr Speicherbedarf</h4>
+  <h4>Datentypen und ihr Speicherbedarf <span class="relevanz r-vor" title="Datentypen festlegen: W22 T2 3c (die Java-Größentabelle wurde nie gefragt)">Kam vor – 1/9 – W22</span></h4>
   <table class="kompakt">
     <tr><th>Java-Typ</th><th>Größe</th><th>Wertebereich / Genauigkeit</th><th>typischer Einsatz</th><th>SQL-Gegenstück</th></tr>
     <tr><td><code>boolean</code></td><td>logisch 1 Bit (JVM meist 1 Byte)</td><td>true / false</td><td>Merker, Status</td><td>BOOLEAN / TINYINT(1)</td></tr>
@@ -653,7 +654,7 @@ Bit:      1  0  1  1  0  0  1  1
   </table>
   <p>Auswahlregel: den <strong>kleinsten Typ, dessen Wertebereich sicher reicht</strong> (mit Reserve für die Zukunft). <strong>Geldbeträge</strong> nie als <code>float</code>/<code>double</code> (Rundungsfehler bei 0,1), sondern als <code>DECIMAL(10,2)</code> in der Datenbank bzw. in Cent als ganze Zahl. Nummern mit führenden Nullen oder Sonderzeichen (PLZ, Telefonnummer) sind Text.</p>
 
-  <h4>Speicherbedarf von Bildern, Video und Audio</h4>
+  <h4>Speicherbedarf von Bildern, Video und Audio <span class="relevanz r-vor" title="Bilder der Drohnen: W23 T2 3b (GiB, 7 P), S26 T2 3b (TiB, 5 P)">Kam vor – 2/9 – S26, W23</span></h4>
   <table class="kompakt">
     <tr><th>Medium</th><th>Formel (unkomprimiert)</th></tr>
     <tr><td>Bild</td><td>Breite × Höhe (Pixel) × Farbtiefe (Bit/Pixel) ÷ 8 = Byte. Farbtiefe = Kanäle × Bit je Kanal (RGB mit 8 Bit je Kanal = 24 Bit)</td></tr>
@@ -672,7 +673,7 @@ TiB pro Jahr     = 2 430,71 : 1 024                  ≈           2,37 TiB</pre
   <p><strong>Video:</strong> Full HD 1 920 × 1 080, 24 Bit, 25 fps, 1 Minute: 1 920 · 1 080 · 3 Byte = 6 220 800 Byte je Bild; · 25 · 60 = 9 331 200 000 Byte ≈ 8,69 GiB pro Minute. Als Datenrate: 155 520 000 Byte/s · 8 = 1 244,16 Mbit/s (Datenraten immer mit SI-Präfix).
   <strong>Audio:</strong> CD-Qualität 44 100 Hz · 16 Bit · 2 Kanäle = 1 411 200 Bit/s = 176 400 Byte/s; 3 Minuten = 31 752 000 Byte ≈ 30,28 MiB.</p>
 
-  <h4>So gehst du vor</h4>
+  <h4>So gehst du vor <span class="relevanz r-vor" title="Rechenweg Speicherbedarf: W23 3b, S26 3b">Kam vor – 2/9 – S26, W23</span></h4>
   <ol>
     <li>Alle Angaben <strong>mit Einheit</strong> herausschreiben (Pixel, Bit/Kanal, Kanäle, Bilder/Tag, Tage/Jahr, Kompression).</li>
     <li>Größe <strong>eines</strong> Elements in Bit berechnen, dann ÷ 8 in Byte.</li>
@@ -692,17 +693,17 @@ TiB pro Jahr     = 2 430,71 : 1 024                  ≈           2,37 TiB</pre
   </div>
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
     <ul>
-      <li><strong>W23 T2 A3b (7 P)</strong> und <strong>S26 T2 A3b (5 P):</strong> Speicherbedarf für Fotos (Megapixel, 8 Bit je Farbkanal, 3 Kanäle, Anzahl Bilder pro Woche/Jahr) in GiB bzw. TiB. Die offizielle Lösung rechnet Bit → Byte → ÷ 1024 je Stufe und rundet am Ende auf; Rundungsdifferenzen werden toleriert.</li>
+      <li><strong>W23 T2 A3b (7 P)</strong> und <strong>S26 T2 A3b (5 P):</strong> Speicherbedarf für Fotos (Megapixel, 8 Bit je Farbkanal, 3 Kanäle, Anzahl Bilder pro Woche/Jahr) in GiB bzw. TiB. Die offizielle Lösung (nur zu W23 vorhanden) rechnet Bit → Byte → ÷ 1024 je Stufe und rundet am Ende auf; Rundungsdifferenzen werden toleriert.</li>
       <li><strong>W22 T2 A2:</strong> Dezimal → Binär (rekursiv und iterativ, siehe ALG-08); <strong>W22 T2 A3c:</strong> passende Datentypen für Attribute festlegen.</li>
       <li>Deckblatt-Hinweis der IHK: Wer ein gerundetes Ergebnis einträgt und damit weiterrechnen muss, rechnet nur mit diesem gerundeten Wert weiter.</li>
     </ul>
   </div>
 
   <!-- ===================== ALG-05 ===================== -->
-  <h3 id="e-05">ALG-05 · Sortieren <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
-  <p class="klein">Vorkommen: 2/9 · Prüfungen: W22 (T2 A1, 25 P: Bubblesort → Vergleichsfunktion → generisch), S24 (T2 A2a, 12 P: Sortieren mit übergebener Vergleichsfunktion) · Tendenz eher fallend</p>
+  <h3 id="e-05">ALG-05 · Sortieren <span class="relevanz r-vor" title="Belege: S24 T2 A2a (12 P); W22 T2 A1a, A1b, A1d (22 P).">Kam vor – 2/9 – S24, W22</span></h3>
+  <p class="klein">Vorkommen: 2/9 · Prüfungen: S24, W22 · Teil 2, Aufgabe 1 oder 2 · Hinweis: Tendenz eher fallend</p>
 
-  <h4>Bubblesort</h4>
+  <h4>Bubblesort <span class="relevanz r-vor" title="Sortieralgorithmus: W22 T2 1a (Bubblesort-Vorgehen vorgegeben), S24 T2 2a (eigener Sortieralgorithmus)">Kam vor – 2/9 – S24, W22</span></h4>
   <p>Benachbarte Elemente werden verglichen und vertauscht, wenn sie in der falschen Reihenfolge stehen. Nach jedem Durchlauf ist das größte noch unsortierte Element ganz hinten angekommen („aufgestiegen wie eine Blase“). Deshalb kann die innere Schleife mit jedem Durchlauf ein Element früher aufhören.</p>
   <pre class="pseudo">funktion bubbleSort(zahlen : integer[])
   zähle i von 0 bis zahlen.length - 2
@@ -751,7 +752,7 @@ Ende funktion</pre>
   </figure>
   <p><strong>Optimierung mit Abbruch:</strong> Eine boolesche Variable <code>getauscht</code> wird zu Beginn jedes Durchlaufs auf <code>false</code> gesetzt und beim Tauschen auf <code>true</code>. Wurde in einem Durchlauf nichts getauscht, ist das Feld sortiert und man kann aufhören (äußere Schleife dann als <code>solange getauscht</code> bzw. <code>wiederhole … solange getauscht</code>). Bei bereits sortierten Daten braucht Bubblesort so nur einen Durchlauf.</p>
 
-  <h4>Selectionsort und Insertionsort (zum Verständnis)</h4>
+  <h4>Selectionsort und Insertionsort (zum Verständnis) <span class="relevanz r-hinter" title="nur als erlaubte Alternativen zu Bubblesort, in keiner Prüfung verlangt">Hintergrund – 0/9</span></h4>
   <div class="zweispaltig">
     <div>
       <p><strong>Selectionsort:</strong> Im unsortierten Rest das Minimum suchen und mit dem ersten Element des Rests tauschen.</p>
@@ -789,7 +790,7 @@ Ende zähle</pre>
   <p>Größenordnung: Bei 1 000 Elementen sind n² = 1 000 000 Vergleiche, n · log₂ n ≈ 10 000. Für große Datenmengen nimmt man deshalb die Sortierfunktion der Bibliothek (Java: <code>List.sort</code>, <code>Arrays.sort</code>; für Objekte stabil).</p>
   <p><strong>Stabilität:</strong> Ein Verfahren ist stabil, wenn Elemente mit <em>gleichem</em> Sortierschlüssel ihre bisherige Reihenfolge behalten. Beispiel: Eine Bücherliste ist alphabetisch nach Titel sortiert und wird danach stabil nach Preis sortiert → Bücher mit gleichem Preis stehen weiterhin alphabetisch. Bubblesort ist stabil, solange nur bei <code>&gt;</code> (nicht bei <code>&gt;=</code>) getauscht wird.</p>
 
-  <h4>Objekte sortieren und die Vergleichsfunktion</h4>
+  <h4>Objekte sortieren und die Vergleichsfunktion <span class="relevanz r-vor" title="Vergleichsfunktion als Parameter: W22 T2 1b/1d, S24 T2 2a">Kam vor – 2/9 – S24, W22</span></h4>
   <p>Bei Objekten vergleichst du ein Attribut über den Getter, tauschst aber <strong>das ganze Objekt</strong>: <code>wenn buecher[j].getPreis() &gt; buecher[j + 1].getPreis() dann</code> … Hilfsvariable vom Typ <code>Buch</code>.</p>
   <p>Soll derselbe Algorithmus nach verschiedenen Kriterien sortieren können, übergibt man ihm eine <strong>Vergleichsfunktion</strong> (Java: <code>Comparator</code>). Der Algorithmus fragt nur noch „steht a vor b?“, das Kriterium steckt in der Funktion. Vertrag der Vergleichsfunktion <code>vergleiche(a, b) : integer</code>:</p>
   <table class="kompakt">
@@ -840,13 +841,13 @@ static &lt;T&gt; void sortiere(List&lt;T&gt; liste, Comparator&lt;T&gt; vergleic
     <ul>
       <li><strong>W22 T2 A1 (25 P):</strong> a) Bubblesort für Objekte nach einem Attribut (10 P), b) Vergleichsfunktion schreiben (5 P), c) generische Klasse erläutern (3 P), d) generischen Sortieralgorithmus mit <code>List&lt;T&gt;</code> (7 P).</li>
       <li><strong>S24 T2 A2a (12 P):</strong> Sortieralgorithmus nach Wahl, der eine übergebene Vergleichsfunktion nutzt (Lösungsbeispiel der IHK: Bubblesort mit <code>wenn vergleiche(…) &gt; 0</code>).</li>
-      <li>Häufige Zusatzfrage: Laufzeit O(n²) vs. O(n log n), stabil/instabil.</li>
+      <li>Mögliche Zusatzfrage (in den 9 ausgewerteten Prüfungen nicht gefragt): Laufzeit O(n²) vs. O(n log n), stabil/instabil.</li>
     </ul>
   </div>
 
   <!-- ===================== ALG-06 ===================== -->
-  <h3 id="e-06">ALG-06 · Zeichenketten verarbeiten <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
-  <p class="klein">Vorkommen: 2/9 · Prüfungen: W21 (Passwortprüfung im Struktogramm, Fehler finden), W25 (Namensspalte per SUBSTRING aufteilen)</p>
+  <h3 id="e-06">ALG-06 · Zeichenketten verarbeiten <span class="relevanz r-vor" title="Belege: W25 T2 A4d (8 P); W21 T2 A1c (6 P). Grenzwertig, nicht mitgezählt: S26 (T2 A1a: Namensvergleich mit == ausdrücklich erlaubt; T2 A1b: Namensvergleich mit == ausdrücklich erlaubt).">Kam vor – 2/9 – W25, W21</span></h3>
+  <p class="klein">Vorkommen: 2/9 · Prüfungen: W25, W21 · Teil 2, Aufgabe 1 oder 4</p>
 
   <p>Ein String ist eine Folge von Zeichen (<code>char</code>). Wie beim Array beginnt der Index bei 0, das letzte Zeichen hat den Index <code>length() - 1</code>. Strings sind in Java unveränderlich: Methoden wie <code>trim()</code> oder <code>substring()</code> liefern einen <em>neuen</em> String.</p>
   <figure>
@@ -891,7 +892,7 @@ static &lt;T&gt; void sortiere(List&lt;T&gt; liste, Comparator&lt;T&gt; vergleic
     <tr><td><code>c - '0'</code>, <code>Integer.parseInt(s)</code></td><td>Ziffer bzw. Text in Zahl</td><td><code>'7' - '0'</code> = 7, <code>parseInt("2026")</code> = 2026</td></tr>
   </table>
 
-  <h4>Muster 1: Zeichen für Zeichen prüfen</h4>
+  <h4>Muster 1: Zeichen für Zeichen prüfen <span class="relevanz r-vor" title="W21 T2 1c: Passwortprüfung Zeichen für Zeichen (Fehler im Struktogramm)">Kam vor – 1/9 – W21</span></h4>
   <p>Zwei Varianten, die man auseinanderhalten muss:</p>
   <ul>
     <li><strong>„Alle Zeichen müssen …“</strong> (nur erlaubte Zeichen): Beim ersten Verstoß sofort <code>false</code> zurückgeben, nach der Schleife <code>true</code>.</li>
@@ -919,7 +920,7 @@ static &lt;T&gt; void sortiere(List&lt;T&gt; liste, Comparator&lt;T&gt; vergleic
   rückgabe hatZiffer                      // "mindestens eine": erst nach der Schleife
 Ende funktion</pre>
 
-  <h4>Muster 2: Text zerlegen</h4>
+  <h4>Muster 2: Text zerlegen <span class="relevanz r-hinter" title="W25 T2 4d: Spalte per SUBSTRING aufteilen (als SQL). Grenzwertig, nicht mitgezählt: W25 (T2 A4d: SUBSTRING wird in der Aufgabe erklärt, kein Vorwissen nötig).">Hintergrund – 0/9</span></h4>
   <p>Trennzeichen suchen (<code>indexOf</code>), links und rechts davon mit <code>substring</code> herausschneiden, Leerzeichen mit <code>trim</code> entfernen. Immer überlegen, was passiert, wenn das Trennzeichen fehlt (<code>indexOf</code> liefert −1).</p>
   <pre class="pseudo">// "53111 Bonn" -&gt; PLZ und Ort
 pos : integer := adresse.indexOf(' ')
@@ -931,9 +932,9 @@ sonst
 Ende wenn</pre>
   <p>Mit <code>split</code> geht es kürzer, wenn das Trennzeichen eindeutig ist: <code>teile := "14.09.2026".split(".")</code> → <code>teile[0]</code> = "14", <code>teile.length</code> = 3.</p>
 
-  <h4>Strings vergleichen</h4>
+  <h4>Strings vergleichen <span class="relevanz r-hinter" title="S26 erlaubt ausdrücklich == beim Namensvergleich (T2 1a/1b); SQL-SUBSTRING-Hinweis zu W25 T2 4d. Grenzwertig, nicht mitgezählt: S26 (T2 A1a: Namensvergleich mit == ausdrücklich erlaubt; T2 A1b: Namensvergleich mit == ausdrücklich erlaubt); W25 (T2 A4d: SUBSTRING wird in der Aufgabe erklärt, kein Vorwissen nötig).">Hintergrund – 0/9</span></h4>
   <p>In Java vergleicht <code>==</code> bei Objekten die <strong>Referenzen</strong> (dasselbe Objekt im Speicher?), <code>equals</code> den <strong>Inhalt</strong>. Zwei inhaltsgleiche Strings, die z. B. aus einer Eingabe oder Datei stammen, sind verschiedene Objekte → <code>==</code> liefert <code>false</code>. Deshalb Strings in Java immer mit <code>equals</code> vergleichen. Im Pseudocode der Prüfung wird <code>=</code> meist akzeptiert (S26 erlaubt ausdrücklich <code>==</code>). Alphabetische Reihenfolge: <code>compareTo</code>. Zahlen, die als Text vorliegen, werden alphabetisch verglichen: <code>"10" &lt; "9"</code>! Vorher umwandeln.</p>
-  <p><strong>Zusammenhang mit SQL</strong> (W25 T2 A4d): Dort zerlegt man Spalten mit <code>SUBSTRING(spalte, start, länge)</code> – Achtung, in SQL beginnt die Zählung bei <strong>1</strong> und der dritte Parameter ist die <strong>Länge</strong>, nicht das Ende. Position eines Zeichens: <code>LOCATE(' ', name)</code> bzw. <code>INSTR</code>.</p>
+  <p><strong>Zusammenhang mit SQL</strong> (W25 T2 A4d): Dort war eine eigene Variante <code>SUBSTRING(string, delimiter, number)</code> in der Aufgabe erklärt (1 = Teil links, -1 = Teil rechts vom Trennzeichen). Üblicher ist, Spalten mit <code>SUBSTRING(spalte, start, länge)</code> zu zerlegen – Achtung, in SQL beginnt die Zählung bei <strong>1</strong> und der dritte Parameter ist die <strong>Länge</strong>, nicht das Ende. Position eines Zeichens: <code>LOCATE(' ', name)</code> bzw. <code>INSTR</code>.</p>
 
   <div class="falle"><span class="kastentitel">Typische Fehler</span>
     <ul>
@@ -953,8 +954,8 @@ Ende wenn</pre>
   </div>
 
   <!-- ===================== ALG-07 ===================== -->
-  <h3 id="e-07">ALG-07 · Exceptions / Fehlerbehandlung <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
-  <p class="klein">Vorkommen: 2/9 · Prüfungen: W21, W25 (Fehlerfall bzw. <code>null</code> behandeln) · verwandt: W24 T2 A2a (Fehlerantwort mit HTTP-Statuscode erzeugen)</p>
+  <h3 id="e-07">ALG-07 · Exceptions / Fehlerbehandlung <span class="relevanz r-vor" title="Belege: W25 T2 A1b (10 P).">Kam vor – 1/9 – W25</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfungen: W25 · Teil 2, Aufgabe 1 · Hinweis: verwandt: W24 T2 A2a (Fehlerantwort mit HTTP-Statuscode erzeugen)</p>
 
   <p>Eine <strong>Exception</strong> (Ausnahme) ist ein Objekt, das einen Fehlerzustand beschreibt. Sie wird an der Fehlerstelle <strong>geworfen</strong> (<code>throw</code>) und wandert die Aufrufkette hinauf, bis ein passender <code>catch</code>-Block sie <strong>fängt</strong>. Fängt sie niemand, bricht das Programm mit einer Fehlermeldung (Stacktrace) ab. Vorteil gegenüber Fehlercodes: Normaler Ablauf und Fehlerbehandlung sind getrennt, und ein Fehler kann nicht „aus Versehen“ ignoriert werden.</p>
 
@@ -1035,7 +1036,7 @@ Ende try</pre>
     <figcaption>Abb. A-7: Ablauf von try/catch/finally – der finally-Block läuft in jedem Fall (auch bei <code>return</code> im try-Block)</figcaption>
   </figure>
 
-  <h4>Checked und unchecked Exceptions (Java)</h4>
+  <h4>Checked und unchecked Exceptions (Java) <span class="relevanz r-hinter" title="nie gefragt">Hintergrund – 0/9</span></h4>
   <table class="kompakt">
     <tr><th></th><th>checked (geprüft)</th><th>unchecked (ungeprüft)</th></tr>
     <tr><td>Oberklasse</td><td><code>Exception</code> (aber nicht <code>RuntimeException</code>)</td><td><code>RuntimeException</code> (und <code>Error</code>)</td></tr>
@@ -1058,7 +1059,7 @@ public void entnehmen(int menge) throws BestandZuNiedrigException {
     bestand = bestand - menge;
 }</pre>
 
-  <h4>Typische Fehlerfälle in Prüfungsalgorithmen</h4>
+  <h4>Typische Fehlerfälle in Prüfungsalgorithmen <span class="relevanz r-vor" title="null bei leerer Liste (W25 1b), Exception bei null/leerem Array lesen (W25 3ba)">Kam vor – 1/9 – W25</span></h4>
   <table class="kompakt">
     <tr><th>Fehlerfall</th><th>erkennen</th><th>sinnvolle Reaktion</th></tr>
     <tr><td>Parameter ist <code>null</code></td><td><code>wenn liste = null dann</code></td><td><code>IllegalArgumentException</code> werfen (sonst später <code>NullPointerException</code>)</td></tr>
@@ -1069,7 +1070,7 @@ public void entnehmen(int menge) throws BestandZuNiedrigException {
     <tr><td>Text ist keine Zahl</td><td><code>Integer.parseInt</code></td><td><code>NumberFormatException</code> fangen, Benutzer informieren</td></tr>
     <tr><td>Datei, Datenbank, Netzwerk nicht erreichbar</td><td>checked Exceptions</td><td>fangen: Meldung, Protokoll, ggf. erneuter Versuch; Ressourcen im <code>finally</code> schließen</td></tr>
   </table>
-  <p><strong>Exception oder Sonderwert?</strong> Ein Sonderwert (<code>null</code>, −1) ist einfach und in der Prüfung oft verlangt („liefert null, wenn kein Tisch frei ist“), muss aber vom Aufrufer geprüft werden – vergisst er es, knallt es später an anderer Stelle. Eine Exception erzwingt die Behandlung (checked) und trägt eine Fehlermeldung, ist aber für „normale“ Ergebnisse wie „nichts gefunden“ oft zu schwer. Faustregel: <em>erwartbares Ergebnis → Sonderwert, echter Fehler/Vertragsbruch → Exception.</em> Prüfungen am Methodenanfang („Wächter“, <em>fail fast</em>) halten den eigentlichen Algorithmus übersichtlich.</p>
+  <p><strong>Exception oder Sonderwert?</strong> Ein Sonderwert (<code>null</code>, −1) ist einfach und in der Prüfung oft verlangt (W25 1b wörtlich: „Die Liste freieTische kann keine Objekte enthalten. In dem Fall soll der Wert null zurückgegeben werden.“), muss aber vom Aufrufer geprüft werden – vergisst er es, knallt es später an anderer Stelle. Eine Exception erzwingt die Behandlung (checked) und trägt eine Fehlermeldung, ist aber für „normale“ Ergebnisse wie „nichts gefunden“ oft zu schwer. Faustregel: <em>erwartbares Ergebnis → Sonderwert, echter Fehler/Vertragsbruch → Exception.</em> Prüfungen am Methodenanfang („Wächter“, <em>fail fast</em>) halten den eigentlichen Algorithmus übersichtlich.</p>
 
   <div class="falle"><span class="kastentitel">Typische Fehler</span>
     <ul>
@@ -1088,8 +1089,8 @@ public void entnehmen(int menge) throws BestandZuNiedrigException {
   </div>
 
   <!-- ===================== ALG-08 ===================== -->
-  <h3 id="e-08">ALG-08 · Rekursion <span class="badge k-sonstige">Sonstige</span></h3>
-  <p class="klein">Vorkommen: 1/9 · Prüfung: W22 T2 A2 (25 P, davon 12 P Rekursion: Schreibtischtest einer rekursiven Umwandlung Dezimal → Binär, Fehler korrigieren, Rekursion vs. Iteration; dazu iterative Lösung)</p>
+  <h3 id="e-08">ALG-08 · Rekursion <span class="relevanz r-vor" title="Belege: W22 T2 A2aa, A2ab, A2b (12 P).">Kam vor – 1/9 – W22</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfungen: W22 · Teil 2, Aufgabe 2</p>
   <p>Eine Funktion ist <strong>rekursiv</strong>, wenn sie sich selbst aufruft. Das funktioniert nur mit zwei Bestandteilen: dem <strong>Basisfall</strong> (Abbruchbedingung, liefert direkt ein Ergebnis) und dem <strong>Rekursionsfall</strong> (ruft sich mit einem <em>kleineren</em> Problem auf und baut aus dessen Ergebnis das eigene). Jeder Aufruf bekommt eigene Parameter und lokale Variablen auf dem <strong>Aufrufstapel (Stack)</strong>.</p>
   <div class="zweispaltig">
     <div>
@@ -1158,11 +1159,11 @@ Ende funktion</pre>
   </table>
   <p>Jede Rekursion lässt sich iterativ umschreiben (ggf. mit eigenem Stack bzw. einer Liste). Iterative Fakultät: <code>ergebnis := 1; zähle i von 2 bis n: ergebnis := ergebnis * i</code>.</p>
   <div class="falle"><span class="kastentitel">Typische Fehler</span>Basisfall fehlt oder wird nie erreicht (Parameter wird nicht kleiner, z. B. <code>fakultaet(n)</code> statt <code>fakultaet(n - 1)</code>) → Endlosrekursion und <code>StackOverflowError</code>. Basisfall liefert für einen Randwert ein falsches Ergebnis (z. B. leeren Text statt „0“). Ergebnis des rekursiven Aufrufs nicht verwendet bzw. nicht zurückgegeben.</div>
-  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>W22 T2 A2:</strong> gegebene rekursive Funktion (Dezimal → Binär) per Schreibtischtest durchspielen, einen Fehler für einen Randfall finden und korrigieren, Mindestzahl Testfälle für Anweisungsüberdeckung, je einen Vor- und Nachteil von Rekursion vs. Iteration nennen, iterative Lösung mit einer Liste schreiben.</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>W22 T2 A2:</strong> gegebene rekursive Funktion (Dezimal → Binär) per Schreibtischtest durchspielen, den Fehler finden (Ausgabe der Binärstellen in umgekehrter Reihenfolge, fällt erst bei Testfall 2 auf) und korrigieren, Mindestzahl Testfälle für Anweisungsüberdeckung, je einen Vor- und Nachteil von Rekursion vs. Iteration nennen, iterative Lösung mit einer Liste schreiben.</div>
 
   <!-- ===================== ALG-09 ===================== -->
-  <h3 id="e-09">ALG-09 · Nebenläufigkeit <span class="badge k-sonstige">Sonstige</span></h3>
-  <p class="klein">Vorkommen: 1/9 · Prüfung: W21 T2 A1b (4 P: Variante zum Blockieren von Terminen bei gleichzeitigen Buchungen wählen und begründen)</p>
+  <h3 id="e-09">ALG-09 · Nebenläufigkeit <span class="relevanz r-vor" title="Belege: W21 T2 A1b (4 P).">Kam vor – 1/9 – W21</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfungen: W21 · Teil 2, Aufgabe 1</p>
   <p>Webanwendungen bearbeiten viele Anfragen <strong>gleichzeitig</strong> (in eigenen Threads oder auf mehreren Servern), alle greifen auf dieselbe Datenbank zu. Solange nur gelesen wird, ist das unproblematisch. Kritisch wird es, wenn zwei Abläufe denselben Datensatz <strong>lesen, prüfen und dann ändern</strong>.</p>
   <table class="kompakt">
     <tr><th>Begriff</th><th>Bedeutung</th></tr>
@@ -1203,7 +1204,7 @@ Ende funktion</pre>
     <figcaption>Abb. A-9: Race Condition beim Kartenverkauf – beide lesen „frei“, bevor einer schreibt</figcaption>
   </figure>
 
-  <h4>Lösungen: Sperren und atomare Operationen</h4>
+  <h4>Lösungen: Sperren und atomare Operationen <span class="relevanz r-vor" title="W21 T2 1b: Varianten der Terminblockierung beurteilen">Kam vor – 1/9 – W21</span></h4>
   <table class="kompakt">
     <tr><th></th><th>Pessimistisches Sperren</th><th>Optimistisches Sperren</th></tr>
     <tr><td>Annahme</td><td>Konflikte sind wahrscheinlich</td><td>Konflikte sind selten</td></tr>
@@ -1649,7 +1650,7 @@ Ende funktion</pre>
     <div class="antwort z12"></div>
     <div class="teilaufgabe"><span class="tp">2 P</span>c) Geben Sie die Rückgabewerte beider Funktionen für die Daten aus Anlage 4 an.</div>
     <div class="antwort z3"></div>
-    <p class="quelle">Angelehnt an: S23 Teil 2, Aufgabe 2 und S22 Teil 2, Aufgabe 1 (2D-Arrays Tag × Stunde bzw. Monat × Verbraucher)</p>
+    <p class="quelle">Angelehnt an: S23 Teil 2, Aufgabe 2 und S22 Teil 2, Aufgabe 1 (2D-Arrays Tag × Stunde bzw. Verbraucher × Monat)</p>
   </div>
 
   <div class="aufgabe" id="ALG-02-3">

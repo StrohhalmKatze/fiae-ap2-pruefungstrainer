@@ -30,7 +30,7 @@
 <header class="blockkopf">
   <h1>Block 05 · Testen &amp; Qualitätssicherung</h1>
   <div class="unter">
-    <span class="badge k-immer">Immer</span> 8/9 Prüfungen · Ø 21 von 200 Punkten · Teil 1 (7×) + Teil 2 (6×) · in Teil 2 oft eine ganze 20–25-Punkte-Aufgabe (S23, S24, W25)
+    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 6, Teil 2 in 6 Prüfungen.">Prüfungskern – 8/9 – alle außer W24</span> · Ø 18 von 200 Punkten · Teil 1 (6×) + Teil 2 (6×) · in Teil 2 oft eine ganze 20–25-Punkte-Aufgabe (S23, S24, W25)
     · Lösungen: <a href="05_Testen_QS_Loesungen.html">05_Testen_QS_Loesungen.html</a>
   </div>
 </header>
@@ -75,24 +75,25 @@
 <section class="teil" id="erklaerung">
   <h2>A · Erklärungssatz</h2>
 
-  <p>Testen und Qualitätssicherung kommen in <strong>8 von 9</strong> Prüfungen vor, und zwar auf zwei Arten: In <strong>Teil 1</strong> sind es meist Wissensfragen mit 3–6 Punkten (Testarten, Testkonzept, Qualitätsmerkmale, QS-Maßnahmen). In <strong>Teil 2</strong> gibt es immer wieder eine <strong>komplette Aufgabe mit 20–25 Punkten</strong>, die nach demselben Drehbuch abläuft: Gegeben ist eine (fehlerhafte) Methode mit Zeilennummern und eine Spezifikation → Schreibtischtest mit Testdaten → Fehler mit Zeilennummer nennen → korrigieren → Fragen zu Unit-Test und Überdeckung (S22 T2 A2, S23 T2 A3, S24 T2 A3, W25 T2 A3). Diese Punkte sind gut planbar, weil das Vorgehen immer gleich ist.</p>
+  <p>Testen und Qualitätssicherung kommen in <strong>8 von 9</strong> Prüfungen vor, und zwar auf zwei Arten: In <strong>Teil 1</strong> sind es meist Wissensfragen mit 3–6 Punkten (Testarten, Testkonzept, Qualitätsmerkmale, QS-Maßnahmen). In <strong>Teil 2</strong> gibt es immer wieder eine <strong>komplette Aufgabe mit 20–25 Punkten</strong>, die nach demselben Drehbuch abläuft: Gegeben ist eine (fehlerhafte) Methode mit Zeilennummern und eine Spezifikation → Schreibtischtest mit Testdaten → Fehler mit Zeilennummer nennen → korrigieren → Fragen zu Unit-Test und Überdeckung (S22 T2 A2, S23 T2 A3, W25 T2 A3; S24 T2 A3 nur teilweise: dort kein Schreibtischtest, sondern Whitebox-Vorteile, Regressionstest, Überdeckungsmetriken und Pfade). Diese Punkte sind gut planbar, weil das Vorgehen immer gleich ist.</p>
+  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
 
   <table class="kompakt">
     <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
-    <tr><td>TQ-01 Testarten</td><td><span class="badge k-meistens">Meistens</span></td><td>3–8 je Frage</td><td>Teststufen, Black-/White-Box, Regressionstest, Testkonzept</td></tr>
-    <tr><td>TQ-02 Code analysieren, Fehler finden</td><td><span class="badge k-meistens">Meistens</span></td><td>4–15</td><td>Fehler mit Zeilennummer benennen und korrigieren</td></tr>
-    <tr><td>TQ-03 Unit-Test, Überdeckungsmaße</td><td><span class="badge k-oft">Oft</span></td><td>3–12</td><td>assertEquals auswerten, C0/C1/C2, Mindestzahl Testfälle</td></tr>
-    <tr><td>TQ-04 Qualitätsmerkmale ISO/IEC 25010</td><td><span class="badge k-oft">Oft</span></td><td>4–5</td><td>Merkmale beschreiben und auf ein Szenario anwenden</td></tr>
-    <tr><td>TQ-05 Schreibtischtest</td><td><span class="badge k-oft">Oft</span></td><td>2–10</td><td>Wertetabelle sauber und vollständig führen</td></tr>
-    <tr><td>TQ-06 Äquivalenzklassen, Testfälle</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>4–10</td><td>gültige/ungültige Klassen, Grenzwerte, Testfalltabelle</td></tr>
-    <tr><td>TQ-07 Codequalität, Reviews</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>5–6</td><td>QS-Maßnahmen erläutern, Code-Review, Clean Code</td></tr>
+    <tr><td>TQ-01 Testarten</td><td><span class="relevanz r-kern" title="Belege: W25 T1 A3ba, A3bc (9 P); S24 T2 A3aa, A3ab (8 P); W23 T1 A1d (6 P); W21 T1 A4d, A4cb, A3ac (13 P).">Prüfungskern – 4/9 – W25, S24, W23, W21</span></td><td>3–8 je Frage</td><td>Teststufen, Black-/White-Box, Regressionstest, Testkonzept</td></tr>
+    <tr><td>TQ-02 Code analysieren, Fehler finden</td><td><span class="relevanz r-kern" title="Belege: W25 T2 A3bb, A3ba (14 P); S23 T2 A3a (Datenverlaufstabelle), A3aa, A3ab (15 P); W22 T2 A2ab (4 P); S22 T2 A2bb (4 P); W21 T2 A1c (6 P).">Prüfungskern – 5/9 – W25, S23, W22, S22, W21</span></td><td>4–15</td><td>Fehler mit Zeilennummer benennen und korrigieren</td></tr>
+    <tr><td>TQ-03 Unit-Test, Überdeckungsmaße</td><td><span class="relevanz r-kern" title="Belege: W25 T2 A3aa, A3ab (6 P); S24 T2 A3c, A3b (17 P); S23 T2 A3ba, A3bb, A3bc (10 P); W22 T2 A2ac (3 P); S22 T2 A2aa, A2ab, A2ba (12 P); W21 T1 A4cb (5 P).">Prüfungskern – 6/9 – W25, S24, S23, W22, S22, W21</span></td><td>3–12</td><td>assertEquals auswerten, C0/C1/C2, Mindestzahl Testfälle</td></tr>
+    <tr><td>TQ-04 Qualitätsmerkmale ISO/IEC 25010</td><td><span class="relevanz r-kern" title="Belege: S26 T1 A4a (5 P); S23 T1 A2a (4 P); W21 T1 A4ca (4 P).">Prüfungskern – 3/9 – S26, S23, W21</span></td><td>4–5</td><td>Merkmale beschreiben und auf ein Szenario anwenden</td></tr>
+    <tr><td>TQ-05 Schreibtischtest</td><td><span class="relevanz r-kern" title="Belege: W25 T2 A3ba (10 P); S23 T2 A3a (Datenverlaufstabelle) (0 P); W22 T2 A2aa (4 P); S22 T2 A2ba (5 P).">Prüfungskern – 4/9 – W25, S23, W22, S22</span></td><td>2–10</td><td>Wertetabelle sauber und vollständig führen</td></tr>
+    <tr><td>TQ-06 Äquivalenzklassen, Testfälle</td><td><span class="relevanz r-vor" title="Belege: S23 T2 A3bc (4 P); S22 T2 A2bc (4 P).">Kam vor – 2/9 – S23, S22</span></td><td>4–10</td><td>gültige/ungültige Klassen, Grenzwerte, Testfalltabelle</td></tr>
+    <tr><td>TQ-07 Codequalität, Reviews</td><td><span class="relevanz r-kern" title="Belege: S24 T1 A1b (6 P); S23 T1 A1e (4 P); W21 T1 A4cb, A1bb (11 P).">Prüfungskern – 3/9 – S24, S23, W21</span></td><td>5–6</td><td>QS-Maßnahmen erläutern, Code-Review, Clean Code</td></tr>
   </table>
 
   <!-- ===================== TQ-01 ===================== -->
-  <h3 id="e-01">TQ-01 · Testarten <span class="badge k-meistens">Meistens</span></h3>
-  <p class="klein">Vorkommen: 7/9 · Prüfungen: W21, S22, W22, S23, W23, S24, W25 (fehlte nur in W24 und S26) · Teil 1 und Teil 2, meist 3–6 Punkte je Teilaufgabe</p>
+  <h3 id="e-01">TQ-01 · Testarten <span class="relevanz r-kern" title="Belege: W25 T1 A3ba, A3bc (9 P); S24 T2 A3aa, A3ab (8 P); W23 T1 A1d (6 P); W21 T1 A4d, A4cb, A3ac (13 P).">Prüfungskern – 4/9 – W25, S24, W23, W21</span></h3>
+  <p class="klein">Vorkommen: 4/9 · Prüfungen: W25, S24, W23, W21 · Teil 1, Aufgabe 3 (außerdem Aufgabe 1 in W23, Aufgabe 4 in W21) und Teil 2 (S24)</p>
 
-  <h4>Warum testen? Grundbegriffe</h4>
+  <h4>Warum testen? Grundbegriffe <span class="relevanz r-hinter" title="Fehlhandlung/Fehlerzustand/-wirkung, Verifikation/Validierung nie abgefragt">Hintergrund – 0/9</span></h4>
   <p>Testen ist die <strong>geplante, nachvollziehbare Ausführung bzw. Prüfung eines Programms mit dem Ziel, Fehler zu finden</strong> und nachzuweisen, dass die Anforderungen erfüllt sind. Ein Test kann die Anwesenheit von Fehlern zeigen, aber nie ihre Abwesenheit beweisen (sinngemäß nach E. W. Dijkstra) – deshalb kommt es auf <em>gut gewählte</em> Testfälle an.</p>
   <ul>
     <li><strong>Fehlhandlung</strong> (Irrtum des Entwicklers) → <strong>Fehlerzustand</strong> (der Defekt im Code, „Bug“) → <strong>Fehlerwirkung</strong> (das sichtbare Fehlverhalten beim Ausführen, „Failure“).</li>
@@ -101,7 +102,7 @@
     <li><strong>Verifikation</strong> („Bauen wir das Produkt richtig?“ – entspricht es der Spezifikation?) vs. <strong>Validierung</strong> („Bauen wir das richtige Produkt?“ – erfüllt es den tatsächlichen Zweck des Kunden?).</li>
   </ul>
 
-  <h4>Teststufen und das V-Modell</h4>
+  <h4>Teststufen und das V-Modell <span class="relevanz r-vor" title="Testkonzept: Zusammenspiel der Teststufen laut Musterlösung (W23 T1 1d); sonst nie abgefragt">Kam vor – 1/9 – W23</span></h4>
   <p>Das V-Modell ordnet jeder Entwurfsphase (linker Ast) eine Teststufe (rechter Ast) zu. Die Testfälle einer Stufe werden aus dem Dokument derselben Ebene abgeleitet und prüfen gegen dieses Dokument.</p>
   <figure>
     <svg viewBox="0 0 720 330" width="720" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
@@ -168,7 +169,7 @@
   </table>
   <p>Varianten des Abnahmetests: <strong>Alpha-Test</strong> (künftige Nutzer testen beim Hersteller), <strong>Beta-Test</strong> (ausgewählte Nutzer testen in ihrer eigenen Umgebung vor der allgemeinen Freigabe).</p>
 
-  <h4>Statisch und dynamisch, Black-Box und White-Box</h4>
+  <h4>Statisch und dynamisch, Black-Box und White-Box <span class="relevanz r-vor" title="Black-/White-Box: W21 T1 4d, S24 T2 3aa; statisch (Review) vs. dynamisch (Unit-Test) bei W21 4cb">Kam vor – 2/9 – S24, W21</span></h4>
   <table class="kompakt">
     <tr><th style="width:18%"></th><th>Statischer Test</th><th>Dynamischer Test</th></tr>
     <tr><td>Prinzip</td><td>Prüfobjekt wird <strong>nicht ausgeführt</strong>, sondern untersucht</td><td>Prüfobjekt wird mit Testdaten <strong>ausgeführt</strong>, Ist- und Soll-Ergebnis werden verglichen</td></tr>
@@ -185,7 +186,7 @@
   </table>
   <p><strong>Grey-Box-Test:</strong> Mischform – Testfälle aus der Spezifikation, aber mit Wissen über die innere Struktur (z. B. beim Integrationstest die Schnittstellen kennen).</p>
 
-  <h4>Weitere Testarten</h4>
+  <h4>Weitere Testarten <span class="relevanz r-vor" title="Usability-Test W21 T1 3ac (2 Möglichkeiten), Regressionstest S24 T2 3ab">Kam vor – 2/9 – S24, W21</span></h4>
   <table class="kompakt">
     <tr><th style="width:24%">Testart</th><th>Zweck und Vorgehen</th></tr>
     <tr><td><strong>Regressionstest</strong></td><td>Nach jeder Änderung (neue Funktion, Fehlerkorrektur, Optimierung) werden die <strong>bereits bestehenden Testfälle erneut ausgeführt</strong>, um sicherzustellen, dass die vorhandene Funktionalität nicht beeinträchtigt wurde (keine „Seiteneffekte“). Wird wegen der häufigen Wiederholung automatisiert (CI-Pipeline).</td></tr>
@@ -200,7 +201,7 @@
   </table>
   <p><strong>Funktionale Tests</strong> prüfen, <em>was</em> das System tut (Ergebnisse). <strong>Nicht-funktionale Tests</strong> prüfen, <em>wie gut</em> es das tut (Last, Usability, Sicherheit, Kompatibilität) – das sind genau die Qualitätsmerkmale aus TQ-04.</p>
 
-  <h4>Manuell oder automatisiert?</h4>
+  <h4>Manuell oder automatisiert? <span class="relevanz r-vor" title="W21 T1 4cb: nur automatische Code-Reviews und Unit-Tests bewerten">Kam vor – 1/9 – W21</span></h4>
   <div class="zweispaltig">
     <div>
       <table class="kompakt">
@@ -232,7 +233,7 @@
     </figure>
   </div>
 
-  <h4>Testkonzept / Testplan</h4>
+  <h4>Testkonzept / Testplan <span class="relevanz r-vor" title="Inhalte eines Testkonzepts (W23 T1 1d, 6 P)">Kam vor – 1/9 – W23</span></h4>
   <p>Das <strong>Testkonzept</strong> (Testplan, vgl. IEEE 829 bzw. ISO/IEC/IEEE 29119) legt <em>vor</em> dem Testen fest, was, wie, womit, von wem und wann getestet wird. Typische Inhalte:</p>
   <ul>
     <li><strong>Testobjekte und Testumfang:</strong> welche Komponenten/Funktionen getestet werden – und welche ausdrücklich nicht.</li>
@@ -248,7 +249,7 @@
   </ul>
   <p><strong>Aufbau eines Testfalls</strong> (z. B. im Testprotokoll): ID · Testobjekt · Vorbedingung · Eingabe/Testschritte · erwartetes Ergebnis · tatsächliches Ergebnis · Status (bestanden/fehlgeschlagen) · Tester, Datum.</p>
 
-  <h4>Konformität zu einer Spezifikation prüfen</h4>
+  <h4>Konformität zu einer Spezifikation prüfen <span class="relevanz r-vor" title="W25 T1 3ba (Konformität sicherstellen), 3bc (XSD-Validierung reicht nicht)">Kam vor – 1/9 – W25</span></h4>
   <p>Wenn ein System eine fremde, vorgegebene Spezifikation erfüllen muss (Datenformat, Norm, Schnittstelle eines Partners, z. B. die eRechnung in W25), reicht es nicht, „irgendwie“ zu testen:</p>
   <ul>
     <li><strong>Formale Validierung</strong> gegen das maschinenlesbare Schema (XSD bei XML, JSON-Schema bei JSON) – automatisiert bei jeder erzeugten Datei.</li>
@@ -263,10 +264,10 @@
     <strong>W21 T1 A4d (4 P):</strong> Black- und White-Box-Test beschreiben. · <strong>W21 T1 A3ac (4 P):</strong> Usability-Tests beschreiben. · <strong>S24 T2 A3aa/ab (je 4 P):</strong> Vorteile des White-Box- gegenüber dem Black-Box-Test; Zweck des Regressionstests. · <strong>W23 T1 A1d (6 P):</strong> Inhalte eines Testkonzepts beschreiben – die Lösung erwartete z. B. Teststrategie, Testumgebung/Automatisierung, Zusammenspiel der Teststufen, Testplan (wer/was/wann), Aufwandsschätzung. · <strong>W25 T1 A3ba/bc (3 + 6 P):</strong> Konformität zu einer Spezifikation sicherstellen; begründen, warum eine XSD-Validierung allein nicht reicht. · Operator „beschreiben/erläutern“: nicht nur den Begriff nennen, sondern Zweck und Vorgehen in ganzen Sätzen, möglichst mit Bezug zum Szenario.</div>
 
   <!-- ===================== TQ-02 ===================== -->
-  <h3 id="e-02">TQ-02 · Code analysieren / Fehler finden <span class="badge k-meistens">Meistens</span></h3>
-  <p class="klein">Vorkommen: 6/9 · Prüfungen: W21 (Struktogramm checkPassword, 3 Fehler), S22 (fehlerhafte Bedingungen), W22 (rekursive Funktion), S23 (Monatsstatistik, 13 P Korrektur), S24 (Pfade notieren), W25 (fehlerhafte Minimum-Funktion) · meist Teil 2</p>
+  <h3 id="e-02">TQ-02 · Code analysieren / Fehler finden <span class="relevanz r-kern" title="Belege: W25 T2 A3bb, A3ba (14 P); S23 T2 A3a (Datenverlaufstabelle), A3aa, A3ab (15 P); W22 T2 A2ab (4 P); S22 T2 A2bb (4 P); W21 T2 A1c (6 P).">Prüfungskern – 5/9 – W25, S23, W22, S22, W21</span></h3>
+  <p class="klein">Vorkommen: 5/9 · Prüfungen: W25, S23, W22, S22, W21 · Teil 2, Aufgabe 2 oder 3 (außerdem Aufgabe 1 in W21)</p>
 
-  <h4>Fehlerarten</h4>
+  <h4>Fehlerarten <span class="relevanz r-vor" title="W25 T2 3bb: zwei semantische (Logik-)Fehler">Kam vor – 1/9 – W25</span></h4>
   <table class="kompakt">
     <tr><th style="width:18%">Fehlerart</th><th>Wann fällt er auf?</th><th>Beispiele</th></tr>
     <tr><td><strong>Syntaxfehler</strong></td><td>beim Übersetzen (Compiler, IDE markiert rot) – Programm startet gar nicht</td><td>fehlendes Semikolon oder Klammer, Schlüsselwort falsch geschrieben, nicht deklarierte Variable, Typfehler (<code>int x = "drei";</code>)</td></tr>
@@ -275,7 +276,7 @@
   </table>
   <p>Das Wort „semantisch“ (W25 T2 A3bb: „zwei semantische Fehler“) meint genau diese Logikfehler: Der Code ist syntaktisch korrekt, <em>bedeutet</em> aber etwas anderes, als gemeint war.</p>
 
-  <h4>Katalog der typischen Fehler in Prüfungsaufgaben</h4>
+  <h4>Katalog der typischen Fehler in Prüfungsaufgaben <span class="relevanz r-kern" title="Fehler finden/korrigieren: W21 T2 1c, S22 2bb, W22 2ab, S23 3aa/3ab, W25 3ba/3bb">Prüfungskern – 5/9 – W25, S23, W22, S22, W21</span></h4>
   <table class="kompakt">
     <tr><th style="width:4%">#</th><th style="width:30%">Fehler</th><th>Erkennungszeichen und Korrektur</th></tr>
     <tr><td>1</td><td><strong>Falsche Initialisierung</strong></td><td><code>min := 0</code> bzw. <code>max := 0</code>, obwohl alle Werte positiv bzw. auch negativ sein können → mit dem <strong>ersten Element</strong> (<code>werte[0]</code>) initialisieren. Zähler/Summe nicht auf 0 gesetzt oder <strong>in der falschen Schleife</strong> initialisiert (innerhalb statt außerhalb bzw. umgekehrt).</td></tr>
@@ -290,7 +291,7 @@
     <tr><td>10</td><td><strong>Sonderfall nicht behandelt</strong></td><td><code>null</code>, leeres Array/leere Liste, ein einziges Element, alle Werte gleich, negative Werte – Spezifikation genau lesen, was dann passieren soll (Exception? 0? leere Liste?).</td></tr>
   </table>
 
-  <h4>So gehst du vor</h4>
+  <h4>So gehst du vor <span class="relevanz r-kern" title="Vorgehen beim Fehlerfinden in 5 Prüfungen">Prüfungskern – 5/9 – W25, S23, W22, S22, W21</span></h4>
   <ol>
     <li><strong>Spezifikation lesen</strong> und für die gegebenen Testdaten das <strong>erwartete Ergebnis selbst ausrechnen</strong> (ohne auf den Code zu schauen).</li>
     <li><strong>Schreibtischtest</strong> (TQ-05) mit denselben Testdaten: Code Zeile für Zeile durchspielen, Variablenwerte notieren → <strong>tatsächliches Ergebnis</strong>.</li>
@@ -325,7 +326,7 @@
   </table>
   <p>Hinweis: Der Fehler in Zeile 03 fällt mit diesen Testdaten gar nicht auf, weil Zeile 07 die Schleife vorher beendet. Fehler können sich gegenseitig <strong>verdecken</strong> – nach jeder Korrektur erneut testen.</p>
 
-  <h4>Gruppenwechsel erkennen</h4>
+  <h4>Gruppenwechsel erkennen <span class="relevanz r-vor" title="S23 T2 3: Ticketstatistik mit Gruppenwechsel (Fehler nennen, Code korrigieren)">Kam vor – 1/9 – S23</span></h4>
   <p>Viele Auswertungen (Statistik je Monat, je Filiale, je Kurs) laufen über eine <strong>nach dem Gruppenbegriff sortierte</strong> Liste. Das Muster: Gruppenbegriff des ersten Elements merken; in der Schleife bei einem <strong>Wechsel</strong> die bisherige Gruppe auswerten, Gesamtwerte fortschreiben, <strong>alle</strong> Gruppenvariablen zurücksetzen und den neuen Gruppenbegriff merken; danach das aktuelle Element verarbeiten; <strong>nach der Schleife die letzte Gruppe auswerten</strong>. Beim Prüfen eines solchen Codes gezielt fragen: Wird jede Gruppenvariable zurückgesetzt? Wird die letzte Gruppe ausgegeben? Werden die Gesamtwerte durch die richtige (Gesamt-)Anzahl geteilt? Was passiert bei leerer Liste (Zugriff auf das erste Element)?</p>
 
   <div class="falle"><span class="kastentitel">Typische Fehler beim Antworten</span>
@@ -334,10 +335,10 @@
     <strong>S23 T2 A3a (15 P):</strong> Statistik je Monat und Jahr (Gruppenwechsel) mit Datenverlaufstabelle prüfen, zwei Fehler nennen (2 P), Änderungen/Erweiterungen angeben, sodass die vorgegebene Ausgabe entsteht (13 P) – Fehler waren u. a. die nicht ausgegebene letzte Gruppe und ein falscher Divisor. · <strong>W25 T2 A3b (14 P):</strong> Minimum-Funktion mit Exception für <code>null</code>/leer: erwartetes und tatsächliches Ergebnis für fünf Testdaten eintragen, dann zwei semantische Fehler (Startwert 0, Schleifengrenze <code>length-1</code>) korrigieren. · <strong>S22 T2 A2bb (4 P):</strong> fehlerhafte Bedingungen so anpassen, dass der Unit-Test erfolgreich ist. · <strong>W21 T2 A1c (6 P):</strong> drei Fehler in einem Struktogramm zur Passwortprüfung finden.</div>
 
   <!-- ===================== TQ-03 ===================== -->
-  <h3 id="e-03">TQ-03 · Unit-Test / Überdeckungsmaße <span class="badge k-oft">Oft</span></h3>
-  <p class="klein">Vorkommen: 5/9 · Prüfungen: S22, W22, S23, S24, W25 · fast immer Teil 2, oft als Teil einer 20–25-Punkte-Testaufgabe</p>
+  <h3 id="e-03">TQ-03 · Unit-Test / Überdeckungsmaße <span class="relevanz r-kern" title="Belege: W25 T2 A3aa, A3ab (6 P); S24 T2 A3c, A3b (17 P); S23 T2 A3ba, A3bb, A3bc (10 P); W22 T2 A2ac (3 P); S22 T2 A2aa, A2ab, A2ba (12 P); W21 T1 A4cb (5 P).">Prüfungskern – 6/9 – W25, S24, S23, W22, S22, W21</span></h3>
+  <p class="klein">Vorkommen: 6/9 · Prüfungen: W25, S24, S23, W22, S22, W21 · Teil 2, Aufgabe 2 oder 3 und Teil 1 (W21)</p>
 
-  <h4>Was ist ein Unit-Test?</h4>
+  <h4>Was ist ein Unit-Test? <span class="relevanz r-kern" title="Unit-Test beschreiben (S22 2aa/2ab, W25 3aa); Unit-Tests bewerten (W21 4cb)">Prüfungskern – 3/9 – W25, S22, W21</span></h4>
   <p>Ein <strong>Unit-Test</strong> (Komponenten-, Modultest) ist ein <strong>automatisierter Test der kleinsten testbaren Einheit</strong> eines Programms – meist einer Methode oder Klasse – <strong>isoliert</strong> vom Rest des Systems. Er ruft die Einheit mit festgelegten Eingaben auf und <strong>vergleicht das tatsächliche mit dem erwarteten Ergebnis</strong>. Unit-Tests werden von den Entwicklern selbst geschrieben, meist mit einem Framework (Java: JUnit, C#: NUnit/xUnit, Python: unittest/pytest).</p>
   <p><strong>Wozu?</strong> Fehler früh und genau lokalisiert finden (man weiß, welche Methode fehlschlägt) · bei jeder Änderung automatisch erneut ausführen (<strong>Regressionstest</strong>, z. B. in der CI-Pipeline) · Absicherung beim Refactoring · ausführbare Dokumentation, wie eine Methode benutzt wird · zwingt zu testbarem, lose gekoppeltem Design.</p>
 
@@ -352,7 +353,7 @@
   <p>Weitere Merkmale guter Unit-Tests: <strong>ein Test prüft genau einen Sachverhalt</strong> (aussagekräftiger Name wie <code>leererWarenkorbKostetNichts</code>), lesbar, wartbar, deckt Normal-, Grenz- und Fehlerfälle ab.</p>
   <p><strong>Stub</strong> = Platzhalter, der feste Antworten liefert (z. B. statt der Datenbank immer drei Testkunden). <strong>Mock</strong> = Platzhalter, der zusätzlich prüft, <em>ob und wie</em> er aufgerufen wurde. <strong>Testtreiber</strong> = Code, der die zu testende Einheit aufruft (bei JUnit: die Testklasse).</p>
 
-  <h4>Aufbau: Arrange – Act – Assert</h4>
+  <h4>Aufbau: Arrange – Act – Assert <span class="relevanz r-vor" title="S22 T2 2ba: JUnit-assertEquals-Testfälle auswerten">Kam vor – 1/9 – S22</span></h4>
   <p>Jede Testmethode folgt demselben Dreischritt: <strong>Arrange</strong> (Vorbereiten: Objekte anlegen, Ausgangszustand und Testdaten herstellen) → <strong>Act</strong> (Ausführen: genau die zu testende Methode aufrufen) → <strong>Assert</strong> (Prüfen: tatsächliches mit erwartetem Ergebnis vergleichen). Beispiel aus einem Bank-Szenario:</p>
   <pre class="java">import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -387,7 +388,7 @@ class KontoTest {
 
   <div class="merke"><span class="kastentitel">Merke: assertEquals auswerten</span>Für jeden Testfall den Methodenaufruf mit dem <strong>gegebenen</strong> (ggf. fehlerhaften) Code selbst ausrechnen → tatsächlicher Wert. Stimmt er mit dem ersten Parameter (expected) überein: <strong>OK</strong>, sonst <strong>Fehler</strong>. Wichtig für die Praxis: Eine JUnit-Testmethode <strong>bricht beim ersten fehlgeschlagenen assert ab</strong>; die folgenden asserts derselben Methode werden nicht mehr ausgeführt. In Prüfungstabellen (S22) wird trotzdem jede Zeile einzeln bewertet – das ist dort ausdrücklich so gemeint.</div>
 
-  <h4>Test-Driven Development (TDD)</h4>
+  <h4>Test-Driven Development (TDD) <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <figure>
     <svg viewBox="0 0 640 200" width="640" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
       <defs>
@@ -416,7 +417,7 @@ class KontoTest {
   </figure>
   <p>Vorteile: jede Zeile Code ist durch einen Test begründet (hohe Abdeckung), Anforderungen werden vorab präzisiert, kleine Schritte, sicheres Refactoring. Nachteile: anfangs mehr Aufwand, Disziplin nötig, bei unklaren Anforderungen oder GUI-lastigem Code schwierig.</p>
 
-  <h4>Kontrollflussgraph</h4>
+  <h4>Kontrollflussgraph <span class="relevanz r-hinter" title="Pfade/Anweisungen im Kontrollfluss verfolgen (W22 2ac, S24 3c); der Graph selbst wurde nie gezeichnet. Grenzwertig, nicht mitgezählt: S24 (T2 A3c: alle Pfade notieren, ein Kontrollflussgraph wird nicht gezeichnet); W22 (T2 A2ac: Mindestzahl der Testfälle für Anweisungsüberdeckung, Graph nicht gefragt).">Hintergrund – 0/9</span></h4>
   <p>White-Box-Überdeckungsmaße werden am <strong>Kontrollflussgraphen</strong> erklärt: <strong>Knoten</strong> = Anweisungen bzw. Bedingungen (oft mit Zeilennummer beschriftet), <strong>Kanten</strong> = mögliche Übergänge. Eine Bedingung hat zwei ausgehende Kanten (wahr/falsch) – auch ein <code>wenn</code> <em>ohne</em> <code>sonst</code>: Seine falsch-Kante führt direkt hinter das <code>Ende wenn</code>.</p>
   <div class="zweispaltig">
     <pre class="pseudo listing" style="flex:1 1 360px">01 funktion versandkosten(gewicht : double,
@@ -464,7 +465,7 @@ class KontoTest {
     </figure>
   </div>
 
-  <h4>Die drei Überdeckungsmaße</h4>
+  <h4>Die drei Überdeckungsmaße <span class="relevanz r-kern" title="Anweisungsüberdeckung W22 2ac, S23 3ba–3bc, W25 3ab; Zweig-/Pfadüberdeckung S24 3b">Prüfungskern – 4/9 – W25, S24, S23, W22</span></h4>
   <table class="kompakt">
     <tr><th style="width:22%">Maß</th><th>Forderung</th><th style="width:30%">Beispiel <code>versandkosten</code></th></tr>
     <tr><td><strong>Anweisungsüberdeckung</strong><br>(C0, statement coverage)</td><td>Jede <strong>Anweisung</strong> wird mindestens einmal ausgeführt. Maß: ausgeführte Anweisungen ÷ alle Anweisungen · 100 %.</td><td><strong>1 Testfall</strong> genügt: gewicht = 12, express = wahr (Pfad P1 führt alle Anweisungen aus)</td></tr>
@@ -485,7 +486,7 @@ class KontoTest {
   </figure>
   <p>Ergänzend gibt es die <strong>Bedingungsüberdeckung</strong> (condition coverage): Bei zusammengesetzten Bedingungen wie <code>a &gt; 0 und b &gt; 0</code> muss jede <em>Teil</em>bedingung einmal wahr und einmal falsch werden (Mehrfachbedingungsüberdeckung: alle Kombinationen). Achtung Bezeichnung: In deutschen Lehrbüchern steht C2 meist für Pfad-, C3 für Bedingungsüberdeckung; manche englischen Quellen nummerieren anders. In der Prüfung werden die Begriffe ausgeschrieben.</p>
 
-  <h4>So bestimmst du die Mindestanzahl der Testfälle</h4>
+  <h4>So bestimmst du die Mindestanzahl der Testfälle <span class="relevanz r-kern" title="W22 2ac (Mindestzahl Testfälle), S23 3bc (Testdaten für volle Überdeckung), S24 3c (alle Pfade)">Prüfungskern – 3/9 – S24, S23, W22</span></h4>
   <ol>
     <li>Kontrollflussgraph skizzieren oder im Code jede Bedingung (B1, B2 …) und jede Anweisung im Zweig (A1, A2 …) markieren – so macht es auch die IHK (S24 T2 A3c).</li>
     <li><strong>C0:</strong> Welche Anweisungen schließen sich gegenseitig aus (z. B. <code>dann</code>- und <code>sonst</code>-Teil derselben Bedingung, oder ein Zweig, in dem man früh mit <code>rückgabe</code>/Exception aussteigt)? Mindestens so viele Testfälle wie sich gegenseitig ausschließende Anweisungsgruppen; dann so kombinieren, dass jeder Testfall möglichst viele Anweisungen mitnimmt.</li>
@@ -494,7 +495,7 @@ class KontoTest {
     <li>Testdaten angeben, die genau diesen Pfad erzwingen, und prüfen, ob der Pfad überhaupt möglich ist (manche Kombinationen sind logisch unmöglich).</li>
   </ol>
   <p><strong>Schleifen:</strong> Jede weitere Wiederholung erzeugt einen neuen Pfad – vollständige Pfadüberdeckung ist dann praktisch unmöglich. Man begrenzt sich z. B. auf <strong>Schleife 0-mal, 1-mal und mehrmals</strong> durchlaufen (Boundary-Interior-Test). Für C0 und C1 reicht oft ein Testfall, der die Schleife mehrmals durchläuft, plus einer, der sie nicht betritt.</p>
-  <p><strong>Englische Begriffe</strong> (kommen im Fachtext vor, S24): statement coverage, branch coverage / decision coverage, path coverage, condition coverage, test case, test suite, assertion, expected/actual result, coverage tool, executed / not executed.</p>
+  <p><strong>Englische Begriffe</strong> (im S24-Fachtext standen davon nur statement coverage, branch coverage, path coverage, executed, at least once, entry/exit point; die übrigen Begriffe sind Zusatzwissen): statement coverage, branch coverage / decision coverage, path coverage, condition coverage, test case, test suite, assertion, expected/actual result, coverage tool, executed / not executed.</p>
 
   <div class="falle"><span class="kastentitel">Typische Fallen</span>
     100 % Überdeckung heißt <strong>nicht</strong> fehlerfrei: Überdeckung misst nur, welcher Code <em>ausgeführt</em> wurde – nicht, ob das Ergebnis mit einer sinnvollen Assertion geprüft wurde, und schon gar nicht, ob <strong>Funktionalität fehlt</strong> (fehlender Code kann nicht „nicht überdeckt“ sein). Der Minimum-Fehler „Startwert 0“ wird mit voller Anweisungsüberdeckung oft nicht gefunden. · Bei der Mindestanzahl für C0 die „leere“ falsch-Kante vergessen ist richtig (C0 braucht sie nicht), bei C1 ein Fehler. · Bei C2 Pfade vergessen, die ohne <code>sonst</code> entstehen. · „Mindestanzahl“ immer mit kurzer Begründung bzw. konkreten Testdaten angeben.</div>
@@ -502,8 +503,8 @@ class KontoTest {
     <strong>S22 T2 A2a (7 P):</strong> Unit-Test beschreiben (3 P) und zwei Eigenschaften nennen und beschreiben (4 P); <strong>A2ba (5 P):</strong> fünf <code>assertEquals</code>-Zeilen mit OK/Fehler auswerten. · <strong>W25 T2 A3a (6 P):</strong> Unit-Test beschreiben, Testabdeckung bezogen auf Anweisungen erläutern. · <strong>W22 T2 A2ac (3 P), S23 T2 A3b (10 P):</strong> Anweisungsüberdeckung erläutern, Mindestzahl Testfälle, nicht durchlaufene Anweisungen nennen, Testdaten für volle Überdeckung anpassen. · <strong>S24 T2 A3b/c (12 + 5 P):</strong> Anweisungs-, Zweig- und Pfadüberdeckung anhand eines <strong>englischen Fachtextes</strong> erläutern (je 4 P) und alle Pfade eines Login-Algorithmus in der Notation „B1, A1, B2, …“ notieren.</div>
 
   <!-- ===================== TQ-04 ===================== -->
-  <h3 id="e-04">TQ-04 · Qualitätsmerkmale ISO/IEC 25010 <span class="badge k-oft">Oft</span></h3>
-  <p class="klein">Vorkommen: 4/9 · Prüfungen: W21 (Effizienz und Änderbarkeit), S23 (Qualitätsmerkmale nach ISO 9126!), S24 (Qualität/QS-Maßnahmen), S26 (Zuverlässigkeit + weiteres Merkmal) · Teil 1, 4–5 Punkte</p>
+  <h3 id="e-04">TQ-04 · Qualitätsmerkmale ISO/IEC 25010 <span class="relevanz r-kern" title="Belege: S26 T1 A4a (5 P); S23 T1 A2a (4 P); W21 T1 A4ca (4 P).">Prüfungskern – 3/9 – S26, S23, W21</span></h3>
+  <p class="klein">Vorkommen: 3/9 · Prüfungen: S26, S23, W21 · Teil 1, Aufgabe 4 (außerdem Aufgabe 2 in S23) · Hinweis: S23 fragte nach ISO/IEC 9126 (dem Vorgänger der Norm 25010)</p>
 
   <p>Die Norm <strong>ISO/IEC 25010</strong> („SQuaRE“, Nachfolger der ISO/IEC 9126) beschreibt ein <strong>Produktqualitätsmodell</strong>: Software-Qualität wird in Merkmale und Untermerkmale zerlegt, damit man sie <strong>beschreiben, als nicht-funktionale Anforderung festlegen und prüfen</strong> kann. Die Fassung von 2011 hat <strong>8 Merkmale</strong>:</p>
   <table class="kompakt">
@@ -519,7 +520,7 @@ class KontoTest {
   </table>
   <p>Neben dem Produktqualitätsmodell definiert die Norm die <strong>Nutzungsqualität</strong> (quality in use): Effektivität, Effizienz, Zufriedenheit, Freiheit von Risiken, Kontextabdeckung – also die Qualität, die der Nutzer im tatsächlichen Einsatz erlebt.</p>
 
-  <h4>Ältere Norm ISO/IEC 9126 und Neufassung 2023</h4>
+  <h4>Ältere Norm ISO/IEC 9126 und Neufassung 2023 <span class="relevanz r-vor" title="ISO 9126 genannt in S23 T1 2a; Effizienz/Änderbarkeit (9126-Begriffe) in W21 T1 4ca">Kam vor – 2/9 – S23, W21</span></h4>
   <table class="kompakt">
     <tr><th style="width:22%">ISO/IEC 9126 (6 Merkmale)</th><th style="width:38%">Untermerkmale 9126</th><th>wird in ISO/IEC 25010 (2011) zu …</th></tr>
     <tr><td><strong>Funktionalität</strong></td><td>Angemessenheit, Richtigkeit, Interoperabilität, Sicherheit, Ordnungsmäßigkeit</td><td>Funktionale Eignung; <strong>Sicherheit</strong> wird eigenes Merkmal; Interoperabilität wandert zur neuen <strong>Kompatibilität</strong></td></tr>
@@ -532,7 +533,7 @@ class KontoTest {
   <p>Jedes 9126-Merkmal hat zusätzlich das Untermerkmal „Konformität“ (Einhaltung von Normen). <strong>Neu als eigene Hauptmerkmale in 25010:</strong> Sicherheit und Kompatibilität.</p>
   <p><strong>ISO/IEC 25010:2023</strong> erweitert auf <strong>9 Merkmale</strong>: Benutzbarkeit heißt nun <strong>Interaktionsfähigkeit</strong> (interaction capability, u. a. mit Inklusivität und Selbstbeschreibungsfähigkeit), Übertragbarkeit heißt <strong>Flexibilität</strong> (neu mit Skalierbarkeit), Reife heißt Fehlerfreiheit (faultlessness), Sicherheit erhält „Widerstandsfähigkeit“ (resistance), und neu ist <strong>Safety</strong> (Betriebssicherheit: Schutz von Menschen und Umwelt, z. B. sicherer Zustand bei Ausfall, Gefahrenwarnung). Die bisherigen Prüfungen haben die Begriffe der Fassung 2011 (bzw. sogar der ISO 9126) verwendet – lerne diese sicher und kenne die Umbenennungen.</p>
 
-  <h4>Qualitätsanforderungen messbar machen</h4>
+  <h4>Qualitätsanforderungen messbar machen <span class="relevanz r-hinter" title="messbare Formulierung nie verlangt; gefragt waren Merkmale beschreiben (W21 4ca, S23 2a, S26 4a)">Hintergrund – 0/9</span></h4>
   <p>„Die App soll schnell und zuverlässig sein“ ist nicht prüfbar. Eine Qualitätsanforderung braucht eine <strong>Messgröße, einen Zielwert und Messbedingungen</strong>:</p>
   <table class="kompakt">
     <tr><th style="width:20%">Merkmal</th><th style="width:38%">Messgröße</th><th>messbare Formulierung (Beispiel Online-Banking)</th></tr>
@@ -549,22 +550,22 @@ class KontoTest {
   <div class="falle"><span class="kastentitel">Typische Fallen</span>
     „Sicherheit“ in 25010 meint <strong>Informationssicherheit</strong> (security), nicht Betriebssicherheit/Unfallschutz (safety – erst in der Fassung 2023). · Funktionale Anforderungen („Das System soll Rechnungen erstellen“) sind <em>kein</em> Qualitätsmerkmal – die Merkmale beschreiben, <em>wie gut</em> etwas funktioniert. · Beim „Beschreiben“ nicht nur den Namen nennen, sondern die Bedeutung erklären und ein konkretes Beispiel aus dem Szenario geben. · Zuverlässigkeit (funktioniert dauerhaft) nicht mit funktionaler Korrektheit (rechnet richtig) verwechseln.</div>
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
-    <strong>W21 T1 A4ca (4 P):</strong> die Qualitätsmerkmale Effizienz und Änderbarkeit beschreiben. · <strong>S23 T1 A2a (4 P):</strong> Qualitätsmerkmale nach <strong>ISO 9126</strong> nennen bzw. beschreiben – deshalb die alten Begriffe kennen. · <strong>S26 T1 A4a (5 P):</strong> Zuverlässigkeit erläutern und ein weiteres Merkmal mit Beispiel aus dem Szenario. · Erwartet wird jeweils: Begriff + Bedeutung + Bezug zur Situation (z. B. Sensoren auf dem Feld, Fahrplan-App).</div>
+    <strong>W21 T1 A4ca (4 P):</strong> die Qualitätsmerkmale Effizienz und Änderbarkeit beschreiben. · <strong>S23 T1 A2a (4 P):</strong> Qualitätsmerkmale nach <strong>ISO 9126</strong> nennen bzw. beschreiben – deshalb die alten Begriffe kennen. · <strong>S26 T1 A4a (5 P):</strong> Zuverlässigkeit beschreiben und ein weiteres Merkmal nennen und beschreiben (ein Beispiel aus dem Szenario war nicht verlangt, ist aber hilfreich). · Erwartet wird jeweils: Begriff + Bedeutung + Bezug zur Situation (z. B. Sensoren auf dem Feld, Fahrplan-App).</div>
 
   <!-- ===================== TQ-05 ===================== -->
-  <h3 id="e-05">TQ-05 · Schreibtischtest <span class="badge k-oft">Oft</span></h3>
-  <p class="klein">Vorkommen: 4/9 · Prüfungen: S22 (assertEquals-Fälle durchrechnen), W22 (rekursive Umwandlung Dezimal → Binär), S23 (Datenverlaufstabelle zur Monatsstatistik), W25 (erwartetes und tatsächliches Ergebnis für fünf Testdaten, 10 P) · Teil 2</p>
+  <h3 id="e-05">TQ-05 · Schreibtischtest <span class="relevanz r-kern" title="Belege: W25 T2 A3ba (10 P); S23 T2 A3a (Datenverlaufstabelle) (0 P); W22 T2 A2aa (4 P); S22 T2 A2ba (5 P).">Prüfungskern – 4/9 – W25, S23, W22, S22</span></h3>
+  <p class="klein">Vorkommen: 4/9 · Prüfungen: W25, S23, W22, S22 · Teil 2, Aufgabe 2 oder 3</p>
 
   <p>Beim <strong>Schreibtischtest</strong> (Trockentest, „dry run“) spielt man einen Algorithmus <strong>von Hand ohne Computer</strong> mit konkreten Testdaten durch und notiert nach jedem Schritt die Werte aller Variablen in einer Tabelle. Weil das Programm dabei nicht ausgeführt wird, zählt er zu den <strong>statischen</strong> Prüfverfahren. Er dient dazu, die Arbeitsweise zu verstehen, das tatsächliche Ergebnis zu ermitteln und so Logikfehler zu finden.</p>
 
-  <h4>Drei Tabellenformen, die in Prüfungen vorkommen</h4>
+  <h4>Drei Tabellenformen, die in Prüfungen vorkommen <span class="relevanz r-kern" title="Schreibtischtest: S22 2ba, W22 2aa, S23 3aa, W25 3ba">Prüfungskern – 4/9 – W25, S23, W22, S22</span></h4>
   <ol>
     <li><strong>Trace-Tabelle</strong> (am häufigsten): eine Spalte je Variable bzw. Bedingung, eine Zeile je Schritt oder Schleifendurchlauf.</li>
     <li><strong>Datenverlaufstabelle</strong> (S23): eine <em>Zeile</em> je Variable, in der Spalte „Werteverlauf“ alle Werte nacheinander, durch Kommas getrennt.</li>
     <li><strong>Testtabelle</strong> (W25): je Zeile ein Satz Testdaten mit <em>erwartetem</em> (aus der Spezifikation) und <em>tatsächlichem</em> Ergebnis (aus dem Code).</li>
   </ol>
 
-  <h4>So gehst du vor</h4>
+  <h4>So gehst du vor <span class="relevanz r-kern" title="Schreibtischtest in 4 Prüfungen">Prüfungskern – 4/9 – W25, S23, W22, S22</span></h4>
   <ol>
     <li>Alle Variablen (auch Laufvariablen) als Spalten anlegen; bei Bedarf eine Spalte für das Ergebnis jeder Bedingung (wahr/falsch).</li>
     <li>Erste Zeile: Anfangswerte nach der Initialisierung.</li>
@@ -633,15 +634,15 @@ class KontoTest {
   <div class="falle"><span class="kastentitel">Typische Fehler</span>
     Werte nur am Ende statt nach jeder Zuweisung notieren (dann sieht man nicht, <em>wo</em> es schiefgeht). · Den Code so durchspielen, wie er <em>gemeint</em> ist, statt wie er <em>dasteht</em> – im Schreibtischtest wird der gegebene, ggf. fehlerhafte Code exakt befolgt. · Laufvariable einen Durchlauf zu weit oder zu kurz führen. · Bei verschachtelten Schleifen vergessen, dass die Initialisierung vor der inneren Schleife bei jedem äußeren Durchlauf erneut ausgeführt wird (oder eben gerade nicht, wenn sie außerhalb steht). · Kurzschlussauswertung übersehen: Bei <code>a oder b</code> wird <code>b</code> nicht mehr ausgewertet, wenn <code>a</code> schon wahr ist (so schützt z. B. <code>i &gt;= n oder werte[i] = 0</code> vor einem Indexfehler).</div>
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
-    <strong>S23 T2 A3a:</strong> Den Code mit vorgegebenen Testdaten überprüfen und dazu eine Datenverlaufstabelle ausfüllen – vorgegeben waren Typ und Variablenname, einzutragen der Werteverlauf. · <strong>W25 T2 A3ba (10 P):</strong> Tabelle mit fünf Testdaten (darunter negative Werte, ein Element, <code>null</code>) – je erwartetes und tatsächliches Ergebnis. · <strong>W22 T2 A2aa (4 P):</strong> rekursive Funktion mit einem Startwert durchspielen. · <strong>S22 T2 A2ba (5 P):</strong> für jede <code>assertEquals</code>-Zeile den Rückgabewert ausrechnen.</div>
+    <strong>S23 T2 A3a:</strong> Den Code mit vorgegebenen Testdaten überprüfen und dazu eine Datenverlaufstabelle ausfüllen – vorgegeben waren Typ und Variablenname, einzutragen der Werteverlauf. · <strong>W25 T2 A3ba (10 P):</strong> Tabelle mit fünf Testdaten (darunter negative Werte, ein Element, <code>null</code>) – je erwartetes und tatsächliches Ergebnis. · <strong>W22 T2 A2aa (4 P):</strong> rekursive Funktion mit zwei Testfällen (7 und 11) durchspielen. · <strong>S22 T2 A2ba (5 P):</strong> für jede <code>assertEquals</code>-Zeile den Rückgabewert ausrechnen.</div>
 
   <!-- ===================== TQ-06 ===================== -->
-  <h3 id="e-06">TQ-06 · Äquivalenzklassen / Testfälle <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
-  <p class="klein">Vorkommen: 3/9 · Prüfungen: S22 (Testdaten aus zwei weiteren Äquivalenzklassen), S23 (Testdaten für volle Anweisungsüberdeckung anpassen), W25 (Testdaten mit Sonderfällen) · Teil 2, 4–10 Punkte</p>
+  <h3 id="e-06">TQ-06 · Äquivalenzklassen / Testfälle <span class="relevanz r-vor" title="Belege: S23 T2 A3bc (4 P); S22 T2 A2bc (4 P).">Kam vor – 2/9 – S23, S22</span></h3>
+  <p class="klein">Vorkommen: 2/9 · Prüfungen: S23, S22 · Teil 2, Aufgabe 2 oder 3</p>
 
   <p>Alle möglichen Eingaben zu testen ist unmöglich (schon ein <code>int</code>-Parameter hat über 4 Milliarden Werte). Man braucht deshalb <strong>wenige, aber gut gewählte</strong> Testfälle. Die beiden wichtigsten Black-Box-Verfahren:</p>
 
-  <h4>Äquivalenzklassenbildung</h4>
+  <h4>Äquivalenzklassenbildung <span class="relevanz r-vor" title="S22 T2 2bc: Testdaten aus zwei weiteren Äquivalenzklassen">Kam vor – 1/9 – S22</span></h4>
   <p>Der Wertebereich jeder Eingabe wird in <strong>Äquivalenzklassen (ÄK)</strong> zerlegt: Mengen von Werten, für die sich das Programm laut Spezifikation <strong>gleich verhält</strong>. Man nimmt an: Findet ein Wert der Klasse einen Fehler, finden ihn alle; findet einer keinen, findet ihn keiner. Deshalb genügt <strong>ein Repräsentant</strong> je Klasse.</p>
   <ul>
     <li><strong>Gültige ÄK:</strong> zulässige Eingaben, die zu einem regulären Ergebnis führen – je unterschiedlichem Verhalten (z. B. je Tarifstufe) eine eigene Klasse.</li>
@@ -650,7 +651,7 @@ class KontoTest {
   </ul>
   <div class="merke"><span class="kastentitel">Merke: Testfälle aus Äquivalenzklassen zusammenstellen</span><strong>Gültige</strong> Klassen verschiedener Parameter dürfen in <strong>einem</strong> Testfall kombiniert werden (so wenige Testfälle wie möglich, bis jede gültige Klasse einmal vorkam). <strong>Ungültige</strong> Klassen werden <strong>einzeln</strong> getestet, jeweils kombiniert mit gültigen Werten für alle anderen Parameter – sonst verdeckt die erste Fehlermeldung den zweiten Fehler (Fehlermaskierung) und man weiß nicht, welche Prüfung gegriffen hat.</div>
 
-  <h4>Grenzwertanalyse</h4>
+  <h4>Grenzwertanalyse <span class="relevanz r-hinter" title="in keiner Prüfung verlangt (S22 2bc fragt Äquivalenzklassen, keine Grenzwerte)">Hintergrund – 0/9</span></h4>
   <p>Fehler sitzen besonders oft an den <strong>Rändern</strong> der Klassen (<code>&lt;</code> statt <code>&lt;=</code>, Off-by-one). Deshalb testet man zusätzlich die <strong>Grenzwerte</strong>: den Wert genau auf der Grenze und den direkt benachbarten Wert auf der anderen Seite (bei Ganzzahlen ±1, bei Beträgen ±0,01). Für den Bereich 1–99: <strong>0, 1, 99, 100</strong> (strenge Variante zusätzlich 2 und 98).</p>
 
   <p><strong>Beispiel: Notenschlüssel</strong> – eine Funktion <code>note(punkte : integer) : integer</code> rechnet 0–100 Punkte in eine Note um (1: 92–100, 2: 81–91, 3: 67–80, 4: 50–66, 5: 30–49, 6: 0–29), sonst Fehlermeldung.</p>
@@ -707,7 +708,7 @@ class KontoTest {
     <tr><td>7</td><td>5,0</td><td><code>null</code></td><td>ungültig: Land fehlt</td><td>Fehler</td></tr>
   </table>
 
-  <h4>Weitere Hinweise zur Testfallauswahl</h4>
+  <h4>Weitere Hinweise zur Testfallauswahl <span class="relevanz r-vor" title="Testdaten für volle Anweisungsüberdeckung (S23 T2 3bc); in W25 3ba waren die Testdaten vorgegeben">Kam vor – 1/9 – S23</span></h4>
   <ul>
     <li><strong>Sonderfälle</strong> immer mitdenken: <code>null</code>, leeres Array/leere Liste/leerer Text, genau ein Element, alle Werte gleich, Maximum am Anfang oder Ende, negative Werte, sehr große Werte, Sonderzeichen und Umlaute.</li>
     <li><strong>Entscheidungstabelle:</strong> Wenn das Ergebnis von <em>Kombinationen</em> mehrerer Bedingungen abhängt, werden alle Kombinationen (Regeln) als Spalten aufgelistet; jede Regel ergibt einen Testfall.</li>
@@ -720,10 +721,10 @@ class KontoTest {
     <strong>S22 T2 A2bc (4 P):</strong> Weil im Unit-Test noch Testfälle fehlen, sollen Testdaten aus zwei weiteren Äquivalenzklassen angegeben werden, für die die Methode −1 liefern muss – also ungültige Klassen, die die vorhandenen Testfälle noch nicht abdecken. · <strong>S23 T2 A3bc (4 P):</strong> Testdaten so anpassen, dass alle Anweisungen durchlaufen werden, und die Änderungen begründen. · <strong>W25 T2 A3ba:</strong> Testdaten mit Sonderfällen (negative Zahlen, ein Element, <code>null</code>) auswerten.</div>
 
   <!-- ===================== TQ-07 ===================== -->
-  <h3 id="e-07">TQ-07 · Codequalität / Reviews <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
-  <p class="klein">Vorkommen: 2/9 · Prüfungen: W21 (Dokumentation einer Bibliothekserweiterung; Bewertung „nur automatische Code-Reviews und Unit-Tests“), S24 (drei qualitätssichernde Maßnahmen) · dazu S23 T1 A1e (QS-Maßnahmen) · Teil 1, 4–6 Punkte</p>
+  <h3 id="e-07">TQ-07 · Codequalität / Reviews <span class="relevanz r-kern" title="Belege: S24 T1 A1b (6 P); S23 T1 A1e (4 P); W21 T1 A4cb, A1bb (11 P).">Prüfungskern – 3/9 – S24, S23, W21</span></h3>
+  <p class="klein">Vorkommen: 3/9 · Prüfungen: S24, S23, W21 · Teil 1, Aufgabe 1 (außerdem Aufgabe 4 in W21)</p>
 
-  <h4>Qualitätssicherung im Entwicklungsprozess</h4>
+  <h4>Qualitätssicherung im Entwicklungsprozess <span class="relevanz r-kern" title="QS-Maßnahmen: S23 T1 1e, S24 T1 1b (3 Maßnahmen), W21 T1 4cb (Bewertung)">Prüfungskern – 3/9 – S24, S23, W21</span></h4>
   <table class="kompakt">
     <tr><th style="width:18%"></th><th>Konstruktive QS (Fehler vermeiden)</th><th>Analytische QS (Fehler finden)</th></tr>
     <tr><td>Idee</td><td>Rahmenbedingungen so setzen, dass Fehler gar nicht erst entstehen</td><td>vorhandene Ergebnisse prüfen und bewerten</td></tr>
@@ -731,7 +732,7 @@ class KontoTest {
   </table>
   <p>Für die Prüfung gilt: Eine Maßnahme <strong>erläutern</strong> heißt, sie zu benennen <em>und</em> zu beschreiben, wie sie die Qualität verbessert (z. B. „Code-Reviews: Jede Änderung wird vor dem Zusammenführen von einem zweiten Entwickler geprüft; so werden Logikfehler und Verstöße gegen Richtlinien früh gefunden und das Wissen im Team verteilt“).</p>
 
-  <h4>Code-Review</h4>
+  <h4>Code-Review <span class="relevanz r-vor" title="Code-Reviews: W21 4cb (automatische Code-Reviews bewerten), S24 1b (Lösung nennt Code-Reviews)">Kam vor – 2/9 – S24, W21</span></h4>
   <p>Beim <strong>Code-Review</strong> lesen und bewerten andere Entwickler den Code, bevor er übernommen wird (Vier-Augen-Prinzip). Heute meist als <strong>Pull-Request-/Merge-Request-Review</strong> im Git-Workflow.</p>
   <table class="kompakt">
     <tr><th style="width:22%">Reviewart</th><th>Merkmale (vom informellsten zum formalsten)</th></tr>
@@ -791,7 +792,7 @@ class KontoTest {
   </div>
   <p><strong>Pair Programming:</strong> Zwei Entwickler arbeiten an einem Rechner; der <em>Driver</em> schreibt den Code, der <em>Navigator</em> prüft laufend, denkt voraus und achtet auf Fehler; die Rollen wechseln regelmäßig. Es ist damit ein „Review in Echtzeit“. Vorteile: weniger Fehler, besseres Design, Wissensverteilung, schnelle Einarbeitung neuer Kollegen. Nachteile: zwei Personen für eine Aufgabe (höherer Personalaufwand), anstrengend, Paare müssen harmonieren.</p>
 
-  <h4>Statische Codeanalyse und Metriken</h4>
+  <h4>Statische Codeanalyse und Metriken <span class="relevanz r-hinter" title="nur indirekt: „automatische Code-Reviews“ in W21 4cb. Grenzwertig, nicht mitgezählt: W21 (T1 A4cb: automatische Code-Reviews bewerten, nur indirekt).">Hintergrund – 0/9</span></h4>
   <p>Werkzeuge wie SonarQube, Checkstyle, SpotBugs oder ESLint („Linter“) untersuchen den Quelltext automatisch – meist in der IDE und in der CI-Pipeline bei jedem Commit.</p>
   <div class="zweispaltig">
     <div>
@@ -803,7 +804,7 @@ class KontoTest {
   </div>
   <p><strong>Metriken:</strong> Codezeilen (LOC) · <strong>zyklomatische Komplexität nach McCabe</strong> = Anzahl der binären Entscheidungen + 1 (bzw. Kanten − Knoten + 2 im Kontrollflussgraphen); Werte über 10 gelten als schwer test- und wartbar; die Zahl ist zugleich eine obere Grenze für die Testfälle, die man für vollständige Zweigüberdeckung braucht · Testabdeckung · Anteil duplizierten Codes · Kopplung zwischen Klassen.</p>
 
-  <h4>Konventionen und Dokumentation</h4>
+  <h4>Konventionen und Dokumentation <span class="relevanz r-vor" title="Dokumentation einer Bibliothekserweiterung (W21 1bb, 6 P); Verfahrensanweisungen zur Dokumentation (S24 1b Lösung)">Kam vor – 2/9 – S24, W21</span></h4>
   <ul>
     <li><strong>Java-Namenskonventionen:</strong> Klassen <code>PascalCase</code> (<code>Kunde</code>), Methoden und Variablen <code>camelCase</code> (<code>berechneSumme</code>, <code>anzahlKunden</code>), Konstanten <code>UPPER_SNAKE_CASE</code> (<code>MAX_VERSUCHE</code>), Pakete klein. Methoden mit Verb, boolesche Methoden mit <code>ist…</code>/<code>hat…</code>.</li>
     <li>Einheitliche Einrückung, geschweifte Klammern auch bei einzeiligen <code>if</code>s, eine Anweisung pro Zeile, begrenzte Zeilenlänge.</li>
@@ -821,7 +822,7 @@ class KontoTest {
  */
 public static boolean istSchaltjahr(int jahr) { … }</pre>
 
-  <h4>Clean Code</h4>
+  <h4>Clean Code <span class="relevanz r-hinter" title="Clean-Code-Regeln weder in der S24-Lösung noch in den Aufgaben verlangt; W21 1bb/4cb ohne Lösung (grenzwertig)">Hintergrund – 0/9</span></h4>
   <table class="kompakt">
     <tr><th style="width:28%">Regel</th><th>Bedeutung</th></tr>
     <tr><td>Sprechende Namen</td><td>Name verrät Zweck und Einheit: <code>restlaufzeitTage</code> statt <code>r</code> oder <code>tmp2</code>.</td></tr>
@@ -848,7 +849,7 @@ double bruttoBetrag(double nettoBetrag) {
 }</pre>
   <p><strong>Refactoring</strong> = Struktur verbessern, <em>ohne das Verhalten zu ändern</em>. Voraussetzung sind Tests (Regressionstest), die vorher und nachher grün sind.</p>
 
-  <h4>Automatische Prüfungen allein – reicht das?</h4>
+  <h4>Automatische Prüfungen allein – reicht das? <span class="relevanz r-vor" title="W21 T1 4cb: Vorschlag, nur automatische Code-Reviews und Unit-Tests einzusetzen, bewerten">Kam vor – 1/9 – W21</span></h4>
   <p>Jedes Verfahren hat einen „blinden Fleck“: Statische Analyse prüft Form und bekannte Muster, aber keine Fachlogik. Unit-Tests prüfen nur, was jemand als Testfall formuliert hat, und nur einzelne Einheiten – nicht das Zusammenspiel, nicht Last, Bedienbarkeit oder die Anforderungen des Kunden. Eine hohe Testabdeckung sagt nichts über die Qualität der Assertions. Menschliche Reviews erkennen Verständlichkeit, Design- und Anforderungsfehler, verteilen Wissen – sind aber langsamer und nicht vollständig. In der Praxis werden die Verfahren deshalb <strong>kombiniert</strong>: Automatik als schnelles, lückenloses Sicherheitsnetz in der CI-Pipeline, Reviews und höhere Teststufen für das, was Automatik nicht sieht.</p>
 
   <div class="falle"><span class="kastentitel">Typische Fehler</span>

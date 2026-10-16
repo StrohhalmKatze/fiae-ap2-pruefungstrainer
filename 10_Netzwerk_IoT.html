@@ -33,7 +33,7 @@
 <header class="blockkopf">
   <h1>Block 10 · Netzwerk, IoT &amp; Infrastruktur</h1>
   <div class="unter">
-    <span class="badge k-oft">Oft</span> 4/9 Prüfungen (W22, S23, W24, S26) · Ø 13 von 200 Punkten · nur Teil 1 · W24 allein 26 Punkte
+    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 4, Teil 2 in 0 Prüfungen.">Prüfungskern – 4/9 – S26, W24, S23, W22</span> · Ø 6 von 200 Punkten · nur Teil 1 · W24 allein 26 Punkte
     · Lösungen: <a href="10_Netzwerk_IoT_Loesungen.html">10_Netzwerk_IoT_Loesungen.html</a>
   </div>
 </header>
@@ -74,13 +74,14 @@
   <h2>A · Erklärungssatz</h2>
 
   <p>Netzwerkthemen stehen nur in <strong>Teil 1</strong> und kamen in 4 von 9 Prüfungen vor – dann aber teils mit vielen Punkten (W24: 26 Punkte am Stück). Die Szenarien werden immer IoT-lastiger: Sensoren im Park (S23), Messstellen und Drohnen im Weinberg (W23, ohne eigene Netzwerkaufgabe), Bodensensoren auf dem Acker (S26). Typisch sind <strong>Zuordnen und Begründen</strong> (welche Funk- oder Netzart passt wozu?), <strong>Begriffe erläutern</strong> (MAC-Adresse, Ethernet-Frame), ein <strong>englischer Fachtext</strong> und einmal ein <strong>kleines Skript</strong>, das ein Netz durchläuft und JSON ausgibt.</p>
+  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
 
   <table class="kompakt">
     <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
-    <tr><td>NET-01 IoT / Sensorik / Funk</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>4–9 je Teilaufgabe</td><td>Funktechnik passend zur Situation wählen und begründen; Sicherheit auf schwachen Geräten</td></tr>
-    <tr><td>NET-02 Netzwerkkonzepte</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>9</td><td>LAN, WAN, SAN, LPWAN, VPN zuordnen und begründen</td></tr>
-    <tr><td>NET-03 Adressierung, Frames, Protokolle</td><td><span class="badge k-sonstige">Sonstige</span></td><td>3–8</td><td>MAC-Adresse, Ethernet-Frame, IPv4-Netz berechnen, Skript über alle Hosts</td></tr>
-    <tr><td>NET-04 Infrastruktur, Virtualisierung, Cloud</td><td><span class="badge k-sonstige">Sonstige</span></td><td>4–8</td><td>Schwachstellen und Anforderungen beschreiben, Backup, Cloud-Modelle</td></tr>
+    <tr><td>NET-01 IoT / Sensorik / Funk</td><td><span class="relevanz r-kern" title="Belege: S26 T1 A3aa, A3ab, A3bd (12 P); W24 T1 A2a (9 P); S23 T1 A4a (4 P).">Prüfungskern – 3/9 – S26, W24, S23</span></td><td>4–9 je Teilaufgabe</td><td>Funktechnik passend zur Situation wählen und begründen; Sicherheit auf schwachen Geräten</td></tr>
+    <tr><td>NET-02 Netzwerkkonzepte</td><td><span class="relevanz r-vor" title="Belege: S26 T1 A3aa (3 P); W24 T1 A2a (9 P).">Kam vor – 2/9 – S26, W24</span></td><td>9</td><td>LAN, WAN, SAN, LPWAN, VPN zuordnen und begründen</td></tr>
+    <tr><td>NET-03 Adressierung, Frames, Protokolle</td><td><span class="relevanz r-vor" title="Belege: W24 T1 A2bb, A2ba, A2c (17 P).">Kam vor – 1/9 – W24</span></td><td>3–8</td><td>MAC-Adresse, Ethernet-Frame, IPv4-Netz berechnen, Skript über alle Hosts</td></tr>
+    <tr><td>NET-04 Infrastruktur, Virtualisierung, Cloud</td><td><span class="relevanz r-vor" title="Belege: W22 T1 A1a, A1b (8 P).">Kam vor – 1/9 – W22</span></td><td>4–8</td><td>Schwachstellen und Anforderungen beschreiben, Backup, Cloud-Modelle</td></tr>
   </table>
 
   <div class="merke"><span class="kastentitel">Merke: Begründen heißt immer „mit Bezug auf die Situation“</span>
@@ -88,10 +89,10 @@
   </div>
 
   <!-- ===================== NET-01 ===================== -->
-  <h3 id="e-01">NET-01 · IoT / Sensorik / Funk <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
-  <p class="klein">Vorkommen: 3/9 · Prüfungen: S23 (T1 A4a: Verschlüsselung für batteriebetriebene Sensoren), W24 (T1 A2a: LPWAN für IoT), S26 (T1 A3a: LoRa aus englischem Fachtext, A3bd: RSA im IoT-Projekt) · dazu IoT als Kulisse in W23</p>
+  <h3 id="e-01">NET-01 · IoT / Sensorik / Funk <span class="relevanz r-kern" title="Belege: S26 T1 A3aa, A3ab, A3bd (12 P); W24 T1 A2a (9 P); S23 T1 A4a (4 P).">Prüfungskern – 3/9 – S26, W24, S23</span></h3>
+  <p class="klein">Vorkommen: 3/9 · Prüfungen: S26, W24, S23 · Teil 1, Aufgabe 2, 3 oder 4 · Hinweis: dazu IoT als Kulisse in W23</p>
 
-  <h4>Was ist das Internet der Dinge (IoT)?</h4>
+  <h4>Was ist das Internet der Dinge (IoT)? <span class="relevanz r-hinter" title="IoT-Begriffe nie abgefragt (IoT nur als Szenario)">Hintergrund – 0/9</span></h4>
   <p>Beim <strong>Internet of Things</strong> werden physische Gegenstände (Zähler, Maschinen, Container, Parkplätze …) mit <strong>Sensoren</strong>, <strong>Aktoren</strong>, einem kleinen Rechner und einer Netzwerkanbindung ausgestattet. Sie sind <strong>eindeutig adressierbar</strong> (z. B. über eine Geräte-ID wie die 64-Bit-<em>DevEUI</em>), erfassen Daten <strong>selbstständig</strong> und übertragen sie ohne menschliches Zutun an eine zentrale Plattform. Dort werden die Daten gespeichert, ausgewertet und gegebenenfalls Befehle an Aktoren zurückgeschickt.</p>
 
   <table class="kompakt">
@@ -168,7 +169,7 @@
     Ein Router verbindet IP-Netze und bleibt dabei bei IP. Ein <strong>IoT-Gateway</strong> setzt zwischen <em>verschiedenen</em> Protokollen um (z. B. LoRa-Funk → IP/Ethernet) und kann Daten zusätzlich puffern, filtern oder vorverarbeiten. Ein LoRaWAN-Gateway entschlüsselt die Nutzdaten übrigens <em>nicht</em>, es leitet die Pakete nur weiter.
   </div>
 
-  <h4>Funktechniken im Vergleich</h4>
+  <h4>Funktechniken im Vergleich <span class="relevanz r-vor" title="LPWAN für IoT (W24 2a), LoRa-Merkmale und Eignung (S26 3aa/3ab)">Kam vor – 2/9 – S26, W24</span></h4>
   <p>Welche Funktechnik passt, hängt von wenigen Kriterien ab: <strong>Reichweite</strong>, <strong>Datenrate</strong>, <strong>Energiebedarf</strong> (Batterie oder Netzteil?), <strong>Kosten</strong> (Hardware, eigene Infrastruktur, laufende Gebühren), <strong>Latenz</strong> und ob eine <strong>Infrastruktur</strong> vorhanden ist (Mobilfunknetz) oder selbst aufgebaut werden muss (Gateways, Access Points). Die Werte sind typische Richtwerte; in der Prüfung genügen Größenordnungen.</p>
 
   <table class="kompakt eng">
@@ -204,7 +205,7 @@
     <figcaption>Abb. A-2: Zielkonflikt bei Funktechniken – WLAN liegt nahe der Ecke „hohe Datenrate“ (kurze Reichweite, hoher Energiebedarf)</figcaption>
   </figure>
 
-  <h4>Warum LPWAN für verteilte, batteriebetriebene Sensoren?</h4>
+  <h4>Warum LPWAN für verteilte, batteriebetriebene Sensoren? <span class="relevanz r-vor" title="W24 T1 2a (LPWAN begründen), S26 T1 3ab (zwei Gründe für LoRa, 6 P)">Kam vor – 2/9 – S26, W24</span></h4>
   <p><strong>LPWAN</strong> (<em>Low Power Wide Area Network</em>) ist der Oberbegriff für Funknetze, die mit <strong>sehr wenig Energie</strong> über <strong>große Entfernungen</strong> funken – auf Kosten der Datenrate. Für Sensoren, die über ein großes Gebiet verteilt sind und keinen Stromanschluss haben, ist das genau die richtige Abwägung:</p>
   <ul>
     <li><strong>Geringer Energiebedarf:</strong> Das Gerät schläft fast immer und wacht nur zum Senden kurz auf → Batterie hält mehrere Jahre, kein Stromanschluss und seltene Wartungsfahrten.</li>
@@ -215,7 +216,7 @@
   </ul>
   <p><strong>Nicht geeignet</strong> ist LPWAN für Bilder, Audio, Video, große Firmware-Updates oder Echtzeitsteuerung mit sehr kurzer Reaktionszeit.</p>
 
-  <h4>LoRa und LoRaWAN</h4>
+  <h4>LoRa und LoRaWAN <span class="relevanz r-vor" title="S26 T1 3aa (LoRa-Merkmale aus englischem Text), 3ab">Kam vor – 1/9 – S26</span></h4>
   <ul>
     <li><strong>LoRa</strong> (<em>Long Range</em>) ist die <strong>Funkmodulation</strong> (physikalische Schicht). Sie nutzt das <em>Chirp Spread Spectrum</em> (CSS): Das Signal wird über eine breitere Frequenz „gestreckt“ und ist dadurch sehr störfest und auch noch knapp über dem Rauschen empfangbar.</li>
     <li><strong>LoRaWAN</strong> ist das darauf aufbauende <strong>Netzwerkprotokoll</strong> (offener Standard der LoRa Alliance): Adressierung, Verschlüsselung, Gerätemanagement.</li>
@@ -279,18 +280,18 @@
     <figcaption>Abb. A-3: LoRaWAN als „Stern von Sternen“ – S1, S2 und S3 werden von je zwei Gateways empfangen, der Network Server verwirft die Duplikate</figcaption>
   </figure>
 
-  <h4>Rechnen mit dem Duty Cycle</h4>
+  <h4>Rechnen mit dem Duty Cycle <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <p><strong>So gehst du vor:</strong> (1) erlaubte Sendezeit pro Stunde: 1 % von 3600 s = <strong>36 s</strong>. (2) benötigte Sendezeit = Nachrichten pro Stunde × Airtime je Nachricht. (3) vergleichen. (4) ggf. maximale Nachrichtenzahl = 36 s ÷ Airtime (abrunden).</p>
   <p><em>Beispiel:</em> Ein Parkplatzsensor sendet bei SF11 (Airtime laut Datenblatt 0,66 s) einmal pro Minute: 60 × 0,66 s = 39,6 s &gt; 36 s → <strong>nicht zulässig</strong>. Maximal 36 s ÷ 0,66 s = 54,5 → 54 Nachrichten pro Stunde, also etwa alle 67 s. Lösung: seltener senden, nur bei Zustandswechsel senden oder mit kleinerem SF senden (kürzere Airtime, geht aber nur bei gutem Empfang).</p>
 
-  <h4>NB-IoT, Sigfox und 5G kurz eingeordnet</h4>
+  <h4>NB-IoT, Sigfox und 5G kurz eingeordnet <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <ul>
     <li><strong>NB-IoT</strong> (<em>Narrowband IoT</em>) ist ein Mobilfunkstandard für IoT-Geräte im LTE-Netz. Vorteile: vorhandenes Netz, sehr gute Durchdringung von Kellern und Schächten, höhere Datenrate als LoRaWAN, Downlink jederzeit möglich. Nachteile: SIM-Karte und Vertrag je Gerät (laufende Kosten), Abhängigkeit vom Netzbetreiber und dessen Abdeckung. Verwandt: <strong>LTE-M</strong> (mehr Datenrate, auch für bewegte Geräte).</li>
     <li><strong>Sigfox</strong> ist ein Betreibernetz mit extrem kleiner Datenrate und streng begrenzter Nachrichtenzahl – nur für seltene Kurzmeldungen.</li>
     <li><strong>5G</strong> hat drei Ausprägungen: hohe Datenraten (Video, Drohnen), sehr kurze Latenz (Steuerung in Echtzeit) und sehr viele IoT-Geräte pro Fläche (dazu zählen NB-IoT und LTE-M). Unternehmen können ein eigenes <strong>5G-Campusnetz</strong> betreiben.</li>
   </ul>
 
-  <h4>Englischer Fachtext: Merkmale herausziehen</h4>
+  <h4>Englischer Fachtext: Merkmale herausziehen <span class="relevanz r-kern" title="englischer Fachtext in 5 Prüfungen (S26 3aa: LoRa); allgemeine Technik [für die h3-Vereinigung nicht gezählt: allgemeine Technik, nicht Thema der h3]">Prüfungskern – 5/9 – S26, W25, S24, W23, S22</span></h4>
   <p>In S26 musste man aus einem englischen Text drei Merkmale von LoRa nennen und zwei Gründe für den Einsatz erläutern. <strong>So gehst du vor:</strong> (1) Text einmal ganz lesen, (2) jede Aussage über die Technik unterstreichen (<em>is, uses, allows, can, is ideal for</em>), (3) auf Deutsch stichpunktartig notieren, (4) bei „Gründe erläutern“ jedes Merkmal mit der Situation verbinden. Wörtlich übersetzen ist nicht nötig. Übungsbeispiel (selbst geschrieben):</p>
   <div class="englisch">
     <p>NB-IoT is a cellular technology standardised by 3GPP. It reuses the existing LTE infrastructure, so operators can activate it with a software update on their base stations. Its narrow bandwidth of 180 kHz improves coverage deep inside buildings and underground. Devices can enter a power saving mode in which they remain registered in the network but do not listen to it, which allows a battery life of more than ten years.</p>
@@ -302,7 +303,7 @@
     <tr><td><em>power saving mode … battery life of more than ten years</em></td><td>Energiesparmodus, Batterielaufzeit über 10 Jahre</td></tr>
   </table>
 
-  <h4>Messwerte als JSON und das Protokoll MQTT</h4>
+  <h4>Messwerte als JSON und das Protokoll MQTT <span class="relevanz r-hinter" title="JSON-Sensordaten (Geräte-ID, Zeitstempel) in S23 4cb; MQTT nie abgefragt. Grenzwertig, nicht mitgezählt: S23 (T1 A4cb: Relationenmodell mit JSON-Sensordaten, IoT nur Kontext).">Hintergrund – 0/9</span></h4>
   <p>Die Plattform erhält die Messwerte meist als <strong>JSON</strong> (Querverweis Block 06). Typische Felder: eine eindeutige Geräte-ID (z. B. <code>DevEUI</code>, 64 Bit in Hex-Schreibweise), der Messwert, ein <strong>Zeitstempel im ISO-8601-Format</strong> mit Zeitzone und oft der Batteriestand. Beispiel Parkplatzsensor:</p>
   <pre>{
   "devEUI": "0004A30B001C2F51",
@@ -318,7 +319,7 @@
   </ul>
   <p><strong>MQTT</strong> ist das verbreitetste Protokoll zwischen IoT-Plattform-Komponenten: Ein zentraler <strong>Broker</strong> nimmt Nachrichten von <em>Publishern</em> entgegen und verteilt sie an alle <em>Subscriber</em> eines <strong>Topics</strong> (z. B. <code>stadt/parken/marktplatz/12</code>). Vorteile: sehr kleiner Protokoll-Overhead, Sender und Empfänger kennen sich nicht (lose Kopplung), drei Zustellgarantien (QoS 0, 1, 2). MQTT läuft über TCP, Port <strong>1883</strong>, verschlüsselt mit TLS über Port <strong>8883</strong>.</p>
 
-  <h4>Sicherheit auf schwachen Geräten (Querverweis Block 07)</h4>
+  <h4>Sicherheit auf schwachen Geräten (Querverweis Block 07) <span class="relevanz r-vor" title="S23 4a (Verschlüsselung für batteriebetriebene Sensoren), S26 3bd (RSA im IoT-Projekt)">Kam vor – 2/9 – S26, S23</span></h4>
   <p>IoT-Sensoren haben einen kleinen Mikrocontroller, wenig Speicher und eine Batterie. Daraus folgt:</p>
   <ul>
     <li><strong>Symmetrische Verschlüsselung</strong> (z. B. <strong>AES-128</strong>) statt asymmetrischer: AES ist schnell, oft in Hardware vorhanden und verbraucht wenig Energie. Bei LoRaWAN ist AES-128 bereits eingebaut.</li>
@@ -330,7 +331,7 @@
     <strong>MAC-Adresse</strong> = <em>Media Access Control</em>, die Hardware-Adresse im LAN (NET-03). <strong>MAC</strong> in der Kryptografie = <em>Message Authentication Code</em>, eine Prüfsumme mit geheimem Schlüssel zum Integritätsschutz. Im Zusammenhang „Manipulation erkennen“ ist immer der Message Authentication Code gemeint.
   </div>
 
-  <h4>Edge oder Cloud?</h4>
+  <h4>Edge oder Cloud? <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <table class="kompakt">
     <tr><th style="width:20%"></th><th>Edge Computing (am Rand, nah am Gerät)</th><th>Cloud Computing (zentral)</th></tr>
     <tr><td>Wo?</td><td>auf dem Gerät, dem Gateway oder einer lokalen Steuerung vor Ort</td><td>im Rechenzentrum bzw. bei einem Cloud-Anbieter</td></tr>
@@ -339,7 +340,7 @@
   </table>
   <p><em>Beispiel:</em> Ein Kühlhaus schaltet bei Übertemperatur sofort lokal die Notkühlung ein (Edge) – das darf nicht davon abhängen, ob das Internet gerade funktioniert. Die Temperaturverläufe aller Filialen werden in der Cloud gespeichert und monatlich ausgewertet. In der Praxis ist fast immer eine <strong>Kombination</strong> sinnvoll.</p>
 
-  <h4>So gehst du vor: Funktechnik begründet auswählen</h4>
+  <h4>So gehst du vor: Funktechnik begründet auswählen <span class="relevanz r-vor" title="S26 T1 3ab: Gründe für LoRa bei verteilten Sensoren">Kam vor – 1/9 – S26</span></h4>
   <ol>
     <li><strong>Anforderungen aus dem Text ziehen:</strong> Entfernung/Fläche? Stromanschluss oder Batterie? Datenmenge und Sendeintervall? Reaktionszeit? Gebäude oder Gelände? Mobilfunkabdeckung? Budget (einmalig/laufend)?</li>
     <li><strong>Ausschlusskriterien zuerst:</strong> Video → nur WLAN oder Mobilfunk (4G/5G). Batterie über Jahre → kein WLAN, kein 5G. Mehrere Kilometer → kein BLE, kein Zigbee, kein WLAN.</li>
@@ -351,16 +352,16 @@
     <ul style="margin:0">
       <li><strong>S26 T1 A3a</strong> (9 P): Englischer Fachartikel zu LoRa; aa) drei Merkmale nennen (3 P), ab) zwei Gründe erläutern, warum LoRa für weit verteilte Bodensensoren ohne Stromversorgung sinnvoll ist (6 P).</li>
       <li><strong>S26 T1 A3bd</strong> (3 P): Ist RSA im IoT-Projekt sinnvoll? → Nein, zu rechen- und energieaufwendig für die Sensoren, symmetrisch verschlüsseln.</li>
-      <li><strong>S23 T1 A4a</strong> (4 P): Batteriebetriebene Sensoren mit geringer Rechenleistung, Daten sollen verschlüsselt werden → geeignetes Verfahren vorschlagen und begründen. A4b (4 P): Stellung nehmen zu „signieren statt verschlüsseln“ (Signatur schützt Integrität und Authentizität, aber nicht die Vertraulichkeit). A4cb: Sensor-Messwerte als JSON mit <code>DevEUI</code>, <code>Value</code>, <code>Timestamp</code> in ein Relationenmodell übernehmen.</li>
+      <li><strong>S23 T1 A4a</strong> (4 P): Batteriebetriebene Sensoren mit geringer Rechenleistung, Daten sollen verschlüsselt werden → geeignetes Verfahren vorschlagen und begründen. A4b (4 P): Stellung nehmen zum Vorschlag, die Daten „zu signieren statt zu verschlüsseln“ (Signatur schützt Integrität und Authentizität, aber nicht die Vertraulichkeit). A4cb: Sensor-Messwerte als JSON mit <code>DevEUI</code>, <code>Value</code>, <code>Timestamp</code> in ein Relationenmodell übernehmen.</li>
       <li><strong>W24 T1 A2a</strong>: „Internet der Dinge“ dem Konzept LPWAN zuordnen und begründen (siehe NET-02).</li>
     </ul>
   </div>
 
   <!-- ===================== NET-02 ===================== -->
-  <h3 id="e-02">NET-02 · Netzwerkkonzepte <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
-  <p class="klein">Vorkommen: 2/9 · Prüfungen: W24 (T1 A2a: LAN, SAN, LPWAN den Gebieten IoT, Unternehmensnetz, Rechenzentrum zuordnen und begründen, 9 P), S26 (T1 A3a: LoRa als Netzkonzept)</p>
+  <h3 id="e-02">NET-02 · Netzwerkkonzepte <span class="relevanz r-vor" title="Belege: S26 T1 A3aa (3 P); W24 T1 A2a (9 P).">Kam vor – 2/9 – S26, W24</span></h3>
+  <p class="klein">Vorkommen: 2/9 · Prüfungen: S26, W24 · Teil 1, Aufgabe 2 oder 3</p>
 
-  <h4>Netzarten nach Ausdehnung</h4>
+  <h4>Netzarten nach Ausdehnung <span class="relevanz r-vor" title="W24 T1 2a: LAN einem Anwendungsgebiet zuordnen">Kam vor – 1/9 – W24</span></h4>
   <table class="kompakt">
     <tr><th style="width:16%">Netz</th><th style="width:26%">Ausgeschrieben</th><th style="width:18%">Ausdehnung</th><th>Merkmale / Beispiel</th></tr>
     <tr><td><strong>PAN</strong></td><td>Personal Area Network</td><td>wenige Meter</td><td>Geräte einer Person: Smartwatch ↔ Smartphone per Bluetooth</td></tr>
@@ -370,7 +371,7 @@
     <tr><td><strong>WAN</strong></td><td>Wide Area Network</td><td>Land, weltweit</td><td>verbindet entfernte Standorte bzw. LANs; Leitungen eines Providers; das Internet ist das größte WAN (manchmal „GAN“, Global Area Network)</td></tr>
   </table>
 
-  <h4>Netze nach Zweck</h4>
+  <h4>Netze nach Zweck <span class="relevanz r-vor" title="SAN/LPWAN zuordnen (W24 2a), LPWAN/LoRa (S26 3aa)">Kam vor – 2/9 – S26, W24</span></h4>
   <table class="kompakt">
     <tr><th style="width:16%">Netz</th><th style="width:26%">Ausgeschrieben</th><th>Merkmale und typischer Einsatz</th></tr>
     <tr><td><strong>SAN</strong></td><td>Storage Area Network</td><td>Eigenes, sehr schnelles Netz <strong>nur für Speicher</strong>, typisch im <strong>Rechenzentrum</strong>. Server greifen <em>blockbasiert</em> auf ein zentrales Speichersystem zu, als wäre es eine lokale Festplatte (Fibre Channel oder iSCSI). Mehrere Server (z. B. ein Virtualisierungscluster) nutzen denselben Speicher; redundante Pfade; der Speicherverkehr belastet das normale LAN nicht.</td></tr>
@@ -383,7 +384,7 @@
     Ein <strong>NAS</strong> (<em>Network Attached Storage</em>) ist ein <em>Speichergerät</em>, das im normalen LAN hängt und Dateien freigibt (dateibasiert, z. B. SMB). Ein <strong>SAN</strong> ist ein eigenes <em>Netz</em> für Speicher im Rechenzentrum mit blockbasiertem Zugriff. Auch nicht verwechseln: <strong>WAN</strong> (Weitverkehrsnetz) und <strong>WLAN</strong> (Funk-LAN).
   </div>
 
-  <h4>Topologien</h4>
+  <h4>Topologien <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <figure>
     <svg viewBox="0 0 760 180" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
       <!-- Stern -->
@@ -443,7 +444,7 @@
     <tr><td><strong>Baum</strong></td><td>hierarchisch verbundene Sterne</td><td>gut strukturierbar, für große Gebäude</td><td>Ausfall eines Verteilers trennt einen ganzen Teilbaum</td><td>Gebäudeverkabelung: Kern-Switch → Etagen-Switches</td></tr>
   </table>
 
-  <h4>Client-Server und Peer-to-Peer</h4>
+  <h4>Client-Server und Peer-to-Peer <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <table class="kompakt">
     <tr><th style="width:15%"></th><th>Client-Server</th><th>Peer-to-Peer (P2P)</th></tr>
     <tr><td>Prinzip</td><td>Ein <strong>Server</strong> stellt Dienste zentral bereit, viele <strong>Clients</strong> nutzen sie (Anfrage → Antwort).</td><td>Alle Rechner sind <strong>gleichberechtigt</strong>; jeder ist zugleich Anbieter und Nutzer.</td></tr>
@@ -452,7 +453,7 @@
     <tr><td>Beispiele</td><td>Dateiserver, Webserver, Datenbankserver, MQTT-Broker</td><td>Dateifreigaben zwischen Arbeitsplatz-PCs, Tauschbörsen, Blockchain</td></tr>
   </table>
 
-  <h4>Aktive Netzwerkkomponenten</h4>
+  <h4>Aktive Netzwerkkomponenten <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <table class="kompakt">
     <tr><th style="width:17%">Komponente</th><th style="width:12%">OSI-Schicht</th><th>Aufgabe</th></tr>
     <tr><td><strong>Repeater / Hub</strong></td><td>1</td><td>verstärkt das Signal bzw. verteilt es an alle Anschlüsse (heute veraltet)</td></tr>
@@ -465,7 +466,7 @@
   </table>
   <p>In kleinen Standorten stecken Router, Firewall, VPN-Endpunkt, Switch und Access Point oft in <em>einem</em> Gerät. In der Prüfung trotzdem die einzelnen <em>Funktionen</em> nennen.</p>
 
-  <h4>So gehst du vor: Netzkonzept zuordnen und begründen</h4>
+  <h4>So gehst du vor: Netzkonzept zuordnen und begründen <span class="relevanz r-vor" title="W24 T1 2a: LAN/SAN/LPWAN zuordnen und begründen (9 P)">Kam vor – 1/9 – W24</span></h4>
   <ol>
     <li>Für jedes Anwendungsgebiet die prägenden Merkmale aus dem Text herausziehen: <em>Wer</em> kommuniziert (Sensoren, PCs, Server, Standorte)? <em>Wie weit</em>? <em>Wie viele Daten</em>? <em>Strom vorhanden</em>? <em>Über welches Medium</em> (eigenes Kabel, Funk, Internet)?</li>
     <li>Konzept zuordnen (meist passt jedes Konzept genau einmal – trotzdem nicht nach dem Ausschlussprinzip raten, sondern prüfen).</li>
@@ -484,10 +485,10 @@
   </div>
 
   <!-- ===================== NET-03 ===================== -->
-  <h3 id="e-03">NET-03 · Adressierung, Frames &amp; Protokolle <span class="badge k-sonstige">Sonstige</span></h3>
-  <p class="klein">Vorkommen: 1/9 · Prüfung: W24 (T1 A2ba: Felder des Ethernet-Frames zuordnen, 6 P · A2bb: Aufbau einer MAC-Adresse, 3 P · A2c: Skript, das alle Geräte im Netz 192.168.0.0/24 abfragt und als JSON-Array ausgibt, 8 P)</p>
+  <h3 id="e-03">NET-03 · Adressierung, Frames &amp; Protokolle <span class="relevanz r-vor" title="Belege: W24 T1 A2bb, A2ba, A2c (17 P).">Kam vor – 1/9 – W24</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfungen: W24 · Teil 1, Aufgabe 2</p>
 
-  <h4>Schichtenmodelle: OSI und TCP/IP</h4>
+  <h4>Schichtenmodelle: OSI und TCP/IP <span class="relevanz r-hinter" title="OSI/TCP-IP nie abgefragt (W24 fragte Ethernet-Frame und MAC-Adresse)">Hintergrund – 0/9</span></h4>
   <p>Schichtenmodelle teilen die Kommunikation in Aufgaben auf. Jede Schicht nutzt die Dienste der darunterliegenden und bietet der darüberliegenden Dienste an; beim Senden packt jede Schicht ihren Kopf (Header) um die Daten (Kapselung). Merksatz von oben (7) nach unten (1): „<strong>A</strong>lle <strong>d</strong>eutschen <strong>S</strong>tudenten <strong>t</strong>rinken <strong>v</strong>erschiedene <strong>S</strong>orten <strong>B</strong>ier“.</p>
   <table class="kompakt">
     <tr><th>OSI-Schicht</th><th>TCP/IP-Modell</th><th>Dateneinheit</th><th>Protokolle / Beispiele</th><th>Geräte</th></tr>
@@ -500,7 +501,7 @@
     <tr><td>1 Bitübertragung</td><td>Bit</td><td>Kabel, Glasfaser, Funk, Stecker, Signalpegel</td><td>Hub, Repeater, Modem</td></tr>
   </table>
 
-  <h4>MAC-Adresse</h4>
+  <h4>MAC-Adresse <span class="relevanz r-vor" title="W24 T1 2bb: Aufbau einer MAC-Adresse (3 P)">Kam vor – 1/9 – W24</span></h4>
   <p>Die <strong>MAC-Adresse</strong> (<em>Media Access Control</em>) ist die Hardware-Adresse einer Netzwerkschnittstelle auf <strong>Schicht 2</strong>. Sie ist <strong>48 Bit = 6 Byte</strong> lang und wird als 12 Hexadezimalziffern geschrieben, paarweise getrennt: <code>00:80:41:AE:FD:7E</code> (Linux), <code>00-80-41-AE-FD-7E</code> (Windows).</p>
   <figure>
     <svg viewBox="0 0 520 140" width="520" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
@@ -540,7 +541,7 @@
     <tr><td>Gültigkeit</td><td>nur im lokalen Netzsegment</td><td>netzübergreifend, Grundlage des Routings</td></tr>
   </table>
 
-  <h4>Ethernet-Frame</h4>
+  <h4>Ethernet-Frame <span class="relevanz r-vor" title="W24 T1 2ba: Felder des Ethernet-Frames zuordnen (6 P)">Kam vor – 1/9 – W24</span></h4>
   <p>Auf Schicht 2 werden die Daten in <strong>Frames</strong> (Rahmen) verpackt. Aufbau eines Ethernet-II-Frames in Übertragungsreihenfolge:</p>
   <figure>
     <svg viewBox="0 0 760 155" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
@@ -601,7 +602,7 @@
   </table>
   <p><em>Mitschnitt lesen (Beispiel):</em> Die ersten 14 Byte nach dem SFD lauten <code>00 80 41 ae fd 7e  3c 07 54 12 9a 01  08 00</code> → Ziel-MAC <code>00:80:41:AE:FD:7E</code>, Quell-MAC <code>3C:07:54:12:9A:01</code>, Typ <code>0x0800</code> → in den Nutzdaten folgt ein IPv4-Paket. Die Ziel-MAC ist keine Broadcast-Adresse, der Frame ist also an genau ein Gerät gerichtet (Unicast).</p>
 
-  <h4>IPv4-Adressen und Subnetze</h4>
+  <h4>IPv4-Adressen und Subnetze <span class="relevanz r-vor" title="W24 T1 2c: Skript für Netz 192.168.0.0/24 (8 P)">Kam vor – 1/9 – W24</span></h4>
   <p>Eine IPv4-Adresse ist <strong>32 Bit</strong> lang, geschrieben als vier Dezimalzahlen (Oktette, je 0–255). Sie besteht aus einem <strong>Netzanteil</strong> (welches Netz?) und einem <strong>Hostanteil</strong> (welches Gerät im Netz?). Wo die Grenze liegt, sagt die <strong>Subnetzmaske</strong> bzw. die <strong>CIDR-Präfixlänge</strong>: <code>/24</code> bedeutet „die ersten 24 Bit sind Netzanteil“ = Maske <code>255.255.255.0</code>.</p>
   <ul>
     <li><strong>Netzadresse:</strong> alle Hostbits 0 – bezeichnet das Netz, nicht an Geräte vergeben.</li>
@@ -665,7 +666,7 @@ Hostbits auf 1 → Broadcast:     1101 1111 = 223   (Broadcast   172.16.8.223)</
     </ul>
   </div>
 
-  <h4>IPv6 in Kürze</h4>
+  <h4>IPv6 in Kürze <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <ul>
     <li><strong>128 Bit</strong>, geschrieben als 8 Blöcke à 16 Bit in Hexadezimal: <code>2001:0db8:0000:0000:0000:ff00:0042:8329</code>.</li>
     <li>Kürzen: führende Nullen eines Blocks weglassen, <strong>eine</strong> zusammenhängende Folge von Null-Blöcken durch <code>::</code> ersetzen → <code>2001:db8::ff00:42:8329</code>.</li>
@@ -673,7 +674,7 @@ Hostbits auf 1 → Broadcast:     1101 1111 = 223   (Broadcast   172.16.8.223)</
     <li>Grund für IPv6: Der IPv4-Adressraum (ca. 4,3 Mrd.) ist erschöpft; IPv6 bietet ca. 3,4 · 10<sup>38</sup> Adressen – genug für jedes IoT-Gerät eine eigene Adresse, ohne NAT.</li>
   </ul>
 
-  <h4>Wichtige Protokolle und Ports</h4>
+  <h4>Wichtige Protokolle und Ports <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <p>Auf der Transportschicht adressiert die <strong>Portnummer</strong> den Dienst bzw. die Anwendung auf einem Rechner (0–65535; bis 1023 „well-known ports“). IP-Adresse + Port = <em>Socket</em>.</p>
   <table class="kompakt">
     <tr><th>Protokoll</th><th>Zweck</th><th>Transport</th><th>Port(s)</th></tr>
@@ -691,7 +692,7 @@ Hostbits auf 1 → Broadcast:     1101 1111 = 223   (Broadcast   172.16.8.223)</
   </table>
   <p>Ohne Port, weil unterhalb der Transportschicht: <strong>IP</strong>, <strong>ICMP</strong> (z. B. <code>ping</code>) und <strong>ARP</strong>. <em>DHCP-Ablauf</em> („DORA“): Discover (Broadcast) → Offer → Request → Acknowledge.</p>
 
-  <h4>TCP und UDP</h4>
+  <h4>TCP und UDP <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <table class="kompakt">
     <tr><th style="width:20%"></th><th>TCP (Transmission Control Protocol)</th><th>UDP (User Datagram Protocol)</th></tr>
     <tr><td>Verbindung</td><td>verbindungsorientiert: Aufbau per Drei-Wege-Handschlag (SYN, SYN-ACK, ACK)</td><td>verbindungslos: Datagramm wird einfach gesendet</td></tr>
@@ -700,7 +701,7 @@ Hostbits auf 1 → Broadcast:     1101 1111 = 223   (Broadcast   172.16.8.223)</
     <tr><td>Einsatz</td><td>wenn jedes Byte ankommen muss: HTTP(S), SSH, E-Mail, Dateiübertragung, MQTT, Datenbankzugriff</td><td>wenn Tempo wichtiger ist oder kleine Einzelanfragen: DNS, DHCP, NTP, VoIP, Live-Video, Online-Spiele, CoAP</td></tr>
   </table>
 
-  <h4>Skript-Muster: Netz durchlaufen und JSON erzeugen</h4>
+  <h4>Skript-Muster: Netz durchlaufen und JSON erzeugen <span class="relevanz r-vor" title="W24 T1 2c: Skript, JSON-Array ausgeben (8 P)">Kam vor – 1/9 – W24</span></h4>
   <p>In W24 sollte ein Skript alle Geräte eines /24-Netzes abfragen und das Ergebnis als JSON-Array ausgeben. Das Muster (hier mit anderer Hilfsfunktion: <code>isReachable(ip : string) : boolean</code> liefert <code>true</code>, wenn ein Gerät auf <code>ping</code> antwortet) erzeugt ein JSON-Array aller erreichbaren Adressen:</p>
   <pre class="pseudo">funktion erreichbareHosts(netz : string) : string
   json : string := "["
@@ -725,10 +726,10 @@ Ende funktion</pre>
   </div>
 
   <!-- ===================== NET-04 ===================== -->
-  <h3 id="e-04">NET-04 · IT-Infrastruktur, Virtualisierung &amp; Cloud <span class="badge k-sonstige">Sonstige</span></h3>
-  <p class="klein">Vorkommen: 1/9 · Prüfung: W22 (T1 A1a: zwei Schwachstellen der veralteten, inhomogenen IT-Infrastruktur beschreiben, 4 P · A1b: eine funktionale und eine nicht-funktionale Anforderung an die neue IT-Infrastruktur, 4 P) · Cloud-Datenbank als Kulisse in W23</p>
+  <h3 id="e-04">NET-04 · IT-Infrastruktur, Virtualisierung &amp; Cloud <span class="relevanz r-vor" title="Belege: W22 T1 A1a, A1b (8 P).">Kam vor – 1/9 – W22</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfungen: W22 · Teil 1, Aufgabe 1 · Hinweis: dazu Cloud-Datenbank als Kulisse in W23</p>
 
-  <h4>Schwachstellen veralteter und uneinheitlicher Infrastruktur</h4>
+  <h4>Schwachstellen veralteter und uneinheitlicher Infrastruktur <span class="relevanz r-vor" title="W22 T1 1a: zwei Schwachstellen der IT-Infrastruktur (4 P)">Kam vor – 1/9 – W22</span></h4>
   <p>„Veraltet“ heißt: alte Hardware, Betriebssysteme ohne Herstellerunterstützung. „Inhomogen“ (uneinheitlich) heißt: viele verschiedene Hersteller, Modelle und Versionen. Beides gefährdet vor allem die <strong>Verfügbarkeit</strong> (Schutzziel, Querverweis Block 07). <em>Beispiel:</em> Eine Steuerberaterkanzlei mit drei Büros hat in jedem Büro einen eigenen Server (Baujahre 2012–2019, drei verschiedene Betriebssysteme), gesichert wird auf eine USB-Festplatte, die im Serverschrank liegt.</p>
   <table class="kompakt">
     <tr><th style="width:15%">Bereich</th><th>Schwachstelle</th><th>Folge</th></tr>
@@ -741,7 +742,7 @@ Ende funktion</pre>
   </table>
   <p>„Beschreiben“ heißt in der Prüfung: <strong>Schwachstelle + Auswirkung</strong> nennen, möglichst mit einem Beleg aus der Situation („Server S3 hat nur ein Netzteil; fällt es aus, steht der Dateiserver still“).</p>
 
-  <h4>Anforderungen an eine Infrastruktur</h4>
+  <h4>Anforderungen an eine Infrastruktur <span class="relevanz r-vor" title="W22 T1 1b: funktionale und nicht-funktionale Anforderung (4 P)">Kam vor – 1/9 – W22</span></h4>
   <div class="merke"><span class="kastentitel">Merke: funktional = WAS, nicht-funktional = WIE GUT</span>
     <strong>Funktionale</strong> Anforderungen beschreiben, welche Dienste/Funktionen die Infrastruktur bereitstellen muss. <strong>Nicht-funktionale</strong> Anforderungen beschreiben Qualitätseigenschaften: Verfügbarkeit, Leistung, Sicherheit, Skalierbarkeit, Wartbarkeit, Energieeffizienz – möglichst <strong>messbar</strong> formuliert.
   </div>
@@ -755,7 +756,7 @@ Ende funktion</pre>
     „Das System soll sicher und schnell sein“ ist zu ungenau und wird kaum bepunktet. Besser: „Die Verbindung zwischen den Büros ist durchgängig verschlüsselt“ oder „Das Öffnen einer Akte dauert höchstens 2 Sekunden“. Und: „Es wird eine Datensicherung durchgeführt“ ist <em>funktional</em>; „Es dürfen höchstens 24 Stunden Daten verloren gehen“ ist <em>nicht-funktional</em>.
   </div>
 
-  <h4>Rechenzentrum, Redundanz und Hochverfügbarkeit</h4>
+  <h4>Rechenzentrum, Redundanz und Hochverfügbarkeit <span class="relevanz r-hinter" title="fehlende Redundanz/Hochverfügbarkeit als Schwachstelle und Anforderung (W22 1a/1b); grenzwertig">Hintergrund – 0/9</span></h4>
   <p>Ein <strong>Rechenzentrum</strong> bündelt Server, Speichersysteme und Netzwerktechnik in einer geschützten Umgebung: unterbrechungsfreie Stromversorgung (<strong>USV</strong>) und Notstromaggregat, Klimatisierung, Brandfrüherkennung und Löschanlage, Zutrittskontrolle, redundante Internetanbindung. Statt eines eigenen Rechenzentrums kann man Fläche bei einem Dienstleister mieten (<em>Colocation</em>) oder Dienste aus der Cloud beziehen.</p>
   <p><strong>Redundanz</strong> heißt, kritische Komponenten mehrfach vorzuhalten, damit kein <strong>Single Point of Failure</strong> (SPOF) bleibt:</p>
   <table class="kompakt">
@@ -776,7 +777,7 @@ Ende funktion</pre>
   </table>
   <p><em>Verfügbarkeit in Zahlen:</em> erlaubte Ausfallzeit pro Jahr = (1 − Verfügbarkeit) × 8760 h. 99 % → 87,6 h · 99,9 % → 8,76 h · 99,99 % → ca. 53 min · 99,999 % → ca. 5 min.</p>
 
-  <h4>Datensicherung (Backup)</h4>
+  <h4>Datensicherung (Backup) <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <table class="kompakt">
     <tr><th style="width:16%">Art</th><th>sichert</th><th>Vorteil</th><th>Nachteil / Wiederherstellung</th></tr>
     <tr><td><strong>Vollsicherung</strong></td><td>alle Daten</td><td>einfachste Wiederherstellung (nur 1 Sicherung)</td><td>dauert lange, braucht viel Speicher</td></tr>
@@ -834,7 +835,7 @@ Ende funktion</pre>
     RAID schützt nur vor dem Ausfall einer Festplatte. Löscht jemand eine Datei, verschlüsselt Ransomware die Daten oder brennt der Serverraum, ist der Fehler sofort auf allen Platten des RAID – es gibt keinen älteren Stand. Dasselbe gilt für eine reine Synchronisation in einen Cloud-Ordner.
   </div>
 
-  <h4>Virtualisierung: virtuelle Maschine und Container</h4>
+  <h4>Virtualisierung: virtuelle Maschine und Container <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <p>Bei der <strong>Virtualisierung</strong> laufen mehrere logische Server auf einer physischen Hardware. Der <strong>Hypervisor</strong> teilt CPU, RAM, Speicher und Netz zu. <em>Typ 1</em> („bare metal“) läuft direkt auf der Hardware (Server-Virtualisierung im Rechenzentrum), <em>Typ 2</em> läuft als Programm auf einem normalen Betriebssystem (Test-VMs auf dem Entwickler-PC).</p>
   <figure>
     <svg viewBox="0 0 760 235" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
@@ -891,7 +892,7 @@ Ende funktion</pre>
   </table>
   <p><strong>Vorteile der Virtualisierung:</strong> bessere Auslastung der Hardware (Konsolidierung: weniger Geräte, weniger Strom und Platz) · neue Server in Minuten bereitstellen · Snapshots vor Updates · Live-Migration im laufenden Betrieb (Wartung ohne Ausfall) · im Cluster hohe Verfügbarkeit · Hardwareunabhängigkeit (VM läuft auf jedem Host) · einheitliche Verwaltung. <strong>Nachteile:</strong> Ausfall eines Hosts trifft viele VMs gleichzeitig (deshalb Cluster), Lizenzkosten, zusätzliches Know-how, geringer Leistungsverlust.</p>
 
-  <h4>Cloud Computing</h4>
+  <h4>Cloud Computing <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <p><strong>Cloud Computing</strong> heißt: IT-Ressourcen (Rechenleistung, Speicher, Plattformen, Software) werden über das Netz <strong>bei Bedarf</strong> bereitgestellt, vom Kunden selbst angefordert, <strong>elastisch skaliert</strong> und <strong>nach Verbrauch</strong> abgerechnet. Die Ressourcen vieler Kunden liegen gemeinsam in den Rechenzentren des Anbieters.</p>
   <figure>
     <svg viewBox="0 0 760 300" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
@@ -1602,7 +1603,7 @@ Ende funktion</pre>
   <table class="kompakt" style="break-inside:auto">
     <tr><th>Prüfung</th><th>Aufgabe</th><th>Thema</th><th>Datei · Lösung</th></tr>
     <tr><td>Winter 2022</td><td>T1 A1a (4 P), A1b (4 P)</td><td>Schwachstellen veralteter, inhomogener IT-Infrastruktur; funktionale und nicht-funktionale Anforderung an die neue Infrastruktur</td><td><code>2022/winter/AE 2022 Winter Teil 1.pdf</code> · keine Lösung</td></tr>
-    <tr><td>Sommer 2023</td><td>T1 A4a (4 P), A4b (4 P)</td><td>Verschlüsselung für batteriebetriebene IoT-Sensoren mit wenig Rechenleistung; signieren statt verschlüsseln?</td><td><code>2023/sommer/AE Sommer 2023 Teil 1.pdf</code> · Lösung: <code>AE Sommer 2023 Teil 1+2 Lösungen.pdf</code></td></tr>
+    <tr><td>Sommer 2023</td><td>T1 A4a (4 P), A4b (4 P)</td><td>Verschlüsselung für batteriebetriebene IoT-Sensoren mit wenig Rechenleistung; signieren statt verschlüsseln? (A4b ist reine Kryptografie, Block 07)</td><td><code>2023/sommer/AE Sommer 2023 Teil 1.pdf</code> · Lösung: <code>AE Sommer 2023 Teil 1+2 Lösungen.pdf</code></td></tr>
     <tr><td>Sommer 2023</td><td>T1 A4cb (13 P)</td><td>Relationenmodell in 3NF inkl. JSON-Sensordaten (DevEUI, Value, Timestamp) – Schwerpunkt Datenbank (Block 01)</td><td>wie oben</td></tr>
     <tr><td>Winter 2024</td><td>T1 A2a (9 P)</td><td>LAN, SAN, LPWAN den Gebieten IoT, Unternehmensnetzwerk, Rechenzentrum zuordnen und begründen</td><td><code>2024/winter/AE Winter 2024 Teil 1.pdf</code> · keine Lösung</td></tr>
     <tr><td>Winter 2024</td><td>T1 A2ba (6 P), A2bb (3 P)</td><td>Felder des Ethernet-Frames zuordnen; Aufbau einer MAC-Adresse</td><td>wie oben</td></tr>

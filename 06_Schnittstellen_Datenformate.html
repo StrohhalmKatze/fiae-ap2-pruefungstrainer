@@ -43,7 +43,7 @@
 <header class="blockkopf">
   <h1>Block 06 · Schnittstellen &amp; Datenformate</h1>
   <div class="unter">
-    <span class="badge k-immer">Immer</span> 8/9 Prüfungen · Ø 15 von 200 Punkten · fast ausschließlich Teil 1 (8×) · Trend ↑ bei REST/HTTP
+    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 8, Teil 2 in 1 Prüfungen.">Prüfungskern – 8/9 – alle außer S22</span> · Ø 13 von 200 Punkten · fast ausschließlich Teil 1 (8×) · Trend ↑ bei REST/HTTP
     · Lösungen: <a href="06_Schnittstellen_Datenformate_Loesungen.html">06_Schnittstellen_Datenformate_Loesungen.html</a>
   </div>
 </header>
@@ -84,26 +84,27 @@
 <section class="teil" id="erklaerung">
   <h2>A · Erklärungssatz</h2>
 
-  <p>Schnittstellen und Datenformate kamen in <strong>8 von 9</strong> Prüfungen vor, fast immer in <strong>Teil 1</strong> als eine Teilaufgabe von 6 bis 25 Punkten. Die Fragen sind meist Wissens- und Verständnisfragen („Erläutern Sie …“, „Beschreiben Sie die Parameter …“), dazu kommen Anwendungsaufgaben: XML-Fehler anhand einer DTD finden, Tabellen in JSON überführen, eine HTTP-Antwort im Code zusammenbauen. Einen Belegsatz mit Notationshilfen gibt es für diesen Block <strong>nicht</strong> – Syntax und Begriffe musst du selbst können.</p>
+  <p>Schnittstellen und Datenformate kamen in <strong>8 von 9</strong> Prüfungen vor, fast immer in <strong>Teil 1</strong> als eine Teilaufgabe von 2 (W21) bzw. 6 bis 25 Punkten. Die Fragen sind meist Wissens- und Verständnisfragen („Erläutern Sie …“, „Beschreiben Sie die Parameter …“), dazu kommen Anwendungsaufgaben: XML-Fehler anhand einer DTD finden, Tabellen in JSON überführen, eine HTTP-Antwort im Code zusammenbauen. Einen Belegsatz mit Notationshilfen gibt es für diesen Block <strong>nicht</strong> – Syntax und Begriffe musst du selbst können.</p>
+  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
 
   <table class="kompakt">
     <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
-    <tr><td>SD-01 XML</td><td><span class="badge k-meistens">Meistens</span> (JSON/XML)</td><td>6–13</td><td>wohlgeformt vs. gültig, Fehler anhand einer DTD finden, Grenzen der Schema-Validierung</td></tr>
-    <tr><td>SD-02 JSON</td><td><span class="badge k-meistens">Meistens</span> (JSON/XML)</td><td>7–14</td><td>Tabellen fehlerfrei in JSON überführen, Embedding vs. Referenz, JSON im Code erzeugen</td></tr>
-    <tr><td>SD-03 REST &amp; HTTP-Methoden</td><td><span class="badge k-oft">Oft ↑</span> (REST/HTTP)</td><td>2–12</td><td>REST-Konzept erläutern, CRUD ↔ HTTP-Methoden, Endpunkte entwerfen</td></tr>
-    <tr><td>SD-04 HTTP-Request/Response</td><td><span class="badge k-oft">Oft ↑</span> (REST/HTTP)</td><td>2–10</td><td>Aufbau von Request und Response, Statuscodes, URL-Parameter, Antwort im Code bauen</td></tr>
-    <tr><td>SD-05 eRechnung</td><td><span class="badge k-sonstige">Sonstige ⚠</span></td><td>ca. 18 (W25)</td><td>Ziel, Formate, Pflichten, Validierung, Datenschutz – oft mit englischem Text</td></tr>
+    <tr><td>SD-01 XML</td><td><span class="relevanz r-vor" title="Belege: W25 T1 A3bc (6 P); W22 T1 A3cc, A3cb, A3ca (13 P).">Kam vor – 2/9 – W25, W22</span></td><td>6–13</td><td>wohlgeformt vs. gültig, Fehler anhand einer DTD finden, Grenzen der Schema-Validierung</td></tr>
+    <tr><td>SD-02 JSON</td><td><span class="relevanz r-kern" title="Belege: W24 T1 A2c (8 P); S24 T1 A2c (3 P); W23 T1 A3ca, A3cb (14 P); S23 T1 A4cb (13 P).">Prüfungskern – 4/9 – W24, S24, W23, S23</span></td><td>7–14</td><td>Tabellen fehlerfrei in JSON überführen, Embedding vs. Referenz, JSON im Code erzeugen</td></tr>
+    <tr><td>SD-03 REST &amp; HTTP-Methoden</td><td><span class="relevanz r-vor" title="Belege: S26 T1 A2ba, A2bc (9 P); S24 T1 A2a, A2b, A2e (19 P).">Kam vor – 2/9 – S26, S24</span> <span class="trend" title="Trend laut Themenanalyse: steigend">↑</span></td><td>2–12</td><td>REST-Konzept erläutern, CRUD ↔ HTTP-Methoden, Endpunkte entwerfen</td></tr>
+    <tr><td>SD-04 HTTP-Request/Response</td><td><span class="relevanz r-kern" title="Belege: S26 T1 A2bb (3 P); W24 T2 A2a (10 P); S24 T1 A2c, A2e, A2d (17 P); W21 T1 A3c (2 P).">Prüfungskern – 4/9 – S26, W24, S24, W21</span> <span class="trend" title="Trend laut Themenanalyse: steigend">↑</span></td><td>2–10</td><td>Aufbau von Request und Response, Statuscodes, URL-Parameter, Antwort im Code bauen</td></tr>
+    <tr><td>SD-05 eRechnung</td><td><span class="relevanz r-vor" title="Belege: W25 T1 A2ba, A2bb, A3ba, A3bb, A3bc (24 P).">Kam vor – 1/9 – W25</span> <span class="trend" title="Trend laut Themenanalyse: beobachten: einmalig, aber in den letzten Prüfungen">⚠</span></td><td>ca. 18 (W25)</td><td>Ziel, Formate, Pflichten, Validierung, Datenschutz – oft mit englischem Text</td></tr>
   </table>
   <p class="klein">Punkte des Blocks je Prüfung: W21 2 · S22 – · W22 13 · S23 13 · W23 14 · S24 25 · W24 18 · W25 24 · S26 12.</p>
 
   <!-- ===================== SD-01 ===================== -->
-  <h3 id="e-01">SD-01 · XML <span class="badge k-meistens">Meistens</span></h3>
-  <p class="klein">Vorkommen: JSON/XML zusammen 6/9 (W22, S23, W23, S24, W24, W25) · XML konkret: W22 T1 A3c (13 P: Zweck der DTD, wohlgeformt/gültig, Fehler finden), W25 T1 A3bc (6 P: warum Schema-Validierung nicht reicht); eRechnungen (W25) sind XML-Dokumente</p>
+  <h3 id="e-01">SD-01 · XML <span class="relevanz r-vor" title="Belege: W25 T1 A3bc (6 P); W22 T1 A3cc, A3cb, A3ca (13 P).">Kam vor – 2/9 – W25, W22</span></h3>
+  <p class="klein">Vorkommen: 2/9 · Prüfungen: W25, W22 · Teil 1, Aufgabe 3 · Hinweis: eRechnungen (W25) sind XML-Dokumente</p>
 
-  <h4>Was ist XML?</h4>
+  <h4>Was ist XML? <span class="relevanz r-hinter" title="allgemeine Einführung; gefragt wurden Details (DTD, wohlgeformt/gültig, XSD-Validierung)">Hintergrund – 0/9</span></h4>
   <p>XML (<em>Extensible Markup Language</em>) ist eine textbasierte <strong>Auszeichnungssprache für hierarchisch strukturierte Daten</strong>. Sie ist für Menschen und Maschinen lesbar, plattform- und programmiersprachenunabhängig und wird vor allem für den <strong>Datenaustausch zwischen Systemen</strong> verwendet (eRechnung, Behördenstandards, SOAP-Webservices, Konfigurationsdateien, Office-Dateiformate). Anders als HTML gibt XML keine Elementnamen vor („extensible“): Die Namen legt man selbst fest. Welche Elemente in welcher Reihenfolge erlaubt sind, beschreibt eine <strong>DTD</strong> oder ein <strong>XML-Schema (XSD)</strong>.</p>
 
-  <h4>Aufbau eines XML-Dokuments</h4>
+  <h4>Aufbau eines XML-Dokuments <span class="relevanz r-vor" title="XML-Dokument lesen und Fehler finden (W22 3cc); XML-Datei mit Rechenfehler deuten (W25 3bc). Grenzwertig, nicht mitgezählt: W25 (T1 A3bc: XML-Datei deuten, Aufbau nur Voraussetzung).">Kam vor – 1/9 – W22</span></h4>
   <p>Beispiel: Spielplan eines Stadttheaters (die Zeilennummern gehören nicht zum Dokument).</p>
   <pre class="xml"><span class="zn"> 1</span>  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 <span class="zn"> 2</span>  &lt;!DOCTYPE spielplan SYSTEM "spielplan.dtd"&gt;
@@ -210,7 +211,7 @@
   <p><strong>Element oder Attribut?</strong> Faustregel: Attribute für Kennungen und kurze Metadaten (<code>id</code>, <code>saal</code>, <code>einheit</code>), Elemente für die eigentlichen Daten – und immer dann, wenn ein Wert mehrfach vorkommen oder selbst Struktur haben kann (Attribute sind nicht wiederholbar und nicht verschachtelbar).</p>
   <p><strong>Namensräume</strong> (<em>namespaces</em>) verhindern Namenskonflikte, wenn Elemente aus verschiedenen Vokabularen in einem Dokument zusammenkommen. Ein Namensraum wird durch eine eindeutige URI bezeichnet (sie muss nicht abrufbar sein) und entweder als Standardnamensraum (<code>xmlns="…"</code>) oder mit Präfix (<code>xmlns:cbc="…"</code>, Elemente dann <code>&lt;cbc:ID&gt;</code>) deklariert. eRechnungen im UBL-Format nutzen z. B. die Präfixe <code>cbc</code> und <code>cac</code> (Beispiel in SD-05).</p>
 
-  <h4>Wohlgeformt und gültig</h4>
+  <h4>Wohlgeformt und gültig <span class="relevanz r-vor" title="wohlgeformt/gültig erläutern und Fehler zuordnen (W22 T1 3cb/3cc)">Kam vor – 1/9 – W22</span></h4>
   <div class="merke"><span class="kastentitel">Merke</span>
     <strong>Wohlgeformt</strong> (<em>well-formed</em>) = das Dokument hält die Syntaxregeln von XML ein. Das prüft jeder XML-Parser, auch ohne DTD.<br>
     <strong>Gültig</strong> (<em>valid</em>) = das Dokument ist wohlgeformt <strong>und</strong> entspricht zusätzlich einer vorgegebenen Grammatik (DTD oder XSD): nur erlaubte Elemente und Attribute, richtige Reihenfolge und Anzahl, Pflichtangaben vorhanden.<br>
@@ -266,7 +267,7 @@
     </ul>
   </div>
 
-  <h4>DTD (Document Type Definition)</h4>
+  <h4>DTD (Document Type Definition) <span class="relevanz r-vor" title="Zweck der DTD (W22 3ca), Fehler anhand der DTD (3cc)">Kam vor – 1/9 – W22</span></h4>
   <p>Die DTD ist die <strong>Grammatik</strong> (der Bauplan) eines Dokumenttyps: Sie legt fest, welche Elemente und Attribute vorkommen dürfen, in welcher Reihenfolge und wie oft. <strong>Wofür?</strong> Damit Sender und Empfänger eine gemeinsame, verbindliche Struktur haben (Schnittstellenvertrag) und eingehende Dokumente <strong>automatisch geprüft (validiert)</strong> werden können, bevor sie verarbeitet werden. Die DTD kann im Dokument stehen (interne DTD in <code>&lt;!DOCTYPE spielplan [ … ]&gt;</code>) oder – wie oben – in einer externen Datei, auf die die DOCTYPE-Deklaration mit <code>SYSTEM "datei.dtd"</code> verweist; so können viele Dokumente dieselbe DTD nutzen.</p>
   <pre class="xml"><span class="zn"> 1</span>  &lt;!ELEMENT spielplan (vorstellung+)&gt;
 <span class="zn"> 2</span>  &lt;!ATTLIST spielplan saison CDATA #REQUIRED&gt;
@@ -301,7 +302,7 @@
   </div>
   <p>Kardinalitäten gelten auch für Gruppen: <code>(telefon | email)+</code> heißt „mindestens ein Kontakt, jeweils Telefon oder E-Mail“. Lies die DTD aus Zeile 3 so: Eine Vorstellung besteht aus genau einem Stück, dann genau einem Datum, dann genau einem Preis, danach beliebig vielen Hinweisen – genau in dieser Reihenfolge.</p>
 
-  <h4>So gehst du vor: Fehler in einem XML-Dokument anhand der DTD finden</h4>
+  <h4>So gehst du vor: Fehler in einem XML-Dokument anhand der DTD finden <span class="relevanz r-vor" title="W22 T1 3cc (6 P)">Kam vor – 1/9 – W22</span></h4>
   <ol>
     <li><strong>DTD in Worte fassen:</strong> Für jedes Element notieren, welche Kinder in welcher Reihenfolge und Anzahl erlaubt sind; für jedes Attribut: Pflicht? erlaubte Werte? ID?</li>
     <li><strong>Erster Durchgang – Wohlgeformtheit</strong>, Zeile für Zeile: passt jedes End-Tag exakt (auch Groß-/Kleinschreibung, Schrägstrich)? Ist alles korrekt verschachtelt und geschlossen? Stehen alle Attributwerte in Anführungszeichen?</li>
@@ -331,7 +332,7 @@
     <tr><td>10</td><td>End-Tag <code>&lt;/Stueck&gt;</code> passt nicht zum Start-Tag <code>&lt;stueck&gt;</code> (Groß-/Kleinschreibung)</td><td>Wohlgeformtheit</td></tr>
   </table>
 
-  <h4>XML-Schema (XSD)</h4>
+  <h4>XML-Schema (XSD) <span class="relevanz r-vor" title="XSD-Schema-Validierung (W25 T1 3bc)">Kam vor – 1/9 – W25</span></h4>
   <p>Ein XML-Schema (<em>XML Schema Definition</em>, Dateiendung <code>.xsd</code>) erfüllt denselben Zweck wie eine DTD, ist aber selbst ein XML-Dokument und deutlich mächtiger: Es kennt <strong>Datentypen</strong>, <strong>Wertebereiche</strong>, genaue Mindest- und Höchstanzahlen und <strong>Namensräume</strong>. eRechnungen (UBL, CII) werden mit XSD-Dateien beschrieben. Dasselbe Spielplan-Format als XSD:</p>
   <pre class="xml"><span class="zn"> 1</span>  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 <span class="zn"> 2</span>  &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
@@ -387,7 +388,7 @@
     <tr><td>Aufwand</td><td>kurz und einfach</td><td>umfangreicher, aber genauer</td></tr>
   </table>
 
-  <h4>Warum eine Schema-Validierung allein nicht reicht</h4>
+  <h4>Warum eine Schema-Validierung allein nicht reicht <span class="relevanz r-vor" title="W25 T1 3bc (6 P)">Kam vor – 1/9 – W25</span></h4>
   <p>DTD und XSD prüfen <strong>Struktur</strong> und (nur XSD) <strong>Datentypen einzelner Felder</strong>. Sie prüfen nicht, ob die Inhalte <strong>fachlich zueinander passen</strong>. Am Spielplan-Beispiel:</p>
   <table class="kompakt">
     <tr><th>Fehler im Dokument</th><th>DTD</th><th>XSD</th><th>Wer findet ihn?</th></tr>
@@ -407,10 +408,10 @@
   </div>
 
   <!-- ===================== SD-02 ===================== -->
-  <h3 id="e-02">SD-02 · JSON <span class="badge k-meistens">Meistens</span></h3>
-  <p class="klein">Vorkommen: JSON/XML zusammen 6/9 · JSON konkret: S23 T1 A4cb (JSON-Sensordaten in ein Relationenmodell übernehmen), W23 T1 A3c (14 P: Tabellen in JSON überführen, Embedding), S24 T1 A2c (JSON-Body eines Requests), W24 T1 A2c (8 P: Skript mit JSON-Ausgabe)</p>
+  <h3 id="e-02">SD-02 · JSON <span class="relevanz r-kern" title="Belege: W24 T1 A2c (8 P); S24 T1 A2c (3 P); W23 T1 A3ca, A3cb (14 P); S23 T1 A4cb (13 P).">Prüfungskern – 4/9 – W24, S24, W23, S23</span></h3>
+  <p class="klein">Vorkommen: 4/9 · Prüfungen: W24, S24, W23, S23 · Teil 1, Aufgabe 2 (außerdem Aufgabe 3 in W23, Aufgabe 4 in S23)</p>
 
-  <h4>Syntax</h4>
+  <h4>Syntax <span class="relevanz r-kern" title="JSON: S23 4cb (Sensordaten), W23 3ca/3cb (14 P), S24 2c (JSON-Body), W24 2c (JSON-Array erzeugen)">Prüfungskern – 4/9 – W24, S24, W23, S23</span></h4>
   <p>JSON (<em>JavaScript Object Notation</em>) ist ein schlankes, textbasiertes Datenaustauschformat. Es ist das Standardformat von REST-APIs und dokumentenorientierten NoSQL-Datenbanken (z. B. MongoDB). Medientyp: <code>application/json</code>, Zeichenkodierung UTF-8. JSON kennt genau sechs Arten von Werten:</p>
   <table class="kompakt">
     <tr><th style="width:12%">Typ</th><th style="width:40%">Schreibweise</th><th>Beispiel</th></tr>
@@ -452,7 +453,7 @@
     </ul>
   </div>
 
-  <h4>So gehst du vor: Tabellen in JSON überführen</h4>
+  <h4>So gehst du vor: Tabellen in JSON überführen <span class="relevanz r-vor" title="Tabellen → JSON (W23 3ca/3cb); umgekehrter Weg JSON → Relationenmodell (S23 4cb)">Kam vor – 2/9 – W23, S23</span></h4>
   <ol>
     <li>Jede <strong>Zeile</strong> wird ein <strong>Objekt</strong> <code>{…}</code>, jede <strong>Spalte</strong> ein <strong>Schlüssel</strong> (Spaltennamen übernehmen, sofern nichts anderes verlangt ist).</li>
     <li>Mehrere Zeilen kommen in ein <strong>Array</strong> <code>[…]</code>, meist mit sprechendem Namen: <code>{"kurse": [ … ]}</code>.</li>
@@ -462,7 +463,7 @@
   </ol>
   <p>Der umgekehrte Weg (S23 T1 A4cb: JSON-Sensordaten in ein Relationenmodell übernehmen): Jedes wiederkehrende Objekt wird eine Entität/Tabelle, ein eingebettetes Array wird eine eigene Tabelle mit Fremdschlüssel auf das übergeordnete Objekt.</p>
 
-  <h4>Embedding und Referenz</h4>
+  <h4>Embedding und Referenz <span class="relevanz r-vor" title="JSON-Embedding als Array (W23 3cb), Referenz vs. Dokument (W23 3b)">Kam vor – 1/9 – W23</span></h4>
   <p>In einer dokumentenorientierten Datenbank (Sammlungen von JSON-Dokumenten statt Tabellen) gibt es zwei Möglichkeiten, eine 1:n-Beziehung abzubilden. Beispiel: Abteilungen eines Sportvereins und ihre Trainingszeiten.</p>
   <figure>
     <svg viewBox="0 0 740 250" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
@@ -527,7 +528,7 @@
     <tr><td>Nachteil</td><td>Redundanz und Änderungsaufwand, wenn dieselben Daten in vielen Dokumenten stecken; Dokumente können sehr groß werden</td><td>mehr Abfragen; die Konsistenz der Verweise muss die Anwendung sichern (keine Fremdschlüssel-Constraints)</td></tr>
   </table>
 
-  <h4>JSON im Programm erzeugen</h4>
+  <h4>JSON im Programm erzeugen <span class="relevanz r-vor" title="Skript mit JSON-Ausgabe (W24 T1 2c, 8 P)">Kam vor – 1/9 – W24</span></h4>
   <p>Manchmal soll ein Skript oder eine Funktion ihr Ergebnis als JSON ausgeben (W24 T1 A2c). In der Praxis erledigen das Bibliotheken (z. B. Jackson oder Gson in Java), in der Prüfung baut man den Text meist selbst zusammen. Dabei kommt es auf drei Dinge an: Klammern öffnen und schließen, <strong>Kommas nur zwischen</strong> den Elementen, Strings in Anführungszeichen (im Code als <code>\"</code> maskiert). Beispiel: Namen aus einem Array als JSON-Array ausgeben.</p>
   <pre class="pseudo">funktion namenAlsJson(namen : string[]) : string
   json : string := "["
@@ -543,7 +544,7 @@ Ende funktion</pre>
   <p>Ergebnis für <code>["Anna", "Ben", "Cem"]</code>: <code>["Anna", "Ben", "Cem"]</code>; für ein leeres Array: <code>[]</code>. Zahlen und <code>true</code>/<code>false</code> werden ohne Anführungszeichen angehängt.</p>
   <div class="falle"><span class="kastentitel">Achtung beim Filtern</span>Wird nur ein Teil der Elemente ausgegeben, ist das erste <em>ausgegebene</em> Element nicht unbedingt das mit dem Index 0. Die Bedingung <code>i &gt; 0</code> setzt dann ein Komma zu viel. Man braucht eine andere Art, sich zu merken, ob schon etwas ausgegeben wurde.</div>
 
-  <h4>JSON, XML, CSV und YAML im Vergleich</h4>
+  <h4>JSON, XML, CSV und YAML im Vergleich <span class="relevanz r-hinter" title="Formatvergleich nie abgefragt">Hintergrund – 0/9</span></h4>
   <table class="kompakt">
     <tr><th style="width:18%">Kriterium</th><th>JSON</th><th>XML</th></tr>
     <tr><td>Aufbau</td><td>Objekte, Arrays, Schlüssel-Wert-Paare</td><td>Elemente mit Start-/End-Tags, Attribute, Baum</td></tr>
@@ -580,17 +581,17 @@ Ende funktion</pre>
   </div>
 
   <!-- ===================== SD-03 ===================== -->
-  <h3 id="e-03">SD-03 · REST-Grundlagen &amp; HTTP-Methoden <span class="badge k-oft">Oft ↑</span></h3>
-  <p class="klein">Vorkommen: REST/HTTP zusammen 4/9 (W21, S24, W24, S26), davon 3 in den letzten 4 Prüfungen · S24 T1 A2a/b (REST-Konzept 2 P, CRUD-Tabelle 6 P), S26 T1 A2ba/bc (REST-Konzept 3 P, zwei weitere HTTP-Methoden 6 P)</p>
+  <h3 id="e-03">SD-03 · REST-Grundlagen &amp; HTTP-Methoden <span class="relevanz r-vor" title="Belege: S26 T1 A2ba, A2bc (9 P); S24 T1 A2a, A2b, A2e (19 P).">Kam vor – 2/9 – S26, S24</span> <span class="trend" title="Trend laut Themenanalyse: steigend">↑</span></h3>
+  <p class="klein">Vorkommen: 2/9 · Prüfungen: S26, S24 · Teil 1, Aufgabe 2</p>
 
-  <h4>Begriffe</h4>
+  <h4>Begriffe <span class="relevanz r-vor" title="REST-API-Konzept beschreiben: S24 T1 2a, S26 T1 2ba">Kam vor – 2/9 – S26, S24</span></h4>
   <ul>
     <li><strong>Schnittstelle / API</strong> (<em>Application Programming Interface</em>): festgelegter Zugang, über den ein Programm Funktionen oder Daten eines anderen Programms nutzt – welche Anfragen möglich sind, wie sie aussehen und was zurückkommt.</li>
     <li><strong>Web-API / Webservice:</strong> eine API, die über das Netz per HTTP(S) aufgerufen wird. Der Client (App, Web-Frontend, anderes System) kennt nur die Schnittstelle, nicht die Implementierung des Servers (lose Kopplung).</li>
     <li><strong>REST</strong> (<em>Representational State Transfer</em>): ein <strong>Architekturstil</strong> – kein Protokoll und kein Standard –, der 2000 von Roy Fielding beschrieben wurde und HTTP konsequent nutzt. Eine API nach diesem Stil heißt <strong>REST-API</strong> bzw. RESTful.</li>
   </ul>
 
-  <h4>Die Prinzipien von REST</h4>
+  <h4>Die Prinzipien von REST <span class="relevanz r-vor" title="REST-Konzept (zustandslos, Ressourcen/URL, Client-Server): S24 2a, S26 2ba">Kam vor – 2/9 – S26, S24</span></h4>
   <table class="kompakt">
     <tr><th style="width:21%">Prinzip</th><th>Bedeutung</th><th style="width:28%">Beispiel (Bibliotheks-API)</th></tr>
     <tr><td>Ressourcen mit eindeutiger URI</td><td>Alles, worauf man zugreift (Medium, Leser, Ausleihe), ist eine Ressource mit eigener Adresse.</td><td><code>/medien/M-30815</code><br><code>/leser/4711/ausleihen</code></td></tr>
@@ -649,7 +650,7 @@ Ende funktion</pre>
     Mindestens drei Aspekte in ganzen Sätzen: <strong>Ressourcen</strong> mit eindeutiger <strong>URI/URL</strong> · Zugriff über die <strong>HTTP-Methoden</strong> (einheitliche Schnittstelle) · Austausch von <strong>Repräsentationen</strong> (meist JSON) · <strong>zustandslos</strong> (jede Anfrage ist in sich vollständig) · <strong>Client und Server lose gekoppelt</strong>. Nur „REST ist eine Schnittstelle im Internet“ reicht nicht.
   </div>
 
-  <h4>CRUD und HTTP-Methoden</h4>
+  <h4>CRUD und HTTP-Methoden <span class="relevanz r-vor" title="S24 T1 2b (CRUD + HTTP-Methoden, 6 P), S26 T1 2bc (zwei weitere Methoden, 6 P)">Kam vor – 2/9 – S26, S24</span></h4>
   <p>CRUD steht für die vier Grundoperationen auf Daten: <em>Create, Read, Update, Delete</em>. Bei REST übernimmt die HTTP-Methode die Rolle des Verbs, die URI benennt nur die Ressource.</p>
   <table class="kompakt">
     <tr><th>CRUD</th><th>HTTP-Methode</th><th>Beispiel (Bibliothek)</th><th>typische Antwort</th></tr>
@@ -660,7 +661,7 @@ Ende funktion</pre>
   </table>
   <p>Weitere Methoden: <strong>HEAD</strong> (wie GET, aber nur die Header – z. B. um Größe oder Änderungsdatum zu prüfen) und <strong>OPTIONS</strong> (welche Methoden sind für eine Ressource erlaubt?).</p>
 
-  <h4>Sicher und idempotent</h4>
+  <h4>Sicher und idempotent <span class="relevanz r-hinter" title="Beschreibung der HTTP-Methoden (PUT idempotent) bei S26 2bc grenzwertig; Idempotenz nie ausdrücklich gefragt">Hintergrund – 0/9</span></h4>
   <ul>
     <li><strong>Sicher</strong> (<em>safe</em>): Die Methode verändert auf dem Server nichts, sie liest nur. Sicher sind GET, HEAD und OPTIONS.</li>
     <li><strong>Idempotent:</strong> Wird dieselbe Anfrage mehrfach gesendet, ist der Zustand auf dem Server danach derselbe wie nach einmaligem Senden. Idempotent sind alle sicheren Methoden sowie <strong>PUT</strong> (zweimal „ersetze durch X“ ergibt X) und <strong>DELETE</strong> (zweimal löschen: weg ist weg – die zweite Antwort darf 404 sein, der Zustand ändert sich nicht mehr).</li>
@@ -668,7 +669,7 @@ Ende funktion</pre>
   </ul>
   <p>Warum das wichtig ist: Bei schlechter Verbindung weiß ein Client oft nicht, ob seine Anfrage angekommen ist. Idempotente Anfragen darf er (oder ein Proxy) gefahrlos wiederholen – bei nicht idempotenten Anfragen kann eine Wiederholung Schaden anrichten.</p>
 
-  <h4>PUT oder PATCH?</h4>
+  <h4>PUT oder PATCH? <span class="relevanz r-vor" title="S24 2b (Lösung: PUT/PATCH für Update), S26 2bc (weitere Methoden beschreiben)">Kam vor – 2/9 – S26, S24</span></h4>
   <p>Die Ressource <code>/leser/4711</code> sieht so aus: <code>{"leserNr": 4711, "name": "Tom Berger", "email": "tom@mail.example", "newsletter": false}</code>. Nur die E-Mail-Adresse soll sich ändern:</p>
   <div class="zweispaltig">
     <pre class="http">PUT /v2/leser/4711
@@ -684,7 +685,7 @@ Content-Type: application/json
   </div>
   <p>PUT überträgt die <strong>vollständige</strong> neue Repräsentation und ersetzt die alte. Schickt man bei PUT nur ein Feld, wären die übrigen danach leer bzw. auf Standardwerte gesetzt. PATCH überträgt <strong>nur die Änderung</strong>.</p>
 
-  <h4>Endpunkte entwerfen</h4>
+  <h4>Endpunkte entwerfen <span class="relevanz r-hinter" title="nur der Abschnitt Query-/Pfadparameter ist für S26 T1 2bb relevant (grenzwertig); Endpunkte entwerfen nie verlangt">Hintergrund – 0/9</span></h4>
   <ul>
     <li><strong>Substantive statt Verben</strong>, Sammlungen im Plural: <code>/medien</code>, nicht <code>/getMedien</code>. Die Aktion steckt in der HTTP-Methode.</li>
     <li><strong>Hierarchie</strong> für abhängige Ressourcen: <code>/leser/{leserNr}/ausleihen/{ausleihId}</code>.</li>
@@ -708,7 +709,7 @@ Content-Type: application/json
     </ul>
   </div>
 
-  <h4>Ablauf eines API-Aufrufs</h4>
+  <h4>Ablauf eines API-Aufrufs <span class="relevanz r-vor" title="S24 T1 2e: Sequenzdiagramm App/WebService/DB mit alt (11 P)">Kam vor – 1/9 – S24</span></h4>
   <p>In S24 T1 A2e (11 P) sollte der Ablauf App → WebService → Datenbank als <strong>Sequenzdiagramm</strong> mit <code>alt</code>-Fragment gezeichnet werden (Notation siehe Block 03 UML). So sieht das für eine einfache Leseanfrage aus:</p>
   <figure>
     <svg viewBox="0 0 700 322" width="700" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
@@ -755,7 +756,7 @@ Content-Type: application/json
     <figcaption>Abb. A-5: Sequenzdiagramm eines GET-Aufrufs mit alt-Fragment (synchrone Nachricht = gefüllte Spitze, Antwort = gestrichelt)</figcaption>
   </figure>
 
-  <h4>REST und SOAP</h4>
+  <h4>REST und SOAP <span class="relevanz r-hinter" title="SOAP nie abgefragt">Hintergrund – 0/9</span></h4>
   <table class="kompakt">
     <tr><th style="width:20%"></th><th>REST</th><th>SOAP</th></tr>
     <tr><td>Art</td><td>Architekturstil</td><td>Protokoll (W3C-Standard)</td></tr>
@@ -775,13 +776,13 @@ Content-Type: application/json
   </div>
 
   <!-- ===================== SD-04 ===================== -->
-  <h3 id="e-04">SD-04 · HTTP-Request/Response &amp; Statuscodes <span class="badge k-oft">Oft ↑</span></h3>
-  <p class="klein">Vorkommen: REST/HTTP zusammen 4/9 · W21 T1 A3c (Ursache für HTTP 404, 2 P), S24 T1 A2c/d (Bestandteile eines Requests 3 P, Statuscode-Klassen 3 P), W24 T2 A2a (HTTP-Antwort im Code bauen, 10 P), S26 T1 A2bb (Parameter einer URL beschreiben, 3 P)</p>
+  <h3 id="e-04">SD-04 · HTTP-Request/Response &amp; Statuscodes <span class="relevanz r-kern" title="Belege: S26 T1 A2bb (3 P); W24 T2 A2a (10 P); S24 T1 A2c, A2e, A2d (17 P); W21 T1 A3c (2 P).">Prüfungskern – 4/9 – S26, W24, S24, W21</span> <span class="trend" title="Trend laut Themenanalyse: steigend">↑</span></h3>
+  <p class="klein">Vorkommen: 4/9 · Prüfungen: S26, W24, S24, W21 · Teil 1, Aufgabe 2 (außerdem Aufgabe 3 in W21) und Teil 2 (W24)</p>
 
-  <h4>HTTP in Kürze</h4>
+  <h4>HTTP in Kürze <span class="relevanz r-hinter" title="allgemeine Einführung; gefragt wurden Details (Request, Statuscode, URL, Response)">Hintergrund – 0/9</span></h4>
   <p>HTTP (<em>Hypertext Transfer Protocol</em>) ist ein Protokoll der Anwendungsschicht nach dem <strong>Request-Response-Prinzip</strong>: Der Client sendet eine Anfrage, der Server beantwortet sie. HTTP ist <strong>zustandslos</strong> – jede Anfrage steht für sich (Sitzungen entstehen erst durch Cookies oder Tokens). Standardport 80; <strong>HTTPS</strong> ist HTTP über eine TLS-verschlüsselte Verbindung (Port 443) und heute der Normalfall. Bei HTTP/1.1 sind die Nachrichten reiner Text; HTTP/2 und HTTP/3 übertragen binär, Methoden, Header und Statuscodes bleiben aber gleich.</p>
 
-  <h4>Aufbau von Request und Response</h4>
+  <h4>Aufbau von Request und Response <span class="relevanz r-vor" title="Bestandteile eines Requests (S24 2c), Response mit Header Content-Type/Length (W24 2a)">Kam vor – 2/9 – W24, S24</span></h4>
   <figure>
     <svg viewBox="0 0 760 352" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
       <text x="10" y="16" font-weight="bold">Request (Client → Server)</text>
@@ -851,7 +852,7 @@ Content-Type: application/json
     <tr><td class="mono">User-Agent</td><td>Request</td><td>Name und Version der Client-Software</td></tr>
   </table>
 
-  <h4>Aufbau einer URL</h4>
+  <h4>Aufbau einer URL <span class="relevanz r-vor" title="Parameter einer GET-URL beschreiben (S26 2bb); GET mit Query-Parameter city (S24 2e)">Kam vor – 2/9 – S26, S24</span></h4>
   <figure>
     <svg viewBox="0 0 720 112" width="720" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
       <g font-family="Consolas, Courier New, monospace" font-size="14">
@@ -896,11 +897,11 @@ Content-Type: application/json
     <li><strong>So beschreibst du einen Parameter</strong> (S26): Name, was er für die Anfrage bedeutet und was der Wert bewirkt – z. B. „<code>titel=Momo</code>: Suchbegriff; es werden nur Medien geliefert, deren Titel ‚Momo‘ enthält“ oder „<code>seite=2</code>: Bei seitenweiser Ausgabe (Paginierung) wird die zweite Seite der Treffer geliefert“.</li>
   </ul>
 
-  <h4>API-Schlüssel</h4>
+  <h4>API-Schlüssel <span class="relevanz r-vor" title="Parameter apikey beschreiben (S26 T1 2bb)">Kam vor – 1/9 – S26</span></h4>
   <p>Ein <strong>API-Schlüssel</strong> (<em>API key</em>) ist eine eindeutige, geheime Zeichenfolge, mit der sich eine <strong>Anwendung</strong> (nicht eine Person) gegenüber einer API ausweist. Zweck: nur registrierte Clients erhalten Zugriff, Anfragen lassen sich einem Kunden zuordnen (Abrechnung, Statistik), und die Anzahl der Anfragen lässt sich begrenzen (<em>Rate-Limiting</em>, Überschreitung → <code>429 Too Many Requests</code>). Übertragung immer über HTTPS, besser im Header als in der URL, und nie im öffentlich einsehbaren Quellcode ablegen. Ein API-Schlüssel ersetzt keine Benutzeranmeldung – dafür gibt es Tokens (z. B. OAuth 2.0).</p>
 
   <div class="zusammen">
-  <h4>Statuscodes</h4>
+  <h4>Statuscodes <span class="relevanz r-kern" title="HTTP 404 (W21 3c), Statuscode-Klassen (S24 2d), Statuscode setzen (W24 2a)">Prüfungskern – 3/9 – W24, S24, W21</span></h4>
   <div class="zweispaltig">
     <table class="kompakt">
       <tr><th style="width:16%">Klasse</th><th>Bedeutung</th></tr>
@@ -948,7 +949,7 @@ Content-Type: application/json
     </ul>
   </div>
 
-  <h4>Content-Length zählt Bytes, nicht Zeichen</h4>
+  <h4>Content-Length zählt Bytes, nicht Zeichen <span class="relevanz r-vor" title="Content-Length in Bytes (W24 T2 2a)">Kam vor – 1/9 – W24</span></h4>
   <p>In UTF-8 belegen ASCII-Zeichen (A–Z, a–z, Ziffern, Leerzeichen, <code>{ } " :</code> usw.) je <strong>1 Byte</strong>, <code>ä ö ü Ä Ö Ü ß</code> je <strong>2 Bytes</strong>, das Eurozeichen <code>€</code> <strong>3 Bytes</strong>, Emojis 4 Bytes. Gezählt wird nur der Body, nicht die Header.</p>
   <table class="kompakt" style="width:auto">
     <tr><th>Body</th><th>Zeichen</th><th>Bytes = Content-Length</th></tr>
@@ -956,7 +957,7 @@ Content-Type: application/json
     <tr><td class="mono">Gebühr: 2,50 €</td><td>14</td><td>17 (ü +1, € +2)</td></tr>
   </table>
 
-  <h4>Eine HTTP-Antwort im Code zusammenbauen</h4>
+  <h4>Eine HTTP-Antwort im Code zusammenbauen <span class="relevanz r-vor" title="createErrorResponse (W24 T2 2a, 10 P)">Kam vor – 1/9 – W24</span></h4>
   <p>In W24 T2 A2a war eine Klasse <code>HttpResponse</code> vorgegeben und eine Methode zu schreiben, die eine vollständige Antwort mit Statuscode, <code>Content-Type</code>, <code>Content-Length</code> (in Bytes) und Body erzeugt. Das Muster an einem einfachen Beispiel – ein „Lebenszeichen“-Endpunkt der Bibliotheks-API, der immer mit einem kurzen Text antwortet (Methoden wie in der Klasse <code>HttpResponse</code> des Belegsatzes):</p>
   <pre class="pseudo">funktion createPingResponse() : HttpResponse
   body : string := "Bücherei-API läuft"
@@ -991,10 +992,10 @@ Bücherei-API läuft</pre>
   </div>
 
   <!-- ===================== SD-05 ===================== -->
-  <h3 id="e-05">SD-05 · eRechnung <span class="badge k-sonstige">Sonstige ⚠</span></h3>
-  <p class="klein">Vorkommen: 1/9, aber in der vorletzten Prüfung: W25 T1 A2b (9 P: englischer Text – Hauptziel, Aspekte einer digitalen Rechnung) und A3 (Transportverschlüsselung 4 P, Konformität sicherstellen 3 P, Online-Prüfseite 6 P, XSD-Validierung reicht nicht 6 P). Wegen der neuen gesetzlichen Pflicht ein naheliegendes Thema für weitere Prüfungen.</p>
+  <h3 id="e-05">SD-05 · eRechnung <span class="relevanz r-vor" title="Belege: W25 T1 A2ba, A2bb, A3ba, A3bb, A3bc (24 P).">Kam vor – 1/9 – W25</span> <span class="trend" title="Trend laut Themenanalyse: beobachten: einmalig, aber in den letzten Prüfungen">⚠</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfungen: W25 · Teil 1, Aufgabe 2 oder 3 · Hinweis: einmalig, aber in der vorletzten Prüfung; wegen der neuen gesetzlichen Pflicht ein naheliegendes Thema für weitere Prüfungen</p>
 
-  <h4>Was ist eine eRechnung?</h4>
+  <h4>Was ist eine eRechnung? <span class="relevanz r-vor" title="Hauptziel und Aspekte einer digitalen Rechnung aus englischem Text (W25 T1 2ba/2bb)">Kam vor – 1/9 – W25</span></h4>
   <p>Nach der EU-Richtlinie 2014/55/EU und § 14 UStG ist eine elektronische Rechnung (eRechnung, <em>e-invoice</em>) eine Rechnung, die in einem <strong>strukturierten elektronischen Format ausgestellt, übermittelt und empfangen</strong> wird und eine <strong>automatische und elektronische Verarbeitung</strong> ermöglicht. In Deutschland muss das Format der europäischen Norm <strong>EN 16931</strong> entsprechen (oder mit ihr kompatibel sein).</p>
   <div class="merke"><span class="kastentitel">Merke</span>
     Das <strong>Hauptziel</strong> der eRechnung ist die <strong>automatische Verarbeitung</strong>: Die Rechnungsdaten werden ohne Abtippen direkt in die Software des Empfängers (Buchhaltung, ERP) übernommen und geprüft. Eine für Menschen lesbare Darstellung ist zweitrangig.<br>
@@ -1003,7 +1004,7 @@ Bücherei-API läuft</pre>
   <p><strong>Zwei Aspekte einer digitalen Rechnung:</strong> Der <strong>visuelle Aspekt</strong> erlaubt einem Menschen, den Inhalt zu sehen und zu lesen (z. B. als PDF). Der <strong>Datenaspekt</strong> erlaubt einem Computer, die enthaltenen Informationen strukturiert zu verarbeiten (z. B. als XML mit festgelegten Feldern für Rechnungsnummer, Beträge, Steuersätze). Eine PDF hat nur den visuellen Aspekt, eine XRechnung nur den Datenaspekt, ZUGFeRD beide.</p>
   <p><strong>Vorteile:</strong> keine manuelle Erfassung, dadurch weniger Fehler und schnellere Bearbeitung und Zahlung; geringere Kosten für Druck, Porto und Erfassung; einfache, durchsuchbare Archivierung; automatische Prüfung (Pflichtangaben, Rechenwerte); Grundlage für digitale Meldeverfahren der Steuerverwaltung. <strong>Herausforderungen:</strong> Software muss eRechnungen erzeugen, prüfen, anzeigen und revisionssicher im Originalformat archivieren; Abläufe und Stammdaten müssen angepasst werden.</p>
 
-  <h4>Pflicht in Deutschland (Stand 2026)</h4>
+  <h4>Pflicht in Deutschland (Stand 2026) <span class="relevanz r-hinter" title="Fristen/Pflichten nie abgefragt">Hintergrund – 0/9</span></h4>
   <table class="kompakt">
     <tr><th style="width:22%">Zeitpunkt</th><th>Regelung</th></tr>
     <tr><td>seit 27.11.2020</td><td><strong>B2G</strong> (an öffentliche Auftraggeber): Lieferanten des Bundes müssen eRechnungen senden; die Länder haben eigene, ähnliche Regelungen.</td></tr>
@@ -1014,7 +1015,7 @@ Bücherei-API läuft</pre>
   </table>
   <p><strong>Ausnahmen:</strong> Kleinbetragsrechnungen bis 250 € (brutto) und Fahrausweise. Rechnungen an Privatkunden (<strong>B2C</strong>) sind nicht betroffen. eRechnungen müssen im <strong>Originalformat</strong> (also als XML) aufbewahrt werden (GoBD) – ein ausgedrucktes Bild reicht nicht.</p>
 
-  <h4>Formate</h4>
+  <h4>Formate <span class="relevanz r-hinter" title="XRechnung/ZUGFeRD nie abgefragt">Hintergrund – 0/9</span></h4>
   <p>Die <strong>EN 16931</strong> legt ein semantisches Datenmodell der „Kernrechnung“ fest (welche Angaben es gibt und was sie bedeuten, z. B. BT-1 Rechnungsnummer) und lässt zwei XML-Syntaxen zu: <strong>UBL</strong> (Universal Business Language) und <strong>UN/CEFACT CII</strong> (Cross Industry Invoice). In Deutschland sind zwei Formate verbreitet:</p>
   <table class="kompakt">
     <tr><th style="width:17%"></th><th>XRechnung</th><th>ZUGFeRD</th><th style="width:18%">PDF / Scan</th></tr>
@@ -1106,7 +1107,7 @@ Bücherei-API läuft</pre>
   &lt;!-- … Rechnungspositionen (cac:InvoiceLine) … --&gt;
 &lt;/ubl:Invoice&gt;</pre>
 
-  <h4>Übertragungswege</h4>
+  <h4>Übertragungswege <span class="relevanz r-hinter" title="Übertragungswege nie abgefragt (W25 3aa nennt nur E-Mail-Transportverschlüsselung)">Hintergrund – 0/9</span></h4>
   <p>Das Gesetz schreibt keinen bestimmten Weg vor. Üblich sind:</p>
   <ul>
     <li><strong>E-Mail</strong> mit der XML- bzw. ZUGFeRD-Datei als Anhang (an eine eigens eingerichtete Rechnungsadresse),</li>
@@ -1157,7 +1158,7 @@ Bücherei-API läuft</pre>
     <figcaption>Abb. A-9: Weg einer eRechnung vom Rechnungssteller zum Empfänger</figcaption>
   </figure>
 
-  <h4>Validierung: Entspricht die Rechnung der Spezifikation?</h4>
+  <h4>Validierung: Entspricht die Rechnung der Spezifikation? <span class="relevanz r-vor" title="Konformität sicherstellen (3ba), Online-Prüfseite/Validator (3bb), XSD reicht nicht (3bc)">Kam vor – 1/9 – W25</span></h4>
   <p>Eine eRechnung wird in zwei Stufen geprüft:</p>
   <ol>
     <li><strong>Schema-Validierung (XSD von UBL bzw. CII):</strong> Struktur, Pflichtelemente, Reihenfolge, Datentypen (Datum, Dezimalzahl, Codes). Sie stellt die formale Korrektheit sicher.</li>
@@ -1165,14 +1166,14 @@ Bücherei-API läuft</pre>
   </ol>
   <p>Beides erledigt der <strong>KoSIT-Validator</strong>, das offizielle Prüfwerkzeug: frei verfügbar (Open Source), lokal ausführbar und auch in automatisierte Tests einbindbar; er erstellt einen Prüfbericht. Bei der Entwicklung einer Rechnungssoftware sichern außerdem ab: die verbindlichen Anforderungen der Spezifikation konsequent umsetzen, erprobte Bibliotheken nutzen, automatisierte Tests mit den offiziellen Testrechnungen, Testläufe mit Empfängern bzw. deren Portalen (Interoperabilität) und die Validierung als festen Schritt vor jedem Versand.</p>
 
-  <h4>Datenschutz und Sicherheit</h4>
+  <h4>Datenschutz und Sicherheit <span class="relevanz r-vor" title="Online-Prüfseite und Datenschutz (W25 T1 3bb); die Transportverschlüsselung (W25 T1 3aa/3ab) gehört zu IT-Sicherheit (Block 07)">Kam vor – 1/9 – W25</span></h4>
   <ul>
     <li><strong>Online-Prüfseiten:</strong> Rechnungen enthalten personenbezogene Daten (Namen, Anschriften, Bankverbindungen) und Geschäftsgeheimnisse (Preise, Mengen, Kundenbeziehungen). Wer eine Rechnung auf eine fremde Website hochlädt, übermittelt diese Daten an Dritte – nach DSGVO braucht das eine Rechtsgrundlage. Deshalb: keine echten Rechnungen hochladen, nur Test- oder anonymisierte Daten; den Anbieter prüfen (Impressum, Sitz bzw. Serverstandort, Datenschutzerklärung, Löschung); bedenken, dass das Ergebnis einer unbekannten Seite falsch oder veraltet sein kann (welche Regeln und welche Version werden geprüft?); im Zweifel den Validator lokal betreiben.</li>
     <li><strong>Transport:</strong> Beim E-Mail-Versand verschlüsselt <strong>TLS</strong> die Verbindung zwischen den Mailservern (Transportverschlüsselung). TLS ist ein <strong>hybrides</strong> Verfahren: asymmetrische Verschlüsselung für den sicheren Austausch eines Sitzungsschlüssels, symmetrische Verschlüsselung für die schnelle Übertragung der Daten. Die Transportverschlüsselung schützt nur die einzelnen Teilstrecken; auf den beteiligten Servern liegt die Nachricht unverschlüsselt. Ende-zu-Ende schützen S/MIME oder PGP bzw. die Übermittlung über Peppol oder ein Portal per HTTPS. (Kryptografie im Detail: Block 07.)</li>
   </ul>
 
-  <h4>Englischer Fachtext: so gehst du vor</h4>
-  <p>In W25 kam die eRechnung als englischer Text. Gefragt wird nicht nach einer Übersetzung, sondern nach dem <strong>Inhalt in eigenen Worten auf Deutsch</strong>. Erst die Frage lesen, dann im Text die passende Stelle suchen (Schlüsselwörter wie <em>main objective</em>, <em>aspects</em>, <em>from … until</em>), dann in ganzen Sätzen antworten. Hilfreiche Vokabeln:</p>
+  <h4>Englischer Fachtext: so gehst du vor <span class="relevanz r-kern" title="englischer Fachtext in 5 Prüfungen (Technik gilt für alle; Vokabeln sind eRechnung-spezifisch) [für die h3-Vereinigung nicht gezählt: allgemeine Technik, nicht Thema der h3]">Prüfungskern – 5/9 – S26, W25, S24, W23, S22</span></h4>
+  <p>In W25 kam die eRechnung als englischer Text. Gefragt wird nicht nach einer Übersetzung, sondern nach dem <strong>Inhalt in eigenen Worten auf Deutsch</strong>. Erst die Frage lesen, dann im Text die passende Stelle suchen (Schlüsselwörter wie <em>main objective</em>, <em>aspects</em>, <em>visual aspect / data aspect</em>), dann in ganzen Sätzen antworten. Hilfreiche Vokabeln:</p>
   <table class="kompakt">
     <tr><th>Englisch</th><th>Deutsch</th><th>Englisch</th><th>Deutsch</th></tr>
     <tr><td><em>invoice / to issue</em></td><td>Rechnung / ausstellen</td><td><em>recipient / consent</em></td><td>Empfänger / Zustimmung</td></tr>

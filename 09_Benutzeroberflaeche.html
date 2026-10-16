@@ -38,7 +38,7 @@
 <header class="blockkopf">
   <h1>Block 09 · Benutzeroberfläche</h1>
   <div class="unter">
-    <span class="badge k-oft">Oft</span> 5/9 Prüfungen (W21, W22, W23, S24, S26) · Ø 12 von 200 Punkten · nur Teil 1
+    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 5, Teil 2 in 0 Prüfungen.">Prüfungskern – 5/9 – S26, S24, W23, W22, W21</span> · Ø 7 von 200 Punkten · nur Teil 1
     · Lösungen: <a href="09_Benutzeroberflaeche_Loesungen.html">09_Benutzeroberflaeche_Loesungen.html</a>
   </div>
 </header>
@@ -76,27 +76,28 @@
   <h2>A · Erklärungssatz</h2>
 
   <p>Aufgaben zur Benutzeroberfläche standen in 5 der 9 ausgewerteten Prüfungen, und zwar immer in <strong>Teil 1</strong>. Meist sind sie Teil einer größeren Aufgabe und bringen zusammen 7–18 Punkte. Typisch sind vier Aufgabenarten: ein <strong>Mockup skizzieren oder ergänzen</strong> (oft in einem vorgedruckten Smartphone- oder Browserrahmen), die <strong>Mängel eines Entwurfs</strong> finden und ihn verbessern, <strong>Barrierefreiheit</strong> (Anforderungen und Maßnahmen) und <strong>Usability</strong> (Begriffe, Tests). Der Belegsatz enthält zu diesem Block nichts – alles hier musst du selbst können.</p>
+  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
 
   <table class="kompakt">
     <thead><tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr></thead>
-    <tr><td>GUI-01 Mockup, Wireframe &amp; GUI-Elemente</td><td><span class="badge k-oft">Oft</span> 4/9</td><td>3–10</td><td>Anforderungen vollständig in eine beschriftete Skizze übertragen, passende Elemente und Darstellungsformen wählen</td></tr>
-    <tr><td>GUI-02 Barrierefreiheit</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span> 3/9</td><td>4–8</td><td>Anforderung und dazu passende, konkrete Maßnahme nennen</td></tr>
-    <tr><td>GUI-03 Usability &amp; Software-Ergonomie</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span> 2/9</td><td>6–16</td><td>Mängel erkennen, mit den Grundsätzen der DIN EN ISO 9241-110 begründen und beheben</td></tr>
+    <tr><td>GUI-01 Mockup, Wireframe &amp; GUI-Elemente</td><td><span class="relevanz r-kern" title="Belege: S26 T1 A4ca, A4cb (10 P); S24 T1 A4bb (7 P); W23 T1 A4ba, A4bb, A4bc (8 P); W22 T1 A3a (3 P).">Prüfungskern – 4/9 – S26, S24, W23, W22</span></td><td>3–10</td><td>Anforderungen vollständig in eine beschriftete Skizze übertragen, passende Elemente und Darstellungsformen wählen</td></tr>
+    <tr><td>GUI-02 Barrierefreiheit</td><td><span class="relevanz r-kern" title="Belege: S26 T1 A4b (8 P); W22 T1 A3b (4 P); W21 T1 A3ab (4 P).">Prüfungskern – 3/9 – S26, W22, W21</span></td><td>4–8</td><td>Anforderung und dazu passende, konkrete Maßnahme nennen</td></tr>
+    <tr><td>GUI-03 Usability &amp; Software-Ergonomie</td><td><span class="relevanz r-vor" title="Belege: S24 T1 A4ba, A4bb (13 P); W21 T1 A3aa, A3ac (12 P).">Kam vor – 2/9 – S24, W21</span></td><td>6–16</td><td>Mängel erkennen, mit den Grundsätzen der DIN EN ISO 9241-110 begründen und beheben</td></tr>
   </table>
   <p class="klein">In der Themenanalyse bilden die drei Unterthemen zusammen das Thema „GUI / Mockup / Barrierefreiheit“ (Oft, 5/9). Damit genug geübt wird, ist es hier aufgeteilt. Die Kategorien der Teilthemen sind nach denselben Regeln berechnet (Wahrscheinlich = 2–3 von 9, davon mindestens einmal in S24–S26).</p>
 
   <!-- ===================== GUI-01 ===================== -->
-  <h3 id="e-01">GUI-01 · Mockup, Wireframe &amp; GUI-Elemente <span class="badge k-oft">Oft</span></h3>
-  <p class="klein">Vorkommen: 4/9 · Prüfungen: W22 (T1 A3a, Gestaltungselemente), W23 (T1 A4b, Darstellungsform + Skizze), S24 (T1 A4bb, verbessertes Mockup), S26 (T1 A4c, Vorteile von Mockups + Smartphone-Mockup ergänzen)</p>
+  <h3 id="e-01">GUI-01 · Mockup, Wireframe &amp; GUI-Elemente <span class="relevanz r-kern" title="Belege: S26 T1 A4ca, A4cb (10 P); S24 T1 A4bb (7 P); W23 T1 A4ba, A4bb, A4bc (8 P); W22 T1 A3a (3 P).">Prüfungskern – 4/9 – S26, S24, W23, W22</span></h3>
+  <p class="klein">Vorkommen: 4/9 · Prüfungen: S26, S24, W23, W22 · Teil 1, Aufgabe 4 (außerdem Aufgabe 3 in W22)</p>
 
-  <h4>So sieht die Aufgabe aus</h4>
+  <h4>So sieht die Aufgabe aus <span class="relevanz r-kern" title="Mockup/Darstellungsform/GUI-Wissensfragen: W22 3a, W23 4b, S24 4bb, S26 4c">Prüfungskern – 4/9 – S26, S24, W23, W22</span></h4>
   <ul>
-    <li><strong>Mockup ergänzen:</strong> Ein leerer Smartphone- oder Browserrahmen ist vorgedruckt, oft schon mit Titelzeile, Zurück-Pfeil oder Menüleiste. Dazu stehen zwei bis fünf Anforderungen im Text („Auf der Seite sollen … angezeigt werden“). Du zeichnest die Elemente ein (S26: 6 P, S24: 7 P).</li>
+    <li><strong>Mockup ergänzen:</strong> Ein leerer Smartphone- oder Browserrahmen ist vorgedruckt, oft schon mit Titelzeile, Zurück-Pfeil oder Menüleiste. Dazu stehen zwei bis fünf Anforderungen im Text (S26 wörtlich: „Auf einer Seite der Smartphone-App sollen folgende Daten … angezeigt werden“). Du zeichnest die Elemente ein (S26: 6 P, S24: 7 P).</li>
     <li><strong>Darstellungsform wählen:</strong> Zwei Darstellungsformen für bestimmte Daten nennen, sich für eine entscheiden, begründen und dann mit Beispieldatensätzen skizzieren (W23: 2 + 2 + 4 P).</li>
     <li><strong>Wissensfragen:</strong> Vorteile von Mockups beschreiben (S26: 4 P), Gestaltungselemente beschreiben (W22: 3 P).</li>
   </ul>
 
-  <h4>Wireframe, Mockup und Prototyp</h4>
+  <h4>Wireframe, Mockup und Prototyp <span class="relevanz r-hinter" title="die Abgrenzung Wireframe/Mockup/Prototyp nie abgefragt (Begriff Mockup steht in den Aufgaben S24/S26/W23)">Hintergrund – 0/9</span></h4>
   <p>Alle drei sind Entwürfe der Benutzeroberfläche, bevor programmiert wird. Sie unterscheiden sich im <strong>Detailgrad</strong> (englisch <em>Fidelity</em>: Low-Fidelity = grob, High-Fidelity = nah am Endprodukt) und darin, ob man sie <strong>bedienen</strong> kann.</p>
   <table class="kompakt">
     <thead><tr><th></th><th>Wireframe</th><th>Mockup</th><th>Prototyp</th></tr></thead>
@@ -209,7 +210,7 @@
 
   <p>Zwei Begriffe aus dem Prototyping solltest du einordnen können: Ein <strong>horizontaler Prototyp</strong> zeigt viele Masken der Oberfläche, aber ohne Logik dahinter. Ein <strong>vertikaler Prototyp</strong> setzt eine einzelne Funktion vollständig durch alle Schichten um (Oberfläche, Logik, Datenbank). Ein <strong>Wegwerf-Prototyp</strong> dient nur zur Klärung und wird danach verworfen, ein <strong>evolutionärer Prototyp</strong> wird zum Produkt weiterentwickelt.</p>
 
-  <h4>Vorteile und Grenzen von Mockups</h4>
+  <h4>Vorteile und Grenzen von Mockups <span class="relevanz r-vor" title="S26 T1 4ca: zwei Vorteile von Mockups">Kam vor – 1/9 – S26</span></h4>
   <table class="kompakt">
     <thead><tr><th style="width:38%">Vorteil</th><th>Begründung bzw. Auswirkung</th></tr></thead>
     <tr><td>Anforderungen werden sichtbar und überprüfbar</td><td>Missverständnisse zwischen Auftraggeber und Entwicklung fallen auf, bevor programmiert wird. Fehlende oder überflüssige Funktionen werden erkannt.</td></tr>
@@ -222,7 +223,7 @@
 
   <div class="falle"><span class="kastentitel">Typische Falle</span>„Beschreiben Sie zwei Vorteile“ heißt: <strong>Vorteil + Auswirkung</strong>. „Mockups sind schnell erstellt“ allein bringt kaum Punkte. Besser: „Der Kunde sieht früh, wie die Seite aussehen wird, und kann fehlende Angaben noch vor der Programmierung nachfordern – Änderungen sind dann deutlich günstiger.“</div>
 
-  <h4>GUI-Elemente und ihr Einsatz</h4>
+  <h4>GUI-Elemente und ihr Einsatz <span class="relevanz r-kern" title="Gestaltungselemente nennen (W22 3a), Mockups skizzieren/ergänzen (W23 4bc, S24 4bb, S26 4cb)">Prüfungskern – 4/9 – S26, S24, W23, W22</span></h4>
   <p>Für Skizzen und für Fragen wie „Welches Element eignet sich?“ brauchst du einen festen Baukasten. Abbildung A-2 zeigt die wichtigsten Elemente so, wie du sie in der Prüfung schnell zeichnen kannst.</p>
 
   <figure>
@@ -439,7 +440,7 @@
 
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>W22 T1 A3a: In einer Tabelle ist ein Gestaltungselement (eine Pfadnavigation) beschrieben, drei weitere sollen ergänzt werden (3 P). Schreibe pro Zeile <strong>Name + Zweck</strong>, z. B. „Akkordeon: Abschnitte, die sich per Klick auf die Überschrift auf- und zuklappen lassen; lange Seiten (FAQ) bleiben übersichtlich.“</div>
 
-  <h4>Darstellungsform für Daten wählen</h4>
+  <h4>Darstellungsform für Daten wählen <span class="relevanz r-vor" title="W23 T1 4b: Darstellungsform nennen, begründen, skizzieren">Kam vor – 1/9 – W23</span></h4>
   <p>Bevor du dich entscheidest, beantworte drei Fragen: <strong>Welche Daten</strong> (Anzahl, Text oder Zahl, Zeitbezug, Ortsbezug, Bilder)? <strong>Was will der Nutzer damit tun</strong> (Überblick, vergleichen, suchen, Lage erkennen, Entwicklung verfolgen)? <strong>Auf welchem Gerät</strong>?</p>
   <table class="kompakt">
     <thead><tr><th style="width:20%">Darstellungsform</th><th style="width:27%">geeignet für</th><th style="width:30%">Vorteil (Begründung)</th><th>Nachteil</th></tr></thead>
@@ -547,7 +548,7 @@
 
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>W23 T1 A4b: zwei Darstellungsformen für eine Übersicht nennen (2 P), eine auswählen und begründen (2 P), dann mit zwei Beispieldatensätzen skizzieren (4 P). Laut Lösungshinweisen wurden u. a. Liste/Tabelle, Kacheln und Karte akzeptiert – entscheidend ist die passende Begründung. In der Skizze die Beispieldatensätze wirklich eintragen.</div>
 
-  <h4>Responsive Design und Mobile First</h4>
+  <h4>Responsive Design und Mobile First <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <p><strong>Responsive Design</strong> heißt: Eine Oberfläche passt ihr Layout automatisch an Bildschirmgröße und Ausrichtung an – mit denselben Inhalten und einer Codebasis für Smartphone, Tablet und Desktop. Typische Techniken und Anpassungen:</p>
   <ul>
     <li>flexible Raster (CSS Grid/Flexbox) mit relativen Breiten statt fester Pixelmaße; <strong>Breakpoints</strong> per Media Query (z. B. unter 600 px, 600–1023 px, ab 1024 px)</li>
@@ -621,7 +622,7 @@
 
   <div class="falle"><span class="kastentitel">Typische Falle</span>„Responsive Design = für jedes Gerät eine eigene App“ ist falsch, ebenso „die Desktop-Seite wird einfach kleiner gezoomt“. Responsive bedeutet <em>ein</em> Inhalt, dessen <em>Anordnung</em> sich anpasst.</div>
 
-  <h4>So skizzierst du ein Mockup in der Prüfung</h4>
+  <h4>So skizzierst du ein Mockup in der Prüfung <span class="relevanz r-kern" title="Mockup skizzieren/ergänzen: W23 4bc, S24 4bb (7 P), S26 4cb (6 P)">Prüfungskern – 3/9 – S26, S24, W23</span></h4>
   <ol>
     <li><strong>Anforderungen markieren:</strong> Jede geforderte Information und Funktion im Aufgabentext unterstreichen und nummerieren. Für jede gibt es Punkte – also muss jede als sichtbares Element in der Skizze vorkommen.</li>
     <li><strong>Vorgaben übernehmen:</strong> Vorgedruckte Teile (Titel, Zurück-Pfeil, Menüleiste) nicht ändern, sondern im gleichen Stil weiterzeichnen.</li>
@@ -711,13 +712,13 @@
 
   <div class="merke"><span class="kastentitel">Merke</span>Bewertet werden <strong>Vollständigkeit</strong> (jede Anforderung als Element), <strong>Eignung der Elemente</strong> und <strong>Übersichtlichkeit</strong> – nicht die Zeichenkunst. Ein vergessenes Element kostet mehr als eine krumme Linie.</div>
 
-  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>S26 T1 A4cb: Ein Smartphone-Rahmen mit Titelzeile und Zurück-Pfeil ist vorgegeben, ergänzt werden sollen ein aktueller Messwert und ein Verlaufsdiagramm mit wählbarem Start- und Enddatum (6 P). Wer nur das Diagramm zeichnet und die Datumsauswahl vergisst, verschenkt Punkte. S24 T1 A4bb: Ein Browserfenster mit Menüleiste ist vorgegeben, darin ein verbessertes Mockup mit allen geforderten Funktionen skizzieren (7 P).</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>S26 T1 A4cb: Ein Smartphone-Rahmen mit Titelzeile und Zurück-Pfeil ist vorgegeben, ergänzt werden sollen der aktuelle Füllstand im Tank und ein Verlaufsdiagramm mit wählbarem Start- und Enddatum (6 P). Wer nur das Diagramm zeichnet und die Datumsauswahl vergisst, verschenkt Punkte. S24 T1 A4bb: Ein Browserfenster mit Menüleiste ist vorgegeben, darin ein verbessertes Mockup mit allen geforderten Funktionen skizzieren (7 P).</div>
 
   <!-- ===================== GUI-02 ===================== -->
-  <h3 id="e-02">GUI-02 · Barrierefreiheit <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
-  <p class="klein">Vorkommen: 3/9 · Prüfungen: W21 (T1 A3ab, Begriff erläutern), W22 (T1 A3b, inklusives Design: Schrift und Farbe), S26 (T1 A4b, zwei Anforderungen + Maßnahmen in einer Tabelle)</p>
+  <h3 id="e-02">GUI-02 · Barrierefreiheit <span class="relevanz r-kern" title="Belege: S26 T1 A4b (8 P); W22 T1 A3b (4 P); W21 T1 A3ab (4 P).">Prüfungskern – 3/9 – S26, W22, W21</span></h3>
+  <p class="klein">Vorkommen: 3/9 · Prüfungen: S26, W22, W21 · Teil 1, Aufgabe 3 (außerdem Aufgabe 4 in S26)</p>
 
-  <h4>Begriff</h4>
+  <h4>Begriff <span class="relevanz r-kern" title="Barrierefreiheit: W21 3ab (Begriff erläutern), W22 3b, S26 4b">Prüfungskern – 3/9 – S26, W22, W21</span></h4>
   <p>Software ist <strong>barrierefrei</strong>, wenn Menschen mit Behinderungen sie in der allgemein üblichen Weise, ohne besondere Erschwernis und grundsätzlich ohne fremde Hilfe finden, wahrnehmen, verstehen und bedienen können (angelehnt an § 4 Behindertengleichstellungsgesetz, BGG). Dazu nutzen viele Menschen <strong>Hilfsmittel</strong>: Screenreader (liest den Bildschirm vor), Braillezeile, Bildschirmlupe, Spracheingabe, Spezialtastaturen. Die Software muss so gebaut sein, dass diese Hilfsmittel funktionieren.</p>
   <table class="kompakt">
     <thead><tr><th style="width:27%">Nutzergruppe</th><th style="width:38%">typische Barriere</th><th>hilft z. B.</th></tr></thead>
@@ -731,7 +732,7 @@
   </table>
   <div class="merke"><span class="kastentitel">Merke</span>Barrierefreiheit ist nicht nur ein Thema für Rollstuhlfahrer und blinde Menschen – und sie nützt allen: Untertitel im Zug, Kontrast in der Sonne, große Buttons beim Gehen, einfache Sprache für Eilige.</div>
 
-  <h4>Rechtlicher Rahmen (Kurzfassung)</h4>
+  <h4>Rechtlicher Rahmen (Kurzfassung) <span class="relevanz r-hinter" title="Gesetze (BGG, BITV, BFSG) nie abgefragt">Hintergrund – 0/9</span></h4>
   <table class="kompakt">
     <thead><tr><th style="width:24%">Regelung</th><th style="width:32%">gilt für</th><th>Inhalt</th></tr></thead>
     <tr><td><strong>BGG</strong> und <strong>BITV 2.0</strong> (Barrierefreie-Informationstechnik-Verordnung)</td><td>öffentliche Stellen des Bundes (die Länder haben eigene, ähnliche Gesetze)</td><td>Websites, Apps und Intranet müssen barrierefrei sein; Pflicht zu einer „Erklärung zur Barrierefreiheit“ mit Feedback-Möglichkeit; Grundinformationen in Deutscher Gebärdensprache und Leichter Sprache</td></tr>
@@ -741,7 +742,7 @@
   <p>Die <strong>WCAG</strong> (Web Content Accessibility Guidelines) sind Richtlinien des W3C. Aktuell ist Version 2.2 (2023). Sie enthalten prüfbare Erfolgskriterien in drei Stufen: <strong>A</strong> (Mindestanforderungen), <strong>AA</strong> (der übliche gesetzliche Standard) und <strong>AAA</strong> (höchste Stufe).</p>
   <div class="falle"><span class="kastentitel">Typische Falle</span>„Barrierefreiheit ist nur für Behörden Pflicht“ – stimmt seit Juni 2025 nicht mehr. Wer Verbrauchern online etwas verkauft oder Buchungen anbietet, fällt in der Regel unter das BFSG. Die BITV 2.0 dagegen gilt nur für öffentliche Stellen.</div>
 
-  <h4>Die vier Prinzipien der WCAG</h4>
+  <h4>Die vier Prinzipien der WCAG <span class="relevanz r-hinter" title="WCAG-Prinzipien nie namentlich abgefragt">Hintergrund – 0/9</span></h4>
   <table class="kompakt">
     <thead><tr><th style="width:16%">Prinzip</th><th style="width:40%">Bedeutung</th><th>Beispiele</th></tr></thead>
     <tr><td><strong>wahrnehmbar</strong><br><span class="klein">perceivable</span></td><td>Alle Informationen müssen mit mindestens einem Sinn erfasst werden können.</td><td>Alternativtexte, Untertitel, Kontrast, nicht nur Farbe, vergrößerbarer Text</td></tr>
@@ -751,7 +752,7 @@
   </table>
   <div class="merke"><span class="kastentitel">Merke</span>Englisch <strong>POUR</strong>: <em>perceivable, operable, understandable, robust</em> – auf Deutsch <strong>wahrnehmbar, bedienbar, verständlich, robust</strong>.</div>
 
-  <h4>Anforderungen und Maßnahmen</h4>
+  <h4>Anforderungen und Maßnahmen <span class="relevanz r-kern" title="S26 4b (zwei Anforderungen + Maßnahmen, 8 P), W22 3b (Schrift/Farbe), W21 3ab">Prüfungskern – 3/9 – S26, W22, W21</span></h4>
   <p>In der Prüfung werden <strong>Anforderung</strong> (was muss erfüllt sein?) und <strong>Maßnahme</strong> (wie setze ich es um?) getrennt verlangt. Die Tabelle ist dein Vorrat.</p>
   <table class="kompakt">
     <thead><tr><th style="width:24%">Anforderung</th><th style="width:60%">Maßnahme (konkret)</th><th>Prinzip</th></tr></thead>
@@ -858,7 +859,7 @@
     <tr><td><span style="color:#222222">Kursleitung: S. Meier</span></td><td><code>#222222</code></td><td>15,9 : 1</td><td>✓</td></tr>
   </table>
 
-  <h4>Inklusives Design: Schrift und Farbgebung</h4>
+  <h4>Inklusives Design: Schrift und Farbgebung <span class="relevanz r-vor" title="W22 T1 3b (Schrift und Farbgebung, 4 P); Kontrast/Schrift auch als Maßnahme in S26 4b. Grenzwertig, nicht mitgezählt: S26 (T1 A4b: Kontrast/Schrift nur als mögliche Maßnahme).">Kam vor – 1/9 – W22</span></h4>
   <p><strong>Inklusives Design</strong> (auch <em>Design for All</em>) heißt: von Anfang an so gestalten, dass möglichst viele Menschen das Produkt ohne Anpassung nutzen können – statt später Sonderlösungen anzubauen. Die Prüfung fragt dazu gern nach Schrift und Farbe.</p>
   <table class="kompakt">
     <thead><tr><th style="width:20%">Kriterium</th><th>Umsetzung (Beispiele)</th></tr></thead>
@@ -874,7 +875,7 @@
     W22 T1 A3b: für die Kriterien „Schriftart/Schriftbild“ und „Farbgebung“ je zwei Beispiele für inklusives Design (4 P).
     S26 T1 A4b: zwei Anforderungen an barrierefreie Software und je eine geeignete Maßnahme in einer Tabelle beschreiben (8 P, also etwa 2 P je Feld). Bei „beschreiben“ reicht ein Stichwort nicht – ein ganzer Satz mit Bezug auf die Nutzer.</div>
 
-  <h4>Barrierefreiheit prüfen</h4>
+  <h4>Barrierefreiheit prüfen <span class="relevanz r-hinter" title="Prüfverfahren nie abgefragt">Hintergrund – 0/9</span></h4>
   <ul>
     <li><strong>Automatische Prüfwerkzeuge</strong> (z. B. axe, WAVE, Lighthouse) finden fehlende Alternativtexte, zu geringe Kontraste oder fehlende Labels. Sie erkennen aber nur einen Teil der Probleme – ob ein Alternativtext <em>sinnvoll</em> ist, prüfen sie nicht.</li>
     <li><strong>Manuelle Prüfung durch Fachleute:</strong> nur mit der Tastatur bedienen, mit einem Screenreader testen (NVDA, JAWS, VoiceOver, TalkBack), auf 200 % vergrößern, Farbfehlsichtigkeit simulieren, Kontraste messen – systematisch entlang der WCAG-Kriterien (z. B. nach dem Prüfverfahren „BITV-Test“).</li>
@@ -883,10 +884,10 @@
   </ul>
 
   <!-- ===================== GUI-03 ===================== -->
-  <h3 id="e-03">GUI-03 · Usability &amp; Software-Ergonomie <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
-  <p class="klein">Vorkommen: 2/9 · Prüfungen: W21 (T1 A3aa Usability/UX an vier Punkten, A3ac Usability-Tests), S24 (T1 A4ba Mängel eines Mockups aus UI/UX-Sicht)</p>
+  <h3 id="e-03">GUI-03 · Usability &amp; Software-Ergonomie <span class="relevanz r-vor" title="Belege: S24 T1 A4ba, A4bb (13 P); W21 T1 A3aa, A3ac (12 P).">Kam vor – 2/9 – S24, W21</span></h3>
+  <p class="klein">Vorkommen: 2/9 · Prüfungen: S24, W21 · Teil 1, Aufgabe 3 oder 4</p>
 
-  <h4>Usability und User Experience</h4>
+  <h4>Usability und User Experience <span class="relevanz r-vor" title="W21 T1 3aa (Usability/UX an vier Punkten, 8 P), S24 T1 4ba (UI/UX-Mängel im Mockup)">Kam vor – 2/9 – S24, W21</span></h4>
   <p><strong>Usability</strong> (Gebrauchstauglichkeit) ist nach DIN EN ISO 9241-11 das Ausmaß, in dem bestimmte Benutzer ein System in einem bestimmten Nutzungskontext nutzen können, um bestimmte Ziele <strong>effektiv, effizient und zufriedenstellend</strong> zu erreichen.</p>
   <table class="kompakt">
     <thead><tr><th style="width:18%">Kriterium</th><th style="width:44%">Bedeutung</th><th>messbar z. B. über</th></tr></thead>
@@ -933,10 +934,10 @@
 
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>W21 T1 A3aa: Usability und positive User Experience anhand von <strong>vier Punkten</strong> verdeutlichen (8 P, also 2 P je Punkt: Punkt nennen + kurz erläutern). Geeignete Punkte: intuitive, schnell erlernbare Bedienung · Effizienz (wenige Schritte, kurze Ladezeiten) · klare Struktur und Übersichtlichkeit · Konsistenz · verständliche Rückmeldungen und Fehlertoleranz · Barrierefreiheit · Nutzbarkeit auf allen Geräten (responsiv) · ansprechende Gestaltung · Vertrauen (transparente Preise, Datenschutz).</div>
 
-  <h4>Software-Ergonomie</h4>
+  <h4>Software-Ergonomie <span class="relevanz r-hinter" title="Normenüberblick nie abgefragt">Hintergrund – 0/9</span></h4>
   <p><strong>Software-Ergonomie</strong> bedeutet, Software an die Fähigkeiten und Bedürfnisse der Menschen anzupassen, damit sie ihre Aufgaben ohne unnötige Belastung erledigen können. Für Bildschirmarbeitsplätze verlangt das sogar der Arbeitsschutz (Arbeitsstättenverordnung, Anhang 6). Die Normenreihe <strong>DIN EN ISO 9241</strong> „Ergonomie der Mensch-System-Interaktion“ regelt das; wichtig sind Teil 11 (Usability-Begriffe), Teil 110 (Interaktionsprinzipien), Teil 112 (Informationsdarstellung) und Teil 210 (menschzentrierte Gestaltung: Nutzungskontext verstehen → Anforderungen festlegen → Entwürfe erstellen → mit Nutzern bewerten, und das iterativ).</p>
 
-  <h4>Grundsätze der Dialoggestaltung nach DIN EN ISO 9241-110</h4>
+  <h4>Grundsätze der Dialoggestaltung nach DIN EN ISO 9241-110 <span class="relevanz r-hinter" title="Gebrauchstauglichkeit/UX-Kriterien (W21 3aa), UI-Mängel (S24 4ba); Grundsätze nicht ausdrücklich genannt (grenzwertig)">Hintergrund – 0/9</span></h4>
   <p>Seit der Neufassung 2020 heißt der Teil 110 „Interaktionsprinzipien“. In Prüfungen und Lehrbüchern ist „Grundsätze der Dialoggestaltung“ weiterhin üblich. Alte und neue Bezeichnungen werden akzeptiert – am sichersten schreibst du beide, z. B. „Robustheit gegen Benutzerfehler (Fehlertoleranz)“.</p>
   <table class="kompakt">
     <thead><tr><th style="width:19%">Grundsatz (2020)</th><th style="width:13%">früher (2006)</th><th style="width:34%">Was heißt das?</th><th>Beispiel (Bibliotheks-App, Mailprogramm)</th></tr></thead>
@@ -964,7 +965,7 @@
 
   <p>Für die <strong>Anzeige</strong> von Informationen gibt es zusätzlich Teil 112 (Entdeckbarkeit, Ablenkungsfreiheit, Unterscheidbarkeit, eindeutige Interpretierbarkeit, Kompaktheit, Konsistenz). Bei der Anordnung helfen die <strong>Gestaltgesetze</strong>: <em>Nähe</em> (Zusammengehöriges steht nah beieinander), <em>Ähnlichkeit</em> (gleich Aussehendes hat die gleiche Funktion), <em>Geschlossenheit</em> (ein Rahmen bildet eine Gruppe). Elemente sollten an einem gemeinsamen Raster ausgerichtet sein – „schief“ angeordnete Elemente wirken unruhig und erschweren das Erfassen.</p>
 
-  <h4>Usability-Tests</h4>
+  <h4>Usability-Tests <span class="relevanz r-vor" title="W21 T1 3ac: zwei Möglichkeiten zum Usability-Test">Kam vor – 1/9 – W21</span></h4>
   <table class="kompakt">
     <thead><tr><th style="width:18%">Verfahren</th><th style="width:38%">Ablauf</th><th style="width:22%">Vorteile</th><th>Nachteile</th></tr></thead>
     <tr><td><strong>Thinking Aloud</strong> (Methode des lauten Denkens)</td><td>Testpersonen aus der Zielgruppe lösen typische Aufgaben („Verlängern Sie das Buch X“) und sprechen dabei ihre Gedanken laut aus. Ein Moderator beobachtet und protokolliert, oft mit Bildschirm- und Videoaufzeichnung.</td><td>zeigt, <em>warum</em> Probleme entstehen; schon mit Papier- oder Klickprototyp möglich; etwa 5 Personen finden die meisten Probleme</td><td>Aufwand; Laborsituation; lautes Denken verändert das Verhalten leicht</td></tr>
@@ -988,7 +989,7 @@
 
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>W21 T1 A3ac: zwei Möglichkeiten zum Test der Benutzerfreundlichkeit beschreiben (4 P). „Beschreiben“ heißt: Verfahren nennen und den Ablauf in ein bis zwei Sätzen erklären. Nur „A/B-Test“ hinzuschreiben bringt höchstens die Hälfte.</div>
 
-  <h4>Mängel in einem Mockup erkennen und verbessern</h4>
+  <h4>Mängel in einem Mockup erkennen und verbessern <span class="relevanz r-vor" title="S24 T1 4ba (drei Mängel), 4bb (verbessertes Mockup)">Kam vor – 1/9 – S24</span></h4>
   <p>Gehe einen Entwurf <strong>systematisch von oben nach unten</strong> durch und stelle zu jedem Bereich die Fragen der Checkliste:</p>
   <ol>
     <li><strong>Orientierung:</strong> Gibt es einen Seitentitel, einen markierten Menüpunkt, eine Breadcrumb, einen Weg zurück? (Selbstbeschreibungsfähigkeit)</li>

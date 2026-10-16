@@ -38,7 +38,7 @@
 <header class="blockkopf">
   <h1>Block 07 · IT-Sicherheit &amp; Datenschutz</h1>
   <div class="unter">
-    <span class="badge k-immer">Immer</span> 8/9 Prüfungen (fehlte nur in W23) · Ø 12 von 200 Punkten · fast nur Teil 1 (Ausnahme S24: Teil 2, Aufgabe 1)
+    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 8, Teil 2 in 1 Prüfungen.">Prüfungskern – 8/9 – alle außer W23</span> · Ø 10 von 200 Punkten · fast nur Teil 1 (Ausnahme S24: Teil 2, Aufgabe 1)
     · Lösungen: <a href="07_IT-Sicherheit_Loesungen.html">07_IT-Sicherheit_Loesungen.html</a>
   </div>
 </header>
@@ -82,18 +82,19 @@
   <h2>A · Erklärungssatz</h2>
 
   <p>IT-Sicherheit kam in <strong>8 von 9</strong> Prüfungen vor, fast immer in <strong>Teil 1</strong> als Teilaufgabe einer Szenario-Aufgabe (Sensoren übertragen Daten, eine App spricht mit einem Server, ein Webserver bekommt ein Zertifikat). Gefragt wird mit den Operatoren <em>nennen</em>, <em>erläutern</em>, <em>begründen</em>, meist 1–9 Punkte je Teilaufgabe. Gerechnet oder programmiert wird hier selten. Punkte gibt es für <strong>saubere Begriffe</strong> und eine <strong>Begründung mit Bezug zum Szenario</strong>. Wer verschlüsseln, signieren und hashen sicher auseinanderhält, holt hier schnelle Punkte.</p>
+  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
 
   <table class="kompakt">
     <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
-    <tr><td>SEC-01 Verschlüsselungsverfahren</td><td><span class="badge k-meistens">Meistens</span></td><td>1–8</td><td>hybride Verschlüsselung erklären, Verfahren begründet auswählen (IoT!)</td></tr>
-    <tr><td>SEC-02 Hash, Signatur, Zertifikate/PKI</td><td><span class="badge k-meistens">Meistens</span></td><td>2–9</td><td>Signatur erstellen/prüfen, „Verschlüsselung ≠ Integrität“, Vertrauenskette</td></tr>
-    <tr><td>SEC-03 Schutzziele &amp; Schutzbedarf</td><td><span class="badge k-meistens">Meistens</span></td><td>3–6</td><td>Situation → Schutzziel, Sicherheitsanforderungen formulieren</td></tr>
-    <tr><td>SEC-04 Authentifizierung</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>3–6</td><td>2FA, Passwörter speichern, Passwort-Reset, OAuth2-Rollen</td></tr>
-    <tr><td>SEC-05 Datenschutz / DSGVO</td><td><span class="badge k-wahrscheinlich">Wahrscheinlich</span></td><td>4–6</td><td>Einwilligung, Datenschutzerklärung, Grundsätze, keine echten Daten in Fremdtools</td></tr>
-    <tr><td>SEC-06 Angriffe &amp; Gegenmaßnahmen</td><td><span class="badge k-sonstige">Sonstige</span></td><td>2–5</td><td>Angriff erkennen und passende Gegenmaßnahme nennen</td></tr>
+    <tr><td>SEC-01 Verschlüsselungsverfahren</td><td><span class="relevanz r-kern" title="Belege: S26 T1 A3bb, A3bd, A3bc (10 P); W25 T1 A3aa, A3ab (4 P); S23 T1 A4b, A4a (8 P); W22 T1 A1d, A1e (8 P); S22 T1 A4c (9 P); W21 T1 A4aa, A4ab (8 P).">Prüfungskern – 6/9 – S26, W25, S23, W22, S22, W21</span></td><td>1–8</td><td>hybride Verschlüsselung erklären, Verfahren begründet auswählen (IoT!)</td></tr>
+    <tr><td>SEC-02 Hash, Signatur, Zertifikate/PKI</td><td><span class="relevanz r-kern" title="Belege: S26 T1 A3bb (4 P); S23 T1 A4b (4 P); W22 T1 A1e (3 P); S22 T1 A4c (9 P); W21 T1 A4bb, A4ba (4 P).">Prüfungskern – 5/9 – S26, S23, W22, S22, W21</span></td><td>2–9</td><td>Signatur erstellen/prüfen, „Verschlüsselung ≠ Integrität“, Vertrauenskette</td></tr>
+    <tr><td>SEC-03 Schutzziele &amp; Schutzbedarf</td><td><span class="relevanz r-kern" title="Belege: S26 T1 A3ba (3 P); W25 T1 A3bb (6 P); S24 T1 A1c (4 P); W22 T1 A1a (4 P); S22 T1 A4c (9 P). Grenzwertig, nicht mitgezählt: S23 (T1 A4b: Signieren statt Verschlüsseln, Schutzziel nicht ausdrücklich genannt).">Prüfungskern – 5/9 – S26, W25, S24, W22, S22</span></td><td>3–6</td><td>Situation → Schutzziel, Sicherheitsanforderungen formulieren</td></tr>
+    <tr><td>SEC-04 Authentifizierung</td><td><span class="relevanz r-kern" title="Belege: S24 T2 A1cb, A1ca (6 P); W22 T1 A1f (6 P); S22 T1 A4b (4 P).">Prüfungskern – 3/9 – S24, W22, S22</span></td><td>3–6</td><td>2FA, Passwörter speichern, Passwort-Reset, OAuth2-Rollen</td></tr>
+    <tr><td>SEC-05 Datenschutz / DSGVO</td><td><span class="relevanz r-vor" title="Belege: W25 T1 A3bb (6 P); W24 T1 A1d (4 P).">Kam vor – 2/9 – W25, W24</span></td><td>4–6</td><td>Einwilligung, Datenschutzerklärung, Grundsätze, keine echten Daten in Fremdtools</td></tr>
+    <tr><td>SEC-06 Angriffe &amp; Gegenmaßnahmen</td><td><span class="relevanz r-vor" title="Belege: S24 T2 A1ba, A1bb (5 P).">Kam vor – 1/9 – S24</span></td><td>2–5</td><td>Angriff erkennen und passende Gegenmaßnahme nennen</td></tr>
   </table>
 
-  <h4>Die wichtigste Tabelle des Blocks: Welcher Mechanismus sichert welches Schutzziel?</h4>
+  <h4>Die wichtigste Tabelle des Blocks: Welcher Mechanismus sichert welches Schutzziel? <span class="relevanz r-kern" title="Kryptografie in 6 Prüfungen: Welcher Mechanismus schützt was (Zertifikat S22 4c, Signieren statt Verschlüsseln S23 4b, Hash/MAC/Signatur und Fangfrage S26 3bb/3bd)">Prüfungskern – 6/9 – S26, W25, S23, W22, S22, W21</span></h4>
   <p>Fast jede Krypto-Frage lässt sich mit dieser Tabelle beantworten. Die Schutzziele selbst werden in SEC-03 genau erklärt.</p>
   <table class="kompakt">
     <tr><th>Mechanismus</th><th>Vertraulichkeit</th><th>Integrität</th><th>Authentizität</th><th>Verbindlichkeit</th></tr>
@@ -108,10 +109,10 @@
   <div class="merke"><span class="kastentitel">Merke</span><strong>Verschlüsseln</strong> schützt vor dem <em>Mitlesen</em>, <strong>Signieren/MAC</strong> schützt vor <em>unbemerkter Veränderung und Fälschung</em>. Das eine ersetzt das andere nicht. Wer beides braucht, muss beides einsetzen (oder TLS bzw. einen AEAD-Modus wie AES-GCM, die beides kombinieren).</div>
 
   <!-- ===================== SEC-01 ===================== -->
-  <h3 id="e-01">SEC-01 · Verschlüsselungsverfahren <span class="badge k-meistens">Meistens</span></h3>
-  <p class="klein">Vorkommen: Kryptografie insgesamt 6/9 · Verschlüsselungsverfahren davon in W21, W22, S23, W25, S26 · immer Teil 1, 1–8 Punkte je Teilaufgabe</p>
+  <h3 id="e-01">SEC-01 · Verschlüsselungsverfahren <span class="relevanz r-kern" title="Belege: S26 T1 A3bb, A3bd, A3bc (10 P); W25 T1 A3aa, A3ab (4 P); S23 T1 A4b, A4a (8 P); W22 T1 A1d, A1e (8 P); S22 T1 A4c (9 P); W21 T1 A4aa, A4ab (8 P).">Prüfungskern – 6/9 – S26, W25, S23, W22, S22, W21</span></h3>
+  <p class="klein">Vorkommen: 6/9 · Prüfungen: S26, W25, S23, W22, S22, W21 · Teil 1, Aufgabe 3 oder 4 (außerdem Aufgabe 1 in W22)</p>
 
-  <h4>Grundbegriffe</h4>
+  <h4>Grundbegriffe <span class="relevanz r-vor" title="Aussage „Verschlüsselung sichert keine Integrität“: S26 T1 3bb/3bd, S23 T1 4b; Kerckhoffs/Kodierung nie gefragt">Kam vor – 2/9 – S26, S23</span></h4>
   <ul>
     <li><strong>Klartext</strong> (lesbare Daten) wird mit einem <strong>Verfahren</strong> (Algorithmus) und einem <strong>Schlüssel</strong> in <strong>Geheimtext</strong> (Chiffrat) umgewandelt. Nur wer den passenden Schlüssel hat, kann zurückwandeln.</li>
     <li><strong>Kerckhoffs-Prinzip:</strong> Das Verfahren ist öffentlich bekannt, die Sicherheit hängt <em>nur</em> am geheimen Schlüssel. Ein „geheimer eigener Algorithmus“ ist keine Sicherheitsmaßnahme.</li>
@@ -180,7 +181,7 @@
     <figcaption>Abb. A-1: Symmetrisch – ein gemeinsamer Schlüssel; asymmetrisch – ein Schlüsselpaar des Empfängers</figcaption>
   </figure>
 
-  <h4>Symmetrische Verschlüsselung</h4>
+  <h4>Symmetrische Verschlüsselung <span class="relevanz r-kern" title="W21 4aa (Lizenzschlüssel), W22 1d, S23 4a (IoT), W25 3aa/3ab, S26 3bd">Prüfungskern – 5/9 – S26, W25, S23, W22, W21</span></h4>
   <p>Sender und Empfänger verwenden <strong>denselben geheimen Schlüssel</strong> zum Ver- und Entschlüsseln.</p>
   <ul>
     <li><strong>Verfahren:</strong> <strong>AES</strong> (Advanced Encryption Standard, Schlüssellänge 128, 192 oder 256 Bit) ist der Standard. Daneben ChaCha20 (gut für Geräte ohne AES-Hardware). Veraltet und unsicher: DES (56 Bit), RC4; 3DES wird nicht mehr empfohlen.</li>
@@ -190,7 +191,7 @@
     <li>Da beide Seiten denselben Schlüssel haben, kann man nicht beweisen, <em>wer</em> von beiden eine Nachricht verschlüsselt hat.</li>
   </ul>
 
-  <h4>Asymmetrische Verschlüsselung (Public-Key-Verfahren)</h4>
+  <h4>Asymmetrische Verschlüsselung (Public-Key-Verfahren) <span class="relevanz r-kern" title="W21 4ab, W22 1d/1e, S23 4a, W25 3aa/3ab, S26 3bc (RSA erläutern) und 3bd">Prüfungskern – 5/9 – S26, W25, S23, W22, W21</span></h4>
   <p>Jeder Teilnehmer hat ein <strong>Schlüsselpaar</strong>: einen <strong>öffentlichen Schlüssel</strong> (Public Key, darf jeder kennen) und einen <strong>privaten Schlüssel</strong> (Private Key, verlässt nie den Besitzer). Was mit dem einen Schlüssel bearbeitet wurde, kann nur mit dem anderen umgekehrt werden. Wer B eine vertrauliche Nachricht schicken will, verschlüsselt mit dem <strong>öffentlichen Schlüssel von B</strong>; entschlüsseln kann nur B mit seinem privaten Schlüssel.</p>
   <ul>
     <li><strong>Verfahren:</strong> RSA, Verfahren auf elliptischen Kurven (ECC, z. B. ECDH für Schlüsselvereinbarung, ECDSA für Signaturen), Diffie-Hellman (Schlüsselvereinbarung).</li>
@@ -199,7 +200,7 @@
     <li><strong>Neues Problem:</strong> Gehört der öffentliche Schlüssel wirklich dem, für den ich ihn halte? Ein Angreifer könnte mir seinen eigenen Schlüssel unterschieben (Man-in-the-Middle). Lösung: <strong>Zertifikate</strong> (SEC-02).</li>
   </ul>
 
-  <div class="merke"><span class="kastentitel">RSA in drei Sätzen (für „Erläutern Sie, was man unter RSA versteht“)</span>
+  <div class="merke"><span class="kastentitel">RSA in drei Sätzen (für „Erläutern Sie, was man unter einem RSA-Algorithmus versteht“)</span>
     RSA (nach Rivest, Shamir, Adleman) ist ein <strong>asymmetrisches</strong> Verfahren mit öffentlichem und privatem Schlüssel. Seine Sicherheit beruht darauf, dass man eine sehr große Zahl <em>n</em>, das Produkt zweier großer Primzahlen <em>p·q</em>, praktisch nicht wieder in diese Primfaktoren zerlegen kann – ohne <em>p</em> und <em>q</em> lässt sich der private Schlüssel nicht berechnen. RSA wird zum Verschlüsseln kleiner Datenmengen (z. B. Sitzungsschlüssel) und zum Signieren verwendet; wegen der langen Schlüssel (2048–4096 Bit, das BSI empfiehlt mindestens 3000 Bit) ist es rechenaufwendig.
   </div>
   <p class="klein"><strong>Nur zum Verständnis</strong> (wird nicht gerechnet): Mit den Mini-Primzahlen p = 3, q = 11 ist n = 33. Öffentlicher Schlüssel (e = 3, n = 33), privater Schlüssel (d = 7, n = 33). Nachricht m = 4: Chiffrat c = 4³ mod 33 = 64 mod 33 = <strong>31</strong>. Entschlüsseln: 31⁷ mod 33 = <strong>4</strong>. Mit echten Zahlen von 600 Dezimalstellen ist das Rückrechnen ohne d praktisch unmöglich.</p>
@@ -215,7 +216,7 @@
     <tr><td>typische Schlüssellänge</td><td>128–256 Bit</td><td>RSA 2048–4096 Bit, ECC 256–384 Bit</td></tr>
   </table>
 
-  <h4>Hybride Verschlüsselung – die Kombination (am häufigsten gefragt!)</h4>
+  <h4>Hybride Verschlüsselung – die Kombination (am häufigsten gefragt!) <span class="relevanz r-kern" title="W21 4ab (hybride Alternative), W22 1d (TLS hybrid), W25 3aa/3ab (Vorteil hybrid)">Prüfungskern – 3/9 – W25, W22, W21</span></h4>
   <p>Hybride Verfahren nutzen die Stärken beider Welten: <strong>Asymmetrisch</strong> wird nur ein kleiner, zufällig erzeugter <strong>Sitzungsschlüssel</strong> (Session Key) sicher übertragen; die eigentlichen <strong>Daten</strong> werden mit diesem Sitzungsschlüssel <strong>symmetrisch</strong> und damit schnell verschlüsselt. Beispiel: Eine Mandantin lädt im Online-Portal ihrer Steuerkanzlei 40 MB Belege hoch.</p>
   <figure>
     <svg viewBox="0 0 760 270" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
@@ -270,7 +271,7 @@
   <p><strong>Vorteile hybrid:</strong> schnell auch bei großen Datenmengen (gegenüber rein asymmetrisch) · kein vorheriger geheimer Schlüsselaustausch nötig (gegenüber rein symmetrisch) · für jede Sitzung ein neuer Schlüssel, ein erbeuteter Sitzungsschlüssel öffnet also nur diese eine Sitzung.</p>
   <div class="merke"><span class="kastentitel">Merke</span>Hybrid = <strong>asymmetrisch für den Schlüssel, symmetrisch für die Daten.</strong> Die Daten werden <em>einmal</em> verschlüsselt, nicht zweimal.</div>
 
-  <h4>TLS / HTTPS vereinfacht</h4>
+  <h4>TLS / HTTPS vereinfacht <span class="relevanz r-kern" title="S22 4c (SSL-Zertifikat), W22 1d (TLS), W25 3aa (Transportverschlüsselung)">Prüfungskern – 3/9 – W25, W22, S22</span></h4>
   <p>TLS (Transport Layer Security, Nachfolger von SSL) ist das Standardbeispiel für hybride Verschlüsselung. HTTPS ist HTTP über TLS; TLS steckt auch in sicheren Mail-Verbindungen, MQTT über TLS usw. Umgangssprachlich heißt das Server-Zertifikat noch „SSL-Zertifikat“.</p>
   <figure>
     <svg viewBox="0 0 720 345" width="720" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
@@ -309,7 +310,7 @@
   <p><strong>Was TLS leistet:</strong> <em>Vertraulichkeit</em> (symmetrische Verschlüsselung der Nutzdaten), <em>Integrität</em> (jeder Datensatz wird mit einem MAC bzw. im AEAD-Modus geschützt, Veränderungen fallen auf) und <em>Authentizität des Servers</em> (Zertifikat; der Client weiß, mit wem er spricht). Den Client authentifiziert TLS normalerweise <em>nicht</em>, das macht die Anwendung (Login). Ausnahme: gegenseitiges TLS (mTLS) mit Client-Zertifikat, z. B. bei Maschinen untereinander.</p>
   <p class="klein">In IHK-Lösungen genügt meist die „klassische“ Darstellung aus TLS 1.2: Der Client erzeugt das Sitzungsgeheimnis und schickt es mit dem öffentlichen Schlüssel des Servers verschlüsselt. Seit TLS 1.3 wird der Sitzungsschlüssel stattdessen von beiden Seiten per (Elliptic-Curve-)Diffie-Hellman berechnet; das Zertifikat dient dann zur Authentifizierung des Servers. Beides ist „hybrid“.</p>
 
-  <h4>Transport- vs. Ende-zu-Ende-Verschlüsselung</h4>
+  <h4>Transport- vs. Ende-zu-Ende-Verschlüsselung <span class="relevanz r-vor" title="W25 T1 3aa nennt die Transportverschlüsselung; der Vergleich mit Ende-zu-Ende wurde nicht gefragt">Kam vor – 1/9 – W25</span></h4>
   <figure>
     <svg viewBox="0 0 740 242" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
       <defs>
@@ -350,7 +351,7 @@
     <tr><td>Beispiele</td><td>HTTPS, TLS zwischen Mailservern, WLAN-Verschlüsselung</td><td>S/MIME, PGP, E2E-Messenger, Verschlüsselung direkt im Sensor bis zur Anwendung</td></tr>
   </table>
 
-  <h4>Verfahren für leistungsschwache Geräte (IoT-Sensoren)</h4>
+  <h4>Verfahren für leistungsschwache Geräte (IoT-Sensoren) <span class="relevanz r-vor" title="S23 4a (Verschlüsselung für batteriebetriebene Sensoren), S26 3bd (RSA im IoT-Projekt?)">Kam vor – 2/9 – S26, S23</span></h4>
   <p>Batteriebetriebene Sensoren haben wenig Rechenleistung und Speicher, sollen jahrelang mit einer Batterie laufen und dürfen per Funk oft nur wenige Byte je Nachricht senden. <strong>So gehst du bei der Auswahl vor:</strong></p>
   <ol class="schritte">
     <li><strong>Rahmenbedingungen aus der Anlage herauslesen:</strong> Prozessor, RAM, Energieversorgung, Laufzeitziel, maximale Nachrichtengröße, Sendehäufigkeit, vorhandene Krypto-Hardware.</li>
@@ -370,18 +371,18 @@
     </ul>
   </div>
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
-    <strong>W21 T1 A4a (8 P):</strong> Eine Software verschlüsselt mit einem eingebauten Lizenzschlüssel symmetrisch; Schwäche erkennen und eine asymmetrische bzw. hybride Alternative mit Vor- und Nachteil erläutern.
+    <strong>W21 T1 A4a (8 P):</strong> Eine Software verschlüsselt mit einem eingebauten Lizenzschlüssel symmetrisch; das Verfahren beschreiben (aa, 2 P), dann ein alternatives Verfahren mit Vor- und Nachteil beschreiben, „welches die zuvor genannten Probleme löst“ (ab, 6 P). Die Probleme sind nicht ausdrücklich benannt: gemeint ist die Schwäche des eingebauten Lizenzschlüssels; erwartet wird eine asymmetrische bzw. hybride Alternative (keine Musterlösung).
     <strong>W22 T1 A1d (5 P):</strong> Ablauf der hybriden Verschlüsselung bei TLS beschreiben.
     <strong>S23 T1 A4a (4 P):</strong> Verschlüsselungsverfahren für Sensoren mit geringer Rechenleistung auswählen und begründen.
     <strong>W25 T1 A3a (4 P):</strong> Transportverschlüsselung benennen und den Vorteil der hybriden Verschlüsselung erläutern.
-    <strong>S26 T1 A3bc/bd (6 P):</strong> „Erläutern Sie, was man unter RSA versteht“ und „Begründen Sie, ob RSA in Ihrem Projekt sinnvoll ist“ – das Projekt hatte batteriebetriebene Bodensensoren. Erwartet: RSA ist asymmetrisch und rechenaufwendig → für die Sensoren ungeeignet bzw. nur für den Schlüsselaustausch sinnvoll.
+    <strong>S26 T1 A3bc/bd (6 P):</strong> „Erläutern Sie, was man unter einem RSA-Algorithmus versteht“ und „Begründen Sie, ob die Verschlüsselung mittels RSA in Ihrem Projekt sinnvoll ist“ – das Projekt hatte Bodensensoren ohne feste Stromversorgung. Erwartet: RSA ist asymmetrisch und rechenaufwendig → für die Sensoren ungeeignet bzw. nur für den Schlüsselaustausch sinnvoll.
   </div>
 
   <!-- ===================== SEC-02 ===================== -->
-  <h3 id="e-02">SEC-02 · Hash, digitale Signatur, Zertifikate/PKI <span class="badge k-meistens">Meistens</span></h3>
-  <p class="klein">Vorkommen: Kryptografie insgesamt 6/9 · Hash/Signatur/Zertifikat davon in W21, S22, W22, S23, S26 · Teil 1, 2–9 Punkte je Teilaufgabe</p>
+  <h3 id="e-02">SEC-02 · Hash, digitale Signatur, Zertifikate/PKI <span class="relevanz r-kern" title="Belege: S26 T1 A3bb (4 P); S23 T1 A4b (4 P); W22 T1 A1e (3 P); S22 T1 A4c (9 P); W21 T1 A4bb, A4ba (4 P).">Prüfungskern – 5/9 – S26, S23, W22, S22, W21</span></h3>
+  <p class="klein">Vorkommen: 5/9 · Prüfungen: S26, S23, W22, S22, W21 · Teil 1, Aufgabe 4 (außerdem Aufgabe 1 in W22, Aufgabe 3 in S26)</p>
 
-  <h4>Hashfunktionen</h4>
+  <h4>Hashfunktionen <span class="relevanz r-vor" title="S26 T1 3bb: Hash/MAC/Signatur gegen Manipulation">Kam vor – 1/9 – S26</span></h4>
   <p>Eine kryptografische Hashfunktion berechnet aus beliebig großen Daten einen <strong>Hashwert</strong> (Prüfsumme, „digitaler Fingerabdruck“) <strong>fester Länge</strong>, z. B. 256 Bit bei SHA-256. Eigenschaften:</p>
   <ul>
     <li><strong>Einwegfunktion:</strong> Aus dem Hashwert lassen sich die Ausgangsdaten nicht zurückberechnen.</li>
@@ -409,7 +410,7 @@
     </ul>
   </div>
 
-  <h4>MAC / HMAC – Prüfsumme mit geheimem Schlüssel</h4>
+  <h4>MAC / HMAC – Prüfsumme mit geheimem Schlüssel <span class="relevanz r-vor" title="S26 T1 3bb: Hash/MAC/Signatur gegen Manipulation">Kam vor – 1/9 – S26</span></h4>
   <p>Ein <strong>MAC</strong> (Message Authentication Code) ist eine Prüfsumme, in die ein <strong>geheimer symmetrischer Schlüssel</strong> eingeht. Das genormte Verfahren auf Basis einer Hashfunktion heißt <strong>HMAC</strong> (z. B. HMAC-SHA256). Beispiel: Eine Wetterstation sendet „Wind 87 km/h“ und dazu HMAC(K, „Wind 87 km/h“). Der Server kennt K, berechnet den HMAC über die empfangene Nachricht neu und vergleicht.</p>
   <ul>
     <li>Sichert <strong>Integrität</strong> (Änderung → anderer MAC) und <strong>Authentizität</strong> (nur wer K kennt, konnte den MAC berechnen).</li>
@@ -417,7 +418,7 @@
     <li>Sehr leichtgewichtig, daher ideal für IoT. <strong>AEAD-Modi</strong> wie AES-GCM oder AES-CCM verschlüsseln <em>und</em> berechnen einen MAC in einem Schritt.</li>
   </ul>
 
-  <h4>Digitale Signatur</h4>
+  <h4>Digitale Signatur <span class="relevanz r-kern" title="W21 4bb (Signieren beim Kompilieren), S23 4b (Signieren statt Verschlüsseln), S26 3bb">Prüfungskern – 3/9 – S26, S23, W21</span></h4>
   <figure>
     <svg viewBox="0 0 760 365" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
       <defs>
@@ -489,7 +490,7 @@
   </table>
   <div class="merke"><span class="kastentitel">Merksatz</span>Verschlüsseln <em>für jemanden</em> → <strong>dessen öffentlicher</strong> Schlüssel. Signieren <em>als ich selbst</em> → <strong>mein privater</strong> Schlüssel.</div>
 
-  <h4>Zertifikate und PKI</h4>
+  <h4>Zertifikate und PKI <span class="relevanz r-kern" title="W21 4ba/4bb, S22 4c (SSL-Zertifikat), W22 1e (Zertifikate/PKI)">Prüfungskern – 3/9 – W22, S22, W21</span></h4>
   <p>Problem der asymmetrischen Verfahren: Woher weiß ich, dass ein öffentlicher Schlüssel wirklich zum Online-Shop oder zur Lieferantin gehört? Ein <strong>digitales Zertifikat</strong> (Standard X.509) ist eine von einer <strong>Zertifizierungsstelle (CA, Certificate Authority)</strong> digital signierte Bescheinigung, die einen <strong>öffentlichen Schlüssel an eine Identität bindet</strong> (Domain, Person, Firma).</p>
   <ul>
     <li><strong>Inhalt:</strong> Inhaber (z. B. Domainname), öffentlicher Schlüssel des Inhabers, Aussteller (CA), Gültigkeitszeitraum, Seriennummer, Verwendungszweck, <strong>Signatur der CA</strong>.</li>
@@ -533,7 +534,7 @@
     <li><strong>Was ein TLS-Zertifikat für eine Website leistet:</strong> Authentizität des Servers und – über den damit abgesicherten Schlüsselaustausch – Vertraulichkeit und Integrität der Verbindung.</li>
   </ul>
 
-  <h4>Code-Signing</h4>
+  <h4>Code-Signing <span class="relevanz r-vor" title="W21 T1 4ba (Warnung nicht vertrauenswürdige Quelle), 4bb (Signieren im Build)">Kam vor – 1/9 – W21</span></h4>
   <p>Auch Programme, Treiber, Apps, Makros und Firmware-Updates werden signiert. Der Hersteller signiert die Datei mit dem privaten Schlüssel seines <strong>Code-Signing-Zertifikats</strong>; das Betriebssystem bzw. Gerät prüft vor dem Start oder der Installation Signatur und Zertifikatskette. Beispiel: Eine Bäckereikette verteilt eine neue Version ihrer Kassensoftware. Ist die Datei signiert, zeigt Windows den geprüften Herausgeber an; ist sie unsigniert oder nach dem Signieren verändert worden, erscheint „Unbekannter Herausgeber“ bzw. eine Sperrwarnung.</p>
   <ul>
     <li>Code-Signing sichert <strong>Integrität</strong> (Datei unverändert) und <strong>Authentizität</strong> (stammt vom genannten Hersteller).</li>
@@ -548,15 +549,15 @@
     <strong>W21 T1 A4b (4 P):</strong> Beim Start einer Software erscheint die Warnung, sie stamme aus einer nicht vertrauenswürdigen Quelle – Ursache erläutern und erklären, wie das Signieren mit einem Zertifikat hilft.
     <strong>S22 T1 A4c (9 P):</strong> Drei Sicherheitsmechanismen erläutern, die ein SSL-Zertifikat für einen Webserver bewirkt (Vertraulichkeit, Integrität, Authentizität).
     <strong>W22 T1 A1e (3 P):</strong> Beschreiben, wie die Echtheit eines öffentlichen Schlüssels über Zertifikate/PKI geprüft wird.
-    <strong>S23 T1 A4b (4 P):</strong> „Signieren statt verschlüsseln?“ – welche Schutzziele werden erreicht, welche nicht.
+    <strong>S23 T1 A4b (4 P):</strong> Stellung nehmen zum Vorschlag eines Kollegen, die Daten „zu signieren statt zu verschlüsseln“ – welche Schutzziele werden erreicht, welche nicht.
     <strong>S26 T1 A3bb (4 P):</strong> Ein Verfahren erläutern, mit dem Sensordaten bei der Übertragung nicht unbemerkt manipuliert werden können (Hash allein reicht nicht → MAC oder Signatur).
   </div>
 
   <!-- ===================== SEC-03 ===================== -->
-  <h3 id="e-03">SEC-03 · Schutzziele &amp; Schutzbedarf <span class="badge k-meistens">Meistens</span></h3>
-  <p class="klein">Vorkommen: 6/9 · Prüfungen: S22, W22, S23, S24, W25, S26 · Teil 1 (meist 3–4 Punkte, oft in Krypto-Aufgaben eingebaut)</p>
+  <h3 id="e-03">SEC-03 · Schutzziele &amp; Schutzbedarf <span class="relevanz r-kern" title="Belege: S26 T1 A3ba (3 P); W25 T1 A3bb (6 P); S24 T1 A1c (4 P); W22 T1 A1a (4 P); S22 T1 A4c (9 P). Grenzwertig, nicht mitgezählt: S23 (T1 A4b: Signieren statt Verschlüsseln, Schutzziel nicht ausdrücklich genannt).">Prüfungskern – 5/9 – S26, W25, S24, W22, S22</span></h3>
+  <p class="klein">Vorkommen: 5/9 · Prüfungen: S26, W25, S24, W22, S22 · Teil 1, Aufgabe 1 oder 3 (außerdem Aufgabe 4 in S22)</p>
 
-  <h4>Die Schutzziele</h4>
+  <h4>Die Schutzziele <span class="relevanz r-kern" title="Schutzziele: S22 4c, W22 1a (Verfügbarkeit), S26 3ba (Integrität); S23 4b, S24 1c, W25 3bb grenzwertig">Prüfungskern – 3/9 – S26, W22, S22</span></h4>
   <p>Das BSI nennt drei <strong>Grundwerte der Informationssicherheit</strong>: Vertraulichkeit, Integrität und Verfügbarkeit (englisch CIA: Confidentiality, Integrity, Availability). Dazu kommen häufig Authentizität und Verbindlichkeit, die das BSI als Teilaspekte der Integrität sieht. Wenn in der Prüfung nach dem „Schutzziel nach BSI“ gefragt wird, ist fast immer einer der drei Grundwerte gemeint.</p>
   <table class="kompakt">
     <tr><th style="width:16%">Schutzziel</th><th style="width:28%">Bedeutung</th><th style="width:18%">Signalwörter</th><th style="width:19%">Beispiel (Online-Shop für Fahrradteile)</th><th>typische Maßnahmen</th></tr>
@@ -567,7 +568,7 @@
     <tr><td><strong>Verbindlichkeit</strong> (Nicht-abstreitbarkeit)</td><td>Eine Handlung kann später nicht abgestritten werden; sie ist einer Person nachweisbar zuzuordnen.</td><td>bestreitet, nachweisen, beweisen, wer war es?</td><td>Ein Kunde bestreitet, eine teure Bestellung aufgegeben zu haben.</td><td>digitale Signatur, revisionssichere Protokollierung mit Zeitstempel, persönliche statt Sammelkonten</td></tr>
   </table>
 
-  <h4>So gehst du vor: Situation → Schutzziel</h4>
+  <h4>So gehst du vor: Situation → Schutzziel <span class="relevanz r-kern" title="Situation einem Schutzziel zuordnen: S22 4c, W22 1a, W25 3bb (Vertraulichkeit), S26 3ba">Prüfungskern – 4/9 – S26, W25, W22, S22</span></h4>
   <ol class="schritte">
     <li>Frage dich: <strong>Was ist passiert bzw. was befürchtet jemand?</strong> Wer sieht etwas, das er nicht sehen darf? Was wurde verändert? Was geht nicht mehr? Wer ist nicht der, der er vorgibt zu sein? Wer kann etwas abstreiten?</li>
     <li>Achte auf die <strong>Signalwörter</strong> aus der Tabelle.</li>
@@ -584,7 +585,7 @@
     </ul>
   </div>
 
-  <h4>BSI IT-Grundschutz und Schutzbedarfsfeststellung</h4>
+  <h4>BSI IT-Grundschutz und Schutzbedarfsfeststellung <span class="relevanz r-hinter" title="Grundschutz/Schutzbedarf nie abgefragt">Hintergrund – 0/9</span></h4>
   <p>Der <strong>IT-Grundschutz</strong> des BSI (BSI-Standards 200-1 bis 200-3 und das IT-Grundschutz-Kompendium mit seinen Bausteinen) beschreibt, wie eine Organisation ein angemessenes Sicherheitsniveau erreicht. Ablauf der Standard-Absicherung, stark vereinfacht:</p>
   <ol class="schritte">
     <li><strong>Strukturanalyse:</strong> Welche Geschäftsprozesse, Anwendungen, IT-Systeme, Räume und Netze gibt es?</li>
@@ -612,7 +613,7 @@
     <li><strong>Verteilungseffekt:</strong> Ist eine Anwendung redundant auf mehrere Systeme verteilt, kann der Bedarf des einzelnen Systems niedriger sein.</li>
   </ul>
 
-  <h4>Sicherheitsanforderungen formulieren</h4>
+  <h4>Sicherheitsanforderungen formulieren <span class="relevanz r-vor" title="S24 T1 1c: zwei sicherheitstechnische Anforderungen">Kam vor – 1/9 – S24</span></h4>
   <p>Wird nach „sicherheitstechnischen Anforderungen“ an ein System gefragt (S24), erwartet die IHK konkrete, überprüfbare Sätze, die sich einem Schutzziel zuordnen lassen. Muster: <em>„Das System muss … (Was? Womit? Wie viel?)“</em>. Beispiele für die Online-Terminbuchung einer Kfz-Werkstatt:</p>
   <ul>
     <li>Alle Verbindungen zwischen Browser und Server müssen mit TLS 1.2 oder höher verschlüsselt werden. <span class="klein">(Vertraulichkeit, Integrität)</span></li>
@@ -623,7 +624,7 @@
   </ul>
   <div class="falle"><span class="kastentitel">Typische Falle</span>„Das System muss sicher sein“ oder „Datenschutz muss beachtet werden“ ist keine Anforderung und bringt keine Punkte. Immer <strong>konkret</strong> (Was genau? Womit?) und möglichst <strong>messbar</strong>.</div>
 
-  <h4>Verfügbarkeit und Ausfallsicherheit</h4>
+  <h4>Verfügbarkeit und Ausfallsicherheit <span class="relevanz r-vor" title="W22 T1 1a: Schwachstellen der veralteten IT-Infrastruktur (Verfügbarkeit)">Kam vor – 1/9 – W22</span></h4>
   <ul>
     <li><strong>Redundanz:</strong> doppelte Komponenten (RAID-Festplattenverbund, zweites Netzteil, Server-Cluster, zweites Rechenzentrum, zweite Internetleitung). Achtung: <strong>RAID ist kein Backup</strong> – versehentlich gelöschte oder verschlüsselte Daten sind auf allen Platten gleichzeitig weg.</li>
     <li><strong>Backups:</strong> regelmäßig, automatisiert, nach der <strong>3-2-1-Regel</strong> (3 Kopien, 2 verschiedene Medien, 1 außer Haus/offline). Offline bzw. unveränderbar, damit Ransomware sie nicht mitverschlüsselt. Die Wiederherstellung regelmäßig testen.</li>
@@ -641,10 +642,10 @@
   </div>
 
   <!-- ===================== SEC-04 ===================== -->
-  <h3 id="e-04">SEC-04 · Authentifizierung <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
-  <p class="klein">Vorkommen: 3/9 · Prüfungen: S22 (OAuth2), W22 (SSO/OAuth2), S24 (Passwort-Reset, Teil 2) · 3–6 Punkte je Teilaufgabe</p>
+  <h3 id="e-04">SEC-04 · Authentifizierung <span class="relevanz r-kern" title="Belege: S24 T2 A1cb, A1ca (6 P); W22 T1 A1f (6 P); S22 T1 A4b (4 P).">Prüfungskern – 3/9 – S24, W22, S22</span></h3>
+  <p class="klein">Vorkommen: 3/9 · Prüfungen: S24, W22, S22 · Teil 1, Aufgabe 1 oder 4 und Teil 2 (S24)</p>
 
-  <h4>Identifikation – Authentifizierung – Autorisierung</h4>
+  <h4>Identifikation – Authentifizierung – Autorisierung <span class="relevanz r-hinter" title="Begriffsabgrenzung nie abgefragt">Hintergrund – 0/9</span></h4>
   <table class="kompakt">
     <tr><th>Begriff</th><th>Frage</th><th>Beispiel Hotel</th><th>Beispiel IT</th></tr>
     <tr><td><strong>Identifikation</strong></td><td>Wer behauptest du zu sein?</td><td>Gast nennt seinen Namen.</td><td>Benutzername eingeben</td></tr>
@@ -653,7 +654,7 @@
   </table>
   <p class="klein">Genau genommen <em>authentisiert</em> sich der Benutzer (er legt einen Nachweis vor), und das System <em>authentifiziert</em> ihn (es prüft den Nachweis). In der Prüfung werden beide Wörter meist gleich verwendet.</p>
 
-  <h4>Faktoren und Mehr-Faktor-Authentifizierung (2FA/MFA)</h4>
+  <h4>Faktoren und Mehr-Faktor-Authentifizierung (2FA/MFA) <span class="relevanz r-vor" title="S24 T2 1cb: sichereres Reset-Verfahren (zweiter Weg/2FA)">Kam vor – 1/9 – S24</span></h4>
   <table class="kompakt">
     <tr><th>Faktor</th><th>Beispiele</th><th>Schwäche</th></tr>
     <tr><td><strong>Wissen</strong> (etwas, das ich weiß)</td><td>Passwort, PIN, Sicherheitsfrage</td><td>kann erraten, ausgespäht, per Phishing abgefragt werden</td></tr>
@@ -667,7 +668,7 @@
   </ul>
   <div class="falle"><span class="kastentitel">Typische Falle</span>Passwort + PIN oder Passwort + Sicherheitsfrage sind <strong>zweimal Wissen</strong> – das ist keine Zwei-Faktor-Authentifizierung. Auch ein Code per E-Mail ist schwach, wenn das E-Mail-Konto mit demselben Passwort geschützt ist.</div>
 
-  <h4>Passwort-Richtlinien</h4>
+  <h4>Passwort-Richtlinien <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <ul>
     <li><strong>Länge schlägt Komplexität:</strong> lieber eine lange Passphrase (z. B. vier zufällige Wörter) als ein kurzes Passwort mit Sonderzeichen. Mindestlänge vorgeben (heute meist 12 oder mehr Zeichen).</li>
     <li>Neue Passwörter gegen Listen bekannter, geleakter Passwörter prüfen; Standardpasswörter bei Inbetriebnahme ändern.</li>
@@ -676,7 +677,7 @@
     <li>Systemseitig: Sperre oder steigende Wartezeit nach Fehlversuchen, Benachrichtigung bei Anmeldung von neuem Gerät.</li>
   </ul>
 
-  <h4>Passwörter sicher speichern</h4>
+  <h4>Passwörter sicher speichern <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <p>Passwörter werden <strong>nie im Klartext</strong> und <strong>nie umkehrbar verschlüsselt</strong> gespeichert, sondern nur als Hashwert. Beim Login wird die Eingabe genauso gehasht und mit dem gespeicherten Wert verglichen. Ein einfacher, schneller Hash (MD5, auch SHA-256) reicht aber nicht:</p>
   <ul>
     <li><strong>Problem 1 – gleiche Passwörter, gleiche Hashes:</strong> Wer die Datenbank sieht, erkennt sofort, welche Benutzer dasselbe Passwort haben.</li>
@@ -691,24 +692,24 @@
   </table>
   <p>Schematisch: Registrierung <code>salt := zufallswert()</code>, <code>hash := H(pepper + salt + passwort)</code> (mit vielen Runden) → <code>salt</code> und <code>hash</code> speichern. Login: <code>salt</code> zum Benutzer laden, mit der Eingabe denselben Hash berechnen, vergleichen. In der Praxis nimmt man dafür eine fertige Bibliotheksfunktion (Java: <code>SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256")</code>, PHP: <code>password_hash()</code>, Spring: <code>BCryptPasswordEncoder</code>) statt einer Eigenentwicklung.</p>
 
-  <h4>Sicherer Passwort-Reset</h4>
+  <h4>Sicherer Passwort-Reset <span class="relevanz r-vor" title="S24 T2 1ca/1cb: Schwachstelle und sichereres Verfahren beim Passwort-Reset">Kam vor – 1/9 – S24</span></h4>
   <ul>
     <li><strong>Schlecht:</strong> „Wir schicken Ihnen Ihr Passwort zu“ – das beweist, dass es im Klartext gespeichert ist. Sicherheitsfragen („Name des ersten Haustiers“) lassen sich oft in sozialen Netzwerken recherchieren.</li>
     <li><strong>Schwachstelle Link per E-Mail:</strong> Wer Zugriff auf das Postfach hat (gehacktes Konto, abgefangene Mail, Mitleser am Firmenrechner), kann das Passwort neu setzen und das Konto übernehmen. Der Reset hat dann nur noch die Sicherheit des E-Mail-Kontos.</li>
     <li><strong>Besser:</strong> zufälliges, nur <strong>einmal</strong> verwendbares Token mit <strong>kurzer Gültigkeit</strong> (z. B. 30 Minuten), nur dessen Hash speichern; zusätzlich einen <strong>zweiten Faktor über einen anderen Kanal</strong> verlangen (Code per SMS oder aus der Authenticator-App); nach dem Reset alle Sitzungen beenden und den Nutzer über die Änderung benachrichtigen; dieselbe Meldung anzeigen, egal ob die E-Mail-Adresse existiert (sonst erfährt ein Angreifer, wer Kunde ist).</li>
   </ul>
 
-  <h4>Sitzungen (Sessions)</h4>
+  <h4>Sitzungen (Sessions) <span class="relevanz r-hinter" title="nie abgefragt">Hintergrund – 0/9</span></h4>
   <p>Nach dem Login bekommt der Client eine zufällige, lange <strong>Session-ID</strong> bzw. ein Token. Regeln: nur über HTTPS übertragen, Cookie mit den Attributen <code>Secure</code>, <code>HttpOnly</code> (kein Zugriff per JavaScript) und <code>SameSite</code>; nach dem Login eine <em>neue</em> Session-ID vergeben; <strong>Timeout</strong> nach Inaktivität (z. B. 15 Minuten bei sensiblen Daten); beim Logout serverseitig ungültig machen.</p>
 
-  <h4>Single Sign-On (SSO)</h4>
+  <h4>Single Sign-On (SSO) <span class="relevanz r-vor" title="W22 T1 1f: Vor-/Nachteil SSO (6 P)">Kam vor – 1/9 – W22</span></h4>
   <p>Der Benutzer meldet sich <strong>einmal</strong> bei einem zentralen Identitätsdienst (Identity Provider) an und kann danach mehrere Anwendungen ohne erneute Anmeldung nutzen. Beispiel: Studierende melden sich einmal an und nutzen Lernplattform, Mail und Bibliotheksportal. Technik: SAML 2.0, OpenID Connect (baut auf OAuth2 auf), im Firmennetz Kerberos/Active Directory.</p>
   <table class="kompakt">
     <tr><th>Vorteile</th><th>Nachteile</th></tr>
     <tr><td>nur ein Passwort → weniger vergessene Passwörter, weniger Passwort-Wiederverwendung, weniger Supportaufwand · zentrale Benutzerverwaltung: Sperren bei Austritt an einer Stelle · MFA muss nur einmal zentral eingerichtet werden · Komfort, Zeitersparnis</td><td><strong>Single Point of Failure:</strong> Fällt der Identity Provider aus, geht nirgends eine Anmeldung · kompromittiertes Konto öffnet <em>alle</em> Anwendungen (daher MFA Pflicht) · Abhängigkeit vom Anbieter, bei externen Anbietern Datenschutzfragen · Einführungs- und Integrationsaufwand</td></tr>
   </table>
 
-  <h4>OAuth2 – delegierte Autorisierung</h4>
+  <h4>OAuth2 – delegierte Autorisierung <span class="relevanz r-vor" title="S22 4b (OAuth2-Ablauf zuordnen), W22 1f (SSO/OAuth2)">Kam vor – 2/9 – W22, S22</span></h4>
   <p>OAuth2 regelt, wie eine Anwendung <strong>im Auftrag eines Benutzers</strong> auf dessen Daten bei einem anderen Dienst zugreifen darf, <strong>ohne das Passwort des Benutzers zu erhalten</strong>. Der Benutzer meldet sich nur beim Dienst selbst an und stimmt einem eingeschränkten Zugriff (Scope) zu; die Anwendung bekommt dafür ein zeitlich begrenztes Token.</p>
   <table class="kompakt">
     <tr><th>Rolle</th><th>Bedeutung</th><th>Beispiel unten</th></tr>
@@ -789,15 +790,15 @@
   </div>
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
     <strong>S22 T1 A4b (4 P):</strong> In einer vorgegebenen OAuth2-Grafik (Resource Owner, Client, Authorization Server, Resource Server) die Begriffe Access Token, Protected Resource und Auth. Code an die richtigen Pfeile schreiben (ein Begriff doppelt).
-    <strong>W22 T1 A1f (6 P):</strong> SSO bzw. OAuth2 für eine Webanwendung: Vor- und Nachteile erläutern.
+    <strong>W22 T1 A1f (6 P):</strong> SSO (Identity Provider im Szenario per OAuth2 angebunden): einen Vorteil und einen Nachteil erläutern, dabei den Sicherheitsaspekt beachten.
     <strong>S24 T2 A1c (6 P):</strong> Schwachstelle eines Passwort-Resets per E-Mail-Link erläutern und ein sichereres Verfahren beschreiben (erwartet: zweiter Kanal, z. B. zusätzlicher Code per SMS).
   </div>
 
   <!-- ===================== SEC-05 ===================== -->
-  <h3 id="e-05">SEC-05 · Datenschutz / DSGVO <span class="badge k-wahrscheinlich">Wahrscheinlich</span></h3>
-  <p class="klein">Vorkommen: 2/9 · Prüfungen: W24 (Einwilligung, Datenschutzerklärung in einer App), W25 (keine echten Daten auf eine Online-Prüfseite) · Teil 1, 4–6 Punkte</p>
+  <h3 id="e-05">SEC-05 · Datenschutz / DSGVO <span class="relevanz r-vor" title="Belege: W25 T1 A3bb (6 P); W24 T1 A1d (4 P).">Kam vor – 2/9 – W25, W24</span></h3>
+  <p class="klein">Vorkommen: 2/9 · Prüfungen: W25, W24 · Teil 1, Aufgabe 1 oder 3</p>
 
-  <h4>Datenschutz ist nicht Datensicherheit</h4>
+  <h4>Datenschutz ist nicht Datensicherheit <span class="relevanz r-hinter" title="Abgrenzung nie abgefragt">Hintergrund – 0/9</span></h4>
   <table class="kompakt">
     <tr><th></th><th>Datenschutz</th><th>Datensicherheit / IT-Sicherheit</th></tr>
     <tr><td>Schützt …</td><td>die <strong>Person</strong> und ihr Recht auf informationelle Selbstbestimmung</td><td>die <strong>Daten und Systeme</strong> selbst (alle Daten, auch nicht personenbezogene)</td></tr>
@@ -807,7 +808,7 @@
   </table>
   <p>Beides hängt zusammen: Die DSGVO verlangt „geeignete technische und organisatorische Maßnahmen“ (TOM) – also Datensicherheit – für personenbezogene Daten.</p>
 
-  <h4>Personenbezogene Daten</h4>
+  <h4>Personenbezogene Daten <span class="relevanz r-hinter" title="personenbezogene Daten der App-Nutzer (W24 1d), Rechnungsdaten auf Prüfseite (W25 3bb); grenzwertig">Hintergrund – 0/9</span></h4>
   <ul>
     <li><strong>Personenbezogen</strong> (Art. 4 DSGVO) sind alle Informationen über eine <em>identifizierte oder identifizierbare</em> natürliche Person. Identifizierbar heißt: Mit Zusatzwissen lässt sich die Person ermitteln. Beispiele: Name, Anschrift, Geburtsdatum, E-Mail-Adresse, Telefonnummer, Kundennummer, Kfz-Kennzeichen, Standortdaten, Online-Kennungen (Cookie-ID, Geräte-ID), Foto, Stimme.</li>
     <li><strong>Nicht personenbezogen</strong> sind Daten ohne Bezug zu einer Person (Temperatur einer Maschine) und <strong>echt anonymisierte</strong> bzw. so stark zusammengefasste Daten, dass kein Rückschluss auf Einzelne möglich ist („durchschnittlich 312 Besucher pro Tag“).</li>
@@ -815,7 +816,7 @@
     <li><strong>Besondere Kategorien</strong> (Art. 9): Gesundheitsdaten, genetische und biometrische Daten (zur Identifizierung), ethnische Herkunft, politische Meinung, religiöse Überzeugung, Gewerkschaftszugehörigkeit, Sexualleben/sexuelle Orientierung. Grundsätzlich verboten, außer mit <strong>ausdrücklicher</strong> Einwilligung oder einer anderen Ausnahme aus Art. 9 Abs. 2 – und mit besonders hohem Schutzbedarf.</li>
   </ul>
 
-  <h4>Grundsätze der Verarbeitung (Art. 5)</h4>
+  <h4>Grundsätze der Verarbeitung (Art. 5) <span class="relevanz r-hinter" title="Transparenz/Rechtmäßigkeit als Gründe für Datenschutzerklärung und Einwilligung (W24 1d); grenzwertig">Hintergrund – 0/9</span></h4>
   <table class="kompakt">
     <tr><th style="width:30%">Grundsatz</th><th>Bedeutung · Beispiel Online-Shop</th></tr>
     <tr><td>Rechtmäßigkeit, Treu und Glauben, Transparenz</td><td>nur mit Rechtsgrundlage; die Person weiß, was mit ihren Daten passiert (Datenschutzerklärung).</td></tr>
@@ -827,7 +828,7 @@
     <tr><td>Rechenschaftspflicht</td><td>Der Verantwortliche muss die Einhaltung <em>nachweisen</em> können (Verarbeitungsverzeichnis, dokumentierte Einwilligungen).</td></tr>
   </table>
 
-  <h4>Rechtsgrundlagen (Art. 6 Abs. 1) – ohne eine davon ist die Verarbeitung verboten</h4>
+  <h4>Rechtsgrundlagen (Art. 6 Abs. 1) – ohne eine davon ist die Verarbeitung verboten <span class="relevanz r-hinter" title="Einwilligung als Rechtsgrundlage (W24 1d), Weitergabe echter Daten ohne Rechtsgrundlage (W25 3bb); grenzwertig">Hintergrund – 0/9</span></h4>
   <table class="kompakt">
     <tr><th style="width:30%">Rechtsgrundlage</th><th>Beispiel</th></tr>
     <tr><td>a) Einwilligung</td><td>Newsletter, Werbung, Weitergabe an Partner, freiwillige Zusatzfunktionen</td></tr>
@@ -838,7 +839,7 @@
     <tr><td>f) berechtigtes Interesse (mit Abwägung)</td><td>Betrugsprävention, IT-Sicherheit (z. B. Log-Dateien für kurze Zeit)</td></tr>
   </table>
 
-  <h4>Einwilligung richtig einholen</h4>
+  <h4>Einwilligung richtig einholen <span class="relevanz r-vor" title="W24 T1 1d: Datenschutzerklärung und Einwilligung (4 P)">Kam vor – 1/9 – W24</span></h4>
   <ul>
     <li><strong>Freiwillig:</strong> keine Nachteile bei Ablehnung. <strong>Kopplungsverbot:</strong> Die Vertragsleistung darf nicht von einer Einwilligung abhängig gemacht werden, die dafür nicht nötig ist.</li>
     <li><strong>Für einen bestimmten Fall und getrennt</strong> je Zweck (eigene Checkbox für Newsletter, eigene für Weitergabe an Partner), nicht in AGB versteckt.</li>
@@ -850,7 +851,7 @@
   </ul>
   <p><strong>Beispiel (App einer Tanzschule):</strong> Bei der Anmeldung zum Kurs werden nur Name, E-Mail und Bankverbindung als Pflichtfelder abgefragt (Vertrag). Darunter zwei <em>leere</em>, getrennte Checkboxen: „Ich möchte den monatlichen Newsletter erhalten“ und „Fotos von mir dürfen auf der Website der Tanzschule erscheinen“, jeweils mit Hinweis auf den Widerruf in den Einstellungen und einem Link zur Datenschutzerklärung.</p>
 
-  <h4>Datenschutzerklärung (Informationspflichten, Art. 13)</h4>
+  <h4>Datenschutzerklärung (Informationspflichten, Art. 13) <span class="relevanz r-vor" title="W24 T1 1d: Datenschutzerklärung">Kam vor – 1/9 – W24</span></h4>
   <p>Die Datenschutzerklärung <strong>informiert</strong> – ihr muss man nicht „zustimmen“. In einer App muss sie <strong>vor</strong> der Datenerhebung (z. B. im Registrierungsdialog und im Store-Eintrag) und jederzeit über das Menü erreichbar sein, in klarer, verständlicher Sprache. Inhalt:</p>
   <ul>
     <li>Name und Kontaktdaten des Verantwortlichen und ggf. des Datenschutzbeauftragten,</li>
@@ -861,7 +862,7 @@
     <li>ob die Angabe der Daten Pflicht ist und was passiert, wenn man sie nicht angibt.</li>
   </ul>
 
-  <h4>Betroffenenrechte</h4>
+  <h4>Betroffenenrechte <span class="relevanz r-hinter" title="Widerruf/Auskunft als Grund für Datenschutzerklärung (W24 1d); grenzwertig">Hintergrund – 0/9</span></h4>
   <table class="kompakt">
     <tr><th>Recht</th><th>Inhalt</th></tr>
     <tr><td>Auskunft (Art. 15)</td><td>welche Daten, Zwecke, Empfänger, Speicherdauer; Kopie der Daten</td></tr>
@@ -873,7 +874,7 @@
   </table>
   <p class="klein">Frist für die Antwort: grundsätzlich ein Monat. Vorher die Identität des Anfragenden prüfen – sonst gibt man die Daten womöglich einem Betrüger.</p>
 
-  <h4>Weitere Begriffe, die man kennen muss</h4>
+  <h4>Weitere Begriffe, die man kennen muss <span class="relevanz r-hinter" title="TOM, Privacy by Design, Auftragsverarbeitung nie abgefragt">Hintergrund – 0/9</span></h4>
   <ul>
     <li><strong>TOM</strong> (technische und organisatorische Maßnahmen, Art. 32): z. B. Verschlüsselung, Pseudonymisierung, Rollen- und Rechtekonzept, Protokollierung, Backups, Zutrittskontrolle zum Serverraum, Verpflichtung der Mitarbeitenden auf Vertraulichkeit, Schulungen.</li>
     <li><strong>Privacy by Design</strong> (Art. 25): Datenschutz von Anfang an in die Technik einbauen (z. B. Pseudonymisierung, Löschroutinen, Verschlüsselung im Entwurf vorsehen). <strong>Privacy by Default:</strong> Die <em>Voreinstellungen</em> sind die datenschutzfreundlichsten – z. B. Profil standardmäßig privat, Standortfreigabe aus, optionale Datenfelder leer.</li>
@@ -883,7 +884,7 @@
     <li><strong>Aufbewahrungspflichten</strong> gehen dem Löschwunsch vor: Rechnungen und andere Buchungsbelege müssen nach Handels- und Steuerrecht mehrere Jahre aufbewahrt werden (Buchungsbelege derzeit 8 Jahre). In dieser Zeit werden sie gesperrt, nicht gelöscht.</li>
   </ul>
 
-  <h4>Echte Daten in Testsystemen und Online-Tools</h4>
+  <h4>Echte Daten in Testsystemen und Online-Tools <span class="relevanz r-vor" title="W25 T1 3bb: keine echten Rechnungen auf Online-Prüfseiten (6 P)">Kam vor – 1/9 – W25</span></h4>
   <p>Wer echte personenbezogene Daten (Kundenlisten, Rechnungen, Bankverbindungen) in ein kostenloses Online-Prüf- oder Konvertierungstool hochlädt, <strong>übermittelt sie an einen Dritten</strong> – ohne Rechtsgrundlage, ohne AV-Vertrag, ohne Wissen, wo und wie lange sie gespeichert werden (eventuell außerhalb der EU). Das verletzt Datenschutz <em>und</em> Vertraulichkeit. Besser: <strong>synthetische Testdaten</strong> (erfundene, aber realistische Datensätze) oder sauber anonymisierte Daten verwenden, Prüfwerkzeuge lokal bzw. im eigenen Netz betreiben oder einen Anbieter mit AV-Vertrag wählen.</p>
 
   <div class="falle"><span class="kastentitel">Typische Fallen</span>
@@ -895,13 +896,13 @@
     </ul>
   </div>
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
-    <strong>W24 T1 A1d (4 P):</strong> Was muss eine App zum Datenschutz bereitstellen? Erwartet: Datenschutzerklärung (Inhalte, Erreichbarkeit) und eine wirksame Einwilligung für Verarbeitungen, die nicht für den Vertrag nötig sind.
-    <strong>W25 T1 A3bb (6 P):</strong> Ein Mitarbeiter will echte elektronische Rechnungen auf einer kostenlosen Online-Prüfseite validieren lassen – Probleme aus Sicht von Datenschutz und Schutzzielen erläutern und eine Alternative nennen.
+    <strong>W24 T1 A1d (4 P):</strong> Zwei Gründe beschreiben, warum die Verwendung einer „Datenschutzerklärung und deren Einwilligung“ für den Datenschutz von Bedeutung ist (Speichern von Benutzerdaten in der App). Erwartet (keine Musterlösung): Datenschutzerklärung (Inhalte, Erreichbarkeit) und eine wirksame Einwilligung für Verarbeitungen, die nicht für den Vertrag nötig sind.
+    <strong>W25 T1 A3bb (6 P):</strong> Bei der Recherche wird die Website www.e-invoice-tester.com gefunden (eRechnung hochladen, Inhalte werden angezeigt) – zwei Punkte erläutern, die bei der Verwendung zu beachten sind (Lösung: keine echten bzw. sensiblen Daten hochladen, Ergebnisse kritisch sehen; Sicht von Datenschutz und Schutzzielen).
   </div>
 
   <!-- ===================== SEC-06 ===================== -->
-  <h3 id="e-06">SEC-06 · Angriffe &amp; Gegenmaßnahmen <span class="badge k-sonstige">Sonstige</span></h3>
-  <p class="klein">Vorkommen: 1/9 · Prüfung: S24 (Teil 2, A1b: Makros in Word-Anhängen, 5 P) · als Wissen aber auch Grundlage für SEC-03 und SEC-04</p>
+  <h3 id="e-06">SEC-06 · Angriffe &amp; Gegenmaßnahmen <span class="relevanz r-vor" title="Belege: S24 T2 A1ba, A1bb (5 P).">Kam vor – 1/9 – S24</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfungen: S24 · Teil 2, Aufgabe 1 · Hinweis: als Wissen aber auch Grundlage für SEC-03 und SEC-04</p>
 
   <table class="kompakt">
     <tr><th style="width:17%">Angriff</th><th style="width:33%">So funktioniert er</th><th style="width:13%">verletzt v. a.</th><th>Gegenmaßnahmen</th></tr>
@@ -917,7 +918,7 @@
     <tr><td><strong>CSRF</strong> (Cross-Site Request Forgery)</td><td>Eine fremde Seite löst im Browser eines angemeldeten Nutzers unbemerkt eine Aktion auf der echten Seite aus; das Session-Cookie wird automatisch mitgeschickt</td><td>Integrität</td><td>CSRF-Token in Formularen, Cookies mit <code>SameSite</code>, erneute Passwortabfrage bei kritischen Änderungen</td></tr>
   </table>
 
-  <h4>SQL-Injection im Code erkennen und beheben</h4>
+  <h4>SQL-Injection im Code erkennen und beheben <span class="relevanz r-hinter" title="SQL-Injection nie abgefragt">Hintergrund – 0/9</span></h4>
   <p>Beispiel: Die Katalogsuche einer Bibliothek baut die Eingabe des Benutzers direkt in den SQL-Text ein.</p>
   <p class="codelabel">Java · unsicher</p>
   <pre class="java">String sql = "SELECT titel, autor FROM buch WHERE autor = '" + eingabe + "'";
@@ -931,12 +932,12 @@ ps.setString(1, eingabe);          // Wert wird getrennt als reine Daten überge
 ResultSet rs = ps.executeQuery();</pre>
   <p><strong>Warum das hilft:</strong> Die SQL-Anweisung mit dem Platzhalter <code>?</code> wird zuerst an die Datenbank geschickt und dort vorbereitet. Der Eingabewert wird anschließend <strong>getrennt als Datenwert</strong> übergeben und nie als SQL-Code interpretiert. Eine Eingabe mit Hochkommas ist dann einfach ein (nicht existierender) Autorenname und ändert die Abfrage nicht mehr. Eigene „Filter“, die Hochkommas entfernen, sind dagegen fehleranfällig.</p>
 
-  <h4>XSS in einem Satz</h4>
+  <h4>XSS in einem Satz <span class="relevanz r-hinter" title="XSS nie abgefragt">Hintergrund – 0/9</span></h4>
   <p>Ein Gästebuch speichert den Kommentar <code>&lt;script&gt;…&lt;/script&gt;</code> und gibt ihn unverändert in die HTML-Seite aus – jeder Besucher führt das Skript aus (z. B. Diebstahl des Session-Cookies, gefälschtes Login-Formular). Abhilfe: Ausgaben <strong>kontextgerecht kodieren</strong>, dann zeigt der Browser <code>&lt;script&gt;</code> nur als Text an.</p>
 
   <div class="merke"><span class="kastentitel">Merke</span>Eingaben im Client (App, JavaScript) zu prüfen ist bequem für den Nutzer, aber <strong>keine Sicherheitsmaßnahme</strong>: Ein Angreifer schickt seine Anfrage einfach direkt an den Server (z. B. mit einem eigenen Programm). Geprüft wird immer <strong>auf dem Server</strong>.</div>
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
-    <strong>S24 T2 A1b (5 P):</strong> Aktionäre sollen Einladungen als Word-Dokument im Mailanhang erhalten. ba) Risiko erläutern (Makros können Schadcode ausführen, Dokumente aus externen Quellen sind gefährlich), bb) eine sicherere Alternative beschreiben (z. B. Einladung direkt auf der Plattform im Browser anzeigen bzw. ohne aktive Inhalte bereitstellen).
+    <strong>S24 T2 A1b (5 P):</strong> Aktionäre sollen Einladungen als Word-Dokument im Mailanhang erhalten. ba) ein Sicherheitsrisiko beschreiben (Makros können Schadcode ausführen, Dokumente aus externen Quellen sind gefährlich; die Lösung nennt nur: Word-Dokumente aus externen Quellen zu öffnen birgt ein hohes Risiko; 2 P), bb) eine sicherere Alternative erläutern (3 P) (z. B. Einladung direkt auf der Plattform im Browser anzeigen bzw. ohne aktive Inhalte bereitstellen).
   </div>
 </section>
 
@@ -1583,7 +1584,7 @@ ResultSet rs = ps.executeQuery();</pre>
     <div class="teilaufgabe"><span class="tp">4 P</span>c) In PulsarConnect wird bei der Registrierung zuerst <code>h := sha256(PEPPER + salt + passwort)</code> berechnet. Danach wird <code>h</code> noch 9 999-mal mit <code>h := sha256(h + salt)</code> erneut gehasht (insgesamt 10 000 Durchläufe). Gespeichert werden <code>salt</code> und das Endergebnis <code>h</code>. Zur Verfügung stehen die Funktion <code>sha256(text : string) : string</code> (liefert den Hashwert als Hex-String) und die Konstante <code>PEPPER : string</code>; <code>+</code> verkettet Zeichenketten.<br>
     Entwickeln Sie in Pseudocode die Funktion <code>pruefePasswort(eingabe : string, salt : string, gespeicherterHash : string) : boolean</code>, die <code>true</code> zurückgibt, wenn die Eingabe zum gespeicherten Hash passt, und sonst <code>false</code>.</div>
     <div class="antwort z12"></div>
-    <p class="quelle">Angelehnt an: S24 Teil 2, Aufgabe 1c (Passwortsicherheit); Fachtext-Aufgabe wie S26 Teil 1, Aufgabe 3a und W25 Teil 1, Aufgabe 3; Pseudocode-Stil wie im Belegsatz S24</p>
+    <p class="quelle">Angelehnt an: S24 Teil 2, Aufgabe 1c (Passwortsicherheit); Fachtext-Aufgabe wie S26 Teil 1, Aufgabe 3a und W25 Teil 1, Aufgabe 2b (englischer Text); Pseudocode-Stil wie im Belegsatz S24</p>
   </div>
 
   <div class="aufgabe" id="SEC-04-3">

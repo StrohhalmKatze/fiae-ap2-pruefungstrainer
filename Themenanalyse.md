@@ -478,3 +478,97 @@ Jedes dieser Themen kam genau einmal vor, alle in W21 oder W22: Git, CI/CD, 3-Sc
 6. **Belegsatz:** Symbole muss man nicht auswendig lernen. Selbst lernen muss man Aggregation vs. Komposition, Multiplizitäten, `loop`/`opt`, die Systemgrenze, ERM-Kardinalitäten und die Notation des Relationenmodells.
 
 > **Vorsicht bei der Aussagekraft:** 9 Prüfungen sind eine kleine Stichprobe, und die IHK veröffentlicht keine Themenrotation. „Wahrscheinlich“ ist eine statistische Tendenz, keine Garantie. Die Einordnung beruht auf visuell gelesenen Scans; die Lösungen zu S23 und W25 stammen vom u-form-Verlag, nicht von der IHK.
+
+
+---
+
+## Ergänzung: Korrekturen nach Neuauswertung der Originalprüfungen (14.10.2026)
+
+Der gesamte Text oberhalb dieses Abschnitts ist unverändert geblieben. Wo er von den folgenden Angaben abweicht, gelten die Angaben dieses Abschnitts.
+
+### Methode und Regeln
+
+Alle 9 Prüfungen (W21–S26, Teil 1 und Teil 2, ohne Teil 3) wurden Teilaufgabe für Teilaufgabe neu gelesen (mit den Lösungen, wo vorhanden) und jedem Unterthema der Blöcke zugeordnet. Aufgaben und Punkte der alten Rohdaten stimmen; die Abweichungen liegen in der Themenzuordnung. Die Tabellen oben lassen sich aus den Rohdaten-Tags nachrechnen: Ein Thema zählte dort, sobald ein Tag auf der Aufgabe stand, auch wenn die Aufgabe das Thema nicht verlangte.
+
+Ein Thema zählt für eine Prüfung nur, wenn es ausdrücklich gefragt war oder die Aufgabe ohne dieses Wissen nicht lösbar ist. Zusätzlich gelten zwei Regeln:
+
+1. **OOP/Getter ist Voraussetzung.** Der Aufruf von Gettern und der Umgang mit Objekten in Algorithmusaufgaben zählt nicht als OOP-Vorkommen. Pseudocode-Aufgaben, die ein gegebenes Klassendiagramm nur lesen, zählen nicht als Klassendiagramm-Vorkommen. „Klassendiagramm erstellen oder ergänzen“ (z. B. W21 T1 3b, W24 T1 3a) zählt beim Klassendiagramm (Block 3), nicht bei OOP.
+2. **Nur sichere Belege zählen.** Grenzfälle (Aufgabe passt nur teilweise oder nur als Voraussetzung) fallen aus Zahl, Prüfungsliste und Ø-Punkten heraus; sie stehen nur im Tooltip der Etiketten in den Übungsdateien.
+
+Die Kategorien Immer/Meistens/Oft/Wahrscheinlich/Sonstige ersetzen in den Übungsdateien die Etiketten *Prüfungskern* (ab 3 Prüfungen), *Kam vor* (1–2) und *Hintergrund* (0), jeweils mit Zahl und Prüfungen, z. B. „Prüfungskern – 3/9 – S26, W24, W22“.
+
+### Korrekturen bei Vorkommen und Prüfungslisten
+
+| Thema (Block) | alt | neu | geänderte Prüfungen | Grund (Prüfung, Aufgabe) |
+|---|---|---|---|---|
+| DB-Theorie (01) | 6/9 (Meistens): S22, W22, S23, W23, W24, W25 | 6/9: S22, W22, S23, W23, W25, S26 | entfällt: W24; kommt dazu: S26 | W24 T2 3ba (Datenqualität beim Import) gehört zu „Datenqualität beim Import“, nicht zu DB-Theorie. S26 T2 4cb verlangt die Löschreihenfolge wegen Fremdschlüsseln, also referenzielle Integrität. |
+| SQL: Unterabfrage (01) | 5/9 (Oft): W21, S22, W22, W23, S26 | 2/9: S22, W23 | entfällt: W21, W22, S26 | Sicher nur S22 T2 4bb (NOT IN/NOT EXISTS) und W23 T2 4d (korrelierte Unterabfrage). W22 T2 4b ist INSERT … SELECT plus DELETE, keine Unterabfrage. W21 T2 4c (UPDATE für Hersteller CCC) und S26 T2 4cb (DELETE „mit Unterabfrage oder WHERE“) lassen die Unterabfrage offen: Grenzfälle, nicht gezählt. |
+| Minimum/Maximum, lineare Suche (02) | 4/9 (Oft): W21, W23, S24, W25 | 5/9: W21, S22, W23, S24, W25 | kommt dazu: S22 | S22 T2 1 verlangt Minimum und Maximum im 2D-Array (30 P); die Themenanalyse nannte S22 nur im Text, zählte es aber nicht mit. |
+| Exceptions/Fehlerbehandlung (02) | 2/9 (Wahrscheinlich): W21, W25 | 1/9: W25 | entfällt: W21 | W21 T1 3c ist die Ursache einer HTTP-404-Meldung, keine Exception-Aufgabe. Übrig bleibt W25 (null/Exception im Algorithmus). |
+| Klassendiagramm (03) | 6/9 (Meistens): W21, S22, S23, S24, W24, S26 | 5/9: W21, S22, S23, W24, S26 | entfällt: S24 | S24 T1 3ba–3bc sind Pseudocode-Methoden zu einem gegebenen Klassendiagramm (nur lesen) und zählen nicht als Klassendiagramm-Aufgabe. |
+| Struktogramm/PAP (03) | 2/9 (Sonstige): W21, S23 | 1/9: W21 | entfällt: S23 | S23 T1 2bc/2bd erlaubten „Pseudocode oder Struktogramm“; die Struktogramm-Notation war nicht verlangt. |
+| Stakeholder/Projektbegriffe (04) | 7/9 (Meistens): S22, S23, W23, S24, W24, W25, S26 | 5/9: S22, W23, S24, W24, S26 | entfällt: S23, W25 | S23 T1 1a (Konflikt Arbeitsplatzverlust) ist Change-Management, Stakeholder nur Grenzfall. W25 T1 1a ist die Machbarkeitsanalyse (eigenes Thema); W25 T1 1b/1c enthalten keine Stakeholder-Frage. |
+| Anforderungen (04) | 5/9 (Oft): S22, W22, S23, W23, S24 | 4/9: S22, W22, S23, S24 | entfällt: W23 | W23 T1 2ab (Aufbau einer User Story) fragt keine funktionalen/nicht-funktionalen Anforderungen. |
+| Risikoanalyse (04) | 4/9 (Oft): S23, S24, W25, S26 | 3/9: S23, W25, S26 | entfällt: S24 | S24 T1 1d ist eine Stakeholderanalyse (Befürchtungen und Maßnahmen), keine Risikotabelle; Grenzfall, nicht gezählt. |
+| Testarten (05) | 7/9 (Meistens): W21, S22, W22, S23, W23, S24, W25 | 4/9: W21, W23, S24, W25 | entfällt: S22, W22, S23 | S22 T2 2aa (Unit-Test), W22 T2 2ac und S23 T2 3ba (Anweisungsüberdeckung) stehen bei Unit-Test/Überdeckung, S23 T1 1e (QS-Maßnahmen) bei Codequalität. Testarten im engeren Sinn: W21, W23, S24, W25. |
+| Code analysieren/Fehler finden (05) | 6/9 (Meistens): W21, S22, W22, S23, S24, W25 | 5/9: W21, S22, W22, S23, W25 | entfällt: S24 | S24 T2 3c (alle Pfade notieren) ist Pfadüberdeckung, kein Fehlerfinden. |
+| Unit-Test/Überdeckungsmaße (05) | 5/9 (Oft): S22, W22, S23, S24, W25 | 6/9: W21, S22, W22, S23, S24, W25 | kommt dazu: W21 | W21 T1 4cb verlangt, „nur automatische Code-Reviews und Unit-Tests“ zu bewerten, also Unit-Test-Wissen. |
+| Qualitätsmerkmale ISO 25010 (05) | 4/9 (Oft): W21, S23, S24, S26 | 3/9: W21, S23, S26 | entfällt: S24 | S24 T1 1b (drei qualitätssichernde Maßnahmen) ist Qualitätssicherung, nicht ISO 25010. |
+| Äquivalenzklassen/Testfälle (05) | 3/9 (Wahrscheinlich): S22, S23, W25 | 2/9: S22, S23 | entfällt: W25 | W25 T2 3ba gab die Testdaten vor („mit fünf vorgegebenen Testdaten testen“); es mussten keine Testfälle gebildet werden. |
+| Codequalität/Reviews (05) | 2/9 (Wahrscheinlich): W21, S24 | 3/9: W21, S23, S24 | kommt dazu: S23 | S23 T1 1e (zwei QS-Maßnahmen) gehört hierher. |
+| Schutzziele (07) | 6/9 (Meistens): S22, W22, S23, S24, W25, S26 | 5/9: S22, W22, S24, W25, S26 | entfällt: S23 | S23 T1 4b (Signieren statt Verschlüsseln) nennt kein Schutzziel ausdrücklich; Grenzfall, nicht gezählt. |
+
+### Korrekturen in den Punktetabellen
+
+Nur Zellen der beiden Punktetabellen oben, deren Wert sich ändert (alle anderen nachgerechneten Zellen stimmen; nicht nachgerechnet wurde die Zeile „Projektmanagement (irgendein Thema)“ der ersten Tabelle). Verglichen wird aufgabenweise: Zählt die alte Tabelle eine Aufgabe, die das Thema nicht verlangt, oder fehlt eine verlangte Aufgabe.
+
+| Tabelle | Zeile | Prüfung | alt | neu | Grund |
+|---|---|---|---:|---:|---|
+| Überblick: Punkte pro Prüfung | Algorithmus in Pseudocode/Code | S22 | 38 | 34 | nur alt gezählt: T2 2bb (4 P) |
+| Überblick: Punkte pro Prüfung | Arrays / Listen durchlaufen | W22 | 20 | 27 | nur neu gezählt: T2 1d (7 P) |
+| Überblick: Punkte pro Prüfung | Arrays / Listen durchlaufen | S26 | 30 | 34 | nur neu gezählt: T2 2ba (4 P) |
+| Überblick: Punkte pro Prüfung | Testen | S23 | 16 | 10 | nur alt gezählt: T1 1e (4 P), T2 3aa (2 P); nur neu gezählt: T2 3a (Datenverlaufstabelle) (0 P) |
+| Überblick: Punkte pro Prüfung | Klassendiagramm | S22 | 13 | 17 | nur neu gezählt: T1 3bc (4 P) |
+| Überblick: Punkte pro Prüfung | Klassendiagramm | S24 | 5 | 0 | nur alt gezählt: T1 3ba (5 P) |
+| Überblick: Punkte pro Prüfung | JSON / XML | W25 | 15 | 6 | nur alt gezählt: T1 2ba (3 P), T1 2bb (6 P) |
+| Überblick: Punkte pro Prüfung | OOP / Entwurfsmuster | W22 | 10 | 15 | nur neu gezählt: T2 1b (5 P) |
+| Überblick: Punkte pro Prüfung | OOP / Entwurfsmuster | S24 | 5 | 17 | nur neu gezählt: T2 2a (12 P) |
+| Punkte pro Prüfung nach Block | Algorithmen & Programmierung | W21 | 37 | 35 | nur alt gezählt: T1 3c (2 P) |
+| Punkte pro Prüfung nach Block | Algorithmen & Programmierung | S22 | 38 | 34 | nur alt gezählt: T2 2bb (4 P) |
+| Punkte pro Prüfung nach Block | UML-Modellierung | S22 | 22 | 26 | nur neu gezählt: T1 3bc (4 P) |
+| Punkte pro Prüfung nach Block | UML-Modellierung | S23 | 49 | 44 | nur alt gezählt: T1 2bc (5 P) |
+| Punkte pro Prüfung nach Block | UML-Modellierung | S24 | 44 | 39 | nur alt gezählt: T1 3ba (5 P) |
+| Punkte pro Prüfung nach Block | Testen & Qualitätssicherung | W22 | 17 | 11 | nur alt gezählt: T1 3cc (6 P) |
+| Punkte pro Prüfung nach Block | Objektorientierung & Entwurfsmuster | W22 | 10 | 15 | nur neu gezählt: T2 1b (5 P) |
+| Punkte pro Prüfung nach Block | Objektorientierung & Entwurfsmuster | S24 | 5 | 17 | nur neu gezählt: T2 2a (12 P) |
+
+### Korrigierte Textaussagen
+
+- **Algorithmusaufgabe in Teil 2** („Aufgabe 1 oder 2 ist immer ein großer Algorithmus … 25–30 Punkte, meist ohne Teilaufgaben“): richtig sind **20–30 Punkte**. S24 Teil 2, Aufgabe 2 hat nur 20 Punkte (2a 12, 2b 8). Ohne Teilaufgaben waren W21, S22, S23, W23 und W24 (5 von 9), mit Teilaufgaben W22, S24, W25 und S26.
+- **Fazit Nr. 2** („Testen kam in den letzten beiden Sommerprüfungen nicht vor (W24, S26)“): richtig ist: **Testen fehlte in W24 und S26.** W24 ist eine Winterprüfung; S24 (Sommer) enthielt Testen (Teil 2, Aufgabe 3, 25 Punkte), ebenso W25.
+- **Block 5, Testen & QS, Spalte „Wo“** („Teil 1 (7×) + Teil 2 (6×)“): richtig ist **Teil 1 (6×) + Teil 2 (6×)**. Die 7. Prüfung mit Teil 1 war W22 Teil 1, Aufgabe 3cc (XML-Fehler finden), die dort als Code-Analyse gezählt wurde.
+- **Block 2, Algorithmen, Spalte „Wo“** („Teil 2 (9×), Teil 1 (5×)“): richtig ist **Teil 2 (9×), Teil 1 (4×)** (S22 3cb, S23 2bc/2bd, S24 3ba–3bc, W24 2c). Die 5. Prüfung war W21 Teil 1, Aufgabe 3c (HTTP-404-Ursache), die als Fehlerbehandlung gezählt wurde.
+- **Block 8, OOP & Entwurfsmuster, Spalte „Wo“** („Teil 1 (4×) + Teil 2 (2×)“): richtig ist **Teil 1 (4×) + Teil 2 (3×)**; die dritte Prüfung mit Teil 2 ist S24 (Aufgabe 2a, Vergleichsfunktion als Parameter). Das Vorkommen bleibt 6/9, OOP-Konzepte bleiben 5/9 (S22, W22, S23, S24, S26).
+- **SQL: SELECT mit JOIN** („‚Auch X ohne Y anzeigen‘ heißt LEFT JOIN (5 Mal: S22, W22, S23, W23, S26)“): richtig sind **4 Mal (S22, W22, S23, S26)**. In W23 Teil 2, Aufgabe 4d nutzt die Musterlösung eine korrelierte Unterabfrage; LEFT JOIN ist dort nur eine genannte Alternative.
+
+### Neu gerechnete Ø-Punkte je Block
+
+Formel: Summe der Punkte aller dem Block zugeordneten Teilaufgaben über die 9 Prüfungen, geteilt durch 9 (von 200 Punkten); eine Teilaufgabe zählt pro Block höchstens einmal, nur sichere Belege. Die alten Ø-Werte der Blöcke, die nicht in jeder Prüfung vorkommen, waren Mittelwerte über die Prüfungen mit Vorkommen und sind dadurch höher.
+
+| Block | alt (Ø von 200) | neu (Ø von 200) | Summe über 9 Prüfungen |
+|---|---:|---:|---:|
+| 01 Datenbanken | 54 | 54 | 487 |
+| 02 Algorithmen | 42 | 41 | 369 |
+| 03 UML | 38 | 37 | 333 |
+| 04 Projektmanagement | 24 | 21 | 189 |
+| 05 Testen & QS | 21 | 18 | 164 |
+| 06 Schnittstellen | 15 | 13 | 121 |
+| 07 IT-Sicherheit | 12 | 10 | 93 |
+| 08 OOP & Entwurfsmuster | 16 | 12 | 110 |
+| 09 Benutzeroberfläche | 12 | 7 | 62 |
+| 10 Netzwerk/IoT | 13 | 6 | 50 |
+| 11 Werkzeuge | 21 | 5 | 41 |
+
+### Geprüft und verworfen
+
+Die Zuordnung von W25 Teil 1, Aufgabe 3aa/3ab (Transportverschlüsselung, hybrides Verfahren; 4 Punkte) zu „Schnittstellen & Datenformate“ wurde geprüft und verworfen. Die Aufgaben gehören zu IT-Sicherheit. Block 6 bleibt in W25 bei 24 Punkten wie in der Tabelle oben.

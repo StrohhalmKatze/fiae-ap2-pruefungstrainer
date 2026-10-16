@@ -33,7 +33,7 @@
 <header class="blockkopf">
   <h1>Block 01 · Datenbanken</h1>
   <div class="unter">
-    <span class="badge k-immer">Immer</span> 9/9 Prüfungen · Ø 54 von 200 Punkten · Teil 1 + Teil 2
+    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 7, Teil 2 in 9 Prüfungen.">Prüfungskern – 9/9 – alle</span> · Ø 54 von 200 Punkten · Teil 1 + Teil 2
     · Kürzel <strong>DB</strong> · 12 Unterthemen · 36 Aufgaben · 345 Punkte
     · Lösungen: <a href="01_Datenbanken_Loesungen.html">01_Datenbanken_Loesungen.html</a>
   </div>
@@ -90,20 +90,21 @@
 <section class="teil" id="erklaerung">
   <h2>A · Erklärungssatz</h2>
   <p>Die Beispiele in diesem Teil verwenden bewusst <strong>andere Szenarien</strong> (Musikschule, Fitnessstudio) als die Aufgaben in Teil C (Fahrradverleih VeloPunkt). So lernst du die Methode, ohne die Lösung schon zu kennen.</p>
+  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
 
   <!-- ======================= DB-01 ======================= -->
-  <h3 id="e-01">DB-01 · ER-/Relationenmodell <span class="badge k-immer">Immer</span></h3>
-  <p class="klein">Vorkommen: 9/9 · Prüfungen: alle (W21–S26) · meist Teil 2, Aufgabe 3 (16–25 P), zusätzlich in Teil 1 (W21, S23, W23, S24, W25)</p>
+  <h3 id="e-01">DB-01 · ER-/Relationenmodell <span class="relevanz r-kern" title="Belege: S26 T2 A3a (20 P); W25 T1 A4c (16 P); W24 T2 A3a (16 P); S24 T1 A4a (10 P); W23 T1 A4a (14 P), T2 A3a (18 P); S23 T1 A4cb (13 P); W22 T2 A3a, A3b (22 P); S22 T2 A3 (20 P); W21 T1 A2b (16 P), T2 A3 (25 P).">Prüfungskern – 9/9 – alle</span></h3>
+  <p class="klein">Vorkommen: 9/9 · Prüfungen: alle · Teil 1 (W25 A4, S24 A4, W23 A4, S23 A4, W21 A2) und Teil 2 (S26 A3, W24 A3, W23 A3, W22 A3, S22 A3, W21 A3)</p>
 
-  <h4>Worum geht es?</h4>
+  <h4>Worum geht es? <span class="relevanz r-hinter" title="Einordnung ER- vs. Relationenmodell; in keiner Prüfung als Wissen abgefragt">Hintergrund – 0/9</span></h4>
   <p>Eine Datenbank wird in zwei Stufen entworfen:</p>
   <ol>
     <li><strong>Konzeptionell – ER-Modell</strong> (Entity-Relationship-Modell): beschreibt den Ausschnitt der Realität mit Entitäten, Beziehungen und Attributen – unabhängig davon, welches Datenbanksystem später verwendet wird.</li>
     <li><strong>Logisch – Relationenmodell</strong> (relationales Datenmodell): Tabellen mit Spalten, Primärschlüsseln (PK) und Fremdschlüsseln (FK). Es lässt sich direkt in <code>CREATE TABLE</code>-Befehle umsetzen.</li>
   </ol>
-  <p>In der Prüfung wird meist das <strong>Relationenmodell in 3. Normalform</strong> verlangt („Erstellen Sie ein relationales Datenmodell in 3NF …“), seltener ein ER-Modell (W21 T1, W23 T1, S24 T1).</p>
+  <p>In der Prüfung wird meist das <strong>Relationenmodell in 3. Normalform</strong> verlangt („Erstellen Sie ein relationales Datenmodell, welches der 3. Normalform genügt …“), seltener ein ER-Modell (W21 T1, W23 T1, S24 T1).</p>
 
-  <h4>Begriffe</h4>
+  <h4>Begriffe <span class="relevanz r-kern" title="Entität, Attribut, Schlüssel, Kardinalität, Beziehungsattribut: Vokabular jeder ER-/Relationenmodell-Aufgabe (jede Prüfung hat eine)">Prüfungskern – 9/9 – alle</span></h4>
   <table>
     <tr><th>Begriff</th><th>Bedeutung</th><th>Beispiel (Musikschule)</th></tr>
     <tr><td>Entität</td><td>einzelnes, eindeutig unterscheidbares Objekt</td><td>die Schülerin Mia Kramer</td></tr>
@@ -115,7 +116,7 @@
     <tr><td>Beziehungsattribut</td><td>Eigenschaft, die erst durch die Beziehung entsteht und zu keiner Entität allein gehört</td><td>Anmeldedatum (eines Schülers <em>zu einem</em> Kurs)</td></tr>
   </table>
 
-  <h4>Notation (Chen-Notation wie im IHK-Belegsatz)</h4>
+  <h4>Notation (Chen-Notation wie im IHK-Belegsatz) <span class="relevanz r-kern" title="ER-Modell zeichnen, erweitern oder lesen; Kardinalitäten stehen nicht im Belegsatz (S24-Belegsatz nur Entität/Beziehung/Attribut)">Prüfungskern – 5/9 – S26, S24, W23, W22, W21</span></h4>
   <p>Der Belegsatz zeigt nur die drei Symbole: <strong>Rechteck = Entität, Raute = Beziehung, Ellipse = Attribut</strong>. Die <strong>Kardinalitäten stehen nicht im Belegsatz</strong> – die musst du kennen. Man schreibt sie als <code>1</code>, <code>n</code> oder <code>m</code> an die Verbindungslinien.</p>
   <figure>
 <svg viewBox="0 0 680 196" width="680" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
@@ -157,7 +158,7 @@
   <div class="merke"><span class="kastentitel">Merke</span>Kardinalität immer mit <strong>zwei Fragen</strong> bestimmen – einmal von links nach rechts, einmal von rechts nach links („Wie viele B kann ein A haben?“ / „Wie viele A kann ein B haben?“). Zweimal „einer“ → 1:1, einmal „mehrere“ → 1:n, zweimal „mehrere“ → m:n.</div>
   <p class="klein">Ergänzung: Manche Lehrbücher nutzen die modifizierte Chen-Notation mit <code>c</code> (0 oder 1) und <code>mc</code> (0 bis viele) oder die Min-Max-Notation <code>(0,1)</code>, <code>(1,*)</code>. In den IHK-Lösungen genügen <code>1</code>, <code>n</code>, <code>m</code>.</p>
 
-  <h4>Besondere Beziehungen</h4>
+  <h4>Besondere Beziehungen <span class="relevanz r-kern" title="rekursive Beziehung und m:n (W21), m:n mit Beziehungsattributen (W22 3b Datum/Dauer, W23 Menge/Datum, S22 und S26 Zeitraum von/bis), Soft Delete (S24); S22/S26 grenzwertig">Prüfungskern – 4/9 – S24, W23, W22, W21</span></h4>
   <ul>
     <li><strong>Rekursive Beziehung:</strong> Ein Entitätstyp steht mit sich selbst in Beziehung, z. B. „Lehrkraft <em>betreut</em> Lehrkraft“ (Mentor). Zwei Linien von derselben Entität zur Raute; die Rollen (Mentor/Mentee) an die Linien schreiben.</li>
     <li><strong>Beziehung mit Attribut:</strong> Das Attribut (Ellipse) hängt an der Raute, z. B. Anmeldedatum an „belegt“. Typisch bei m:n: Menge, Datum, Note, Anzahl, Preis zum Zeitpunkt.</li>
@@ -216,7 +217,7 @@
 </figure>
 
 
-  <h4>Vom ER-Modell zum Relationenmodell</h4>
+  <h4>Vom ER-Modell zum Relationenmodell <span class="relevanz r-kern" title="Relationenmodell mit PK/FK und Kardinalitäten in allen Prüfungen außer S24; die Notation steht in keinem Belegsatz">Prüfungskern – 8/9 – alle außer S24</span></h4>
   <table>
     <tr><th>Begriff im Relationenmodell</th><th>Bedeutung</th></tr>
     <tr><td>Relation / Tabelle</td><td>entspricht einem Entitätstyp (oder einer aufgelösten m:n-Beziehung)</td></tr>
@@ -233,7 +234,7 @@
   </ol>
   <div class="falle"><span class="kastentitel">Typische Falle</span>Die Notation des Relationenmodells (PK/FK-Kennzeichnung, Kardinalitäten an den Linien) steht <strong>nicht</strong> im Belegsatz. Du musst sie selbst beherrschen.</div>
 
-  <h4>Überführungsregeln</h4>
+  <h4>Überführungsregeln <span class="relevanz r-kern" title="1:n, m:n, rekursiv ins Relationenmodell übertragen: in jeder Relationenmodell-Aufgabe">Prüfungskern – 8/9 – alle außer S24</span></h4>
   <table>
     <tr><th>Im ER-Modell</th><th>Umsetzung im Relationenmodell</th></tr>
     <tr><td>Entitätstyp</td><td>eigene Tabelle; das Schlüsselattribut wird PK</td></tr>
@@ -308,7 +309,7 @@
   <div class="merke"><span class="kastentitel">Merke</span>
     Der <strong>Fremdschlüssel steht immer auf der n-Seite.</strong> Eine m:n-Beziehung gibt es im Relationenmodell nicht – sie wird <strong>immer</strong> über eine Zwischentabelle aufgelöst, deren PK aus den beiden FKs besteht.</div>
 
-  <h4>So gehst du vor (Teil 2, Aufgabe 3)</h4>
+  <h4>So gehst du vor (Teil 2, Aufgabe 3) <span class="relevanz r-kern" title="Vorgehen für die Relationenmodell-Aufgabe (T2 A3, in S23/W25 in Teil 1)">Prüfungskern – 8/9 – alle außer S24</span></h4>
   <ol>
     <li>Text/Formular durcharbeiten: Substantive → Kandidaten für Tabellen und Attribute, Verben → Beziehungen.</li>
     <li>Je Tabelle alle genannten Attribute sammeln. <em>„Übernehmen Sie alle genannten Attribute“</em> bringt Punkte – nichts weglassen.</li>
@@ -339,10 +340,10 @@
   </div>
 
   <!-- ======================= DB-02 ======================= -->
-  <h3 id="e-02">DB-02 · Normalisierung 1NF–3NF <span class="badge k-immer">Immer</span></h3>
-  <p class="klein">Vorkommen: 8/9 · Prüfungen: alle außer S24 · Teil 2, Aufgabe 3 und Teil 1 (S23, W25)</p>
+  <h3 id="e-02">DB-02 · Normalisierung 1NF–3NF <span class="relevanz r-kern" title="Belege: S26 T2 A3a (20 P); W25 T1 A4a, A4b, A4c (24 P); W24 T2 A3a (16 P); W23 T2 A3a (18 P); S23 T1 A4ca, A4cb (16 P); W22 T2 A3b (10 P); S22 T2 A3 (20 P); W21 T2 A3 (25 P).">Prüfungskern – 8/9 – alle außer S24</span></h3>
+  <p class="klein">Vorkommen: 8/9 · Prüfungen: alle außer S24 · Teil 2, Aufgabe 3 und Teil 1 (W25, S23)</p>
 
-  <h4>Warum normalisieren?</h4>
+  <h4>Warum normalisieren? <span class="relevanz r-vor" title="Redundanz an einem Beispiel beschreiben (W25 T1 4a)">Kam vor – 1/9 – W25</span></h4>
   <p><strong>Redundanz</strong> = dieselbe Information ist mehrfach gespeichert. Das kostet Speicher, vor allem aber führt es zu <strong>Inkonsistenzen</strong> (widersprüchlichen Daten), weil Änderungen nicht überall nachgezogen werden. Ziel der Normalisierung: jede Information genau einmal speichern und so Anomalien verhindern.</p>
   <p>Beispiel – unnormalisierte Kursliste einer Musikschule (Excel):</p>
   <table class="daten">
@@ -352,7 +353,7 @@
     <tr><td>K3</td><td>Gitarre Fortgeschr.</td><td>L7</td><td>Petra Lang</td><td>R2</td><td>103 Lea Fink, 102 Noah Ernst</td></tr>
   </table>
 
-  <h4>Anomalien</h4>
+  <h4>Anomalien <span class="relevanz r-vor" title="Änderungsanomalie (S23 4ca); Redundanz und drei Anomalien am Beispiel (W25 4a/4b)">Kam vor – 2/9 – W25, S23</span></h4>
   <table>
     <tr><th>Anomalie</th><th>Bedeutung</th><th>Beispiel aus der Kursliste</th></tr>
     <tr><td><strong>Einfügeanomalie</strong></td><td>Ein Sachverhalt kann nicht gespeichert werden, ohne dass gleichzeitig ein anderer, noch nicht vorhandener Sachverhalt erfasst wird.</td><td>Eine neue Lehrkraft kann erst gespeichert werden, wenn sie einen Kurs hat (die Zeile braucht eine KursNr).</td></tr>
@@ -360,17 +361,78 @@
     <tr><td><strong>Löschanomalie</strong></td><td>Beim Löschen eines Datensatzes gehen ungewollt weitere Informationen verloren.</td><td>Wird Kurs K2 gelöscht, ist auch jede Information über Uwe Brandl weg.</td></tr>
   </table>
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
-    „Erläutern Sie die Änderungsanomalie …“ heißt: <strong>Begriff erklären UND am konkreten Datensatz der Anlage zeigen</strong> (welche Zeilen, welcher Wert). Eine reine Definition gibt nur die Hälfte der Punkte (W25 T1 4b: drei Anomalien, 6 P; S23 T1 4ca: Änderungsanomalie, 3 P; W25 T1 4a: Redundanz an einem Beispiel, 2 P).</div>
+    „… die jeweilige Anomalieart an einem konkreten Beispiel aus der Tabelle Bewertung erläutern“ heißt: <strong>Begriff erklären UND am konkreten Datensatz der Anlage zeigen</strong> (welche Zeilen, welcher Wert). Eine reine Definition gibt nur die Hälfte der Punkte (W25 T1 4b: drei Anomalien, 6 P; S23 T1 4ca: Änderungsanomalie, 3 P; W25 T1 4a: Redundanz an einem Beispiel, 2 P).</div>
 
-  <h4>Grundbegriffe</h4>
+  <h4>Grundbegriffe <span class="relevanz r-hinter" title="in 9 Prüfungen nie abgefragt; die 3NF-Aufgaben verlangen nur das praktische Vorgehen">Hintergrund – 0/9</span></h4>
+  <p>Für die Normalformen brauchst du vier Begriffe. Sie bauen aufeinander auf, deshalb kommen sie hier in dieser Reihenfolge. Alle Beispiele beziehen sich auf die Kursliste der Musikschule von oben. Damit du die Zusammenhänge sehen kannst, steht sie hier schon mit <strong>einer Zeile je Kurs und Teilnehmer</strong> (das ist der Schritt zur 1NF, siehe unten):</p>
+  <table class="daten">
+    <tr><th>KursNr</th><th>SchuelerNr</th><th>Kurstitel</th><th>LehrerNr</th><th>Lehrer</th><th>Raum</th><th>Schueler</th></tr>
+    <tr><td>K1</td><td>101</td><td>Gitarre Anfänger</td><td>L7</td><td>Petra Lang</td><td>R2</td><td>Mia Kramer</td></tr>
+    <tr><td>K1</td><td>102</td><td>Gitarre Anfänger</td><td>L7</td><td>Petra Lang</td><td>R2</td><td>Noah Ernst</td></tr>
+    <tr><td>K2</td><td>101</td><td>Klavier</td><td>L3</td><td>Uwe Brandl</td><td>R1</td><td>Mia Kramer</td></tr>
+    <tr><td>K3</td><td>103</td><td>Gitarre Fortgeschr.</td><td>L7</td><td>Petra Lang</td><td>R2</td><td>Lea Fink</td></tr>
+    <tr><td>K3</td><td>102</td><td>Gitarre Fortgeschr.</td><td>L7</td><td>Petra Lang</td><td>R2</td><td>Noah Ernst</td></tr>
+  </table>
+  <p class="klein">Die Namen sind hier der Übersicht halber nicht in Vor- und Nachname zerlegt. Für die Begriffe spielt das keine Rolle.</p>
+
+  <p><strong>1. Funktionale Abhängigkeit (A → B)</strong></p>
+  <p>Einfach gesagt: <strong>Wenn ich A kenne, weiß ich B sicher.</strong> Zum selben A gibt es nie zwei verschiedene B. Man schreibt <code class="nowrap">A → B</code> und sagt „A bestimmt B“ oder „B hängt funktional von A ab“.</p>
+  <p><strong>Beispiel:</strong> <code class="nowrap">LehrerNr → Lehrer</code>. Überall, wo L7 steht, steht auch „Petra Lang“. Überall, wo L3 steht, steht „Uwe Brandl“. Kennst du die LehrerNr, kennst du also den Namen. Ebenso gilt <code class="nowrap">KursNr → Kurstitel</code> (K1 ist immer „Gitarre Anfänger“) und <code class="nowrap">SchuelerNr → Schueler</code> (101 ist immer Mia Kramer).</p>
+  <p><strong>Gegenbeispiel:</strong> <code class="nowrap">LehrerNr → KursNr</code> gilt <em>nicht</em>. Zu L7 gehören zwei verschiedene Kurse, K1 und K3. Wenn du nur „L7“ kennst, weißt du nicht, welcher Kurs gemeint ist. Die Richtung ist also wichtig: <code class="nowrap">KursNr → LehrerNr</code> gilt (jeder Kurs hat genau eine Lehrkraft), umgekehrt nicht.</p>
+  <div class="tipp"><span class="kastentitel">Prüftest für A → B</span>
+    Frag dich: <strong>„Kann es zum selben Wert von A zwei verschiedene Werte von B geben?“</strong><br>
+    Nein → <code class="nowrap">A → B</code> gilt. Ja → <code class="nowrap">A → B</code> gilt nicht.<br>
+    Entscheidend ist, was fachlich <em>möglich</em> ist, nicht was zufällig in den Beispieldaten steht. In der Kursliste steht R2 zwar immer bei L7. Trotzdem gilt <code class="nowrap">LehrerNr → Raum</code> nicht, denn Petra Lang könnte einen weiteren Kurs auch in R1 geben.</div>
+
+  <p><strong>2. Schlüsselkandidat, Primärschlüssel, Nichtschlüsselattribut</strong></p>
+  <p>Ein <strong>Schlüssel</strong> ist eine Spalte oder Spaltenkombination, deren Wert <strong>jede Zeile eindeutig</strong> bestimmt. Kennst du den Schlüssel, kennst du also alle anderen Werte der Zeile. Welche Spalten leisten das in der Kursliste?</p>
   <ul>
-    <li><strong>Funktionale Abhängigkeit A → B:</strong> Zu jedem Wert von A gehört genau ein Wert von B. Beispiel: LehrerNr → Lehrer (L7 gehört immer zu Petra Lang). Umgekehrt muss das nicht gelten (zwei Lehrkräfte könnten gleich heißen).</li>
-    <li><strong>Voll funktionale Abhängigkeit:</strong> B hängt vom <em>gesamten</em> (zusammengesetzten) Schlüssel ab, nicht nur von einem Teil davon.</li>
-    <li><strong>Transitive Abhängigkeit:</strong> Schlüssel → A → B, wobei A selbst kein Schlüssel ist. Beispiel: KursNr → LehrerNr → Lehrer.</li>
-    <li><strong>Schlüsselkandidat:</strong> minimale Attributkombination, die jede Zeile eindeutig identifiziert; einer davon wird Primärschlüssel. <strong>Nichtschlüsselattribut:</strong> gehört zu keinem Schlüsselkandidaten.</li>
+    <li><strong>KursNr allein</strong> reicht nicht: K1 steht in zwei Zeilen (mit Schüler 101 und 102).</li>
+    <li><strong>SchuelerNr allein</strong> reicht nicht: 101 steht in zwei Zeilen (in K1 und in K2).</li>
+    <li><strong>KursNr + SchuelerNr</strong> reicht: Jede Kombination (K1/101, K1/102, K2/101, K3/103, K3/102) kommt nur einmal vor, denn ein Schüler belegt denselben Kurs nicht zweimal.</li>
   </ul>
+  <p>Ein <strong>Schlüsselkandidat</strong> ist so eine Kombination, die zusätzlich <strong>minimal</strong> ist: Du kannst keine Spalte weglassen, ohne dass die Eindeutigkeit verloren geht. (KursNr, SchuelerNr) ist minimal – lässt du eine der beiden Spalten weg, bist du wieder bei den ersten beiden Punkten. (KursNr, SchuelerNr, Raum) ist zwar auch eindeutig, aber <em>nicht</em> minimal, denn Raum ist überflüssig.</p>
+  <p>Den Schlüsselkandidaten, den du tatsächlich verwendest, nennst du <strong>Primärschlüssel (PK)</strong> und unterstreichst ihn. (Gibt es mehrere Kandidaten, z. B. LehrerNr und eine eindeutige E-Mail-Adresse bei der Lehrkraft, wählst du einen davon aus.) Hier ist der PK <span class="rm">(<u>KursNr, SchuelerNr</u>)</span>. Weil er aus zwei Spalten besteht, heißt er <strong>zusammengesetzter Schlüssel</strong>.</p>
+  <p>Alle Spalten, die zu <strong>keinem</strong> Schlüsselkandidaten gehören, sind <strong>Nichtschlüsselattribute</strong> – hier Kurstitel, LehrerNr, Lehrer, Raum und Schueler. Nur um diese Spalten geht es bei der 2NF und der 3NF.</p>
 
-  <h4>Die drei Normalformen</h4>
+  <p><strong>3. Voll funktionale und partielle (teilweise) Abhängigkeit</strong></p>
+  <p>Diese Unterscheidung brauchst du nur bei einem <strong>zusammengesetzten Schlüssel</strong>. Die Frage ist: Braucht ein Nichtschlüsselattribut den <em>ganzen</em> Schlüssel, oder reicht schon ein <em>Teil</em> davon?</p>
+  <ul>
+    <li><strong>Partiell abhängig</strong> = ein Teil des Schlüssels reicht schon. Beispiel: <code class="nowrap">KursNr → Kurstitel</code>. Für den Kurstitel ist es egal, welcher Schüler in der Zeile steht – K1 heißt immer „Gitarre Anfänger“. Die SchuelerNr wird also nicht gebraucht. Genauso hängen LehrerNr, Lehrer und Raum nur von KursNr ab und Schueler nur von SchuelerNr. Genau daher kommt die Redundanz: „Gitarre Anfänger“ steht so oft in der Tabelle, wie K1 Teilnehmer hat.</li>
+    <li><strong>Voll funktional abhängig</strong> = nur der ganze Schlüssel reicht, kein Teil allein. In der Kursliste gibt es so eine Spalte nicht. Stell dir deshalb eine zusätzliche Spalte <strong>Anmeldedatum</strong> vor (<em>gedachtes Beispiel</em>, wie in der Tabelle Belegung bei DB-01). Mia Kramer (101) kann sich für K1 an einem anderen Tag angemeldet haben als für K2 – SchuelerNr allein reicht also nicht. Und 101 und 102 können sich an verschiedenen Tagen für K1 angemeldet haben – KursNr allein reicht auch nicht. Erst beide zusammen bestimmen das Datum: <code class="nowrap">(KursNr, SchuelerNr) → Anmeldedatum</code> ist voll funktional.</li>
+  </ul>
+  <p>Eine partielle Abhängigkeit <strong>verletzt die 2NF</strong>. Lösung: Das Attribut zieht mit „seinem“ Schlüsselteil in eine eigene Tabelle, z. B. Kurstitel mit KursNr in die Tabelle Kurs (siehe durchgerechnetes Beispiel unten).</p>
+  <p><strong>Wichtig:</strong> Besteht der Schlüssel aus <strong>nur einer Spalte</strong>, gibt es keinen „Teil“ des Schlüssels, der allein reichen könnte. Dann ist jede Abhängigkeit vom Schlüssel automatisch voll funktional.</p>
+
+  <p><strong>4. Transitive Abhängigkeit</strong></p>
+  <p>„Transitiv“ heißt hier: <strong>über einen Umweg</strong>. Ein Nichtschlüsselattribut hängt nicht direkt vom Schlüssel ab, sondern von einem <em>anderen Nichtschlüsselattribut</em>. Es entsteht eine Kette:</p>
+  <p class="rm">Schlüssel → Nichtschlüsselattribut → anderes Nichtschlüsselattribut</p>
+  <p><strong>Beispiel:</strong> Die Kette steckt schon in der Kursliste. Am deutlichsten siehst du sie in der Tabelle Kurs, die bei der 2NF entsteht: <span class="rm">Kurs(<u>KursNr</u>, Kurstitel, LehrerNr, Lehrer, Raum)</span>. Dort gilt:</p>
+  <p class="rm">KursNr → LehrerNr → Lehrer (K1 → L7 → Petra Lang)</p>
+  <p>Der Kurs bestimmt die Lehrkraft, und die LehrerNr bestimmt den Namen. Der Lehrername hängt also nur „über Umweg“ vom Kurs ab – eigentlich gehört er zur Lehrkraft, nicht zum Kurs. Die Folge: „Petra Lang“ steht bei K1 <em>und</em> bei K3. Ändert sich ihr Name, musst du beide Stellen ändern (Änderungsanomalie, siehe oben).</p>
+  <p>Eine transitive Abhängigkeit <strong>verletzt die 3NF</strong>. Lösung: Das Zwischenattribut LehrerNr wird Primärschlüssel einer eigenen Tabelle Lehrkraft, der Name zieht dorthin um. In Kurs bleibt LehrerNr als Fremdschlüssel stehen.</p>
+  <p><strong>Gegenprobe Raum:</strong> Der Raum hängt direkt am Kurs (<code class="nowrap">KursNr → Raum</code>) und nicht über den Umweg Lehrkraft, denn <code class="nowrap">LehrerNr → Raum</code> gilt nicht (siehe Prüftest). Raum bleibt deshalb in Kurs.</p>
+
+  <p><strong>Die Begriffe im Überblick</strong></p>
+  <table>
+    <tr><th>Begriff</th><th>Einfach gesagt</th><th>Beispiel aus der Kursliste</th><th>Wichtig für</th></tr>
+    <tr><td><strong>Funktionale Abhängigkeit</strong> A → B</td><td>Kenne ich A, weiß ich B sicher.</td><td>LehrerNr → Lehrer<br>(L7 → Petra Lang)</td><td>Grundlage aller Normalformen</td></tr>
+    <tr><td><strong>Schlüsselkandidat / Primärschlüssel</strong></td><td>Minimale Spaltenkombination, die jede Zeile eindeutig bestimmt. Der ausgewählte Kandidat ist der PK.</td><td>(KursNr, SchuelerNr)</td><td>Bezugspunkt für 2NF und 3NF</td></tr>
+    <tr><td><strong>Nichtschlüsselattribut</strong></td><td>Spalte, die zu keinem Schlüsselkandidaten gehört.</td><td>Kurstitel, LehrerNr, Lehrer, Raum, Schueler</td><td>Nur diese Spalten werden bei 2NF und 3NF geprüft</td></tr>
+    <tr><td><strong>Partielle Abhängigkeit</strong></td><td>Ein Teil des zusammengesetzten Schlüssels reicht schon.</td><td>KursNr → Kurstitel</td><td>verletzt die <strong>2NF</strong></td></tr>
+    <tr><td><strong>Voll funktionale Abhängigkeit</strong></td><td>Nur der ganze Schlüssel reicht.</td><td>(KursNr, SchuelerNr) → Anmeldedatum <span class="klein">(gedachte Spalte)</span></td><td>verlangt die <strong>2NF</strong></td></tr>
+    <tr><td><strong>Transitive Abhängigkeit</strong></td><td>Hängt nur über ein anderes Nichtschlüsselattribut vom Schlüssel ab.</td><td>KursNr → LehrerNr → Lehrer</td><td>verletzt die <strong>3NF</strong></td></tr>
+  </table>
+  <div class="merke"><span class="kastentitel">Merke</span>
+    <strong>1NF:</strong> jedes Feld atomar · <strong>2NF:</strong> alles hängt vom <em>ganzen</em> Schlüssel ab (keine partielle Abhängigkeit) · <strong>3NF:</strong> und <em>nur</em> vom Schlüssel (keine transitive Abhängigkeit).</div>
+  <div class="falle"><span class="kastentitel">Typische Verwechslungen</span>
+    <ul>
+      <li><strong>Partiell oder transitiv?</strong> Schau, <em>wovon</em> das Attribut abhängt. Von einem <strong>Teil des Schlüssels</strong> → partiell → 2NF verletzt (Kurstitel hängt an KursNr). Von einem <strong>Nichtschlüsselattribut</strong> → transitiv → 3NF verletzt (Lehrer hängt an LehrerNr).</li>
+      <li><strong>„Nr“ heißt nicht „Schlüssel“:</strong> LehrerNr ist in der Tabelle Kurs ein ganz normales Nichtschlüsselattribut, denn dort ist KursNr der PK. Auch als Fremdschlüssel ist sie kein Schlüssel im Sinne der Normalisierung. Gerade deshalb ist KursNr → LehrerNr → Lehrer eine transitive Abhängigkeit.</li>
+    </ul>
+  </div>
+
+  <h4>Die drei Normalformen <span class="relevanz r-kern" title="3NF verlangt in 8 Prüfungen; die Regeln werden nie direkt abgefragt, sind aber Grundlage des Vorgehens">Prüfungskern – 8/9 – alle außer S24</span></h4>
   <table>
     <tr><th>NF</th><th>Regel</th><th>Typischer Verstoß</th><th>Lösung</th></tr>
     <tr><td><strong>1NF</strong></td><td>Alle Attributwerte sind <strong>atomar</strong> (ein Wert pro Feld), keine Wiederholungsgruppen.</td><td>„101 Mia Kramer, 102 Noah Ernst“ in einem Feld; „Petra Lang“ statt Vor- und Nachname getrennt</td><td>Mehrfachwerte in eigene Zeilen bzw. eigene Tabelle; zusammengesetzte Felder zerlegen</td></tr>
@@ -381,7 +443,7 @@
     Jedes Nichtschlüsselattribut hängt <strong>vom Schlüssel</strong> ab (1NF), <strong>vom ganzen Schlüssel</strong> (2NF) und <strong>von nichts als dem Schlüssel</strong> (3NF).<br>
     Die 2NF kann nur bei einem <strong>zusammengesetzten</strong> PK verletzt sein. Eine Tabelle in 1NF mit einspaltigem PK ist automatisch in 2NF.</div>
 
-  <h4>Durchgerechnetes Beispiel: Kursliste → 3NF</h4>
+  <h4>Durchgerechnetes Beispiel: Kursliste → 3NF <span class="relevanz r-kern" title="Übungsbeispiel zum 3NF-Vorgehen (8 Prüfungen)">Prüfungskern – 8/9 – alle außer S24</span></h4>
   <p><strong>1NF:</strong> Je Kurs und Teilnehmer eine eigene Zeile, Namen zerlegt. Schlüssel: (KursNr, SchuelerNr).</p>
   <p class="rm">Kursliste(<u>KursNr, SchuelerNr</u>, Kurstitel, LehrerNr, LehrerVorname, LehrerNachname, Raum, SchuelerVorname, SchuelerNachname)</p>
   <p><strong>2NF:</strong> Kurstitel, LehrerNr, Lehrername und Raum hängen nur von KursNr ab, die Schülernamen nur von SchuelerNr → auslagern.</p>
@@ -395,7 +457,7 @@
   <p class="rm">Belegung(<u>↑KursNr, ↑SchuelerNr</u>)</p>
   <p class="klein">Hätte ein Raum weitere Eigenschaften (Größe, Etage), bekäme auch er eine eigene Tabelle Raum(<u>RaumNr</u>, …) und Kurs einen FK RaumNr.</p>
 
-  <h4>Formular/Beleg → 3NF: So gehst du vor</h4>
+  <h4>Formular/Beleg → 3NF: So gehst du vor <span class="relevanz r-kern" title="Relationenmodell in 3NF aus Formular/Tabelle/Text: W21, S22, W22, S23, W23, W24, W25, S26">Prüfungskern – 8/9 – alle außer S24</span></h4>
   <ol>
     <li>Alle Felder des Formulars als Attributliste aufschreiben – auch Kopf- und Fußdaten.</li>
     <li><strong>Berechnete Felder streichen</strong> (Positionsbetrag, Summe, Steuerbetrag, Alter) – sie werden bei Bedarf per SQL berechnet.</li>
@@ -461,10 +523,10 @@
   </div>
 
   <!-- ======================= DB-03 ======================= -->
-  <h3 id="e-03">DB-03 · SQL: SELECT mit JOIN <span class="badge k-immer">Immer</span></h3>
-  <p class="klein">Vorkommen: 9/9 · Prüfungen: alle · Teil 2, Aufgabe 4 (die SQL-Aufgabe ist in allen 9 Prüfungen Aufgabe 4 von Teil 2)</p>
+  <h3 id="e-03">DB-03 · SQL: SELECT mit JOIN <span class="relevanz r-kern" title="Belege: S26 T2 A4b, A4ca (18 P); W25 T2 A4b, A4c, A4e (15 P); W24 T2 A4a, A4b, A4c (21 P); S24 T2 A4b, A4d, A4a (22 P); W23 T2 A4a, A4b, A4d, A4c (25 P); S23 T2 A4a, A4b, A4c (21 P); W22 T2 A4a, A4c (15 P); S22 T2 A4ba, A4bb, A4bc, A4bd (24 P); W21 T2 A4a, A4b, A4c, A4d, A4e (25 P).">Prüfungskern – 9/9 – alle</span></h3>
+  <p class="klein">Vorkommen: 9/9 · Prüfungen: alle · Teil 2, Aufgabe 4</p>
 
-  <h4>Aufbau einer Abfrage</h4>
+  <h4>Aufbau einer Abfrage <span class="relevanz r-kern" title="SELECT-Abfragen in jeder Prüfung (T2 A4)">Prüfungskern – 9/9 – alle</span></h4>
 <pre class="sql">SELECT   Spalten / Ausdrücke [AS Alias]   -- was wird angezeigt?
 FROM     Tabelle [Alias]
   [INNER | LEFT] JOIN Tabelle2 ON Bedingung
@@ -476,7 +538,7 @@ ORDER BY Spalte [ASC | DESC], …;</pre>
     Die <strong>Schreibreihenfolge</strong> ist fest: SELECT – FROM – (JOIN) – WHERE – GROUP BY – HAVING – ORDER BY.<br>
     Die <strong>Ausführungsreihenfolge</strong> ist eine andere: FROM/JOIN → WHERE → GROUP BY → HAVING → SELECT → ORDER BY. Darum darf ein Spaltenalias aus dem SELECT in ORDER BY verwendet werden, aber nicht in WHERE.</div>
 
-  <h4>Bedingungen in WHERE</h4>
+  <h4>Bedingungen in WHERE <span class="relevanz r-kern" title="WHERE in jeder Prüfung; LIKE W22 4c/W23 4a, IS NULL S23 4a/S26 4b, AND/OR W21 4e/W24 4a">Prüfungskern – 9/9 – alle</span></h4>
   <table>
     <tr><th>Operator</th><th>Beispiel</th><th>Bedeutung</th></tr>
     <tr><td><code>=  &lt;&gt;  &lt;  &gt;  &lt;=  &gt;=</code></td><td><code>Preis &gt;= 9</code></td><td>Vergleich (<code>&lt;&gt;</code> = ungleich)</td></tr>
@@ -488,7 +550,7 @@ ORDER BY Spalte [ASC | DESC], …;</pre>
   </table>
   <p>Texte und Datumswerte stehen in einfachen Anführungszeichen, Zahlen ohne. Dezimalpunkt statt Komma (<code>9.50</code>). Datumsliterale im Format <code>'JJJJ-MM-TT'</code>.</p>
 
-  <h4>Funktionen, berechnete Spalten, Alias</h4>
+  <h4>Funktionen, berechnete Spalten, Alias <span class="relevanz r-kern" title="Spaltenalias (Aufgabentext gibt Spaltennamen vor) in jeder Prüfung; YEAR/MONTH/WEEKDAY/Datumsdifferenz in S22, W22, S23, W23, S24, W24, S26. Grenzwertig, nicht mitgezählt: W21 (T2 A4d: Spaltenalias nicht verlangt, nur Ergebnisspalte &#x27;Anzahl&#x27;).">Prüfungskern – 8/9 – alle außer W21</span></h4>
   <table>
     <tr><th>Funktion (MySQL)</th><th>Ergebnis</th></tr>
     <tr><td><code>YEAR(d)</code>, <code>MONTH(d)</code>, <code>DAY(d)</code></td><td>Jahr, Monat (1–12), Tag aus einem Datum</td></tr>
@@ -515,7 +577,7 @@ WHERE  Titel LIKE '%ing%' OR Titel LIKE 'Y%';</pre>
 <tr><td>Spinning</td><td>10.00</td><td>100.00</td><td>90.00</td></tr>
 </table>
 
-  <h4>JOIN-Arten</h4>
+  <h4>JOIN-Arten <span class="relevanz r-kern" title="JOIN in jeder Prüfung; LEFT JOIN in S22, W22, S23, S26 (W23 4d: Kunde ohne Rechnung)">Prüfungskern – 9/9 – alle</span></h4>
   <p>Ein JOIN verbindet Tabellen über ihre Beziehung, fast immer <strong>FK = PK</strong>. Fehlt die ON-Bedingung, entsteht das kartesische Produkt (jede Zeile mit jeder).</p>
   <table>
     <tr><th>JOIN-Art</th><th>liefert</th></tr>
@@ -564,7 +626,7 @@ ORDER BY b.Datum;</pre>
 </table>
   <p class="klein">Die ältere Schreibweise <code>FROM Mitglied m, Buchung b, Kurs k WHERE b.MitgliedNr = m.MitgliedNr AND …</code> ist gleichwertig zum INNER JOIN und wird akzeptiert. Für einen LEFT JOIN braucht man aber die JOIN-Syntax.</p>
 
-  <h4>Die LEFT-JOIN-Falle: Bedingung in ON oder in WHERE?</h4>
+  <h4>Die LEFT-JOIN-Falle: Bedingung in ON oder in WHERE? <span class="relevanz r-kern" title="LEFT JOIN mit Bedingung auf die rechte Tabelle: W22 4a (Jahr 2022 in ON), S22 4bd, S23 4c, S26 4b (lebende Tiere); die Falle selbst wird nicht ausdrücklich gefragt. Grenzwertig, nicht mitgezählt: W23 (T2 A4d: Musterlösung mit korrelierter Unterabfrage, LEFT JOIN nur als Alternative).">Prüfungskern – 4/9 – S26, S23, W22, S22</span></h4>
   <p>Aufgabe: „Alle Mitglieder mit ihren Buchungen im April – <em>auch Mitglieder ohne April-Buchung</em> sollen erscheinen.“</p>
   <div class="nebeneinander">
     <div>
@@ -615,16 +677,16 @@ ORDER BY m.Nachname;</pre>
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
     <ul>
       <li>„Auch … ohne …“ = LEFT JOIN kam in <strong>S22, W22, S23, W23 und S26</strong> vor.</li>
-      <li><strong>W21 T2 4e (8 P):</strong> Join über 4 Tabellen mit ORDER BY; <strong>W24 T2 4c (12 P):</strong> 3-Tabellen-Join mit Datumsdifferenz; <strong>S23 T2 4b (8 P):</strong> 3-Tabellen-Join mit Wochentag und ORDER BY; <strong>W22 T2 4c (5 P):</strong> LIKE-Muster bei PLZ; <strong>W23 T2 4a (4 P):</strong> BETWEEN.</li>
+      <li><strong>W21 T2 4e (8 P):</strong> Join über 4 Tabellen mit ORDER BY; <strong>W24 T2 4c (12 P):</strong> 3-Tabellen-Join mit Datumsdifferenz; <strong>S23 T2 4b (8 P):</strong> 3-Tabellen-Join mit Wochentag und ORDER BY; <strong>W22 T2 4c (5 P):</strong> LIKE-Muster bei PLZ; <strong>W23 T2 4a (4 P):</strong> PLZ-Bereich 50800 bis 51999 (IHK-Lösung mit LIKE-Präfixen, alternativ BETWEEN).</li>
       <li>Punkte gibt es meist je Klausel (SELECT-Liste, FROM/JOIN, WHERE, ORDER BY) – schreibe also auch bei Unsicherheit alle Teile hin.</li>
     </ul>
   </div>
 
   <!-- ======================= DB-04 ======================= -->
-  <h3 id="e-04">DB-04 · SQL: Aggregatfunktionen, GROUP BY und HAVING <span class="badge k-immer">Immer</span></h3>
+  <h3 id="e-04">DB-04 · SQL: Aggregatfunktionen, GROUP BY und HAVING <span class="relevanz r-kern" title="Belege: S26 T2 A4b, A4ca (18 P); W25 T2 A4b, A4c, A4e (15 P); S24 T2 A4b, A4d (20 P); W23 T2 A4b, A4d (13 P); S23 T2 A4a, A4c (13 P); W22 T2 A4a (10 P); S22 T2 A4bc (6 P); W21 T2 A4d (6 P).">Prüfungskern – 8/9 – alle außer W24</span></h3>
   <p class="klein">Vorkommen: 8/9 · Prüfungen: alle außer W24 · Teil 2, Aufgabe 4</p>
 
-  <h4>Aggregatfunktionen</h4>
+  <h4>Aggregatfunktionen <span class="relevanz r-kern" title="COUNT/SUM/AVG/MIN/MAX in allen Prüfungen außer W24">Prüfungskern – 8/9 – alle außer W24</span></h4>
   <table>
     <tr><th>Funktion</th><th>liefert</th><th>NULL-Werte</th></tr>
     <tr><td><code>COUNT(*)</code></td><td>Anzahl Zeilen</td><td>werden mitgezählt</td></tr>
@@ -647,7 +709,7 @@ FROM   Kurs;</pre>
 <tr><td>4</td><td>3</td><td>2</td></tr>
 </table>
 
-  <h4>GROUP BY</h4>
+  <h4>GROUP BY <span class="relevanz r-kern" title="GROUP BY in allen Prüfungen außer W24">Prüfungskern – 8/9 – alle außer W24</span></h4>
   <p>Ohne GROUP BY fasst eine Aggregatfunktion die ganze (gefilterte) Tabelle zu <strong>einer</strong> Zeile zusammen. Mit GROUP BY entsteht <strong>je Gruppe eine Zeile</strong>.</p>
   <div class="merke"><span class="kastentitel">Merke – GROUP-BY-Regel</span>
     Jede Spalte im SELECT, die <strong>nicht</strong> in einer Aggregatfunktion steht, muss auch im GROUP BY stehen. (MySQL ist je nach Einstellung toleranter – die Prüfung erwartet die Regel.)</div>
@@ -666,7 +728,7 @@ ORDER BY Anzahl DESC;</pre>
 </table>
   <p>„Boxen“ hat keine Buchung. Nach dem LEFT JOIN existiert trotzdem <strong>eine</strong> Zeile (mit NULL in den Buchungsspalten). <code>COUNT(*)</code> zählt diese Zeile mit (1), <code>COUNT(b.BuchungNr)</code> zählt nur echte Buchungen (0).</p>
 
-  <h4>WHERE oder HAVING?</h4>
+  <h4>WHERE oder HAVING? <span class="relevanz r-vor" title="HAVING: W21 4d (COUNT &gt; 50), W25 4c (COUNT &gt;= 3)">Kam vor – 2/9 – W25, W21</span></h4>
   <table>
     <tr><th></th><th>WHERE</th><th>HAVING</th></tr>
     <tr><td>filtert</td><td>einzelne Zeilen</td><td>Gruppen</td></tr>
@@ -686,7 +748,7 @@ HAVING COUNT(*) &gt;= 2;                -- Gruppenfilter</pre>
 <tr><td>2</td><td>Kurz</td><td>2</td></tr>
 </table>
 
-  <h4>So gehst du vor</h4>
+  <h4>So gehst du vor <span class="relevanz r-kern" title="Gruppierungsaufgaben (je/pro, COUNT/SUM/AVG, LEFT JOIN + COUNT) in 8 Prüfungen">Prüfungskern – 8/9 – alle außer W24</span></h4>
   <ol>
     <li>„je …“, „pro …“, „für jede(n) …“ → das ist die <strong>GROUP-BY-Spalte</strong> (plus die Spalten, die dazu angezeigt werden sollen).</li>
     <li>„Anzahl“ → COUNT, „Summe/Umsatz/Gesamt“ → SUM, „Durchschnitt“ → AVG, „höchste/niedrigste/letzte“ → MAX/MIN.</li>
@@ -700,22 +762,22 @@ HAVING COUNT(*) &gt;= 2;                -- Gruppenfilter</pre>
       <li><code>COUNT(*)</code> nach LEFT JOIN liefert 1 statt 0.</li>
       <li>Spalte im SELECT, aber nicht im GROUP BY.</li>
       <li>AVG ignoriert NULL; sollen fehlende Werte als 0 zählen: <code>AVG(COALESCE(Spalte, 0))</code>.</li>
-      <li>Mit Aggregaten darf man rechnen, z. B. Durchschnitt pro Monat <code>COUNT(*) / 12</code> (S23).</li>
+      <li>Mit Aggregaten darf man rechnen, z. B. Durchschnitt pro Monat <code>COUNT(P.MID_Ist) / 12</code> (S23).</li>
     </ul>
   </div>
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
     <ul>
-      <li><strong>W21 T2 4d (6 P):</strong> GROUP BY mit <code>HAVING COUNT(…) &gt; 50</code>; <strong>W25 T2 4c (5 P):</strong> <code>HAVING COUNT(*) &gt;= 3</code>.</li>
+      <li><strong>W21 T2 4d (6 P):</strong> GROUP BY mit <code>HAVING COUNT(…) &gt; 50</code>; <strong>W25 T2 4c (5 P):</strong> <code>HAVING COUNT(b.BID) &gt;= 3</code>.</li>
       <li><strong>W25 T2 4b/4e:</strong> SUM über 4 Tabellen, SUM je Kategorie mit ORDER BY DESC; <strong>S24 T2 4b (8 P):</strong> MIN/MAX/AVG/COUNT je Börse.</li>
       <li><strong>S22 T2 4bc, S23 T2 4c, W22 T2 4a, S26 T2 4b:</strong> LEFT JOIN + GROUP BY (Anzahl/Summe auch für Datensätze ohne Partner).</li>
     </ul>
   </div>
 
   <!-- ======================= DB-05 ======================= -->
-  <h3 id="e-05">DB-05 · SQL: INSERT, UPDATE, DELETE <span class="badge k-meistens">Meistens</span></h3>
-  <p class="klein">Vorkommen: 7/9 · Prüfungen: W21, S22, W22, W23, S24, W25, S26 · Teil 2, Aufgabe 4</p>
+  <h3 id="e-05">DB-05 · SQL: INSERT, UPDATE, DELETE <span class="relevanz r-kern" title="Belege: S26 T2 A4ca, A4cb (14 P); W25 T2 A4a, A4d (10 P); S24 T2 A4c, A4a (10 P); W23 T2 A4c (8 P); W22 T2 A4b (10 P); S22 T2 A4bb (5 P); W21 T2 A4c (5 P).">Prüfungskern – 7/9 – alle außer W24, S23</span></h3>
+  <p class="klein">Vorkommen: 7/9 · Prüfungen: alle außer W24, S23 · Teil 2, Aufgabe 4</p>
 
-  <h4>INSERT – Datensätze einfügen</h4>
+  <h4>INSERT – Datensätze einfügen <span class="relevanz r-kern" title="INSERT in W25 4a; INSERT … SELECT in W22, S24, S26 baut darauf auf">Prüfungskern – 4/9 – S26, W25, S24, W22</span></h4>
 <pre class="sql">INSERT INTO Mitglied (MitgliedNr, Vorname, Nachname, Ort, Eintritt)
 VALUES (5, 'Eva', 'Lorenz', 'Bonn', '2026-10-01');
 
@@ -728,7 +790,7 @@ VALUES (4, 'Kai Brehm'), (5, 'Ina Vogt');</pre>
     <li>Eine Spalte mit <code>AUTO_INCREMENT</code> lässt man weg – das DBMS vergibt die Nummer.</li>
   </ul>
 
-  <h4>UPDATE – Werte ändern</h4>
+  <h4>UPDATE – Werte ändern <span class="relevanz r-kern" title="W21 4c (+5 %), W23 4c (UPDATE mit JOIN), W25 4d (UPDATE mit SUBSTRING)">Prüfungskern – 3/9 – W25, W23, W21</span></h4>
 <pre class="sql">UPDATE Kurs
 SET    Preis = Preis * 1.05              -- Preis um 5 % erhöhen
 WHERE  TrainerNr = 1;
@@ -745,7 +807,7 @@ SET    k.Preis = k.Preis - 1
 WHERE  t.Name = 'Omar Haddad';</pre>
   <div class="merke"><span class="kastentitel">Merke</span><code>UPDATE</code> und <code>DELETE</code> <strong>ohne WHERE</strong> betreffen <strong>alle</strong> Zeilen der Tabelle. Mehrere Spalten trennt man im SET mit Komma: <code>SET Preis = 9.50, TrainerNr = 2</code>.</div>
 
-  <h4>DELETE – Datensätze löschen</h4>
+  <h4>DELETE – Datensätze löschen <span class="relevanz r-kern" title="S22 4bb, W22 4b, S24 4a/4c, S26 4cb">Prüfungskern – 4/9 – S26, S24, W22, S22</span></h4>
 <pre class="sql">DELETE FROM Buchung
 WHERE  Datum &lt; '2026-04-01';</pre>
   <p><strong>Referenzielle Integrität:</strong> Ein Datensatz, auf den noch ein Fremdschlüssel zeigt, kann (ohne <code>ON DELETE CASCADE</code>) nicht gelöscht werden. Deshalb gilt:</p>
@@ -763,7 +825,7 @@ DELETE FROM Mitglied WHERE MitgliedNr = 2;   -- 2. Eltern</pre>
     <tr><td><code>DROP TABLE t</code></td><td>löscht die Tabelle samt Struktur und Daten</td></tr>
   </table>
 
-  <h4>Archivierungsmuster: INSERT … SELECT + DELETE</h4>
+  <h4>Archivierungsmuster: INSERT … SELECT + DELETE <span class="relevanz r-kern" title="Daten in Archivtabelle verschieben: W22 4b, S24 4c, S26 4ca/4cb">Prüfungskern – 3/9 – S26, S24, W22</span></h4>
   <p>Alte Datensätze werden aus der Arbeitstabelle in eine Archivtabelle <strong>verschoben</strong>: Die Arbeitstabelle bleibt klein und schnell, die Historie bleibt erhalten.</p>
 <pre class="sql">START TRANSACTION;
 
@@ -808,10 +870,10 @@ GROUP BY k.KursNr, k.Titel, t.Name;</pre>
   </div>
 
   <!-- ======================= DB-06 ======================= -->
-  <h3 id="e-06">DB-06 · Datenbank-Theorie: ACID, Transaktion, Integrität, Index, NoSQL <span class="badge k-meistens">Meistens</span></h3>
-  <p class="klein">Vorkommen: 6/9 · Prüfungen: S22, W22, S23, W23, W24, W25 · meist Teil 1</p>
+  <h3 id="e-06">DB-06 · Datenbank-Theorie: ACID, Transaktion, Integrität, Index, NoSQL <span class="relevanz r-kern" title="Belege: S26 T2 A4cb (4 P); W25 T1 A4a, A4b (8 P); W23 T1 A3a, A3b, A3ca, A3cb (25 P); S23 T1 A4ca (3 P); W22 T1 A4c (5 P); S22 T2 A4ac, A4ba (5 P), T1 A2c (9 P).">Prüfungskern – 6/9 – S26, W25, W23, S23, W22, S22</span></h3>
+  <p class="klein">Vorkommen: 6/9 · Prüfungen: S26, W25, W23, S23, W22, S22 · Teil 1, Aufgabe 4 (außerdem Aufgabe 2 in S22, Aufgabe 3 in W23) und Teil 2 (S26, S22)</p>
 
-  <h4>Transaktion und ACID</h4>
+  <h4>Transaktion und ACID <span class="relevanz r-vor" title="ACID-Eigenschaften erläutern (W23 T1 3a, 8 P)">Kam vor – 1/9 – W23</span></h4>
   <p>Eine <strong>Transaktion</strong> ist eine Folge von Datenbankoperationen, die als logische Einheit <strong>ganz oder gar nicht</strong> ausgeführt wird. <code>START TRANSACTION</code> beginnt sie, <code>COMMIT</code> macht die Änderungen dauerhaft, <code>ROLLBACK</code> nimmt alle Änderungen seit Beginn zurück.</p>
   <p>Beispiel: Ein Mitglied wird von Kurs A nach Kurs B umgebucht (DELETE der alten + INSERT der neuen Buchung). Fällt nach dem DELETE der Server aus, wäre das Mitglied ohne Transaktion in gar keinem Kurs mehr.</p>
   <table>
@@ -822,7 +884,7 @@ GROUP BY k.KursNr, k.Titel, t.Name;</pre>
     <tr><td><strong>D</strong>urability – Dauerhaftigkeit</td><td>Nach dem COMMIT bleiben die Änderungen erhalten, auch bei Absturz oder Stromausfall.</td><td>Bestätigte Buchung ist nach dem Neustart noch da.</td></tr>
   </table>
 
-  <h4>Referenzielle Integrität</h4>
+  <h4>Referenzielle Integrität <span class="relevanz r-vor" title="S26 T2 4cb: Löschreihenfolge wegen Fremdschlüssel">Kam vor – 1/9 – S26</span></h4>
   <p>Jeder Fremdschlüsselwert muss als Primärschlüsselwert in der referenzierten Tabelle existieren (oder NULL sein, wenn erlaubt). Das DBMS verhindert daher</p>
   <ul>
     <li>das Einfügen/Ändern eines FK-Werts, zu dem es keinen PK gibt (Buchung für Mitglied 99, das nicht existiert),</li>
@@ -836,7 +898,7 @@ GROUP BY k.KursNr, k.Titel, t.Name;</pre>
   </table>
 <pre class="sql">FOREIGN KEY (TrainerNr) REFERENCES Trainer (TrainerNr) ON DELETE SET NULL</pre>
 
-  <h4>Index</h4>
+  <h4>Index <span class="relevanz r-vor" title="S22 4ac (Zweck des Index) und 4ba (CREATE INDEX)">Kam vor – 1/9 – S22</span></h4>
   <p>Ein Index ist eine zusätzliche, sortierte Datenstruktur (meist ein B-Baum) über eine oder mehrere Spalten – vergleichbar mit dem Stichwortverzeichnis eines Buches. Ohne Index muss das DBMS bei einer Suche die ganze Tabelle lesen (Full Table Scan).</p>
   <table>
     <tr><th>Vorteile</th><th>Nachteile</th></tr>
@@ -845,10 +907,10 @@ GROUP BY k.KursNr, k.Titel, t.Name;</pre>
   <p><strong>Sinnvoll</strong> für Spalten, die oft in WHERE, JOIN (Fremdschlüssel!) oder ORDER BY vorkommen, bei großen Tabellen und Spalten mit vielen verschiedenen Werten. <strong>Wenig sinnvoll</strong> bei kleinen Tabellen, bei Spalten mit wenigen verschiedenen Werten (z. B. ja/nein) und bei Tabellen mit sehr vielen Schreibzugriffen. Der Primärschlüssel ist automatisch indiziert.</p>
 <pre class="sql">CREATE INDEX idx_buchung_datum ON Buchung (Datum);</pre>
 
-  <h4>Redundanz und Anomalien</h4>
+  <h4>Redundanz und Anomalien <span class="relevanz r-vor" title="Verweis auf DB-02; eigener Inhalt (gewollte Redundanz) nie gefragt; Redundanz/Anomalien S23, W25">Kam vor – 2/9 – W25, S23</span></h4>
   <p>Siehe <a href="#e-02">DB-02</a>. Ergänzung: <strong>Gewollte Redundanz</strong> gibt es z. B. in Archiv- und Auswertungstabellen (Data Warehouse), bei bewusster Denormalisierung für schnellere Abfragen und bei Datensicherungen.</p>
 
-  <h4>NoSQL und dokumentenorientierte Datenbanken</h4>
+  <h4>NoSQL und dokumentenorientierte Datenbanken <span class="relevanz r-kern" title="NoSQL: S22 2c (9 P), W22 4c (5 P), W23 3a/3b/3ca/3cb (Dokumenten-DB, JSON)">Prüfungskern – 3/9 – W23, W22, S22</span></h4>
   <p><strong>NoSQL</strong> („not only SQL“) bezeichnet Datenbanken ohne festes Tabellenschema. Arten: <strong>Dokumentenorientiert</strong> (JSON-Dokumente, z. B. MongoDB), <strong>Key-Value</strong> (Schlüssel → Wert, z. B. Cache, Sitzungsdaten), <strong>spaltenorientiert</strong> (Wide Column, sehr große verteilte Datenmengen), <strong>Graph</strong> (Knoten und Kanten, z. B. soziale Netze, Routen).</p>
   <table>
     <tr><th>Relational</th><th>Dokumentenorientiert</th></tr>
@@ -906,8 +968,8 @@ GROUP BY k.KursNr, k.Titel, t.Name;</pre>
   </div>
 
   <!-- ======================= DB-07 ======================= -->
-  <h3 id="e-07">DB-07 · SQL: Unterabfragen <span class="badge k-oft">Oft</span></h3>
-  <p class="klein">Vorkommen: 5/9 · Prüfungen: W21, S22, W22, W23, S26 · Teil 2, Aufgabe 4</p>
+  <h3 id="e-07">DB-07 · SQL: Unterabfragen <span class="relevanz r-vor" title="Belege: W23 T2 A4d (8 P); S22 T2 A4bb (5 P). Grenzwertig, nicht mitgezählt: S26 (T2 A4cb: DELETE &#x27;mit Unterabfrage oder WHERE&#x27;, Unterabfrage nicht zwingend); W21 (T2 A4c: UPDATE für Hersteller CCC, Unterabfrage möglich, ohne Musterlösung nicht belegt).">Kam vor – 2/9 – W23, S22</span></h3>
+  <p class="klein">Vorkommen: 2/9 · Prüfungen: W23, S22 · Teil 2, Aufgabe 4</p>
   <p>Eine Unterabfrage (Subquery) ist ein SELECT in Klammern innerhalb einer anderen Anweisung (SELECT, UPDATE, DELETE, INSERT).</p>
   <table>
     <tr><th>Art</th><th>liefert</th><th>verwendet mit</th></tr>
@@ -942,7 +1004,7 @@ WHERE  NOT EXISTS (SELECT * FROM Buchung b WHERE b.MitgliedNr = m.MitgliedNr);</
 <tr><th>Nachname</th></tr>
 <tr><td>Wolf</td></tr>
 </table>
-  <h4>Korreliert oder nicht korreliert?</h4>
+  <h4>Korreliert oder nicht korreliert? <span class="relevanz r-vor" title="Unterabfragen: W21 4c (UPDATE mit Unterabfrage), S22 4bb (NOT IN/NOT EXISTS), W23 4d (korrelierte Unterabfrage), S26 4cb (DELETE über Unterabfrage); W21/S26 grenzwertig">Kam vor – 2/9 – W23, S22</span></h4>
   <ul>
     <li><strong>Nicht korreliert:</strong> Die Unterabfrage ist unabhängig von der äußeren Abfrage, wird einmal ausgewertet und das Ergebnis verwendet (Beispiele AVG und IN oben).</li>
     <li><strong>Korreliert:</strong> Die Unterabfrage verweist auf eine Spalte der äußeren Abfrage (z. B. <code>m.MitgliedNr</code>) und wird gedanklich <strong>für jede Zeile der äußeren Abfrage neu</strong> ausgeführt (Beispiel NOT EXISTS oben).</li>
@@ -981,15 +1043,15 @@ FROM   (SELECT KursNr, COUNT(*) AS Anzahl
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span>
     <ul>
       <li><strong>S22 T2 4bb (5 P):</strong> DELETE mit NOT IN bzw. NOT EXISTS; <strong>W23 T2 4d (8 P):</strong> korrelierte Unterabfrage mit AVG; <strong>W21 T2 4c (5 P):</strong> UPDATE mit Unterabfrage; <strong>S26 T2 4cb:</strong> DELETE mit Unterabfrage.</li>
-      <li>Der IHK-Belegsatz enthält IN/NOT IN, EXISTS/NOT EXISTS und die Unterabfrage in FROM – nachschlagen erlaubt!</li>
+      <li>Der IHK-Belegsatz enthält IN/NOT IN, EXISTS/NOT EXISTS und die Unterabfrage in FROM (so ab S22; im W21-Belegsatz fehlen IN und die Unterabfrage in FROM, dort gibt es nur EXISTS/NOT EXISTS und die Unterabfrage im Spaltenausdruck) – nachschlagen erlaubt!</li>
     </ul>
   </div>
 
   <!-- ======================= DB-08 ======================= -->
-  <h3 id="e-08">DB-08 · SQL: DDL (CREATE, ALTER, DROP, INDEX) <span class="badge k-oft">Oft</span></h3>
-  <p class="klein">Vorkommen: 5/9 · Prüfungen: W21, S22, W22, W25, S26 · Teil 2, Aufgabe 3/4</p>
+  <h3 id="e-08">DB-08 · SQL: DDL (CREATE, ALTER, DROP, INDEX) <span class="relevanz r-kern" title="Belege: S26 T2 A4a (3 P); W25 T2 A4d (8 P); W22 T2 A3c (3 P); S22 T2 A4ba (3 P); W21 T2 A4a (3 P).">Prüfungskern – 5/9 – S26, W25, W22, S22, W21</span></h3>
+  <p class="klein">Vorkommen: 5/9 · Prüfungen: S26, W25, W22, S22, W21 · Teil 2, Aufgabe 4 (außerdem Aufgabe 3 in W22)</p>
 
-  <h4>SQL-Teilsprachen und CRUD</h4>
+  <h4>SQL-Teilsprachen und CRUD <span class="relevanz r-vor" title="CRUD den DDL/DML/DQL-Befehlen zuordnen (S26 T2 4a)">Kam vor – 1/9 – S26</span></h4>
   <table>
     <tr><th>Teilsprache</th><th>Zweck</th><th>Befehle</th></tr>
     <tr><td><strong>DDL</strong> – Data Definition Language</td><td>Struktur definieren</td><td><code>CREATE</code>, <code>ALTER</code>, <code>DROP</code> (auch <code>TRUNCATE</code>)</td></tr>
@@ -999,7 +1061,7 @@ FROM   (SELECT KursNr, COUNT(*) AS Anzahl
   </table>
   <p><strong>CRUD</strong> (Create, Read, Update, Delete) sind die vier Grundoperationen auf <em>Daten</em>: Create → <code>INSERT</code>, Read → <code>SELECT</code>, Update → <code>UPDATE</code>, Delete → <code>DELETE</code> – also alles <strong>DML</strong>. (Nicht verwechseln: <code>CREATE TABLE</code> und <code>DROP TABLE</code> sind DDL.)</p>
 
-  <h4>Datentypen</h4>
+  <h4>Datentypen <span class="relevanz r-kern" title="Datentypen wählen: W21 4a, W22 3c, W25 4d">Prüfungskern – 3/9 – W25, W22, W21</span></h4>
   <table>
     <tr><th>Datentyp</th><th>Verwendung</th><th>Beispiel</th></tr>
     <tr><td><code>INTEGER</code> (<code>INT</code>)</td><td>Ganzzahlen, IDs, Mengen</td><td>MitgliedNr, Anzahl</td></tr>
@@ -1015,7 +1077,7 @@ FROM   (SELECT KursNr, COUNT(*) AS Anzahl
     <strong>PLZ, Telefonnummer, Hausnummer, IBAN als Text</strong> (CHAR/VARCHAR): Es gibt führende Nullen (01067), Sonderzeichen (+49, 12a) und es wird nicht damit gerechnet.<br>
     <strong>Geldbeträge als DECIMAL</strong>, nicht als DOUBLE (keine Rundungsfehler).</div>
 
-  <h4>CREATE TABLE mit Einschränkungen (Constraints)</h4>
+  <h4>CREATE TABLE mit Einschränkungen (Constraints) <span class="relevanz r-vor" title="CREATE TABLE (W21 T2 4a)">Kam vor – 1/9 – W21</span></h4>
   <table>
     <tr><th>Constraint</th><th>Bedeutung</th></tr>
     <tr><td><code>PRIMARY KEY (Spalte[, …])</code></td><td>Primärschlüssel (eindeutig, nicht NULL); mehrere Spalten = zusammengesetzter PK</td></tr>
@@ -1037,7 +1099,7 @@ FROM   (SELECT KursNr, COUNT(*) AS Anzahl
 );</pre>
   <p>Reihenfolge: Die referenzierte Tabelle (Trainer) muss <strong>vorher</strong> existieren; beim Löschen mit <code>DROP TABLE</code> umgekehrt. Der Datentyp des FK muss zum PK passen. Zusammengesetzter PK: <code>PRIMARY KEY (MitgliedNr, KursNr, Datum)</code>.</p>
 
-  <h4>ALTER TABLE, DROP, CREATE INDEX</h4>
+  <h4>ALTER TABLE, DROP, CREATE INDEX <span class="relevanz r-vor" title="CREATE INDEX (S22 4ba), ALTER TABLE ADD/DROP (W25 4d)">Kam vor – 2/9 – W25, S22</span></h4>
 <pre class="sql">ALTER TABLE Mitglied ADD COLUMN Email VARCHAR(80);
 ALTER TABLE Mitglied DROP COLUMN Ort;
 ALTER TABLE Mitglied MODIFY COLUMN Nachname VARCHAR(60) NOT NULL;   -- MySQL
@@ -1065,8 +1127,8 @@ UPDATE Mitglied SET Standort = LEFT(Mitgliedscode, 2);     -- oder SUBSTRING(Mit
   </div>
 
   <!-- ======================= DB-09 ======================= -->
-  <h3 id="e-09">DB-09 · SQL: UNION <span class="badge k-sonstige">Sonstige</span></h3>
-  <p class="klein">Vorkommen: 1/9 · Prüfung: S24 (T2 4d, 12 P)</p>
+  <h3 id="e-09">DB-09 · SQL: UNION <span class="relevanz r-vor" title="Belege: S24 T2 A4d (12 P).">Kam vor – 1/9 – S24</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfungen: S24 · Teil 2, Aufgabe 4</p>
   <p><code>UNION</code> hängt die Ergebnisse zweier SELECT-Anweisungen <strong>untereinander</strong> (ein JOIN verbindet dagegen nebeneinander).</p>
   <ul>
     <li>Beide SELECTs brauchen die <strong>gleiche Anzahl Spalten</strong> mit <strong>kompatiblen Datentypen in gleicher Reihenfolge</strong>.</li>
@@ -1103,8 +1165,8 @@ ORDER BY Jahr;</pre>
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>S24 T2 4d (12 P):</strong> Auswertung je Jahr (MIN, MAX, COUNT) über eine aktuelle Tabelle und ihre Archivtabelle mit <code>UNION ALL</code>, <code>GROUP BY YEAR(…)</code> und <code>ORDER BY … DESC</code>. Vorher (4c) wurde ins Archiv verschoben – die Aufgaben bauen aufeinander auf.</div>
 
   <!-- ======================= DB-10 ======================= -->
-  <h3 id="e-10">DB-10 · SQL: Benutzer und Rechte (CREATE USER, GRANT, REVOKE) <span class="badge k-sonstige">Sonstige</span></h3>
-  <p class="klein">Vorkommen: 1/9 · Prüfung: S23 (T2 4d, 4 P)</p>
+  <h3 id="e-10">DB-10 · SQL: Benutzer und Rechte (CREATE USER, GRANT, REVOKE) <span class="relevanz r-vor" title="Belege: S23 T2 A4d (4 P).">Kam vor – 1/9 – S23</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfungen: S23 · Teil 2, Aufgabe 4</p>
 <pre class="sql">CREATE USER rezeption IDENTIFIED BY 'Passwort';           -- MySQL genauer: 'rezeption'@'localhost'
 GRANT SELECT, INSERT, UPDATE ON fitness.Mitglied TO rezeption;
 GRANT SELECT ON fitness.Kurs TO rezeption;                  -- je Tabelle ein GRANT (oder fitness.* für alle)
@@ -1129,8 +1191,8 @@ DROP USER rezeption;</pre>
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>S23 T2 4d (4 P):</strong> Benutzer anlegen und ihm ein Leserecht geben. Die Syntax (<code>CREATE … IDENTIFIED BY</code>, <code>GRANT … ON … TO</code>, <code>REVOKE … ON … FROM</code>) steht im Belegsatz.</div>
 
   <!-- ======================= DB-11 ======================= -->
-  <h3 id="e-11">DB-11 · Trigger, Stored Procedure, View <span class="badge k-sonstige">Sonstige</span></h3>
-  <p class="klein">Vorkommen: 1/9 · Prüfung: S22 (T2 4aa/4ab, je 2 P)</p>
+  <h3 id="e-11">DB-11 · Trigger, Stored Procedure, View <span class="relevanz r-vor" title="Belege: S22 T2 A4aa, A4ab (4 P).">Kam vor – 1/9 – S22</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfungen: S22 · Teil 2, Aufgabe 4</p>
   <table>
     <tr><th></th><th>View (Sicht)</th><th>Stored Procedure</th><th>Trigger</th></tr>
     <tr><td>Was?</td><td>gespeicherte SELECT-Abfrage, die wie eine (virtuelle) Tabelle benutzt wird; speichert selbst keine Daten</td><td>in der Datenbank gespeicherte, benannte Folge von SQL-Anweisungen mit Parametern (auch Variablen, Verzweigungen)</td><td>SQL-Code, der <strong>automatisch</strong> bei einem Ereignis (INSERT, UPDATE, DELETE) auf einer Tabelle ausgeführt wird</td></tr>
@@ -1162,12 +1224,12 @@ VALUES (OLD.KursNr, OLD.Preis, NEW.Preis, NOW());</pre>
     <tr><td><strong>Vorteile</strong></td><td>gilt für alle Anwendungen, die auf die DB zugreifen; Datenintegrität unabhängig vom Client; weniger Datenübertragung; Performance</td></tr>
     <tr><td><strong>Nachteile</strong></td><td>herstellerspezifische Syntax (Bindung an ein DBMS); schwerer zu testen, zu debuggen und zu versionieren; Trigger laufen „unsichtbar“ – Seiteneffekte werden leicht übersehen; Last liegt auf dem DB-Server</td></tr>
   </table>
-  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>S22 T2 4aa/4ab (je 2 P):</strong> „Erläutern Sie, was man unter einer Stored Procedure / einem Trigger versteht.“ Die Syntax steht nicht im Belegsatz – gefragt ist vor allem die Erklärung (Was? Wann ausgelöst? Wozu?).</div>
+  <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>S22 T2 4aa/4ab (je 2 P):</strong> „Beschreiben Sie, was Sie unter dem Begriff ‚Stored Procedure‘ verstehen.“ bzw. „Beschreiben Sie, was ein Trigger ist.“ Die Syntax steht nicht im Belegsatz – gefragt ist vor allem die Erklärung (Was? Wann ausgelöst? Wozu?).</div>
 
   <!-- ======================= DB-12 ======================= -->
-  <h3 id="e-12">DB-12 · Datenqualität beim Import von Altdaten <span class="badge k-sonstige">Sonstige</span></h3>
-  <p class="klein">Vorkommen: 1/9 · Prüfung: W24 (T2 3b, 13 P)</p>
-  <h4>Kriterien der Datenqualität</h4>
+  <h3 id="e-12">DB-12 · Datenqualität beim Import von Altdaten <span class="relevanz r-vor" title="Belege: W24 T2 A3ba, A3bb, A3bc (13 P).">Kam vor – 1/9 – W24</span></h3>
+  <p class="klein">Vorkommen: 1/9 · Prüfungen: W24 · Teil 2, Aufgabe 3</p>
+  <h4>Kriterien der Datenqualität <span class="relevanz r-vor" title="Datenqualitätsprobleme beschreiben (W24 T2 3ba)">Kam vor – 1/9 – W24</span></h4>
   <table>
     <tr><th>Kriterium</th><th>Frage</th></tr>
     <tr><td>Vollständigkeit</td><td>Sind alle Pflichtangaben vorhanden?</td></tr>
@@ -1179,7 +1241,7 @@ VALUES (OLD.KursNr, OLD.Preis, NEW.Preis, NOW());</pre>
     <tr><td>Gültigkeit / Plausibilität</td><td>Liegen die Werte im zulässigen Bereich (kein 31.02., kein negativer Preis)?</td></tr>
     <tr><td>Aktualität</td><td>Sind die Daten auf dem neuesten Stand?</td></tr>
   </table>
-  <h4>Typische Probleme manuell gepflegter Altdaten</h4>
+  <h4>Typische Probleme manuell gepflegter Altdaten <span class="relevanz r-vor" title="drei Datenqualitätsprobleme mit Folge (W24 3ba, 9 P)">Kam vor – 1/9 – W24</span></h4>
   <p>Beispiel: Mitgliederliste eines Sportvereins (Excel):</p>
   <table class="daten">
     <tr><th>Name</th><th>Geburtstag</th><th>Abteilung</th><th>Beitrag</th></tr>
@@ -1196,7 +1258,7 @@ VALUES (OLD.KursNr, OLD.Preis, NEW.Preis, NOW());</pre>
     <tr><td>Dubletten</td><td>„Meier, Anna“ und „A. Meier“</td><td>dieselbe Person doppelt im System → doppelte Rechnungen, falsche Statistik, PK-/UNIQUE-Verletzung</td></tr>
     <tr><td>ungültige Werte, Tippfehler, Text statt Wert</td><td>„12o“ (Buchstabe o), „frei“</td><td>Typfehler beim Import; Werte müssen per Regel übersetzt werden („frei“ → 0)</td></tr>
   </table>
-  <h4>ETL und Vorgehen beim Import</h4>
+  <h4>ETL und Vorgehen beim Import <span class="relevanz r-vor" title="Importweg (W24 3bb)">Kam vor – 1/9 – W24</span></h4>
   <p><strong>ETL</strong> = <strong>E</strong>xtract (Daten aus der Quelle lesen, z. B. CSV-Export der Excel-Datei) – <strong>T</strong>ransform (bereinigen, vereinheitlichen, aufteilen, Dubletten zusammenführen, Schlüssel zuordnen, prüfen) – <strong>L</strong>oad (in die Zieltabellen laden, Reihenfolge der Fremdschlüssel beachten).</p>
   <ol>
     <li><strong>Analyse (Profiling):</strong> Formate, Leerwerte, Ausreißer und Dubletten feststellen und zählen.</li>
@@ -1206,7 +1268,7 @@ VALUES (OLD.KursNr, OLD.Preis, NEW.Preis, NOW());</pre>
     <li>Nicht automatisch lösbare Fälle in eine <strong>Fehlerliste</strong> → manuelle Klärung durch die Fachabteilung.</li>
     <li><strong>Prüfen:</strong> Plausibilitätsregeln, Stichproben, Summen-/Anzahlabgleich; erst Testimport, dann produktiver Import.</li>
   </ol>
-  <h4>Bewertung: Lohnt sich der Import?</h4>
+  <h4>Bewertung: Lohnt sich der Import? <span class="relevanz r-vor" title="Importidee beurteilen (W24 3bc)">Kam vor – 1/9 – W24</span></h4>
   <p>Abzuwägen sind <strong>Aufwand</strong> (Datenmenge, Fehlerquote, Anteil manueller Nacharbeit) und <strong>Nutzen</strong> (Bedeutung der Historie für Auswertungen, Gewährleistung, gesetzliche Aufbewahrungspflichten, Risiko falscher Daten im neuen System). Mögliche Ergebnisse: vollständiger Import nach Bereinigung, <strong>Teilimport</strong> (z. B. nur Stammdaten oder nur die letzten Jahre) oder <strong>kein Import</strong> (Altdaten schreibgeschützt archivieren, Neuerfassung).</p>
   <div class="merke"><span class="kastentitel">Merke</span>Bei „Beurteilen Sie …“ zählt die <strong>begründete</strong> Entscheidung. Ob du für oder gegen den Import argumentierst, ist egal – es müssen Argumente aus der Situation kommen (Datenmenge, Fehlerarten, Nutzen).</div>
   <div class="tipp"><span class="kastentitel">So wird es in der Prüfung gefragt</span><strong>W24 T2 3ba (9 P):</strong> Drei Probleme bezüglich der Datenqualität beschreiben und je eine Folge des Imports nennen (3 × 3 P). <strong>3bb (2 P):</strong> Einen Weg aufzeigen, wie die Daten dennoch importiert werden können. <strong>3bc (2 P):</strong> Die Importidee beurteilen.</div>
