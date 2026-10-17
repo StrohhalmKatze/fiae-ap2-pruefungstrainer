@@ -85,8 +85,8 @@
     <tr><td>TQ-03 Unit-Test, Überdeckungsmaße</td><td><span class="relevanz r-kern" title="Belege: W25 T2 A3aa, A3ab (6 P); S24 T2 A3c, A3b (17 P); S23 T2 A3ba, A3bb, A3bc (10 P); W22 T2 A2ac (3 P); S22 T2 A2aa, A2ab, A2ba (12 P); W21 T1 A4cb (5 P).">Prüfungskern – 6/9 – W25, S24, S23, W22, S22, W21</span></td><td>3–12</td><td>assertEquals auswerten, C0/C1/C2, Mindestzahl Testfälle</td></tr>
     <tr><td>TQ-04 Qualitätsmerkmale ISO/IEC 25010</td><td><span class="relevanz r-kern" title="Belege: S26 T1 A4a (5 P); S23 T1 A2a (4 P); W21 T1 A4ca (4 P).">Prüfungskern – 3/9 – S26, S23, W21</span></td><td>4–5</td><td>Merkmale beschreiben und auf ein Szenario anwenden</td></tr>
     <tr><td>TQ-05 Schreibtischtest</td><td><span class="relevanz r-kern" title="Belege: W25 T2 A3ba (10 P); S23 T2 A3a (Datenverlaufstabelle) (0 P); W22 T2 A2aa (4 P); S22 T2 A2ba (5 P).">Prüfungskern – 4/9 – W25, S23, W22, S22</span></td><td>2–10</td><td>Wertetabelle sauber und vollständig führen</td></tr>
-    <tr><td>TQ-06 Äquivalenzklassen, Testfälle</td><td><span class="relevanz r-vor" title="Belege: S23 T2 A3bc (4 P); S22 T2 A2bc (4 P).">Kam vor – 2/9 – S23, S22</span></td><td>4–10</td><td>gültige/ungültige Klassen, Grenzwerte, Testfalltabelle</td></tr>
-    <tr><td>TQ-07 Codequalität, Reviews</td><td><span class="relevanz r-kern" title="Belege: S24 T1 A1b (6 P); S23 T1 A1e (4 P); W21 T1 A4cb, A1bb (11 P).">Prüfungskern – 3/9 – S24, S23, W21</span></td><td>5–6</td><td>QS-Maßnahmen erläutern, Code-Review, Clean Code</td></tr>
+    <tr><td>TQ-06 Äquivalenzklassen, Testfälle</td><td><span class="relevanz r-vor" title="Belege: S23 T2 A3bc (4 P); S22 T2 A2bc (4 P).">Kam vor – 2/9 – S23, S22</span> <span class="trend" title="Trend laut Themenanalyse: fallend">↓</span></td><td>4–10</td><td>gültige/ungültige Klassen, Grenzwerte, Testfalltabelle</td></tr>
+    <tr><td>TQ-07 Codequalität, Reviews</td><td><span class="relevanz r-kern" title="Belege: S24 T1 A1b (6 P); S23 T1 A1e (4 P); W21 T1 A4cb, A1bb (11 P).">Prüfungskern – 3/9 – S24, S23, W21</span> <span class="trend" title="Trend laut Themenanalyse: fallend">↓</span></td><td>5–6</td><td>QS-Maßnahmen erläutern, Code-Review, Clean Code</td></tr>
   </table>
 
   <!-- ===================== TQ-01 ===================== -->
@@ -637,7 +637,7 @@ class KontoTest {
     <strong>S23 T2 A3a:</strong> Den Code mit vorgegebenen Testdaten überprüfen und dazu eine Datenverlaufstabelle ausfüllen – vorgegeben waren Typ und Variablenname, einzutragen der Werteverlauf. · <strong>W25 T2 A3ba (10 P):</strong> Tabelle mit fünf Testdaten (darunter negative Werte, ein Element, <code>null</code>) – je erwartetes und tatsächliches Ergebnis. · <strong>W22 T2 A2aa (4 P):</strong> rekursive Funktion mit zwei Testfällen (7 und 11) durchspielen. · <strong>S22 T2 A2ba (5 P):</strong> für jede <code>assertEquals</code>-Zeile den Rückgabewert ausrechnen.</div>
 
   <!-- ===================== TQ-06 ===================== -->
-  <h3 id="e-06">TQ-06 · Äquivalenzklassen / Testfälle <span class="relevanz r-vor" title="Belege: S23 T2 A3bc (4 P); S22 T2 A2bc (4 P).">Kam vor – 2/9 – S23, S22</span></h3>
+  <h3 id="e-06">TQ-06 · Äquivalenzklassen / Testfälle <span class="relevanz r-vor" title="Belege: S23 T2 A3bc (4 P); S22 T2 A2bc (4 P).">Kam vor – 2/9 – S23, S22</span> <span class="trend" title="Trend laut Themenanalyse: fallend">↓</span></h3>
   <p class="klein">Vorkommen: 2/9 · Prüfungen: S23, S22 · Teil 2, Aufgabe 2 oder 3</p>
 
   <p>Alle möglichen Eingaben zu testen ist unmöglich (schon ein <code>int</code>-Parameter hat über 4 Milliarden Werte). Man braucht deshalb <strong>wenige, aber gut gewählte</strong> Testfälle. Die beiden wichtigsten Black-Box-Verfahren:</p>
@@ -721,7 +721,7 @@ class KontoTest {
     <strong>S22 T2 A2bc (4 P):</strong> Weil im Unit-Test noch Testfälle fehlen, sollen Testdaten aus zwei weiteren Äquivalenzklassen angegeben werden, für die die Methode −1 liefern muss – also ungültige Klassen, die die vorhandenen Testfälle noch nicht abdecken. · <strong>S23 T2 A3bc (4 P):</strong> Testdaten so anpassen, dass alle Anweisungen durchlaufen werden, und die Änderungen begründen. · <strong>W25 T2 A3ba:</strong> Testdaten mit Sonderfällen (negative Zahlen, ein Element, <code>null</code>) auswerten.</div>
 
   <!-- ===================== TQ-07 ===================== -->
-  <h3 id="e-07">TQ-07 · Codequalität / Reviews <span class="relevanz r-kern" title="Belege: S24 T1 A1b (6 P); S23 T1 A1e (4 P); W21 T1 A4cb, A1bb (11 P).">Prüfungskern – 3/9 – S24, S23, W21</span></h3>
+  <h3 id="e-07">TQ-07 · Codequalität / Reviews <span class="relevanz r-kern" title="Belege: S24 T1 A1b (6 P); S23 T1 A1e (4 P); W21 T1 A4cb, A1bb (11 P).">Prüfungskern – 3/9 – S24, S23, W21</span> <span class="trend" title="Trend laut Themenanalyse: fallend">↓</span></h3>
   <p class="klein">Vorkommen: 3/9 · Prüfungen: S24, S23, W21 · Teil 1, Aufgabe 1 (außerdem Aufgabe 4 in W21)</p>
 
   <h4>Qualitätssicherung im Entwicklungsprozess <span class="relevanz r-kern" title="QS-Maßnahmen: S23 T1 1e, S24 T1 1b (3 Maßnahmen), W21 T1 4cb (Bewertung)">Prüfungskern – 3/9 – S24, S23, W21</span></h4>
