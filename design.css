@@ -112,6 +112,23 @@
 .ap2-nachoben:hover { filter: brightness(1.12); }
 .ap2-nachoben:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
+/* ---------- Tabellen: eigener seitlich scrollbarer Bereich (setzt uebungen.js) ---------- */
+@media screen {
+  .ap2-tabelle { margin: 10px 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .ap2-tabelle > table { margin: 0; }
+}
+/* Im Druck gibt es kein Wischen: Hülle ausblenden, die Tabelle verhält sich wie ohne sie */
+@media print {
+  .ap2-tabelle { display: contents; }
+  /* Regeln für das erste/letzte Element in Kästen greifen sonst auf die Hülle statt auf die Tabelle */
+  .merke > .ap2-tabelle:first-child > table, .tipp > .ap2-tabelle:first-child > table,
+  .falle > .ap2-tabelle:first-child > table, .info > .ap2-tabelle:first-child > table,
+  .muster > .ap2-tabelle:first-child > table { margin-top: 0; }
+  .muster > .ap2-tabelle:nth-last-child(2) > table { margin-bottom: 0; }
+}
+.ap2-wischen { margin: -6px 0 10px; font-size: 12px; color: var(--muted); text-align: right; }
+.ap2-wischen[hidden] { display: none; }
+
 /* ---------- Übungsdateien: kompakte Legende ---------- */
 .st-legende { margin: 10px 0 14px; padding: 8px 12px; border-radius: 8px; background: var(--soft); font-size: 13px; color: var(--muted); }
 
@@ -138,6 +155,37 @@
   .ap2-start .ap2-wort { display: none; }
   .ap2-nachoben { right: 12px; bottom: 12px; width: 42px; height: 42px; }
   .st-tag { font-size: 13px; padding: 1px 10px; }
+  /* Tabellen am Handy kompakter, damit möglichst viele ganz hineinpassen */
+  table { font-size: 13px; }
+  th, td { padding: 3px 5px; -webkit-hyphens: auto; hyphens: auto; }
+  code { overflow-wrap: anywhere; }
+  td .relevanz, th .relevanz { white-space: normal; }
+  table.daten td, table.daten th, table.sheet td, table.sheet th { font-size: 11.5px; padding: 2px 4px; }
+  /* Erklär-Tabellen, die nicht passen, werden zu Karten (Klasse setzt uebungen.js) */
+  table.ap2-gestapelt, table.ap2-gestapelt > tbody, table.ap2-gestapelt > thead,
+  table.ap2-gestapelt tr, table.ap2-gestapelt td, table.ap2-gestapelt th { display: block; width: auto; }
+  table.ap2-gestapelt tr.ap2-kopfzeile { display: none; }
+  table.ap2-gestapelt tr { margin: 0 0 8px; padding: 8px 10px; border: 1px solid #c9cfd8; border-radius: 8px; }
+  table.ap2-gestapelt td, table.ap2-gestapelt th { padding: 2px 0; border: none; background: none; }
+  table.ap2-gestapelt tr > :first-child { padding-bottom: 4px; font-size: 14px; font-weight: 700; }
+  table.ap2-gestapelt td[data-label]::before { content: attr(data-label) ": "; font-weight: 600; color: var(--muted); }
+  /* schmalere Innenabstände der Kästen geben den Tabellen mehr Platz */
+  .anlage { padding: 8px 8px; }
+  .aufgabe { padding: 10px 10px 12px; }
+  .merke, .tipp, .falle, .info { padding: 8px 10px; }
+}
+
+/* Datenbank- und Tabellenblatt-Tabellen: erste Spalte bleibt beim seitlichen Wischen stehen */
+@media screen {
+  .ap2-tabelle table.daten tr > :first-child, .ap2-tabelle table.sheet tr > :first-child {
+    position: sticky; left: 0; z-index: 1; box-shadow: 1px 0 0 #c9cfd8;
+  }
+  .ap2-tabelle table.daten td:first-child, .ap2-tabelle table.sheet td:first-child { background: #fff; }
+  html[data-theme="dark"] .ap2-tabelle table.daten td:first-child,
+  html[data-theme="dark"] .ap2-tabelle table.sheet td:first-child { background: #14171c; }
+  html[data-theme="dark"] table.ap2-gestapelt tr { border-color: #4b5261; }
+  html[data-theme="dark"] .ap2-tabelle table.daten tr > :first-child,
+  html[data-theme="dark"] .ap2-tabelle table.sheet tr > :first-child { box-shadow: 1px 0 0 #4b5261; }
 }
 @media screen and (max-width: 560px) {
   body.ap2-mit-leiste { padding-top: 48px; }

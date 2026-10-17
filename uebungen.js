@@ -489,6 +489,68 @@
     });
   }
 
+  /* ---------- Breite Tabellen in einem eigenen, seitlich scrollbaren Bereich ----------
+     Sonst wird am Handy die ganze Seite breiter als der Bildschirm (Leiste und Pfeil rutschen raus). */
+  // Erklär-Tabellen dürfen am Handy zu Karten werden; Anlagen, Daten-, Tabellenblatt-
+  // und Aufgabentabellen bleiben Tabellen wie in der Prüfung.
+  function istStapelbar(tab) {
+    if (tab.closest(".aufgabe, .anlage")) return false;
+    if (/\b(daten|sheet|leer|ankreuz|ausfuellen|eng|syntax)\b/.test(tab.className)) return false;
+    if (tab.querySelector("[rowspan], [colspan], table")) return false;
+    var zeilen = tab.rows;
+    if (zeilen.length < 2 || zeilen[0].cells.length < 3) return false;
+    for (var i = 0; i < zeilen[0].cells.length; i++) if (zeilen[0].cells[i].tagName !== "TH") return false;
+    return true;
+  }
+  function beschrifteZellen(tab) {
+    var kopf = [].map.call(tab.rows[0].cells, function (c) { return c.textContent.trim(); });
+    tab.rows[0].classList.add("ap2-kopfzeile");
+    for (var r = 1; r < tab.rows.length; r++) {
+      [].forEach.call(tab.rows[r].cells, function (c, i) {
+        if (i > 0 && kopf[i] && c.textContent.trim() !== "") c.setAttribute("data-label", kopf[i]);
+      });
+    }
+  }
+
+  // Nur bei schmalen Bildschirmen (Handy): Am PC bleibt der Aufbau unverändert, damit
+  // Layout und Druck exakt wie bisher sind. Wird ein Fenster schmal gezogen, folgt der Umbau dann.
+  function macheTabellenScrollbar() {
+    var schmal = window.matchMedia("(max-width: 560px)");
+    if (schmal.matches) packeTabellenEin(schmal);
+    else if (schmal.addEventListener) schmal.addEventListener("change", function warte(e) {
+      if (!e.matches) return;
+      schmal.removeEventListener("change", warte);
+      packeTabellenEin(schmal);
+    });
+  }
+
+  function packeTabellenEin(schmal) {
+    var paare = [];
+    document.querySelectorAll("table").forEach(function (tab) {
+      if (tab.parentElement.classList.contains("ap2-tabelle")) return;
+      var huelle = el("div", "ap2-tabelle");
+      tab.parentNode.insertBefore(huelle, tab);
+      huelle.appendChild(tab);
+      var hinweis = el("div", "ap2-wischen no-print", "↔ Tabelle seitlich wischen");
+      huelle.parentNode.insertBefore(hinweis, huelle.nextSibling);
+      var stapelbar = istStapelbar(tab);
+      if (stapelbar) beschrifteZellen(tab);
+      paare.push([huelle, hinweis, tab, stapelbar]);
+    });
+    var pruefe = function () {
+      paare.forEach(function (p) {
+        if (p[3]) {
+          p[2].classList.remove("ap2-gestapelt");
+          if (schmal.matches && p[0].scrollWidth > p[0].clientWidth + 1) p[2].classList.add("ap2-gestapelt");
+        }
+        p[1].hidden = p[0].scrollWidth <= p[0].clientWidth + 1;
+      });
+    };
+    pruefe();
+    window.addEventListener("resize", pruefe);
+    document.addEventListener("toggle", pruefe, true);   // eingeklappte Bereiche (details) auf der Startseite
+  }
+
   /* ---------- Schwebender Pfeil „Nach oben“ (erscheint nach etwas Scrollen) ---------- */
   function baueNachObenKnopf() {
     var b = el("a", "ap2-nachoben no-print", "↑");
@@ -517,6 +579,7 @@
       n += setupZellen();
       n += setupBildzonen();
     }
+    macheTabellenScrollbar();
     baueLeiste(n > 0);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
