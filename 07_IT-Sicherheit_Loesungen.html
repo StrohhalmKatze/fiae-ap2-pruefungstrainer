@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>07 IT-Sicherheit &amp; Datenschutz – Lösungen</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design.css">
 <script src="uebungen.js"></script>
 <style>
   /* Zusatzregeln Block 07 (Lösungen) */
@@ -26,24 +27,28 @@
 </head>
 <body>
 
-<header class="blockkopf">
-  <h1>Block 07 · IT-Sicherheit &amp; Datenschutz – Lösungen</h1>
-  <div class="unter">
-    Lösungssatz zu <a href="07_IT-Sicherheit.html">07_IT-Sicherheit.html</a>
-    · zu den Code-Aufgaben SEC-04.2 und SEC-06.3 lauffähige Java-Dateien im Ordner <code>java\07_IT-Sicherheit\</code>
-  </div>
+<header class="st-hero">
+  <p class="st-eyebrow"><a href="index.html">Prüfungstrainer AP2</a> · Block 07 · Lösungssatz</p>
+  <h1>IT-Sicherheit &amp; Datenschutz <span class="st-tag">Lösungen</span></h1>
+  <p class="st-lead">Zu den Code-Aufgaben SEC-04.2 und SEC-06.3 lauffähige Java-Dateien im Ordner <code>java/07_IT-Sicherheit/</code>.</p>
+  <p class="st-aktionen no-print">
+    <a class="st-knopf" href="07_IT-Sicherheit.html#aufgaben">Zurück zu den Aufgaben</a>
+    <a class="st-knopf st-zweit" href="07_IT-Sicherheit.html#erklaerung">Erklärungssatz</a>
+  </p>
 </header>
 
-<nav class="toc">
-  <strong>Inhalt</strong>
-  <ol>
-    <li><a href="#l-01">SEC-01 Verschlüsselung</a></li>
-    <li><a href="#l-02">SEC-02 Hash/Signatur/PKI</a></li>
-    <li><a href="#l-03">SEC-03 Schutzziele</a></li>
-    <li><a href="#l-04">SEC-04 Authentifizierung</a></li>
-    <li><a href="#l-05">SEC-05 Datenschutz</a></li>
-    <li><a href="#l-06">SEC-06 Angriffe</a></li>
-  </ol>
+<nav class="st-inhalt" id="inhalt" aria-label="Inhalt">
+  <div class="st-teil">
+    <p class="st-teil-kopf"><span class="st-teil-titel">Lösungen nach Unterthema</span><span class="st-teil-info">6 Unterthemen · 18 Aufgaben</span></p>
+    <ul class="st-chips">
+      <li><a href="#l-01">SEC-01 Verschlüsselung</a></li>
+      <li><a href="#l-02">SEC-02 Hash/Signatur/PKI</a></li>
+      <li><a href="#l-03">SEC-03 Schutzziele</a></li>
+      <li><a href="#l-04">SEC-04 Authentifizierung</a></li>
+      <li><a href="#l-05">SEC-05 Datenschutz</a></li>
+      <li><a href="#l-06">SEC-06 Angriffe</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="info">
@@ -297,7 +302,7 @@
     rückgabe false
   Ende wenn
 Ende funktion</pre>
-    <p class="datei">Lauffähig als Java: <code>java\07_IT-Sicherheit\Aufgabe_SEC_04_2.java</code> (Methode <code>pruefePasswort</code>; enthält auch den Wörterbuchangriff aus a und die PBKDF2-Variante aus b).</p>
+    <p class="datei">Lauffähig als Java: <code>java/07_IT-Sicherheit/Aufgabe_SEC_04_2.java</code> (Methode <code>pruefePasswort</code>; enthält auch den Wörterbuchangriff aus a und die PBKDF2-Variante aus b).</p>
     <p class="codelabel">Java · Aufgabe_SEC_04_2.java (Auszug)</p>
     <pre class="java">static boolean pruefePasswort(String eingabe, String salt, String gespeicherterHash) {
     String h = sha256(PEPPER + salt + eingabe);          // 1. Durchlauf
@@ -464,7 +469,7 @@ WHERE email = 'o'neil@mail.example' AND passwort_md5 = 'ac03ebddb7750a7c60020f02
         }
     }
 }</pre>
-    <p class="datei">Lauffähig als Java: <code>java\07_IT-Sicherheit\Aufgabe_SEC_06_3.java</code> (Methoden <code>loginNeu</code>/<code>loginSicher</code>; mit optionalem H2-Treiber wird der Angriff gegen eine Testdatenbank gezeigt).</p>
+    <p class="datei">Lauffähig als Java: <code>java/07_IT-Sicherheit/Aufgabe_SEC_06_3.java</code> (Methoden <code>loginNeu</code>/<code>loginSicher</code>; mit optionalem H2-Treiber wird der Angriff gegen eine Testdatenbank gezeigt).</p>
     <p class="codelabel">Ausgabe (Test gegen H2, Adresse mit Apostroph)</p>
     <pre class="ausgabe">Fall                     loginUnsicher   loginSicher
 richtiges Passwort       true            true

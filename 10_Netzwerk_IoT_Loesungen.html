@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>10 Netzwerk, IoT &amp; Infrastruktur – Lösungen</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design.css">
 <script src="uebungen.js"></script>
 <style>
   /* Zusatzregeln Block 10 (Lösungen) */
@@ -24,22 +25,26 @@
 </head>
 <body>
 
-<header class="blockkopf">
-  <h1>Block 10 · Netzwerk, IoT &amp; Infrastruktur – Lösungen</h1>
-  <div class="unter">
-    Lösungssatz zu <a href="10_Netzwerk_IoT.html">10_Netzwerk_IoT.html</a>
-    · Skriptaufgabe NET-03.3 zusätzlich als lauffähige Java-Datei im Ordner <code>java\10_Netzwerk_IoT\</code> (Start mit <code>java Aufgabe_NET_03_3.java</code>)
-  </div>
+<header class="st-hero">
+  <p class="st-eyebrow"><a href="index.html">Prüfungstrainer AP2</a> · Block 10 · Lösungssatz</p>
+  <h1>Netzwerk, IoT &amp; Infrastruktur <span class="st-tag">Lösungen</span></h1>
+  <p class="st-lead">Skriptaufgabe NET-03.3 zusätzlich als lauffähige Java-Datei im Ordner <code>java/10_Netzwerk_IoT/</code> (Start mit <code>java Aufgabe_NET_03_3.java</code>).</p>
+  <p class="st-aktionen no-print">
+    <a class="st-knopf" href="10_Netzwerk_IoT.html#aufgaben">Zurück zu den Aufgaben</a>
+    <a class="st-knopf st-zweit" href="10_Netzwerk_IoT.html#erklaerung">Erklärungssatz</a>
+  </p>
 </header>
 
-<nav class="toc">
-  <strong>Inhalt</strong>
-  <ol>
-    <li><a href="#l-01">NET-01 IoT / Sensorik / Funk</a> (NET-01.1 bis 01.3, 35 P)</li>
-    <li><a href="#l-02">NET-02 Netzwerkkonzepte</a> (NET-02.1 bis 02.3, 34 P)</li>
-    <li><a href="#l-03">NET-03 Adressierung, Frames &amp; Protokolle</a> (NET-03.1 bis 03.3, 42 P)</li>
-    <li><a href="#l-04">NET-04 IT-Infrastruktur, Virtualisierung &amp; Cloud</a> (NET-04.1 bis 04.3, 36 P)</li>
-  </ol>
+<nav class="st-inhalt" id="inhalt" aria-label="Inhalt">
+  <div class="st-teil">
+    <p class="st-teil-kopf"><span class="st-teil-titel">Lösungen nach Unterthema</span><span class="st-teil-info">4 Unterthemen · 12 Aufgaben</span></p>
+    <ul class="st-chips">
+      <li><a title="NET-01.1 bis 01.3, 35 P" href="#l-01">NET-01 IoT / Sensorik / Funk</a></li>
+      <li><a title="NET-02.1 bis 02.3, 34 P" href="#l-02">NET-02 Netzwerkkonzepte</a></li>
+      <li><a title="NET-03.1 bis 03.3, 42 P" href="#l-03">NET-03 Adressierung, Frames &amp; Protokolle</a></li>
+      <li><a title="NET-04.1 bis 04.3, 36 P" href="#l-04">NET-04 IT-Infrastruktur, Virtualisierung &amp; Cloud</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="info">
@@ -394,7 +399,7 @@ static String inventarisiereMitHersteller(String netz) {
     json = json + "]";
     return json;
 }</pre>
-    <p class="datei">Vollständige Datei mit simulierten Hilfsfunktionen <code>getMacAddress</code>/<code>getVendor</code> (11 Geräte, fiktive Hersteller), Subnetzrechnung und Testlauf: <code>java\10_Netzwerk_IoT\Aufgabe_NET_03_3.java</code></p>
+    <p class="datei">Vollständige Datei mit simulierten Hilfsfunktionen <code>getMacAddress</code>/<code>getVendor</code> (11 Geräte, fiktive Hersteller), Subnetzrechnung und Testlauf: <code>java/10_Netzwerk_IoT/Aufgabe_NET_03_3.java</code></p>
     <p class="codelabel">Ausgabe des Testlaufs</p>
     <pre class="ausgabe">a) inventarisiere("10.10.20"):
 [{"ip": "10.10.20.1", "mac": "5C:F2:86:00:14:01"}, {"ip": "10.10.20.2", "mac": "5C:F2:86:00:14:02"}, {"ip": "10.10.20.31", "mac": "3C:52:82:5E:90:31"}, {"ip": "10.10.20.32", "mac": "3C:52:82:5E:90:32"}, {"ip": "10.10.20.41", "mac": "3C:52:82:5E:91:41"}, {"ip": "10.10.20.50", "mac": "7C:4F:B5:3A:07:D1"}, {"ip": "10.10.20.70", "mac": "00:0E:8C:A1:22:70"}, {"ip": "10.10.20.71", "mac": "00:0E:8C:A1:22:71"}, {"ip": "10.10.20.140", "mac": "A4:C1:38:0B:5D:8C"}, {"ip": "10.10.20.201", "mac": "F2:6B:19:C8:44:0E"}, {"ip": "10.10.20.254", "mac": "5C:F2:86:00:14:FE"}]

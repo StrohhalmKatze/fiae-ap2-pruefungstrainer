@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>08 Objektorientierung &amp; Entwurfsmuster – Lösungen</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design.css">
 <script src="uebungen.js"></script>
 <style>
   /* Zusatzregeln Block 08 (Lösungen) */
@@ -23,23 +24,27 @@
 </head>
 <body>
 
-<header class="blockkopf">
-  <h1>Block 08 · Objektorientierung &amp; Entwurfsmuster – Lösungen</h1>
-  <div class="unter">
-    Lösungssatz zu <a href="08_OOP_Entwurfsmuster.html">08_OOP_Entwurfsmuster.html</a>
-    · Pseudocode im IHK-Stil, dazu lauffähige Java-Dateien im Ordner <code>java\08_OOP_Entwurfsmuster\</code> (Start mit <code>java Aufgabe_OOP_NN_k.java</code>)
-  </div>
+<header class="st-hero">
+  <p class="st-eyebrow"><a href="index.html">Prüfungstrainer AP2</a> · Block 08 · Lösungssatz</p>
+  <h1>Objektorientierung &amp; Entwurfsmuster <span class="st-tag">Lösungen</span></h1>
+  <p class="st-lead">Pseudocode im IHK-Stil, dazu lauffähige Java-Dateien im Ordner <code>java/08_OOP_Entwurfsmuster/</code> (Start mit <code>java Aufgabe_OOP_NN_k.java</code>).</p>
+  <p class="st-aktionen no-print">
+    <a class="st-knopf" href="08_OOP_Entwurfsmuster.html#aufgaben">Zurück zu den Aufgaben</a>
+    <a class="st-knopf st-zweit" href="08_OOP_Entwurfsmuster.html#erklaerung">Erklärungssatz</a>
+  </p>
 </header>
 
-<nav class="toc">
-  <strong>Inhalt</strong>
-  <ol>
-    <li><a href="#l-01">OOP-01 Grundkonzepte</a></li>
-    <li><a href="#l-02">OOP-02 Vererbung, Interfaces</a></li>
-    <li><a href="#l-03">OOP-03 Polymorphie, Generics</a></li>
-    <li><a href="#l-04">OOP-04 Erzeugungsmuster</a></li>
-    <li><a href="#l-05">OOP-05 Verhaltens-/Strukturmuster</a></li>
-  </ol>
+<nav class="st-inhalt" id="inhalt" aria-label="Inhalt">
+  <div class="st-teil">
+    <p class="st-teil-kopf"><span class="st-teil-titel">Lösungen nach Unterthema</span><span class="st-teil-info">5 Unterthemen · 15 Aufgaben</span></p>
+    <ul class="st-chips">
+      <li><a href="#l-01">OOP-01 Grundkonzepte</a></li>
+      <li><a href="#l-02">OOP-02 Vererbung, Interfaces</a></li>
+      <li><a href="#l-03">OOP-03 Polymorphie, Generics</a></li>
+      <li><a href="#l-04">OOP-04 Erzeugungsmuster</a></li>
+      <li><a href="#l-05">OOP-05 Verhaltens-/Strukturmuster</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="info">
@@ -104,7 +109,7 @@ true
     <p><code>naechsteNr</code> gehört als statisches Attribut zur <strong>Klasse</strong> und existiert nur <strong>einmal</strong> für alle Etiketten. Jeder Konstruktoraufruf liest und erhöht denselben Zähler – so entstehen fortlaufende, eindeutige Nummern, und die statische Methode <code>getAnzahl()</code> kann ohne Objekt aufgerufen werden.</p>
     <p>Als normales Attribut hätte jedes Objekt eine eigene Kopie mit dem Startwert 1000: Alle Etiketten bekämen die Nummer 1000, die Nummern wären nicht mehr eindeutig. Außerdem dürfte die statische Methode <code>getAnzahl()</code> nicht mehr auf das Attribut zugreifen (Compilerfehler).</p>
     <div class="bewertung"><strong>Bewertung:</strong> 1 P Begründung (ein Zähler für alle Objekte), 1 P Folge ohne static (jedes Objekt beginnt bei 1000, keine eindeutigen Nummern).</div>
-    <p class="datei">Datei: <code>java\08_OOP_Entwurfsmuster\Aufgabe_OOP_01_2.java</code> (enthält zusätzlich ein Beispiel für die <code>NullPointerException</code>)</p>
+    <p class="datei">Datei: <code>java/08_OOP_Entwurfsmuster/Aufgabe_OOP_01_2.java</code> (enthält zusätzlich ein Beispiel für die <code>NullPointerException</code>)</p>
   </div>
 
   <div class="loesung" id="L-OOP-01-3">
@@ -487,7 +492,7 @@ Expressbuchung</pre>
 <pre class="ausgabe">ClassCastException: class Zustellung cannot be cast to class Expresszustellung (Zustellung and Expresszustellung are in unnamed module of loader 'app')
 a instanceof Expresszustellung: false</pre>
     <div class="bewertung"><strong>Bewertung:</strong> 1 P Übersetzen erlaubt, 1 P <code>ClassCastException</code> zur Laufzeit.</div>
-    <p class="datei">Datei: <code>java\08_OOP_Entwurfsmuster\Aufgabe_OOP_03_2.java</code> – Die Datei enthält die Klassen aus Anlage 7, den Programmausschnitt der Aufgabe sowie b) und c) zum Ausprobieren.</p>
+    <p class="datei">Datei: <code>java/08_OOP_Entwurfsmuster/Aufgabe_OOP_03_2.java</code> – Die Datei enthält die Klassen aus Anlage 7, den Programmausschnitt der Aufgabe sowie b) und c) zum Ausprobieren.</p>
   </div>
 
   <div class="loesung" id="L-OOP-03-3">

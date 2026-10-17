@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>07 IT-Sicherheit &amp; Datenschutz – Übungen</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design.css">
 <script src="uebungen.js"></script>
 <style>
   /* Zusatzregeln Block 07 */
@@ -35,46 +36,57 @@
 <body>
 
 <!-- ===================== KOPF ===================== -->
-<header class="blockkopf">
-  <h1>Block 07 · IT-Sicherheit &amp; Datenschutz</h1>
-  <div class="unter">
-    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 8, Teil 2 in 1 Prüfungen.">Prüfungskern – 8/9 – alle außer W23</span> · Ø 10 von 200 Punkten · fast nur Teil 1 (Ausnahme S24: Teil 2, Aufgabe 1)
-    · Lösungen: <a href="07_IT-Sicherheit_Loesungen.html">07_IT-Sicherheit_Loesungen.html</a>
-  </div>
+<header class="st-hero">
+  <p class="st-eyebrow"><a href="index.html">Prüfungstrainer AP2</a> · Block 07</p>
+  <h1>IT-Sicherheit &amp; Datenschutz</h1>
+  <p class="st-lead">Fast nur Teil 1 (Ausnahme S24: Teil 2, Aufgabe 1).</p>
+  <ul class="st-zahlen">
+    <li><strong>10</strong><span>Ø Punkte pro Prüfung</span></li>
+    <li><strong>6</strong><span>Unterthemen</span></li>
+    <li><strong>18</strong><span>Aufgaben</span></li>
+    <li><strong>202</strong><span>Punkte zum Üben</span></li>
+  </ul>
+  <p class="st-etikett">Prüfungsrelevanz des Blocks: <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 8, Teil 2 in 1 Prüfungen.">Prüfungskern – 8/9 – alle außer W23</span></p>
+  <p class="st-aktionen no-print">
+    <a class="st-knopf" href="#erklaerung">Erklärungssatz lesen</a>
+    <a class="st-knopf st-zweit" href="#aufgaben">Zu den Aufgaben</a>
+    <a class="st-knopf st-zweit" href="07_IT-Sicherheit_Loesungen.html">Lösungen</a>
+  </p>
 </header>
 
-<nav class="toc">
-  <strong>Inhalt</strong>
-  <ol>
-    <li><a href="#erklaerung">Erklärungssatz</a>
-      <ol>
-        <li><a href="#e-01">SEC-01 Verschlüsselungsverfahren</a></li>
-        <li><a href="#e-02">SEC-02 Hash, Signatur, Zertifikate/PKI</a></li>
-        <li><a href="#e-03">SEC-03 Schutzziele &amp; Schutzbedarf</a></li>
-        <li><a href="#e-04">SEC-04 Authentifizierung</a></li>
-        <li><a href="#e-05">SEC-05 Datenschutz / DSGVO</a></li>
-        <li><a href="#e-06">SEC-06 Angriffe &amp; Gegenmaßnahmen</a></li>
-      </ol>
-    </li>
-    <li><a href="#belegsatz">Belegsatz</a> (Anlagen 1–11, keine IHK-Notationshilfe für diesen Block)</li>
-    <li><a href="#aufgaben">Aufgaben</a>
-      <ol>
-        <li><a href="#a-01">SEC-01 (3 Aufgaben)</a></li>
-        <li><a href="#a-02">SEC-02 (3 Aufgaben)</a></li>
-        <li><a href="#a-03">SEC-03 (3 Aufgaben)</a></li>
-        <li><a href="#a-04">SEC-04 (3 Aufgaben)</a></li>
-        <li><a href="#a-05">SEC-05 (3 Aufgaben)</a></li>
-        <li><a href="#a-06">SEC-06 (3 Aufgaben)</a></li>
-        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
-      </ol>
-    </li>
-  </ol>
+<nav class="st-inhalt" id="inhalt" aria-label="Inhalt">
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#erklaerung">A · Erklärungssatz</a><span class="st-teil-info">6 Unterthemen</span></p>
+    <ul class="st-chips">
+      <li><a href="#e-01">SEC-01 Verschlüsselungsverfahren</a></li>
+      <li><a href="#e-02">SEC-02 Hash, Signatur, Zertifikate/PKI</a></li>
+      <li><a href="#e-03">SEC-03 Schutzziele &amp; Schutzbedarf</a></li>
+      <li><a href="#e-04">SEC-04 Authentifizierung</a></li>
+      <li><a href="#e-05">SEC-05 Datenschutz / DSGVO</a></li>
+      <li><a href="#e-06">SEC-06 Angriffe &amp; Gegenmaßnahmen</a></li>
+    </ul>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#belegsatz">B · Belegsatz</a><span class="st-teil-info">Anlagen 1–11, keine IHK-Notationshilfe für diesen Block</span></p>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#aufgaben">C · Aufgaben</a><span class="st-teil-info">18 Aufgaben, je 3 pro Unterthema</span></p>
+    <ul class="st-chips">
+      <li><a href="#a-01">SEC-01</a></li>
+      <li><a href="#a-02">SEC-02</a></li>
+      <li><a href="#a-03">SEC-03</a></li>
+      <li><a href="#a-04">SEC-04</a></li>
+      <li><a href="#a-05">SEC-05</a></li>
+      <li><a href="#a-06">SEC-06</a></li>
+      <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="info no-print">
   <span class="kastentitel">So arbeitest du mit diesem Block</span>
   Erst den Erklärungssatz lesen, dann die Aufgaben mit dem Belegsatz daneben lösen (Belegsatz am besten separat ausdrucken und neben die Aufgaben legen). Zeitrichtwert: 1 Punkt ≈ 0,9 Minuten.
-  Lösungen erst danach in der separaten Lösungsdatei nachsehen. Zu den beiden Code-Aufgaben (SEC-04.2, SEC-06.3) gibt es lauffähige Java-Dateien im Ordner <code>java\07_IT-Sicherheit\</code>.
+  Lösungen erst danach in der separaten Lösungsdatei nachsehen. Zu den beiden Code-Aufgaben (SEC-04.2, SEC-06.3) gibt es lauffähige Java-Dateien im Ordner <code>java/07_IT-Sicherheit/</code>.
 </div>
 
 <!-- ===================== TEIL A: ERKLÄRUNGSSATZ ===================== -->
@@ -82,10 +94,10 @@
   <h2>A · Erklärungssatz</h2>
 
   <p>IT-Sicherheit kam in <strong>8 von 9</strong> Prüfungen vor, fast immer in <strong>Teil 1</strong> als Teilaufgabe einer Szenario-Aufgabe (Sensoren übertragen Daten, eine App spricht mit einem Server, ein Webserver bekommt ein Zertifikat). Gefragt wird mit den Operatoren <em>nennen</em>, <em>erläutern</em>, <em>begründen</em>, meist 1–9 Punkte je Teilaufgabe. Gerechnet oder programmiert wird hier selten. Punkte gibt es für <strong>saubere Begriffe</strong> und eine <strong>Begründung mit Bezug zum Szenario</strong>. Wer verschlüsseln, signieren und hashen sicher auseinanderhält, holt hier schnelle Punkte.</p>
-  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
+  <p class="st-legende"><strong>Etiketten:</strong> <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> in mindestens 3 von 9 Prüfungen gefragt · <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> in 1–2 · <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> nie gefragt, kann beim Lernen übersprungen werden · ↑ steigend, ↓ fallend, ⚠ neu. Gezählt werden nur eindeutige Belege; Fundstellen und Grenzfälle stehen im Tooltip.</p>
 
   <table class="kompakt">
-    <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
+    <tr><th>Unterthema</th><th>Prüfungsrelevanz</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
     <tr><td>SEC-01 Verschlüsselungsverfahren</td><td><span class="relevanz r-kern" title="Belege: S26 T1 A3bb, A3bd, A3bc (10 P); W25 T1 A3aa, A3ab (4 P); S23 T1 A4b, A4a (8 P); W22 T1 A1d, A1e (8 P); S22 T1 A4c (9 P); W21 T1 A4aa, A4ab (8 P).">Prüfungskern – 6/9 – S26, W25, S23, W22, S22, W21</span></td><td>1–8</td><td>hybride Verschlüsselung erklären, Verfahren begründet auswählen (IoT!)</td></tr>
     <tr><td>SEC-02 Hash, Signatur, Zertifikate/PKI</td><td><span class="relevanz r-kern" title="Belege: S26 T1 A3bb (4 P); S23 T1 A4b (4 P); W22 T1 A1e (3 P); S22 T1 A4c (9 P); W21 T1 A4bb, A4ba (4 P).">Prüfungskern – 5/9 – S26, S23, W22, S22, W21</span></td><td>2–9</td><td>Signatur erstellen/prüfen, „Verschlüsselung ≠ Integrität“, Vertrauenskette</td></tr>
     <tr><td>SEC-03 Schutzziele &amp; Schutzbedarf</td><td><span class="relevanz r-kern" title="Belege: S26 T1 A3ba (3 P); W25 T1 A3bb (6 P); S24 T1 A1c (4 P); W22 T1 A1a (4 P); S22 T1 A4c (9 P). Grenzwertig, nicht mitgezählt: S23 (T1 A4b: Signieren statt Verschlüsseln, Schutzziel nicht ausdrücklich genannt).">Prüfungskern – 5/9 – S26, W25, S24, W22, S22</span> <span class="trend" title="Trend laut Themenanalyse: steigend">↑</span></td><td>3–6</td><td>Situation → Schutzziel, Sicherheitsanforderungen formulieren</td></tr>

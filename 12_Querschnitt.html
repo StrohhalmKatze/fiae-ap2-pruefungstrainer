@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>12 Querschnitt – Übungen</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design.css">
 <script src="uebungen.js"></script>
 <style>
   /* Zusatzregeln Block 12 */
@@ -53,45 +54,56 @@
 <body>
 
 <!-- ===================== KOPF ===================== -->
-<header class="blockkopf">
-  <h1>Block 12 · Querschnitt</h1>
-  <div class="unter">
-    Sammelblock für die Themen ohne eigenen Block · Etikett je Unterthema (statt einer Block-Kategorie) · fast nur Teil 1
-    <ul>
+<header class="st-hero">
+  <p class="st-eyebrow"><a href="index.html">Prüfungstrainer AP2</a> · Block 12</p>
+  <h1>Querschnitt</h1>
+  <p class="st-lead">Sammelblock für die Themen ohne eigenen Block · fast nur Teil 1.</p>
+  <ul class="st-zahlen">
+    <li><strong>8</strong><span>Ø Punkte pro Prüfung</span></li>
+    <li><strong>5</strong><span>Unterthemen</span></li>
+    <li><strong>15</strong><span>Aufgaben</span></li>
+    <li><strong>170</strong><span>Punkte zum Üben</span></li>
+  </ul>
+  <p class="st-etikett">Prüfungsrelevanz: Etikett je Unterthema</p>
+  <ul class="st-unterliste">
       <li>QU-01 Englischer Fachtext <span class="relevanz r-kern" title="Belege: S26 T1 A3aa (3 P); W25 T1 A2ba, A2bb (9 P); S24 T2 A3b (12 P); W23 T1 A2aa (1 P); S22 T1 A2c (9 P).">Prüfungskern – 5/9 – S26, W25, S24, W23, S22</span> <span class="trend" title="Trend laut Themenanalyse: steigend">↑</span> · Ø 7 Punkte</li>
       <li>QU-02 Tabellenkalkulation <span class="relevanz r-vor" title="Belege: S23 T1 A3aa, A3ab, A3ac, A3ba, A3bb (16 P).">Kam vor – 1/9 – S23</span> · 16 Punkte</li>
       <li>QU-03 Ticketsystem / IT-Service <span class="relevanz r-vor" title="Belege: S22 T1 A4a (12 P).">Kam vor – 1/9 – S22</span> · 12 Punkte</li>
       <li>QU-04 Künstliche Intelligenz <span class="relevanz r-vor" title="Belege: W23 T1 A1b (6 P).">Kam vor – 1/9 – W23</span> (dazu S26 als Kontext) · 6 Punkte</li>
       <li>QU-05 Green IT <span class="relevanz r-vor" title="Belege: W23 T1 A1c (4 P).">Kam vor – 1/9 – W23</span> · 4 Punkte</li>
     </ul>
-    Lösungen: <a href="12_Querschnitt_Loesungen.html">12_Querschnitt_Loesungen.html</a>
-  </div>
+  <p class="st-aktionen no-print">
+    <a class="st-knopf" href="#erklaerung">Erklärungssatz lesen</a>
+    <a class="st-knopf st-zweit" href="#aufgaben">Zu den Aufgaben</a>
+    <a class="st-knopf st-zweit" href="12_Querschnitt_Loesungen.html">Lösungen</a>
+  </p>
 </header>
 
-<nav class="toc">
-  <strong>Inhalt</strong>
-  <ol>
-    <li><a href="#erklaerung">Erklärungssatz</a>
-      <ol>
-        <li><a href="#e-01">QU-01 Englischer Fachtext</a></li>
-        <li><a href="#e-02">QU-02 Tabellenkalkulation</a></li>
-        <li><a href="#e-03">QU-03 Ticketsystem / IT-Service</a></li>
-        <li><a href="#e-04">QU-04 Künstliche Intelligenz</a></li>
-        <li><a href="#e-05">QU-05 Green IT</a></li>
-      </ol>
-    </li>
-    <li><a href="#belegsatz">Belegsatz</a> (Anlagen 1–12: Ausgangssituation, englische Texte, Funktionsliste, Arbeitsblätter, Support, KI, Green IT)</li>
-    <li><a href="#aufgaben">Aufgaben</a>
-      <ol>
-        <li><a href="#a-01">QU-01 (3 Aufgaben)</a></li>
-        <li><a href="#a-02">QU-02 (3 Aufgaben)</a></li>
-        <li><a href="#a-03">QU-03 (3 Aufgaben)</a></li>
-        <li><a href="#a-04">QU-04 (3 Aufgaben)</a></li>
-        <li><a href="#a-05">QU-05 (3 Aufgaben)</a></li>
-        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
-      </ol>
-    </li>
-  </ol>
+<nav class="st-inhalt" id="inhalt" aria-label="Inhalt">
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#erklaerung">A · Erklärungssatz</a><span class="st-teil-info">5 Unterthemen</span></p>
+    <ul class="st-chips">
+      <li><a href="#e-01">QU-01 Englischer Fachtext</a></li>
+      <li><a href="#e-02">QU-02 Tabellenkalkulation</a></li>
+      <li><a href="#e-03">QU-03 Ticketsystem / IT-Service</a></li>
+      <li><a href="#e-04">QU-04 Künstliche Intelligenz</a></li>
+      <li><a href="#e-05">QU-05 Green IT</a></li>
+    </ul>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#belegsatz">B · Belegsatz</a><span class="st-teil-info">Anlagen 1–12: Ausgangssituation, englische Texte, Funktionsliste, Arbeitsblätter, Support, KI, Green IT</span></p>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#aufgaben">C · Aufgaben</a><span class="st-teil-info">15 Aufgaben, je 3 pro Unterthema</span></p>
+    <ul class="st-chips">
+      <li><a href="#a-01">QU-01</a></li>
+      <li><a href="#a-02">QU-02</a></li>
+      <li><a href="#a-03">QU-03</a></li>
+      <li><a href="#a-04">QU-04</a></li>
+      <li><a href="#a-05">QU-05</a></li>
+      <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="info no-print">
@@ -104,11 +116,11 @@
 <section class="teil" id="erklaerung">
   <h2>A · Erklärungssatz</h2>
 
-  <p>Dieser Block sammelt die Themen, die in der Themenanalyse keinem Fachblock zugeordnet sind. Der <strong>englische Fachtext</strong> ist dabei der wichtigste: Er kam in fünf der letzten neun Prüfungen vor, zuletzt in vier Prüfungen hintereinander mit steigender Tendenz. Die übrigen vier Themen kamen je einmal dran, meist als 4- bis 16-Punkte-Teilaufgabe in Teil 1. Sie sind schnell gelernt und bringen sichere Punkte, wenn sie wieder auftauchen. KI und Green IT stehen außerdem in den Szenarien neuerer Prüfungen (Drohnenbilder, KI-Auswertung, Energieverbrauch).</p>
-  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
+  <p>Dieser Block sammelt die Themen, die in der Themenanalyse keinem Fachblock zugeordnet sind. Der <strong>englische Fachtext</strong> ist dabei der wichtigste: Er kam in fünf der letzten neun Prüfungen vor, davon in drei der letzten vier (S24, W25, S26), also mit steigender Tendenz. Die übrigen vier Themen kamen je einmal dran, meist als 4- bis 16-Punkte-Teilaufgabe in Teil 1. Sie sind schnell gelernt und bringen sichere Punkte, wenn sie wieder auftauchen. KI und Green IT stehen außerdem in den Szenarien neuerer Prüfungen (Drohnenbilder, KI-Auswertung, Energieverbrauch).</p>
+  <p class="st-legende"><strong>Etiketten:</strong> <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> in mindestens 3 von 9 Prüfungen gefragt · <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> in 1–2 · <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> nie gefragt, kann beim Lernen übersprungen werden · ↑ steigend, ↓ fallend, ⚠ neu. Gezählt werden nur eindeutige Belege; Fundstellen und Grenzfälle stehen im Tooltip.</p>
 
   <table class="kompakt">
-    <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
+    <tr><th>Unterthema</th><th>Prüfungsrelevanz</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
     <tr><td>QU-01 Englischer Fachtext</td><td><span class="relevanz r-kern" title="Belege: S26 T1 A3aa (3 P); W25 T1 A2ba, A2bb (9 P); S24 T2 A3b (12 P); W23 T1 A2aa (1 P); S22 T1 A2c (9 P).">Prüfungskern – 5/9 – S26, W25, S24, W23, S22</span> <span class="trend" title="Trend laut Themenanalyse: steigend">↑</span></td><td>3–12</td><td>Text gezielt auswerten, Antwort auf Deutsch erläutern, auf das Szenario übertragen</td></tr>
     <tr><td>QU-02 Tabellenkalkulation</td><td><span class="relevanz r-vor" title="Belege: S23 T1 A3aa, A3ab, A3ac, A3ba, A3bb (16 P).">Kam vor – 1/9 – S23</span></td><td>16</td><td>Formeln mit $-Bezügen, WENN, SVERWEIS, WOCHENTAG; Grenzen der Tabellenkalkulation</td></tr>
     <tr><td>QU-03 Ticketsystem / IT-Service</td><td><span class="relevanz r-vor" title="Belege: S22 T1 A4a (12 P).">Kam vor – 1/9 – S22</span></td><td>12</td><td>Vor- und Nachteile erläutern, Priorität und SLA bestimmen, Support-Level</td></tr>

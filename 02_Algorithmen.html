@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>02 Algorithmen &amp; Programmierung – Übungen</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design.css">
 <script src="uebungen.js"></script>
 <style>
   /* Zusatzregeln Block 02 */
@@ -20,52 +21,63 @@
 <body>
 
 <!-- ===================== KOPF ===================== -->
-<header class="blockkopf">
-  <h1>Block 02 · Algorithmen &amp; Programmierung</h1>
-  <div class="unter">
-    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 4, Teil 2 in 9 Prüfungen.">Prüfungskern – 9/9 – alle</span> · Ø 41 von 200 Punkten · vor allem Teil 2 (dort immer eine 20–30-Punkte-Algorithmusaufgabe), in mehreren Prüfungen auch Teil 1
-    · Lösungen: <a href="02_Algorithmen_Loesungen.html">02_Algorithmen_Loesungen.html</a>
-  </div>
+<header class="st-hero">
+  <p class="st-eyebrow"><a href="index.html">Prüfungstrainer AP2</a> · Block 02</p>
+  <h1>Algorithmen &amp; Programmierung</h1>
+  <p class="st-lead">Vor allem Teil 2 (dort immer eine 20–30-Punkte-Algorithmusaufgabe), in mehreren Prüfungen auch Teil 1.</p>
+  <ul class="st-zahlen">
+    <li><strong>41</strong><span>Ø Punkte pro Prüfung</span></li>
+    <li><strong>9</strong><span>Unterthemen</span></li>
+    <li><strong>27</strong><span>Aufgaben</span></li>
+    <li><strong>277</strong><span>Punkte zum Üben</span></li>
+  </ul>
+  <p class="st-etikett">Prüfungsrelevanz des Blocks: <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 4, Teil 2 in 9 Prüfungen.">Prüfungskern – 9/9 – alle</span></p>
+  <p class="st-aktionen no-print">
+    <a class="st-knopf" href="#erklaerung">Erklärungssatz lesen</a>
+    <a class="st-knopf st-zweit" href="#aufgaben">Zu den Aufgaben</a>
+    <a class="st-knopf st-zweit" href="02_Algorithmen_Loesungen.html">Lösungen</a>
+  </p>
 </header>
 
-<nav class="toc">
-  <strong>Inhalt</strong>
-  <ol>
-    <li><a href="#erklaerung">Erklärungssatz</a>
-      <ol>
-        <li><a href="#e-01">ALG-01 Algorithmus in Pseudocode</a></li>
-        <li><a href="#e-02">ALG-02 Arrays und Listen</a></li>
-        <li><a href="#e-03">ALG-03 Minimum/Maximum, Suche</a></li>
-        <li><a href="#e-04">ALG-04 Speicherbedarf, Zahlensysteme</a></li>
-        <li><a href="#e-05">ALG-05 Sortieren</a></li>
-        <li><a href="#e-06">ALG-06 Zeichenketten</a></li>
-        <li><a href="#e-07">ALG-07 Exceptions</a></li>
-        <li><a href="#e-08">ALG-08 Rekursion</a></li>
-        <li><a href="#e-09">ALG-09 Nebenläufigkeit</a></li>
-      </ol>
-    </li>
-    <li><a href="#belegsatz">Belegsatz</a> (Pseudocode-Konventionen, Anlagen 1–6)</li>
-    <li><a href="#aufgaben">Aufgaben</a>
-      <ol>
-        <li><a href="#a-01">ALG-01 (3 Aufgaben)</a></li>
-        <li><a href="#a-02">ALG-02 (3 Aufgaben)</a></li>
-        <li><a href="#a-03">ALG-03 (3 Aufgaben)</a></li>
-        <li><a href="#a-04">ALG-04 (3 Aufgaben)</a></li>
-        <li><a href="#a-05">ALG-05 (3 Aufgaben)</a></li>
-        <li><a href="#a-06">ALG-06 (3 Aufgaben)</a></li>
-        <li><a href="#a-07">ALG-07 (3 Aufgaben)</a></li>
-        <li><a href="#a-08">ALG-08 (3 Aufgaben)</a></li>
-        <li><a href="#a-09">ALG-09 (3 Aufgaben)</a></li>
-        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
-      </ol>
-    </li>
-  </ol>
+<nav class="st-inhalt" id="inhalt" aria-label="Inhalt">
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#erklaerung">A · Erklärungssatz</a><span class="st-teil-info">9 Unterthemen</span></p>
+    <ul class="st-chips">
+      <li><a href="#e-01">ALG-01 Algorithmus in Pseudocode</a></li>
+      <li><a href="#e-02">ALG-02 Arrays und Listen</a></li>
+      <li><a href="#e-03">ALG-03 Minimum/Maximum, Suche</a></li>
+      <li><a href="#e-04">ALG-04 Speicherbedarf, Zahlensysteme</a></li>
+      <li><a href="#e-05">ALG-05 Sortieren</a></li>
+      <li><a href="#e-06">ALG-06 Zeichenketten</a></li>
+      <li><a href="#e-07">ALG-07 Exceptions</a></li>
+      <li><a href="#e-08">ALG-08 Rekursion</a></li>
+      <li><a href="#e-09">ALG-09 Nebenläufigkeit</a></li>
+    </ul>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#belegsatz">B · Belegsatz</a><span class="st-teil-info">Pseudocode-Konventionen, Anlagen 1–6</span></p>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#aufgaben">C · Aufgaben</a><span class="st-teil-info">27 Aufgaben, je 3 pro Unterthema</span></p>
+    <ul class="st-chips">
+      <li><a href="#a-01">ALG-01</a></li>
+      <li><a href="#a-02">ALG-02</a></li>
+      <li><a href="#a-03">ALG-03</a></li>
+      <li><a href="#a-04">ALG-04</a></li>
+      <li><a href="#a-05">ALG-05</a></li>
+      <li><a href="#a-06">ALG-06</a></li>
+      <li><a href="#a-07">ALG-07</a></li>
+      <li><a href="#a-08">ALG-08</a></li>
+      <li><a href="#a-09">ALG-09</a></li>
+      <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="info no-print">
   <span class="kastentitel">So arbeitest du mit diesem Block</span>
   Erst den Erklärungssatz lesen, dann die Aufgaben mit dem Belegsatz daneben lösen (Belegsatz am besten separat ausdrucken und neben die Aufgaben legen). Zeitrichtwert: 1 Punkt ≈ 0,9 Minuten.
-  Lösungen erst danach in der separaten Lösungsdatei nachsehen. Zu jeder Code-Aufgabe gibt es dort Pseudocode <em>und</em> eine lauffähige Java-Datei im Ordner <code>java\02_Algorithmen\</code>.
+  Lösungen erst danach in der separaten Lösungsdatei nachsehen. Zu jeder Code-Aufgabe gibt es dort Pseudocode <em>und</em> eine lauffähige Java-Datei im Ordner <code>java/02_Algorithmen/</code>.
 </div>
 
 <!-- ===================== TEIL A: ERKLÄRUNGSSATZ ===================== -->
@@ -73,10 +85,10 @@
   <h2>A · Erklärungssatz</h2>
 
   <p>In <strong>jeder</strong> der 9 ausgewerteten Prüfungen steht in Teil 2 (Aufgabe 1 oder 2) eine große Algorithmusaufgabe mit 20–30 Punkten (nur S24 mit 20 P, aufgeteilt in zwei Teilaufgaben). Fast immer bekommst du ein Klassendiagramm mit Attributen („Getter sind vorhanden“), eine Beispieltabelle mit Daten und eine Methodensignatur. Gesucht ist eine Methode, die eine Liste oder ein Array von Objekten durchläuft und dabei <strong>zählt, summiert, filtert, ein Ergebnis-Array füllt oder ein Minimum sucht</strong>. Ob du das in Pseudocode, als Struktogramm oder in einer Programmiersprache schreibst, ist meist freigestellt. Der Belegsatz enthält nur die Pseudocode-Konventionen, nicht die Muster. Die musst du können.</p>
-  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
+  <p class="st-legende"><strong>Etiketten:</strong> <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> in mindestens 3 von 9 Prüfungen gefragt · <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> in 1–2 · <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> nie gefragt, kann beim Lernen übersprungen werden · ↑ steigend, ↓ fallend, ⚠ neu. Gezählt werden nur eindeutige Belege; Fundstellen und Grenzfälle stehen im Tooltip.</p>
 
   <table class="kompakt">
-    <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
+    <tr><th>Unterthema</th><th>Prüfungsrelevanz</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
     <tr><td>ALG-01 Algorithmus in Pseudocode</td><td><span class="relevanz r-kern" title="Belege: S26 T2 A1a, A1b, A2ba (34 P); W25 T2 A1a, A1b (30 P); W24 T2 A1, A2a, A2b (50 P), T1 A2c (8 P); S24 T2 A2a, A2b (20 P), T1 A3ba, A3bb, A3bc (15 P); W23 T2 A2 (25 P); S23 T2 A2, A3ab (38 P), T1 A2bc, A2bd (9 P); W22 T2 A1a, A1b, A1d, A2c (32 P); S22 T2 A1 (30 P), T1 A3cb (4 P); W21 T2 A2 (25 P).">Prüfungskern – 9/9 – alle</span></td><td>20–30 (T2), 4–15 (T1)</td><td>Grundmuster sicher anwenden, sauber initialisieren</td></tr>
     <tr><td>ALG-02 Arrays und Listen</td><td><span class="relevanz r-kern" title="Belege: S26 T2 A1a, A1b, A2ba (34 P); W25 T2 A3bb, A1a, A1b (34 P); W24 T2 A1, A2b (40 P); S24 T2 A2a, A2b (20 P), T1 A3ba, A3bb, A3bc (15 P); W23 T2 A2 (25 P); S23 T2 A2 (25 P); W22 T2 A1a, A1d, A2c (27 P); S22 T2 A1 (30 P), T1 A3cb (4 P); W21 T2 A2 (25 P).">Prüfungskern – 9/9 – alle</span></td><td>in ALG-01 enthalten</td><td>Indexgrenzen, 2D-Arrays, <code>List&lt;T&gt;</code>-Methoden</td></tr>
     <tr><td>ALG-03 Minimum/Maximum, Suche</td><td><span class="relevanz r-kern" title="Belege: W25 T2 A1b, A3bb, A1a (34 P); S24 T1 A3bb (5 P); W23 T2 A2 (25 P); S22 T2 A1 (30 P); W21 T2 A2 (25 P).">Prüfungskern – 5/9 – W25, S24, W23, S22, W21</span></td><td>10–25</td><td>richtig initialisieren, Objekt statt Wert merken</td></tr>

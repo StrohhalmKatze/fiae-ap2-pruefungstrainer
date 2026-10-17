@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>03 UML-Modellierung – Übungen</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design.css">
 <script src="uebungen.js"></script>
 <style>
   /* Zusatzregeln Block 03 */
@@ -36,42 +37,53 @@
 <body>
 
 <!-- ===================== KOPF ===================== -->
-<header class="blockkopf">
-  <h1>Block 03 · UML-Modellierung</h1>
-  <div class="unter">
-    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 9, Teil 2 in 6 Prüfungen.">Prüfungskern – 9/9 – alle</span> · Ø 37 von 200 Punkten · Teil 1 (in jeder Prüfung muss mindestens ein Diagramm gezeichnet werden) und Teil 2 (6×, oft als ganze 25-Punkte-Aufgabe)
-    · Lösungen: <a href="03_UML_Loesungen.html">03_UML_Loesungen.html</a>
-  </div>
+<header class="st-hero">
+  <p class="st-eyebrow"><a href="index.html">Prüfungstrainer AP2</a> · Block 03</p>
+  <h1>UML-Modellierung</h1>
+  <p class="st-lead">Teil 1 (in jeder Prüfung muss mindestens ein Diagramm gezeichnet werden) und Teil 2 (6×, oft als ganze 25-Punkte-Aufgabe).</p>
+  <ul class="st-zahlen">
+    <li><strong>37</strong><span>Ø Punkte pro Prüfung</span></li>
+    <li><strong>7</strong><span>Unterthemen</span></li>
+    <li><strong>21</strong><span>Aufgaben</span></li>
+    <li><strong>252</strong><span>Punkte zum Üben</span></li>
+  </ul>
+  <p class="st-etikett">Prüfungsrelevanz des Blocks: <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 9, Teil 2 in 6 Prüfungen.">Prüfungskern – 9/9 – alle</span></p>
+  <p class="st-aktionen no-print">
+    <a class="st-knopf" href="#erklaerung">Erklärungssatz lesen</a>
+    <a class="st-knopf st-zweit" href="#aufgaben">Zu den Aufgaben</a>
+    <a class="st-knopf st-zweit" href="03_UML_Loesungen.html">Lösungen</a>
+  </p>
 </header>
 
-<nav class="toc">
-  <strong>Inhalt</strong>
-  <ol>
-    <li><a href="#erklaerung">Erklärungssatz</a>
-      <ol>
-        <li><a href="#e-01">UML-01 Diagrammwahl, Diagramme lesen</a></li>
-        <li><a href="#e-02">UML-02 Aktivitätsdiagramm</a></li>
-        <li><a href="#e-03">UML-03 Klassendiagramm</a></li>
-        <li><a href="#e-04">UML-04 Zustandsdiagramm</a></li>
-        <li><a href="#e-05">UML-05 Use-Case-Diagramm</a></li>
-        <li><a href="#e-06">UML-06 Sequenzdiagramm</a></li>
-        <li><a href="#e-07">UML-07 Struktogramm / PAP</a></li>
-      </ol>
-    </li>
-    <li><a href="#belegsatz">Belegsatz</a> (UML-Notation wie im IHK-Belegsatz, Struktogramm, PAP, Pseudocode, Anlagen 1–10)</li>
-    <li><a href="#aufgaben">Aufgaben</a>
-      <ol>
-        <li><a href="#a-01">UML-01 (3 Aufgaben)</a></li>
-        <li><a href="#a-02">UML-02 (3 Aufgaben)</a></li>
-        <li><a href="#a-03">UML-03 (3 Aufgaben)</a></li>
-        <li><a href="#a-04">UML-04 (3 Aufgaben)</a></li>
-        <li><a href="#a-05">UML-05 (3 Aufgaben)</a></li>
-        <li><a href="#a-06">UML-06 (3 Aufgaben)</a></li>
-        <li><a href="#a-07">UML-07 (3 Aufgaben)</a></li>
-        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
-      </ol>
-    </li>
-  </ol>
+<nav class="st-inhalt" id="inhalt" aria-label="Inhalt">
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#erklaerung">A · Erklärungssatz</a><span class="st-teil-info">7 Unterthemen</span></p>
+    <ul class="st-chips">
+      <li><a href="#e-01">UML-01 Diagrammwahl, Diagramme lesen</a></li>
+      <li><a href="#e-02">UML-02 Aktivitätsdiagramm</a></li>
+      <li><a href="#e-03">UML-03 Klassendiagramm</a></li>
+      <li><a href="#e-04">UML-04 Zustandsdiagramm</a></li>
+      <li><a href="#e-05">UML-05 Use-Case-Diagramm</a></li>
+      <li><a href="#e-06">UML-06 Sequenzdiagramm</a></li>
+      <li><a href="#e-07">UML-07 Struktogramm / PAP</a></li>
+    </ul>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#belegsatz">B · Belegsatz</a><span class="st-teil-info">UML-Notation wie im IHK-Belegsatz, Struktogramm, PAP, Pseudocode, Anlagen 1–10</span></p>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#aufgaben">C · Aufgaben</a><span class="st-teil-info">21 Aufgaben, je 3 pro Unterthema</span></p>
+    <ul class="st-chips">
+      <li><a href="#a-01">UML-01</a></li>
+      <li><a href="#a-02">UML-02</a></li>
+      <li><a href="#a-03">UML-03</a></li>
+      <li><a href="#a-04">UML-04</a></li>
+      <li><a href="#a-05">UML-05</a></li>
+      <li><a href="#a-06">UML-06</a></li>
+      <li><a href="#a-07">UML-07</a></li>
+      <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="info no-print">
@@ -85,10 +97,10 @@
   <h2>A · Erklärungssatz</h2>
 
   <p>UML-Diagramme sind der zweitgrößte Brocken der AP2 nach den Datenbanken. In <strong>jeder</strong> der neun ausgewerteten Prüfungen musste in Teil 1 mindestens ein Diagramm gezeichnet werden, in sechs Prüfungen zusätzlich in Teil 2 – dort oft als komplette 25-Punkte-Aufgabe (Aktivitätsdiagramm S23, Sequenzdiagramm W23, Zustandsdiagramm W25). Fast immer bekommst du einen Text (Prozessbeschreibung, Interview, Anforderungsliste, Quelltext) und musst daraus ein Diagramm erstellen oder ein vorgegebenes Teil-Diagramm ergänzen.</p>
-  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
+  <p class="st-legende"><strong>Etiketten:</strong> <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> in mindestens 3 von 9 Prüfungen gefragt · <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> in 1–2 · <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> nie gefragt, kann beim Lernen übersprungen werden · ↑ steigend, ↓ fallend, ⚠ neu. Gezählt werden nur eindeutige Belege; Fundstellen und Grenzfälle stehen im Tooltip.</p>
 
   <table class="kompakt">
-    <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
+    <tr><th>Unterthema</th><th>Prüfungsrelevanz</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
     <tr><td>UML-01 Diagrammwahl, Diagramme lesen</td><td><span class="relevanz r-kern" title="Belege: S26 T1 A2a (16 P), T2 A2a (12 P); W25 T1 A2a (18 P), T2 A2 (25 P); W24 T1 A3a, A4a, A3ba, A3bb, A3bc (40 P); S24 T1 A2e, A3a (25 P), T2 A1a (14 P); W23 T1 A2c, A2b (21 P), T2 A1 (25 P); S23 T1 A2bb, A3c (19 P), T2 A1 (25 P); W22 T1 A4a, A4b (25 P); S22 T1 A3a, A3ca, A3ba, A3bc (24 P); W21 T1 A2a (14 P), T2 A1a (15 P).">Prüfungskern – 9/9 – alle</span></td><td>in jeder Diagrammaufgabe</td><td>Aus dem Text erkennen, welches Diagramm gefragt ist; Diagramme lesen und Fehler finden</td></tr>
     <tr><td>UML-02 Aktivitätsdiagramm</td><td><span class="relevanz r-kern" title="Belege: S26 T1 A2a (16 P); S24 T2 A1a (14 P); W23 T1 A2c (15 P); S23 T2 A1 (25 P); W22 T1 A4a (14 P); W21 T2 A1a (15 P).">Prüfungskern – 6/9 – S26, S24, W23, S23, W22, W21</span></td><td>14–25</td><td>Partitionen, Entscheidung mit Guards, Teilung/Synchronisation, Schleife</td></tr>
     <tr><td>UML-03 Klassendiagramm</td><td><span class="relevanz r-kern" title="Belege: S26 T2 A2a (12 P); W24 T1 A3a, A3ba, A3bc, A3bb (25 P); S23 T1 A2bb (9 P); S22 T1 A3a, A3bb, A3ba, A3bc (17 P); W21 T1 A3b (7 P).">Prüfungskern – 5/9 – S26, W24, S23, S22, W21</span></td><td>5–25</td><td>Attribute/Methoden-Syntax, Multiplizitäten, Aggregation vs. Komposition</td></tr>

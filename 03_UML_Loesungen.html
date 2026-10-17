@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>03 UML-Modellierung – Lösungen</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design.css">
 <script src="uebungen.js"></script>
 <style>
   /* Zusatzregeln Block 03 (Lösungen) */
@@ -25,25 +26,29 @@
 </head>
 <body>
 
-<header class="blockkopf">
-  <h1>Block 03 · UML-Modellierung – Lösungen</h1>
-  <div class="unter">
-    Lösungssatz zu <a href="03_UML.html">03_UML.html</a>
-    · Diagramme als Musterlösung; zu den Struktogramm-Aufgaben lauffähige Java-Dateien im Ordner <code>java\03_UML\</code> (Start mit <code>java Aufgabe_UML_07_k.java</code>)
-  </div>
+<header class="st-hero">
+  <p class="st-eyebrow"><a href="index.html">Prüfungstrainer AP2</a> · Block 03 · Lösungssatz</p>
+  <h1>UML-Modellierung <span class="st-tag">Lösungen</span></h1>
+  <p class="st-lead">Diagramme als Musterlösung; zu den Struktogramm-Aufgaben lauffähige Java-Dateien im Ordner <code>java/03_UML/</code> (Start mit <code>java Aufgabe_UML_07_k.java</code>).</p>
+  <p class="st-aktionen no-print">
+    <a class="st-knopf" href="03_UML.html#aufgaben">Zurück zu den Aufgaben</a>
+    <a class="st-knopf st-zweit" href="03_UML.html#erklaerung">Erklärungssatz</a>
+  </p>
 </header>
 
-<nav class="toc">
-  <strong>Inhalt</strong>
-  <ol>
-    <li><a href="#l-01">UML-01 Diagrammwahl</a></li>
-    <li><a href="#l-02">UML-02 Aktivität</a></li>
-    <li><a href="#l-03">UML-03 Klasse</a></li>
-    <li><a href="#l-04">UML-04 Zustand</a></li>
-    <li><a href="#l-05">UML-05 Use Case</a></li>
-    <li><a href="#l-06">UML-06 Sequenz</a></li>
-    <li><a href="#l-07">UML-07 Struktogramm/PAP</a></li>
-  </ol>
+<nav class="st-inhalt" id="inhalt" aria-label="Inhalt">
+  <div class="st-teil">
+    <p class="st-teil-kopf"><span class="st-teil-titel">Lösungen nach Unterthema</span><span class="st-teil-info">7 Unterthemen · 21 Aufgaben</span></p>
+    <ul class="st-chips">
+      <li><a href="#l-01">UML-01 Diagrammwahl</a></li>
+      <li><a href="#l-02">UML-02 Aktivität</a></li>
+      <li><a href="#l-03">UML-03 Klasse</a></li>
+      <li><a href="#l-04">UML-04 Zustand</a></li>
+      <li><a href="#l-05">UML-05 Use Case</a></li>
+      <li><a href="#l-06">UML-06 Sequenz</a></li>
+      <li><a href="#l-07">UML-07 Struktogramm/PAP</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="info">
@@ -1302,7 +1307,7 @@
 gebuehrGesamt([12], wahr)              -&gt;   0,00  (erwartet   0,00) OK
 gebuehrGesamt([10, 11], falsch)        -&gt;  10,00  (erwartet  10,00) OK
 gebuehrGesamt([], falsch)              -&gt;   0,00  (erwartet   0,00) OK</pre>
-    <p class="datei">Datei: <code>java\03_UML\Aufgabe_UML_07_1.java</code></p>
+    <p class="datei">Datei: <code>java/03_UML/Aufgabe_UML_07_1.java</code></p>
   </div>
 
   <div class="loesung" id="L-UML-07-2">
@@ -1362,7 +1367,7 @@ Buch, ausgeliehen an Tag 100        -&gt; 128 (erwartet 128)
 Zeitschrift, ausgeliehen an Tag 114 -&gt; 122 (erwartet 122)
 Noten, ausgeliehen an Tag 100       -&gt; 122 (erwartet 122)
 fußgesteuert, Buch an Tag 100       -&gt; 129 (falsch: 129 statt 128, ein Tag zu spät)</pre>
-    <p class="datei">Datei: <code>java\03_UML\Aufgabe_UML_07_2.java</code></p>
+    <p class="datei">Datei: <code>java/03_UML/Aufgabe_UML_07_2.java</code></p>
   </div>
 
   <div class="loesung" id="L-UML-07-3">
@@ -1526,7 +1531,7 @@ korrigiert: pruefeAusweis("40517280") = false  OK
 korrigiert: pruefeAusweis("12345678") = true  OK
 korrigiert: pruefeAusweis("1234567") = false  OK
 korrigiert: pruefeAusweis("00000000") = true  OK</pre>
-    <p class="datei">Datei: <code>java\03_UML\Aufgabe_UML_07_3.java</code> (enthält die fehlerhafte und die korrigierte Fassung)</p>
+    <p class="datei">Datei: <code>java/03_UML/Aufgabe_UML_07_3.java</code> (enthält die fehlerhafte und die korrigierte Fassung)</p>
   </div>
 </section>
 

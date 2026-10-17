@@ -3,59 +3,196 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Übungen AP2 FIAE – Übersicht</title>
+<title>Prüfungstrainer AP2 FIAE</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design.css">
 <script src="uebungen.js"></script>
 </head>
 <body>
 
-<header class="blockkopf">
-  <h1>Übungen AP2 · Fachinformatiker Anwendungsentwicklung</h1>
-  <div class="unter">Vorbereitung auf die Abschlussprüfung Teil 2, Winter 2026 · Teil 1 (Planen eines Softwareproduktes) und Teil 2 (Entwicklung und Umsetzung von Algorithmen)</div>
+<header class="st-hero">
+  <p class="st-eyebrow">AP2 · Fachinformatiker/in Anwendungsentwicklung</p>
+  <h1>Prüfungstrainer AP2</h1>
+  <p class="st-lead">Erklärungen, Übungsaufgaben und Musterlösungen für Teil 1 und Teil 2 der Abschlussprüfung, sortiert danach, wie oft ein Thema in den letzten Prüfungen gefragt war.</p>
+  <ul class="st-zahlen">
+    <li><strong>12</strong><span>Themenblöcke</span></li>
+    <li><strong>237</strong><span>Aufgaben mit Lösung</span></li>
+    <li><strong>9</strong><span>Prüfungen ausgewertet (W21–S26)</span></li>
+    <li><strong>58</strong><span>lauffähige Java-Lösungen</span></li>
+  </ul>
+  <p class="st-aktionen">
+    <a class="st-knopf" href="01_Datenbanken.html">Mit Block 01 starten →</a>
+    <a class="st-knopf st-zweit" href="#so">So funktioniert’s</a>
+  </p>
 </header>
 
-<div class="info">
-  <span class="kastentitel">Aufbau jedes Blocks</span>
-  <ul>
-    <li><strong>Datei 1 – Übungen:</strong> A · Erklärungssatz (Lernskript), B · Belegsatz (Notationshilfen und Anlagen, wie in der Prüfung), C · Aufgaben (3 pro Unterthema: ★ Grundlagen, ★★ Anwendung, ★★★ Prüfungsniveau).</li>
-    <li><strong>Datei 2 – Lösungen:</strong> Musterlösungen mit Bewertungshinweisen; Algorithmen in Pseudocode und Java.</li>
-    <li><strong>Java-Dateien</strong> zum Ausprobieren liegen im Unterordner <code>java/</code>, SQL-Skripte mit den Beispieldaten in <code>sql/</code>.</li>
-    <li><strong>Prüfungsrelevanz-Etiketten:</strong> Jedes Unterthema und jeder Abschnitt im Erklärungssatz (Teil A) trägt ein Etikett, das aus den 9 Prüfungen W21–S26 belegt, in wie vielen Prüfungen sein Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in 8 von 9 Prüfungen direkt gebraucht, nur S24 nicht">Prüfungskern – 8/9 – alle außer S24</span> (in mindestens 3 Prüfungen; die Prüfungen sind genannt, ab 7 steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: in W25 und S23 vorgekommen">Kam vor – 2/9 – W25, S23</span> (in 1–2 Prüfungen) und <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> (in keiner Prüfung direkt gebraucht, nur zum Verständnis – kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet; die Etiketten sind nur ein Wegweiser.</li>
-    <li><strong>Digital bearbeiten:</strong> In die Antwortfelder und leeren Tabellenzellen der Aufgaben kannst du direkt tippen (Knopf <code>Aa</code>/<code>&lt;/&gt;</code> im Feld schaltet auf Code-Schrift um). In Zeichenflächen fügst du ein Bild ein: Feld anklicken und <code>Strg + V</code>, Bilddatei hineinziehen oder „Datei wählen“. Alles wird automatisch in diesem Browser auf diesem PC gespeichert (am besten Chrome oder Edge verwenden). Beim Drucken erscheinen deine Antworten in den Feldern.</li>
-    <li><strong>Sichern:</strong> „Exportieren“ (oben rechts in jeder Übungsdatei) speichert alle Antworten aller Blöcke als Datei, „Importieren“ stellt sie wieder her, „Leeren“ löscht die Antworten der geöffneten Datei. Achtung: Wer im Browser „Website-Daten löschen“ ausführt, löscht auch die Antworten – also ab und zu exportieren.</li>
-    <li><strong>Darkmode:</strong> Knopf oben rechts (☾ Dunkel / ☀ Hell). Ohne Auswahl folgt die Seite der Windows-Einstellung. Gedruckt wird immer hell.</li>
-  </ul>
-  Zeitrichtwert wie in der Prüfung: 1 Punkt ≈ 0,9 Minuten. Drucken: im Browser <code>Strg + P</code>; jeder Teil beginnt auf einer neuen Seite.
-</div>
+<h2 id="bloecke">Themenblöcke</h2>
+<p class="st-hinweis">Sortiert nach Prüfungsrelevanz. Ø Pkt = Punkte, die im Mittel einer Prüfung auf den Block entfielen (von 200).</p>
 
-<h2>Blöcke</h2>
-<p class="klein">Reihenfolge = Wichtigkeit laut Themenanalyse (Vorkommen in 9 Prüfungen W21–S26, Ø Punkte von 200).</p>
+<ol class="st-karten">
+  <li class="st-karte">
+    <div class="st-kopf"><span class="st-nr">01</span><h3>Datenbanken</h3><span class="st-schnitt"><strong>54</strong> Ø Pkt</span></div>
+    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 7, Teil 2 in 9 Prüfungen.">Prüfungskern – 9/9 – alle</span>
+    <p class="st-meta">36 Aufgaben · 345 Punkte</p>
+    <p class="st-links"><a href="01_Datenbanken.html">Übungen</a><a href="01_Datenbanken_Loesungen.html">Lösungen</a></p>
+  </li>
+  <li class="st-karte">
+    <div class="st-kopf"><span class="st-nr">02</span><h3>Algorithmen &amp; Programmierung</h3><span class="st-schnitt"><strong>41</strong> Ø Pkt</span></div>
+    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 4, Teil 2 in 9 Prüfungen.">Prüfungskern – 9/9 – alle</span>
+    <p class="st-meta">27 Aufgaben · 277 Punkte</p>
+    <p class="st-links"><a href="02_Algorithmen.html">Übungen</a><a href="02_Algorithmen_Loesungen.html">Lösungen</a></p>
+  </li>
+  <li class="st-karte">
+    <div class="st-kopf"><span class="st-nr">03</span><h3>UML-Modellierung</h3><span class="st-schnitt"><strong>37</strong> Ø Pkt</span></div>
+    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 9, Teil 2 in 6 Prüfungen.">Prüfungskern – 9/9 – alle</span>
+    <p class="st-meta">21 Aufgaben · 252 Punkte</p>
+    <p class="st-links"><a href="03_UML.html">Übungen</a><a href="03_UML_Loesungen.html">Lösungen</a></p>
+  </li>
+  <li class="st-karte">
+    <div class="st-kopf"><span class="st-nr">04</span><h3>Projektmanagement</h3><span class="st-schnitt"><strong>21</strong> Ø Pkt</span></div>
+    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 8, Teil 2 in 0 Prüfungen.">Prüfungskern – 8/9 – alle außer W21</span>
+    <p class="st-meta">30 Aufgaben · 332 Punkte</p>
+    <p class="st-links"><a href="04_Projektmanagement.html">Übungen</a><a href="04_Projektmanagement_Loesungen.html">Lösungen</a></p>
+  </li>
+  <li class="st-karte">
+    <div class="st-kopf"><span class="st-nr">05</span><h3>Testen &amp; Qualitätssicherung</h3><span class="st-schnitt"><strong>18</strong> Ø Pkt</span></div>
+    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 6, Teil 2 in 6 Prüfungen.">Prüfungskern – 8/9 – alle außer W24</span>
+    <p class="st-meta">21 Aufgaben · 254 Punkte</p>
+    <p class="st-links"><a href="05_Testen_QS.html">Übungen</a><a href="05_Testen_QS_Loesungen.html">Lösungen</a></p>
+  </li>
+  <li class="st-karte">
+    <div class="st-kopf"><span class="st-nr">06</span><h3>Schnittstellen &amp; Datenformate</h3><span class="st-schnitt"><strong>13</strong> Ø Pkt</span></div>
+    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 8, Teil 2 in 1 Prüfungen.">Prüfungskern – 8/9 – alle außer S22</span>
+    <p class="st-meta">15 Aufgaben · 174 Punkte</p>
+    <p class="st-links"><a href="06_Schnittstellen_Datenformate.html">Übungen</a><a href="06_Schnittstellen_Datenformate_Loesungen.html">Lösungen</a></p>
+  </li>
+  <li class="st-karte">
+    <div class="st-kopf"><span class="st-nr">07</span><h3>IT-Sicherheit &amp; Datenschutz</h3><span class="st-schnitt"><strong>10</strong> Ø Pkt</span></div>
+    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 8, Teil 2 in 1 Prüfungen.">Prüfungskern – 8/9 – alle außer W23</span>
+    <p class="st-meta">18 Aufgaben · 202 Punkte</p>
+    <p class="st-links"><a href="07_IT-Sicherheit.html">Übungen</a><a href="07_IT-Sicherheit_Loesungen.html">Lösungen</a></p>
+  </li>
+  <li class="st-karte">
+    <div class="st-kopf"><span class="st-nr">08</span><h3>Objektorientierung &amp; Entwurfsmuster</h3><span class="st-schnitt"><strong>12</strong> Ø Pkt</span></div>
+    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 4, Teil 2 in 3 Prüfungen.">Prüfungskern – 6/9 – S26, W24, S24, S23, W22, S22</span>
+    <p class="st-meta">15 Aufgaben · 178 Punkte</p>
+    <p class="st-links"><a href="08_OOP_Entwurfsmuster.html">Übungen</a><a href="08_OOP_Entwurfsmuster_Loesungen.html">Lösungen</a></p>
+  </li>
+  <li class="st-karte">
+    <div class="st-kopf"><span class="st-nr">09</span><h3>Benutzeroberfläche</h3><span class="st-schnitt"><strong>7</strong> Ø Pkt</span></div>
+    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 5, Teil 2 in 0 Prüfungen.">Prüfungskern – 5/9 – S26, S24, W23, W22, W21</span>
+    <p class="st-meta">9 Aufgaben · 105 Punkte</p>
+    <p class="st-links"><a href="09_Benutzeroberflaeche.html">Übungen</a><a href="09_Benutzeroberflaeche_Loesungen.html">Lösungen</a></p>
+  </li>
+  <li class="st-karte">
+    <div class="st-kopf"><span class="st-nr">10</span><h3>Netzwerk, IoT &amp; Infrastruktur</h3><span class="st-schnitt"><strong>6</strong> Ø Pkt</span></div>
+    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 4, Teil 2 in 0 Prüfungen.">Prüfungskern – 4/9 – S26, W24, S23, W22</span>
+    <p class="st-meta">12 Aufgaben · 147 Punkte</p>
+    <p class="st-links"><a href="10_Netzwerk_IoT.html">Übungen</a><a href="10_Netzwerk_IoT_Loesungen.html">Lösungen</a></p>
+  </li>
+  <li class="st-karte">
+    <div class="st-kopf"><span class="st-nr">11</span><h3>Entwicklungsumgebung &amp; Werkzeuge</h3><span class="st-schnitt"><strong>5</strong> Ø Pkt</span></div>
+    <span class="relevanz r-vor" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 2, Teil 2 in 0 Prüfungen.">Kam vor – 2/9 – W22, W21</span>
+    <p class="st-meta">18 Aufgaben · 198 Punkte</p>
+    <p class="st-links"><a href="11_Werkzeuge.html">Übungen</a><a href="11_Werkzeuge_Loesungen.html">Lösungen</a></p>
+  </li>
+  <li class="st-karte">
+    <div class="st-kopf"><span class="st-nr">12</span><h3>Querschnitt</h3><span class="st-schnitt"><strong>8</strong> Ø Pkt</span></div>
+    <span class="st-gemischt">Englisch, Tabellenkalkulation, Ticketsystem, KI, Green IT · Etikett je Unterthema</span>
+    <p class="st-meta">15 Aufgaben · 170 Punkte</p>
+    <p class="st-links"><a href="12_Querschnitt.html">Übungen</a><a href="12_Querschnitt_Loesungen.html">Lösungen</a></p>
+  </li>
+</ol>
 
-<table style="font-size:12.5px">
-  <tr><th>#</th><th>Block</th><th>Prüfungsrelevanz</th><th>Ø Pkt</th><th>Aufgaben</th><th>Punkte</th><th>Druckseiten (Ü + L)</th><th>Übungen</th><th>Lösungen</th></tr>
-  <tr><td>01</td><td>Datenbanken</td><td><span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 7, Teil 2 in 9 Prüfungen.">Prüfungskern – 9/9 – alle</span></td><td>54</td><td>36</td><td>345</td><td>75 + 38</td><td><a href="01_Datenbanken.html">öffnen</a></td><td><a href="01_Datenbanken_Loesungen.html">öffnen</a></td></tr>
-  <tr><td>02</td><td>Algorithmen &amp; Programmierung</td><td><span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 4, Teil 2 in 9 Prüfungen.">Prüfungskern – 9/9 – alle</span></td><td>41</td><td>27</td><td>277</td><td>68 + 39</td><td><a href="02_Algorithmen.html">öffnen</a></td><td><a href="02_Algorithmen_Loesungen.html">öffnen</a></td></tr>
-  <tr><td>03</td><td>UML-Modellierung</td><td><span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 9, Teil 2 in 6 Prüfungen.">Prüfungskern – 9/9 – alle</span></td><td>37</td><td>21</td><td>252</td><td>82 + 28</td><td><a href="03_UML.html">öffnen</a></td><td><a href="03_UML_Loesungen.html">öffnen</a></td></tr>
-  <tr><td>04</td><td>Projektmanagement</td><td><span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 8, Teil 2 in 0 Prüfungen.">Prüfungskern – 8/9 – alle außer W21</span></td><td>21</td><td>30</td><td>332</td><td>74 + 30</td><td><a href="04_Projektmanagement.html">öffnen</a></td><td><a href="04_Projektmanagement_Loesungen.html">öffnen</a></td></tr>
-  <tr><td>05</td><td>Testen &amp; Qualitätssicherung</td><td><span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 6, Teil 2 in 6 Prüfungen.">Prüfungskern – 8/9 – alle außer W24</span></td><td>18</td><td>21</td><td>254</td><td>68 + 30</td><td><a href="05_Testen_QS.html">öffnen</a></td><td><a href="05_Testen_QS_Loesungen.html">öffnen</a></td></tr>
-  <tr><td>06</td><td>Schnittstellen &amp; Datenformate</td><td><span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 8, Teil 2 in 1 Prüfungen.">Prüfungskern – 8/9 – alle außer S22</span></td><td>13</td><td>15</td><td>174</td><td>61 + 21</td><td><a href="06_Schnittstellen_Datenformate.html">öffnen</a></td><td><a href="06_Schnittstellen_Datenformate_Loesungen.html">öffnen</a></td></tr>
-  <tr><td>07</td><td>IT-Sicherheit &amp; Datenschutz</td><td><span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 8, Teil 2 in 1 Prüfungen.">Prüfungskern – 8/9 – alle außer W23</span></td><td>10</td><td>18</td><td>202</td><td>60 + 16</td><td><a href="07_IT-Sicherheit.html">öffnen</a></td><td><a href="07_IT-Sicherheit_Loesungen.html">öffnen</a></td></tr>
-  <tr><td>08</td><td>Objektorientierung &amp; Entwurfsmuster</td><td><span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 4, Teil 2 in 3 Prüfungen.">Prüfungskern – 6/9 – S26, W24, S24, S23, W22, S22</span></td><td>12</td><td>15</td><td>178</td><td>70 + 30</td><td><a href="08_OOP_Entwurfsmuster.html">öffnen</a></td><td><a href="08_OOP_Entwurfsmuster_Loesungen.html">öffnen</a></td></tr>
-  <tr><td>09</td><td>Benutzeroberfläche</td><td><span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 5, Teil 2 in 0 Prüfungen.">Prüfungskern – 5/9 – S26, S24, W23, W22, W21</span></td><td>7</td><td>9</td><td>105</td><td>39 + 16</td><td><a href="09_Benutzeroberflaeche.html">öffnen</a></td><td><a href="09_Benutzeroberflaeche_Loesungen.html">öffnen</a></td></tr>
-  <tr><td>10</td><td>Netzwerk, IoT &amp; Infrastruktur</td><td><span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 4, Teil 2 in 0 Prüfungen.">Prüfungskern – 4/9 – S26, W24, S23, W22</span></td><td>6</td><td>12</td><td>147</td><td>44 + 17</td><td><a href="10_Netzwerk_IoT.html">öffnen</a></td><td><a href="10_Netzwerk_IoT_Loesungen.html">öffnen</a></td></tr>
-  <tr><td>11</td><td>Entwicklungsumgebung &amp; Werkzeuge</td><td><span class="relevanz r-vor" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 2, Teil 2 in 0 Prüfungen.">Kam vor – 2/9 – W22, W21</span></td><td>5</td><td>18</td><td>198</td><td>62 + 24</td><td><a href="11_Werkzeuge.html">öffnen</a></td><td><a href="11_Werkzeuge_Loesungen.html">öffnen</a></td></tr>
-  <tr><td>12</td><td>Querschnitt (Englisch, Tabellenkalkulation, Ticketsystem, KI, Green IT)</td><td>gemischt (Etikett je Unterthema)</td><td>–</td><td>15</td><td>170</td><td>55 + 15</td><td><a href="12_Querschnitt.html">öffnen</a></td><td><a href="12_Querschnitt_Loesungen.html">öffnen</a></td></tr>
-  <tr><th></th><th>Gesamt</th><th></th><th></th><th>237</th><th>2634</th><th>758 + 304</th><th></th><th></th></tr>
-</table>
-<p class="klein">Druckseiten = Übungsdatei (Erklärungssatz, Belegsatz, Aufgaben mit Antwortfeldern) + Lösungsdatei, gemessen als A4-PDF aus Chrome. Dazu 58 Java-Dateien in <code>java/</code> und ein SQL-Skript in <code>sql/</code>.</p>
+<section class="st-pfad">
+  <h2>Empfohlene Reihenfolge</h2>
+  <ol class="st-schritte">
+    <li><a class="st-kern" href="01_Datenbanken.html">01 Datenbanken</a></li>
+    <li><a class="st-kern" href="02_Algorithmen.html">02 Algorithmen</a></li>
+    <li><a class="st-kern" href="03_UML.html">03 UML</a></li>
+    <li><a href="08_OOP_Entwurfsmuster.html">08 OOP</a></li>
+    <li><a class="st-kern" href="04_Projektmanagement.html">04 Projektmanagement</a></li>
+    <li><a class="st-kern" href="05_Testen_QS.html">05 Testen</a></li>
+    <li><a class="st-kern" href="06_Schnittstellen_Datenformate.html">06 Schnittstellen</a></li>
+    <li><a class="st-kern" href="07_IT-Sicherheit.html">07 Sicherheit</a></li>
+    <li><a href="12_Querschnitt.html">12 Querschnitt</a></li>
+    <li><a href="09_Benutzeroberflaeche.html">09 Benutzeroberfläche</a></li>
+    <li><a href="10_Netzwerk_IoT.html">10 Netzwerk</a></li>
+    <li><a href="11_Werkzeuge.html">11 Werkzeuge</a></li>
+  </ol>
+  <p class="st-hinweis">Sortiert nach Ø Punkten pro Prüfung. Ausnahme: 08 OOP folgt direkt auf UML, weil es auf dem Klassendiagramm aufbaut. Farbig hinterlegt sind die Blöcke 01–07, die praktisch in jeder Prüfung vorkommen.</p>
+</section>
 
-<div class="tipp">
-  <span class="kastentitel">Empfohlene Lernreihenfolge</span>
-  01 Datenbanken → 02 Algorithmen → 03 UML → 08 OOP (baut auf dem Klassendiagramm auf) → 05 Testen → 04 Projektmanagement → 06 Schnittstellen → 07 Sicherheit → 09 Benutzeroberfläche → 12 Querschnitt → 10 Netzwerk → 11 Werkzeuge.
-  Die Blöcke 01–07 kommen praktisch in jeder Prüfung vor.
-</div>
+<section class="st-mehr">
+  <h2 id="so">So funktioniert’s</h2>
+  <div class="st-kacheln">
+    <div class="st-kachel"><h3>Lernen</h3><p>Der Erklärungssatz (Teil A) erklärt jedes Unterthema mit Bezug auf echte Prüfungsaufgaben. Der Belegsatz (Teil B) enthält die Notationshilfen wie in der Prüfung.</p></div>
+    <div class="st-kachel"><h3>Üben</h3><p>Teil C hat drei Aufgaben je Unterthema, von ★ Grundlagen über ★★ Anwendung bis ★★★ Prüfungsniveau. Richtwert: 1 Punkt ≈ 0,9 Minuten.</p></div>
+    <div class="st-kachel"><h3>Kontrollieren</h3><p>Die Lösungsdatei enthält Musterlösungen mit Bewertungshinweisen, Algorithmen in Pseudocode und Java.</p></div>
+    <div class="st-kachel"><h3>Speichern</h3><p>Antworten direkt eintippen oder Skizzen als Bild einfügen. Alles bleibt in deinem Browser.</p></div>
+  </div>
 
-<p class="klein">Grundlage: <code>Themenanalyse.md</code> im übergeordneten Ordner. Die Aufgaben sind an echte Prüfungsaufgaben angelehnt, aber neu formuliert; am Ende jedes Aufgabenteils steht eine Liste passender Originalaufgaben aus deinem Prüfungsordner.</p>
+  <details>
+    <summary>Was bedeuten die Etiketten?</summary>
+    <p>Jedes Unterthema und jeder Abschnitt im Erklärungssatz trägt ein Etikett. Es zeigt, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde, also ausdrücklich gefragt war oder für die Lösung nötig war.</p>
+    <ul>
+      <li><span class="relevanz r-kern" title="Beispiel: in 8 von 9 Prüfungen direkt gebraucht, nur S24 nicht">Prüfungskern – 8/9 – alle außer S24</span> in mindestens 3 Prüfungen. Die Prüfungen stehen dabei, ab 7 heißt es „alle außer …“, bei 9 „alle“.</li>
+      <li><span class="relevanz r-vor" title="Beispiel: in W25 und S23 vorgekommen">Kam vor – 2/9 – W25, S23</span> in 1 oder 2 Prüfungen.</li>
+      <li><span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> in keiner Prüfung direkt gebraucht, nur zum Verständnis. Kann beim Lernen übersprungen werden.</li>
+    </ul>
+    <p>Gezählt werden nur eindeutig belegte Prüfungen. Grenzfälle und die Begründung stehen im Tooltip. Ausgeblendet wird nichts, die Etiketten sind nur ein Wegweiser. Pfeile dahinter zeigen den Trend: ↑ steigend, ↓ fallend, ⚠ neu in den letzten beiden Prüfungen.</p>
+  </details>
+
+  <details>
+    <summary>Antworten eintippen und Bilder einfügen</summary>
+    <ul>
+      <li>In die Antwortfelder und leeren Tabellenzellen der Aufgaben kannst du direkt tippen. Der Knopf <code>Aa</code>/<code>&lt;/&gt;</code> im Feld schaltet auf Code-Schrift um.</li>
+      <li>In Zeichenflächen fügst du ein Bild ein: Feld anklicken und <code>Strg + V</code>, Bilddatei hineinziehen oder „Datei wählen“.</li>
+      <li>Alles wird automatisch in diesem Browser auf diesem Gerät gespeichert. Am besten Chrome oder Edge verwenden.</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Sichern, Darkmode und Drucken</summary>
+    <ul>
+      <li><strong>Sichern:</strong> „Exportieren“ (oben rechts in jeder Übungsdatei) speichert die Antworten aller Blöcke als Datei, „Importieren“ stellt sie wieder her, „Leeren“ löscht die Antworten der geöffneten Datei.</li>
+      <li><strong>Achtung:</strong> Wer im Browser die Website-Daten löscht, löscht auch die Antworten. Also ab und zu exportieren.</li>
+      <li><strong>Darkmode:</strong> Knopf oben rechts (☾ Dunkel / ☀ Hell). Ohne Auswahl folgt die Seite der Systemeinstellung. Gedruckt wird immer hell.</li>
+      <li><strong>Drucken:</strong> im Browser <code>Strg + P</code>. Jeder Teil beginnt auf einer neuen Seite, deine Antworten erscheinen in den Feldern.</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Java- und SQL-Dateien</summary>
+    <p>Die 58 Java-Lösungen zum Ausprobieren liegen im Unterordner <code>java/</code> und starten ohne Kompilieren mit <code>java Datei.java</code> (JDK 11 oder neuer). Das SQL-Skript mit den Beispieldaten für Block 01 liegt in <code>sql/</code> und läuft mit MySQL, MariaDB und SQLite.</p>
+  </details>
+
+  <details>
+    <summary>Alle Zahlen als Tabelle</summary>
+    <table style="font-size:13px">
+      <tr><th>#</th><th>Block</th><th>Ø Pkt</th><th>Aufgaben</th><th>Punkte</th><th>Druckseiten (Ü + L)</th></tr>
+      <tr><td>01</td><td>Datenbanken</td><td>54</td><td>36</td><td>345</td><td>79 + 37</td></tr>
+      <tr><td>02</td><td>Algorithmen &amp; Programmierung</td><td>41</td><td>27</td><td>277</td><td>68 + 39</td></tr>
+      <tr><td>03</td><td>UML-Modellierung</td><td>37</td><td>21</td><td>252</td><td>72 + 28</td></tr>
+      <tr><td>04</td><td>Projektmanagement</td><td>21</td><td>30</td><td>332</td><td>73 + 30</td></tr>
+      <tr><td>05</td><td>Testen &amp; Qualitätssicherung</td><td>18</td><td>21</td><td>254</td><td>68 + 30</td></tr>
+      <tr><td>06</td><td>Schnittstellen &amp; Datenformate</td><td>13</td><td>15</td><td>174</td><td>62 + 21</td></tr>
+      <tr><td>07</td><td>IT-Sicherheit &amp; Datenschutz</td><td>10</td><td>18</td><td>202</td><td>56 + 16</td></tr>
+      <tr><td>08</td><td>Objektorientierung &amp; Entwurfsmuster</td><td>12</td><td>15</td><td>178</td><td>70 + 30</td></tr>
+      <tr><td>09</td><td>Benutzeroberfläche</td><td>7</td><td>9</td><td>105</td><td>40 + 17</td></tr>
+      <tr><td>10</td><td>Netzwerk, IoT &amp; Infrastruktur</td><td>6</td><td>12</td><td>147</td><td>46 + 17</td></tr>
+      <tr><td>11</td><td>Entwicklungsumgebung &amp; Werkzeuge</td><td>5</td><td>18</td><td>198</td><td>65 + 24</td></tr>
+      <tr><td>12</td><td>Querschnitt</td><td>8</td><td>15</td><td>170</td><td>57 + 15</td></tr>
+      <tr><th></th><th>Gesamt</th><th></th><th>237</th><th>2634</th><th>756 + 304</th></tr>
+    </table>
+    <p class="klein">Druckseiten = Übungsdatei (Erklärungssatz, Belegsatz, Aufgaben mit Antwortfeldern) + Lösungsdatei, gemessen als A4-PDF aus Chrome.</p>
+  </details>
+</section>
+
+<footer class="st-fuss">
+  <p>Grundlage ist die Auswertung von 9 Prüfungen (W21–S26) in der <a href="https://github.com/StrohhalmKatze/fiae-ap2-pruefungstrainer/blob/master/Themenanalyse.md">Themenanalyse</a>. Die Aufgaben sind an echte Prüfungsaufgaben angelehnt, aber neu formuliert. Am Ende jedes Aufgabenteils stehen die passenden Originalaufgaben, die Originalprüfungen selbst sind nicht enthalten.</p>
+  <p><a href="https://github.com/StrohhalmKatze/fiae-ap2-pruefungstrainer">Projekt auf GitHub</a> · <a href="https://github.com/StrohhalmKatze/fiae-ap2-pruefungstrainer/issues">Fehler melden</a> · Kein offizielles Material der IHK.</p>
+</footer>
 
 </body>
 </html>

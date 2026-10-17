@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>11 Entwicklungsumgebung &amp; Werkzeuge – Übungen</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design.css">
 <script src="uebungen.js"></script>
 <style>
   /* Zusatzregeln Block 11 */
@@ -31,40 +32,51 @@
 <body>
 
 <!-- ===================== KOPF ===================== -->
-<header class="blockkopf">
-  <h1>Block 11 · Entwicklungsumgebung &amp; Werkzeuge</h1>
-  <div class="unter">
-    <span class="relevanz r-vor" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 2, Teil 2 in 0 Prüfungen.">Kam vor – 2/9 – W22, W21</span> · Ø 5 von 200 Punkten · nur Teil 1 (jeweils Aufgabe 1 bzw. 2)
-    · Lösungen: <a href="11_Werkzeuge_Loesungen.html">11_Werkzeuge_Loesungen.html</a>
-  </div>
+<header class="st-hero">
+  <p class="st-eyebrow"><a href="index.html">Prüfungstrainer AP2</a> · Block 11</p>
+  <h1>Entwicklungsumgebung &amp; Werkzeuge</h1>
+  <p class="st-lead">Nur Teil 1 (jeweils Aufgabe 1 bzw. 2).</p>
+  <ul class="st-zahlen">
+    <li><strong>5</strong><span>Ø Punkte pro Prüfung</span></li>
+    <li><strong>6</strong><span>Unterthemen</span></li>
+    <li><strong>18</strong><span>Aufgaben</span></li>
+    <li><strong>198</strong><span>Punkte zum Üben</span></li>
+  </ul>
+  <p class="st-etikett">Prüfungsrelevanz des Blocks: <span class="relevanz r-vor" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 2, Teil 2 in 0 Prüfungen.">Kam vor – 2/9 – W22, W21</span></p>
+  <p class="st-aktionen no-print">
+    <a class="st-knopf" href="#erklaerung">Erklärungssatz lesen</a>
+    <a class="st-knopf st-zweit" href="#aufgaben">Zu den Aufgaben</a>
+    <a class="st-knopf st-zweit" href="11_Werkzeuge_Loesungen.html">Lösungen</a>
+  </p>
 </header>
 
-<nav class="toc">
-  <strong>Inhalt</strong>
-  <ol>
-    <li><a href="#erklaerung">Erklärungssatz</a>
-      <ol>
-        <li><a href="#e-01">WZ-01 Versionsverwaltung (Git)</a></li>
-        <li><a href="#e-02">WZ-02 CI/CD &amp; Deployment</a></li>
-        <li><a href="#e-03">WZ-03 Softwarearchitektur</a></li>
-        <li><a href="#e-04">WZ-04 Compiler vs. Interpreter</a></li>
-        <li><a href="#e-05">WZ-05 Bibliotheken, Frameworks, Doku</a></li>
-        <li><a href="#e-06">WZ-06 Open Source &amp; Lizenzen</a></li>
-      </ol>
-    </li>
-    <li><a href="#belegsatz">Belegsatz</a> (Anlagen 1–11)</li>
-    <li><a href="#aufgaben">Aufgaben</a>
-      <ol>
-        <li><a href="#a-01">WZ-01 (3 Aufgaben)</a></li>
-        <li><a href="#a-02">WZ-02 (3 Aufgaben)</a></li>
-        <li><a href="#a-03">WZ-03 (3 Aufgaben)</a></li>
-        <li><a href="#a-04">WZ-04 (3 Aufgaben)</a></li>
-        <li><a href="#a-05">WZ-05 (3 Aufgaben)</a></li>
-        <li><a href="#a-06">WZ-06 (3 Aufgaben)</a></li>
-        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
-      </ol>
-    </li>
-  </ol>
+<nav class="st-inhalt" id="inhalt" aria-label="Inhalt">
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#erklaerung">A · Erklärungssatz</a><span class="st-teil-info">6 Unterthemen</span></p>
+    <ul class="st-chips">
+      <li><a href="#e-01">WZ-01 Versionsverwaltung (Git)</a></li>
+      <li><a href="#e-02">WZ-02 CI/CD &amp; Deployment</a></li>
+      <li><a href="#e-03">WZ-03 Softwarearchitektur</a></li>
+      <li><a href="#e-04">WZ-04 Compiler vs. Interpreter</a></li>
+      <li><a href="#e-05">WZ-05 Bibliotheken, Frameworks, Doku</a></li>
+      <li><a href="#e-06">WZ-06 Open Source &amp; Lizenzen</a></li>
+    </ul>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#belegsatz">B · Belegsatz</a><span class="st-teil-info">Anlagen 1–11</span></p>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#aufgaben">C · Aufgaben</a><span class="st-teil-info">18 Aufgaben, je 3 pro Unterthema</span></p>
+    <ul class="st-chips">
+      <li><a href="#a-01">WZ-01</a></li>
+      <li><a href="#a-02">WZ-02</a></li>
+      <li><a href="#a-03">WZ-03</a></li>
+      <li><a href="#a-04">WZ-04</a></li>
+      <li><a href="#a-05">WZ-05</a></li>
+      <li><a href="#a-06">WZ-06</a></li>
+      <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="info no-print">
@@ -78,10 +90,10 @@
   <h2>A · Erklärungssatz</h2>
 
   <p>Die Themen dieses Blocks kamen bisher nur in W21 und W22 vor (der ersten und der dritten der neun ausgewerteten Prüfungen; in S22 und ab S23 kamen sie nicht vor), dort aber jeweils mit rund 20 Punkten in Teil 1. Jedes Unterthema wurde genau einmal gefragt – meist mit kurzen Wissensfragen („Nennen Sie …“, „Beschreiben Sie den Unterschied …“) oder einer Bewertung („Entscheiden Sie, ob Sie dem Vorschlag zustimmen“). Es ist Grundlagenwissen aus dem Ausbildungsalltag und kann jederzeit wiederkommen, z. B. als Einstieg in Aufgabe 1 oder 2 von Teil 1.</p>
-  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
+  <p class="st-legende"><strong>Etiketten:</strong> <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> in mindestens 3 von 9 Prüfungen gefragt · <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> in 1–2 · <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> nie gefragt, kann beim Lernen übersprungen werden · ↑ steigend, ↓ fallend, ⚠ neu. Gezählt werden nur eindeutige Belege; Fundstellen und Grenzfälle stehen im Tooltip.</p>
 
   <table class="kompakt">
-    <tr><th>Unterthema</th><th>Kategorie</th><th>Original</th><th>Wichtigste Fähigkeit</th></tr>
+    <tr><th>Unterthema</th><th>Prüfungsrelevanz</th><th>Original</th><th>Wichtigste Fähigkeit</th></tr>
     <tr><td>WZ-01 Versionsverwaltung (Git)</td><td><span class="relevanz r-vor" title="Belege: W21 T1 A1c (4 P).">Kam vor – 1/9 – W21</span></td><td>W21 T1 A1c (4 P)</td><td>Nutzen begründen, Begriffe, Commit-Graph, Team-Workflow bewerten</td></tr>
     <tr><td>WZ-02 CI/CD &amp; Deployment</td><td><span class="relevanz r-vor" title="Belege: W22 T1 A1ca, A1cb (6 P).">Kam vor – 1/9 – W22</span></td><td>W22 T1 A1c (6 P)</td><td>Pipeline beschreiben, Vorteile der Automatisierung</td></tr>
     <tr><td>WZ-03 Softwarearchitektur</td><td><span class="relevanz r-vor" title="Belege: W22 T1 A2a (6 P).">Kam vor – 1/9 – W22</span></td><td>W22 T1 A2a (6 P)</td><td>3 Schichten und ihr Zusammenspiel, MVC, Skizze</td></tr>

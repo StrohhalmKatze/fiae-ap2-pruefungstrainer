@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>01 Datenbanken – Übungen</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design.css">
 <script src="uebungen.js"></script>
 <style>
   nav.toc ol ol { columns: 2; column-gap: 24px; font-size: 13px; }
@@ -30,53 +31,63 @@
 </head>
 <body>
 
-<header class="blockkopf">
-  <h1>Block 01 · Datenbanken</h1>
-  <div class="unter">
-    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 7, Teil 2 in 9 Prüfungen.">Prüfungskern – 9/9 – alle</span> · Ø 54 von 200 Punkten · Teil 1 + Teil 2
-    · Kürzel <strong>DB</strong> · 12 Unterthemen · 36 Aufgaben · 345 Punkte
-    · Lösungen: <a href="01_Datenbanken_Loesungen.html">01_Datenbanken_Loesungen.html</a>
-  </div>
+<header class="st-hero">
+  <p class="st-eyebrow"><a href="index.html">Prüfungstrainer AP2</a> · Block 01</p>
+  <h1>Datenbanken</h1>
+  <p class="st-lead">Teil 1 + Teil 2.</p>
+  <ul class="st-zahlen">
+    <li><strong>54</strong><span>Ø Punkte pro Prüfung</span></li>
+    <li><strong>12</strong><span>Unterthemen</span></li>
+    <li><strong>36</strong><span>Aufgaben</span></li>
+    <li><strong>345</strong><span>Punkte zum Üben</span></li>
+  </ul>
+  <p class="st-etikett">Prüfungsrelevanz des Blocks: <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 7, Teil 2 in 9 Prüfungen.">Prüfungskern – 9/9 – alle</span></p>
+  <p class="st-aktionen no-print">
+    <a class="st-knopf" href="#erklaerung">Erklärungssatz lesen</a>
+    <a class="st-knopf st-zweit" href="#aufgaben">Zu den Aufgaben</a>
+    <a class="st-knopf st-zweit" href="01_Datenbanken_Loesungen.html">Lösungen</a>
+  </p>
 </header>
 
-<nav class="toc">
-  <strong>Inhalt</strong>
-  <ol>
-    <li><a href="#erklaerung">Erklärungssatz</a>
-      <ol>
-        <li><a href="#e-01">DB-01 ER-/Relationenmodell</a></li>
-        <li><a href="#e-02">DB-02 Normalisierung</a></li>
-        <li><a href="#e-03">DB-03 SELECT mit JOIN</a></li>
-        <li><a href="#e-04">DB-04 Aggregate, GROUP BY, HAVING</a></li>
-        <li><a href="#e-05">DB-05 INSERT, UPDATE, DELETE</a></li>
-        <li><a href="#e-06">DB-06 DB-Theorie</a></li>
-        <li><a href="#e-07">DB-07 Unterabfragen</a></li>
-        <li><a href="#e-08">DB-08 DDL</a></li>
-        <li><a href="#e-09">DB-09 UNION</a></li>
-        <li><a href="#e-10">DB-10 GRANT, REVOKE</a></li>
-        <li><a href="#e-11">DB-11 Trigger, Procedure, View</a></li>
-        <li><a href="#e-12">DB-12 Datenqualität</a></li>
-      </ol>
-    </li>
-    <li><a href="#belegsatz">Belegsatz</a> (<a href="#notation">Notationshilfen ER-Modell, SQL-Syntax</a>, <a href="#anlage-1">Anlagen 1–8</a>)</li>
-    <li><a href="#aufgaben">Aufgaben</a>
-      <ol>
-        <li><a href="#a-01">DB-01 (3 Aufgaben)</a></li>
-        <li><a href="#a-02">DB-02 (3 Aufgaben)</a></li>
-        <li><a href="#a-03">DB-03 (3 Aufgaben)</a></li>
-        <li><a href="#a-04">DB-04 (3 Aufgaben)</a></li>
-        <li><a href="#a-05">DB-05 (3 Aufgaben)</a></li>
-        <li><a href="#a-06">DB-06 (3 Aufgaben)</a></li>
-        <li><a href="#a-07">DB-07 (3 Aufgaben)</a></li>
-        <li><a href="#a-08">DB-08 (3 Aufgaben)</a></li>
-        <li><a href="#a-09">DB-09 (3 Aufgaben)</a></li>
-        <li><a href="#a-10">DB-10 (3 Aufgaben)</a></li>
-        <li><a href="#a-11">DB-11 (3 Aufgaben)</a></li>
-        <li><a href="#a-12">DB-12 (3 Aufgaben)</a></li>
-        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
-      </ol>
-    </li>
-  </ol>
+<nav class="st-inhalt" id="inhalt" aria-label="Inhalt">
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#erklaerung">A · Erklärungssatz</a><span class="st-teil-info">12 Unterthemen</span></p>
+    <ul class="st-chips">
+      <li><a href="#e-01">DB-01 ER-/Relationenmodell</a></li>
+      <li><a href="#e-02">DB-02 Normalisierung</a></li>
+      <li><a href="#e-03">DB-03 SELECT mit JOIN</a></li>
+      <li><a href="#e-04">DB-04 Aggregate, GROUP BY, HAVING</a></li>
+      <li><a href="#e-05">DB-05 INSERT, UPDATE, DELETE</a></li>
+      <li><a href="#e-06">DB-06 DB-Theorie</a></li>
+      <li><a href="#e-07">DB-07 Unterabfragen</a></li>
+      <li><a href="#e-08">DB-08 DDL</a></li>
+      <li><a href="#e-09">DB-09 UNION</a></li>
+      <li><a href="#e-10">DB-10 GRANT, REVOKE</a></li>
+      <li><a href="#e-11">DB-11 Trigger, Procedure, View</a></li>
+      <li><a href="#e-12">DB-12 Datenqualität</a></li>
+    </ul>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#belegsatz">B · Belegsatz</a><span class="st-teil-info"><a href="#notation">Notationshilfen ER-Modell, SQL-Syntax</a>, <a href="#anlage-1">Anlagen 1–8</a></span></p>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#aufgaben">C · Aufgaben</a><span class="st-teil-info">36 Aufgaben, je 3 pro Unterthema</span></p>
+    <ul class="st-chips">
+      <li><a href="#a-01">DB-01</a></li>
+      <li><a href="#a-02">DB-02</a></li>
+      <li><a href="#a-03">DB-03</a></li>
+      <li><a href="#a-04">DB-04</a></li>
+      <li><a href="#a-05">DB-05</a></li>
+      <li><a href="#a-06">DB-06</a></li>
+      <li><a href="#a-07">DB-07</a></li>
+      <li><a href="#a-08">DB-08</a></li>
+      <li><a href="#a-09">DB-09</a></li>
+      <li><a href="#a-10">DB-10</a></li>
+      <li><a href="#a-11">DB-11</a></li>
+      <li><a href="#a-12">DB-12</a></li>
+      <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="info no-print">
@@ -90,7 +101,7 @@
 <section class="teil" id="erklaerung">
   <h2>A · Erklärungssatz</h2>
   <p>Die Beispiele in diesem Teil verwenden bewusst <strong>andere Szenarien</strong> (Musikschule, Fitnessstudio) als die Aufgaben in Teil C (Fahrradverleih VeloPunkt). So lernst du die Methode, ohne die Lösung schon zu kennen.</p>
-  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
+  <p class="st-legende"><strong>Etiketten:</strong> <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> in mindestens 3 von 9 Prüfungen gefragt · <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> in 1–2 · <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> nie gefragt, kann beim Lernen übersprungen werden · ↑ steigend, ↓ fallend, ⚠ neu. Gezählt werden nur eindeutige Belege; Fundstellen und Grenzfälle stehen im Tooltip.</p>
 
   <!-- ======================= DB-01 ======================= -->
   <h3 id="e-01">DB-01 · ER-/Relationenmodell <span class="relevanz r-kern" title="Belege: S26 T2 A3a (20 P); W25 T1 A4c (16 P); W24 T2 A3a (16 P); S24 T1 A4a (10 P); W23 T1 A4a (14 P), T2 A3a (18 P); S23 T1 A4cb (13 P); W22 T2 A3a, A3b (22 P); S22 T2 A3 (20 P); W21 T1 A2b (16 P), T2 A3 (25 P).">Prüfungskern – 9/9 – alle</span></h3>

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>11 Entwicklungsumgebung &amp; Werkzeuge – Lösungen</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design.css">
 <script src="uebungen.js"></script>
 <style>
   /* Zusatzregeln Block 11 (Lösungen) */
@@ -22,24 +23,28 @@
 </head>
 <body>
 
-<header class="blockkopf">
-  <h1>Block 11 · Entwicklungsumgebung &amp; Werkzeuge – Lösungen</h1>
-  <div class="unter">
-    Lösungssatz zu <a href="11_Werkzeuge.html">11_Werkzeuge.html</a>
-    · Musterlösungen mit Bewertungshinweisen; zwei lauffähige Java-Beispiele im Ordner <code>java\11_Werkzeuge\</code> (Start mit <code>java Aufgabe_WZ_04_2.java</code> bzw. <code>java Aufgabe_WZ_05_3.java</code>)
-  </div>
+<header class="st-hero">
+  <p class="st-eyebrow"><a href="index.html">Prüfungstrainer AP2</a> · Block 11 · Lösungssatz</p>
+  <h1>Entwicklungsumgebung &amp; Werkzeuge <span class="st-tag">Lösungen</span></h1>
+  <p class="st-lead">Musterlösungen mit Bewertungshinweisen; zwei lauffähige Java-Beispiele im Ordner <code>java/11_Werkzeuge/</code> (Start mit <code>java Aufgabe_WZ_04_2.java</code> bzw. <code>java Aufgabe_WZ_05_3.java</code>).</p>
+  <p class="st-aktionen no-print">
+    <a class="st-knopf" href="11_Werkzeuge.html#aufgaben">Zurück zu den Aufgaben</a>
+    <a class="st-knopf st-zweit" href="11_Werkzeuge.html#erklaerung">Erklärungssatz</a>
+  </p>
 </header>
 
-<nav class="toc">
-  <strong>Inhalt</strong>
-  <ol>
-    <li><a href="#l-01">WZ-01 Versionsverwaltung</a></li>
-    <li><a href="#l-02">WZ-02 CI/CD</a></li>
-    <li><a href="#l-03">WZ-03 Architektur</a></li>
-    <li><a href="#l-04">WZ-04 Compiler/Interpreter</a></li>
-    <li><a href="#l-05">WZ-05 Bibliotheken, Doku</a></li>
-    <li><a href="#l-06">WZ-06 Open Source</a></li>
-  </ol>
+<nav class="st-inhalt" id="inhalt" aria-label="Inhalt">
+  <div class="st-teil">
+    <p class="st-teil-kopf"><span class="st-teil-titel">Lösungen nach Unterthema</span><span class="st-teil-info">6 Unterthemen · 18 Aufgaben</span></p>
+    <ul class="st-chips">
+      <li><a href="#l-01">WZ-01 Versionsverwaltung</a></li>
+      <li><a href="#l-02">WZ-02 CI/CD</a></li>
+      <li><a href="#l-03">WZ-03 Architektur</a></li>
+      <li><a href="#l-04">WZ-04 Compiler/Interpreter</a></li>
+      <li><a href="#l-05">WZ-05 Bibliotheken, Doku</a></li>
+      <li><a href="#l-06">WZ-06 Open Source</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="info">
@@ -553,7 +558,7 @@
       <li>Mit <strong>Step Over</strong> die Zeile ausführen: <code>schnitt = 62.0</code> → hier entsteht der Fehler. Mit „Ausdruck auswerten“ zeigt <code>summeMinuten / anzahl</code> den Wert 62 (int) → Ursache Ganzzahldivision. Liegt die Berechnung in einer aufgerufenen Methode, mit <strong>Step Into</strong> hineinspringen; über den <strong>Aufrufstapel</strong> sieht man, von wo sie aufgerufen wurde.</li>
       <li>Code korrigieren, Unit-Test ergänzen und erneut ausführen.</li>
     </ol>
-    <p class="datei">Zum Ausprobieren: <code>java\11_Werkzeuge\Aufgabe_WZ_04_2.java</code> enthält die Ausschnitte (3) und (4) mit Korrektur; Ausgabe des Programms:</p>
+    <p class="datei">Zum Ausprobieren: <code>java/11_Werkzeuge/Aufgabe_WZ_04_2.java</code> enthält die Ausschnitte (3) und (4) mit Korrektur; Ausgabe des Programms:</p>
     <pre>(3) Laufzeitfehler:
     IndexOutOfBoundsException: Index 3 out of bounds for length 3
     korrigiert: A-1003
@@ -654,7 +659,7 @@ OK     Korrektur (3): erwartet A-1003, erhalten A-1003</pre>
  */
 public Optional&lt;LocalDateTime&gt; naechsterFreierTermin(
         Monteur m, LocalDate ab, Duration dauer, boolean notdienst) { … }</pre>
-    <p class="datei">Geprüft: Die vollständige Klasse mit diesem Kommentar steht in <code>java\11_Werkzeuge\Aufgabe_WZ_05_3.java</code>; sie kompiliert und erzeugt mit <code>javadoc -Xdoclint:all</code> für <code>EinsatzKalender</code> keine Warnungen. Programmausgabe des Beispiels (Fr 02.10.2026 belegt, 03.10. Feiertag und Samstag):</p>
+    <p class="datei">Geprüft: Die vollständige Klasse mit diesem Kommentar steht in <code>java/11_Werkzeuge/Aufgabe_WZ_05_3.java</code>; sie kompiliert und erzeugt mit <code>javadoc -Xdoclint:all</code> für <code>EinsatzKalender</code> keine Warnungen. Programmausgabe des Beispiels (Fr 02.10.2026 belegt, 03.10. Feiertag und Samstag):</p>
     <pre>Normaler Auftrag ab Fr 02.10.2026: Optional[2026-10-05T07:30]
 Notdienst ab Fr 02.10.2026:        Optional[2026-10-03T07:30]
 Ist 03.10.2026 Feiertag? true

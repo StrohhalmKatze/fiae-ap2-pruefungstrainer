@@ -58,7 +58,7 @@ Die Blöcke sind danach sortiert, wie stark ihr Inhalt in den ausgewerteten Prü
 | 09 | Benutzeroberfläche | Prüfungskern · 5/9 | 7 | 9 | 105 |
 | 10 | Netzwerk, IoT & Infrastruktur | Prüfungskern · 4/9 | 6 | 12 | 147 |
 | 11 | Entwicklungsumgebung & Werkzeuge | Kam vor · 2/9 | 5 | 18 | 198 |
-| 12 | Querschnitt (Englisch, Tabellenkalkulation, Ticketsystem, KI, Green IT) | je Unterthema | – | 15 | 170 |
+| 12 | Querschnitt (Englisch, Tabellenkalkulation, Ticketsystem, KI, Green IT) | je Unterthema | 8 | 15 | 170 |
 
 ## Aufbau eines Blocks
 

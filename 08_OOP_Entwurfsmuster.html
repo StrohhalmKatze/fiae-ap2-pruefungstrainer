@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>08 Objektorientierung &amp; Entwurfsmuster – Übungen</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design.css">
 <script src="uebungen.js"></script>
 <style>
   /* Zusatzregeln Block 08 */
@@ -37,44 +38,55 @@
 <body>
 
 <!-- ===================== KOPF ===================== -->
-<header class="blockkopf">
-  <h1>Block 08 · Objektorientierung &amp; Entwurfsmuster</h1>
-  <div class="unter">
-    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 4, Teil 2 in 3 Prüfungen.">Prüfungskern – 6/9 – S26, W24, S24, S23, W22, S22</span> · Ø 12 von 200 Punkten · Teil 1 (4×) + Teil 2 (3×)
-    · Lösungen: <a href="08_OOP_Entwurfsmuster_Loesungen.html">08_OOP_Entwurfsmuster_Loesungen.html</a>
-  </div>
+<header class="st-hero">
+  <p class="st-eyebrow"><a href="index.html">Prüfungstrainer AP2</a> · Block 08</p>
+  <h1>Objektorientierung &amp; Entwurfsmuster</h1>
+  <p class="st-lead">Teil 1 (4×) + Teil 2 (3×).</p>
+  <ul class="st-zahlen">
+    <li><strong>12</strong><span>Ø Punkte pro Prüfung</span></li>
+    <li><strong>5</strong><span>Unterthemen</span></li>
+    <li><strong>15</strong><span>Aufgaben</span></li>
+    <li><strong>178</strong><span>Punkte zum Üben</span></li>
+  </ul>
+  <p class="st-etikett">Prüfungsrelevanz des Blocks: <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 4, Teil 2 in 3 Prüfungen.">Prüfungskern – 6/9 – S26, W24, S24, S23, W22, S22</span></p>
+  <p class="st-aktionen no-print">
+    <a class="st-knopf" href="#erklaerung">Erklärungssatz lesen</a>
+    <a class="st-knopf st-zweit" href="#aufgaben">Zu den Aufgaben</a>
+    <a class="st-knopf st-zweit" href="08_OOP_Entwurfsmuster_Loesungen.html">Lösungen</a>
+  </p>
 </header>
 
-<nav class="toc">
-  <strong>Inhalt</strong>
-  <ol>
-    <li><a href="#erklaerung">Erklärungssatz</a>
-      <ol>
-        <li><a href="#e-01">OOP-01 Grundkonzepte</a></li>
-        <li><a href="#e-02">OOP-02 Vererbung, abstrakte Klassen, Interfaces</a></li>
-        <li><a href="#e-03">OOP-03 Polymorphie, Generics</a></li>
-        <li><a href="#e-04">OOP-04 Erzeugungsmuster, Kategorien</a></li>
-        <li><a href="#e-05">OOP-05 Verhaltens- und Strukturmuster</a></li>
-      </ol>
-    </li>
-    <li><a href="#belegsatz">Belegsatz</a> (UML-Klassendiagramm, UML-Sequenzdiagramm, Pseudocode, Anlagen 1–12)</li>
-    <li><a href="#aufgaben">Aufgaben</a>
-      <ol>
-        <li><a href="#a-01">OOP-01 (3 Aufgaben)</a></li>
-        <li><a href="#a-02">OOP-02 (3 Aufgaben)</a></li>
-        <li><a href="#a-03">OOP-03 (3 Aufgaben)</a></li>
-        <li><a href="#a-04">OOP-04 (3 Aufgaben)</a></li>
-        <li><a href="#a-05">OOP-05 (3 Aufgaben)</a></li>
-        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
-      </ol>
-    </li>
-  </ol>
+<nav class="st-inhalt" id="inhalt" aria-label="Inhalt">
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#erklaerung">A · Erklärungssatz</a><span class="st-teil-info">5 Unterthemen</span></p>
+    <ul class="st-chips">
+      <li><a href="#e-01">OOP-01 Grundkonzepte</a></li>
+      <li><a href="#e-02">OOP-02 Vererbung, abstrakte Klassen, Interfaces</a></li>
+      <li><a href="#e-03">OOP-03 Polymorphie, Generics</a></li>
+      <li><a href="#e-04">OOP-04 Erzeugungsmuster, Kategorien</a></li>
+      <li><a href="#e-05">OOP-05 Verhaltens- und Strukturmuster</a></li>
+    </ul>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#belegsatz">B · Belegsatz</a><span class="st-teil-info">UML-Klassendiagramm, UML-Sequenzdiagramm, Pseudocode, Anlagen 1–12</span></p>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#aufgaben">C · Aufgaben</a><span class="st-teil-info">15 Aufgaben, je 3 pro Unterthema</span></p>
+    <ul class="st-chips">
+      <li><a href="#a-01">OOP-01</a></li>
+      <li><a href="#a-02">OOP-02</a></li>
+      <li><a href="#a-03">OOP-03</a></li>
+      <li><a href="#a-04">OOP-04</a></li>
+      <li><a href="#a-05">OOP-05</a></li>
+      <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="info no-print">
   <span class="kastentitel">So arbeitest du mit diesem Block</span>
   Erst den Erklärungssatz lesen, dann die Aufgaben mit dem Belegsatz daneben lösen (Belegsatz am besten separat ausdrucken und neben die Aufgaben legen). Zeitrichtwert: 1 Punkt ≈ 0,9 Minuten.
-  Lösungen erst danach in der separaten Lösungsdatei nachsehen. Zu jeder Code-Aufgabe gibt es dort Pseudocode <em>und</em> eine lauffähige Java-Datei im Ordner <code>java\08_OOP_Entwurfsmuster\</code>.<br>
+  Lösungen erst danach in der separaten Lösungsdatei nachsehen. Zu jeder Code-Aufgabe gibt es dort Pseudocode <em>und</em> eine lauffähige Java-Datei im Ordner <code>java/08_OOP_Entwurfsmuster/</code>.<br>
   In der Themenanalyse hat dieser Block nur zwei Unterthemen („OOP-Konzepte“ und „Entwurfsmuster“). Damit genug geübt wird, sind sie hier auf <strong>fünf Unterthemen</strong> verteilt. Die UML-Notation aller Diagrammarten im Detail behandelt Block 03; hier geht es um die objektorientierten Konzepte und ihre Umsetzung in Klassendiagramm, Pseudocode und Java.
 </div>
 
@@ -83,10 +95,10 @@
   <h2>A · Erklärungssatz</h2>
 
   <p>Objektorientierung kommt in der AP2 selten als „reine Theorie“ vor, sondern fast immer als <strong>Kette in einer größeren Aufgabe</strong>: Zuerst wird ein Klassendiagramm gezeichnet oder ergänzt (oft mit abstrakter Klasse oder Interface), dann soll ein Begriff wie <em>Polymorphie</em> erläutert werden, und zum Schluss werden einzelne Methoden in Pseudocode implementiert. Entwurfsmuster tauchen in derselben Form auf: Muster erkennen, im Klassendiagramm umsetzen, Ablauf zeigen, Methode programmieren. Beispiele: S22 Teil 1 Aufgabe 3 (Observer, 30 P), S23 Teil 1 Aufgabe 2b (Polymorphie und Fabrikmethode, 22 P), S26 Teil 2 Aufgabe 2 (abstrakte Klasse und dynamische Bindung, 20 P), W24 Teil 1 Aufgabe 4b (Entwurfsmuster, 10 P).</p>
-  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
+  <p class="st-legende"><strong>Etiketten:</strong> <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> in mindestens 3 von 9 Prüfungen gefragt · <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> in 1–2 · <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> nie gefragt, kann beim Lernen übersprungen werden · ↑ steigend, ↓ fallend, ⚠ neu. Gezählt werden nur eindeutige Belege; Fundstellen und Grenzfälle stehen im Tooltip.</p>
 
   <table class="kompakt">
-    <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
+    <tr><th>Unterthema</th><th>Prüfungsrelevanz</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
     <tr><td>OOP-01 Grundkonzepte</td><td><span class="relevanz r-kern" title="Belege: S26 T2 A2a (12 P); S24 T1 A3bc (5 P); S23 T1 A2bb, A2bc, A2bd (18 P); S22 T1 A3a, A3cb (11 P). Grenzwertig, nicht mitgezählt: W25 (T2 A1b: null bei leerer Liste im Algorithmus, keine OOP-Frage); W23 (T2 A2: vorgegebene {static}-Methode getDistance, nicht gefragt).">Prüfungskern – 4/9 – S26, S24, S23, S22</span></td><td>2–7 (Teil einer größeren Aufgabe)</td><td>Klasse aus Text oder Diagramm umsetzen: Sichtbarkeiten, Konstruktor, <code>static</code>, Getter/Setter</td></tr>
     <tr><td>OOP-02 Vererbung, abstrakte Klassen, Interfaces</td><td><span class="relevanz r-kern" title="Belege: S26 T2 A2a (12 P); S23 T1 A2bb (9 P); S22 T1 A3ba, A3bb, A3bc (10 P).">Prüfungskern – 3/9 – S26, S23, S22</span></td><td>4–12</td><td>Hierarchie modellieren, Fallunterscheidungen nach einem Typ-Attribut durch Vererbung ersetzen</td></tr>
     <tr><td>OOP-03 Polymorphie, Überladen/Überschreiben, Generics</td><td><span class="relevanz r-kern" title="Belege: S26 T2 A2bb, A2a (16 P); S24 T1 A3bc (5 P), T2 A2a (12 P); S23 T1 A2ba, A2bd (8 P); W22 T2 A1c, A1d, A1b (15 P).">Prüfungskern – 4/9 – S26, S24, S23, W22</span></td><td>3–10</td><td>Dynamische Bindung erklären, Aufrufe richtig auswerten, generische Klasse erläutern</td></tr>

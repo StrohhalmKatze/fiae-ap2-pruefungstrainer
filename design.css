@@ -1,0 +1,169 @@
+/* =====================================================================
+   design.css – Erscheinungsbild der Startseite und der Übungsdateien
+   Wird nach style.css geladen. Die Lösungsdateien nutzen nur style.css.
+   Die weichere Optik für Kästen, Aufgaben und Tabellen gilt nur am
+   Bildschirm; der Druck bleibt bis auf den Kopfbereich wie bisher.
+   ===================================================================== */
+
+/* ---------- Kopfbereich ---------- */
+.st-hero { padding: 6px 0 22px; margin-bottom: 18px; border-bottom: 3px solid var(--accent); }
+.st-eyebrow { margin: 0 0 6px; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+.st-eyebrow a { color: inherit; text-decoration: none; }
+.st-eyebrow a:hover { text-decoration: underline; }
+.st-hero h1 { font-size: 34px; margin: 0 0 10px; }
+.st-lead { margin: 0 0 18px; max-width: 640px; font-size: 17px; color: var(--muted); }
+.st-zahlen { list-style: none; padding: 0; margin: 0 0 16px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.st-zahlen li { margin: 0; padding: 10px 12px; border-radius: 8px; background: var(--soft); }
+.st-zahlen strong { display: block; font-size: 24px; line-height: 1.15; color: var(--accent); }
+.st-zahlen span { font-size: 13px; color: var(--muted); }
+.st-etikett { margin: 0 0 16px; font-size: 13.5px; color: var(--muted); }
+.st-etikett .relevanz { font-size: 12px; }
+.st-unterliste { margin: -8px 0 16px; padding-left: 20px; font-size: 13.5px; color: var(--muted); }
+.st-aktionen { margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.st-knopf { display: inline-block; padding: 8px 16px; border: 1px solid var(--accent); border-radius: 6px; background: var(--accent); color: #fff; font-weight: 600; text-decoration: none; }
+.st-knopf.st-zweit { background: transparent; color: var(--accent); }
+.st-hinweis { margin: -4px 0 12px; font-size: 13.5px; color: var(--muted); }
+
+/* ---------- Startseite: Blockkarten ---------- */
+.st-karten { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+.st-karte { display: flex; flex-direction: column; gap: 7px; margin: 0; padding: 12px 14px; border: 1px solid #d6dbe2; border-radius: 10px; background: #fff; }
+.st-kopf { display: flex; align-items: baseline; gap: 10px; }
+.st-nr { font-family: Consolas, "Courier New", monospace; font-size: 13px; color: var(--muted); }
+.st-kopf h3 { flex: 1; margin: 0; font-size: 16px; }
+.st-schnitt { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.st-schnitt strong { font-size: 18px; color: var(--text); }
+.st-karte .relevanz { align-self: flex-start; margin-left: 0; white-space: normal; }
+.st-gemischt { align-self: flex-start; font-size: 12px; color: var(--muted); }
+.st-meta { margin: 0; font-size: 13px; color: var(--muted); }
+.st-links { margin: auto 0 0; padding-top: 4px; display: flex; gap: 8px; }
+.st-links a { flex: 1; padding: 5px 0; border: 1px solid var(--accent); border-radius: 6px; font-size: 14px; font-weight: 600; text-align: center; text-decoration: none; }
+.st-links a:first-child { background: var(--accent); color: #fff; }
+
+/* ---------- Startseite: Reihenfolge, Kacheln, Details, Fuß ---------- */
+.st-schritte { list-style: none; padding: 0; margin: 0 0 8px; display: flex; flex-wrap: wrap; gap: 6px 4px; }
+.st-schritte li { margin: 0; }
+.st-schritte li:not(:last-child)::after { content: "→"; margin-left: 4px; color: var(--muted); }
+.st-schritte a { display: inline-block; padding: 2px 10px; border: 1px solid #b9c9dc; border-radius: 14px; color: var(--accent); font-size: 13.5px; text-decoration: none; }
+.st-schritte a.st-kern { background: #e7eef7; border-color: var(--accent); }
+.st-kacheln { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 0 0 18px; }
+.st-kachel { padding: 12px 14px; border-radius: 8px; background: var(--soft); }
+.st-kachel h3 { margin: 0 0 4px; font-size: 15px; color: var(--accent); }
+.st-kachel p { margin: 0; font-size: 13.5px; }
+.st-mehr details { border-top: 1px solid #d6dbe2; padding: 8px 0; }
+.st-mehr details:last-child { border-bottom: 1px solid #d6dbe2; }
+.st-mehr summary { cursor: pointer; font-weight: 600; }
+.st-mehr details > :not(summary) { margin-top: 8px; }
+.st-mehr ul { margin-bottom: 4px; padding-left: 20px; }
+.st-fuss { margin-top: 40px; padding-top: 12px; border-top: 1px solid #d6dbe2; font-size: 13px; color: var(--muted); }
+.st-fuss p { margin: 0 0 6px; }
+
+/* ---------- Übungsdateien: Inhaltsverzeichnis als Karten ---------- */
+.st-inhalt { display: grid; gap: 10px; margin: 0 0 18px; }
+.st-teil { padding: 12px 14px; border: 1px solid #d6dbe2; border-radius: 10px; background: #fff; }
+.st-teil-kopf { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.st-teil-kopf > a { font-size: 15.5px; font-weight: 700; text-decoration: none; }
+.st-teil-info { font-size: 13px; color: var(--muted); }
+.st-chips { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.st-chips li { margin: 0; }
+/* Sprunglinks: Linkfarbe, Pfeil nach unten (springt innerhalb der Seite), deutlicher Hover */
+.st-chips a { display: inline-block; padding: 2px 10px; border: 1px solid #b9c9dc; border-radius: 14px; color: var(--accent); font-size: 13px; text-decoration: none; }
+.st-chips a::after { content: "↓"; margin-left: 5px; font-size: 12px; }
+.st-chips a:hover, .st-schritte a:hover { background: #e7eef7; border-color: var(--accent); text-decoration: underline; }
+.st-chips a:focus-visible, .st-schritte a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Rücksprung „↑ Inhalt“ (setzt uebungen.js an jede Überschrift, die im Inhalt verlinkt ist) */
+.st-hoch { margin-left: 10px; font-size: 12px; font-weight: 400; color: var(--muted); text-decoration: none; white-space: nowrap; vertical-align: middle; }
+.st-hoch:hover { color: var(--accent); text-decoration: underline; }
+
+/* Sprungziel: nicht unter der Leiste verstecken und kurz aufleuchten lassen */
+@media screen {
+  html { scroll-behavior: smooth; }
+  :target { scroll-margin-top: 64px; }
+  h2:target, h3:target, .anlage:target, section:target > h2:first-child { animation: st-ziel 2s ease-out; border-radius: 4px; }
+  html[data-theme="dark"] h2:target, html[data-theme="dark"] h3:target,
+  html[data-theme="dark"] .anlage:target, html[data-theme="dark"] section:target > h2:first-child { animation-name: st-ziel-dunkel; }
+}
+@keyframes st-ziel { 0%, 35% { background: #fff1b8; } 100% { background: transparent; } }
+@keyframes st-ziel-dunkel { 0%, 35% { background: #4a3f15; } 100% { background: transparent; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  h2:target, h3:target, .anlage:target, section:target > h2:first-child { animation: none; }
+}
+
+.st-teil-kopf > .st-teil-titel { font-size: 15.5px; font-weight: 700; color: var(--accent); }
+
+/* ---------- Lösungsdateien: Kennzeichnung im Titel ---------- */
+.st-tag { display: inline-block; margin-left: 8px; padding: 2px 12px; border: 1px solid #86c39a; border-radius: 14px; background: var(--tipp-bg); color: #166534; font-size: 15px; font-weight: 700; vertical-align: middle; }
+
+/* ---------- Leiste: Link zur Startseite (setzt uebungen.js) ---------- */
+.ap2-leiste a.ap2-start { padding: 4px 11px; border: 1px solid #9aa3b1; border-radius: 14px; background: var(--soft); color: var(--text); text-decoration: none; }
+.ap2-leiste a.ap2-start:hover { border-color: var(--accent); }
+
+/* ---------- Schwebender Pfeil „Nach oben“ (setzt uebungen.js) ---------- */
+.ap2-nachoben {
+  position: fixed; right: 18px; bottom: 18px; z-index: 50;
+  display: flex; align-items: center; justify-content: center; width: 46px; height: 46px;
+  border-radius: 50%; background: var(--accent); color: #fff; font-size: 22px; line-height: 1; text-decoration: none;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, .25);
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity .2s, transform .2s, visibility 0s linear .2s;
+}
+.ap2-nachoben.ap2-sichtbar { opacity: 1; visibility: visible; transform: none; transition: opacity .2s, transform .2s; }
+.ap2-nachoben:hover { filter: brightness(1.12); }
+.ap2-nachoben:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* ---------- Übungsdateien: kompakte Legende ---------- */
+.st-legende { margin: 10px 0 14px; padding: 8px 12px; border-radius: 8px; background: var(--soft); font-size: 13px; color: var(--muted); }
+
+/* ---------- Ruhigere Optik für Kästen, Aufgaben und Tabellen (nur Bildschirm) ---------- */
+@media screen {
+  .merke, .tipp, .falle, .info { border-radius: 8px; padding: 10px 14px; }
+  .aufgabe { border-color: #cfd5dd; border-radius: 10px; padding: 12px 16px 14px; box-shadow: 0 1px 2px rgba(15, 23, 42, .06); }
+  .aufgabe .kopf { border-bottom-color: #e3e7ec; padding-bottom: 6px; margin-bottom: 8px; }
+  .anlage { border-color: #cfd5dd; border-radius: 10px; }
+  th, td { border-color: #c9cfd8; }
+  th { background: #eef1f5; }
+  .antwort, .zeichenflaeche { border-radius: 6px; }
+}
+
+/* ---------- Handy ---------- */
+@media (max-width: 560px) {
+  .st-hero h1 { font-size: 28px; }
+  .st-lead { font-size: 16px; }
+  .st-zahlen { grid-template-columns: repeat(2, 1fr); }
+  /* Speicherleiste einzeilig halten, damit sie den Kopf nicht verdeckt */
+  .ap2-leiste { top: 6px; right: 6px; gap: 4px; font-size: 12px; }
+  .ap2-leiste .ap2-status { display: none; }
+  .ap2-leiste button, .ap2-leiste a.ap2-start { padding: 3px 8px; }
+  .ap2-start .ap2-wort { display: none; }
+  .ap2-nachoben { right: 12px; bottom: 12px; width: 42px; height: 42px; }
+  .st-tag { font-size: 13px; padding: 1px 10px; }
+}
+@media screen and (max-width: 560px) {
+  body.ap2-mit-leiste { padding-top: 48px; }
+}
+
+/* ---------- Darkmode ---------- */
+@media screen {
+  html[data-theme="dark"] .st-karte, html[data-theme="dark"] .st-teil { background: #1b1f26; border-color: #353c48; }
+  html[data-theme="dark"] .st-knopf:not(.st-zweit), html[data-theme="dark"] .st-links a:first-child { color: #10141a; }
+  html[data-theme="dark"] .st-mehr details, html[data-theme="dark"] .st-fuss { border-color: #353c48; }
+  html[data-theme="dark"] .aufgabe { box-shadow: none; }
+  html[data-theme="dark"] .st-tag { border-color: #2f6b45; color: #9be3b1; }
+  html[data-theme="dark"] .ap2-nachoben { color: #10141a; box-shadow: 0 2px 8px rgba(0, 0, 0, .5); }
+  html[data-theme="dark"] .st-chips a, html[data-theme="dark"] .st-schritte a { border-color: #3f5876; }
+  html[data-theme="dark"] .st-chips a:hover, html[data-theme="dark"] .st-schritte a:hover,
+  html[data-theme="dark"] .st-schritte a.st-kern { background: #1e2b3b; border-color: var(--accent); }
+}
+
+/* ---------- Druck ---------- */
+@media print {
+  .st-aktionen, .st-pfad, .st-mehr { display: none !important; }
+  .st-hero { padding-top: 0; }
+  .st-zahlen li { border: 1px solid #ccc; background: #fff; }
+  .st-karte, .st-teil, .st-legende { break-inside: avoid; }
+  .st-chips a { border: 1px solid #bbb; background: #fff; color: #000; }
+  .st-chips a::after { content: none; }
+  .st-tag { border: 1px solid #000; background: #fff; color: #000; }
+  .ap2-nachoben { display: none !important; }
+}

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>09 Benutzeroberfläche – Übungen</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design.css">
 <script src="uebungen.js"></script>
 <style>
   /* Zusatzregeln Block 09 */
@@ -35,34 +36,45 @@
 <body>
 
 <!-- ===================== KOPF ===================== -->
-<header class="blockkopf">
-  <h1>Block 09 · Benutzeroberfläche</h1>
-  <div class="unter">
-    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 5, Teil 2 in 0 Prüfungen.">Prüfungskern – 5/9 – S26, S24, W23, W22, W21</span> · Ø 7 von 200 Punkten · nur Teil 1
-    · Lösungen: <a href="09_Benutzeroberflaeche_Loesungen.html">09_Benutzeroberflaeche_Loesungen.html</a>
-  </div>
+<header class="st-hero">
+  <p class="st-eyebrow"><a href="index.html">Prüfungstrainer AP2</a> · Block 09</p>
+  <h1>Benutzeroberfläche</h1>
+  <p class="st-lead">Nur Teil 1.</p>
+  <ul class="st-zahlen">
+    <li><strong>7</strong><span>Ø Punkte pro Prüfung</span></li>
+    <li><strong>3</strong><span>Unterthemen</span></li>
+    <li><strong>9</strong><span>Aufgaben</span></li>
+    <li><strong>105</strong><span>Punkte zum Üben</span></li>
+  </ul>
+  <p class="st-etikett">Prüfungsrelevanz des Blocks: <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 5, Teil 2 in 0 Prüfungen.">Prüfungskern – 5/9 – S26, S24, W23, W22, W21</span></p>
+  <p class="st-aktionen no-print">
+    <a class="st-knopf" href="#erklaerung">Erklärungssatz lesen</a>
+    <a class="st-knopf st-zweit" href="#aufgaben">Zu den Aufgaben</a>
+    <a class="st-knopf st-zweit" href="09_Benutzeroberflaeche_Loesungen.html">Lösungen</a>
+  </p>
 </header>
 
-<nav class="toc">
-  <strong>Inhalt</strong>
-  <ol>
-    <li><a href="#erklaerung">Erklärungssatz</a>
-      <ol>
-        <li><a href="#e-01">GUI-01 Mockup, Wireframe &amp; GUI-Elemente</a></li>
-        <li><a href="#e-02">GUI-02 Barrierefreiheit</a></li>
-        <li><a href="#e-03">GUI-03 Usability &amp; Software-Ergonomie</a></li>
-      </ol>
-    </li>
-    <li><a href="#belegsatz">Belegsatz</a> (keine Notationshilfe, Anlagen 1–5)</li>
-    <li><a href="#aufgaben">Aufgaben</a>
-      <ol>
-        <li><a href="#a-01">GUI-01 (3 Aufgaben)</a></li>
-        <li><a href="#a-02">GUI-02 (3 Aufgaben)</a></li>
-        <li><a href="#a-03">GUI-03 (3 Aufgaben)</a></li>
-        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
-      </ol>
-    </li>
-  </ol>
+<nav class="st-inhalt" id="inhalt" aria-label="Inhalt">
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#erklaerung">A · Erklärungssatz</a><span class="st-teil-info">3 Unterthemen</span></p>
+    <ul class="st-chips">
+      <li><a href="#e-01">GUI-01 Mockup, Wireframe &amp; GUI-Elemente</a></li>
+      <li><a href="#e-02">GUI-02 Barrierefreiheit</a></li>
+      <li><a href="#e-03">GUI-03 Usability &amp; Software-Ergonomie</a></li>
+    </ul>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#belegsatz">B · Belegsatz</a><span class="st-teil-info">keine Notationshilfe, Anlagen 1–5</span></p>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#aufgaben">C · Aufgaben</a><span class="st-teil-info">9 Aufgaben, je 3 pro Unterthema</span></p>
+    <ul class="st-chips">
+      <li><a href="#a-01">GUI-01</a></li>
+      <li><a href="#a-02">GUI-02</a></li>
+      <li><a href="#a-03">GUI-03</a></li>
+      <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="info no-print">
@@ -76,10 +88,10 @@
   <h2>A · Erklärungssatz</h2>
 
   <p>Aufgaben zur Benutzeroberfläche standen in 5 der 9 ausgewerteten Prüfungen, und zwar immer in <strong>Teil 1</strong>. Meist sind sie Teil einer größeren Aufgabe und bringen zusammen 7–18 Punkte. Typisch sind vier Aufgabenarten: ein <strong>Mockup skizzieren oder ergänzen</strong> (oft in einem vorgedruckten Smartphone- oder Browserrahmen), die <strong>Mängel eines Entwurfs</strong> finden und ihn verbessern, <strong>Barrierefreiheit</strong> (Anforderungen und Maßnahmen) und <strong>Usability</strong> (Begriffe, Tests). Der Belegsatz enthält zu diesem Block nichts – alles hier musst du selbst können.</p>
-  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
+  <p class="st-legende"><strong>Etiketten:</strong> <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> in mindestens 3 von 9 Prüfungen gefragt · <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> in 1–2 · <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> nie gefragt, kann beim Lernen übersprungen werden · ↑ steigend, ↓ fallend, ⚠ neu. Gezählt werden nur eindeutige Belege; Fundstellen und Grenzfälle stehen im Tooltip.</p>
 
   <table class="kompakt">
-    <thead><tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr></thead>
+    <thead><tr><th>Unterthema</th><th>Prüfungsrelevanz</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr></thead>
     <tr><td>GUI-01 Mockup, Wireframe &amp; GUI-Elemente</td><td><span class="relevanz r-kern" title="Belege: S26 T1 A4ca, A4cb (10 P); S24 T1 A4bb (7 P); W23 T1 A4ba, A4bb, A4bc (8 P); W22 T1 A3a (3 P).">Prüfungskern – 4/9 – S26, S24, W23, W22</span></td><td>3–10</td><td>Anforderungen vollständig in eine beschriftete Skizze übertragen, passende Elemente und Darstellungsformen wählen</td></tr>
     <tr><td>GUI-02 Barrierefreiheit</td><td><span class="relevanz r-kern" title="Belege: S26 T1 A4b (8 P); W22 T1 A3b (4 P); W21 T1 A3ab (4 P).">Prüfungskern – 3/9 – S26, W22, W21</span></td><td>4–8</td><td>Anforderung und dazu passende, konkrete Maßnahme nennen</td></tr>
     <tr><td>GUI-03 Usability &amp; Software-Ergonomie</td><td><span class="relevanz r-vor" title="Belege: S24 T1 A4ba, A4bb (13 P); W21 T1 A3aa, A3ac (12 P).">Kam vor – 2/9 – S24, W21</span> <span class="trend" title="Trend laut Themenanalyse: fallend">↓</span></td><td>6–16</td><td>Mängel erkennen, mit den Grundsätzen der DIN EN ISO 9241-110 begründen und beheben</td></tr>

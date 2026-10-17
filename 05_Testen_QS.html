@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>05 Testen &amp; Qualitätssicherung – Übungen</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design.css">
 <script src="uebungen.js"></script>
 <style>
   /* Zusatzregeln Block 05 */
@@ -27,48 +28,59 @@
 <body>
 
 <!-- ===================== KOPF ===================== -->
-<header class="blockkopf">
-  <h1>Block 05 · Testen &amp; Qualitätssicherung</h1>
-  <div class="unter">
-    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 6, Teil 2 in 6 Prüfungen.">Prüfungskern – 8/9 – alle außer W24</span> · Ø 18 von 200 Punkten · Teil 1 (6×) + Teil 2 (6×) · in Teil 2 oft eine ganze 20–25-Punkte-Aufgabe (S23, S24, W25)
-    · Lösungen: <a href="05_Testen_QS_Loesungen.html">05_Testen_QS_Loesungen.html</a>
-  </div>
+<header class="st-hero">
+  <p class="st-eyebrow"><a href="index.html">Prüfungstrainer AP2</a> · Block 05</p>
+  <h1>Testen &amp; Qualitätssicherung</h1>
+  <p class="st-lead">Teil 1 (6×) + Teil 2 (6×) · in Teil 2 oft eine ganze 20–25-Punkte-Aufgabe (S23, S24, W25).</p>
+  <ul class="st-zahlen">
+    <li><strong>18</strong><span>Ø Punkte pro Prüfung</span></li>
+    <li><strong>7</strong><span>Unterthemen</span></li>
+    <li><strong>21</strong><span>Aufgaben</span></li>
+    <li><strong>254</strong><span>Punkte zum Üben</span></li>
+  </ul>
+  <p class="st-etikett">Prüfungsrelevanz des Blocks: <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 6, Teil 2 in 6 Prüfungen.">Prüfungskern – 8/9 – alle außer W24</span></p>
+  <p class="st-aktionen no-print">
+    <a class="st-knopf" href="#erklaerung">Erklärungssatz lesen</a>
+    <a class="st-knopf st-zweit" href="#aufgaben">Zu den Aufgaben</a>
+    <a class="st-knopf st-zweit" href="05_Testen_QS_Loesungen.html">Lösungen</a>
+  </p>
 </header>
 
-<nav class="toc">
-  <strong>Inhalt</strong>
-  <ol>
-    <li><a href="#erklaerung">Erklärungssatz</a>
-      <ol>
-        <li><a href="#e-01">TQ-01 Testarten</a></li>
-        <li><a href="#e-02">TQ-02 Code analysieren, Fehler finden</a></li>
-        <li><a href="#e-03">TQ-03 Unit-Test, Überdeckungsmaße</a></li>
-        <li><a href="#e-04">TQ-04 Qualitätsmerkmale ISO/IEC 25010</a></li>
-        <li><a href="#e-05">TQ-05 Schreibtischtest</a></li>
-        <li><a href="#e-06">TQ-06 Äquivalenzklassen, Testfälle</a></li>
-        <li><a href="#e-07">TQ-07 Codequalität, Reviews</a></li>
-      </ol>
-    </li>
-    <li><a href="#belegsatz">Belegsatz</a> (Pseudocode-Konventionen, Anlagen 1–8)</li>
-    <li><a href="#aufgaben">Aufgaben</a>
-      <ol>
-        <li><a href="#a-01">TQ-01 (3 Aufgaben)</a></li>
-        <li><a href="#a-02">TQ-02 (3 Aufgaben)</a></li>
-        <li><a href="#a-03">TQ-03 (3 Aufgaben)</a></li>
-        <li><a href="#a-04">TQ-04 (3 Aufgaben)</a></li>
-        <li><a href="#a-05">TQ-05 (3 Aufgaben)</a></li>
-        <li><a href="#a-06">TQ-06 (3 Aufgaben)</a></li>
-        <li><a href="#a-07">TQ-07 (3 Aufgaben)</a></li>
-        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
-      </ol>
-    </li>
-  </ol>
+<nav class="st-inhalt" id="inhalt" aria-label="Inhalt">
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#erklaerung">A · Erklärungssatz</a><span class="st-teil-info">7 Unterthemen</span></p>
+    <ul class="st-chips">
+      <li><a href="#e-01">TQ-01 Testarten</a></li>
+      <li><a href="#e-02">TQ-02 Code analysieren, Fehler finden</a></li>
+      <li><a href="#e-03">TQ-03 Unit-Test, Überdeckungsmaße</a></li>
+      <li><a href="#e-04">TQ-04 Qualitätsmerkmale ISO/IEC 25010</a></li>
+      <li><a href="#e-05">TQ-05 Schreibtischtest</a></li>
+      <li><a href="#e-06">TQ-06 Äquivalenzklassen, Testfälle</a></li>
+      <li><a href="#e-07">TQ-07 Codequalität, Reviews</a></li>
+    </ul>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#belegsatz">B · Belegsatz</a><span class="st-teil-info">Pseudocode-Konventionen, Anlagen 1–8</span></p>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#aufgaben">C · Aufgaben</a><span class="st-teil-info">21 Aufgaben, je 3 pro Unterthema</span></p>
+    <ul class="st-chips">
+      <li><a href="#a-01">TQ-01</a></li>
+      <li><a href="#a-02">TQ-02</a></li>
+      <li><a href="#a-03">TQ-03</a></li>
+      <li><a href="#a-04">TQ-04</a></li>
+      <li><a href="#a-05">TQ-05</a></li>
+      <li><a href="#a-06">TQ-06</a></li>
+      <li><a href="#a-07">TQ-07</a></li>
+      <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="info no-print">
   <span class="kastentitel">So arbeitest du mit diesem Block</span>
   Erst den Erklärungssatz lesen, dann die Aufgaben mit dem Belegsatz daneben lösen (Belegsatz am besten separat ausdrucken und neben die Aufgaben legen – dort stehen die Code-Listings, die Spezifikationen und der englische Fachtext). Zeitrichtwert: 1 Punkt ≈ 0,9 Minuten.
-  Lösungen erst danach in der separaten Lösungsdatei nachsehen. Zu jeder Code- und Unit-Test-Aufgabe gibt es dort den JUnit-5-Code und eine lauffähige Java-Datei im Ordner <code>java\05_Testen_QS\</code>.
+  Lösungen erst danach in der separaten Lösungsdatei nachsehen. Zu jeder Code- und Unit-Test-Aufgabe gibt es dort den JUnit-5-Code und eine lauffähige Java-Datei im Ordner <code>java/05_Testen_QS/</code>.
 </div>
 
 <!-- ===================== TEIL A: ERKLÄRUNGSSATZ ===================== -->
@@ -76,10 +88,10 @@
   <h2>A · Erklärungssatz</h2>
 
   <p>Testen und Qualitätssicherung kommen in <strong>8 von 9</strong> Prüfungen vor, und zwar auf zwei Arten: In <strong>Teil 1</strong> sind es meist Wissensfragen mit 3–6 Punkten (Testarten, Testkonzept, Qualitätsmerkmale, QS-Maßnahmen). In <strong>Teil 2</strong> gibt es immer wieder eine <strong>komplette Aufgabe mit 20–25 Punkten</strong>, die nach demselben Drehbuch abläuft: Gegeben ist eine (fehlerhafte) Methode mit Zeilennummern und eine Spezifikation → Schreibtischtest mit Testdaten → Fehler mit Zeilennummer nennen → korrigieren → Fragen zu Unit-Test und Überdeckung (S22 T2 A2, S23 T2 A3, W25 T2 A3; S24 T2 A3 nur teilweise: dort kein Schreibtischtest, sondern Whitebox-Vorteile, Regressionstest, Überdeckungsmetriken und Pfade). Diese Punkte sind gut planbar, weil das Vorgehen immer gleich ist.</p>
-  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
+  <p class="st-legende"><strong>Etiketten:</strong> <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> in mindestens 3 von 9 Prüfungen gefragt · <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> in 1–2 · <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> nie gefragt, kann beim Lernen übersprungen werden · ↑ steigend, ↓ fallend, ⚠ neu. Gezählt werden nur eindeutige Belege; Fundstellen und Grenzfälle stehen im Tooltip.</p>
 
   <table class="kompakt">
-    <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
+    <tr><th>Unterthema</th><th>Prüfungsrelevanz</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
     <tr><td>TQ-01 Testarten</td><td><span class="relevanz r-kern" title="Belege: W25 T1 A3ba, A3bc (9 P); S24 T2 A3aa, A3ab (8 P); W23 T1 A1d (6 P); W21 T1 A4d, A4cb, A3ac (13 P).">Prüfungskern – 4/9 – W25, S24, W23, W21</span></td><td>3–8 je Frage</td><td>Teststufen, Black-/White-Box, Regressionstest, Testkonzept</td></tr>
     <tr><td>TQ-02 Code analysieren, Fehler finden</td><td><span class="relevanz r-kern" title="Belege: W25 T2 A3bb, A3ba (14 P); S23 T2 A3a (Datenverlaufstabelle), A3aa, A3ab (15 P); W22 T2 A2ab (4 P); S22 T2 A2bb (4 P); W21 T2 A1c (6 P).">Prüfungskern – 5/9 – W25, S23, W22, S22, W21</span></td><td>4–15</td><td>Fehler mit Zeilennummer benennen und korrigieren</td></tr>
     <tr><td>TQ-03 Unit-Test, Überdeckungsmaße</td><td><span class="relevanz r-kern" title="Belege: W25 T2 A3aa, A3ab (6 P); S24 T2 A3c, A3b (17 P); S23 T2 A3ba, A3bb, A3bc (10 P); W22 T2 A2ac (3 P); S22 T2 A2aa, A2ab, A2ba (12 P); W21 T1 A4cb (5 P).">Prüfungskern – 6/9 – W25, S24, S23, W22, S22, W21</span></td><td>3–12</td><td>assertEquals auswerten, C0/C1/C2, Mindestzahl Testfälle</td></tr>

@@ -425,6 +425,14 @@
   /* ---------- Leiste ---------- */
   function baueLeiste(mitAntworten) {
     var bar = el("div", "ap2-leiste no-print");
+    if (FILE && FILE !== "index") {
+      var start = el("a", "ap2-start");
+      start.href = "index.html";
+      start.title = "Zur Startseite mit allen Blöcken";
+      start.appendChild(document.createTextNode("⌂"));
+      start.appendChild(el("span", "ap2-wort", " Startseite"));
+      bar.appendChild(start);
+    }
     if (mitAntworten) {
       statusEl = el("span", "ap2-status", "Antworten werden im Browser gespeichert");
       statusEl.title = "Gespeichert wird in diesem Browser auf diesem PC. Zur Sicherung „Exportieren“ nutzen.";
@@ -467,9 +475,42 @@
     });
   }
 
+  /* ---------- Rücksprung zum Inhaltsverzeichnis (nur Seiten mit nav#inhalt) ---------- */
+  function ergaenzeInhaltslinks() {
+    var nav = document.getElementById("inhalt");
+    if (!nav) return;
+    nav.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      var ziel = document.getElementById(a.getAttribute("href").slice(1));
+      if (!ziel || !/^H[23]$/.test(ziel.tagName) || ziel.querySelector(".st-hoch")) return;
+      var hoch = el("a", "st-hoch no-print", "↑ Inhalt");
+      hoch.href = "#inhalt";
+      hoch.title = "Zurück zum Inhaltsverzeichnis";
+      ziel.appendChild(hoch);
+    });
+  }
+
+  /* ---------- Schwebender Pfeil „Nach oben“ (erscheint nach etwas Scrollen) ---------- */
+  function baueNachObenKnopf() {
+    var b = el("a", "ap2-nachoben no-print", "↑");
+    b.href = "#";
+    b.title = "Zum Seitenanfang";
+    b.setAttribute("aria-label", "Zum Seitenanfang");
+    b.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+      window.scrollTo(0, 0);
+    });
+    document.body.appendChild(b);
+    var zeigen = function () { b.classList.toggle("ap2-sichtbar", window.scrollY > 600); };
+    window.addEventListener("scroll", zeigen, { passive: true });
+    zeigen();
+  }
+
   /* ---------- Start ---------- */
   function start() {
     markiereHelleDiagramme();
+    ergaenzeInhaltslinks();
+    baueNachObenKnopf();
     var n = 0;
     if (document.querySelector(".aufgabe")) {
       n += setupTextfelder();

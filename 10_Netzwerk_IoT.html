@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>10 Netzwerk, IoT &amp; Infrastruktur – Übungen</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design.css">
 <script src="uebungen.js"></script>
 <style>
   /* Zusatzregeln Block 10 */
@@ -30,42 +31,53 @@
 <body>
 
 <!-- ===================== KOPF ===================== -->
-<header class="blockkopf">
-  <h1>Block 10 · Netzwerk, IoT &amp; Infrastruktur</h1>
-  <div class="unter">
-    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 4, Teil 2 in 0 Prüfungen.">Prüfungskern – 4/9 – S26, W24, S23, W22</span> · Ø 6 von 200 Punkten · nur Teil 1 · W24 allein 26 Punkte
-    · Lösungen: <a href="10_Netzwerk_IoT_Loesungen.html">10_Netzwerk_IoT_Loesungen.html</a>
-  </div>
+<header class="st-hero">
+  <p class="st-eyebrow"><a href="index.html">Prüfungstrainer AP2</a> · Block 10</p>
+  <h1>Netzwerk, IoT &amp; Infrastruktur</h1>
+  <p class="st-lead">Nur Teil 1 · W24 allein 26 Punkte.</p>
+  <ul class="st-zahlen">
+    <li><strong>6</strong><span>Ø Punkte pro Prüfung</span></li>
+    <li><strong>4</strong><span>Unterthemen</span></li>
+    <li><strong>12</strong><span>Aufgaben</span></li>
+    <li><strong>147</strong><span>Punkte zum Üben</span></li>
+  </ul>
+  <p class="st-etikett">Prüfungsrelevanz des Blocks: <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 4, Teil 2 in 0 Prüfungen.">Prüfungskern – 4/9 – S26, W24, S23, W22</span></p>
+  <p class="st-aktionen no-print">
+    <a class="st-knopf" href="#erklaerung">Erklärungssatz lesen</a>
+    <a class="st-knopf st-zweit" href="#aufgaben">Zu den Aufgaben</a>
+    <a class="st-knopf st-zweit" href="10_Netzwerk_IoT_Loesungen.html">Lösungen</a>
+  </p>
 </header>
 
-<nav class="toc">
-  <strong>Inhalt</strong>
-  <ol>
-    <li><a href="#erklaerung">Erklärungssatz</a>
-      <ol>
-        <li><a href="#e-01">NET-01 IoT / Sensorik / Funk</a></li>
-        <li><a href="#e-02">NET-02 Netzwerkkonzepte</a></li>
-        <li><a href="#e-03">NET-03 Adressierung, Frames, Protokolle</a></li>
-        <li><a href="#e-04">NET-04 Infrastruktur, Virtualisierung, Cloud</a></li>
-      </ol>
-    </li>
-    <li><a href="#belegsatz">Belegsatz</a> (Anlagen 1–8: Ausgangssituation, Netzwerkplan, Funktechniken, englischer Fachtext, Messwerte, Bestandsaufnahme, Hilfsfunktionen, Ethernet-Frame)</li>
-    <li><a href="#aufgaben">Aufgaben</a>
-      <ol>
-        <li><a href="#a-01">NET-01 (3 Aufgaben)</a></li>
-        <li><a href="#a-02">NET-02 (3 Aufgaben)</a></li>
-        <li><a href="#a-03">NET-03 (3 Aufgaben)</a></li>
-        <li><a href="#a-04">NET-04 (3 Aufgaben)</a></li>
-        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
-      </ol>
-    </li>
-  </ol>
+<nav class="st-inhalt" id="inhalt" aria-label="Inhalt">
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#erklaerung">A · Erklärungssatz</a><span class="st-teil-info">4 Unterthemen</span></p>
+    <ul class="st-chips">
+      <li><a href="#e-01">NET-01 IoT / Sensorik / Funk</a></li>
+      <li><a href="#e-02">NET-02 Netzwerkkonzepte</a></li>
+      <li><a href="#e-03">NET-03 Adressierung, Frames, Protokolle</a></li>
+      <li><a href="#e-04">NET-04 Infrastruktur, Virtualisierung, Cloud</a></li>
+    </ul>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#belegsatz">B · Belegsatz</a><span class="st-teil-info">Anlagen 1–8: Ausgangssituation, Netzwerkplan, Funktechniken, englischer Fachtext, Messwerte, Bestandsaufnahme, Hilfsfunktionen, Ethernet-Frame</span></p>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#aufgaben">C · Aufgaben</a><span class="st-teil-info">12 Aufgaben, je 3 pro Unterthema</span></p>
+    <ul class="st-chips">
+      <li><a href="#a-01">NET-01</a></li>
+      <li><a href="#a-02">NET-02</a></li>
+      <li><a href="#a-03">NET-03</a></li>
+      <li><a href="#a-04">NET-04</a></li>
+      <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="info no-print">
   <span class="kastentitel">So arbeitest du mit diesem Block</span>
   Erst den Erklärungssatz lesen, dann die Aufgaben mit dem Belegsatz daneben lösen (Belegsatz am besten separat ausdrucken und neben die Aufgaben legen). Zeitrichtwert: 1 Punkt ≈ 0,9 Minuten.
-  Lösungen erst danach in der separaten Lösungsdatei nachsehen. Zur Skriptaufgabe (NET-03.3) gibt es dort Pseudocode <em>und</em> eine lauffähige Java-Datei im Ordner <code>java\10_Netzwerk_IoT\</code>.
+  Lösungen erst danach in der separaten Lösungsdatei nachsehen. Zur Skriptaufgabe (NET-03.3) gibt es dort Pseudocode <em>und</em> eine lauffähige Java-Datei im Ordner <code>java/10_Netzwerk_IoT/</code>.
   Du schreibst AE, nicht FISI: Gefragt sind Begriffe, Zuordnungen mit Begründung, einfache Rechnungen und ein kleines Skript – keine Router-Konfiguration.
 </div>
 
@@ -74,10 +86,10 @@
   <h2>A · Erklärungssatz</h2>
 
   <p>Netzwerkthemen stehen nur in <strong>Teil 1</strong> und kamen in 4 von 9 Prüfungen vor – dann aber teils mit vielen Punkten (W24: 26 Punkte am Stück). Die Szenarien werden immer IoT-lastiger: Sensoren im Park (S23), Messstellen und Drohnen im Weinberg (W23, ohne eigene Netzwerkaufgabe), Bodensensoren auf dem Acker (S26). Typisch sind <strong>Zuordnen und Begründen</strong> (welche Funk- oder Netzart passt wozu?), <strong>Begriffe erläutern</strong> (MAC-Adresse, Ethernet-Frame), ein <strong>englischer Fachtext</strong> und einmal ein <strong>kleines Skript</strong>, das ein Netz durchläuft und JSON ausgibt.</p>
-  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
+  <p class="st-legende"><strong>Etiketten:</strong> <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> in mindestens 3 von 9 Prüfungen gefragt · <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> in 1–2 · <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> nie gefragt, kann beim Lernen übersprungen werden · ↑ steigend, ↓ fallend, ⚠ neu. Gezählt werden nur eindeutige Belege; Fundstellen und Grenzfälle stehen im Tooltip.</p>
 
   <table class="kompakt">
-    <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
+    <tr><th>Unterthema</th><th>Prüfungsrelevanz</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
     <tr><td>NET-01 IoT / Sensorik / Funk</td><td><span class="relevanz r-kern" title="Belege: S26 T1 A3aa, A3ab, A3bd (12 P); W24 T1 A2a (9 P); S23 T1 A4a (4 P).">Prüfungskern – 3/9 – S26, W24, S23</span></td><td>4–9 je Teilaufgabe</td><td>Funktechnik passend zur Situation wählen und begründen; Sicherheit auf schwachen Geräten</td></tr>
     <tr><td>NET-02 Netzwerkkonzepte</td><td><span class="relevanz r-vor" title="Belege: S26 T1 A3aa (3 P); W24 T1 A2a (9 P).">Kam vor – 2/9 – S26, W24</span></td><td>9</td><td>LAN, WAN, SAN, LPWAN, VPN zuordnen und begründen</td></tr>
     <tr><td>NET-03 Adressierung, Frames, Protokolle</td><td><span class="relevanz r-vor" title="Belege: W24 T1 A2bb, A2ba, A2c (17 P).">Kam vor – 1/9 – W24</span></td><td>3–8</td><td>MAC-Adresse, Ethernet-Frame, IPv4-Netz berechnen, Skript über alle Hosts</td></tr>

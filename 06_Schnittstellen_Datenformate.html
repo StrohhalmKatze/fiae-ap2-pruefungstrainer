@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>06 Schnittstellen &amp; Datenformate – Übungen</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design.css">
 <script src="uebungen.js"></script>
 <style>
   /* Zusatzregeln Block 06 */
@@ -40,44 +41,55 @@
 <body>
 
 <!-- ===================== KOPF ===================== -->
-<header class="blockkopf">
-  <h1>Block 06 · Schnittstellen &amp; Datenformate</h1>
-  <div class="unter">
-    <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 8, Teil 2 in 1 Prüfungen.">Prüfungskern – 8/9 – alle außer S22</span> · Ø 13 von 200 Punkten · fast ausschließlich Teil 1 (8×) · Trend ↑ bei REST/HTTP
-    · Lösungen: <a href="06_Schnittstellen_Datenformate_Loesungen.html">06_Schnittstellen_Datenformate_Loesungen.html</a>
-  </div>
+<header class="st-hero">
+  <p class="st-eyebrow"><a href="index.html">Prüfungstrainer AP2</a> · Block 06</p>
+  <h1>Schnittstellen &amp; Datenformate</h1>
+  <p class="st-lead">Fast ausschließlich Teil 1 (8×) · Trend ↑ bei REST/HTTP.</p>
+  <ul class="st-zahlen">
+    <li><strong>13</strong><span>Ø Punkte pro Prüfung</span></li>
+    <li><strong>5</strong><span>Unterthemen</span></li>
+    <li><strong>15</strong><span>Aufgaben</span></li>
+    <li><strong>174</strong><span>Punkte zum Üben</span></li>
+  </ul>
+  <p class="st-etikett">Prüfungsrelevanz des Blocks: <span class="relevanz r-kern" title="Vereinigung der Unterthemen (Teil A): Prüfungen, in denen mindestens ein Unterthema des Blocks direkt gebraucht wurde; nur eindeutig belegte Prüfungen. Teil 1 in 8, Teil 2 in 1 Prüfungen.">Prüfungskern – 8/9 – alle außer S22</span></p>
+  <p class="st-aktionen no-print">
+    <a class="st-knopf" href="#erklaerung">Erklärungssatz lesen</a>
+    <a class="st-knopf st-zweit" href="#aufgaben">Zu den Aufgaben</a>
+    <a class="st-knopf st-zweit" href="06_Schnittstellen_Datenformate_Loesungen.html">Lösungen</a>
+  </p>
 </header>
 
-<nav class="toc">
-  <strong>Inhalt</strong>
-  <ol>
-    <li><a href="#erklaerung">Erklärungssatz</a>
-      <ol>
-        <li><a href="#e-01">SD-01 XML</a></li>
-        <li><a href="#e-02">SD-02 JSON</a></li>
-        <li><a href="#e-03">SD-03 REST &amp; HTTP-Methoden</a></li>
-        <li><a href="#e-04">SD-04 HTTP-Request/Response, Statuscodes</a></li>
-        <li><a href="#e-05">SD-05 eRechnung</a></li>
-      </ol>
-    </li>
-    <li><a href="#belegsatz">Belegsatz</a> (Anlagen 1–12: Ausgangssituation, API-Dokumentation, HTTP-Beispiele, Klassen, XML/DTD, Tabellen, englischer Text, Rechnungsauszug)</li>
-    <li><a href="#aufgaben">Aufgaben</a>
-      <ol>
-        <li><a href="#a-01">SD-01 XML (3 Aufgaben)</a></li>
-        <li><a href="#a-02">SD-02 JSON (3 Aufgaben)</a></li>
-        <li><a href="#a-03">SD-03 REST (3 Aufgaben)</a></li>
-        <li><a href="#a-04">SD-04 HTTP (3 Aufgaben)</a></li>
-        <li><a href="#a-05">SD-05 eRechnung (3 Aufgaben)</a></li>
-        <li><a href="#originale">Originalaufgaben zum Üben</a></li>
-      </ol>
-    </li>
-  </ol>
+<nav class="st-inhalt" id="inhalt" aria-label="Inhalt">
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#erklaerung">A · Erklärungssatz</a><span class="st-teil-info">5 Unterthemen</span></p>
+    <ul class="st-chips">
+      <li><a href="#e-01">SD-01 XML</a></li>
+      <li><a href="#e-02">SD-02 JSON</a></li>
+      <li><a href="#e-03">SD-03 REST &amp; HTTP-Methoden</a></li>
+      <li><a href="#e-04">SD-04 HTTP-Request/Response, Statuscodes</a></li>
+      <li><a href="#e-05">SD-05 eRechnung</a></li>
+    </ul>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#belegsatz">B · Belegsatz</a><span class="st-teil-info">Anlagen 1–12: Ausgangssituation, API-Dokumentation, HTTP-Beispiele, Klassen, XML/DTD, Tabellen, englischer Text, Rechnungsauszug</span></p>
+  </div>
+  <div class="st-teil">
+    <p class="st-teil-kopf"><a href="#aufgaben">C · Aufgaben</a><span class="st-teil-info">15 Aufgaben, je 3 pro Unterthema</span></p>
+    <ul class="st-chips">
+      <li><a href="#a-01">SD-01 XML</a></li>
+      <li><a href="#a-02">SD-02 JSON</a></li>
+      <li><a href="#a-03">SD-03 REST</a></li>
+      <li><a href="#a-04">SD-04 HTTP</a></li>
+      <li><a href="#a-05">SD-05 eRechnung</a></li>
+      <li><a href="#originale">Originalaufgaben zum Üben</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="info no-print">
   <span class="kastentitel">So arbeitest du mit diesem Block</span>
   Erst den Erklärungssatz lesen, dann die Aufgaben mit dem Belegsatz daneben lösen (Belegsatz am besten separat ausdrucken und neben die Aufgaben legen). Zeitrichtwert: 1 Punkt ≈ 0,9 Minuten.
-  Lösungen erst danach in der separaten Lösungsdatei nachsehen. Zu den Code- und Validierungsaufgaben gibt es dort Pseudocode bzw. Musterlösungen <em>und</em> lauffähige Java-Dateien im Ordner <code>java\06_Schnittstellen_Datenformate\</code> (nur JDK, keine Bibliotheken).
+  Lösungen erst danach in der separaten Lösungsdatei nachsehen. Zu den Code- und Validierungsaufgaben gibt es dort Pseudocode bzw. Musterlösungen <em>und</em> lauffähige Java-Dateien im Ordner <code>java/06_Schnittstellen_Datenformate/</code> (nur JDK, keine Bibliotheken).
 </div>
 
 <!-- ===================== TEIL A: ERKLÄRUNGSSATZ ===================== -->
@@ -85,10 +97,10 @@
   <h2>A · Erklärungssatz</h2>
 
   <p>Schnittstellen und Datenformate kamen in <strong>8 von 9</strong> Prüfungen vor, fast immer in <strong>Teil 1</strong> als eine Teilaufgabe von 2 (W21) bzw. 6 bis 25 Punkten. Die Fragen sind meist Wissens- und Verständnisfragen („Erläutern Sie …“, „Beschreiben Sie die Parameter …“), dazu kommen Anwendungsaufgaben: XML-Fehler anhand einer DTD finden, Tabellen in JSON überführen, eine HTTP-Antwort im Code zusammenbauen. Einen Belegsatz mit Notationshilfen gibt es für diesen Block <strong>nicht</strong> – Syntax und Begriffe musst du selbst können.</p>
-  <p class="klein"><strong>Etiketten an Unterthemen und Abschnitten:</strong> Sie zeigen, in wie vielen der 9 Prüfungen W21–S26 der Inhalt direkt gebraucht wurde (ausdrücklich gefragt oder ohne ihn ist die Aufgabe nicht lösbar): <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> = in mindestens 3 Prüfungen (die Prüfungen sind genannt, neueste zuerst; ab 7 Prüfungen steht „alle außer …“, bei 9 „alle“), <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> = in 1–2 Prüfungen, <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> = in keiner Prüfung direkt gebraucht, nur zum Verständnis (kann beim Lernen übersprungen werden). Gezählt werden nur eindeutig belegte Prüfungen, Grenzfälle stehen im Tooltip; dort steht auch die Begründung. Es ist nichts ausgeblendet.</p>
+  <p class="st-legende"><strong>Etiketten:</strong> <span class="relevanz r-kern" title="Beispiel: in S26, W24 und W22 direkt gebraucht">Prüfungskern – 3/9 – S26, W24, W22</span> in mindestens 3 von 9 Prüfungen gefragt · <span class="relevanz r-vor" title="Beispiel: nur in S24 direkt gebraucht">Kam vor – 1/9 – S24</span> in 1–2 · <span class="relevanz r-hinter" title="Beispiel: in keiner Prüfung direkt gebraucht">Hintergrund – 0/9</span> nie gefragt, kann beim Lernen übersprungen werden · ↑ steigend, ↓ fallend, ⚠ neu. Gezählt werden nur eindeutige Belege; Fundstellen und Grenzfälle stehen im Tooltip.</p>
 
   <table class="kompakt">
-    <tr><th>Unterthema</th><th>Kategorie</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
+    <tr><th>Unterthema</th><th>Prüfungsrelevanz</th><th>Typische Punkte</th><th>Wichtigste Fähigkeit</th></tr>
     <tr><td>SD-01 XML</td><td><span class="relevanz r-vor" title="Belege: W25 T1 A3bc (6 P); W22 T1 A3cc, A3cb, A3ca (13 P).">Kam vor – 2/9 – W25, W22</span></td><td>6–13</td><td>wohlgeformt vs. gültig, Fehler anhand einer DTD finden, Grenzen der Schema-Validierung</td></tr>
     <tr><td>SD-02 JSON</td><td><span class="relevanz r-kern" title="Belege: W24 T1 A2c (8 P); S24 T1 A2c (3 P); W23 T1 A3ca, A3cb (14 P); S23 T1 A4cb (13 P).">Prüfungskern – 4/9 – W24, S24, W23, S23</span></td><td>7–14</td><td>Tabellen fehlerfrei in JSON überführen, Embedding vs. Referenz, JSON im Code erzeugen</td></tr>
     <tr><td>SD-03 REST &amp; HTTP-Methoden</td><td><span class="relevanz r-vor" title="Belege: S26 T1 A2ba, A2bc (9 P); S24 T1 A2a, A2b, A2e (19 P).">Kam vor – 2/9 – S26, S24</span></td><td>2–12</td><td>REST-Konzept erläutern, CRUD ↔ HTTP-Methoden, Endpunkte entwerfen</td></tr>
