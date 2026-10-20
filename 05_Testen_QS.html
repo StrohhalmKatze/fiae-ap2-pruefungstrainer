@@ -24,6 +24,21 @@
   .englisch p { margin: 6px 0; text-align: justify; }
   .ausgabebox { font-family: Consolas, "Courier New", monospace; font-size: 13px; border: 2px solid #222; padding: 6px 10px; display: inline-block; white-space: pre; line-height: 1.45; }
 </style>
+<style id="ap2-loesung-stile">
+/* Stile aus 05_Testen_QS_Loesungen.html, nur für eingebettete Lösungen (werkzeuge/loesungen_einbetten.py) */
+.ap2-loesung-inhalt table.kompakt td, .ap2-loesung-inhalt table.kompakt th { padding: 2px 6px; }
+.ap2-loesung-inhalt td.mono, .ap2-loesung-inhalt th.mono { font-family: Consolas, "Courier New", monospace; font-size: 13px; }
+.ap2-loesung-inhalt pre { font-size: 12px; }
+.ap2-loesung-inhalt pre.ausgabe { background: #fff; border-style: dashed; }
+.ap2-loesung-inhalt pre.java, .ap2-loesung-inhalt pre.ausgabe, .ap2-loesung-inhalt pre.pseudo { break-inside: auto; }
+.ap2-loesung-inhalt .codelabel { break-after: avoid; }
+.ap2-loesung-inhalt .loesung .kopf { font-size: 16px; margin-bottom: 4px; break-after: avoid; page-break-after: avoid; }
+.ap2-loesung-inhalt .loesung h4 { margin: 12px 0 4px; font-size: 15px; break-after: avoid; }
+.ap2-loesung-inhalt .zweispaltig { display: flex; gap: 16px; flex-wrap: wrap; }
+.ap2-loesung-inhalt .zweispaltig > * { flex: 1 1 300px; min-width: 0; }
+.ap2-loesung-inhalt .ok { font-weight: 700; }
+.ap2-loesung-inhalt .fehler { font-weight: 700; color: var(--immer); }
+</style>
 </head>
 <body>
 
@@ -1171,6 +1186,21 @@ Gesamt: 7 Termine, Ø 13.0</div>
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 1d (Zusammenspiel der Teststufen) und W21 Teil 1, Aufgabe 4</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-01-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-01.1 · 6 Punkte</div>
+    <h4>a) Teststufen (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:6%">Nr.</th><th style="width:30%">Teststufe</th><th>Prüfgrundlage (V-Modell)</th></tr>
+      <tr><td>1</td><td>Komponententest (Unit-Test, Modultest)</td><td>Komponentenspezifikation (Modul-/Methodenentwurf; hier die Spezifikation der Methode <code>beitrag</code> in Anlage 3)</td></tr>
+      <tr><td>2</td><td>Integrationstest</td><td>technischer Systementwurf (Architektur, Schnittstellenbeschreibung der REST-API)</td></tr>
+      <tr><td>3</td><td>Systemtest</td><td>funktionaler Systementwurf (Pflichtenheft)</td></tr>
+      <tr><td>4</td><td>Abnahmetest</td><td>Anforderungsdefinition (Lastenheft, Vertrag)</td></tr>
+    </table>
+    <h4>b) Statisch vs. dynamisch (2 P)</h4>
+    <p>Beim <strong>statischen</strong> Test wird das Prüfobjekt <strong>nicht ausgeführt</strong>, sondern untersucht (gelesen, analysiert) – z. B. Code-Review des Pull-Requests zu <code>zugangPruefen</code>, statische Codeanalyse in der CI-Pipeline, Review des Pflichtenhefts. Beim <strong>dynamischen</strong> Test wird das Programm mit Testdaten <strong>ausgeführt</strong> und das tatsächliche mit dem erwarteten Ergebnis verglichen – z. B. Unit-Test der Methode <code>beitrag</code>, Lasttest des Check-in-Servers.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Zeile 1 P (0,5 P Teststufe, 0,5 P Prüfgrundlage); „Modultest“ und „Unit-Test“ gleichwertig; bei Nr. 3 auch „Anforderungen aus dem Pflichtenheft“. b) 1 P Unterschied, 1 P passende Beispiele.</div>
+    <p><strong>Erklärung:</strong> Die Teststufe ergibt sich aus der <em>Größe</em> des Testobjekts (eine Methode → mehrere zusammenarbeitende Teile → ganzes System → Einsatz beim Kunden). Situation 3 ist kein Abnahmetest, obwohl „alle Anforderungen“ geprüft werden: Es prüft der Hersteller in seiner Testumgebung, nicht der Kunde.</p>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-01-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="TQ-01-2">
     <div class="kopf">
@@ -1185,6 +1215,25 @@ Gesamt: 7 Termine, Ø 13.0</div>
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: S24 Teil 2, Aufgabe 3a (Vorteile White-Box, Regressionstest) und W21 Teil 1, Aufgabe 4d</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-01-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-01.2 · 10 Punkte</div>
+    <h4>a) Black-Box vs. White-Box (4 P)</h4>
+    <p>Beim <strong>Black-Box-Test</strong> werden die Testfälle nur aus der <strong>Spezifikation</strong> abgeleitet; der Quellcode wird nicht betrachtet. Geprüft wird das Ein-/Ausgabeverhalten (z. B. „aktives Mitglied ohne Premium will in die Sauna → ‚Sauna nur mit Premium‘“). Beim <strong>White-Box-Test</strong> werden die Testfälle aus dem <strong>Quellcode</strong> und seiner Kontrollstruktur abgeleitet, z. B. so, dass jeder Zweig von <code>zugangPruefen</code> einmal durchlaufen wird.</p>
+    <p>Vorteile des White-Box-Tests (zwei genügen):</p>
+    <ul>
+      <li>Die <strong>Testabdeckung ist messbar</strong> (z. B. 100 % Zweigüberdeckung), man weiß, welche Codeteile getestet wurden.</li>
+      <li>Es werden <strong>alle Programmteile</strong> geprüft, auch solche, die die Spezifikation nicht erfasst (z. B. versteckte Sonderbehandlungen, toter Code).</li>
+      <li>Fehler lassen sich <strong>genauer lokalisieren</strong> (welcher Zweig liefert das falsche Ergebnis).</li>
+      <li>Unterstützt die Optimierung des Codes (unnötige Bedingungen fallen auf).</li>
+    </ul>
+    <h4>b) Regressionstest (3 P)</h4>
+    <p>Der Fehler hätte durch einen <strong>Regressionstest</strong> entdeckt werden können: Nach jeder Änderung (hier an der Beitragsberechnung) werden <strong>die bereits vorhandenen Testfälle – auch die für die Kursbuchung – erneut ausgeführt</strong>, um sicherzustellen, dass die Änderung keine unbeabsichtigten Auswirkungen auf bestehende, bereits abgenommene Funktionen hat.</p>
+    <p>Automatisieren, weil Regressionstests nach <strong>jeder</strong> Änderung vollständig wiederholt werden müssen: Manuell wäre das zu zeitaufwendig, teuer und fehleranfällig. Automatisiert laufen sie in der CI-Pipeline bei jedem Commit, schnell und immer unter gleichen Bedingungen.</p>
+    <h4>c) Lasttest (3 P)</h4>
+    <p>Geeignet ist ein <strong>Lasttest</strong> (Performancetest; ergänzend Stresstest). Vorgehen: In einer produktionsnahen Testumgebung simuliert ein Lastgenerator (z. B. JMeter, Gatling) gleichzeitige Check-ins – zunächst die erwartete Spitzenlast von 50 Check-ins pro Minute über einen längeren Zeitraum, dann mit Reserve (z. B. das Doppelte). Gemessen werden Antwortzeit bis zur Öffnung des Drehkreuzes, Fehlerrate, CPU-, Speicher- und Datenbankauslastung; die Messwerte werden mit den Anforderungen (z. B. 95 % der Prüfungen unter 1 s) verglichen. Beim Stresstest wird die Last weiter gesteigert, bis das System an seine Grenze kommt, um zu sehen, ob es kontrolliert reagiert.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) 2 P Unterschied (je Testart 1 P), je Vorteil 1 P. b) 1 P Testart, 1 P Erläuterung, 1 P Begründung der Automatisierung. c) 1 P Testart (Last-, Performance- oder Stresstest), 2 P Vorgehen (Simulation der Last + Messgrößen/Vergleich mit Anforderung).</div>
+    <p><strong>Erklärung:</strong> Der Klassiker aus S24 T2 A3a. Häufiger Fehler bei b): „Integrationstest“ – der prüft zwar das Zusammenspiel, entscheidend ist hier aber das <em>Wiederholen bestehender Tests nach einer Änderung</em>.</p>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-01-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="TQ-01-3">
     <div class="kopf">
@@ -1205,6 +1254,50 @@ Gesamt: 7 Termine, Ø 13.0</div>
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 1d (Testkonzept), W21 Teil 1, Aufgabe 3ac (Usability-Test) und W25 Teil 1, Aufgabe 3b (Konformität zur Spezifikation, XSD-Validierung)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-01-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-01.3 · 20 Punkte</div>
+    <h4>a) Inhalte des Testkonzepts (6 P) – drei der folgenden</h4>
+    <ul>
+      <li><strong>Testobjekte und Testumfang:</strong> Was wird getestet (App, Weboberfläche, Server/REST-API, Drehkreuzsteuerung, Schnittstelle GesundPlus) und was ausdrücklich nicht (z. B. die Firmware der Fitnessarmbänder).</li>
+      <li><strong>Teststrategie mit Teststufen und Testmethoden:</strong> Unit-Tests durch die Entwickler mit Mindestabdeckung (z. B. 80 % Zweigüberdeckung), Integrationstests der REST-Schnittstelle, Systemtest inkl. Last- und Sicherheitstest, Usability-Test, Abnahmetest am 15.02.2027; Priorisierung der Tests nach Risiko (Zugangsprüfung, Gesundheitsdaten).</li>
+      <li><strong>Testumgebung und Testautomatisierung:</strong> produktionsnaher Testserver mit Testdatenbank, Testgeräte (Android/iOS, verschiedene Versionen), Test-Drehkreuz; welche Tests automatisiert in der CI-Pipeline laufen, welche Werkzeuge verwendet werden.</li>
+      <li><strong>Testdaten:</strong> künstliche bzw. anonymisierte Daten, keine echten Gesundheitsdaten von Mitgliedern (DSGVO).</li>
+      <li><strong>Rollen und Verantwortlichkeiten / Testplan:</strong> wer testet was wann (Entwickler: Unit-Tests, Testerin: System- und Lasttest, VitaPark: Abnahme).</li>
+      <li><strong>Zeitplan, Aufwand und Kosten</strong> bis zur Abnahme, Abstimmung mit der Entwicklungsplanung.</li>
+      <li><strong>Eingangs- und Endekriterien:</strong> z. B. „keine offenen Fehler der Klasse 1 und 2, alle Testfälle der Priorität A bestanden“.</li>
+      <li><strong>Fehlermanagement und Testdokumentation:</strong> Fehlerklassen, Meldeweg im Ticketsystem, Vorlagen für Testfälle und Testprotokolle, Testbericht.</li>
+    </ul>
+    <h4>b) Usability-Test (4 P) – zwei der folgenden</h4>
+    <ul>
+      <li><strong>Aufgabenbasierter Test mit Nutzern der Zielgruppe:</strong> Mitglieder über 60 erhalten typische Aufgaben („Buchen Sie für Donnerstag den Kurs Rückenfit“); beobachtet und gemessen werden Erfolgsquote, benötigte Zeit, Fehlbedienungen und Stellen, an denen sie hängen bleiben.</li>
+      <li><strong>Thinking-Aloud (lautes Denken):</strong> Die Testperson spricht während der Bedienung aus, was sie denkt, sucht und erwartet; so werden Verständnisprobleme (unklare Begriffe, versteckte Schaltflächen) sichtbar.</li>
+      <li><strong>Eye-Tracking:</strong> Der Blickverlauf wird aufgezeichnet; man sieht, ob wichtige Elemente (z. B. der Buchen-Button) überhaupt wahrgenommen werden.</li>
+      <li><strong>Befragung/Fragebogen</strong> nach der Nutzung (z. B. standardisierter Fragebogen zur Zufriedenheit) oder Interview.</li>
+      <li><strong>A/B-Test:</strong> Zwei Varianten einer Oberfläche werden verschiedenen Nutzergruppen gezeigt und anhand von Kennzahlen verglichen.</li>
+      <li><strong>Heuristische Evaluation:</strong> Experten prüfen die Oberfläche anhand anerkannter Regeln (z. B. Grundsätze der DIN EN ISO 9241-110) – ohne Nutzer, als Ergänzung.</li>
+    </ul>
+    <h4>c) Smoke-Test (3 P)</h4>
+    <p>Ein <strong>Smoke-Test</strong> ist ein kurzer, oberflächlicher (meist automatisierter) Test der wichtigsten Grundfunktionen direkt nach einem Build bzw. Deployment. Er prüft, ob das System überhaupt lauffähig ist; schlägt er fehl, werden keine weiteren, aufwendigen Tests gestartet. Mögliche Prüfungen: Der Server startet und die REST-API antwortet (z. B. Status-Abfrage liefert HTTP 200) · Anmeldung mit einem Testkonto ist möglich · die Datenbankverbindung funktioniert und die Kursliste kann abgerufen werden · ein Test-QR-Code wird vom Zugangsdienst akzeptiert.</p>
+    <h4>da) Konformität zur Spezifikation (3 P) – zwei der folgenden</h4>
+    <ul>
+      <li>Jede erzeugte JSON-Datei wird <strong>automatisch gegen das veröffentlichte JSON-Schema validiert</strong> (in Unit-/Integrationstests der CI-Pipeline).</li>
+      <li><strong>Testfälle systematisch aus der Schnittstellenspezifikation ableiten</strong>: jede Regel, jedes Pflichtfeld, jeder Sonderfall (kein Training im Monat, Abmeldung vom Programm) erhält einen Testfall; Rückverfolgbarkeit Anforderung ↔ Testfall.</li>
+      <li><strong>Beispieldateien und Prüfwerkzeuge der Krankenkasse</strong> verwenden und die eigenen Ausgaben damit vergleichen.</li>
+      <li><strong>Integrationstest mit der Testumgebung von GesundPlus</strong>, ggf. formale Freigabe/Zertifizierung durch die Krankenkasse vor dem Echtbetrieb.</li>
+      <li>Review der Implementierung gegen die Spezifikation durch eine zweite Person.</li>
+    </ul>
+    <h4>db) Stellungnahme (4 P)</h4>
+    <p>Die Aussage trifft <strong>nicht</strong> zu. Die Validierung gegen das JSON-Schema ist <em>notwendig</em>, aber <em>nicht ausreichend</em>: Ein Schema prüft nur die <strong>formale Struktur</strong> – ob Pflichtfelder vorhanden sind, ob Datentypen und Formate stimmen (Zahl, Datum). Nicht geprüft werden:</p>
+    <ul>
+      <li>die <strong>inhaltliche Richtigkeit</strong>: Sind es die Daten des richtigen Mitglieds, stimmen Trainingsminuten und Bonuspunkte? Eine Datei mit falschen, aber gut formatierten Werten ist schema-valide.</li>
+      <li><strong>fachliche Regeln und Plausibilität</strong> (Datum nicht in der Zukunft, keine doppelte Übermittlung, Werte im sinnvollen Bereich).</li>
+      <li>der <strong>Übertragungsablauf</strong>: Authentifizierung, Verschlüsselung, Reaktion auf Fehlermeldungen oder Ablehnung durch die Krankenkasse, Wiederholung.</li>
+      <li><strong>Datenschutz:</strong> Es dürfen nur Daten von Mitgliedern mit Einwilligung und nur die vereinbarten Felder übertragen werden.</li>
+    </ul>
+    <p>Fazit: Zusätzlich sind fachliche Tests mit bekannten Soll-Ergebnissen und ein Integrationstest mit der Gegenstelle nötig.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je beschriebenem Inhalt 2 P (1 P Nennung, 1 P Beschreibung mit Bezug zum Projekt). b) je Methode 2 P. c) 1 P Begriff, je Prüfung 1 P. da) je Maßnahme 1,5 P. db) 1 P klare Position, 3 P für mindestens drei Argumente (Struktur vs. Inhalt, Fachregeln, Übertragung/Datenschutz/Gegenstelle).</div>
+    <p><strong>Erklärung:</strong> a) entspricht W23 T1 A1d, d) dem eRechnungs-Teil von W25 T1 A3b. Bei „beschreiben“ reicht ein Stichwort wie „Testumgebung“ nicht – es muss erkennbar sein, <em>was</em> dort festgelegt wird.</p>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-01-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== TQ-02 ===================== -->
   <h3 id="a-02">TQ-02 · Code analysieren / Fehler finden</h3>
@@ -1228,6 +1321,22 @@ Gesamt: 7 Termine, Ø 13.0</div>
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W25 Teil 2, Aufgabe 3bb (semantische Fehler)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-02-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-02.1 · 5 Punkte</div>
+    <h4>a) Fehlerarten (3 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:6%">Nr.</th><th style="width:22%">Fehlerart</th><th>Begründung</th></tr>
+      <tr><td>1</td><td>Syntaxfehler</td><td>Compiler meldet den Fehler, Programm wird nicht übersetzt</td></tr>
+      <tr><td>2</td><td>Laufzeitfehler</td><td>Index <code>length</code> existiert nicht → <code>ArrayIndexOutOfBoundsException</code>, Abbruch</td></tr>
+      <tr><td>3</td><td>Logikfehler</td><td>läuft, liefert aber eine falsche (negative) Summe</td></tr>
+      <tr><td>4</td><td>Logikfehler</td><td>läuft, liefert aber 20 % statt 80 % des Preises</td></tr>
+      <tr><td>5</td><td>Syntaxfehler</td><td>unbekannter Bezeichner, Compiler meldet den Fehler</td></tr>
+      <tr><td>6</td><td>Laufzeitfehler</td><td>Methodenaufruf auf <code>null</code> → <code>NullPointerException</code></td></tr>
+    </table>
+    <h4>b) Logikfehler (2 P)</h4>
+    <p>Der Code ist syntaktisch korrekt, daher übersetzt ihn der Compiler; er führt auch keine verbotene Operation aus, daher bricht das Programm nicht ab. Er <strong>tut aber etwas anderes als beabsichtigt</strong> und liefert ein falsches Ergebnis. Solche Fehler findet man nur durch einen Vergleich mit dem erwarteten Ergebnis: Tests (Unit-Tests, Schreibtischtest) mit Testdaten, deren Soll-Ergebnis vorher aus der Spezifikation berechnet wurde, sowie Code-Reviews gegen die Spezifikation.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je richtig gesetztem Kreuz 0,5 P. b) 1 P Begründung, 1 P Vorgehen (Test mit Soll-Ergebnis oder Review).</div>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-02-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="TQ-02-2">
     <div class="kopf">
@@ -1267,6 +1376,64 @@ Gesamt: 7 Termine, Ø 13.0</div>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W25 Teil 2, Aufgabe 3b (fehlerhafte Funktion durchspielen und korrigieren)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-02-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-02.2 · 10 Punkte</div>
+    <h4>a) Schreibtischtest (3 P)</h4>
+    <table class="kompakt" style="width:auto">
+      <tr><th>i</th><th>puls[i]</th><th>Bedingung Zeile 05 (<code>&gt; 140</code>)</th><th>summe</th><th>anzahl</th></tr>
+      <tr><td>1</td><td>120</td><td>falsch</td><td>0</td><td>0</td></tr>
+      <tr><td>2</td><td>140</td><td>falsch</td><td>0</td><td>0</td></tr>
+      <tr><td>3</td><td>160</td><td>wahr</td><td>160</td><td>1</td></tr>
+      <tr><td>4</td><td>135</td><td>falsch</td><td>160</td><td>1</td></tr>
+    </table>
+    <p>Tatsächliches Ergebnis: <code>160 / 5 = 32.0</code>. Erwartetes Ergebnis: Werte ≥ 140 sind 150, 140 und 160 → <code>(150 + 140 + 160) / 3 = 150.0</code>.</p>
+    <h4>b) Fehler (3 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:9%">Zeile</th><th>Fehler und Auswirkung</th></tr>
+      <tr><td>04</td><td>Die Schleife beginnt bei Index 1 → der <strong>erste Pulswert wird nie ausgewertet</strong> (hier fehlt 150).</td></tr>
+      <tr><td>05</td><td><code>&gt;</code> statt <code>&gt;=</code> → Werte <strong>genau auf der Grenze</strong> werden nicht gezählt, obwohl „mindestens“ gefordert ist (hier fehlt 140).</td></tr>
+      <tr><td>13</td><td>Division durch <code>puls.length</code> statt durch <code>anzahl</code> → es wird durch die Anzahl <em>aller</em> Werte geteilt, der Durchschnitt ist viel zu klein.</td></tr>
+    </table>
+    <h4>c) Korrigierte Zeilen (2 P)</h4>
+    <pre class="java">04     for (int i = 0; i &lt; puls.length; i++) {
+05         if (puls[i] &gt;= grenze) {
+13     return (double) summe / anzahl;</pre>
+    <h4>d) Testdaten mit „zufällig richtigem“ Ergebnis (2 P)</h4>
+    <p>Z. B. <code>puls = {100, 110}</code>, <code>grenze = 140</code>: Kein Wert liegt im Belastungsbereich, beide Fassungen liefern 0.0. (Auch das leere Array liefert in beiden Fassungen 0.0.) Folgerung: Ein bestandener Test beweist nicht, dass der Code fehlerfrei ist. Testdaten müssen gezielt so gewählt werden, dass Fehler sichtbar werden können – Grenzwerte, erstes und letztes Element, mehrere Werte im Bereich.</p>
+    <p class="codelabel">JUnit 5 – Tests für die korrigierte Methode (Klasse <code>Trainingsauswertung</code>)</p>
+    <pre class="java">class TrainingsauswertungTest {
+    private final Trainingsauswertung t = new Trainingsauswertung();
+
+    @Test
+    void durchschnittAllerWerteAbGrenze() {
+        assertEquals(150.0, t.belastungsDurchschnitt(new int[]{150, 120, 140, 160, 135}, 140), 0.001);
+    }
+
+    @Test
+    void wertGenauAufDerGrenzeZaehlt() {
+        assertEquals(140.0, t.belastungsDurchschnitt(new int[]{140}, 140), 0.001);
+    }
+
+    @Test
+    void keinWertImBelastungsbereichLiefertNull() {
+        assertEquals(0.0, t.belastungsDurchschnitt(new int[]{100, 110}, 140), 0.001);
+    }
+}</pre>
+    <p class="codelabel">Ausgabe von Aufgabe_TQ_02_2.java (Auszug)</p>
+    <pre class="ausgabe">Tests gegen die FEHLERHAFTE Methode:
+   FEHLER Testdaten der Aufgabe                         erwartet  150,0, tatsächlich   32,0
+   OK     kein Wert im Belastungsbereich                erwartet    0,0, tatsächlich    0,0
+   FEHLER ein Element, genau auf der Grenze             erwartet  140,0, tatsächlich    0,0
+   FEHLER alle Werte im Bereich                         erwartet  155,0, tatsächlich   80,0
+   OK     leeres Array                                  erwartet    0,0, tatsächlich    0,0
+   -&gt; 2 bestanden, 3 fehlgeschlagen
+
+Tests gegen die KORRIGIERTE Methode:
+   ...
+   -&gt; 5 bestanden, 0 fehlgeschlagen</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) 2 P Tabelle (Folgefehler werden nicht doppelt abgezogen), 1 P beide Ergebnisse. b) je Fehler mit Zeile und Auswirkung 1 P. c) drei richtige Zeilen 2 P, zwei richtige 1 P; Java-Alternative <code>i &lt;= puls.length - 1</code> gleichwertig. d) 1 P passende Testdaten, 1 P Folgerung.</div>
+    <p><strong>Erklärung:</strong> Die drei Fehler verstärken sich hier gegenseitig. Typisch für Prüfungsaufgaben: Start bei 1 ist nur dann richtig, wenn das Element 0 vorher bereits verarbeitet wurde (z. B. als Startwert beim Minimum) – das ist hier nicht der Fall.</p>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-02-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="TQ-02-3">
     <div class="kopf">
@@ -1297,6 +1464,165 @@ Gesamt: 7 Termine, Ø 13.0</div>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S23 Teil 2, Aufgabe 3a (Jahresstatistik mit Datenverlaufstabelle, Fehler nennen, Code korrigieren und erweitern)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-02-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-02.3 · 25 Punkte</div>
+    <h4>a) Datenverlaufstabelle und tatsächliche Ausgabe (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:12%">Typ</th><th style="width:20%">Variable</th><th>Werteverlauf</th></tr>
+      <tr><td>integer</td><td>i</td><td>0, 1, 2, 3, 4, 5, 6</td></tr>
+      <tr><td>string</td><td>kurs</td><td>Aqua-Fitness, Rückenfit, Yoga</td></tr>
+      <tr><td>integer</td><td>anzahl</td><td>0, 1, 2, 0, 1, 2, 3, 0, 1, 2</td></tr>
+      <tr><td>integer</td><td>summe</td><td>0, 14, 32, 0, 10, 22, 30, 0, 16, 29</td></tr>
+      <tr><td>integer</td><td>max</td><td>0, 14, 18 <em>(bleibt bis zum Ende 18)</em></td></tr>
+      <tr><td>integer</td><td>anzahlGesamt</td><td>0, 2, 5</td></tr>
+      <tr><td>integer</td><td>summeGesamt</td><td>0, 32, 62</td></tr>
+    </table>
+    <p>Tatsächliche Ausgabe:</p>
+    <pre class="ausgabe">Kursstatistik
+Aqua-Fitness: 2 Termine, max. 18, Ø 16.0
+Rückenfit: 3 Termine, max. 18, Ø 10.0
+Gesamt: 5 Termine, Ø 31.0</pre>
+    <h4>b) Fehler (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:14%">Zeile</th><th style="width:43%">Fehler (Ursache)</th><th>Auswirkung auf die Ausgabe</th></tr>
+      <tr><td>nach 18 (Gruppenwechsel)</td><td><code>max</code> wird beim Gruppenwechsel <strong>nicht zurückgesetzt</strong> – nur <code>anzahl</code> und <code>summe</code>.</td><td>Das Maximum „wandert“ in den nächsten Kurs: Rückenfit zeigt max. 18 (von Aqua-Fitness) statt 12.</td></tr>
+      <tr><td>nach 25 (Schleifenende)</td><td>Die <strong>letzte Gruppe wird nicht ausgewertet</strong>: Ausgabe und Aufsummierung erfolgen nur beim Wechsel, der letzte Kurs erlebt aber keinen Wechsel mehr.</td><td>Die Zeile für Yoga fehlt; die Gesamtwerte enthalten Yoga nicht (5 statt 7 Termine).</td></tr>
+      <tr><td>27</td><td>Division durch <code>anzahl</code> (Termine des letzten Kurses) statt durch <code>anzahlGesamt</code>.</td><td>Gesamtdurchschnitt 62 / 2 = 31.0 statt 13.0.</td></tr>
+    </table>
+    <h4>c) Korrekturen (8 P)</h4>
+    <pre class="pseudo">nach Zeile 18 einfügen:
+18a      max := 0
+
+nach Zeile 25 einfügen (letzte Gruppe auswerten):
+25a  ausgabe(kurs + ": " + anzahl + " Termine, max. " + max
+25b          + ", Ø " + summe / anzahl)
+25c  anzahlGesamt := anzahlGesamt + anzahl
+25d  summeGesamt := summeGesamt + summe
+
+Zeile 27 ersetzen durch:
+27           + summeGesamt / anzahlGesamt)</pre>
+    <p>Vollständige korrigierte Prozedur (inklusive Teil d):</p>
+    <pre class="pseudo">prozedur kursStatistik(termine : List&lt;Termin&gt;)
+  ausgabe("Kursstatistik")
+  wenn termine.size() = 0 dann                          // d)
+    ausgabe("Keine Termine vorhanden")
+    rückgabe
+  Ende wenn
+  kurs : string := termine.get(0).getKurs()
+  anzahl : integer := 0
+  summe : integer := 0
+  max : integer := 0
+  anzahlGesamt : integer := 0
+  summeGesamt : integer := 0
+  zähle i von 0 bis termine.size() - 1
+    t : Termin := termine.get(i)
+    wenn t.getKurs() &lt;&gt; kurs dann
+      ausgabe(kurs + ": " + anzahl + " Termine, max. " + max
+              + ", Ø " + summe / anzahl)
+      anzahlGesamt := anzahlGesamt + anzahl
+      summeGesamt := summeGesamt + summe
+      kurs := t.getKurs()
+      anzahl := 0
+      summe := 0
+      max := 0                                          // Korrektur 1
+    Ende wenn
+    anzahl := anzahl + 1
+    summe := summe + t.getTeilnehmer()
+    wenn t.getTeilnehmer() &gt; max dann
+      max := t.getTeilnehmer()
+    Ende wenn
+  Ende zähle
+  // Korrektur 2: letzte Gruppe auswerten
+  ausgabe(kurs + ": " + anzahl + " Termine, max. " + max
+          + ", Ø " + summe / anzahl)
+  anzahlGesamt := anzahlGesamt + anzahl
+  summeGesamt := summeGesamt + summe
+  // Korrektur 3: durch die Gesamtanzahl teilen
+  ausgabe("Gesamt: " + anzahlGesamt + " Termine, Ø "
+          + summeGesamt / anzahlGesamt)
+Ende prozedur</pre>
+    <h4>d) Leere Liste (3 P)</h4>
+    <p>In Zeile 03 greift <code>termine.get(0)</code> auf ein Element zu, das nicht existiert → <strong>Laufzeitfehler</strong> (Indexüberschreitung, in Java <code>IndexOutOfBoundsException</code>), das Programm bricht nach der Überschrift ab. (Ohne diesen Abbruch würde später durch 0 geteilt.) Ergänzung nach Zeile 02:</p>
+    <pre class="pseudo">02a  wenn termine.size() = 0 dann
+02b    ausgabe("Keine Termine vorhanden")
+02c    rückgabe
+02d  Ende wenn</pre>
+    <h4>e) Testarten nach der Korrektur (2 P)</h4>
+    <ul>
+      <li><strong>Fehlernachtest (Re-Test):</strong> Mit denselben Testdaten prüfen, ob jetzt die erwartete Ausgabe entsteht, die Fehler also wirklich behoben sind.</li>
+      <li><strong>Regressionstest:</strong> Die übrigen vorhandenen Tests erneut ausführen, um sicherzustellen, dass die Änderungen keine neuen Fehler verursacht haben.</li>
+    </ul>
+    <p>Ebenfalls akzeptiert: zusätzliche Grenzfalltests (leere Liste, nur ein Kurs, ein einziger Termin) als Unit-Tests.</p>
+    <p class="codelabel">Java · Aufgabe_TQ_02_3.java (korrigierte Fassung, Auszug)</p>
+    <pre class="java">static void kursStatistik(List&lt;Termin&gt; termine) {
+    ausgabe("Kursstatistik");
+    if (termine.size() == 0) {                       // d) leere Liste abfangen
+        ausgabe("Keine Termine vorhanden");
+        return;
+    }
+    String kurs = termine.get(0).getKurs();
+    int anzahl = 0;
+    int summe = 0;
+    int max = 0;
+    int anzahlGesamt = 0;
+    int summeGesamt = 0;
+    for (int i = 0; i &lt;= termine.size() - 1; i++) {
+        Termin t = termine.get(i);
+        if (!t.getKurs().equals(kurs)) {
+            ausgabe(kurs + ": " + anzahl + " Termine, max. " + max
+                    + ", Ø " + (double) summe / anzahl);
+            anzahlGesamt = anzahlGesamt + anzahl;
+            summeGesamt = summeGesamt + summe;
+            kurs = t.getKurs();
+            anzahl = 0;
+            summe = 0;
+            max = 0;                                 // Korrektur 1
+        }
+        anzahl = anzahl + 1;
+        summe = summe + t.getTeilnehmer();
+        if (t.getTeilnehmer() &gt; max) {
+            max = t.getTeilnehmer();
+        }
+    }
+    // Korrektur 2 (nach Zeile 25): letzte Gruppe ausgeben und aufsummieren
+    ausgabe(kurs + ": " + anzahl + " Termine, max. " + max + ", Ø " + (double) summe / anzahl);
+    anzahlGesamt = anzahlGesamt + anzahl;
+    summeGesamt = summeGesamt + summe;
+    // Korrektur 3 (Zeile 27): durch anzahlGesamt teilen
+    ausgabe("Gesamt: " + anzahlGesamt + " Termine, Ø " + (double) summeGesamt / anzahlGesamt);
+}</pre>
+    <p class="codelabel">Ausgabe von Aufgabe_TQ_02_3.java (Auszug)</p>
+    <pre class="ausgabe">a) Ausgabe der FEHLERHAFTEN Prozedur (mit Variablenstand nach jedem Durchlauf):
+   Kursstatistik
+      [i=0] kurs=Aqua-Fitness anzahl=1 summe=14 max=14 anzahlGesamt=0 summeGesamt=0
+      [i=1] kurs=Aqua-Fitness anzahl=2 summe=32 max=18 anzahlGesamt=0 summeGesamt=0
+   Aqua-Fitness: 2 Termine, max. 18, Ø 16.0
+      [i=2] kurs=Rückenfit anzahl=1 summe=10 max=18 anzahlGesamt=2 summeGesamt=32
+      [i=3] kurs=Rückenfit anzahl=2 summe=22 max=18 anzahlGesamt=2 summeGesamt=32
+      [i=4] kurs=Rückenfit anzahl=3 summe=30 max=18 anzahlGesamt=2 summeGesamt=32
+   Rückenfit: 3 Termine, max. 18, Ø 10.0
+      [i=5] kurs=Yoga anzahl=1 summe=16 max=18 anzahlGesamt=5 summeGesamt=62
+      [i=6] kurs=Yoga anzahl=2 summe=29 max=18 anzahlGesamt=5 summeGesamt=62
+   Gesamt: 5 Termine, Ø 31.0
+   stimmt mit erwarteter Ausgabe überein? false
+
+c) Ausgabe der KORRIGIERTEN Prozedur:
+   Kursstatistik
+   Aqua-Fitness: 2 Termine, max. 18, Ø 16.0
+   Rückenfit: 3 Termine, max. 12, Ø 10.0
+   Yoga: 2 Termine, max. 16, Ø 14.5
+   Gesamt: 7 Termine, Ø 13.0
+   stimmt mit erwarteter Ausgabe überein? true
+
+d) Aufruf mit leerer Liste:
+   Kursstatistik
+   fehlerhaft: Laufzeitfehler IndexOutOfBoundsException: Index 0 out of bounds for length 0
+   korrigiert:
+   Kursstatistik
+   Keine Termine vorhanden</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) 4 P Datenverlaufstabelle (je zwei richtige Zeilen ca. 1 P; Zwischenwerte 0 nach dem Zurücksetzen dürfen fehlen), 2 P tatsächliche Ausgabe. b) je Fehler 2 P (1 P Ursache mit Zeile, 1 P Auswirkung). c) <code>max := 0</code> 2 P; Auswertung der letzten Gruppe nach der Schleife 4 P (Ausgabe 2 P, Fortschreiben beider Gesamtwerte 2 P); Divisor 2 P. Gleichwertig: Ausgabe in eine Hilfsprozedur <code>gruppeAusgeben(…)</code> auslagern (DRY), <code>max</code> beim Wechsel mit der Teilnehmerzahl des neuen Termins initialisieren. d) 1 P Beschreibung, 2 P Ergänzung. e) je Testart mit Begründung 1 P.</div>
+    <p><strong>Erklärung:</strong> Typischer Gruppenwechsel wie in S23 T2 A3 (dort: Ticketstatistik je Monat). Die Ausgabe der letzten Gruppe nach der Schleife wird praktisch immer vergessen. Achtung: Der Fehler „max wird nicht zurückgesetzt“ fällt nur auf, wenn ein späterer Kurs ein kleineres Maximum hat – deshalb sind die Testdaten so gewählt.</p>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-02-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== TQ-03 ===================== -->
   <h3 id="a-03">TQ-03 · Unit-Test / Überdeckungsmaße</h3>
@@ -1321,6 +1647,31 @@ void buchungVerringertFreiePlaetze() {
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S22 Teil 2, Aufgabe 2a und W25 Teil 2, Aufgabe 3aa</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-03-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-03.1 · 6 Punkte</div>
+    <h4>a) Unit-Test (2 P)</h4>
+    <p>Ein Unit-Test ist ein <strong>automatisierter Test der kleinsten testbaren Einheit</strong> eines Programms (z. B. der Methode <code>buchen</code> der Klasse <code>Kurs</code>), die <strong>isoliert</strong> vom Rest des Systems mit festgelegten Eingaben aufgerufen wird; das tatsächliche Ergebnis wird automatisch mit dem erwarteten verglichen. Er wird vom Entwickler geschrieben und dient dazu, Fehler früh und genau lokalisiert zu finden und bei jeder Änderung automatisch erneut zu prüfen, dass die Einheit noch korrekt arbeitet (Regressionstest, Absicherung beim Refactoring).</p>
+    <h4>b) Eigenschaften (2 P) – zwei der folgenden</h4>
+    <ul>
+      <li><strong>Schnell</strong> (fast): läuft in Millisekunden, damit alle Tests bei jeder Änderung ausgeführt werden können.</li>
+      <li><strong>Unabhängig/isoliert</strong> (independent): hängt nicht von anderen Tests, deren Reihenfolge, einer echten Datenbank oder dem Netzwerk ab; Abhängigkeiten werden durch Mocks/Stubs ersetzt.</li>
+      <li><strong>Wiederholbar</strong> (repeatable): liefert bei jeder Ausführung und auf jedem Rechner dasselbe Ergebnis.</li>
+      <li><strong>Selbstprüfend</strong> (self-validating): entscheidet selbst über bestanden/fehlgeschlagen, keine manuelle Kontrolle der Ausgabe.</li>
+      <li><strong>Zeitnah</strong> (timely): wird zusammen mit dem Code (oder vorher, TDD) geschrieben.</li>
+      <li>Prüft <strong>genau einen Sachverhalt</strong>, aussagekräftiger Name, deckt auch Grenz- und Fehlerfälle ab.</li>
+    </ul>
+    <h4>c) Arrange – Act – Assert (2 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:8%">Zeile</th><th style="width:14%">Phase</th><th>Aufgabe</th></tr>
+      <tr><td>(1)</td><td>Arrange</td><td>Ausgangszustand herstellen: Testobjekt anlegen (Kurs „Yoga“ mit 12 Plätzen, 0 gebucht).</td></tr>
+      <tr><td>(2)</td><td>Act</td><td>Die zu testende Aktion ausführen: 3 Plätze buchen.</td></tr>
+      <tr><td>(3)</td><td>Assert</td><td>Tatsächliches Ergebnis mit dem erwarteten vergleichen: Es müssen 9 freie Plätze übrig sein.</td></tr>
+    </table>
+    <p class="codelabel">Ausgabe von Aufgabe_TQ_03_1.java</p>
+    <pre class="ausgabe">OK      buchungVerringertFreiePlaetze
+OK      ueberbuchungWirdAbgelehnt</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) 1 P Begriff (kleinste Einheit, isoliert, automatisiert, Soll-Ist-Vergleich), 1 P Zweck. b) je Eigenschaft mit Beschreibung 1 P. c) 1 P richtige Zuordnung, 1 P Beschreibung der Phasen.</div>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-03-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="TQ-03-2">
     <div class="kopf">
@@ -1362,6 +1713,62 @@ void testeFreiePlaetze() {
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: S22 Teil 2, Aufgabe 2b (assertEquals-Testfälle auswerten, Bedingungen korrigieren)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-03-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-03.2 · 12 Punkte</div>
+    <h4>a) Auswertung der Testfälle (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:12%">Testfall</th><th style="width:28%">Aufruf</th><th style="width:20%">Rückgabewert</th><th style="width:12%">erwartet</th><th>Ergebnis</th></tr>
+      <tr><td>1</td><td class="mono">freiePlaetze(20, 15)</td><td>5</td><td>5</td><td class="ok">OK</td></tr>
+      <tr><td>2</td><td class="mono">freiePlaetze(20, 0)</td><td>−1 <span class="klein">(<code>gebucht &gt; 0</code> falsch)</span></td><td>20</td><td class="fehler">Fehler</td></tr>
+      <tr><td>3</td><td class="mono">freiePlaetze(20, 20)</td><td>−1 <span class="klein">(<code>20 &lt; 20</code> falsch)</span></td><td>0</td><td class="fehler">Fehler</td></tr>
+      <tr><td>4</td><td class="mono">freiePlaetze(20, 21)</td><td>−1</td><td>−1</td><td class="ok">OK</td></tr>
+      <tr><td>5</td><td class="mono">freiePlaetze(0, 0)</td><td>−1</td><td>−1</td><td class="ok">OK</td></tr>
+      <tr><td>6</td><td class="mono">freiePlaetze(20, 1)</td><td>19</td><td>19</td><td class="ok">OK</td></tr>
+    </table>
+    <h4>b) Korrektur (3 P)</h4>
+    <pre class="java">01 public int freiePlaetze(int kapazitaet, int gebucht) {
+02     int frei = -1;
+03     if (kapazitaet &gt; 0 &amp;&amp; gebucht &gt;= 0) {      // 0 Buchungen sind zulässig
+04         if (gebucht &lt;= kapazitaet) {             // ein voll belegter Kurs ist zulässig
+05             frei = kapazitaet - gebucht;
+06         }
+07     }
+08     return frei;
+09 }</pre>
+    <h4>c) JUnit bricht beim ersten Fehlschlag ab (3 P)</h4>
+    <p><strong>Ursache:</strong> Alle sechs Prüfungen stehen in <em>einer</em> Testmethode. Schlägt ein <code>assertEquals</code> fehl, wird ein <code>AssertionError</code> ausgelöst und die Testmethode <strong>an dieser Stelle abgebrochen</strong>. Testfall 2 schlägt fehl, die Testfälle 3 bis 6 werden gar nicht mehr ausgeführt – der zweite Fehler (Testfall 3) bleibt deshalb zunächst unbemerkt.</p>
+    <p><strong>Besser:</strong> je Testfall eine eigene Testmethode mit sprechendem Namen, oder ein parametrisierter Test, bei dem jede Datenzeile als eigener Testfall ausgeführt und gemeldet wird (alternativ <code>assertAll</code>):</p>
+    <pre class="java">@ParameterizedTest
+@CsvSource({
+    "20, 15,  5",     // normaler Fall
+    "20,  0, 20",     // Grenzwert: nichts gebucht
+    "20, 20,  0",     // Grenzwert: voll belegt
+    "20, 21, -1",     // ungültig: überbucht
+    " 0,  0, -1",     // ungültig: keine Kapazität
+    "20,  1, 19"
+})
+void freiePlaetzeLiefertErwartetenWert(int kapazitaet, int gebucht, int erwartet) {
+    assertEquals(erwartet, freiePlaetze(kapazitaet, gebucht));
+}</pre>
+    <p class="codelabel">Ausgabe von Aufgabe_TQ_03_2.java (Auszug)</p>
+    <pre class="ausgabe">a) Jeder Testfall einzeln gegen die FEHLERHAFTE Methode:
+   TF | Aufruf                 | erwartet | tatsächlich | Ergebnis
+    1 | freiePlaetze(20, 15)   |        5 |           5 | OK
+    2 | freiePlaetze(20,  0)   |       20 |          -1 | Fehler
+    3 | freiePlaetze(20, 20)   |        0 |          -1 | Fehler
+    4 | freiePlaetze(20, 21)   |       -1 |          -1 | OK
+    5 | freiePlaetze( 0,  0)   |       -1 |          -1 | OK
+    6 | freiePlaetze(20,  1)   |       19 |          19 | OK
+
+c) Eine einzige JUnit-Testmethode mit allen sechs asserts (fehlerhafte Methode):
+   Testmethode FEHLGESCHLAGEN in Testfall 2: expected: &lt;20&gt; but was: &lt;-1&gt;
+   (Testfälle 3 bis 6 wurden nicht mehr ausgeführt)
+...
+   JUnit-Lauf korrigiert:
+   Testmethode bestanden</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Testfall 1 P (Rückgabewert und OK/Fehler). b) je korrigierter Bedingung 1,5 P; gleichwertig ist eine zusammengefasste Bedingung <code>if (kapazitaet &gt; 0 &amp;&amp; gebucht &gt;= 0 &amp;&amp; gebucht &lt;= kapazitaet)</code>. c) 1,5 P Ursache (Abbruch beim ersten fehlgeschlagenen assert), 1,5 P Verbesserung.</div>
+    <p><strong>Erklärung:</strong> Wie S22 T2 A2b: Beide Fehler sitzen an Grenzwerten (0 und kapazitaet). Die Testfälle 2 und 3 sind genau die Grenzwerttests, die solche Fehler aufdecken.</p>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-03-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="TQ-03-3">
     <div class="kopf">
@@ -1385,6 +1792,130 @@ void testeFreiePlaetze() {
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S24 Teil 2, Aufgabe 3b/3c (Überdeckungsmaße aus englischem Fachtext, alle Pfade notieren) und W22 Teil 2, Aufgabe 2ac</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-03-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-03.3 · 25 Punkte</div>
+    <h4>a) Überdeckungsmaße (9 P)</h4>
+    <p><strong>Anweisungsüberdeckung</strong> (statement coverage): Maß dafür, wie viele der ausführbaren Anweisungen durch die Testfälle mindestens einmal ausgeführt werden (Angabe in Prozent). Bei 100 % wurde jede Anweisung mindestens einmal ausgeführt – aber nicht unbedingt jedes Ergebnis jeder Entscheidung: Ein <code>if</code> ohne <code>else</code> ist schon mit einem Testfall vollständig überdeckt, in dem die Bedingung wahr ist. Schwächstes der drei Maße.</p>
+    <p><strong>Zweigüberdeckung</strong> (branch/decision coverage): Jedes mögliche Ergebnis jeder Entscheidung – wahr <em>und</em> falsch – muss mindestens einmal durchlaufen werden, also auch der „leere“ falsch-Zweig eines <code>if</code> ohne <code>else</code>. Strenger als die Anweisungsüberdeckung: Vollständige Zweigüberdeckung schließt vollständige Anweisungsüberdeckung ein, aber nicht umgekehrt.</p>
+    <p><strong>Pfadüberdeckung</strong> (path coverage): Jeder mögliche Pfad – eine Folge von Anweisungen vom Eintrittspunkt der Methode bis zu einem Austrittspunkt – muss mindestens einmal ausgeführt werden. Stärkstes Maß, schließt die vollständige Zweigüberdeckung ein. Die Zahl der Pfade wächst sehr schnell (jede unabhängige Entscheidung verdoppelt sie, Schleifen erzeugen theoretisch unbegrenzt viele Pfade); vollständige Pfadüberdeckung ist daher nur bei kleinen Methoden bzw. mit begrenzter Zahl an Schleifendurchläufen praktikabel.</p>
+    <h4>b) Kontrollflussgraph (5 P)</h4>
+    <figure>
+      <svg viewBox="0 0 760 540" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <defs>
+          <marker id="lsg-l03k-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#222"/>
+          </marker>
+        </defs>
+        <!-- Start / Ende -->
+        <rect x="255" y="8" width="90" height="32" rx="16" fill="#fff" stroke="#222"/>
+        <text x="300" y="29" text-anchor="middle">Start (02)</text>
+        <rect x="255" y="494" width="90" height="32" rx="16" fill="#fff" stroke="#222"/>
+        <text x="300" y="515" text-anchor="middle">Ende (18)</text>
+        <!-- Knoten -->
+        <circle cx="300" cy="85" r="18" fill="#eef3fa" stroke="#222"/><text x="300" y="90" text-anchor="middle">B1</text>
+        <circle cx="220" cy="145" r="18" fill="#fff" stroke="#222"/><text x="220" y="150" text-anchor="middle">A1</text>
+        <circle cx="220" cy="205" r="18" fill="#eef3fa" stroke="#222"/><text x="220" y="210" text-anchor="middle">B2</text>
+        <circle cx="150" cy="265" r="18" fill="#eef3fa" stroke="#222"/><text x="150" y="270" text-anchor="middle">B3</text>
+        <circle cx="90" cy="325" r="18" fill="#fff" stroke="#222"/><text x="90" y="330" text-anchor="middle">A2</text>
+        <circle cx="210" cy="325" r="18" fill="#fff" stroke="#222"/><text x="210" y="330" text-anchor="middle">A3</text>
+        <circle cx="220" cy="395" r="18" fill="#eef3fa" stroke="#222"/><text x="220" y="400" text-anchor="middle">B4</text>
+        <circle cx="150" cy="455" r="18" fill="#fff" stroke="#222"/><text x="150" y="460" text-anchor="middle">A4</text>
+        <circle cx="430" cy="300" r="18" fill="#fff" stroke="#222"/><text x="430" y="305" text-anchor="middle">A5</text>
+        <!-- Kanten -->
+        <line x1="300" y1="40" x2="300" y2="66" stroke="#222" marker-end="url(#lsg-l03k-pfeil)"/>
+        <line x1="287" y1="98" x2="233" y2="132" stroke="#222" marker-end="url(#lsg-l03k-pfeil)"/>
+        <text x="248" y="108">w</text>
+        <path d="M318,85 L430,85 L430,281" fill="none" stroke="#222" marker-end="url(#lsg-l03k-pfeil)"/>
+        <text x="370" y="78">f</text>
+        <line x1="220" y1="163" x2="220" y2="186" stroke="#222" marker-end="url(#lsg-l03k-pfeil)"/>
+        <line x1="207" y1="218" x2="163" y2="252" stroke="#222" marker-end="url(#lsg-l03k-pfeil)"/>
+        <text x="171" y="230">w</text>
+        <path d="M238,205 L290,205 L290,395 L239,395" fill="none" stroke="#222" marker-end="url(#lsg-l03k-pfeil)"/>
+        <text x="262" y="198">f</text>
+        <line x1="137" y1="278" x2="103" y2="312" stroke="#222" marker-end="url(#lsg-l03k-pfeil)"/>
+        <text x="104" y="290">w</text>
+        <line x1="163" y1="278" x2="197" y2="312" stroke="#222" marker-end="url(#lsg-l03k-pfeil)"/>
+        <text x="190" y="290">f</text>
+        <line x1="106" y1="334" x2="204" y2="386" stroke="#222" marker-end="url(#lsg-l03k-pfeil)"/>
+        <line x1="213" y1="343" x2="218" y2="376" stroke="#222" marker-end="url(#lsg-l03k-pfeil)"/>
+        <line x1="206" y1="407" x2="164" y2="443" stroke="#222" marker-end="url(#lsg-l03k-pfeil)"/>
+        <text x="168" y="420">w</text>
+        <line x1="231" y1="409" x2="289" y2="493" stroke="#222" marker-end="url(#lsg-l03k-pfeil)"/>
+        <text x="266" y="444">f</text>
+        <line x1="167" y1="462" x2="254" y2="502" stroke="#222" marker-end="url(#lsg-l03k-pfeil)"/>
+        <path d="M430,318 L430,510 L346,510" fill="none" stroke="#222" marker-end="url(#lsg-l03k-pfeil)"/>
+        <!-- Legende -->
+        <text x="480" y="150" font-weight="bold">Legende</text>
+        <text x="480" y="172">Start = Zeile 02 (Initialisierung)</text>
+        <text x="480" y="192">Ende = Zeile 18 (return)</text>
+        <text x="480" y="212">B1 … B4 = Bedingungen</text>
+        <text x="480" y="232">A1 … A5 = Anweisungen</text>
+        <text x="480" y="252">w / f = wahr / falsch</text>
+      </svg>
+      <figcaption>Abb. L-1: Kontrollflussgraph der Methode <code>zugangPruefen</code> (B-Knoten hinterlegt)</figcaption>
+    </figure>
+    <h4>c) Mindestanzahl der Testfälle (4 P)</h4>
+    <p><strong>Anweisungsüberdeckung: 3 Testfälle.</strong> A5 wird nur bei inaktivem Vertrag ausgeführt (dann keine andere A-Anweisung), A2 und A3 schließen sich gegenseitig aus (dann/sonst von B3). Also mindestens drei; A1 und A4 lassen sich mitnehmen, z. B. (aktiv, Premium, offener Betrag, Sauna), (aktiv, kein Premium, offener Betrag, Sauna), (nicht aktiv).</p>
+    <p><strong>Zweigüberdeckung: 4 Testfälle.</strong> Zusätzlich muss jede Bedingung auch falsch werden; insbesondere der falsch-Zweig von B2 (Bereich ist nicht die Sauna) kommt in keinem der drei Testfälle oben vor und lässt sich mit A2/A3 nicht kombinieren.</p>
+    <table class="kompakt">
+      <tr><th>Nr.</th><th>Vertrag aktiv</th><th>Premium</th><th>offener Betrag</th><th>Bereich</th><th>durchlaufene Zweige</th><th>Rückgabe</th></tr>
+      <tr><td>T1</td><td>nein</td><td>beliebig</td><td>beliebig</td><td>beliebig</td><td>B1 f</td><td>„Kein Zutritt“</td></tr>
+      <tr><td>T2</td><td>ja</td><td>ja</td><td>25,50 €</td><td>Sauna</td><td>B1 w, B2 w, B3 w, B4 w</td><td>„Zutritt Sauna (Zahlung offen)“</td></tr>
+      <tr><td>T3</td><td>ja</td><td>nein</td><td>0,00 €</td><td>Sauna</td><td>B1 w, B2 w, B3 f, B4 f</td><td>„Sauna nur mit Premium“</td></tr>
+      <tr><td>T4</td><td>ja</td><td>beliebig</td><td>beliebig</td><td>Trainingsbereich</td><td>B1 w, B2 f, B4 w oder f</td><td>„Zutritt Trainingsbereich …“</td></tr>
+    </table>
+    <h4>d) Alle Pfade (5 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:12%">Nummer</th><th style="width:40%">Pfad</th><th>Beispiel</th></tr>
+      <tr><td>1</td><td class="mono">B1, A5</td><td>Vertrag nicht aktiv</td></tr>
+      <tr><td>2</td><td class="mono">B1, A1, B2, B3, A2, B4, A4</td><td>Sauna, Premium, Zahlung offen</td></tr>
+      <tr><td>3</td><td class="mono">B1, A1, B2, B3, A2, B4</td><td>Sauna, Premium, nichts offen</td></tr>
+      <tr><td>4</td><td class="mono">B1, A1, B2, B3, A3, B4, A4</td><td>Sauna, kein Premium, Zahlung offen</td></tr>
+      <tr><td>5</td><td class="mono">B1, A1, B2, B3, A3, B4</td><td>Sauna, kein Premium, nichts offen</td></tr>
+      <tr><td>6</td><td class="mono">B1, A1, B2, B4, A4</td><td>Trainingsbereich, Zahlung offen</td></tr>
+      <tr><td>7</td><td class="mono">B1, A1, B2, B4</td><td>Trainingsbereich, nichts offen</td></tr>
+    </table>
+    <p>Die Reihenfolge der Pfade ist beliebig. Zählkontrolle: falls B1 falsch 1 Pfad; falls B1 wahr: (B2 falsch: 1 + B2 wahr: 2) = 3 Möglichkeiten, jeweils mal 2 für B4 → 6; zusammen 7.</p>
+    <h4>e) Überdeckung beweist keine Korrektheit (2 P)</h4>
+    <p>Überdeckung zeigt nur, <em>welcher Code ausgeführt</em> wurde, nicht, ob das Ergebnis mit sinnvollen Assertions geprüft wurde, und sie kann <strong>fehlende Funktionalität</strong> nicht aufdecken. Beispiele zu <code>zugangPruefen</code>: Ein Test, der die Methode aufruft, die zurückgegebene Meldung aber nicht prüft, zählt für die Überdeckung voll mit – ein Tippfehler in „Zutritt Sauna“ (das Drehkreuz öffnet dann nicht) bliebe unentdeckt. Oder: Wäre in der Spezifikation gefordert, dass gesperrte Mitglieder trotz aktiven Vertrags abgewiesen werden, fehlte diese Prüfung im Code ganz – kein Überdeckungsmaß zeigt Code an, der gar nicht existiert. Auch ein Aufruf mit <code>bereich = null</code> führt trotz 100 % Pfadüberdeckung zu einer <code>NullPointerException</code>.</p>
+    <p class="codelabel">Ausgabe von Aufgabe_TQ_03_3.java (instrumentierte Methode, alle Eingabekombinationen ausprobiert)</p>
+    <pre class="ausgabe">d) Alle Pfade (7):
+   1  B1, A5                       -&gt; "Kein Zutritt"
+      z. B. aktiv=false premium=true  offen=25,50 bereich=Sauna
+   2  B1, A1, B2, B3, A2, B4, A4   -&gt; "Zutritt Sauna (Zahlung offen)"
+      z. B. aktiv=true  premium=true  offen=25,50 bereich=Sauna
+   3  B1, A1, B2, B3, A2, B4       -&gt; "Zutritt Sauna"
+      z. B. aktiv=true  premium=true  offen= 0,00 bereich=Sauna
+   4  B1, A1, B2, B3, A3, B4, A4   -&gt; "Sauna nur mit Premium (Zahlung offen)"
+      z. B. aktiv=true  premium=false offen=25,50 bereich=Sauna
+   5  B1, A1, B2, B3, A3, B4       -&gt; "Sauna nur mit Premium"
+      z. B. aktiv=true  premium=false offen= 0,00 bereich=Sauna
+   6  B1, A1, B2, B4, A4           -&gt; "Zutritt Trainingsbereich (Zahlung offen)"
+      z. B. aktiv=true  premium=true  offen=25,50 bereich=Trainingsbereich
+   7  B1, A1, B2, B4               -&gt; "Zutritt Trainingsbereich"
+      z. B. aktiv=true  premium=true  offen= 0,00 bereich=Trainingsbereich
+
+c) Zweige insgesamt: 8 [B1 falsch, B1 wahr, B2 falsch, B2 wahr, B3 falsch, B3 wahr, B4 falsch, B4 wahr]
+   Minimale Anzahl Testfälle Anweisungsüberdeckung (C0): 3
+      Pfad 1: B1, A5
+      Pfad 2: B1, A1, B2, B3, A2, B4, A4
+      Pfad 4: B1, A1, B2, B3, A3, B4, A4
+   Minimale Anzahl Testfälle Zweigüberdeckung (C1): 4
+      Pfad 1: B1, A5
+      Pfad 3: B1, A1, B2, B3, A2, B4
+      Pfad 4: B1, A1, B2, B3, A3, B4, A4
+      Pfad 6: B1, A1, B2, B4, A4
+   Pfadüberdeckung (C2): 7 Testfälle
+...
+   T1-T3 decken alle Anweisungen ab: true
+   T1-T3 lassen diese Zweige aus: [B2 falsch]
+   T1-T4 decken alle Zweige ab: true
+
+e) Trotz 100 % Pfadüberdeckung: Aufruf mit bereich = null (z. B. fehlender Wert aus der App)
+   -&gt; NullPointerException in bereich.equals(...) - kein Überdeckungsmaß hat das angezeigt</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Maß 3 P (2 P Erläuterung, 1 P Verhältnis zu den anderen Maßen). b) 5 P: alle Knoten (2 P), richtige Kanten inkl. der falsch-Kante B2 → B4 und B1 → A5 (2 P), Beschriftung w/f (1 P); Knoten mit Zeilennummern statt Marken sind gleichwertig. c) je 2 P (Anzahl + Begründung bzw. Testfälle). d) 5 P für alle sieben Pfade, je fehlendem oder falschem Pfad 1 P Abzug. e) 1 P Begründung, 1 P Beispiel.</div>
+    <p><strong>Erklärung:</strong> Wie S24 T2 A3b/c (dort Login mit B1–B3 und A1–A4, fünf Pfade). Merke den Unterschied der drei Zahlen: 3 (C0) &lt; 4 (C1) &lt; 7 (C2). Die zyklomatische Zahl nach McCabe ist hier 4 Entscheidungen + 1 = 5 – eine obere Grenze für die Testfälle der Zweigüberdeckung (4 ≤ 5).</p>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-03-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== TQ-04 ===================== -->
   <h3 id="a-04">TQ-04 · Qualitätsmerkmale ISO/IEC 25010</h3>
@@ -1407,6 +1938,20 @@ void testeFreiePlaetze() {
     </table>
     <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 4ca und S26 Teil 1, Aufgabe 4a</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-04-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-04.1 · 6 Punkte</div>
+    <table class="kompakt">
+      <tr><th style="width:6%">Nr.</th><th style="width:34%">Qualitätsmerkmal</th><th>Untermerkmal (nicht gefordert)</th></tr>
+      <tr><td>1</td><td>Leistungseffizienz</td><td>Zeitverhalten</td></tr>
+      <tr><td>2</td><td>Zuverlässigkeit</td><td>Fehlertoleranz (auch Verfügbarkeit)</td></tr>
+      <tr><td>3</td><td>Benutzbarkeit</td><td>Erlernbarkeit</td></tr>
+      <tr><td>4</td><td>Kompatibilität</td><td>Interoperabilität</td></tr>
+      <tr><td>5</td><td>Wartbarkeit</td><td>Modularität, Modifizierbarkeit</td></tr>
+      <tr><td>6</td><td>Sicherheit</td><td>Vertraulichkeit</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je richtiger Zuordnung 1 P. Begriffe der ISO 9126 werden ebenfalls akzeptiert (Effizienz, Änderbarkeit; Nr. 4 dort Funktionalität/Interoperabilität).</div>
+    <p><strong>Erklärung:</strong> Nr. 2 ist keine Leistungs-, sondern eine Zuverlässigkeitsanforderung: Es geht darum, dass das System auch bei einer Störung weiterarbeitet. Nr. 6 ist Sicherheit im Sinne von Informationssicherheit (Schutz vertraulicher Gesundheitsdaten).</p>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-04-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="TQ-04-2">
     <div class="kopf">
@@ -1421,6 +1966,25 @@ void testeFreiePlaetze() {
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S26 Teil 1, Aufgabe 4a (Zuverlässigkeit) und W21 Teil 1, Aufgabe 4ca (Effizienz, Änderbarkeit)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-04-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-04.2 · 8 Punkte</div>
+    <h4>a) Zuverlässigkeit (3 P)</h4>
+    <p>Zuverlässigkeit ist die Fähigkeit der Software, ihre Funktionen unter festgelegten Bedingungen über einen festgelegten Zeitraum <strong>dauerhaft und auch bei Störungen</strong> zu erbringen. Untermerkmale am Beispiel des Check-ins (zwei genügen):</p>
+    <ul>
+      <li><strong>Verfügbarkeit:</strong> Der Check-in muss während der Öffnungszeiten praktisch immer funktionieren, z. B. 99,9 % – sonst stehen Mitglieder vor dem geschlossenen Drehkreuz.</li>
+      <li><strong>Fehlertoleranz:</strong> Fällt die Verbindung zum Server aus, prüft das Drehkreuz weiter offline, statt alle Mitglieder abzuweisen.</li>
+      <li><strong>Wiederherstellbarkeit:</strong> Nach einem Absturz ist der Dienst schnell wieder einsatzbereit, Check-ins gehen nicht verloren.</li>
+      <li><strong>Reife:</strong> Im Normalbetrieb treten kaum Fehler auf.</li>
+    </ul>
+    <h4>b) Wartbarkeit (3 P)</h4>
+    <p>Wartbarkeit beschreibt, wie <strong>leicht und mit welchem Aufwand</strong> die Software geändert werden kann – um Fehler zu beheben, sie zu erweitern oder an neue Anforderungen anzupassen. Untermerkmale: Modularität, Wiederverwendbarkeit, Analysierbarkeit, Modifizierbarkeit, Testbarkeit (zwei genügen). Für Brückner Digital ist sie besonders wichtig, weil VitaPark Connect über Jahre betreut und weiterentwickelt wird: neue Tarife und Studios, weitere Armbandhersteller, Änderungen der GesundPlus-Spezifikation. Gut wartbarer Code senkt die Kosten jeder Änderung und das Risiko, dabei neue Fehler einzubauen.</p>
+    <h4>c) Messbare Anforderungen (2 P)</h4>
+    <ul>
+      <li><strong>Schnell:</strong> „Nach dem Antippen von ‚Kurse‘ wird die Kursliste bei einer Mobilfunkverbindung (4G) in 95 % der Fälle in höchstens 2 Sekunden vollständig angezeigt.“</li>
+      <li><strong>Einfach zu bedienen:</strong> „Mindestens 8 von 10 Testpersonen über 60 Jahre, die die App zum ersten Mal nutzen, buchen ohne Hilfe innerhalb von 3 Minuten einen Kurs.“</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> a) 1 P Beschreibung, je Untermerkmal mit Bezug 1 P. b) 1 P Beschreibung, 1 P zwei Untermerkmale, 1 P Begründung. c) je messbarer Anforderung (Messgröße + Zielwert + Bedingung) 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-04-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="TQ-04-3">
     <div class="kopf">
@@ -1443,6 +2007,28 @@ void testeFreiePlaetze() {
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: S23 Teil 1, Aufgabe 2a (Qualitätsmerkmale nach ISO 9126) und S26 Teil 1, Aufgabe 4a</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-04-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-04.3 · 17 Punkte</div>
+    <h4>a) ISO/IEC 9126 (3 P)</h4>
+    <p>Funktionalität · Zuverlässigkeit · Benutzbarkeit · Effizienz · Änderbarkeit (Wartbarkeit) · Übertragbarkeit</p>
+    <h4>b) Neu in ISO/IEC 25010 (2 P)</h4>
+    <p><strong>Sicherheit</strong> (Informationssicherheit; in 9126 Untermerkmal der Funktionalität) und <strong>Kompatibilität</strong> (fasst Interoperabilität und Koexistenz zusammen).</p>
+    <h4>c) Qualitätsanforderungen „Check-in am Drehkreuz“ (9 P) – Beispiellösung</h4>
+    <table class="kompakt">
+      <tr><th style="width:15%">Merkmal</th><th style="width:28%">konkrete Anforderung</th><th style="width:30%">messbares Abnahmekriterium</th><th>Prüfung</th></tr>
+      <tr><td>Zuverlässigkeit</td><td>Der Check-in ist während der Öffnungszeiten verfügbar und funktioniert auch bei Ausfall der Serververbindung.</td><td>Verfügbarkeit ≥ 99,9 % zwischen 6 und 23 Uhr pro Monat; bei Verbindungsabbruch werden gültige Karten der letzten 24 h offline akzeptiert; nach einem Neustart ist der Dienst in ≤ 5 min wieder bereit.</td><td>Ausfall-/Fehlertoleranztest im Systemtest (Server stoppen, Netzwerk trennen), Langzeittest, Messung im Pilotbetrieb (Monitoring)</td></tr>
+      <tr><td>Leistungs&shy;effizienz</td><td>Das Drehkreuz öffnet auch zur Spitzenzeit ohne spürbare Wartezeit.</td><td>Bei 50 Check-ins pro Minute (Reserve: 100) öffnet das Drehkreuz in 95 % der Fälle spätestens 1 s nach dem Scan; Server-CPU-Last ≤ 70 %.</td><td>Lasttest mit Lastgenerator (simulierte Scans), Messung der Antwortzeiten; Stresstest über die Spitzenlast hinaus</td></tr>
+      <tr><td>Sicherheit</td><td>Nur aktive Mitglieder erhalten Zutritt; ein kopierter QR-Code (Screenshot) darf nicht funktionieren; Übertragung verschlüsselt.</td><td>Der QR-Code enthält ein signiertes Token, das höchstens 30 s gültig ist; abgelaufene, manipulierte oder fremde Codes werden in 100 % der Testfälle abgewiesen; Kommunikation nur über TLS; keine kritischen Befunde im Penetrationstest.</td><td>Sicherheitstest/Penetrationstest, Negativtests mit manipulierten und abgelaufenen Codes, Code-Review der Zugangsprüfung</td></tr>
+    </table>
+    <h4>d) Zielkonflikt (3 P) – ein Beispiel genügt</h4>
+    <ul>
+      <li><strong>Sicherheit ↔ Benutzbarkeit:</strong> Ein alle 30 Sekunden wechselnder QR-Code oder eine zusätzliche PIN am Drehkreuz verhindert, dass Mitgliedskarten weitergegeben werden. Für ältere Mitglieder, die die App erstmals nutzen, ist das aber umständlicher, und zur Spitzenzeit bilden sich Schlangen. Man muss abwägen, z. B. PIN nur für die Sauna.</li>
+      <li><strong>Zuverlässigkeit ↔ Sicherheit:</strong> Die Offline-Prüfung hält den Betrieb bei Serverausfall aufrecht, aber ein gerade gekündigtes oder gesperrtes Mitglied kommt in dieser Zeit eventuell noch hinein.</li>
+      <li><strong>Leistungseffizienz ↔ Sicherheit:</strong> Signaturprüfung und verschlüsselte Verbindung kosten Rechenzeit und verlängern die Öffnungszeit des Drehkreuzes.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Merkmal 0,5 P. b) je Merkmal 1 P. c) je Merkmal 3 P (je Spalte 1 P); Kriterien müssen wirklich messbar sein (Zahl + Einheit/Bedingung) – „schnell“ oder „sicher“ allein gibt 0 P in dieser Spalte. d) 1 P die beiden Merkmale, 2 P Erläuterung am Beispiel mit Abwägung.</div>
+    <p><strong>Erklärung:</strong> S23 T1 A2a fragte tatsächlich nach ISO 9126. Die Tabelle in c) verbindet TQ-04 mit TQ-01: Zu jeder Qualitätsanforderung gehört eine Prüfung – nicht-funktionale Anforderungen werden durch nicht-funktionale Tests (Last-, Ausfall-, Sicherheitstest) abgenommen.</p>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-04-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== TQ-05 ===================== -->
   <h3 id="a-05">TQ-05 · Schreibtischtest</h3>
@@ -1482,6 +2068,36 @@ void testeFreiePlaetze() {
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W22 Teil 2, Aufgabe 2aa und S23 Teil 2, Aufgabe 3a (Schreibtischtest)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-05-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-05.1 · 5 Punkte</div>
+    <h4>a) Schreibtischtest (1 P)</h4>
+    <p>Ein Schreibtischtest ist das <strong>manuelle Durchspielen</strong> eines Algorithmus mit konkreten Testdaten <strong>ohne Computer</strong>; nach jedem Schritt werden die Werte der Variablen in einer Tabelle notiert, um das Ergebnis zu ermitteln und Fehler zu finden.</p>
+    <h4>b) Trace-Tabelle (3 P)</h4>
+    <table class="kompakt" style="width:auto">
+      <tr><th>i</th><th>minuten[i]</th><th>Bedingung Zeile 04</th><th>Bedingung Zeile 07</th><th>punkte</th></tr>
+      <tr><td>–</td><td>–</td><td>–</td><td>–</td><td>0</td></tr>
+      <tr><td>0</td><td>45</td><td>falsch</td><td>wahr</td><td>1</td></tr>
+      <tr><td>1</td><td>70</td><td>wahr</td><td>–</td><td>4</td></tr>
+      <tr><td>2</td><td>20</td><td>falsch</td><td>falsch</td><td>4</td></tr>
+      <tr><td>3</td><td>60</td><td>wahr</td><td>–</td><td>7</td></tr>
+      <tr><td>4</td><td>30</td><td>falsch</td><td>wahr</td><td>8</td></tr>
+    </table>
+    <h4>c) Rückgabewert (1 P)</h4>
+    <p>Rückgabewert <strong>8</strong>. Das entspricht der Regel in Anlage 3: 45 → 1, 70 → 3, 20 → 0, 60 → 3 (ab 60 Minuten), 30 → 1 (ab 30 Minuten); 1 + 3 + 0 + 3 + 1 = 8.</p>
+    <p class="codelabel">Ausgabe von Aufgabe_TQ_05_1.java</p>
+    <pre class="ausgabe">Schreibtischtest bonuspunkte([45, 70, 20, 60, 30]):
+   i | minuten[i] | &gt;= 60 (Z. 04) | &gt;= 30 (Z. 07) | punkte
+   - |     -      |       -       |       -       | 0
+   0 |         45 | falsch        | wahr          | 1
+   1 |         70 | wahr          | -             | 4
+   2 |         20 | falsch        | falsch        | 4
+   3 |         60 | wahr          | -             | 7
+   4 |         30 | falsch        | wahr          | 8
+   Rückgabewert: 8
+Kontrolle Grenzwerte: [59] -&gt; 1, [29] -&gt; 0, [] -&gt; 0</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) 1 P. b) je richtiger Zeile 0,5 P (max. 3 P, Folgefehler nicht doppelt abziehen). c) 1 P.</div>
+    <p><strong>Erklärung:</strong> Die Bedingung in Zeile 07 wird nur geprüft, wenn die in Zeile 04 falsch ist (sonst-Zweig). 60 und 30 sind Grenzwerte – „ab“ heißt <code>&gt;=</code>, die Funktion ist hier korrekt.</p>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-05-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="TQ-05-2">
     <div class="kopf">
@@ -1530,6 +2146,54 @@ void testeFreiePlaetze() {
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S23 Teil 2, Aufgabe 3a (Schreibtischtest über verschachtelte Daten, Fehler finden)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-05-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-05.2 · 10 Punkte</div>
+    <h4>a) Schreibtischtest (6 P)</h4>
+    <table class="kompakt" style="width:auto">
+      <tr><th>tag</th><th>std</th><th>besucher[tag][std]</th><th>Bedingung Zeile 06 (&gt; 80)</th><th>folge</th><th>anzahl</th></tr>
+      <tr><td>–</td><td>–</td><td>–</td><td>–</td><td>0</td><td>0</td></tr>
+      <tr><td>0</td><td>0</td><td>40</td><td>falsch</td><td>0</td><td>0</td></tr>
+      <tr><td>0</td><td>1</td><td>85</td><td>wahr</td><td>1</td><td>0</td></tr>
+      <tr><td>0</td><td>2</td><td>90</td><td>wahr</td><td>2</td><td>1</td></tr>
+      <tr><td>0</td><td>3</td><td>95</td><td>wahr</td><td>3</td><td>1</td></tr>
+      <tr><td>1</td><td>0</td><td>70</td><td>falsch</td><td>0</td><td>1</td></tr>
+      <tr><td>1</td><td>1</td><td>82</td><td>wahr</td><td>1</td><td>1</td></tr>
+      <tr><td>1</td><td>2</td><td>60</td><td>falsch</td><td>0</td><td>1</td></tr>
+      <tr><td>1</td><td>3</td><td>88</td><td>wahr</td><td>1</td><td>1</td></tr>
+      <tr><td>2</td><td>0</td><td>91</td><td>wahr</td><td><strong>2</strong></td><td><strong>2</strong></td></tr>
+      <tr><td>2</td><td>1</td><td>50</td><td>falsch</td><td>0</td><td>2</td></tr>
+      <tr><td>2</td><td>2</td><td>96</td><td>wahr</td><td>1</td><td>2</td></tr>
+      <tr><td>2</td><td>3</td><td>97</td><td>wahr</td><td>2</td><td>3</td></tr>
+    </table>
+    <h4>b) Ergebnisse (2 P)</h4>
+    <p>Tatsächliches Ergebnis: <strong>3</strong>. Erwartet laut Spezifikation: <strong>2</strong> (Montag 18–20 Uhr und Mittwoch 19–20 Uhr). Abweichung: Am Mittwoch um 17 Uhr (91) wird eine Spitzenphase gezählt, weil <code>folge</code> vom Dienstag 20 Uhr (88) noch auf 1 stand. Die Folge wird also über die Tagesgrenze (die Nacht) hinweg fortgesetzt, was die Spezifikation ausschließt.</p>
+    <h4>c) Fehler und Korrektur (2 P)</h4>
+    <p><strong>Zeile 03:</strong> <code>folge := 0</code> wird nur <em>einmal</em> vor der äußeren Schleife ausgeführt, statt zu Beginn <em>jedes</em> Tages. Korrektur: Zeile 03 in die äußere Schleife verschieben (nach Zeile 04, vor die innere Schleife).</p>
+    <pre class="pseudo">01 funktion spitzenphasen(besucher : integer[][], grenze : integer) : integer
+02   anzahl : integer := 0
+04   zähle tag von 0 bis besucher.length - 1
+03     folge : integer := 0                     // jetzt für jeden Tag neu
+05     zähle std von 0 bis besucher[tag].length - 1
+06       wenn besucher[tag][std] &gt; grenze dann
+07         folge := folge + 1
+08         wenn folge = 2 dann
+09           anzahl := anzahl + 1
+10         Ende wenn
+11       sonst
+12         folge := 0
+13       Ende wenn
+14     Ende zähle
+15   Ende zähle
+16   rückgabe anzahl
+17 Ende funktion</pre>
+    <p class="codelabel">Ausgabe von Aufgabe_TQ_05_2.java (Auszug)</p>
+    <pre class="ausgabe">   tatsächliches Ergebnis: 3
+b) erwartetes Ergebnis laut Spezifikation (korrigierte Funktion): 2
+
+Zusatz: Dienstag endet unter der Grenze -&gt; fehlerhaft 2, korrigiert 2 (Fehler bleibt mit solchen Testdaten unentdeckt)</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je zwei richtige Zeilen 1 P (Folgefehler nicht doppelt abziehen). b) 1 P beide Ergebnisse, 1 P Begründung. c) 1 P Fehler mit Zeile, 1 P Korrektur (gleichwertig: <code>folge := 0</code> zusätzlich als erste Anweisung in der äußeren Schleife).</div>
+    <p><strong>Erklärung:</strong> Klassischer Fehler bei verschachtelten Schleifen: Initialisierung in der falschen Schleife. Er zeigt sich nur, wenn ein Tag mit einem Wert über der Grenze endet <em>und</em> der nächste mit einem beginnt – der Zusatzlauf zeigt, dass andere Testdaten ihn nicht finden.</p>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-05-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="TQ-05-3">
     <div class="kopf">
@@ -1587,6 +2251,87 @@ void testeFreiePlaetze() {
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W25 Teil 2, Aufgabe 3b (erwartetes und tatsächliches Testergebnis, zwei Fehler korrigieren), W22 Teil 2, Aufgabe 2a (Schreibtischtest einer Rekursion) und S23 Teil 2, Aufgabe 3b</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-05-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-05.3 · 20 Punkte</div>
+    <h4>a) Testtabelle (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:6%">TF</th><th style="width:30%">Testdaten</th><th style="width:30%">erwartetes Ergebnis</th><th>tatsächliches Ergebnis</th></tr>
+      <tr><td>1</td><td class="mono">{W, W, F, W, W, W, F}</td><td>3</td><td>3</td></tr>
+      <tr><td>2</td><td class="mono">{W, F, W, W, W, W}</td><td>4</td><td class="fehler">1</td></tr>
+      <tr><td>3</td><td class="mono">{F, F, F}</td><td>0</td><td>0</td></tr>
+      <tr><td>4</td><td class="mono">{W, W, W}</td><td>3</td><td class="fehler">0</td></tr>
+      <tr><td>5</td><td class="mono">{}</td><td><code>IllegalArgumentException</code></td><td class="fehler">0</td></tr>
+      <tr><td>6</td><td class="mono">null</td><td><code>IllegalArgumentException</code></td><td><code>IllegalArgumentException</code></td></tr>
+    </table>
+    <h4>b) Schreibtischtest der Rekursion (5 P)</h4>
+    <table class="kompakt" style="width:auto">
+      <tr><th>Aufruf</th><th>i</th><th>i &gt;= t.length</th><th>t[i]</th><th>Rückgabewert</th></tr>
+      <tr><td>1</td><td>3</td><td>falsch</td><td>W (true)</td><td>1 + Ergebnis Aufruf 2 = <strong>3</strong></td></tr>
+      <tr><td>2</td><td>4</td><td>falsch</td><td>W (true)</td><td>1 + Ergebnis Aufruf 3 = 2</td></tr>
+      <tr><td>3</td><td>5</td><td>falsch</td><td>W (true)</td><td>1 + Ergebnis Aufruf 4 = 1</td></tr>
+      <tr><td>4</td><td>6</td><td>wahr</td><td>nicht ausgewertet</td><td>0 (Basisfall)</td></tr>
+    </table>
+    <p>Ergebnis: <code>serieAb(t, 3) = 3</code>. Im 4. Aufruf ist <code>i = 6 = t.length</code>; weil der linke Teil der <code>oder</code>-Bedingung schon wahr ist, wird <code>t[6]</code> nicht mehr ausgewertet – sonst gäbe es eine Indexüberschreitung.</p>
+    <h4>c) Fehler und Korrektur (5 P)</h4>
+    <ul>
+      <li><strong>Fehler 1 (Zeilen 11–12, Auswertung nur im else-Zweig ab Zeile 10):</strong> <code>max</code> wird nur aktualisiert, wenn eine Serie durch einen Ruhetag (<code>false</code>) beendet wird. Endet das Array mit Trainingstagen, wird die <strong>letzte Serie nie ausgewertet</strong> (TF2 liefert 1 statt 4, TF4 liefert 0 statt 3). Korrektur: <code>max</code> direkt nach <code>serie++</code> aktualisieren – oder nach der Schleife (nach Zeile 16) zusätzlich <code>if (serie &gt; max) { max = serie; }</code> einfügen.</li>
+      <li><strong>Fehler 2 (Zeile 02):</strong> Ein leeres Array wird nicht abgefangen, laut Spezifikation muss dann eine <code>IllegalArgumentException</code> ausgelöst werden (TF5 liefert 0). Korrektur: <code>if (trainiert == null || trainiert.length == 0) {</code></li>
+    </ul>
+    <pre class="java">public int laengsteSerie(boolean[] trainiert) {
+    if (trainiert == null || trainiert.length == 0) {      // Fehler 2 behoben
+        throw new IllegalArgumentException("keine Daten");
+    }
+    int serie = 0;
+    int max = 0;
+    for (int i = 0; i &lt; trainiert.length; i++) {
+        if (trainiert[i]) {
+            serie++;
+            if (serie &gt; max) {                             // Fehler 1 behoben:
+                max = serie;                               // Maximum nach jedem Trainingstag
+            }
+        } else {
+            serie = 0;
+        }
+    }
+    return max;
+}</pre>
+    <h4>d) Mindestauswahl für Anweisungsüberdeckung der gegebenen Methode (4 P)</h4>
+    <p>Es genügen <strong>2 Testfälle: TF6 und TF1</strong> (statt TF1 auch TF2).</p>
+    <ul>
+      <li>Die Anweisung in Zeile 03 (<code>throw</code>) wird nur bei <code>null</code> ausgeführt → <strong>TF6</strong> ist nötig; er führt aber nur die Zeilen 02 und 03 aus.</li>
+      <li>Ein zweiter Testfall muss alle übrigen Anweisungen ausführen: einen Trainingstag (Zeile 09), einen Ruhetag nach einer Serie, sodass <code>serie &gt; max</code> wahr ist (Zeilen 11, 12, 14), und die Rückgabe (Zeile 17). Das leistet TF1 (ebenso TF2). TF3 erreicht Zeile 09 und 12 nicht, TF4 die Zeilen 11, 12, 14 nicht, TF5 nicht einmal den Schleifenrumpf.</li>
+    </ul>
+    <p class="codelabel">Ausgabe von Aufgabe_TQ_05_3.java</p>
+    <pre class="ausgabe">a) Testtabelle (W = true, F = false, Exception = IllegalArgumentException):
+   TF | Testdaten             | erwartet  | fehlerhaft | korrigiert
+    1 | {W, W, F, W, W, W, F} | 3         | 3          | 3
+    2 | {W, F, W, W, W, W}    | 4         | 1          | 4            &lt;- Abweichung
+    3 | {F, F, F}             | 0         | 0          | 0
+    4 | {W, W, W}             | 3         | 0          | 3            &lt;- Abweichung
+    5 | {} (leeres Array)     | Exception | 0          | Exception    &lt;- Abweichung
+    6 | null                  | Exception | Exception  | Exception
+
+b) Schreibtischtest serieAb(t, 3) mit t = {F, W, F, W, W, W}:
+   Aufruf 1: serieAb(t, 3)  i &gt;= t.length: false, t[i]: true  -&gt; 1 + serieAb(t, 4)
+     Aufruf 2: serieAb(t, 4)  i &gt;= t.length: false, t[i]: true  -&gt; 1 + serieAb(t, 5)
+       Aufruf 3: serieAb(t, 5)  i &gt;= t.length: false, t[i]: true  -&gt; 1 + serieAb(t, 6)
+         Aufruf 4: serieAb(t, 6)  i &gt;= t.length: true, t[i]: nicht geprüft  -&gt; Basisfall, Rückgabe 0
+       Aufruf 3 liefert 1
+     Aufruf 2 liefert 2
+   Aufruf 1 liefert 3
+   Ergebnis: 3
+
+d) Ausgeführte Zeilen der fehlerhaften Methode je Testfall:
+   TF1: [2, 5, 6, 7, 8, 9, 11, 12, 14, 17]
+   TF2: [2, 5, 6, 7, 8, 9, 11, 12, 14, 17]
+   TF3: [2, 5, 6, 7, 8, 11, 14, 17]
+   TF4: [2, 5, 6, 7, 8, 9, 17]
+   TF5: [2, 5, 6, 7, 17]
+   TF6: [2, 3]
+   TF1 + TF6 zusammen: [2, 3, 5, 6, 7, 8, 9, 11, 12, 14, 17] -&gt; alle Anweisungszeilen? true</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Zeile 1 P (0,5 P erwartet, 0,5 P tatsächlich). b) je Aufruf 1 P, 1 P Ergebnis. c) je Fehler 1 P Benennung mit Zeile, 1,5 P Korrektur. d) 1 P Anzahl, 1 P TF6, 2 P Begründung des zweiten Testfalls.</div>
+    <p><strong>Erklärung:</strong> Aufbau wie W25 T2 A3b (Tabelle „erwartetes Testergebnis / Testergebnis“, danach zwei Fehler korrigieren). Der Fehler „letztes Element/letzte Serie wird nicht ausgewertet“ ist derselbe Mechanismus wie die fehlende letzte Gruppe beim Gruppenwechsel. d) zeigt: Volle Anweisungsüberdeckung mit TF1 + TF6 findet keinen der beiden Fehler!</p>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-05-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== TQ-06 ===================== -->
   <h3 id="a-06">TQ-06 · Äquivalenzklassen / Testfälle</h3>
@@ -1609,6 +2354,20 @@ void testeFreiePlaetze() {
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S22 Teil 2, Aufgabe 2bc (Testdaten aus Äquivalenzklassen)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-06-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-06.1 · 5 Punkte</div>
+    <h4>a) Äquivalenzklassen (3 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:8%">ÄK</th><th style="width:18%">gültig/ungültig</th><th>Beschreibung</th><th style="width:22%">Repräsentant</th></tr>
+      <tr><td>1</td><td>gültig</td><td>ganze Zahl von 0 bis 3</td><td>2</td></tr>
+      <tr><td>2</td><td>ungültig</td><td>ganze Zahl kleiner als 0</td><td>−2</td></tr>
+      <tr><td>3</td><td>ungültig</td><td>ganze Zahl größer als 3</td><td>5</td></tr>
+      <tr><td>4</td><td>ungültig</td><td>keine ganze Zahl (Text, Kommazahl, leeres Feld)</td><td>„zwei“ bzw. 1,5 bzw. leer</td></tr>
+    </table>
+    <h4>b) Grenzwerte (2 P)</h4>
+    <p>Testwerte: <strong>−1, 0, 3, 4</strong> (je der Wert auf der Grenze und der direkt benachbarte Wert außerhalb). Grenzwerte werden zusätzlich getestet, weil Programmierfehler besonders häufig an den Rändern der Klassen entstehen (<code>&lt;</code> statt <code>&lt;=</code>, Off-by-one); ein Repräsentant aus der Mitte der Klasse würde solche Fehler nicht finden.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) gültige Klasse 1 P, die beiden Bereichsüberschreitungen 1 P, formale Klasse (keine Zahl/leer) 1 P – jeweils mit Repräsentant. Wer „leer“ als eigene fünfte Klasse führt, ist ebenfalls richtig. b) 1 P Werte, 1 P Begründung.</div>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-06-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="TQ-06-2">
     <div class="kopf">
@@ -1640,6 +2399,52 @@ void testeFreiePlaetze() {
     </table>
     <p class="quelle">Angelehnt an: S22 Teil 2, Aufgabe 2bc (Äquivalenzklassen) und W25 Teil 2, Aufgabe 3ba (Testdaten mit Sonderfällen)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-06-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-06.2 · 12 Punkte</div>
+    <h4>a) Äquivalenzklassen (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:12%">Parameter</th><th style="width:44%">gültige Äquivalenzklassen</th><th>ungültige Äquivalenzklassen</th></tr>
+      <tr><td>alter</td><td>A1: 14–17 (50 % Ermäßigung)<br>A2: 18–64 (voller Beitrag)<br>A3: 65–120 (20 % Ermäßigung)</td><td>A4: kleiner als 14<br>A5: größer als 120</td></tr>
+      <tr><td>tarif</td><td>T1: „BASIC“<br>T2: „PREMIUM“</td><td>T3: anderer Text (z. B. „GOLD“, „basic“, leere Zeichenkette)<br>T4: <code>null</code></td></tr>
+    </table>
+    <h4>b) Testfalltabelle (5 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:7%">Nr.</th><th style="width:11%">alter</th><th style="width:16%">tarif</th><th style="width:30%">abgedeckte ÄK</th><th>erwartetes Ergebnis</th></tr>
+      <tr><td>1</td><td>15</td><td>„BASIC“</td><td>A1, T1</td><td>14,95 (29,90 · 0,5)</td></tr>
+      <tr><td>2</td><td>40</td><td>„PREMIUM“</td><td>A2, T2</td><td>49,90</td></tr>
+      <tr><td>3</td><td>70</td><td>„BASIC“</td><td>A3, T1</td><td>23,92 (29,90 · 0,8)</td></tr>
+      <tr><td>4</td><td>10</td><td>„BASIC“</td><td>A4 (ungültig)</td><td><code>IllegalArgumentException</code></td></tr>
+      <tr><td>5</td><td>130</td><td>„PREMIUM“</td><td>A5 (ungültig)</td><td><code>IllegalArgumentException</code></td></tr>
+      <tr><td>6</td><td>40</td><td>„GOLD“</td><td>T3 (ungültig)</td><td><code>IllegalArgumentException</code></td></tr>
+      <tr><td>7</td><td>40</td><td><code>null</code></td><td>T4 (ungültig)</td><td><code>IllegalArgumentException</code></td></tr>
+    </table>
+    <p>7 Testfälle sind das Minimum: Die drei gültigen Altersklassen brauchen drei Testfälle (die beiden gültigen Tarife werden dabei mit abgedeckt), jede der vier ungültigen Klassen wird einzeln mit sonst gültigen Werten getestet.</p>
+    <h4>c) Grenzwerte für alter, Tarif BASIC (3 P)</h4>
+    <table class="kompakt" style="width:auto">
+      <tr><th>alter</th><th>erwartetes Ergebnis</th><th>alter</th><th>erwartetes Ergebnis</th></tr>
+      <tr><td>13</td><td><code>IllegalArgumentException</code></td><td>64</td><td>29,90</td></tr>
+      <tr><td>14</td><td>14,95</td><td>65</td><td>23,92</td></tr>
+      <tr><td>17</td><td>14,95</td><td>120</td><td>23,92</td></tr>
+      <tr><td>18</td><td>29,90</td><td>121</td><td><code>IllegalArgumentException</code></td></tr>
+    </table>
+    <p class="codelabel">Ausgabe von Aufgabe_TQ_06_2.java (Referenzimplementierung nach Anlage 3)</p>
+    <pre class="ausgabe">b) Testfälle aus Äquivalenzklassen (gültige kombiniert, ungültige einzeln):
+   T1    beitrag( 15, "BASIC"  ) erwartet 14.95     tatsächlich 14.95     OK
+   T2    beitrag( 40, "PREMIUM") erwartet 49.90     tatsächlich 49.90     OK
+   T3    beitrag( 70, "BASIC"  ) erwartet 23.92     tatsächlich 23.92     OK
+   T4    beitrag( 10, "BASIC"  ) erwartet Exception tatsächlich Exception OK
+   T5    beitrag(130, "PREMIUM") erwartet Exception tatsächlich Exception OK
+   T6    beitrag( 40, "GOLD"   ) erwartet Exception tatsächlich Exception OK
+   T7    beitrag( 40, null     ) erwartet Exception tatsächlich Exception OK
+c) Grenzwerte für das Alter (Tarif BASIC):
+   G1    beitrag( 13, "BASIC"  ) erwartet Exception tatsächlich Exception OK
+   G2    beitrag( 14, "BASIC"  ) erwartet 14.95     tatsächlich 14.95     OK
+   ...
+   G8    beitrag(121, "BASIC"  ) erwartet Exception tatsächlich Exception OK
+-&gt; 15 bestanden, 0 fehlgeschlagen</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Parameter 2 P (gültige 1 P, ungültige 1 P); <code>null</code> und „anderer Text“ dürfen zu einer Klasse zusammengefasst werden. b) 2 P gültige Klassen mit möglichst wenigen kombinierten Testfällen, 2 P ungültige Klassen einzeln, 1 P richtige erwartete Ergebnisse. c) 8 Werte mit Ergebnis 3 P (je fehlendem/falschem Wert 0,5 P Abzug).</div>
+    <p><strong>Erklärung:</strong> Die Testfälle stammen ausschließlich aus der Spezifikation (Black-Box) – der Code ist hier noch gar nicht bekannt. Grenzwert 65 ist der wichtigste: An ihm scheitert die Implementierung in TQ-06.3.</p>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-06-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="TQ-06-3">
     <div class="kopf">
@@ -1668,6 +2473,92 @@ void testeFreiePlaetze() {
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: S22 Teil 2, Aufgabe 2b (Unit-Test, Bedingungen korrigieren, Äquivalenzklassen) und S23 Teil 2, Aufgabe 3bc (Testdaten für volle Anweisungsüberdeckung)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-06-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-06.3 · 18 Punkte</div>
+    <h4>a) JUnit-5-Testklasse (6 P)</h4>
+    <pre class="java">import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class BeitragsrechnerTest {
+
+    private Beitragsrechner rechner;
+
+    @BeforeEach
+    void setUp() {
+        rechner = new Beitragsrechner();
+    }
+
+    @Test
+    void tf1JugendlicherPremiumHalberBeitrag() {
+        assertEquals(24.95, rechner.beitrag(16, "PREMIUM"), 0.001);
+    }
+
+    @Test
+    void tf2ErwachsenerBasicVollerBeitrag() {
+        assertEquals(29.90, rechner.beitrag(40, "BASIC"), 0.001);
+    }
+
+    @Test
+    void tf3SeniorAb65Ermaessigt() {
+        assertEquals(23.92, rechner.beitrag(65, "BASIC"), 0.001);
+    }
+
+    @Test
+    void tf4AlterUnter14WirdAbgelehnt() {
+        assertThrows(IllegalArgumentException.class, () -&gt; rechner.beitrag(13, "BASIC"));
+    }
+
+    @Test
+    void tf5UnbekannterTarifWirdAbgelehnt() {
+        assertThrows(IllegalArgumentException.class, () -&gt; rechner.beitrag(30, "GOLD"));
+    }
+
+    @Test
+    void tf6FehlenderTarifWirdAbgelehnt() {
+        assertThrows(IllegalArgumentException.class, () -&gt; rechner.beitrag(30, null));
+    }
+}</pre>
+    <h4>b) Fehlschlagende Testfälle (4 P)</h4>
+    <ul>
+      <li><strong>TF3 schlägt fehl:</strong> Zeile 16 prüft <code>alter &gt; 65</code>; für 65 ist die Bedingung falsch, die Methode liefert in Zeile 19 den vollen Beitrag 29,90 statt 23,92 – laut Beitragsordnung gilt die Ermäßigung <em>ab</em> 65.</li>
+      <li><strong>TF6 schlägt fehl:</strong> Zeile 06 ruft <code>tarif.equals("BASIC")</code> auf <code>null</code> auf → <code>NullPointerException</code> statt der geforderten <code>IllegalArgumentException</code>. <code>assertThrows</code> erwartet genau diesen Typ (oder eine Unterklasse); eine NPE ist keine IllegalArgumentException, der Test schlägt daher fehl.</li>
+      <li>TF1, TF2, TF4 und TF5 sind erfolgreich.</li>
+    </ul>
+    <h4>c) Korrektur (2 P)</h4>
+    <pre class="java">06     if ("BASIC".equals(tarif)) {          // null-sicher: liefert false statt NPE
+08     } else if ("PREMIUM".equals(tarif)) {
+16     if (alter &gt;= 65) {</pre>
+    <p>Gleichwertig für Zeile 06: vorher <code>if (tarif == null) { throw new IllegalArgumentException("Tarif fehlt"); }</code> einfügen.</p>
+    <h4>d) Kleinste Teilmenge für Anweisungsüberdeckung (3 P)</h4>
+    <p><strong>5 Testfälle: TF1, TF2, TF3, TF4 und TF5</strong> (statt TF5 auch TF6). Begründung: Jeder Aufruf endet an genau einem von fünf Ausgängen – <code>throw</code> in Zeile 03 (nur TF4), <code>throw</code> in Zeile 11 (TF5 oder TF6), <code>return</code> in Zeile 14 (nur TF1), Zeile 17 (nur TF3) oder Zeile 19 (nur TF2). Diese Anweisungen schließen sich gegenseitig aus, also sind mindestens fünf Testfälle nötig. Die übrigen Anweisungen (Zeile 07 BASIC, Zeile 09 PREMIUM) werden dabei mit ausgeführt (TF2/TF3 bzw. TF1).</p>
+    <h4>e) Beurteilung „alle Alterswerte 0–130 testen“ (3 P)</h4>
+    <p><strong>Pro:</strong> Automatisiert kostet die Ausführung kaum Zeit; alle Altersgrenzen sind sicher enthalten, Denkfehler bei der Klassenbildung fallen nicht ins Gewicht. <strong>Contra:</strong> Für jeden der 262 Fälle muss das erwartete Ergebnis unabhängig aus der Spezifikation bestimmt werden – wer es mit dem Code berechnet, testet den Code gegen sich selbst. Die meisten Fälle sind redundant (gleiche Äquivalenzklasse), die Tests werden unübersichtlich und schwer wartbar. Trotzdem fehlen wichtige Fälle: unbekannter Tarif, <code>null</code>, extreme Werte außerhalb 0–130. <strong>Fazit:</strong> Äquivalenzklassen plus Grenzwerte erreichen mit rund 15 Testfällen praktisch dieselbe Fehlerfindung; vollständiges Testen aller Eingaben ist im Allgemeinen unmöglich. Der Vorschlag ist höchstens als ergänzender parametrisierter Test sinnvoll, ersetzt aber die gezielten Testfälle nicht.</p>
+    <p class="codelabel">Ausgabe von Aufgabe_TQ_06_3.java (Testmethoden mit Ersatz für assertEquals/assertThrows)</p>
+    <pre class="ausgabe">b) Tests gegen die FEHLERHAFTE Methode (Anlage 4):
+   OK      TF1 tf1JugendlichPremium
+   OK      TF2 tf2ErwachsenBasic
+   FEHLER  TF3 tf3SeniorAbGrenze65 -&gt; expected: &lt;23.92&gt; but was: &lt;29.9&gt;
+   OK      TF4 tf4AlterZuNiedrig
+   OK      TF5 tf5TarifUnbekannt
+   FEHLER  TF6 tf6TarifFehlt -&gt; Unexpected exception type thrown, expected: &lt;IllegalArgumentException&gt; but was: &lt;NullPointerException&gt;
+   4 von 6 Tests bestanden
+
+c) Tests gegen die KORRIGIERTE Methode:
+   ...
+   6 von 6 Tests bestanden
+
+d) Ausgeführte Anweisungszeilen der korrigierten Methode je Testfall:
+   TF1: [2, 6, 8, 9, 13, 14]
+   TF2: [2, 6, 7, 13, 16, 19]
+   TF3: [2, 6, 7, 13, 16, 17]
+   TF4: [2, 3]
+   TF5: [2, 6, 8, 11]
+   TF6: [2, 6, 8, 11]
+   minimale Anzahl für 100 % Anweisungsüberdeckung: 5 -&gt; [TF1 TF2 TF3 TF4 TF5, TF1 TF2 TF3 TF4 TF6]</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Testmethode 1 P (Aufruf, erwarteter Wert, Delta bzw. <code>assertThrows</code> mit Lambda); <code>@BeforeEach</code> ist nicht gefordert, <code>new Beitragsrechner()</code> in jeder Methode ist gleichwertig. b) je fehlschlagendem Testfall 2 P (Testfall 1 P, Begründung mit Zeile 1 P). c) je Korrektur 1 P. d) 1 P Anzahl, 2 P Begründung. e) 1 P Pro, 1 P Contra, 1 P begründetes Fazit.</div>
+    <p><strong>Erklärung:</strong> TF6 ist eine typische Falle: Auch eine „falsche“ Exception lässt den Test fehlschlagen. In der Prüfung genügt die Aussage, dass eine <code>NullPointerException</code> statt der erwarteten Exception ausgelöst wird.</p>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-06-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== TQ-07 ===================== -->
   <h3 id="a-07">TQ-07 · Codequalität / Reviews</h3>
@@ -1682,6 +2573,20 @@ void testeFreiePlaetze() {
     <div class="antwort z8"></div>
     <p class="quelle">Angelehnt an: S24 Teil 1, Aufgabe 1b und S23 Teil 1, Aufgabe 1e</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-07-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-07.1 · 6 Punkte</div>
+    <p>Drei der folgenden Maßnahmen, jeweils mit Erläuterung:</p>
+    <ul>
+      <li><strong>Code-Reviews über Pull-Requests:</strong> Jede Änderung wird vor dem Zusammenführen von mindestens einem zweiten Entwickler geprüft. So werden Logik- und Designfehler früh gefunden, Richtlinien eingehalten und das Wissen im Team verteilt.</li>
+      <li><strong>Automatisierte Tests in einer CI-Pipeline:</strong> Bei jedem Commit werden der Build sowie Unit- und Integrationstests automatisch ausgeführt (mit vorgegebener Mindest-Testabdeckung); Fehler und Seiteneffekte fallen sofort auf.</li>
+      <li><strong>Coding-Richtlinien und statische Codeanalyse:</strong> Einheitliche Namens- und Formatierungsregeln, deren Einhaltung ein Analysewerkzeug automatisch prüft; der Code bleibt lesbar und wartbar, typische Fehlermuster werden erkannt.</li>
+      <li><strong>Standardisiertes Vorgehensmodell:</strong> z. B. Scrum mit einer Definition of Done („Code reviewt, Tests grün, dokumentiert“), regelmäßigen Reviews und Retrospektiven.</li>
+      <li><strong>Standardisierte Testumgebungen, -verfahren und -daten:</strong> Alle testen unter gleichen, produktionsnahen Bedingungen mit definierten Testdaten – Ergebnisse sind reproduzierbar.</li>
+      <li><strong>Dokumentationsrichtlinien und Vorlagen:</strong> z. B. Javadoc für alle öffentlichen Methoden, einheitliche Vorlagen für Anforderungen und Testfälle.</li>
+      <li><strong>Schulung/Zertifizierung</strong> der Entwickler und Tester (z. B. ISTQB) sowie <strong>Pair Programming</strong> bei kritischen Teilen.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> je Maßnahme 2 P (1 P Nennung, 1 P Erläuterung, wie sie die Qualität verbessert). Drei Testarten (z. B. Unit-, Integrations-, Systemtest) zählen zusammen höchstens als zwei Maßnahmen.</div>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-07-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="TQ-07-2">
     <div class="kopf">
@@ -1714,6 +2619,53 @@ void testeFreiePlaetze() {
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 1bb (Dokumentation) und S24 Teil 1, Aufgabe 1b (Code-Reviews, Dokumentationsrichtlinien)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-07-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-07.2 · 10 Punkte</div>
+    <h4>a) Verstöße (4 P) – vier der folgenden</h4>
+    <table class="kompakt">
+      <tr><th style="width:16%">Zeile</th><th>Verstoß</th></tr>
+      <tr><td>02, 03</td><td>Nichtssagende Namen <code>p</code>, <code>n</code>, <code>e</code>, <code>s</code>, <code>x</code> – der Zweck ist ohne Erklärung nicht erkennbar.</td></tr>
+      <tr><td>05, 07, 10, 12, 15 (06, 11)</td><td>„Magic Numbers“ 10.0, 15.0, 0.1, 5.0 und 10 statt benannter Konstanten – Preise stehen mehrfach im Code, eine Preisänderung muss an mehreren Stellen erfolgen.</td></tr>
+      <tr><td>04–14</td><td>Doppelter Code (Verstoß gegen DRY): Die Rabattberechnung ist für ermäßigt und normal kopiert.</td></tr>
+      <tr><td>01, 15</td><td>Nutzlose Kommentare: „Preis“ und „plus 5 mal n“ wiederholen nur den Code, statt den Zweck zu erklären; ein Javadoc-Kommentar fehlt.</td></tr>
+      <tr><td>04, 15</td><td><code>== true</code> ist überflüssig (<code>if (e)</code> genügt).</td></tr>
+      <tr><td>15</td><td><code>if</code> ohne geschweifte Klammern und mit der Anweisung in derselben Zeile – verstößt gegen übliche Konventionen und ist fehleranfällig bei späteren Ergänzungen.</td></tr>
+    </table>
+    <h4>b) Überarbeitete Methode (4 P) und c) Javadoc (2 P)</h4>
+    <pre class="java">private static final double PREIS_TAGESKARTE = 15.00;
+private static final double PREIS_TAGESKARTE_ERMAESSIGT = 10.00;
+private static final double SAUNA_ZUSCHLAG_JE_KARTE = 5.00;
+private static final int MENGENRABATT_AB_ANZAHL = 10;
+private static final double MENGENRABATT_SATZ = 0.10;
+
+/**
+ * Berechnet den Gesamtpreis für Gast-Tageskarten nach der Preisliste (Anlage 3).
+ * Ab 10 Karten wird der Kartenpreis um 10 % ermäßigt;
+ * der Sauna-Zuschlag wird nicht rabattiert.
+ *
+ * @param anzahlKarten  Anzahl der gekauften Tageskarten (mindestens 1)
+ * @param ermaessigt    true, wenn ein Ermäßigungsnachweis (Schüler, Studierende) vorliegt
+ * @param mitSauna      true, wenn die Karten die Saunanutzung einschließen
+ * @return Gesamtpreis in Euro
+ */
+public double berechneGastkartenPreis(int anzahlKarten, boolean ermaessigt, boolean mitSauna) {
+    double einzelpreis = ermaessigt ? PREIS_TAGESKARTE_ERMAESSIGT : PREIS_TAGESKARTE;
+    double preis = einzelpreis * anzahlKarten;
+    if (anzahlKarten &gt;= MENGENRABATT_AB_ANZAHL) {
+        preis = preis * (1 - MENGENRABATT_SATZ);
+    }
+    if (mitSauna) {
+        preis = preis + SAUNA_ZUSCHLAG_JE_KARTE * anzahlKarten;
+    }
+    return preis;
+}</pre>
+    <p>Optional (über die Aufgabe hinaus, weil das Verhalten sich ändert): ungültige Anzahl (≤ 0) mit <code>IllegalArgumentException</code> abweisen; Geldbeträge in der Praxis als <code>BigDecimal</code> oder in Cent (<code>long</code>) rechnen, um Rundungsfehler zu vermeiden.</p>
+    <p class="codelabel">Ausgabe von Aufgabe_TQ_07_2.java – Regressionsvergleich alte/neue Methode</p>
+    <pre class="ausgabe">Regressionsvergleich alt/neu: 100 Kombinationen, 0 Abweichungen
+Beispiele: 1 Karte normal = 15,00 | 3 Karten ermäßigt + Sauna = 45,00 | 10 Karten normal = 135,00 | 10 Karten normal + Sauna = 185,00</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Verstoß mit Zeile 1 P. b) 1 P sprechende Namen, 1 P Konstanten, 1 P Duplikat beseitigt, 1 P Verhalten unverändert (auch ohne Bedingungsoperator <code>?:</code>, z. B. mit <code>if/else</code> für den Einzelpreis). c) 1 P Beschreibung, 1 P <code>@param</code> und <code>@return</code>.</div>
+    <p><strong>Erklärung:</strong> Ein Refactoring darf das Verhalten nicht ändern – deshalb vergleicht die Java-Datei alte und neue Methode für 100 Eingabekombinationen (ein kleiner automatischer Regressionstest).</p>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-07-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="TQ-07-3">
     <div class="kopf">
@@ -1733,6 +2685,36 @@ void testeFreiePlaetze() {
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 4cb (nur automatische Code-Reviews und Unit-Tests bewerten) und S24 Teil 1, Aufgabe 1b</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-TQ-07-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe TQ-07.3 · 18 Punkte</div>
+    <h4>a) Ablauf eines Code-Reviews per Pull-Request (4 P)</h4>
+    <ol>
+      <li><strong>Pull-Request erstellen:</strong> Der Entwickler pusht seine Änderungen in einen eigenen Branch und eröffnet einen Pull-Request mit Beschreibung (was, warum, wie getestet); die CI-Pipeline baut und testet automatisch.</li>
+      <li><strong>Prüfung durch Reviewer:</strong> Mindestens ein anderer Entwickler liest die Änderungen, prüft sie anhand einer Checkliste (Logik, Spezifikation, Lesbarkeit, Tests, Sicherheit) und schreibt Kommentare direkt an die betroffenen Zeilen.</li>
+      <li><strong>Nacharbeit:</strong> Der Autor beantwortet die Kommentare, behebt die Befunde und lädt die Änderungen hoch.</li>
+      <li><strong>Abschluss:</strong> Der Reviewer kontrolliert die Nacharbeit und gibt frei (Approve); danach wird der Branch in den Hauptzweig übernommen (Merge).</li>
+    </ol>
+    <h4>b) Vorteile (3 P) – drei der folgenden</h4>
+    <p>Fehler (Logik, Design, Sicherheitslücken) werden früh und günstig gefunden · Vier-Augen-Prinzip, Prüfung gegen die Anforderungen · Wissenstransfer, mehrere Entwickler kennen jeden Codeteil · einheitlicher Stil, bessere Lesbarkeit und Wartbarkeit · Lerneffekt für neue Kollegen und Auszubildende.</p>
+    <h4>c) Statische Codeanalyse (3 P)</h4>
+    <p><strong>Findet automatisch</strong> (zwei genügen): Verstöße gegen Namens- und Formatierungskonventionen · ungenutzte Variablen, toter Code · mögliche <code>NullPointerException</code>s · duplizierter Code · zu hohe Komplexität, zu lange Methoden · bekannte unsichere Muster (z. B. SQL per String-Verkettung).</p>
+    <p><strong>Findet nicht:</strong> fachliche Fehler gegenüber der Spezifikation, z. B. <code>alter &gt; 65</code> statt <code>alter &gt;= 65</code> – der Code ist formal einwandfrei (ebenso: fehlende Funktionen, ob Namen und Design wirklich verständlich sind).</p>
+    <h4>d) Beurteilung des Vorschlags (5 P)</h4>
+    <p><strong>Für den Vorschlag spricht:</strong> Statische Analyse und Unit-Tests laufen automatisch bei jedem Commit, schnell, lückenlos und objektiv; 85 % Testabdeckung ist ein guter Wert; die eingesparte Zeit hilft vor der Abnahme.</p>
+    <p><strong>Dagegen spricht:</strong></p>
+    <ul>
+      <li>Die statische Analyse prüft nur Form und bekannte Muster, keine Fachlogik.</li>
+      <li>Unit-Tests prüfen nur, was als Testfall formuliert wurde. Hat ein Entwickler die Spezifikation falsch verstanden, sind Code <em>und</em> Test falsch (z. B. Ermäßigung „ab 65“). Eine hohe Abdeckung sagt nichts über die Qualität der Assertions; 15 % des Codes sind gar nicht getestet.</li>
+      <li>Unit-Tests prüfen Einheiten isoliert – nicht das Zusammenspiel, Last, Bedienbarkeit oder Sicherheit.</li>
+      <li>Ohne Reviews gehen Wissensverteilung, einheitliches Design und Wartbarkeit verloren; Sicherheitslücken in der sicherheitsrelevanten Zugangsprüfung bleiben eher unentdeckt.</li>
+      <li>Fehler, die erst nach der Abnahme gefunden werden, sind deutlich teurer als die eingesparte Review-Zeit.</li>
+    </ul>
+    <p><strong>Fazit:</strong> Den Vorschlag in dieser Form ablehnen. Automatische Prüfungen sind eine gute Grundlage, ersetzen Reviews aber nicht. Sinnvoller Kompromiss: Reviews beibehalten, mindestens für sicherheitskritische und fachlich komplexe Teile (Zugangsprüfung, Beitragsberechnung, GesundPlus-Schnittstelle), kleine Änderungen mit leichtgewichtigem Review.</p>
+    <h4>e) Pair Programming (3 P)</h4>
+    <p>Zwei Entwickler arbeiten gemeinsam an einem Rechner an derselben Aufgabe: Der <strong>Driver</strong> schreibt den Code, der <strong>Navigator</strong> prüft jede Zeile laufend, denkt an Sonderfälle und die Gesamtstruktur; die Rollen wechseln regelmäßig. <strong>Vorteil:</strong> Der Code wird sofort beim Entstehen geprüft („Review in Echtzeit“), Fehler in der sicherheitsrelevanten Zugangsprüfung werden früher gefunden, und zwei Personen kennen den Code. <strong>Nachteil:</strong> Zwei Personen arbeiten an einer Aufgabe – höherer Personalaufwand, gerade unter Zeitdruck; zudem anstrengend und abhängig davon, ob das Paar gut zusammenarbeitet.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Schritt 1 P. b) je Vorteil 1 P. c) 2 P für zwei automatisch findbare Probleme, 1 P für ein nicht findbares. d) 1 P Pro-Argument(e), 3 P Contra-Argumente (mind. drei verschiedene), 1 P begründetes Fazit; ein gut begründetes „Ja, aber …“ ist ebenfalls möglich. e) 1 P Verfahren, je 1 P Vor- und Nachteil.</div>
+    <p><strong>Erklärung:</strong> Entspricht W21 T1 A4cb. Bei „Beurteilen“ zählt die Abwägung: Argumente beider Seiten, bezogen auf die Situation, dann ein klares Fazit.</p>
+  </div><p class="ap2-loesung-link"><a href="05_Testen_QS_Loesungen.html#L-TQ-07-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== ORIGINALAUFGABEN ===================== -->
   <h3 id="originale">Originalaufgaben zum Üben</h3>

@@ -32,6 +32,25 @@
   ol.schritte li { margin: 4px 0; }
   @media print { .anlage { break-inside: auto; } table { break-inside: auto; } tr { break-inside: avoid; } }
 </style>
+<style id="ap2-loesung-stile">
+/* Stile aus 07_IT-Sicherheit_Loesungen.html, nur für eingebettete Lösungen (werkzeuge/loesungen_einbetten.py) */
+.ap2-loesung-inhalt table.kompakt td, .ap2-loesung-inhalt table.kompakt th { padding: 2px 6px; }
+.ap2-loesung-inhalt table.ankreuz td:not(:first-child), .ap2-loesung-inhalt table.ankreuz th:not(:first-child) { text-align: center; width: 13%; }
+.ap2-loesung-inhalt td.mono, .ap2-loesung-inhalt th.mono { font-family: Consolas, "Courier New", monospace; font-size: 13px; }
+.ap2-loesung-inhalt pre { font-size: 12px; }
+.ap2-loesung-inhalt pre.ausgabe { background: #fff; border-style: dashed; }
+.ap2-loesung-inhalt pre.java, .ap2-loesung-inhalt pre.ausgabe { break-inside: auto; }
+.ap2-loesung-inhalt .codelabel { break-after: avoid; }
+.ap2-loesung-inhalt .loesung .kopf { font-size: 16px; margin-bottom: 4px; break-after: avoid; page-break-after: avoid; }
+.ap2-loesung-inhalt .loesung h4 { margin: 12px 0 4px; font-size: 15px; }
+.ap2-loesung-inhalt .datei { font-size: 12px; color: var(--muted); }
+.ap2-loesung-inhalt .zweispaltig { display: flex; gap: 16px; flex-wrap: wrap; }
+.ap2-loesung-inhalt .zweispaltig > * { flex: 1 1 300px; min-width: 0; }
+@media print {
+  .ap2-loesung-inhalt table { break-inside: auto; }
+  .ap2-loesung-inhalt tr { break-inside: avoid; }
+}
+</style>
 </head>
 <body>
 
@@ -1337,6 +1356,26 @@ ResultSet rs = ps.executeQuery();</pre>
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 4a (symmetrische Verschlüsselung mit eingebautem Schlüssel)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SEC-01-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SEC-01.1 · 6 Punkte</div>
+    <h4>a) Zuordnung (4 P)</h4>
+    <table class="ankreuz kompakt">
+      <tr><th>Aussage</th><th>symm.</th><th>asym.</th><th>hybrid</th></tr>
+      <tr><td>1. derselbe geheime Schlüssel</td><td>✘</td><td></td><td></td></tr>
+      <tr><td>2. öffentlicher Schlüssel des Empfängers</td><td></td><td>✘</td><td></td></tr>
+      <tr><td>3. schnell, große Datenmengen</td><td>✘</td><td></td><td></td></tr>
+      <tr><td>4. Sitzungsschlüssel asymmetrisch, Nutzdaten symmetrisch</td><td></td><td></td><td>✘</td></tr>
+      <tr><td>5. RSA</td><td></td><td>✘</td><td></td></tr>
+      <tr><td>6. AES</td><td>✘</td><td></td><td></td></tr>
+      <tr><td>7. 20 Personen → 190 Schlüssel</td><td>✘</td><td></td><td></td></tr>
+      <tr><td>8. HTTPS, kombiniert die Vorteile</td><td></td><td></td><td>✘</td></tr>
+    </table>
+    <p class="klein">Zu 7: 20·19/2 = 190 ist die Formel für die paarweisen Schlüssel der symmetrischen Verschlüsselung.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> je zwei richtige Kreuze 1 P (8 richtige Kreuze = 4 P). Ein falsch gesetztes Kreuz in einer Zeile = Zeile falsch.</div>
+    <h4>b) Problem des eingebauten Schlüssels (2 P)</h4>
+    <p>Alle installierten Apps hätten denselben Schlüssel. Ein Angreifer könnte ihn einmal aus der App auslesen (z. B. durch Analyse des Programmcodes) und damit <strong>den gesamten Datenverkehr aller Mitglieder</strong> entschlüsseln bzw. gefälschte Daten verschlüsseln. Außerdem lässt sich der Schlüssel praktisch nicht mehr austauschen, ohne alle Apps zu aktualisieren.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Erkennen, dass derselbe Schlüssel überall steckt und auslesbar ist, 1 P; Folge (ganzer Verkehr betroffen / nicht austauschbar) 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="07_IT-Sicherheit_Loesungen.html#L-SEC-01-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SEC-01-2">
     <div class="kopf">
@@ -1350,6 +1389,42 @@ ResultSet rs = ps.executeQuery();</pre>
     <div class="antwort z8"></div>
     <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 1d (TLS hybrid) und W25 Teil 1, Aufgabe 3a (Vorteil hybride Verschlüsselung)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SEC-01-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SEC-01.2 · 10 Punkte</div>
+    <h4>a) Ablauf der hybriden Verschlüsselung (6 P)</h4>
+    <ol class="schritte">
+      <li>Die App baut die Verbindung auf; der API-Server sendet sein <strong>Zertifikat</strong> mit seinem <strong>öffentlichen Schlüssel</strong>.</li>
+      <li>Die App prüft das Zertifikat (CA-Signatur, Gültigkeit, Hostname).</li>
+      <li>Es wird ein zufälliger <strong>symmetrischer Sitzungsschlüssel</strong> erzeugt bzw. zwischen App und Server vereinbart. In der klassischen Darstellung erzeugt die App ihn und verschlüsselt ihn mit dem <strong>öffentlichen Schlüssel des API-Servers</strong>.</li>
+      <li>Der API-Server entschlüsselt den Sitzungsschlüssel mit seinem <strong>privaten Schlüssel</strong>. Nun kennen beide denselben Sitzungsschlüssel.</li>
+      <li>IBAN, Gesundheitsangaben und alle weiteren Nutzdaten werden mit dem Sitzungsschlüssel <strong>symmetrisch</strong> (z. B. AES) ver- und entschlüsselt.</li>
+    </ol>
+    <figure>
+      <svg viewBox="0 0 700 250" width="700" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <defs><marker id="lsg-l0102-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#222"/></marker></defs>
+        <rect x="40" y="10" width="160" height="36" fill="#fff" stroke="#222"/><text x="120" y="33" text-anchor="middle" font-weight="bold">Mitglieder-App</text>
+        <rect x="500" y="10" width="160" height="36" fill="#fff" stroke="#222"/><text x="580" y="33" text-anchor="middle" font-weight="bold">API-Server</text>
+        <line x1="120" y1="46" x2="120" y2="245" stroke="#222" stroke-dasharray="5,4"/>
+        <line x1="580" y1="46" x2="580" y2="245" stroke="#222" stroke-dasharray="5,4"/>
+        <text x="350" y="70" text-anchor="middle" font-size="12">① Zertifikat mit öffentlichem Schlüssel des Servers</text>
+        <line x1="580" y1="78" x2="122" y2="78" stroke="#222" marker-end="url(#lsg-l0102-pfeil)"/>
+        <rect x="30" y="92" width="180" height="30" fill="#fff" stroke="#222"/><text x="120" y="112" text-anchor="middle" font-size="12">② Zertifikat prüfen</text>
+        <text x="350" y="146" text-anchor="middle" font-size="12">③ Sitzungsschlüssel, mit öffentl. Schlüssel verschlüsselt</text>
+        <line x1="120" y1="154" x2="578" y2="154" stroke="#222" marker-end="url(#lsg-l0102-pfeil)"/>
+        <rect x="480" y="168" width="200" height="30" fill="#fff" stroke="#222"/><text x="580" y="188" text-anchor="middle" font-size="12">④ mit privatem Schlüssel entschlüsseln</text>
+        <rect x="150" y="212" width="400" height="28" fill="#eef3fa" stroke="#222"/><text x="350" y="231" text-anchor="middle" font-size="12">⑤ Nutzdaten symmetrisch mit Sitzungsschlüssel (AES)</text>
+        <line x1="122" y1="226" x2="578" y2="226" stroke="#222" stroke-width="2" marker-start="url(#lsg-l0102-pfeil)" marker-end="url(#lsg-l0102-pfeil)"/>
+      </svg>
+      <figcaption>Lösung SEC-01.2a: hybride Verschlüsselung beim HTTPS-Aufbau</figcaption>
+    </figure>
+    <div class="bewertung"><strong>Bewertung:</strong> Sitzungsschlüssel ist symmetrisch 1 P; Sitzungsschlüssel wird mit dem öffentlichen Schlüssel des Servers verschlüsselt übertragen 2 P; Entschlüsselung mit dem privaten Schlüssel des Servers 1 P; Nutzdaten werden symmetrisch mit dem Sitzungsschlüssel verschlüsselt 2 P. Die TLS-1.3-Variante (Schlüssel per Diffie-Hellman vereinbart, Zertifikat zur Authentifizierung) ist gleichwertig.</div>
+    <h4>b) Vorteile des hybriden Verfahrens (4 P)</h4>
+    <ul>
+      <li><strong>Gegenüber rein symmetrisch:</strong> Es ist kein vorheriger geheimer Schlüsselaustausch über einen sicheren Kanal nötig – der Sitzungsschlüssel wird sicher mit dem öffentlichen Schlüssel übertragen. (Das Schlüsselaustauschproblem entfällt.)</li>
+      <li><strong>Gegenüber rein asymmetrisch:</strong> Die großen Nutzdaten werden schnell symmetrisch verschlüsselt; asymmetrisch würde nur der kurze Schlüssel bearbeitet. Das Verfahren ist dadurch deutlich schneller und ressourcenschonender.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> je Vorteil mit Begründung 2 P. Nur „schneller“ bzw. nur „sicherer“ ohne den Vergleich: je 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="07_IT-Sicherheit_Loesungen.html#L-SEC-01-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SEC-01-3">
     <div class="kopf">
@@ -1369,6 +1444,24 @@ ResultSet rs = ps.executeQuery();</pre>
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: S26 Teil 1, Aufgabe 3bc/3bd (RSA erläutern, Eignung im IoT-Projekt) und S23 Teil 1, Aufgabe 4a (Verschlüsselung für Sensoren)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SEC-01-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SEC-01.3 · 18 Punkte</div>
+    <h4>a) Was ist RSA? (3 P)</h4>
+    <p>RSA ist ein <strong>asymmetrisches</strong> Verschlüsselungsverfahren mit einem öffentlichen und einem privaten Schlüssel (Schlüsselpaar). Seine Sicherheit beruht darauf, dass sich das Produkt zweier sehr großer Primzahlen praktisch nicht wieder in diese Faktoren zerlegen lässt. Es wird zum Verschlüsseln kleiner Datenmengen (z. B. eines Sitzungsschlüssels) und zum Erstellen digitaler Signaturen eingesetzt und arbeitet mit langen Schlüsseln (2048 Bit und mehr).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> asymmetrisch/Schlüsselpaar 1 P; Sicherheit durch Faktorisierungsproblem großer Zahlen 1 P; Einsatzzweck oder lange Schlüssel/rechenaufwendig 1 P.</div>
+    <h4>b) RSA für die Sensoren sinnvoll? (4 P)</h4>
+    <p><strong>Nein.</strong> Die PS-200 haben laut Anlage 3 nur einen 48-MHz-Mikrocontroller mit 32 KB RAM und <strong>keine Hardwareunterstützung für RSA</strong>. RSA ist sehr rechenaufwendig und würde die Batterie stark belasten (gefordert: mindestens 5 Jahre Laufzeit). Außerdem ist ein RSA-2048-Chiffrat mindestens 256 Byte groß, die Funkstrecke erlaubt aber nur 48 Byte je Nachricht. Die Aussage von Herrn Demir ist falsch: Asymmetrische Verfahren sind nicht grundsätzlich „sicherer“; AES-128 bietet vergleichbare Sicherheit, ist aber schnell und als Hardwarebaustein vorhanden.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Ergebnis „nicht sinnvoll“ mit Bezug auf Rechenleistung/Energie 2 P; Bezug auf die max. Nachrichtengröße (48 Byte vs. 256 Byte) 1 P; Richtigstellung der Aussage „asymmetrisch = sicherer“ 1 P.</div>
+    <h4>c) Geeignetes Verfahren + Schlüsselverteilung (4 P)</h4>
+    <p>Geeignet ist die <strong>symmetrische Verschlüsselung mit AES-128</strong>, die der PS-200 als Hardwarebaustein beherrscht. Jeder Sensor erhält <strong>bei der Produktion bzw. Inbetriebnahme einen eigenen, individuellen Schlüssel</strong>, der sicher im Sensor und auf dem Server hinterlegt wird. <strong>Schwachstelle der derzeitigen Lösung:</strong> Alle Sensoren eines Studios nutzen denselben gemeinsamen Schlüssel. Wird ein einziger Sensor ausgelesen oder entwendet, ist der Schlüssel aller Sensoren dieses Studios kompromittiert.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> AES (symmetrisch) vorgeschlagen 1 P; individueller Schlüssel je Sensor, sicher hinterlegt 2 P; Schwachstelle gemeinsamer Schlüssel benannt 1 P.</div>
+    <h4>d) Transport- vs. Ende-zu-Ende-Verschlüsselung (4 P)</h4>
+    <p>Bei der <strong>Transportverschlüsselung</strong> ist jede Teilstrecke für sich geschützt (Sensor → Gateway, Gateway → API-Server). Am Gateway liegen die Daten <strong>im Klartext</strong> vor, weil das Gateway sie entschlüsselt und neu verschlüsselt. Bei der <strong>Ende-zu-Ende-Verschlüsselung</strong> wären die Daten vom Sensor bis zum API-Server durchgehend verschlüsselt; das Gateway könnte sie nur weiterleiten, nicht lesen. <strong>Risiko</strong> der derzeitigen Lösung: Wer das Gateway kompromittiert oder physischen Zugang dazu hat, kann die Messwerte mitlesen oder verändern, bevor sie per TLS weitergehen.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Transportverschlüsselung = Teilstrecken, Klartext am Gateway 1,5 P; Ende-zu-Ende = durchgehend, Gateway kann nicht lesen 1,5 P; Risiko (Gateway als Angriffspunkt) 1 P.</div>
+    <h4>e) Forward Secrecy (3 P)</h4>
+    <p>Forward Secrecy (vorwärtsgerichtete Geheimhaltung) bedeutet: Selbst wenn ein Angreifer später den langfristigen privaten Schlüssel des Servers erbeutet, kann er <strong>zuvor mitgeschnittenen, verschlüsselten Datenverkehr nicht nachträglich entschlüsseln</strong>. TLS 1.3 erreicht das, indem für jede Verbindung ein <strong>temporäres (ephemeres) Schlüsselpaar</strong> per Diffie-Hellman verwendet und am Ende der Sitzung gelöscht wird. Das Sitzungsgeheimnis hängt damit nicht am dauerhaften Schlüssel des Servers.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Kernaussage (alter Verkehr bleibt auch nach Diebstahl des privaten Schlüssels geheim) 2 P; Ursache (temporäre, gelöschte Schlüssel je Sitzung) 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="07_IT-Sicherheit_Loesungen.html#L-SEC-01-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== SEC-02 ===================== -->
   <h3 id="a-02">SEC-02 · Hash, digitale Signatur, Zertifikate/PKI</h3>
@@ -1384,6 +1477,15 @@ ResultSet rs = ps.executeQuery();</pre>
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: S26 Teil 1, Aufgabe 3bb (Hashverfahren)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SEC-02-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SEC-02.1 · 6 Punkte</div>
+    <h4>a) Eigenschaften einer Hashfunktion (3 P)</h4>
+    <p>Beliebige drei aus: <strong>Einwegfunktion</strong> (aus dem Hashwert kann man die Eingabe nicht zurückberechnen) · <strong>Kollisionsresistenz</strong> (praktisch keine zwei Eingaben mit gleichem Hashwert) · <strong>feste Ausgabelänge</strong> unabhängig von der Eingabegröße · <strong>Lawineneffekt</strong> (kleine Änderung → völlig anderer Hashwert) · <strong>deterministisch</strong> (gleiche Eingabe → gleicher Hashwert) · schnell berechenbar.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> je korrekte Eigenschaft 1 P (max. 3).</div>
+    <h4>b) IBAN nur als Hash speichern? (3 P)</h4>
+    <p>Der Vorschlag ist <strong>nicht umsetzbar</strong>. Ein Hashwert ist <strong>keine Verschlüsselung</strong>: Er ist eine Einwegfunktion und lässt sich nicht „entschlüsseln“. Die IBAN wird aber für die SEPA-Lastschrift wieder im Klartext benötigt, könnte dann also nicht mehr zurückgewonnen werden. <strong>Alternative:</strong> die IBAN verschlüsselt speichern (symmetrische Verschlüsselung der Datenbankfelder bzw. Festplattenverschlüsselung), sodass sie bei Bedarf wieder entschlüsselt werden kann.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Hash ist Einwegfunktion / keine Verschlüsselung 1 P; IBAN wird im Klartext gebraucht → nicht wiederherstellbar 1 P; sinnvolle Alternative (Verschlüsselung) 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="07_IT-Sicherheit_Loesungen.html#L-SEC-02-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SEC-02-2">
     <div class="kopf">
@@ -1480,6 +1582,23 @@ ResultSet rs = ps.executeQuery();</pre>
     <div class="antwort z8"></div>
     <p class="quelle">Angelehnt an: S23 Teil 1, Aufgabe 4b (Signieren statt Verschlüsseln)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SEC-02-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SEC-02.2 · 10 Punkte</div>
+    <h4>a) Felder (1)–(6) (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:10%">Feld</th><th>Inhalt</th></tr>
+      <tr><td>(1)</td><td>Hashfunktion (Hashwert der Firmware berechnen)</td></tr>
+      <tr><td>(2)</td><td>privatem Schlüssel des Herstellers (Build-Server)</td></tr>
+      <tr><td>(3)</td><td>öffentlichem Schlüssel des Herstellers</td></tr>
+      <tr><td>(4)</td><td>Hashwert H2 (aus der Signatur zurückgewonnen)</td></tr>
+      <tr><td>(5)</td><td>Vergleich: H1 = H2 ?</td></tr>
+      <tr><td>(6)</td><td>Firmware installieren (Signatur gültig, Firmware echt und unverändert)</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je Feld 1 P. Bei (2)/(3) muss die Richtung stimmen (signieren = privater Schlüssel, prüfen = öffentlicher Schlüssel); Verwechslung 0 P für das jeweilige Feld.</div>
+    <h4>b) Signatur ausreichend? (4 P)</h4>
+    <p>Die Signatur stellt <strong>Integrität</strong> (jede Veränderung der Firmware fällt beim Vergleich auf) und <strong>Authentizität</strong> (die Firmware stammt nachweislich von Seidel &amp; Brandt) sicher, zusätzlich <strong>Verbindlichkeit</strong>. <strong>Nicht</strong> gesichert wird die <strong>Vertraulichkeit</strong> – die Firmware wird im Klartext übertragen. Für Firmware-Updates ist das in der Regel <strong>ausreichend</strong>: Entscheidend ist, dass nur echte, unveränderte Firmware installiert wird; der Inhalt der Firmware ist nicht geheim. Eine Verschlüsselung ist also nicht zwingend nötig (kann den Schutz des Hersteller-Know-hows aber zusätzlich erhöhen).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Integrität und Authentizität genannt 2 P; Vertraulichkeit wird nicht gesichert 1 P; begründete Einschätzung, dass die Signatur hier ausreicht 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="07_IT-Sicherheit_Loesungen.html#L-SEC-02-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SEC-02-3">
     <div class="kopf">
@@ -1499,6 +1618,31 @@ ResultSet rs = ps.executeQuery();</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 4b (Code-Signatur), W22 Teil 1, Aufgabe 1e (Echtheit über PKI), S26 Teil 1, Aufgabe 3bb (Schutz vor Manipulation)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SEC-02-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SEC-02.3 · 18 Punkte</div>
+    <h4>a) Meldung „Unbekannter Herausgeber“ (4 P)</h4>
+    <p>Die ausführbare Datei von PulsarDesk ist <strong>nicht digital signiert</strong>. Windows (SmartScreen) kann deshalb den Herausgeber nicht überprüfen und auch nicht ausschließen, dass die Datei auf dem Weg verändert wurde, und warnt vorsichtshalber. <strong>Abhilfe durch Code-Signing:</strong> Seidel &amp; Brandt beschafft ein Code-Signing-Zertifikat einer anerkannten CA und signiert die Datei auf dem Build-Server mit dem zugehörigen privaten Schlüssel. Windows prüft dann die Signatur und die Zertifikatskette und zeigt den geprüften Herausgeber an; die Warnung entfällt.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Ursache (Datei unsigniert, Herausgeber nicht prüfbar) 2 P; Lösung (Code-Signing-Zertifikat, Datei signieren, Prüfung durch das Betriebssystem) 2 P.</div>
+    <h4>b) Prüfung der Verbindung zum Web-Portal (5 P)</h4>
+    <p>Der Server sendet beim Verbindungsaufbau sein TLS-Zertifikat. Der Browser prüft:</p>
+    <ol class="schritte">
+      <li>Stimmt der Name im Zertifikat (<code>portal.pulsar-fitness.example</code>) mit der aufgerufenen Adresse überein?</li>
+      <li>Ist das Zertifikat zeitlich gültig und nicht gesperrt (Sperrliste/OCSP)?</li>
+      <li>Ist die Signatur des Zertifikats korrekt? Sie wird mit dem öffentlichen Schlüssel der ausstellenden Zwischen-CA geprüft, deren Zertifikat wiederum mit dem der Root-CA – bis zu einem <strong>Root-Zertifikat, das im Vertrauensspeicher</strong> des Geräts liegt (Vertrauenskette).</li>
+      <li>Schließlich weist der Server über den Schlüsselaustausch nach, dass er den zum Zertifikat gehörenden <strong>privaten Schlüssel</strong> besitzt.</li>
+    </ol>
+    <p>Erst wenn alle Prüfungen aufgehen, gilt die Gegenstelle als das echte Web-Portal (Schloss-Symbol); sonst erscheint eine Zertifikatswarnung.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Namensabgleich 1 P; Gültigkeit/Sperrung 1 P; Signaturprüfung über die Kette bis zur vertrauten Root-CA 2 P; Nachweis des Schlüsselbesitzes 1 P (max. 5).</div>
+    <h4>c) „AES verhindert auch Veränderung“? (3 P)</h4>
+    <p>Die Aussage ist <strong>falsch</strong>. AES (Verschlüsselung) sichert nur die <strong>Vertraulichkeit</strong>. Ein Angreifer kann das Chiffrat verändern, ohne den Schlüssel zu kennen; der Empfänger entschlüsselt dann veränderte oder unsinnige Daten, ohne es zu bemerken. Für den Schutz vor Veränderung braucht es zusätzlich einen MAC bzw. einen AEAD-Modus (z. B. AES-GCM) oder eine Signatur.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Aussage als falsch erkannt, Verschlüsselung = nur Vertraulichkeit 2 P; richtige Maßnahme für Integrität (MAC/AEAD/Signatur) 1 P.</div>
+    <h4>d) Manipulationserkennung ohne Signatur (4 P)</h4>
+    <p>Geeignet ist ein <strong>MAC bzw. HMAC</strong>: Sensor und API-Server teilen einen geheimen (symmetrischen) Schlüssel. Der Sensor berechnet über die Messwerte mit diesem Schlüssel einen MAC und schickt ihn mit. Der Server berechnet den MAC über die empfangenen Werte mit demselben Schlüssel neu und vergleicht. Stimmen beide nicht überein, wurden die Daten verändert und werden verworfen. Ein MAC ist leichtgewichtig und daher für die rechenschwachen Sensoren geeignet (AES-basiert, z. B. AES-CMAC/GCM). Gleichwertig: AEAD-Modus, der Verschlüsselung und MAC kombiniert.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> MAC/HMAC genannt 1 P; gemeinsamer geheimer Schlüssel 1 P; MAC neu berechnen und vergleichen 1 P; für Sensoren geeignet, weil leichtgewichtig 1 P.</div>
+    <h4>e) Warum keine Verbindlichkeit? (2 P)</h4>
+    <p>Beim MAC kennen <strong>beide Seiten denselben geheimen Schlüssel</strong>. Der API-Server könnte einen gültigen MAC also selbst erzeugen und kann einem Dritten nicht beweisen, dass eine Nachricht wirklich vom Sensor stammt. Nur eine digitale Signatur mit einem <em>privaten</em> Schlüssel, den nur der Absender besitzt, ermöglicht diesen Nachweis.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> gemeinsamer Schlüssel → Empfänger könnte MAC selbst erzeugen 1 P; daher kein Beweis gegenüber Dritten / Signatur nötig 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="07_IT-Sicherheit_Loesungen.html#L-SEC-02-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== SEC-03 ===================== -->
   <h3 id="a-03">SEC-03 · Schutzziele &amp; Schutzbedarf</h3>
@@ -1520,6 +1664,19 @@ ResultSet rs = ps.executeQuery();</pre>
     </table>
     <p class="quelle">Angelehnt an: S26 Teil 1, Aufgabe 3ba und S22 Teil 1, Aufgabe 4c (Schutzziele zuordnen)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SEC-03-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SEC-03.1 · 6 Punkte</div>
+    <table class="kompakt">
+      <tr><th style="width:8%">Vorfall</th><th style="width:22%">Schutzziel</th><th>Begründung</th></tr>
+      <tr><td>V1</td><td>Verfügbarkeit</td><td>Das Portal war durch die Anfrageflut (DDoS) nicht erreichbar.</td></tr>
+      <tr><td>V2</td><td>Vertraulichkeit</td><td>Gesundheitsdaten gelangten an eine unbefugte Person.</td></tr>
+      <tr><td>V4</td><td>Integrität</td><td>Der Tarif wurde unbefugt/unbemerkt verändert; Daten sind nicht mehr korrekt.</td></tr>
+      <tr><td>V7</td><td>Verfügbarkeit</td><td>Gateway und Schlösser fielen aus; Mitglieder kamen nicht an ihre Sachen.</td></tr>
+      <tr><td>V9</td><td>Authentizität</td><td>Gefälschte Absenderangabe („im Namen von Frau Petersen“); CEO-Fraud.</td></tr>
+      <tr><td>V12</td><td>Verbindlichkeit</td><td>Die Kündigung lässt sich dem Mitglied nicht nachweisen; es kann sie abstreiten.</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je Vorfall 1 P für das richtige Schutzziel mit passender Begründung. Bei V2 wird auch Datenschutz akzeptiert; bei V9 ist neben Authentizität der Hinweis auf Vertraulichkeit/Integrität als Angriffsziel möglich.</div>
+  </div><p class="ap2-loesung-link"><a href="07_IT-Sicherheit_Loesungen.html#L-SEC-03-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SEC-03-2">
     <div class="kopf">
@@ -1537,6 +1694,23 @@ ResultSet rs = ps.executeQuery();</pre>
     <div class="antwort z8"></div>
     <p class="quelle">Angelehnt an: S24 Teil 1, Aufgabe 1c (sicherheitstechnische Anforderungen) und W22 Teil 1, Aufgabe 1a (veraltete IT-Infrastruktur)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SEC-03-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SEC-03.2 · 10 Punkte</div>
+    <h4>a) Sicherheitsanforderungen aus A1–A3 (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:8%">Aussage</th><th style="width:22%">Schutzziel</th><th>Sicherheitstechnische Anforderung (Beispiel)</th></tr>
+      <tr><td>A1</td><td>Verfügbarkeit</td><td>Die Kursbuchung muss auch bei der Lastspitze am Sonntagabend verfügbar bleiben, z. B. durch Lastverteilung und automatische Skalierung auf ausreichend viele gleichzeitige Zugriffe.</td></tr>
+      <tr><td>A2</td><td>Vertraulichkeit</td><td>Körper- und Gesundheitsdaten dürfen nur vom Mitglied selbst und der zuständigen Trainerin/dem Trainer eingesehen werden (Rollen- und Rechtekonzept); der Empfang hat keinen Zugriff.</td></tr>
+      <tr><td>A3</td><td>Verbindlichkeit / Integrität</td><td>Jede Kündigung und jeder Tarifwechsel über die App wird mit Mitglied, Zeitpunkt und Aktion manipulationssicher protokolliert (idealerweise mit zweitem Faktor bestätigt), sodass die Handlung nachweisbar zugeordnet werden kann.</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je Zeile 2 P (1 P Schutzziel, 1 P konkrete, überprüfbare Anforderung). „Muss sicher sein“ o. Ä. ohne konkreten Inhalt: 0 P für die Anforderung.</div>
+    <h4>b) Risiken veralteter Empfangs-PCs (4 P)</h4>
+    <ul>
+      <li><strong>Vertraulichkeit/Integrität:</strong> Für Windows 8.1 werden keine Sicherheitsupdates mehr veröffentlicht. Bekannt gewordene Lücken bleiben offen; Angreifer können die PCs übernehmen und auf Mitglieder- und Gesundheitsdaten zugreifen oder sie verändern (vgl. V13, Ransomware).</li>
+      <li><strong>Verfügbarkeit:</strong> Für das veraltete System fehlen Treiber, Ersatzteile und Unterstützung; aktuelle Software (PulsarDesk) läuft womöglich nicht zuverlässig, und bei einem Befall fällt der Empfangsbetrieb aus.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> je Risiko mit Bezug zu einem Schutzziel 2 P. Gleichwertig: fehlende Patches als Einfallstor, Kompatibilitätsprobleme, höhere Ausfallwahrscheinlichkeit.</div>
+  </div><p class="ap2-loesung-link"><a href="07_IT-Sicherheit_Loesungen.html#L-SEC-03-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SEC-03-3">
     <div class="kopf">
@@ -1560,6 +1734,31 @@ ResultSet rs = ps.executeQuery();</pre>
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: S26 Teil 1, Aufgabe 3b (Schutzziel aus Kundensicht), erweitert um die Schutzbedarfsfeststellung nach BSI-Standard 200-2</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SEC-03-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SEC-03.3 · 16 Punkte</div>
+    <h4>a) Schutzbedarfskategorien des BSI (3 P)</h4>
+    <ul>
+      <li><strong>normal:</strong> Die Schadensauswirkungen sind begrenzt und überschaubar.</li>
+      <li><strong>hoch:</strong> Die Schadensauswirkungen können beträchtlich sein.</li>
+      <li><strong>sehr hoch:</strong> Die Schadensauswirkungen können ein existenziell bedrohliches, katastrophales Ausmaß erreichen.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> je Kategorie mit sinngemäßer Beschreibung 1 P.</div>
+    <h4>b) Schutzbedarf D1, D2, D3, D5 (8 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:16%">Objekt</th><th>V</th><th>I</th><th>A</th><th>Begründung der höchsten Einstufung</th></tr>
+      <tr><td>D1 Kursplan</td><td>normal</td><td>normal</td><td>normal</td><td>öffentliche Daten; ein kurzer Ausfall oder Fehler ist ärgerlich, aber folgenlos.</td></tr>
+      <tr><td>D2 Mitgliederstammdaten</td><td>hoch</td><td>normal</td><td>normal</td><td>personenbezogene Daten inkl. IBAN: Offenlegung bedeutet Datenschutzverstoß, Missbrauchsgefahr und Imageschaden (V).</td></tr>
+      <tr><td>D3 Gesundheits- und Körperdaten</td><td>sehr hoch</td><td>hoch</td><td>normal</td><td>besondere Kategorie personenbezogener Daten (Gesundheit); eine Offenlegung kann für die Betroffenen gravierende Folgen haben (V).</td></tr>
+      <tr><td>D5 Zutrittssystem</td><td>normal</td><td>hoch</td><td>hoch</td><td>Fällt es aus, kommen Mitglieder nicht hinein/heraus; bei Manipulation erhalten Unbefugte Zutritt (A und I).</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je Objekt 2 P (1 P für die plausible höchste Einstufung, 1 P für die Begründung). Abweichende, gut begründete Einstufungen (z. B. D2-Integrität „hoch“ wegen der IBAN) werden akzeptiert.</div>
+    <h4>c) Schutzbedarf des Datenbank-Servers (2 P)</h4>
+    <p>Hinsichtlich der Vertraulichkeit <strong>sehr hoch</strong>, da auf ihm auch die Gesundheits- und Körperdaten (D3) liegen. Dabei gilt das <strong>Maximumprinzip</strong>: Ein System erbt den höchsten Schutzbedarf der auf ihm verarbeiteten Daten bzw. Anwendungen.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> „sehr hoch“ 1 P; Maximumprinzip benannt 1 P.</div>
+    <h4>d) Stellungnahme zu A4 (Backup) (3 P)</h4>
+    <p>Die Aussage ist <strong>falsch</strong>. Ein Backup bleibt auch in der Cloud nötig. Die Redundanz des Anbieters (mehrere Festplatten, z. B. RAID) schützt nur vor Hardwaredefekten, <strong>nicht</strong> vor versehentlichem oder böswilligem Löschen, fehlerhaften Änderungen oder Ransomware – diese wirken sich auf alle Kopien gleichzeitig aus (vgl. V13). Es braucht regelmäßige, möglichst offline/unveränderbar gespeicherte Backups (3-2-1-Regel) und getestete Wiederherstellung; außerdem ist der Kunde datenschutzrechtlich selbst verantwortlich.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Aussage als falsch erkannt 1 P; Redundanz ≠ Backup (schützt nicht vor Löschen/Ransomware) 1 P; sinnvolle Backup-Maßnahme genannt 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="07_IT-Sicherheit_Loesungen.html#L-SEC-03-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== SEC-04 ===================== -->
   <h3 id="a-04">SEC-04 · Authentifizierung</h3>
@@ -1582,6 +1781,23 @@ ResultSet rs = ps.executeQuery();</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S24 Teil 2, Aufgabe 1c (zweiter Faktor) und W22 Teil 1, Aufgabe 1f</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SEC-04-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SEC-04.1 · 6 Punkte</div>
+    <h4>a) Authentifizierung vs. Autorisierung (2 P)</h4>
+    <p><strong>Authentifizierung</strong> ist der Nachweis der Identität: Die Trainerin meldet sich mit Benutzername und Passwort (und zweitem Faktor) an, das System prüft, <em>wer</em> sie ist. <strong>Autorisierung</strong> legt fest, <em>was</em> sie danach darf: Aufgrund ihrer Rolle darf sie die Körperdaten ihrer eigenen Mitglieder sehen, aber z. B. keine Tarife ändern.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Authentifizierung = Identität nachweisen 1 P; Autorisierung = Rechte/Was darf man 1 P.</div>
+    <h4>b) Drei Faktorkategorien (3 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:30%">Kategorie</th><th>Beispiel für PulsarConnect</th></tr>
+      <tr><td>Wissen</td><td>Passwort bzw. PIN für das Web-Portal</td></tr>
+      <tr><td>Besitz</td><td>Einmalcode aus der Authenticator-App auf dem Smartphone der Trainerin (TOTP)</td></tr>
+      <tr><td>Biometrie (Inhärenz)</td><td>Fingerabdruck oder Gesichtserkennung zum Entsperren der App</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je Kategorie mit passendem Beispiel 1 P.</div>
+    <h4>c) Passwort + Sicherheitsfrage (1 P)</h4>
+    <p>Beides gehört zur Kategorie <strong>Wissen</strong>. Zwei Faktoren aus derselben Kategorie sind keine Zwei-Faktor-Authentifizierung; die Faktoren müssen aus <em>verschiedenen</em> Kategorien stammen.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> beide Faktoren sind „Wissen“, daher keine 2FA 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="07_IT-Sicherheit_Loesungen.html#L-SEC-04-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SEC-04-2">
     <div class="kopf">
@@ -1598,6 +1814,48 @@ ResultSet rs = ps.executeQuery();</pre>
     <div class="antwort z12"></div>
     <p class="quelle">Angelehnt an: S24 Teil 2, Aufgabe 1c (Passwortsicherheit); Fachtext-Aufgabe wie S26 Teil 1, Aufgabe 3a und W25 Teil 1, Aufgabe 2b (englischer Text); Pseudocode-Stil wie im Belegsatz S24</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SEC-04-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SEC-04.2 · 12 Punkte</div>
+    <h4>a) Schwachstellen der Passwortspeicherung (4 P)</h4>
+    <ul>
+      <li><strong>MD5 ohne Salt:</strong> MD5 ist ein schneller, unsicherer Hash. Ohne Salt sind die Hashes für häufige Passwörter über vorberechnete Tabellen (Rainbow Tables) bzw. einen Wörterbuchangriff schnell aufzulösen (siehe Java-Ausgabe: hallo123, 123456, Sommer2025! gefunden).</li>
+      <li><strong>Gleiche Passwörter ergeben gleiche Hashes:</strong> Die Mitglieder 10231 (m.berger) und 10233 (k.hansen) haben denselben Hashwert <code>10b43971…</code> – man erkennt sofort, dass sie dasselbe Passwort verwenden. Das wäre mit einem benutzerindividuellen Salt nicht sichtbar.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> MD5 schnell/unsicher und kein Salt 2 P; gleiche Hashes = gleiche Passwörter erkennbar 2 P.</div>
+    <h4>b) Speicherung in PulsarConnect (nach Anlage 10) (4 P)</h4>
+    <p>Passwörter werden nie im Klartext gespeichert, sondern als Hashwert einer <strong>absichtlich langsamen</strong> Funktion (Argon2id, scrypt, bcrypt oder PBKDF2 mit vielen Iterationen). Vor dem Hashen wird jedes Passwort mit einem <strong>Salt</strong> kombiniert – einem mindestens 16 Byte langen Zufallswert, der für jeden Benutzer neu erzeugt und zusammen mit dem Hash gespeichert wird (nicht geheim); dadurch ergeben gleiche Passwörter verschiedene Hashes und Rainbow Tables werden nutzlos. Zusätzlich kann ein <strong>Pepper</strong> verwendet werden: ein geheimer, für alle Benutzer gleicher Wert, der <em>nicht</em> in der Datenbank steht (z. B. im Hardware-Sicherheitsmodul). Wird nur die Datenbank gestohlen, kann der Angreifer ohne den Pepper keine Passwörter durchprobieren.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> langsame/dedizierte Hashfunktion 1 P; Salt (zufällig, je Benutzer, mit Hash gespeichert) 2 P; Pepper (geheim, nicht in der DB) 1 P.</div>
+    <h4>c) Pseudocode pruefePasswort (4 P)</h4>
+    <pre class="pseudo">funktion pruefePasswort(eingabe : string, salt : string,
+                        gespeicherterHash : string) : boolean
+  h : string := sha256(PEPPER + salt + eingabe)      // 1. Durchlauf
+  zähle i von 2 bis 10000                              // weitere 9 999 Durchläufe
+    h := sha256(h + salt)
+  Ende zähle
+  wenn h = gespeicherterHash dann
+    rückgabe true
+  sonst
+    rückgabe false
+  Ende wenn
+Ende funktion</pre>
+    <p class="datei">Lauffähig als Java: <code>java/07_IT-Sicherheit/Aufgabe_SEC_04_2.java</code> (Methode <code>pruefePasswort</code>; enthält auch den Wörterbuchangriff aus a und die PBKDF2-Variante aus b).</p>
+    <p class="codelabel">Java · Aufgabe_SEC_04_2.java (Auszug)</p>
+    <pre class="java">static boolean pruefePasswort(String eingabe, String salt, String gespeicherterHash) {
+    String h = sha256(PEPPER + salt + eingabe);          // 1. Durchlauf
+    for (int i = 2; i &lt;= 10000; i++) {                   // Durchläufe 2 bis 10 000
+        h = sha256(h + salt);
+    }
+    return h.equals(gespeicherterHash);
+}</pre>
+    <p class="codelabel">Ausgabe (gekürzt)</p>
+    <pre class="ausgabe">m.berger  salt=3f9a1c0b...  hash=aecaf827...40e8dfc5
+k.hansen  salt=c84e2b71...  hash=916d1c81...1419734c
+Gleiches Passwort, verschiedene Hashwerte: true
+pruefePasswort("hallo123", saltBerger, hashBerger) = true
+pruefePasswort("Hallo123", saltBerger, hashBerger) = false
+pruefePasswort("hallo123", saltHansen, hashBerger) = false  (falsches Salt)</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> ersten Hash korrekt mit PEPPER + salt + eingabe 1 P; Schleife mit genau 9 999 weiteren Durchläufen und <code>h + salt</code> 2 P; Vergleich und boolesche Rückgabe 1 P. Gleichwertig: Zählschleife von 1 bis 9 999, <code>return h = gespeicherterHash</code> direkt.</div>
+  </div><p class="ap2-loesung-link"><a href="07_IT-Sicherheit_Loesungen.html#L-SEC-04-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SEC-04-3">
     <div class="kopf">
@@ -1630,6 +1888,40 @@ ResultSet rs = ps.executeQuery();</pre>
     <div class="antwort z8"></div>
     <p class="quelle">Angelehnt an: S22 Teil 1, Aufgabe 4b (OAuth2-Grafik), W22 Teil 1, Aufgabe 1f (SSO/OAuth2) und S24 Teil 2, Aufgabe 1c (Passwort-Reset)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SEC-04-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SEC-04.3 · 18 Punkte</div>
+    <h4>a) Rollen und Inhalte (6 P)</h4>
+    <div class="zweispaltig">
+      <table class="kompakt">
+        <tr><th style="width:18%">Rolle</th><th>Begriff</th></tr>
+        <tr><td>(R1)</td><td>Resource Owner</td></tr>
+        <tr><td>(R2)</td><td>Client</td></tr>
+        <tr><td>(R3)</td><td>Authorization Server</td></tr>
+        <tr><td>(R4)</td><td>Resource Server</td></tr>
+      </table>
+      <table class="kompakt">
+        <tr><th style="width:18%">Inhalt</th><th>Begriff</th></tr>
+        <tr><td>(A)</td><td>Authorization Code</td></tr>
+        <tr><td>(B)</td><td>Access Token</td></tr>
+        <tr><td>(C)</td><td>Access Token</td></tr>
+        <tr><td>(D)</td><td>Protected Resource</td></tr>
+      </table>
+    </div>
+    <p class="klein">Das mehrfach benötigte Element ist das <strong>Access Token</strong>: Es wird in Schritt ⑥ ausgestellt (B) und in Schritt ⑦ bei der Anfrage an die API mitgeschickt (C).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> je richtiger Eintrag 0,75 P (8 Einträge = 6 P). R1/R2 nicht vertauschen; (A) = Authorization Code, (D) = Protected Resource.</div>
+    <h4>b) Vorteile von OAuth2 gegenüber Passwortweitergabe (4 P)</h4>
+    <ul>
+      <li>Das Mitglied gibt sein Pulsar-Passwort <strong>nicht</strong> an die VitaKasse weiter; es meldet sich nur beim Pulsar-Login-Server an. Die VitaKasse kennt das Passwort nie und kann es nicht missbrauchen oder verlieren.</li>
+      <li>Der Zugriff ist auf den <strong>Scope</strong> „Besuche lesen“ begrenzt und über ein Access Token mit Ablaufzeit geregelt; das Mitglied kann die Freigabe jederzeit <strong>einzeln widerrufen</strong>, ohne sein Passwort zu ändern. Bei Passwortweitergabe hätte die VitaKasse dagegen vollen Kontozugriff.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> je Vorteil mit Begründung 2 P (Passwort bleibt beim Anbieter; eingeschränkter, widerrufbarer, ablaufender Zugriff).</div>
+    <h4>c) Single Sign-On – Vor- und Nachteil (4 P)</h4>
+    <p><strong>Vorteil:</strong> Die Mitarbeitenden müssen sich nur einmal anmelden und nur ein starkes Passwort (plus zentrale 2FA) merken; die Benutzerverwaltung ist zentral, beim Austritt wird ein Konto an einer Stelle gesperrt. <strong>Nachteil:</strong> Der Identitätsdienst ist ein Single Point of Failure – fällt er aus, ist keine Anmeldung mehr möglich; außerdem öffnet ein kompromittiertes Konto gleich alle angebundenen Systeme (daher 2FA zwingend).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> plausibler Vorteil 2 P; plausibler Nachteil 2 P.</div>
+    <h4>d) Sicherer Passwort-Reset (4 P)</h4>
+    <p><strong>Schwachstelle:</strong> Der Reset hängt allein am E-Mail-Konto. Wer Zugriff auf das Postfach des Mitglieds hat (gehacktes oder mitgelesenes Konto, abgefangene Mail), kann über den Link sofort ein neues Passwort setzen und das Pulsar-Konto übernehmen. <strong>Sicherer:</strong> Es wird ein zufälliges, nur einmal verwendbares Token mit kurzer Gültigkeit (z. B. 30 Minuten) verschickt und zusätzlich ein <strong>zweiter Faktor über einen anderen Kanal</strong> verlangt (z. B. Code per SMS oder aus der Authenticator-App). Nach dem Reset werden alle Sitzungen beendet und das Mitglied benachrichtigt; es wird immer dieselbe neutrale Meldung angezeigt, egal ob die Adresse existiert.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Schwachstelle (Reset nur so sicher wie das E-Mail-Konto) 2 P; sichereres Verfahren mit zweitem Kanal/Faktor 2 P. Gleichwertig: zeitlich begrenztes Einmal-Token mit Bestätigung über einen zweiten Kanal.</div>
+  </div><p class="ap2-loesung-link"><a href="07_IT-Sicherheit_Loesungen.html#L-SEC-04-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== SEC-05 ===================== -->
   <h3 id="a-05">SEC-05 · Datenschutz / DSGVO</h3>
@@ -1653,6 +1945,24 @@ ResultSet rs = ps.executeQuery();</pre>
     </table>
     <p class="quelle">Grundlagenaufgabe zu W24 Teil 1, Aufgabe 1d und W25 Teil 1, Aufgabe 3bb</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SEC-05-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SEC-05.1 · 5 Punkte</div>
+    <h4>a) Datenschutz vs. Datensicherheit (2 P)</h4>
+    <p><strong>Datenschutz</strong> schützt die <em>Person</em> und ihr Recht auf informationelle Selbstbestimmung: Er regelt, ob und wofür personenbezogene Daten verarbeitet werden dürfen (DSGVO). <strong>Datensicherheit</strong> schützt die <em>Daten und Systeme</em> selbst – alle Daten, nicht nur personenbezogene – vor Verlust, Manipulation und unbefugtem Zugriff (z. B. durch Verschlüsselung und Backups).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Datenschutz = Schutz der Person/personenbezogener Daten 1 P; Datensicherheit = Schutz der Daten/Systeme (technisch) 1 P.</div>
+    <h4>b) Personenbezogene Daten? (3 P)</h4>
+    <table class="ankreuz kompakt">
+      <tr><th>Daten</th><th>ja</th><th>nein</th></tr>
+      <tr><td>1. Mitgliedsnummer 10231</td><td>✘</td><td></td></tr>
+      <tr><td>2. Durchschnitt 412 Mitglieder/Tag</td><td></td><td>✘</td></tr>
+      <tr><td>3. IP-Adresse eines Mitglieds</td><td>✘</td><td></td></tr>
+      <tr><td>4. CO₂-Wert in Kursraum 2</td><td></td><td>✘</td></tr>
+      <tr><td>5. Foto einer Trainerin</td><td>✘</td><td></td></tr>
+      <tr><td>6. Körperfettanteil mit Mitgliedsnummer</td><td>✘</td><td></td></tr>
+    </table>
+    <p class="klein">1 und 6: über die Mitgliedsnummer ist die Person identifizierbar. 2: aggregiert/anonym. 4: kein Personenbezug. 3: die IP-Adresse gilt nach EuGH als personenbezogen.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> je zwei richtige Zeilen 1 P (6 richtige = 3 P).</div>
+  </div><p class="ap2-loesung-link"><a href="07_IT-Sicherheit_Loesungen.html#L-SEC-05-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SEC-05-2">
     <div class="kopf">
@@ -1672,6 +1982,24 @@ ResultSet rs = ps.executeQuery();</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W24 Teil 1, Aufgabe 1d (Datenschutzerklärung und Einwilligung in einer App)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SEC-05-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SEC-05.2 · 10 Punkte</div>
+    <h4>a) Datenschutzmängel des Entwurfs (8 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:4%">Nr.</th><th style="width:46%">Mangel</th><th>Verbesserung</th></tr>
+      <tr><td>1</td><td>Die beiden Häkchen sind <strong>vorangekreuzt</strong>. Eine vorangekreuzte Checkbox ist keine wirksame Einwilligung (aktive Handlung nötig).</td><td>Checkboxen leer vorbelegen; der Nutzer kreuzt selbst an.</td></tr>
+      <tr><td>2</td><td>Die Einwilligung in Werbung/Weitergabe ist mit der AGB-Zustimmung <strong>gekoppelt</strong> und als Pflichtfeld (*) ausgelegt (Kopplungsverbot).</td><td>Werbe-/Weitergabe-Einwilligung von den AGB trennen und freiwillig machen (keine Pflicht für die Mitgliedschaft).</td></tr>
+      <tr><td>3</td><td>Zwei verschiedene Zwecke (Werbung und Weitergabe an Partner) sind in <strong>einer</strong> Checkbox zusammengefasst.</td><td>Für jeden Zweck eine eigene, getrennte Einwilligung.</td></tr>
+      <tr><td>4</td><td><strong>Datenminimierung verletzt:</strong> Familienstand und Arbeitgeber sind für Vertrag und Training nicht erforderlich (Pflichtfelder).</td><td>Nur erforderliche Felder als Pflicht; überflüssige Felder streichen oder optional machen.</td></tr>
+      <tr><td>(5)</td><td>Gesundheitsdaten (Vorerkrankungen/Medikamente) sind Pflichtfeld und benötigen eine <strong>ausdrückliche, gesonderte</strong> Einwilligung.</td><td>Angabe freiwillig machen und mit ausdrücklicher Einwilligung für diese besondere Datenkategorie versehen.</td></tr>
+      <tr><td>(6)</td><td>„Mit der Registrierung erkennen Sie die Datenschutzbestimmungen an“ – die Datenschutzerklärung ist eine <strong>Information</strong>, keine Zustimmung.</td><td>Formulierung in einen Hinweis mit Link zur Datenschutzerklärung ändern („Informationen zur Verarbeitung finden Sie …“).</td></tr>
+    </table>
+    <p class="klein">Vier dieser Mängel genügen für die volle Punktzahl.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> je Mangel mit passender Verbesserung 2 P (max. 8). 1 P, wenn nur der Mangel ohne Verbesserung genannt wird.</div>
+    <h4>b) Inhalte der Datenschutzerklärung (2 P)</h4>
+    <p>Zwei beliebige aus: Verantwortlicher (Kontaktdaten) · Zwecke und Rechtsgrundlagen der Verarbeitung · Empfänger/Weitergabe der Daten · Speicherdauer · Betroffenenrechte und Widerrufsrecht · Beschwerderecht bei der Aufsichtsbehörde.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> je korrekter Inhalt 1 P (max. 2).</div>
+  </div><p class="ap2-loesung-link"><a href="07_IT-Sicherheit_Loesungen.html#L-SEC-05-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SEC-05-3">
     <div class="kopf">
@@ -1691,6 +2019,24 @@ ResultSet rs = ps.executeQuery();</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W25 Teil 1, Aufgabe 3bb (keine echten Daten auf eine Online-Prüfseite) und W24 Teil 1, Aufgabe 1d</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SEC-05-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SEC-05.3 · 15 Punkte</div>
+    <h4>a) Herzfrequenzdaten (3 P)</h4>
+    <p>Herzfrequenz- und Gesundheitsdaten sind eine <strong>besondere Kategorie personenbezogener Daten</strong> (Art. 9 DSGVO). Ihre Verarbeitung ist grundsätzlich verboten und bedarf daher besonders strenger Voraussetzungen und eines hohen Schutzniveaus. Pulsar kann sie auf die <strong>ausdrückliche Einwilligung</strong> des Mitglieds stützen (Art. 9 Abs. 2 a).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> besondere Kategorie/Gesundheitsdaten 1 P; grundsätzlich strengerer Schutz 1 P; Rechtsgrundlage ausdrückliche Einwilligung 1 P.</div>
+    <h4>b) Auskunft und Löschung (4 P)</h4>
+    <p><strong>Auskunftsrecht (Art. 15):</strong> Das Mitglied darf erfahren, welche Daten über es gespeichert sind, zu welchen Zwecken, an welche Empfänger und wie lange; es kann eine Kopie verlangen. <strong>Recht auf Löschung (Art. 17):</strong> Daten sind zu löschen, wenn der Zweck entfallen ist bzw. die Einwilligung widerrufen wurde. <strong>Aber:</strong> Die Rechnungsdaten unterliegen gesetzlichen <strong>Aufbewahrungspflichten</strong> (Handels-/Steuerrecht, mehrere Jahre). Solange diese laufen, dürfen bzw. müssen sie aufbewahrt werden; sie werden für andere Zwecke gesperrt statt gelöscht.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Auskunftsrecht beschrieben 1 P; Löschrecht beschrieben 1 P; Aufbewahrungspflicht als Grund gegen sofortiges Löschen 2 P.</div>
+    <h4>c) Cloud-Betrieb (3 P)</h4>
+    <p>Der Cloud-Anbieter ist <strong>Auftragsverarbeiter</strong>. Pulsar muss mit ihm einen <strong>Vertrag zur Auftragsverarbeitung (AV-Vertrag)</strong> schließen, in dem Weisungsbindung und technisch-organisatorische Maßnahmen geregelt sind, und sich von dessen Sicherheitsmaßnahmen überzeugen. Da das Rechenzentrum in Frankfurt (EU) steht, ist das Datenschutzniveau gegeben; bei Servern außerhalb der EU wären zusätzliche Garantien (z. B. Standardvertragsklauseln) nötig.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Auftragsverarbeitung erkannt 1 P; AV-Vertrag/Weisungsbindung 1 P; TOM prüfen bzw. EU-Standort/Drittlandproblematik 1 P.</div>
+    <h4>d) Echte Daten in ein Online-Tool? (3 P)</h4>
+    <p><strong>Unzulässig.</strong> Mit dem Upload würden echte Namen und IBANs an einen Dritten <strong>übermittelt</strong> – ohne Rechtsgrundlage, ohne AV-Vertrag, ohne Kontrolle über Speicherort und -dauer (ggf. außerhalb der EU). Das verletzt den Datenschutz und die Vertraulichkeit (Objekt D2). <strong>Alternative:</strong> mit <strong>synthetischen Testdaten</strong> (erfundene, aber formal gültige IBANs) testen oder ein Prüfwerkzeug lokal im eigenen Netz einsetzen.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> unzulässig mit Begründung (Übermittlung echter personenbezogener Daten an Dritte) 2 P; sinnvolle Alternative (Testdaten/lokal) 1 P.</div>
+    <h4>e) Privacy by Default (2 P)</h4>
+    <p>Die datenschutzfreundlichste Einstellung ist die Voreinstellung. Beispiel: In der Mitglieder-App ist die Freigabe der Trainingsdaten an die VitaKasse <strong>standardmäßig deaktiviert</strong> und die Standortfreigabe aus; das Mitglied muss sie bewusst selbst einschalten.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Prinzip (datenschutzfreundliche Voreinstellung) 1 P; passendes Beispiel aus der App 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="07_IT-Sicherheit_Loesungen.html#L-SEC-05-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== SEC-06 ===================== -->
   <h3 id="a-06">SEC-06 · Angriffe &amp; Gegenmaßnahmen</h3>
@@ -1709,6 +2055,18 @@ ResultSet rs = ps.executeQuery();</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S24 Teil 2, Aufgabe 1b (Word-Anhang mit Makros, sicherere Alternative)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SEC-06-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SEC-06.1 · 6 Punkte</div>
+    <h4>a) Risiko (V3) (2 P)</h4>
+    <p>Das Dokument enthält ein <strong>Makro</strong>. Wird „Inhalt aktivieren“ geklickt, führt es Programmcode aus und kann <strong>Schadsoftware nachladen und installieren</strong> (z. B. Ransomware, Spionageprogramm). Dokumente aus unbekannten externen Quellen sind deshalb besonders gefährlich.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Makro führt Code aus / lädt Schadsoftware 1 P; Gefahr für den PC bzw. das Netz 1 P.</div>
+    <h4>b) Gegenmaßnahmen (2 P)</h4>
+    <p>Zwei beliebige aus: Makros aus Internet-/Mail-Dokumenten per Richtlinie blockieren bzw. nur signierte Makros zulassen · Anhänge serverseitig filtern bzw. in einer Sandbox prüfen · aktuellen Virenschutz einsetzen · eingeschränkte Benutzerrechte · Mitarbeitende schulen.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> je sinnvolle Maßnahme 1 P (max. 2).</div>
+    <h4>c) Sicherere Alternative für eigene Rechnungen (2 P)</h4>
+    <p>Rechnungen <strong>ohne aktive Inhalte</strong> versenden, z. B. als <strong>PDF</strong>, oder im Portal/in der App zum Abruf bereitstellen (Rückfragen über ein Formular dort). Begründung: Ein PDF bzw. die Anzeige im Browser/in der App enthält keine ausführbaren Makros; so gewöhnt Pulsar seine Mitglieder nicht daran, Makros zu aktivieren, und ein gefälschter Makro-Anhang fällt eher auf.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Alternative ohne Makros (PDF/Portal) 1 P; Begründung 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="07_IT-Sicherheit_Loesungen.html#L-SEC-06-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SEC-06-2">
     <div class="kopf">
@@ -1727,6 +2085,19 @@ ResultSet rs = ps.executeQuery();</pre>
     </table>
     <p class="quelle">Eigene Aufgabe zur Wissensbreite (Angriffe kamen bisher nur in S24 Teil 2, Aufgabe 1b vor)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SEC-06-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SEC-06.2 · 12 Punkte</div>
+    <table class="kompakt">
+      <tr><th style="width:8%">Vorfall</th><th style="width:28%">Angriffsart</th><th>Gegenmaßnahme</th></tr>
+      <tr><td>V5</td><td>Social Engineering (Pretexting, Vortäuschen des IT-Supports)</td><td>Schulung/Sensibilisierung; Regel „IT fragt nie nach Passwörtern“; Rückruf über eine bekannte Nummer.</td></tr>
+      <tr><td>V6</td><td>Credential Stuffing (Ausprobieren geleakter Zugangsdaten), Brute Force</td><td>Fehlversuchssperre/Rate Limiting; 2FA; Abgleich mit geleakten Passwörtern; Benachrichtigung bei neuem Gerät.</td></tr>
+      <tr><td>V8</td><td>Cross-Site Scripting (XSS) über ein Kommentarfeld</td><td>Ausgaben kontextgerecht kodieren (Output-Encoding); Content-Security-Policy; Cookies mit HttpOnly.</td></tr>
+      <tr><td>V10</td><td>Man-in-the-Middle über gefälschten WLAN-Hotspot (Evil Twin)</td><td>Zertifikatswarnungen ernst nehmen/TLS mit Prüfung; VPN; gesichertes offizielles WLAN; Nutzer warnen.</td></tr>
+      <tr><td>V11</td><td>Cross-Site Request Forgery (CSRF)</td><td>CSRF-Token in Formularen; Cookies mit SameSite; erneute Bestätigung bei kritischen Änderungen (z. B. E-Mail ändern).</td></tr>
+      <tr><td>V13</td><td>Ransomware</td><td>Offline-/unveränderbare Backups mit getesteter Wiederherstellung; Patches; eingeschränkte Rechte; E-Mail-/Makroschutz.</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je Vorfall 1 P richtige Angriffsart + 1 P passende Gegenmaßnahme (6 × 2 = 12). Bei V6 wird Brute Force/Credential Stuffing akzeptiert; bei V11 auch „Phishing-Link, der eine Aktion auslöst“ mit CSRF-Bezug.</div>
+  </div><p class="ap2-loesung-link"><a href="07_IT-Sicherheit_Loesungen.html#L-SEC-06-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SEC-06-3">
     <div class="kopf">
@@ -1746,6 +2117,48 @@ ResultSet rs = ps.executeQuery();</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Eigene Aufgabe auf Prüfungsniveau (Code analysieren wie in W25 Teil 2, Aufgabe 3; Sicherheitsthema wie S24 Teil 2, Aufgabe 1)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SEC-06-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SEC-06.3 · 18 Punkte</div>
+    <h4>a) Sicherheitslücke in login (3 P)</h4>
+    <p><strong>SQL-Injection.</strong> Die Eingaben aus dem Feld „E-Mail“ werden in den Zeilen 13/14 per String-Verkettung direkt in den SQL-Text eingebaut. Enthält die Eingabe SQL-Sonderzeichen (z. B. ein Hochkomma), ändert sich dadurch die Bedeutung der Abfrage – ein Angreifer kann die Passwortprüfung umgehen oder weitere Daten auslesen.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> SQL-Injection benannt 1 P; Ursache (ungeprüfte Eingabe per Verkettung in den SQL-Text) 2 P.</div>
+    <h4>b) SQL-Anweisung und Gefahr (4 P)</h4>
+    <p>Für die gültige Adresse <code>o'neil@mail.example</code> und das Passwort <code>Lauf2026</code> baut Zeile 13/14 folgende Anweisung:</p>
+    <pre class="sql">SELECT mitglied_nr FROM mitglied
+WHERE email = 'o'neil@mail.example' AND passwort_md5 = 'ac03ebddb7750a7c60020f0281650bd5'</pre>
+    <p>Das zweite Hochkomma (in <code>o'neil</code>) beendet die Zeichenkette vorzeitig; der Teil <code>neil@mail.example'…</code> wird als SQL-Code gelesen und ergibt einen <strong>Syntaxfehler</strong>. Daran zeigt sich: Vom Benutzer gelieferter Text wird als SQL ausgeführt. Dieselbe Lücke lässt sich gezielt ausnutzen, um die Bedingung der <code>WHERE</code>-Klausel auszuhebeln und sich <strong>ohne gültiges Passwort anzumelden</strong> oder Daten auszulesen.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> SQL-Anweisung korrekt angegeben 2 P; Ursache des Fehlers (Hochkomma beendet die Zeichenkette) 1 P; abgeleitete Gefahr (Eingabe wird als SQL ausgeführt → Anmeldung umgehbar) 1 P.</div>
+    <h4>c) login mit PreparedStatement (5 P)</h4>
+    <pre class="java">public boolean login(String email, String passwort) throws Exception {
+    String sql = "SELECT mitglied_nr FROM mitglied WHERE email = ? AND passwort_md5 = ?";
+    try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, email);                 // Eingaben werden nur als Daten übergeben
+        ps.setString(2, md5(passwort));
+        try (ResultSet rs = ps.executeQuery()) {
+            return rs.next();
+        }
+    }
+}</pre>
+    <p class="datei">Lauffähig als Java: <code>java/07_IT-Sicherheit/Aufgabe_SEC_06_3.java</code> (Methoden <code>loginNeu</code>/<code>loginSicher</code>; mit optionalem H2-Treiber wird der Angriff gegen eine Testdatenbank gezeigt).</p>
+    <p class="codelabel">Ausgabe (Test gegen H2, Adresse mit Apostroph)</p>
+    <pre class="ausgabe">Fall                     loginUnsicher   loginSicher
+richtiges Passwort       true            true
+falsches Passwort        false           false
+Adresse mit Apostroph    SQL-Fehler      true</pre>
+    <p>Beim PreparedStatement wird die Abfrage mit Platzhaltern <code>?</code> vorab an die Datenbank gegeben; die Werte werden anschließend getrennt als reine Daten übergeben und nie als SQL interpretiert. Die Adresse mit Apostroph wird dann korrekt verarbeitet.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> PreparedStatement mit Platzhaltern 2 P; beide Werte per <code>setString</code> gesetzt 2 P; funktional korrekte Abfrage/Rückgabe 1 P. Gleichwertig: Nutzung einer sicheren DAO-/ORM-Methode mit Parameterbindung.</div>
+    <h4>d) Zwei weitere Mängel (4 P)</h4>
+    <ul>
+      <li><strong>Zugangsdaten im Quellcode (Zeilen 6–8):</strong> DB-URL, Benutzer <code>root</code> und Passwort stehen im Klartext im Code und werden mitversioniert. Abhilfe: Zugangsdaten auslagern (Konfiguration/Umgebungsvariablen/Secret-Store) und einen Datenbankbenutzer mit minimalen Rechten statt <code>root</code> verwenden.</li>
+      <li><strong>Technische Fehlermeldung an den Nutzer (Zeile 33):</strong> <code>e.getMessage()</code> wird in die Webseite ausgegeben und verrät interne Details. Abhilfe: dem Nutzer nur eine allgemeine Meldung zeigen, die Details serverseitig protokollieren.</li>
+      <li>Gleichwertig anrechenbar: nicht geschlossene Verbindungen (<code>Connection</code> ohne try-with-resources, Ressourcenleck); ausgegebene Kommentare werden nicht HTML-kodiert (XSS in <code>bewertungenAlsHtml</code>).</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> je Mangel mit Abhilfe 2 P (max. 4). Nicht gewertet: die Lücke aus a) und die Verwendung von MD5.</div>
+    <h4>e) Warum Client-Prüfung nicht reicht (2 P)</h4>
+    <p>Prüfungen in App und Browser lassen sich umgehen: Ein Angreifer schickt seine Anfrage einfach direkt an den Server (z. B. mit einem eigenen Programm oder Werkzeug), ohne die App zu benutzen. Sicherheitsrelevante Prüfungen müssen daher immer <strong>auf dem Server</strong> erfolgen; das Prepared Statement wirkt dort unabhängig von der Eingabeprüfung.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> Client-Prüfung umgehbar / Anfrage direkt an den Server 1 P; Prüfung muss serverseitig erfolgen 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="07_IT-Sicherheit_Loesungen.html#L-SEC-06-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== ORIGINALAUFGABEN ===================== -->
   <h3 id="originale">Originalaufgaben zum Üben</h3>

@@ -32,6 +32,24 @@
     table.kurz { break-inside: avoid; }
   }
 </style>
+<style id="ap2-loesung-stile">
+/* Stile aus 09_Benutzeroberflaeche_Loesungen.html, nur für eingebettete Lösungen (werkzeuge/loesungen_einbetten.py) */
+.ap2-loesung-inhalt table.kompakt td, .ap2-loesung-inhalt table.kompakt th { padding: 3px 6px; }
+.ap2-loesung-inhalt td.nr, .ap2-loesung-inhalt th.nr { width: 46px; text-align: center; }
+.ap2-loesung-inhalt .loesung .kopf { font-size: 16px; margin-bottom: 4px; break-after: avoid; page-break-after: avoid; }
+.ap2-loesung-inhalt .loesung h4 { margin: 12px 0 4px; font-size: 15px; break-after: avoid; }
+.ap2-loesung-inhalt .loesung ol.anm { font-size: 14px; margin: 4px 0; }
+.ap2-loesung-inhalt .muster { background: #fbfbf8; border: 1px dashed #bbb; border-radius: 4px; padding: 6px 10px; margin: 6px 0; }
+.ap2-loesung-inhalt .muster > :first-child { margin-top: 0; }
+.ap2-loesung-inhalt .muster > :last-child { margin-bottom: 0; }
+.ap2-loesung-inhalt h3 + .loesung { margin-top: 8px; }
+@media print {
+  .ap2-loesung-inhalt table { break-inside: auto; }
+  .ap2-loesung-inhalt tr { break-inside: avoid; }
+  .ap2-loesung-inhalt table.kurz { break-inside: avoid; }
+  .ap2-loesung-inhalt .bewertung { break-inside: avoid; }
+}
+</style>
 </head>
 <body>
 
@@ -1380,6 +1398,23 @@
     </table>
     <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 3a (Gestaltungselemente für Benutzerschnittstellen beschreiben)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-GUI-01-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe GUI-01.1 · 6 Punkte</div>
+    <p>Verlangt sind sechs der acht Elemente. Hier alle acht:</p>
+    <table class="kompakt">
+      <thead><tr><th class="nr">Nr.</th><th style="width:30%">Bezeichnung (auch akzeptiert)</th><th>Zweck</th></tr></thead>
+      <tr><td class="nr">①</td><td><strong>Breadcrumb</strong> (Pfadnavigation, Brotkrümelnavigation)</td><td>zeigt, wo man sich in der Hierarchie der Anwendung befindet (Start › Kurse › Aquafitness 50+); die übergeordneten Ebenen sind anklickbar – Orientierung und schneller Rückweg</td></tr>
+      <tr><td class="nr">②</td><td><strong>Tabs</strong> (Registerkarten, Reiter)</td><td>wechseln zwischen gleichrangigen Ansichten desselben Kurses (Termine, Teilnehmende, Warteliste), ohne die Seite zu verlassen; der aktive Tab ist hervorgehoben</td></tr>
+      <tr><td class="nr">③</td><td><strong>Dropdown-Liste</strong> (Auswahlliste, Drop-down-Menü, Combobox)</td><td>Auswahl genau eines Werts aus einer vorgegebenen Liste, platzsparend; hier als Filter nach Kursleitung</td></tr>
+      <tr><td class="nr">④</td><td><strong>Datumsauswahl</strong> (Datepicker, Zeitraumauswahl, Kalender)</td><td>Auswahl eines Zeitraums über einen Kalender, ohne Datum eintippen zu müssen; verhindert falsche Formate; filtert die Termine</td></tr>
+      <tr><td class="nr">⑤</td><td><strong>Checkbox</strong> (Kontrollkästchen)</td><td>eine Option an- oder abwählen (ja/nein); hier: nur Termine mit freien Plätzen anzeigen</td></tr>
+      <tr><td class="nr">⑥</td><td><strong>Fortschrittsbalken</strong> (Balkenanzeige, Füllstandsanzeige, Progress Bar)</td><td>stellt die Belegung grafisch dar (12 von 15 Plätzen) – die Auslastung der Termine ist auf einen Blick vergleichbar</td></tr>
+      <tr><td class="nr">⑦</td><td><strong>Pagination</strong> (Seitennavigation, Blätterfunktion)</td><td>verteilt eine lange Liste auf mehrere Seiten und ermöglicht das Wechseln zwischen ihnen; die aktuelle Seite ist markiert</td></tr>
+      <tr><td class="nr">⑧</td><td><strong>Toast</strong> (Snackbar, Statusmeldung, Benachrichtigung)</td><td>kurze Rückmeldung nach einer Aktion („Termin gespeichert“), die die Arbeit nicht blockiert und nach einigen Sekunden von selbst verschwindet</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je Element 0,5 P für die Bezeichnung und 0,5 P für den Zweck, höchstens sechs Elemente (6 P). Gängige Synonyme und englische Begriffe werden akzeptiert. Für ⑥ wird „Balkendiagramm“ akzeptiert, für ③ „Auswahlmenü“. Nicht akzeptiert: „Toggle“ für ⑤ (das ist ein Schalter mit sofortiger Wirkung) und „Pop-up“ für ⑧, wenn der Zweck nicht stimmt (ein Pop-up blockiert).</div>
+    <p><strong>Erklärung:</strong> Der Zweck sollte sich auf die konkrete Seite beziehen. Nicht markiert, aber ebenfalls Gestaltungselemente sind das Suchfeld, der Primärbutton „+ Termin anlegen“ und die Tabelle selbst.</p>
+  </div><p class="ap2-loesung-link"><a href="09_Benutzeroberflaeche_Loesungen.html#L-GUI-01-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="GUI-01-2">
     <div class="kopf">
@@ -1402,6 +1437,85 @@
     <div class="antwort z8"></div>
     <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 3a und W23 Teil 1, Aufgabe 4b (geeignete Darstellung wählen und begründen)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-GUI-01-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe GUI-01.2 · 11 Punkte</div>
+    <h4>a) Bedienelemente für den Ticketkauf (7 P)</h4>
+    <table class="kompakt">
+      <thead><tr><th style="width:12%">Anf.</th><th style="width:26%">GUI-Element</th><th>Begründung</th></tr></thead>
+      <tr><td>C1</td><td><strong>Radiobuttons</strong> oder Segmented Control (Umschalter mit 3 Segmenten)</td><td>genau eine Auswahl aus wenigen Optionen; alle drei Bäder sind auf einen Blick sichtbar, ein Tipp genügt</td></tr>
+      <tr><td>C2</td><td><strong>Datumsauswahl</strong> (Kalender, Datepicker)</td><td>nur gültige Tage (heute bis +30) sind wählbar, Revisionstage gesperrt – keine Fehleingaben, kein Datumsformat nötig</td></tr>
+      <tr><td>C3</td><td><strong>Stepper</strong> (− 0 +) je Tarif</td><td>exakte kleine Ganzzahl; die Grenzen 0 und 10 lassen sich erzwingen; große Tippflächen</td></tr>
+      <tr><td>C4</td><td><strong>Checkboxen</strong> (oder Toggle-Switches)</td><td>mehrere Optionen unabhängig voneinander wählbar</td></tr>
+      <tr><td>C5</td><td><strong>Toast / Snackbar</strong></td><td>kurze Bestätigung, die nicht blockiert und von selbst verschwindet; der Nutzer muss nichts wegklicken</td></tr>
+      <tr><td>C6</td><td><strong>Modaler Dialog</strong> (Bestätigungsdialog)</td><td>unterbricht den Ablauf und erzwingt eine bewusste Entscheidung; eindeutig beschriftete Buttons („Ticket stornieren“ / „Ticket behalten“) verhindern versehentliches Stornieren</td></tr>
+      <tr><td>C7</td><td><strong>Tab-Bar</strong> (Bottom Navigation) mit Symbol und Text</td><td>die vier Hauptbereiche sind immer sichtbar und mit einem Tipp erreichbar, gut mit dem Daumen bedienbar</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je Zeile 0,5 P für ein geeignetes Element und 0,5 P für eine passende Begründung. Ebenfalls akzeptiert: C1 Dropdown (mit Begründung „platzsparend“), C2 waagerechte Tagesleiste mit Chips, C3 Dropdown 0–10 oder Zahlenfeld mit Pfeilen, C7 Hamburger-Menü (mit Begründung „spart Platz“). Nicht akzeptiert: Slider oder Freitext für C3, Freitext für C2, Toast für C6 (keine Entscheidung möglich).</div>
+
+    <h4>b) Responsive Design (4 P)</h4>
+    <div class="muster">
+      <p><strong>Responsive Design</strong> bedeutet, dass sich das Layout einer Oberfläche automatisch an Bildschirmgröße und Ausrichtung des Endgeräts anpasst (flexible Raster, Breakpoints über Media Queries, relative Größen). Inhalte und Funktionen bleiben gleich, es gibt nur eine Codebasis.</p>
+      <p><strong>Anpassungen der Seite aus Anlage 5 (zwei verlangt):</strong></p>
+      <ul>
+        <li>Die Tabelle mit sechs Spalten wird zu einer <strong>Liste von Karten</strong>: je Termin eine Karte mit Datum, Uhrzeit, Belegung und Schaltfläche „Anwesenheit“. Weniger wichtige Spalten (Kursleitung) entfallen oder rücken in die Karte. So muss im Hochformat nicht waagerecht gescrollt werden.</li>
+        <li>Die waagerechte <strong>Menüleiste wird zum Hamburger-Menü</strong>, die Suche zum Lupensymbol – das spart Platz für den Inhalt.</li>
+        <li>Die <strong>Filterzeile</strong> (Dropdown, Datumsauswahl, Checkbox) wird untereinander angeordnet oder hinter einer Schaltfläche „Filter“ eingeklappt.</li>
+        <li>Kleine Text-Links wie „Bearbeiten“ werden zu <strong>großen Touch-Schaltflächen</strong> (mind. 44 × 44 px) mit Abstand, weil am Beckenrand mit dem Finger bedient wird; Hover-Effekte entfallen.</li>
+        <li>Breadcrumb verkürzt („‹ Kurse“), Pagination durch Weiterscrollen ersetzt.</li>
+      </ul>
+    </div>
+
+    <figure>
+      <svg viewBox="0 0 760 480" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <rect x="20" y="10" width="330" height="460" rx="18" fill="#fff" stroke="#222" stroke-width="3"/>
+        <circle cx="185" cy="17" r="2" fill="#222"/>
+        <rect x="34" y="24" width="302" height="44" fill="#e8ecf1"/>
+        <g stroke="#222" stroke-width="2.5"><line x1="46" y1="38" x2="64" y2="38"/><line x1="46" y1="46" x2="64" y2="46"/><line x1="46" y1="54" x2="64" y2="54"/></g>
+        <text x="76" y="51" font-size="13" font-weight="bold">AquaVita Verwaltung</text>
+        <circle cx="314" cy="44" r="6" fill="none" stroke="#222" stroke-width="1.5"/>
+        <line x1="318" y1="48" x2="323" y2="53" stroke="#222" stroke-width="2"/>
+        <text x="46" y="90" font-size="12" fill="#1f4e79" text-decoration="underline">‹ Kurse</text>
+        <text x="46" y="114" font-size="17" font-weight="bold">Aquafitness 50+</text>
+        <text x="46" y="140" font-weight="bold" fill="#1f4e79">Termine</text>
+        <text x="124" y="140" fill="#444">Teilnehmende</text>
+        <text x="234" y="140" fill="#444">Warteliste (3)</text>
+        <line x1="34" y1="150" x2="336" y2="150" stroke="#ccc"/>
+        <line x1="46" y1="150" x2="100" y2="150" stroke="#1f4e79" stroke-width="3"/>
+        <rect x="46" y="162" width="104" height="36" rx="6" fill="#1f4e79"/>
+        <text x="98" y="185" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">+ Termin</text>
+        <rect x="196" y="162" width="128" height="36" rx="6" fill="#fff" stroke="#555"/>
+        <text x="260" y="185" text-anchor="middle" font-size="12">Filter (1) ▾</text>
+        <!-- Karten -->
+        <g fill="#fff" stroke="#999"><rect x="46" y="210" width="278" height="70" rx="8"/><rect x="46" y="288" width="278" height="70" rx="8"/><rect x="46" y="366" width="278" height="70" rx="8"/></g>
+        <g font-size="13" font-weight="bold"><text x="58" y="231">Mi 04.11.2026 · 09:00</text><text x="58" y="309">Fr 06.11.2026 · 17:30</text><text x="58" y="387">Mo 09.11.2026 · 09:00</text></g>
+        <g font-size="11" fill="#555"><text x="58" y="248">S. Brandt</text><text x="58" y="326">J. Kowalski</text><text x="58" y="404">S. Brandt · ausgebucht</text></g>
+        <g fill="#fff" stroke="#999"><rect x="58" y="258" width="110" height="10"/><rect x="58" y="336" width="110" height="10"/><rect x="58" y="414" width="110" height="10"/></g>
+        <g fill="#1f4e79"><rect x="58" y="258" width="88" height="10"/><rect x="58" y="336" width="66" height="10"/><rect x="58" y="414" width="110" height="10"/></g>
+        <g font-size="11"><text x="174" y="267">12/15</text><text x="174" y="345">9/15</text><text x="174" y="423">15/15</text></g>
+        <g fill="#fff" stroke="#1f4e79"><rect x="222" y="240" width="92" height="34" rx="6"/><rect x="222" y="318" width="92" height="34" rx="6"/><rect x="222" y="396" width="92" height="34" rx="6"/></g>
+        <g font-size="11" fill="#1f4e79" text-anchor="middle"><text x="268" y="261">Anwesenheit</text><text x="268" y="339">Anwesenheit</text><text x="268" y="417">Anwesenheit</text></g>
+        <text x="185" y="453" text-anchor="middle" font-size="10" fill="#555">⋮ weitere Termine beim Scrollen</text>
+        <!-- Beschriftungen -->
+        <g stroke="#c2410c" stroke-width="1.2">
+          <line x1="330" y1="46" x2="378" y2="46"/><line x1="100" y1="86" x2="378" y2="86"/><line x1="324" y1="180" x2="378" y2="180"/>
+          <line x1="324" y1="232" x2="378" y2="232"/><line x1="314" y1="335" x2="378" y2="335"/><line x1="262" y1="449" x2="378" y2="449"/>
+        </g>
+        <g fill="#c2410c"><circle cx="330" cy="46" r="2.5"/><circle cx="100" cy="86" r="2.5"/><circle cx="324" cy="180" r="2.5"/><circle cx="324" cy="232" r="2.5"/><circle cx="314" cy="335" r="2.5"/><circle cx="262" cy="449" r="2.5"/></g>
+        <g font-size="12">
+          <text x="384" y="50">Menüleiste → Hamburger-Menü, Suche als Lupe</text>
+          <text x="384" y="90">Breadcrumb verkürzt auf „‹ Kurse“</text>
+          <text x="384" y="184">Filter hinter einer Schaltfläche (einklappbar)</text>
+          <text x="384" y="236">Tabelle → Kartenliste: eine Karte je Termin,</text>
+          <text x="384" y="252">kein waagerechtes Scrollen im Hochformat</text>
+          <text x="384" y="339">große Touch-Schaltflächen (mind. 44 px)</text>
+          <text x="384" y="355">statt kleiner Text-Links „Bearbeiten“</text>
+          <text x="384" y="453">Pagination → weiterscrollen</text>
+        </g>
+      </svg>
+      <figcaption>Abb. L-1: Kursverwaltung auf dem Tablet im Hochformat (eine mögliche Umsetzung)</figcaption>
+    </figure>
+    <div class="bewertung"><strong>Bewertung:</strong> 1 P für die Erläuterung des Begriffs; je Anpassung 1,5 P (1 P konkrete Anpassung mit Bezug auf Anlage 5, 0,5 P Wirkung bzw. Begründung). Allgemeine Antworten ohne Bezug zur Seite („Bilder skalieren“) höchstens 1 P je Anpassung. „Eigene App für Tablets entwickeln“ ist kein Responsive Design (0 P).</div>
+  </div><p class="ap2-loesung-link"><a href="09_Benutzeroberflaeche_Loesungen.html#L-GUI-01-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="GUI-01-3">
     <div class="kopf">
@@ -1443,6 +1557,140 @@
     </div>
     <p class="quelle">Angelehnt an: S26 Teil 1, Aufgabe 4c (Vorteile von Mockups, Smartphone-Entwurf ergänzen) und W23 Teil 1, Aufgabe 4b (Darstellungsformen)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-GUI-01-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe GUI-01.3 · 18 Punkte</div>
+    <h4>aa) Wireframe und Mockup (2 P)</h4>
+    <div class="muster"><p>Ein <strong>Wireframe</strong> ist ein grober, schematischer Entwurf (Low-Fidelity). Er zeigt Aufbau und Anordnung der Elemente mit Platzhaltern – ohne Farben, Bilder und endgültige Texte. Ein <strong>Mockup</strong> ist ein detailgetreuer, aber statischer Entwurf (High-Fidelity). Er zeigt das spätere Aussehen mit Farben, Schriften, Symbolen und Beispielinhalten, ist aber nicht bedienbar.</p></div>
+    <div class="bewertung">je Begriff 1 P; der Unterschied (Detailgrad: Struktur vs. Aussehen) muss erkennbar sein.</div>
+
+    <h4>ab) Vorteile von Mockups (4 P)</h4>
+    <div class="muster">
+      <p>Zwei der folgenden Vorteile, jeweils mit Begründung:</p>
+      <ul>
+        <li><strong>Frühes Feedback, günstige Änderungen:</strong> Die AquaVita sieht schon vor der Programmierung, wie die Seite „Auslastung“ aussehen wird, und kann fehlende oder missverständliche Inhalte (z. B. welche Becken angezeigt werden) korrigieren lassen. Änderungen am Entwurf kosten wenig, Änderungen am fertigen Code viel.</li>
+        <li><strong>Gemeinsame Abstimmungs- und Abnahmegrundlage:</strong> Kunde, UI/UX-Team und Entwicklung sprechen über dasselbe Bild. Das abgestimmte Mockup ist eine verbindliche Vorgabe – weniger Missverständnisse und Rückfragen während der Umsetzung.</li>
+        <li><strong>Frühe Usability-Tests:</strong> Mit dem Mockup bzw. einem daraus erstellten Klickprototyp lassen sich Personen aus den Zielgruppen (z. B. Seniorinnen und Senioren) testen, bevor Code existiert.</li>
+        <li><strong>Bessere Planung:</strong> Umfang und benötigte Daten (z. B. stündliche Prognosewerte, Temperatursensoren) werden sichtbar – der Aufwand lässt sich genauer schätzen.</li>
+        <li><strong>Einheitliches Design:</strong> Mockups sind die Grundlage eines Styleguides für App und Website.</li>
+      </ul>
+    </div>
+    <div class="bewertung">je Vorteil 2 P (1 P Vorteil, 1 P Begründung bzw. Auswirkung). Reine Stichworte ohne Begründung höchstens 1 P je Vorteil.</div>
+
+    <h4>ba) Darstellungsformen (2 P)</h4>
+    <div class="muster"><p>Zwei von: <strong>Säulendiagramm</strong> (je Stunde eine Säule) · <strong>Liniendiagramm</strong> (Verlaufskurve über den Tag) · <strong>Tabelle/Liste</strong> (Uhrzeit – erwartete Auslastung in %) · <strong>farbige Zeitleiste bzw. Heatmap</strong> (je Stunde ein Feld mit Stufe „wenig/mittel/voll“ als Text).</p></div>
+    <div class="bewertung">je Darstellungsform 1 P. Nicht akzeptiert: Kreisdiagramm (zeigt Anteile, keinen Verlauf), Karte, Tacho bzw. Ampel (zeigen nur einen einzelnen Wert).</div>
+
+    <h4>bb) Entscheidung und Begründung (2 P)</h4>
+    <div class="muster"><p><strong>Säulendiagramm.</strong> Jede Öffnungsstunde ist eine eigene Säule. Die Nutzerin erkennt auf einen Blick, wann wenig los ist (niedrigste Säulen), und kann ihren Besuch danach planen. Das funktioniert auch auf dem kleinen Smartphone-Bildschirm, und die aktuelle Stunde lässt sich hervorheben. Eine Tabelle müsste dagegen Zeile für Zeile gelesen werden.</p></div>
+    <div class="bewertung">1 P für eine Entscheidung, die zu ba) passt, 1 P für eine Begründung mit Bezug auf die Aufgabe der Nutzer. Ebenso richtig z. B.: „Liniendiagramm – zeigt den Verlauf über den Tag mit Spitzen und ruhigen Zeiten als durchgehende Kurve.“ „Ist übersichtlich“ allein: 0 P.</div>
+
+    <h4>c) Entwurf der Seite „Auslastung“ (8 P)</h4>
+    <figure>
+      <svg viewBox="0 0 760 800" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <rect x="10" y="10" width="392" height="776" rx="44" fill="#fff" stroke="#222" stroke-width="5"/>
+        <rect x="26" y="26" width="360" height="744" rx="30" fill="#fff" stroke="#222" stroke-width="1.2"/>
+        <rect x="156" y="26" width="100" height="22" rx="11" fill="#222"/>
+        <rect x="4" y="150" width="5" height="40" rx="2" fill="#222"/>
+        <rect x="4" y="205" width="5" height="60" rx="2" fill="#222"/>
+        <rect x="403" y="180" width="5" height="70" rx="2" fill="#222"/>
+        <text x="50" y="44" font-size="12" font-weight="bold">14:05</text>
+        <rect x="338" y="34" width="22" height="11" rx="2" fill="none" stroke="#222"/>
+        <rect x="340" y="36" width="15" height="7" fill="#222"/>
+        <text x="44" y="91" font-size="24">←</text>
+        <text x="206" y="89" text-anchor="middle" font-size="18" font-weight="bold">Auslastung</text>
+        <line x1="26" y1="104" x2="386" y2="104" stroke="#ccc"/>
+        <!-- B1 Bad -->
+        <text x="42" y="126" font-size="11" fill="#555">Bad</text>
+        <rect x="42" y="132" width="328" height="38" rx="6" fill="#fff" stroke="#555"/>
+        <text x="56" y="156" font-size="14">Hallenbad Mitte</text>
+        <text x="356" y="157" text-anchor="end" font-size="14">▾</text>
+        <!-- B6 + B2 -->
+        <text x="42" y="198" font-size="15" font-weight="bold">Jetzt</text>
+        <text x="342" y="198" text-anchor="end" font-size="11" fill="#555">Stand: 14:05 Uhr</text>
+        <text x="360" y="199" text-anchor="middle" font-size="16" fill="#1f4e79">↻</text>
+        <rect x="42" y="208" width="328" height="84" rx="8" fill="#eef3fa" stroke="#1f4e79"/>
+        <text x="58" y="236" font-size="18" font-weight="bold">142 von 400 Gästen</text>
+        <rect x="58" y="248" width="240" height="14" rx="7" fill="#fff" stroke="#1f4e79"/>
+        <rect x="58" y="248" width="86" height="14" rx="7" fill="#1f4e79"/>
+        <text x="306" y="260" font-size="13" font-weight="bold">36 %</text>
+        <text x="58" y="282" font-size="12" fill="#333">mäßig besucht</text>
+        <!-- B3 Tag -->
+        <text x="42" y="320" font-size="15" font-weight="bold">Prognose</text>
+        <rect x="42" y="330" width="62" height="28" rx="14" fill="#1f4e79"/>
+        <text x="73" y="349" text-anchor="middle" font-size="12" fill="#fff">Heute</text>
+        <g fill="#fff" stroke="#888"><rect x="112" y="330" width="80" height="28" rx="14"/><rect x="200" y="330" width="80" height="28" rx="14"/><rect x="288" y="330" width="80" height="28" rx="14"/></g>
+        <g font-size="12" text-anchor="middle"><text x="152" y="349">So 11.10.</text><text x="240" y="349">Mo 12.10.</text><text x="328" y="349">Di 13.10.</text></g>
+        <text x="378" y="350" text-anchor="middle" font-size="16" fill="#555">›</text>
+        <!-- B3 Diagramm -->
+        <text x="70" y="371" font-size="10" fill="#555">erwartete Auslastung in %</text>
+        <g stroke="#ccc" stroke-dasharray="3 3"><line x1="66" y1="374" x2="372" y2="374"/><line x1="66" y1="448" x2="372" y2="448"/></g>
+        <g font-size="10" text-anchor="end" fill="#333"><text x="62" y="378">100</text><text x="62" y="452">50</text><text x="62" y="526">0</text></g>
+        <rect x="73.8" y="499.8" width="14" height="22.2" fill="#b9cde3" stroke="#1f4e79" stroke-width="0.8"/>
+        <rect x="95.4" y="485.0" width="14" height="37.0" fill="#b9cde3" stroke="#1f4e79" stroke-width="0.8"/>
+        <rect x="116.9" y="462.8" width="14" height="59.2" fill="#b9cde3" stroke="#1f4e79" stroke-width="0.8"/>
+        <rect x="138.5" y="455.4" width="14" height="66.6" fill="#b9cde3" stroke="#1f4e79" stroke-width="0.8"/>
+        <rect x="160.1" y="470.2" width="14" height="51.8" fill="#b9cde3" stroke="#1f4e79" stroke-width="0.8"/>
+        <rect x="181.6" y="477.6" width="14" height="44.4" fill="#b9cde3" stroke="#1f4e79" stroke-width="0.8"/>
+        <rect x="203.2" y="468.7" width="14" height="53.3" fill="#1f4e79" stroke="#1f4e79" stroke-width="0.8"/>
+        <rect x="224.8" y="440.6" width="14" height="81.4" fill="#b9cde3" stroke="#1f4e79" stroke-width="0.8"/>
+        <rect x="246.4" y="418.4" width="14" height="103.6" fill="#b9cde3" stroke="#1f4e79" stroke-width="0.8"/>
+        <rect x="267.9" y="403.6" width="14" height="118.4" fill="#b9cde3" stroke="#1f4e79" stroke-width="0.8"/>
+        <rect x="289.5" y="425.8" width="14" height="96.2" fill="#b9cde3" stroke="#1f4e79" stroke-width="0.8"/>
+        <rect x="311.1" y="455.4" width="14" height="66.6" fill="#b9cde3" stroke="#1f4e79" stroke-width="0.8"/>
+        <rect x="332.6" y="477.6" width="14" height="44.4" fill="#b9cde3" stroke="#1f4e79" stroke-width="0.8"/>
+        <rect x="354.2" y="499.8" width="14" height="22.2" fill="#b9cde3" stroke="#1f4e79" stroke-width="0.8"/>
+        <text x="210.2" y="463" text-anchor="middle" font-size="10" font-weight="bold" fill="#1f4e79">jetzt</text>
+        <line x1="66" y1="372" x2="66" y2="522" stroke="#222"/>
+        <line x1="66" y1="522" x2="372" y2="522" stroke="#222"/>
+        <g font-size="10" text-anchor="middle"><text x="80.8" y="537">8</text><text x="145.5" y="537">11</text><text x="210.2" y="537">14</text><text x="274.9" y="537">17</text><text x="339.6" y="537">20</text></g>
+        <text x="372" y="552" text-anchor="end" font-size="10" fill="#555">Uhrzeit</text>
+        <!-- B4 -->
+        <text x="42" y="584" font-size="15" font-weight="bold">Wassertemperatur</text>
+        <g font-size="13"><text x="42" y="608">Sportbecken</text><text x="42" y="634">Nichtschwimmerbecken</text><text x="42" y="660">Kinderbecken</text></g>
+        <g font-size="13" font-weight="bold" text-anchor="end"><text x="370" y="608">27 °C</text><text x="370" y="634">30 °C</text><text x="370" y="660">32 °C</text></g>
+        <g stroke="#ddd"><line x1="42" y1="617" x2="370" y2="617"/><line x1="42" y1="643" x2="370" y2="643"/></g>
+        <!-- B5 -->
+        <rect x="42" y="672" width="328" height="42" rx="8" fill="#1f4e79"/>
+        <text x="206" y="698" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">Ticket für Hallenbad Mitte kaufen</text>
+        <!-- Tab-Bar -->
+        <line x1="26" y1="724" x2="386" y2="724" stroke="#ccc"/>
+        <rect x="66" y="730" width="10" height="10" fill="#1f4e79"/>
+        <g fill="none" stroke="#555"><rect x="156" y="730" width="10" height="10"/><rect x="246" y="730" width="10" height="10"/><rect x="336" y="730" width="10" height="10"/></g>
+        <g font-size="10" text-anchor="middle"><text x="71" y="754" font-weight="bold" fill="#1f4e79">Start</text><text x="161" y="754">Tickets</text><text x="251" y="754">Kurse</text><text x="341" y="754">Konto</text></g>
+        <rect x="156" y="760" width="100" height="4" rx="2" fill="#222"/>
+        <!-- Beschriftungen -->
+        <g stroke="#c2410c" stroke-width="1.2">
+          <line x1="370" y1="151" x2="440" y2="151"/><line x1="372" y1="195" x2="440" y2="195"/><line x1="370" y1="250" x2="440" y2="250"/>
+          <line x1="384" y1="344" x2="440" y2="344"/><line x1="372" y1="448" x2="440" y2="448"/><line x1="378" y1="634" x2="440" y2="634"/>
+          <line x1="370" y1="693" x2="440" y2="693"/><line x1="386" y1="742" x2="440" y2="742"/>
+        </g>
+        <g fill="#c2410c">
+          <circle cx="370" cy="151" r="2.5"/><circle cx="372" cy="195" r="2.5"/><circle cx="370" cy="250" r="2.5"/><circle cx="384" cy="344" r="2.5"/>
+          <circle cx="372" cy="448" r="2.5"/><circle cx="378" cy="634" r="2.5"/><circle cx="370" cy="693" r="2.5"/><circle cx="386" cy="742" r="2.5"/>
+        </g>
+        <g font-size="12">
+          <text x="446" y="148"><tspan font-weight="bold">B1</tspan> Dropdown zur Auswahl des Bades</text>
+          <text x="446" y="163">(alternativ: drei Tabs)</text>
+          <text x="446" y="192"><tspan font-weight="bold">B6</tspan> Stand der Daten und</text>
+          <text x="446" y="207">Aktualisieren-Symbol ↻</text>
+          <text x="446" y="247"><tspan font-weight="bold">B2</tspan> aktuelle Auslastung als Anzahl,</text>
+          <text x="446" y="262">Prozent, Balken und Text</text>
+          <text x="446" y="341"><tspan font-weight="bold">B3</tspan> Tag wählen: heute bis</text>
+          <text x="446" y="356">6 Tage im Voraus (Chips)</text>
+          <text x="446" y="445"><tspan font-weight="bold">B3</tspan> Prognose als Säulendiagramm,</text>
+          <text x="446" y="460">aktuelle Stunde hervorgehoben,</text>
+          <text x="446" y="475">Achsen beschriftet</text>
+          <text x="446" y="638"><tspan font-weight="bold">B4</tspan> Wassertemperatur je Becken</text>
+          <text x="446" y="690"><tspan font-weight="bold">B5</tspan> Primäraktion: direkt zum</text>
+          <text x="446" y="705">Ticketkauf für das gewählte Bad</text>
+          <text x="446" y="746">Tab-Bar der App (Navigation)</text>
+        </g>
+      </svg>
+      <figcaption>Abb. L-2: Musterlösung Seite „Auslastung“ (Smartphone, 360 × 740)</figcaption>
+    </figure>
+    <div class="bewertung"><strong>Bewertung (8 P):</strong> je 1 P für B1 Auswahl des Bades · B2 aktuelle Auslastung mit Anzahl <em>und</em> Prozent · B3 Auswahl des Tages (heute bis +6) · B3 stündliche Prognose in der Darstellungsform aus bb) mit beschrifteten Achsen · B4 Wassertemperatur je Becken · B5 Schaltfläche zum Ticketkauf · B6 Stand der Daten und Aktualisieren; 1 P für die Gesamtgestaltung (sinnvolle Reihenfolge, Beschriftungen und Beispieldaten, Primäraktion hervorgehoben, Auslastung nicht nur über Farbe). Ebenfalls richtig: Bad als Tabs bzw. Segmented Control, Tag als Datumsauswahl, aktuelle Auslastung als Tacho oder Ringdiagramm mit Zahl, Prognose als Liniendiagramm, Aktualisieren per „Nach unten ziehen“ (beschriftet).</div>
+    <p><strong>Erklärung:</strong> Anders als in S26 T1 A4cb (dort stehen 6 P nur einmal für die ganze Aufgabe) stehen die Punkte hier hinter den Anforderungen. Typische Punktverluste: nur Prozent statt „Anzahl und Prozent“ (B2), Diagramm ohne Tagesauswahl (B3), Zeitstempel vergessen (B6). Die Tab-Bar ist nicht verlangt, schadet aber nicht.</p>
+  </div><p class="ap2-loesung-link"><a href="09_Benutzeroberflaeche_Loesungen.html#L-GUI-01-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== GUI-02 ===================== -->
   <h3 id="a-02">GUI-02 · Barrierefreiheit</h3>
@@ -1461,6 +1709,18 @@
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 3ab (Barrierefreiheit erläutern)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-GUI-02-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe GUI-02.1 · 6 Punkte</div>
+    <h4>a) Begriff (2 P)</h4>
+    <div class="muster"><p>Barrierefreie Software kann von allen Menschen – auch von Menschen mit Behinderungen (z. B. Seh-, Hör-, motorischen oder kognitiven Einschränkungen) und von älteren Menschen – in der üblichen Weise, ohne besondere Erschwernis und grundsätzlich ohne fremde Hilfe genutzt werden. Dazu müssen Inhalte wahrnehmbar, bedienbar und verständlich sein und mit Hilfsmitteln wie Screenreader, Bildschirmlupe oder Tastatur funktionieren.</p></div>
+    <div class="bewertung">1 P für den Kern („für alle nutzbar, ohne fremde Hilfe bzw. besondere Erschwernis“), 1 P für den Bezug auf Einschränkungen oder Hilfsmittel. „Rollstuhlgerecht“ oder „ohne Treppen“ allein: 0 P.</div>
+    <h4>b) WCAG-Prinzipien (2 P)</h4>
+    <div class="muster"><p>wahrnehmbar · bedienbar · verständlich · robust</p></div>
+    <div class="bewertung">je 0,5 P; die englischen Begriffe (perceivable, operable, understandable, robust) werden akzeptiert.</div>
+    <h4>c) Personengruppen (2 P)</h4>
+    <div class="muster"><p>Vier von: blinde Menschen · sehbehinderte Menschen · Menschen mit Farbfehlsichtigkeit · gehörlose und schwerhörige Menschen · Menschen mit motorischen Einschränkungen (z. B. Zittern, Lähmungen) · Menschen mit kognitiven Einschränkungen oder Lernschwierigkeiten · ältere Menschen (laut D3 eine Zielgruppe) · Menschen mit geringen Deutschkenntnissen (z. B. Touristen) · vorübergehend oder situativ eingeschränkte Menschen (z. B. grelles Sonnenlicht im Freibad, nasse Hände, Arm im Gips).</p></div>
+    <div class="bewertung">je 0,5 P. Zwei Nennungen derselben Gruppe („Blinde“, „Sehbehinderte“) zählen einzeln, „Behinderte“ allein nur einmal.</div>
+  </div><p class="ap2-loesung-link"><a href="09_Benutzeroberflaeche_Loesungen.html#L-GUI-02-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="GUI-02-2">
     <div class="kopf">
@@ -1484,6 +1744,28 @@
     </table>
     <p class="quelle">Angelehnt an: S26 Teil 1, Aufgabe 4b (Anforderungen und Maßnahmen) und W22 Teil 1, Aufgabe 3b (inklusives Design)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-GUI-02-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe GUI-02.2 · 12 Punkte</div>
+    <h4>a) Rückmeldungen F1 bis F6 (8 P, vier verlangt)</h4>
+    <table class="kompakt">
+      <thead><tr><th class="nr">Nr.</th><th style="width:42%">verletzte Anforderung</th><th>geeignete Maßnahme</th></tr></thead>
+      <tr><td class="nr">F1</td><td>Texte müssen auch für sehbehinderte und ältere Menschen lesbar sein: ausreichender Kontrast und Vergrößerung ohne Informationsverlust (wahrnehmbar).</td><td>Kontrastverhältnis mind. 4,5 : 1 (dunkle Schrift statt Hellgrau); relative Schriftgrößen, Systemschriftgröße übernehmen; fließendes, responsives Layout, das bis 200 % Vergrößerung nicht überlappt.</td></tr>
+      <tr><td class="nr">F2</td><td>Informationen dürfen nicht allein über Farbe vermittelt werden (wahrnehmbar).</td><td>Belegung zusätzlich als Text („ausgebucht“, „3 Plätze frei“) und Symbol (✕ / ✓) oder Muster; farbfehlsichtigen-freundliche Farben (z. B. Blau/Orange).</td></tr>
+      <tr><td class="nr">F3</td><td>Bedienelemente und informative Bilder brauchen eine Textalternative bzw. einen zugänglichen Namen, damit Screenreader sie vorlesen können (wahrnehmbar, robust).</td><td>Schaltflächen mit sichtbarem Text oder zugänglichem Namen (z. B. <code>aria-label</code>, in Apps <code>contentDescription</code>/<code>accessibilityLabel</code>); aussagekräftige Alternativtexte („Sportbecken mit acht Bahnen“), dekorative Bilder ausblenden; Test mit TalkBack und VoiceOver.</td></tr>
+      <tr><td class="nr">F4</td><td>Die Anwendung muss auch bei eingeschränkter Feinmotorik und ohne Maus vollständig bedienbar sein (bedienbar).</td><td>Touch-Ziele mind. 44 × 44 pt bzw. 48 × 48 dp mit Abstand; alle Elemente per Tabulator in logischer Reihenfolge erreichbar, sichtbarer Fokus; „Bezahlen“ als echtes Button-Element.</td></tr>
+      <tr><td class="nr">F5</td><td>Audio- und Videoinhalte brauchen Alternativen für gehörlose Menschen (wahrnehmbar).</td><td>Untertitel für das Video, Textfassung der Baderegeln; ggf. Video in Deutscher Gebärdensprache.</td></tr>
+      <tr><td class="nr">F6</td><td>Inhalte müssen verständlich sein – auch für Menschen mit geringen Deutschkenntnissen oder Lernschwierigkeiten (verständlich).</td><td>Tariftexte in einfacher Sprache mit kurzen Sätzen und Beispielen („Ermäßigt zahlen: Schüler, Studierende, Menschen mit Schwerbehindertenausweis“); Fachbegriffe erklären; englische Fassung (Zielgruppe Touristen, D3); ggf. Leichte Sprache.</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je Zeile 2 P – 1 P für die Anforderung (sinngemäß, mit Bezug zur Rückmeldung; das WCAG-Prinzip ist nicht verlangt), 1 P für eine konkrete, passende Maßnahme. Eine Maßnahme, die nur die Anforderung wiederholt („Kontrast verbessern“), gibt 0,5 P.</div>
+
+    <h4>b) Inklusives Design (4 P)</h4>
+    <table class="kompakt">
+      <thead><tr><th style="width:22%">Kriterium</th><th>Beispiele (je zwei verlangt)</th></tr></thead>
+      <tr><td>Schriftart / Schriftbild</td><td>serifenlose, gut lesbare Schrift mit unterscheidbaren Zeichen · ausreichende Grundgröße (ca. 16 px) · Schriftgröße vom Nutzer einstellbar (Systemeinstellung) · Zeilenabstand ca. 1,5-fach · linksbündig, kein Blocksatz · keine langen Texte in Großbuchstaben oder kursiv · klare Hierarchie durch Größe und Fettung</td></tr>
+      <tr><td>Farbgebung</td><td>hoher Kontrast (mind. 4,5 : 1) · Farbe nie alleiniger Informationsträger · Rot-Grün-Kombinationen vermeiden · Dunkel- bzw. Hochkontrastmodus anbieten · einheitliche Farbbedeutungen · keine grellen, flackernden Farben</td></tr>
+    </table>
+    <div class="bewertung">je passendem Beispiel 1 P, höchstens zwei je Kriterium.</div>
+  </div><p class="ap2-loesung-link"><a href="09_Benutzeroberflaeche_Loesungen.html#L-GUI-02-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="GUI-02-3">
     <div class="kopf">
@@ -1505,6 +1787,148 @@
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: S26 Teil 1, Aufgabe 4b und S24 Teil 1, Aufgabe 4ba (Mängel eines Mockups beschreiben)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-GUI-02-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe GUI-02.3 · 16 Punkte</div>
+    <h4>a) Gesetzliche Grundlage (2 P)</h4>
+    <div class="muster"><p>Seit dem 28.06.2025 gilt das <strong>Barrierefreiheitsstärkungsgesetz (BFSG)</strong>, mit dem Deutschland den European Accessibility Act der EU umsetzt. Es verpflichtet auch private Unternehmen, bestimmte Produkte und Dienstleistungen für Verbraucher barrierefrei anzubieten. Dazu gehören Dienstleistungen im elektronischen Geschäftsverkehr, also auch der Online-Verkauf von Tickets und die Online-Buchung von Kursen über Website und App. Die Ausnahme für Kleinstunternehmen greift nicht, weil die AquaVita 140 Beschäftigte hat.</p></div>
+    <div class="bewertung">1 P für das BFSG (oder den European Accessibility Act), 1 P für die Begründung (Online-Verkauf bzw. Buchung für Verbraucher; keine Kleinstunternehmen-Ausnahme). Die BITV 2.0 gilt nur für öffentliche Stellen (0 P).</div>
+
+    <h4>b) Barrieren im Entwurf (10 P, vier verlangt)</h4>
+    <figure>
+      <svg viewBox="0 0 760 610" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <!-- Browserfenster -->
+        <rect x="1" y="1" width="758" height="608" rx="6" fill="#fff" stroke="#222" stroke-width="1.5"/>
+        <path d="M1.75,33 V7 a5.25,5.25 0 0 1 5.25,-5.25 H753 a5.25,5.25 0 0 1 5.25,5.25 V33 Z" fill="#e8ecf1"/>
+        <path d="M12,33 V11 a4,4 0 0 1 4,-4 H218 a4,4 0 0 1 4,4 V33" fill="#fff" stroke="#999"/>
+        <line x1="1" y1="33" x2="12" y2="33" stroke="#999"/>
+        <line x1="222" y1="33" x2="759" y2="33" stroke="#999"/>
+        <text x="24" y="25" font-size="12">AquaVita – Kurse</text>
+        <text x="208" y="25" font-size="12" fill="#666" text-anchor="end">×</text>
+        <g fill="#fff" stroke="#888"><circle cx="712" cy="17" r="5"/><circle cx="728" cy="17" r="5"/><circle cx="744" cy="17" r="5"/></g>
+        <text x="14" y="55" font-size="15" fill="#555">←</text>
+        <text x="36" y="55" font-size="15" fill="#bbb">→</text>
+        <text x="58" y="55" font-size="15" fill="#555">↻</text>
+        <rect x="86" y="40" width="620" height="20" rx="10" fill="#f3f4f6" stroke="#c8c8c8"/>
+        <text x="100" y="54" font-size="12" fill="#333">https://www.aquavita-freizeit.de/kurse/buchen?id=4711</text>
+        <text x="738" y="55" font-size="14" fill="#555" text-anchor="middle">⋮</text>
+        <line x1="1" y1="64" x2="759" y2="64" stroke="#c8c8c8"/>
+        <!-- Kopf der Website -->
+        <path d="M20,91 q6,-8 12,0 t12,0 t12,0" stroke="#1f4e79" stroke-width="2.5" fill="none"/>
+        <text x="62" y="93" font-size="19" font-weight="bold" fill="#1f4e79">AquaVita</text>
+        <g font-size="13"><text x="260" y="90">Start</text><text x="318" y="90">Bäder</text><text x="378" y="90">Tickets</text><text x="446" y="90">Kurse</text><text x="502" y="90">Kontakt</text></g>
+        <text x="740" y="90" font-size="13" text-anchor="end">Anmelden</text>
+        <line x1="20" y1="106" x2="740" y2="106" stroke="#ddd"/>
+        <!-- Bildkarussell -->
+        <rect x="20" y="114" width="720" height="104" fill="#f3f4f6" stroke="#999"/>
+        <line x1="20" y1="114" x2="740" y2="218" stroke="#d0d0d0"/>
+        <line x1="740" y1="114" x2="20" y2="218" stroke="#d0d0d0"/>
+        <rect x="220" y="138" width="320" height="48" rx="4" fill="#fff" stroke="#999"/>
+        <text x="380" y="159" text-anchor="middle" font-size="14" font-weight="bold">Saunawelt: 20 % Rabatt im November!</text>
+        <text x="380" y="177" text-anchor="middle" font-size="11" fill="#1f4e79">Jetzt Gutschein sichern ›</text>
+        <text x="38" y="175" font-size="26" fill="#666" text-anchor="middle">‹</text>
+        <text x="722" y="175" font-size="26" fill="#666" text-anchor="middle">›</text>
+        <circle cx="368" cy="206" r="4" fill="#555"/>
+        <circle cx="380" cy="206" r="4" fill="#fff" stroke="#555"/>
+        <circle cx="392" cy="206" r="4" fill="#fff" stroke="#555"/>
+        <!-- Kursinfo -->
+        <text x="20" y="250" font-size="11" fill="#b4b4b4">Aquafitness 50+ · Hallenbad Mitte · 45 Min. · Kursleitung: S. Brandt · Infos zum Kurs: <tspan text-decoration="underline">hier klicken ↗</tspan></text>
+        <!-- Fehlermeldung -->
+        <rect x="20" y="264" width="720" height="24" fill="#fdecec"/>
+        <text x="30" y="281" font-size="12" fill="#c62828">Fehler 422 – Eingabe ungültig. Pflichtfelder sind rot markiert.</text>
+        <!-- Formular links -->
+        <rect x="20" y="300" width="170" height="32" fill="#fff" stroke="#999"/>
+        <text x="30" y="321" font-size="12" fill="#9a9a9a">TT.MM.JJJJ</text>
+        <g fill="#fff" stroke="#999">
+          <rect x="20" y="344" width="84" height="30" rx="15"/><rect x="112" y="344" width="84" height="30" rx="15"/><rect x="204" y="344" width="84" height="30" rx="15"/>
+        </g>
+        <g font-size="12"><text x="34" y="364">09:00</text><text x="126" y="364">11:00</text><text x="218" y="364">17:30</text></g>
+        <circle cx="86" cy="359" r="5" fill="#2e7d32"/>
+        <circle cx="178" cy="359" r="5" fill="#c62828"/>
+        <circle cx="270" cy="359" r="5" fill="#2e7d32"/>
+        <rect x="20" y="388" width="345" height="32" fill="#fff" stroke="#999"/>
+        <text x="30" y="409" font-size="12" fill="#9a9a9a">Vor- und Nachname</text>
+        <rect x="20" y="432" width="345" height="32" fill="#fff" stroke="#c62828" stroke-width="2"/>
+        <text x="30" y="453" font-size="12" fill="#9a9a9a">Geburtsdatum</text>
+        <!-- Formular rechts -->
+        <text x="395" y="310" font-size="11" fill="#b4b4b4">Personen</text>
+        <line x1="395" y1="324" x2="640" y2="324" stroke="#c8c8c8" stroke-width="4" stroke-linecap="round"/>
+        <line x1="395" y1="324" x2="452" y2="324" stroke="#1f4e79" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="452" cy="324" r="9" fill="#fff" stroke="#555" stroke-width="1.5"/>
+        <rect x="395" y="348" width="14" height="14" fill="#1f4e79"/>
+        <path d="M398,355 l3,3 l6,-7" stroke="#fff" stroke-width="2" fill="none"/>
+        <text x="417" y="360" font-size="12">Ja, Newsletter mit Angeboten erhalten</text>
+        <rect x="395" y="376" width="9" height="9" fill="#fff" stroke="#999"/>
+        <text x="410" y="384" font-size="10" fill="#b4b4b4">AGB gelesen</text>
+        <rect x="395" y="400" width="130" height="48" fill="#eee" stroke="#999"/>
+        <g font-size="21" font-style="italic" fill="#555" font-family="Georgia, serif">
+          <text x="405" y="432" transform="rotate(-12 405 432)">x</text>
+          <text x="428" y="428" transform="rotate(10 428 428)">7</text>
+          <text x="451" y="436" transform="rotate(-8 451 436)">R</text>
+          <text x="475" y="429" transform="rotate(14 475 429)">q</text>
+          <text x="498" y="434" transform="rotate(-10 498 434)">2</text>
+        </g>
+        <path d="M398,418 C430,448 470,403 522,433" stroke="#777" fill="none"/>
+        <path d="M400,438 C440,408 480,453 520,413" stroke="#999" fill="none"/>
+        <rect x="535" y="408" width="170" height="32" fill="#fff" stroke="#999"/>
+        <text x="545" y="429" font-size="12" fill="#9a9a9a">Zeichen eingeben</text>
+        <text x="722" y="430" font-size="15" fill="#888" text-anchor="middle">↻</text>
+        <!-- Schaltflächen -->
+        <rect x="20" y="484" width="180" height="44" rx="4" fill="#1f4e79"/>
+        <text x="110" y="512" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">Zurücksetzen</text>
+        <rect x="208" y="492" width="80" height="28" rx="3" fill="#fff" stroke="#c8c8c8"/>
+        <text x="248" y="511" text-anchor="middle" font-size="12" fill="#999">Submit</text>
+        <g fill="none" stroke="#999" stroke-width="1.3">
+          <path d="M672,502 c-2,-4 -8,-4 -8,1 c0,4 8,9 8,9 c0,0 8,-5 8,-9 c0,-5 -6,-5 -8,-1 z"/>
+          <circle cx="694" cy="506" r="2.2"/><circle cx="704" cy="500" r="2.2"/><circle cx="704" cy="512" r="2.2"/>
+          <line x1="696" y1="505" x2="702" y2="501"/><line x1="696" y1="507" x2="702" y2="511"/>
+          <rect x="718" y="502" width="16" height="8"/><rect x="721" y="497" width="10" height="5"/><rect x="721" y="507" width="10" height="6" fill="#fff"/>
+        </g>
+        <!-- Fußzeile -->
+        <line x1="20" y1="556" x2="740" y2="556" stroke="#ddd"/>
+        <text x="20" y="580" font-size="10" fill="#b4b4b4">© AquaVita Freizeit GmbH · Impressum · Datenschutz · AGB</text>
+              <!-- Markierungen -->
+        <g font-size="10" font-weight="bold" text-anchor="middle" fill="#fff">
+          <circle cx="110" cy="228" r="11.5" fill="#b91c1c" stroke="#fff" stroke-width="1.5"/><text x="110" y="231.5">B1</text>
+          <circle cx="302" cy="359" r="11.5" fill="#b91c1c" stroke="#fff" stroke-width="1.5"/><text x="302" y="362.5">B2</text>
+          <circle cx="726" cy="276" r="11.5" fill="#b91c1c" stroke="#fff" stroke-width="1.5"/><text x="726" y="279.5">B3</text>
+          <circle cx="380" cy="404" r="11.5" fill="#b91c1c" stroke="#fff" stroke-width="1.5"/><text x="380" y="407.5">B4</text>
+          <circle cx="540" cy="392" r="11.5" fill="#b91c1c" stroke="#fff" stroke-width="1.5"/><text x="540" y="395.5">B5</text>
+          <circle cx="712" cy="134" r="11.5" fill="#b91c1c" stroke="#fff" stroke-width="1.5"/><text x="712" y="137.5">B6</text>
+          <circle cx="466" cy="228" r="11.5" fill="#b91c1c" stroke="#fff" stroke-width="1.5"/><text x="466" y="231.5">B7</text>
+          <circle cx="664" cy="324" r="11.5" fill="#b91c1c" stroke="#fff" stroke-width="1.5"/><text x="664" y="327.5">B8</text>
+          <circle cx="204" cy="316" r="11.5" fill="#b91c1c" stroke="#fff" stroke-width="1.5"/><text x="204" y="319.5">B9</text>
+          <circle cx="640" cy="506" r="11.5" fill="#b91c1c" stroke="#fff" stroke-width="1.5"/><text x="640" y="509.5">B10</text>
+        </g>
+      </svg>
+      <figcaption>Abb. L-3: Entwurf aus Anlage 4 mit markierten Barrieren B1–B10</figcaption>
+    </figure>
+    <table class="kompakt">
+      <thead><tr><th class="nr">Nr.</th><th style="width:38%">Barriere im Entwurf</th><th style="width:13%">Prinzip</th><th>Maßnahme</th></tr></thead>
+      <tr><td class="nr">B1</td><td>Kursinfo, „Personen“, „AGB gelesen“ und Fußzeile in kleiner hellgrauer Schrift (Kontrast ca. 2 : 1) – für sehbehinderte und ältere Menschen kaum lesbar</td><td>wahrnehmbar</td><td>Kontrast mind. 4,5 : 1, Schriftgröße ca. 16 px, über die Browsereinstellung vergrößerbar</td></tr>
+      <tr><td class="nr">B2</td><td>freie und ausgebuchte Uhrzeiten nur durch grünen bzw. roten Punkt unterscheidbar – Farbfehlsichtige und Screenreader-Nutzer erhalten die Information nicht</td><td>wahrnehmbar</td><td>zusätzlich Text („3 Plätze frei“, „ausgebucht“) und Symbol; ausgebuchte Termine deaktivieren und benennen</td></tr>
+      <tr><td class="nr">B3</td><td>Fehler nur durch roten Rahmen erkennbar; Meldung „Fehler 422 – Eingabe ungültig“ ohne Feldbezug</td><td>wahrnehmbar, verständlich</td><td>Fehlermeldung als Text mit Symbol direkt am Feld, mit Korrekturhinweis; für Screenreader mit dem Feld verknüpft und angesagt; Fokus auf das erste fehlerhafte Feld</td></tr>
+      <tr><td class="nr">B4</td><td>Eingabefelder nur mit Platzhaltertext statt Beschriftung – verschwindet beim Tippen, wird nicht zuverlässig vorgelesen</td><td>verständlich (auch robust)</td><td>dauerhaft sichtbare Labels, im Code mit dem Feld verknüpft; Pflichtfelder als Text kennzeichnen</td></tr>
+      <tr><td class="nr">B5</td><td>Bild-CAPTCHA ohne Alternative – blinde und stark sehbehinderte Menschen können nicht buchen</td><td>wahrnehmbar</td><td>auf das CAPTCHA verzichten (unsichtbarer Bot-Schutz, z. B. verstecktes Feld, Zeit- und Mengenbegrenzung) oder barrierefreie Alternative (Audio, einfache Frage)</td></tr>
+      <tr><td class="nr">B6</td><td>Bildkarussell wechselt automatisch alle 3 s ohne Pause – lenkt ab, Inhalte verschwinden zu schnell</td><td>bedienbar</td><td>kein automatischer Wechsel oder Pause-/Stopp-Schaltfläche; Wechsel stoppt bei Fokus; Alternativtexte für die Bilder</td></tr>
+      <tr><td class="nr">B7</td><td>Linktext „hier klicken“ nicht aussagekräftig (in der Linkliste des Screenreaders sinnlos); öffnet ohne Ankündigung ein neues Fenster</td><td>verständlich (auch bedienbar)</td><td>Linktext „Kursbeschreibung Aquafitness 50+ (PDF, 120 kB)“; im selben Fenster öffnen oder darauf hinweisen</td></tr>
+      <tr><td class="nr">B8</td><td>Schieberegler für die Personenanzahl: schwer zu treffen, per Tastatur kaum gezielt einstellbar, Wert weder sichtbar noch ansagbar</td><td>bedienbar</td><td>Stepper mit großen +/−-Schaltflächen oder Auswahlliste; Wert sichtbar und für Screenreader ausgegeben</td></tr>
+      <tr><td class="nr">B9</td><td>Datumsformat „TT.MM.JJJJ“ nur als Platzhalter, freie Eingabe fehleranfällig</td><td>verständlich</td><td>Formatangabe im Label, tolerante Eingabe; besser die Termine als Liste zur Auswahl anbieten</td></tr>
+      <tr><td class="nr">B10</td><td>Symbole „merken, teilen, drucken“ ohne Text und nur 16 × 16 px groß – schwer zu treffen, für Screenreader ohne Namen</td><td>bedienbar, wahrnehmbar</td><td>Zielgröße mind. 24 × 24 px (besser 44 × 44 px) mit Abstand; sichtbare Beschriftung bzw. zugänglicher Name</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je Zeile 2,5 P – 1 P für die Barriere (Ort im Entwurf und Auswirkung bzw. betroffene Gruppe), 0,5 P für ein passendes Prinzip (bei mehreren möglichen Prinzipien wird jede begründete Zuordnung akzeptiert), 1 P für eine konkrete Maßnahme. Reine Usability-Mängel ohne Barrierebezug (z. B. „Werbung lenkt ab“ ohne Bezug auf den automatischen Wechsel) zählen hier nicht.</div>
+
+    <h4>c) Prüfverfahren (4 P)</h4>
+    <div class="muster">
+      <p>Zwei der folgenden Verfahren:</p>
+      <ul>
+        <li><strong>Automatisierte Prüfung</strong> mit Werkzeugen wie axe, WAVE oder Lighthouse: Die Seiten werden automatisch auf messbare Kriterien untersucht (fehlende Alternativtexte, zu geringe Kontraste, fehlende Labels, Überschriftenstruktur). Schnell und wiederholbar, z. B. bei jedem Build; findet aber nur einen Teil der Probleme.</li>
+        <li><strong>Manuelle Prüfung durch Fachleute</strong> entlang der WCAG-Kriterien (z. B. nach dem Prüfverfahren „BITV-Test“): die Seite nur mit der Tastatur bedienen, mit einem Screenreader (NVDA, VoiceOver, TalkBack) durchgehen, auf 200 % vergrößern, Kontraste messen, Farbfehlsichtigkeit simulieren.</li>
+        <li><strong>Nutzertest mit Menschen mit Behinderungen</strong> (z. B. blinde Screenreader-Nutzer, Seniorinnen): Sie lösen typische Aufgaben wie „Buchen Sie den Kurs am Mittwoch“; Probleme werden beobachtet und protokolliert.</li>
+        <li><strong>Prüfung durch eine externe Prüfstelle</strong>, die einen Prüfbericht erstellt.</li>
+      </ul>
+    </div>
+    <div class="bewertung">je Verfahren 2 P (1 P Verfahren, 1 P Beschreibung des Ablaufs). Nur „testen“ ohne Verfahren: 0 P.</div>
+  </div><p class="ap2-loesung-link"><a href="09_Benutzeroberflaeche_Loesungen.html#L-GUI-02-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== GUI-03 ===================== -->
   <h3 id="a-03">GUI-03 · Usability &amp; Software-Ergonomie</h3>
@@ -1531,6 +1955,27 @@
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 3aa (Usability und User Experience)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-GUI-03-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe GUI-03.1 · 6 Punkte</div>
+    <h4>a) Usability und User Experience (2 P)</h4>
+    <div class="muster"><p><strong>Usability</strong> (Gebrauchstauglichkeit) beschreibt, wie effektiv, effizient und zufriedenstellend bestimmte Nutzer in einem bestimmten Nutzungskontext ihre Ziele mit der App erreichen – also die Qualität <em>während</em> der Nutzung. <strong>User Experience</strong> ist weiter gefasst: Sie umfasst alle Wahrnehmungen und Reaktionen <em>vor, während und nach</em> der Nutzung, z. B. Erwartungen, Gefühle, Ästhetik, Vertrauen und Erinnerung. Usability ist ein Teil der UX.</p></div>
+    <div class="bewertung">je Begriff 1 P; der Unterschied (UX umfasst mehr als die eigentliche Nutzung) muss deutlich werden.</div>
+    <h4>b) Zuordnung (3 P)</h4>
+    <table class="kompakt kurz">
+      <thead><tr><th class="nr">Nr.</th><th style="width:52%">Eigenschaft (Kurzform)</th><th>Grundsatz</th></tr></thead>
+      <tr><td class="nr">1</td><td>Gutscheincodes: Leerzeichen und O/0 werden abgefangen</td><td>Robustheit gegen Benutzerfehler (Fehlertoleranz)</td></tr>
+      <tr><td class="nr">2</td><td>„Schritt 2 von 3: Zusatzleistungen wählen“</td><td>Selbstbeschreibungsfähigkeit</td></tr>
+      <tr><td class="nr">3</td><td>Videos anhalten, zurückspulen, schneller abspielen</td><td>Steuerbarkeit</td></tr>
+      <tr><td class="nr">4</td><td>nur die für den Kurs nötigen Angaben werden abgefragt</td><td>Aufgabenangemessenheit</td></tr>
+      <tr><td class="nr">5</td><td>Logo oben links führt zur Startseite</td><td>Erwartungskonformität</td></tr>
+      <tr><td class="nr">6</td><td>Tour stellt neue Funktionen vor</td><td>Erlernbarkeit (Lernförderlichkeit)</td></tr>
+    </table>
+    <div class="bewertung">je richtiger Zuordnung 0,5 P; die Bezeichnungen der Fassung von 2006 werden akzeptiert.</div>
+    <h4>c) Fehlender Grundsatz (1 P)</h4>
+    <div class="muster"><p><strong>Benutzerbindung</strong> (neu seit 2020): Die App ist einladend und motivierend und schafft Vertrauen, z. B. durch eine ansprechende Gestaltung, eine persönliche Begrüßung, transparente Preise oder einen Glückwunsch mit Bonus zum zehnten Besuch.</p></div>
+    <div class="bewertung">0,5 P Grundsatz, 0,5 P passendes Beispiel.</div>
+    <p><strong>Erklärung:</strong> Nr. 1 ist keine Aufgabenangemessenheit, weil es um das Abfangen von <em>Fehleingaben</em> geht. Nr. 3 gehört zur Steuerbarkeit, weil der Nutzer Tempo und Ablauf bestimmt. Die frühere Individualisierbarkeit ist kein eigener Grundsatz mehr und deshalb nicht der gesuchte.</p>
+  </div><p class="ap2-loesung-link"><a href="09_Benutzeroberflaeche_Loesungen.html#L-GUI-03-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="GUI-03-2">
     <div class="kopf">
@@ -1554,6 +1999,28 @@
     </table>
     <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 3ac (Möglichkeiten zum Test der Benutzerfreundlichkeit)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-GUI-03-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe GUI-03.2 · 12 Punkte</div>
+    <h4>a) Rückmeldungen F7 bis F12 (8 P, vier verlangt)</h4>
+    <table class="kompakt">
+      <thead><tr><th class="nr">Nr.</th><th style="width:25%">verletzter Grundsatz</th><th>Verbesserung für die neue App</th></tr></thead>
+      <tr><td class="nr">F7</td><td>Robustheit gegen Benutzerfehler (Fehlertoleranz)</td><td>Eingaben bleiben nach einem Fehler erhalten; das fehlerhafte Feld wird markiert und verständlich erklärt („Das Kind muss bei Kursbeginn mindestens 4 Jahre alt sein“); Geburtsdatum per Datumsauswahl, Prüfung schon bei der Eingabe.</td></tr>
+      <tr><td class="nr">F8</td><td>Selbstbeschreibungsfähigkeit</td><td>nach dem Bezahlen eine Bestätigungsseite („Kauf erfolgreich“, Ticketnummer, QR-Code, Hinweis auf die E-Mail) und eine Bestätigungs-E-Mail; während der Zahlung eine Ladeanzeige.</td></tr>
+      <tr><td class="nr">F9</td><td>Aufgabenangemessenheit</td><td>Schnellkauf häufiger Tickets direkt von der Startseite („Tageskarte Hallenbad“) in wenigen Schritten; Adresse im Kundenkonto speichern und vorbelegen; nur nötige Daten abfragen.</td></tr>
+      <tr><td class="nr">F10</td><td>Erwartungskonformität</td><td>einheitliche Begriffe in App und Website (überall „Warenkorb“), Schaltflächen immer an derselben Stelle („Weiter“ rechts unten); gemeinsamer Styleguide bzw. Designsystem.</td></tr>
+      <tr><td class="nr">F11</td><td>Steuerbarkeit</td><td>Zurückgehen ohne Datenverlust (Auswahl zwischenspeichern), sichtbare Schaltfläche „Abbrechen“ in jedem Schritt, Kauf später fortsetzen.</td></tr>
+      <tr><td class="nr">F12</td><td>Erlernbarkeit (Lernförderlichkeit)</td><td>kurze Einführung beim ersten Öffnen; Hilfe-Symbol bzw. Erklärung mit Beispiel direkt an der Wertkarte; FAQ.</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je Zeile 2 P – 1 P Grundsatz, 1 P konkrete, passende Verbesserung. Begründete andere Zuordnungen werden akzeptiert, z. B. F8 Erwartungskonformität (man erwartet eine Bestätigung), F11 Robustheit gegen Benutzerfehler (Datenverlust), F9 Benutzerbindung (Stammgast wird verärgert).</div>
+
+    <h4>b) Usability-Tests (4 P)</h4>
+    <table class="kompakt">
+      <thead><tr><th style="width:22%">Zeitpunkt</th><th>Testverfahren und Beschreibung (je ein Verfahren verlangt)</th></tr></thead>
+      <tr><td>vor dem Go-live (klickbarer Prototyp)</td><td><strong>Thinking-Aloud-Test:</strong> Etwa fünf Testpersonen aus den Zielgruppen (z. B. Senioren, Familien) lösen am Klickprototyp typische Aufgaben („Kaufen Sie eine Familienkarte für Samstag“) und sprechen dabei ihre Gedanken laut aus. Ein Moderator beobachtet, protokolliert Probleme und zeichnet ggf. Bildschirm und Ton auf.<br><span class="klein">Ebenfalls richtig: heuristische Evaluation bzw. Expertenreview, Eye-Tracking, Cognitive Walkthrough.</span></td></tr>
+      <tr><td>nach dem Go-live (laufender Betrieb)</td><td><strong>A/B-Test:</strong> Zwei Varianten einer Seite (z. B. Ticketkauf mit drei oder mit vier Schritten) werden zufällig verschiedenen Nutzergruppen gezeigt. Verglichen werden Kennzahlen wie Abschluss- oder Abbruchquote; die bessere Variante wird übernommen.<br><span class="klein">Ebenfalls richtig: Nutzungsanalyse (Web-Analytics, Abbruchstellen), Fragebogen wie SUS bzw. In-App-Feedback.</span></td></tr>
+    </table>
+    <div class="bewertung">je Zeitpunkt 2 P – 1 P für ein passendes Verfahren, 1 P für die Beschreibung des Ablaufs. Ein A/B-Test vor dem Go-live ist nur eingeschränkt sinnvoll (es fehlen echte Nutzer in großer Zahl) und gibt dort höchstens 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="09_Benutzeroberflaeche_Loesungen.html#L-GUI-03-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="GUI-03-3">
     <div class="kopf">
@@ -1598,6 +2065,254 @@
     </div>
     <p class="quelle">Angelehnt an: S24 Teil 1, Aufgabe 4b (Mängel eines Mockups aus UI/UX-Sicht, verbessertes Mockup skizzieren)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-GUI-03-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe GUI-03.3 · 18 Punkte</div>
+    <h4>a) Mängel aus UI/UX-Sicht (8 P, vier verlangt)</h4>
+    <figure>
+      <svg viewBox="0 0 760 610" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <!-- Browserfenster -->
+        <rect x="1" y="1" width="758" height="608" rx="6" fill="#fff" stroke="#222" stroke-width="1.5"/>
+        <path d="M1.75,33 V7 a5.25,5.25 0 0 1 5.25,-5.25 H753 a5.25,5.25 0 0 1 5.25,5.25 V33 Z" fill="#e8ecf1"/>
+        <path d="M12,33 V11 a4,4 0 0 1 4,-4 H218 a4,4 0 0 1 4,4 V33" fill="#fff" stroke="#999"/>
+        <line x1="1" y1="33" x2="12" y2="33" stroke="#999"/>
+        <line x1="222" y1="33" x2="759" y2="33" stroke="#999"/>
+        <text x="24" y="25" font-size="12">AquaVita – Kurse</text>
+        <text x="208" y="25" font-size="12" fill="#666" text-anchor="end">×</text>
+        <g fill="#fff" stroke="#888"><circle cx="712" cy="17" r="5"/><circle cx="728" cy="17" r="5"/><circle cx="744" cy="17" r="5"/></g>
+        <text x="14" y="55" font-size="15" fill="#555">←</text>
+        <text x="36" y="55" font-size="15" fill="#bbb">→</text>
+        <text x="58" y="55" font-size="15" fill="#555">↻</text>
+        <rect x="86" y="40" width="620" height="20" rx="10" fill="#f3f4f6" stroke="#c8c8c8"/>
+        <text x="100" y="54" font-size="12" fill="#333">https://www.aquavita-freizeit.de/kurse/buchen?id=4711</text>
+        <text x="738" y="55" font-size="14" fill="#555" text-anchor="middle">⋮</text>
+        <line x1="1" y1="64" x2="759" y2="64" stroke="#c8c8c8"/>
+        <!-- Kopf der Website -->
+        <path d="M20,91 q6,-8 12,0 t12,0 t12,0" stroke="#1f4e79" stroke-width="2.5" fill="none"/>
+        <text x="62" y="93" font-size="19" font-weight="bold" fill="#1f4e79">AquaVita</text>
+        <g font-size="13"><text x="260" y="90">Start</text><text x="318" y="90">Bäder</text><text x="378" y="90">Tickets</text><text x="446" y="90">Kurse</text><text x="502" y="90">Kontakt</text></g>
+        <text x="740" y="90" font-size="13" text-anchor="end">Anmelden</text>
+        <line x1="20" y1="106" x2="740" y2="106" stroke="#ddd"/>
+        <!-- Bildkarussell -->
+        <rect x="20" y="114" width="720" height="104" fill="#f3f4f6" stroke="#999"/>
+        <line x1="20" y1="114" x2="740" y2="218" stroke="#d0d0d0"/>
+        <line x1="740" y1="114" x2="20" y2="218" stroke="#d0d0d0"/>
+        <rect x="220" y="138" width="320" height="48" rx="4" fill="#fff" stroke="#999"/>
+        <text x="380" y="159" text-anchor="middle" font-size="14" font-weight="bold">Saunawelt: 20 % Rabatt im November!</text>
+        <text x="380" y="177" text-anchor="middle" font-size="11" fill="#1f4e79">Jetzt Gutschein sichern ›</text>
+        <text x="38" y="175" font-size="26" fill="#666" text-anchor="middle">‹</text>
+        <text x="722" y="175" font-size="26" fill="#666" text-anchor="middle">›</text>
+        <circle cx="368" cy="206" r="4" fill="#555"/>
+        <circle cx="380" cy="206" r="4" fill="#fff" stroke="#555"/>
+        <circle cx="392" cy="206" r="4" fill="#fff" stroke="#555"/>
+        <!-- Kursinfo -->
+        <text x="20" y="250" font-size="11" fill="#b4b4b4">Aquafitness 50+ · Hallenbad Mitte · 45 Min. · Kursleitung: S. Brandt · Infos zum Kurs: <tspan text-decoration="underline">hier klicken ↗</tspan></text>
+        <!-- Fehlermeldung -->
+        <rect x="20" y="264" width="720" height="24" fill="#fdecec"/>
+        <text x="30" y="281" font-size="12" fill="#c62828">Fehler 422 – Eingabe ungültig. Pflichtfelder sind rot markiert.</text>
+        <!-- Formular links -->
+        <rect x="20" y="300" width="170" height="32" fill="#fff" stroke="#999"/>
+        <text x="30" y="321" font-size="12" fill="#9a9a9a">TT.MM.JJJJ</text>
+        <g fill="#fff" stroke="#999">
+          <rect x="20" y="344" width="84" height="30" rx="15"/><rect x="112" y="344" width="84" height="30" rx="15"/><rect x="204" y="344" width="84" height="30" rx="15"/>
+        </g>
+        <g font-size="12"><text x="34" y="364">09:00</text><text x="126" y="364">11:00</text><text x="218" y="364">17:30</text></g>
+        <circle cx="86" cy="359" r="5" fill="#2e7d32"/>
+        <circle cx="178" cy="359" r="5" fill="#c62828"/>
+        <circle cx="270" cy="359" r="5" fill="#2e7d32"/>
+        <rect x="20" y="388" width="345" height="32" fill="#fff" stroke="#999"/>
+        <text x="30" y="409" font-size="12" fill="#9a9a9a">Vor- und Nachname</text>
+        <rect x="20" y="432" width="345" height="32" fill="#fff" stroke="#c62828" stroke-width="2"/>
+        <text x="30" y="453" font-size="12" fill="#9a9a9a">Geburtsdatum</text>
+        <!-- Formular rechts -->
+        <text x="395" y="310" font-size="11" fill="#b4b4b4">Personen</text>
+        <line x1="395" y1="324" x2="640" y2="324" stroke="#c8c8c8" stroke-width="4" stroke-linecap="round"/>
+        <line x1="395" y1="324" x2="452" y2="324" stroke="#1f4e79" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="452" cy="324" r="9" fill="#fff" stroke="#555" stroke-width="1.5"/>
+        <rect x="395" y="348" width="14" height="14" fill="#1f4e79"/>
+        <path d="M398,355 l3,3 l6,-7" stroke="#fff" stroke-width="2" fill="none"/>
+        <text x="417" y="360" font-size="12">Ja, Newsletter mit Angeboten erhalten</text>
+        <rect x="395" y="376" width="9" height="9" fill="#fff" stroke="#999"/>
+        <text x="410" y="384" font-size="10" fill="#b4b4b4">AGB gelesen</text>
+        <rect x="395" y="400" width="130" height="48" fill="#eee" stroke="#999"/>
+        <g font-size="21" font-style="italic" fill="#555" font-family="Georgia, serif">
+          <text x="405" y="432" transform="rotate(-12 405 432)">x</text>
+          <text x="428" y="428" transform="rotate(10 428 428)">7</text>
+          <text x="451" y="436" transform="rotate(-8 451 436)">R</text>
+          <text x="475" y="429" transform="rotate(14 475 429)">q</text>
+          <text x="498" y="434" transform="rotate(-10 498 434)">2</text>
+        </g>
+        <path d="M398,418 C430,448 470,403 522,433" stroke="#777" fill="none"/>
+        <path d="M400,438 C440,408 480,453 520,413" stroke="#999" fill="none"/>
+        <rect x="535" y="408" width="170" height="32" fill="#fff" stroke="#999"/>
+        <text x="545" y="429" font-size="12" fill="#9a9a9a">Zeichen eingeben</text>
+        <text x="722" y="430" font-size="15" fill="#888" text-anchor="middle">↻</text>
+        <!-- Schaltflächen -->
+        <rect x="20" y="484" width="180" height="44" rx="4" fill="#1f4e79"/>
+        <text x="110" y="512" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">Zurücksetzen</text>
+        <rect x="208" y="492" width="80" height="28" rx="3" fill="#fff" stroke="#c8c8c8"/>
+        <text x="248" y="511" text-anchor="middle" font-size="12" fill="#999">Submit</text>
+        <g fill="none" stroke="#999" stroke-width="1.3">
+          <path d="M672,502 c-2,-4 -8,-4 -8,1 c0,4 8,9 8,9 c0,0 8,-5 8,-9 c0,-5 -6,-5 -8,-1 z"/>
+          <circle cx="694" cy="506" r="2.2"/><circle cx="704" cy="500" r="2.2"/><circle cx="704" cy="512" r="2.2"/>
+          <line x1="696" y1="505" x2="702" y2="501"/><line x1="696" y1="507" x2="702" y2="511"/>
+          <rect x="718" y="502" width="16" height="8"/><rect x="721" y="497" width="10" height="5"/><rect x="721" y="507" width="10" height="6" fill="#fff"/>
+        </g>
+        <!-- Fußzeile -->
+        <line x1="20" y1="556" x2="740" y2="556" stroke="#ddd"/>
+        <text x="20" y="580" font-size="10" fill="#b4b4b4">© AquaVita Freizeit GmbH · Impressum · Datenschutz · AGB</text>
+              <!-- Markierungen -->
+        <g font-size="10" font-weight="bold" text-anchor="middle" fill="#fff">
+          <circle cx="590" cy="86" r="11.5" fill="#1f4e79" stroke="#fff" stroke-width="1.5"/><text x="590" y="89.5">U1</text>
+          <circle cx="48" cy="134" r="11.5" fill="#1f4e79" stroke="#fff" stroke-width="1.5"/><text x="48" y="137.5">U2</text>
+          <circle cx="204" cy="316" r="11.5" fill="#1f4e79" stroke="#fff" stroke-width="1.5"/><text x="204" y="319.5">U3</text>
+          <circle cx="726" cy="276" r="11.5" fill="#1f4e79" stroke="#fff" stroke-width="1.5"/><text x="726" y="279.5">U4</text>
+          <circle cx="204" cy="481" r="11.5" fill="#1f4e79" stroke="#fff" stroke-width="1.5"/><text x="204" y="484.5">U5</text>
+          <circle cx="302" cy="506" r="11.5" fill="#1f4e79" stroke="#fff" stroke-width="1.5"/><text x="302" y="509.5">U6</text>
+          <circle cx="664" cy="324" r="11.5" fill="#1f4e79" stroke="#fff" stroke-width="1.5"/><text x="664" y="327.5">U7</text>
+          <circle cx="466" cy="228" r="11.5" fill="#1f4e79" stroke="#fff" stroke-width="1.5"/><text x="466" y="231.5">U9</text>
+          <circle cx="375" cy="355" r="11.5" fill="#1f4e79" stroke="#fff" stroke-width="1.5"/><text x="375" y="358.5">U10</text>
+          <circle cx="640" cy="506" r="11.5" fill="#1f4e79" stroke="#fff" stroke-width="1.5"/><text x="640" y="509.5">U12</text>
+        </g>
+      </svg>
+      <figcaption>Abb. L-4: Entwurf aus Anlage 4 mit markierten Usability-Mängeln (U8, U11 und U13 fehlen im Entwurf und sind deshalb nicht markiert)</figcaption>
+    </figure>
+    <table class="kompakt">
+      <thead><tr><th class="nr">Nr.</th><th style="width:62%">Mangel (mit Auswirkung)</th><th>Grundsatz</th></tr></thead>
+      <tr><td class="nr">U1</td><td>keine Seitenüberschrift, kein markierter Menüpunkt, keine Breadcrumb; der Kursname steht nur im grauen Kleintext – man erkennt nicht, wo man ist und welchen Kurs man bucht</td><td>Selbstbeschreibungs­fähigkeit</td></tr>
+      <tr><td class="nr">U2</td><td>großes, automatisch wechselndes Werbekarussell nimmt das obere Drittel ein, hat mit der Buchung nichts zu tun und lenkt ab; das Formular rutscht nach unten</td><td>Aufgabenangemessenheit</td></tr>
+      <tr><td class="nr">U3</td><td>Kursdatum als Freitextfeld, obwohl nur feste Termine möglich sind; Datum und Uhrzeiten getrennt, freie Plätze nicht als Zahl – Nutzer muss raten, ungültige Termine sind eingebbar</td><td>Aufgabenangemessenheit (auch Robustheit)</td></tr>
+      <tr><td class="nr">U4</td><td>technische Fehlermeldung „Fehler 422 – Eingabe ungültig“ ohne Feldbezug und ohne Lösungshinweis</td><td>Robustheit gegen Benutzerfehler (auch Selbstbeschreibungsfähigkeit)</td></tr>
+      <tr><td class="nr">U5</td><td>„Zurücksetzen“ ist die auffälligste Schaltfläche, steht direkt neben dem Absenden und löscht ohne Rückfrage alle Eingaben</td><td>Robustheit gegen Benutzerfehler</td></tr>
+      <tr><td class="nr">U6</td><td>Absende-Schaltfläche englisch („Submit“) auf einer deutschen Seite und so blass gestaltet, dass sie deaktiviert wirkt; unklar, ob verbindlich und kostenpflichtig gebucht wird</td><td>Erwartungskonformität (auch Selbstbeschreibungsfähigkeit)</td></tr>
+      <tr><td class="nr">U7</td><td>Schieberegler für 1–4 Personen ohne Wertanzeige – ungenau, man sieht nicht, wie viele Personen gewählt sind</td><td>Aufgabenangemessenheit (auch Selbstbeschreibungsfähigkeit)</td></tr>
+      <tr><td class="nr">U8</td><td><em>(fehlt)</em> kein Preis und keine Zusammenfassung vor dem Absenden (Anforderung A4)</td><td>Selbstbeschreibungsfähigkeit</td></tr>
+      <tr><td class="nr">U9</td><td>Link „hier klicken“ öffnet die Kursbeschreibung in einem neuen Fenster – die Zurück-Taste funktioniert nicht, Nutzer verlieren die Orientierung</td><td>Erwartungskonformität (auch Steuerbarkeit)</td></tr>
+      <tr><td class="nr">U10</td><td>Newsletter-Checkbox ist vorausgewählt – Nutzer abonnieren ungewollt Werbung, das untergräbt das Vertrauen (zudem keine wirksame Einwilligung nach DSGVO)</td><td>Benutzerbindung (auch Erwartungskonformität)</td></tr>
+      <tr><td class="nr">U11</td><td><em>(fehlt)</em> keine Möglichkeit, die Buchung abzubrechen oder zur Kursübersicht zurückzukehren (Anforderung A6)</td><td>Steuerbarkeit</td></tr>
+      <tr><td class="nr">U12</td><td>Symbole „merken, teilen, drucken“ ohne Beschriftung – Bedeutung unklar</td><td>Selbstbeschreibungs­fähigkeit</td></tr>
+      <tr><td class="nr">U13</td><td><em>(fehlt)</em> nur ein Namens- und ein Geburtsdatumsfeld, obwohl bis zu vier Personen angemeldet werden können (Anforderung A3)</td><td>Aufgabenangemessenheit</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je Mangel 2 P – 1 P für den nachvollziehbar beschriebenen Mangel mit Auswirkung auf den Nutzer, 1 P für einen passenden Grundsatz (begründete andere Zuordnungen werden akzeptiert). Reine Barrierefreiheitsmängel (Kontrast, Farbe, CAPTCHA) geben in dieser Teilaufgabe keine Punkte. Auch Mängel bei Positionierung und Ausrichtung werden akzeptiert, wenn die Auswirkung beschrieben ist (z. B. „Elemente nicht an einem Raster ausgerichtet, zusammengehörige Felder auf zwei Spalten verteilt – Reihenfolge der Eingabe unklar“).</div>
+
+    <h4>b) Verbessertes Mockup (10 P)</h4>
+    <figure>
+      <svg viewBox="0 0 760 720" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <!-- Browserfenster -->
+        <rect x="1" y="1" width="758" height="718" rx="6" fill="#fff" stroke="#222" stroke-width="1.5"/>
+        <path d="M1.75,33 V7 a5.25,5.25 0 0 1 5.25,-5.25 H753 a5.25,5.25 0 0 1 5.25,5.25 V33 Z" fill="#e8ecf1"/>
+        <path d="M12,33 V11 a4,4 0 0 1 4,-4 H218 a4,4 0 0 1 4,4 V33" fill="#fff" stroke="#999"/>
+        <line x1="1" y1="33" x2="12" y2="33" stroke="#999"/>
+        <line x1="222" y1="33" x2="759" y2="33" stroke="#999"/>
+        <text x="24" y="25" font-size="12">Kurs buchen – AquaVita</text>
+        <text x="208" y="25" font-size="12" fill="#666" text-anchor="end">×</text>
+        <g fill="#fff" stroke="#888"><circle cx="712" cy="17" r="5"/><circle cx="728" cy="17" r="5"/><circle cx="744" cy="17" r="5"/></g>
+        <text x="14" y="55" font-size="15" fill="#555">←</text>
+        <text x="36" y="55" font-size="15" fill="#bbb">→</text>
+        <text x="58" y="55" font-size="15" fill="#555">↻</text>
+        <rect x="86" y="40" width="620" height="20" rx="10" fill="#f3f4f6" stroke="#c8c8c8"/>
+        <text x="100" y="54" font-size="12" fill="#333">https://www.aquavita-freizeit.de/kurse/aquafitness-50/buchen</text>
+        <text x="738" y="55" font-size="14" fill="#555" text-anchor="middle">⋮</text>
+        <line x1="1" y1="64" x2="759" y2="64" stroke="#c8c8c8"/>
+        <!-- Kopf -->
+        <path d="M20,91 q6,-8 12,0 t12,0 t12,0" stroke="#1f4e79" stroke-width="2.5" fill="none"/>
+        <text x="62" y="93" font-size="19" font-weight="bold" fill="#1f4e79">AquaVita</text>
+        <g font-size="13"><text x="260" y="90">Start</text><text x="318" y="90">Bäder</text><text x="378" y="90">Tickets</text><text x="446" y="90" font-weight="bold" fill="#1f4e79">Kurse</text><text x="502" y="90">Kontakt</text></g>
+        <line x1="446" y1="99" x2="483" y2="99" stroke="#1f4e79" stroke-width="3"/>
+        <text x="740" y="90" font-size="13" text-anchor="end">Anmelden</text>
+        <line x1="20" y1="106" x2="740" y2="106" stroke="#ddd"/>
+        <!-- Breadcrumb, Überschrift -->
+        <text x="20" y="128" font-size="12"><tspan fill="#1f4e79" text-decoration="underline">Start</tspan> › <tspan fill="#1f4e79" text-decoration="underline">Kurse</tspan> › <tspan fill="#1f4e79" text-decoration="underline">Aquafitness 50+</tspan> › Buchen</text>
+        <text x="20" y="160" font-size="21" font-weight="bold">Kurs buchen: Aquafitness 50+</text>
+        <!-- Kursinfo -->
+        <rect x="20" y="176" width="230" height="252" rx="8" fill="#f3f4f6" stroke="#ccc"/>
+        <rect x="32" y="188" width="206" height="76" fill="#fff" stroke="#999"/>
+        <line x1="32" y1="188" x2="238" y2="264" stroke="#ccc"/><line x1="238" y1="188" x2="32" y2="264" stroke="#ccc"/>
+        <g font-size="12">
+          <text x="32" y="284"><tspan font-weight="bold">Bad:</tspan> Hallenbad Mitte</text>
+          <text x="32" y="302"><tspan font-weight="bold">Kursleitung:</tspan> S. Brandt</text>
+          <text x="32" y="320"><tspan font-weight="bold">Dauer:</tspan> 45 Minuten</text>
+          <text x="32" y="338"><tspan font-weight="bold">Preis:</tspan> 9,50 € je Person</text>
+          <text x="32" y="360" fill="#333">Gelenkschonendes Training im</text>
+          <text x="32" y="375" fill="#333">Wasser für Erwachsene ab</text>
+          <text x="32" y="390" fill="#333">50 Jahren.</text>
+          <text x="32" y="414" fill="#1f4e79" text-decoration="underline">Kursbeschreibung (PDF, 120 kB)</text>
+        </g>
+        <!-- 1 Termin -->
+        <circle cx="282" cy="186" r="11" fill="#1f4e79"/><text x="282" y="190" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">1</text>
+        <text x="300" y="191" font-size="15" font-weight="bold">Termin wählen</text>
+        <rect x="270" y="202" width="470" height="30" rx="4" fill="#fff" stroke="#ccc"/>
+        <rect x="270" y="236" width="470" height="30" rx="4" fill="#eef3fa" stroke="#1f4e79" stroke-width="2"/>
+        <rect x="270" y="270" width="470" height="30" rx="4" fill="#fff" stroke="#ccc"/>
+        <circle cx="288" cy="217" r="7" fill="#eee" stroke="#bbb"/>
+        <circle cx="288" cy="251" r="7" fill="#fff" stroke="#1f4e79" stroke-width="1.5"/><circle cx="288" cy="251" r="3.5" fill="#1f4e79"/>
+        <circle cx="288" cy="285" r="7" fill="#fff" stroke="#555"/>
+        <text x="304" y="222" fill="#999">Mo, 02.11.2026 · 09:00 Uhr</text>
+        <text x="304" y="256" font-weight="bold">Mi, 04.11.2026 · 09:00 Uhr</text>
+        <text x="304" y="290">Fr, 06.11.2026 · 17:30 Uhr</text>
+        <g font-size="12" text-anchor="end">
+          <text x="728" y="221">✕ ausgebucht · <tspan fill="#1f4e79" text-decoration="underline">auf Warteliste setzen</tspan></text>
+          <text x="728" y="255">✓ 3 Plätze frei</text>
+          <text x="728" y="289">✓ 6 Plätze frei</text>
+        </g>
+        <!-- 2 Teilnehmende -->
+        <circle cx="282" cy="328" r="11" fill="#1f4e79"/><text x="282" y="332" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">2</text>
+        <text x="300" y="333" font-size="15" font-weight="bold">Teilnehmende (1 bis 4 Personen)</text>
+        <text x="270" y="358" font-size="12" font-weight="bold" fill="#444">Person 1</text>
+        <text x="270" y="378" font-size="12">Vor- und Nachname *</text>
+        <rect x="270" y="384" width="226" height="32" fill="#fff" stroke="#555"/>
+        <text x="280" y="405">Erika Muster</text>
+        <text x="514" y="378" font-size="12">Geburtsdatum * (TT.MM.JJJJ)</text>
+        <rect x="514" y="384" width="226" height="32" fill="#fff" stroke="#555"/>
+        <text x="524" y="405">12.03.1958</text>
+        <rect x="714" y="393" width="14" height="13" fill="#fff" stroke="#222"/><line x1="714" y1="397" x2="728" y2="397" stroke="#222"/>
+        <rect x="270" y="428" width="220" height="30" rx="4" fill="#fff" stroke="#1f4e79"/>
+        <text x="380" y="448" text-anchor="middle" font-size="12" fill="#1f4e79">+ Weitere Person hinzufügen</text>
+        <!-- 3 Prüfen und buchen -->
+        <circle cx="282" cy="490" r="11" fill="#1f4e79"/><text x="282" y="494" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">3</text>
+        <text x="300" y="495" font-size="15" font-weight="bold">Prüfen und buchen</text>
+        <rect x="270" y="506" width="470" height="58" rx="6" fill="#eef3fa" stroke="#c9d6e6"/>
+        <text x="284" y="528">Mi, 04.11.2026, 09:00 Uhr · 1 Person × 9,50 €</text>
+        <text x="284" y="551" font-size="15" font-weight="bold">Gesamtpreis: 9,50 € <tspan font-size="12" font-weight="normal">(inkl. MwSt.)</tspan></text>
+        <rect x="270" y="578" width="18" height="18" fill="#fff" stroke="#222" stroke-width="1.5"/>
+        <text x="298" y="592">Ich akzeptiere die <tspan fill="#1f4e79" text-decoration="underline">AGB</tspan> *</text>
+        <rect x="270" y="606" width="18" height="18" fill="#fff" stroke="#222" stroke-width="1.5"/>
+        <text x="298" y="620">Newsletter mit Angeboten abonnieren (freiwillig)</text>
+        <rect x="270" y="640" width="140" height="42" rx="6" fill="#fff" stroke="#1f4e79" stroke-width="1.5"/>
+        <text x="340" y="666" text-anchor="middle" font-size="14" fill="#1f4e79">Abbrechen</text>
+        <rect x="500" y="640" width="240" height="42" rx="6" fill="#1f4e79"/>
+        <text x="620" y="666" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">Zahlungspflichtig buchen</text>
+        <text x="270" y="704" font-size="11" fill="#444">* Pflichtfeld · Nach dem Buchen: Bestätigungsseite und Bestätigung per E-Mail</text>
+        <!-- Anmerkungen -->
+        <g font-size="11" font-weight="bold" text-anchor="middle" fill="#fff">
+          <circle cx="316" cy="124" r="9" fill="#c2410c"/><text x="316" y="128">A</text>
+          <circle cx="250" cy="176" r="9" fill="#c2410c"/><text x="250" y="180">B</text>
+          <circle cx="260" cy="251" r="9" fill="#c2410c"/><text x="260" y="255">C</text>
+          <circle cx="260" cy="400" r="9" fill="#c2410c"/><text x="260" y="404">D</text>
+          <circle cx="260" cy="443" r="9" fill="#c2410c"/><text x="260" y="447">E</text>
+          <circle cx="260" cy="535" r="9" fill="#c2410c"/><text x="260" y="539">F</text>
+          <circle cx="260" cy="601" r="9" fill="#c2410c"/><text x="260" y="605">G</text>
+          <circle cx="260" cy="661" r="9" fill="#c2410c"/><text x="260" y="665">H</text>
+          <circle cx="346" cy="154" r="9" fill="#c2410c"/><text x="346" y="158">I</text>
+          <circle cx="260" cy="700" r="9" fill="#c2410c"/><text x="260" y="704">J</text>
+        </g>
+      </svg>
+      <figcaption>Abb. L-5: Musterlösung – überarbeitete Seite „Kurs buchen“ (Desktop); A bis J siehe Anmerkungen</figcaption>
+    </figure>
+    <ol class="anm" type="A">
+      <li><strong>Orientierung:</strong> aktiver Menüpunkt „Kurse“, Breadcrumb und Überschrift mit Kursname (behebt U1).</li>
+      <li><strong>Kursinfo</strong> mit allen Angaben aus A1 in gut lesbarer Schrift; aussagekräftiger PDF-Link, der im selben Fenster öffnet (A1; U9, B1, B7).</li>
+      <li><strong>Termine als Liste mit Radiobuttons:</strong> freie Plätze als Text, ausgebuchte Termine deaktiviert, mit Warteliste (A2; U3, B2, B9).</li>
+      <li><strong>Sichtbare Beschriftungen</strong> mit Formatangabe, Pflichtfelder mit *; Fehlermeldungen erscheinen bei Bedarf als Text direkt am Feld, Eingaben bleiben erhalten (U4, B3, B4).</li>
+      <li><strong>Personen</strong> über „+ Weitere Person hinzufügen“ (bis zu vier), je Person Name und Geburtsdatum – kein Schieberegler (A3; U7, U13, B8).</li>
+      <li><strong>Zusammenfassung mit Gesamtpreis</strong> vor dem Buchen (A4; U8).</li>
+      <li><strong>AGB-Bestätigung als Pflicht</strong>, Newsletter freiwillig und nicht vorausgewählt (A5; U10).</li>
+      <li><strong>„Abbrechen“</strong> als Sekundärbutton, eindeutige deutsche Hauptaktion „Zahlungspflichtig buchen“ hervorgehoben; kein „Zurücksetzen“ (A6; U5, U6, U11).</li>
+      <li><strong>Kein Werbekarussell, kein CAPTCHA:</strong> Die Buchung beginnt direkt unter der Überschrift; Bot-Schutz unsichtbar auf dem Server (U2, B5, B6).</li>
+      <li><strong>Bestätigung</strong> nach dem Buchen auf dem Bildschirm und per E-Mail (A7); Symbole ohne Beschriftung entfallen (U12, B10).</li>
+    </ol>
+    <div class="bewertung"><strong>Bewertung (10 P):</strong> je 1 P für die Umsetzung von A1 bis A7 (7 P; A7 genügt als Randnotiz oder Folgeseite in der Skizze), 3 P für die erkennbare Beseitigung der in a) genannten Mängel und eine übersichtliche, ausgerichtete Anordnung. Andere Anordnungen sind gleichwertig, z. B. ein mehrstufiger Ablauf (Schritt 1 Termin, Schritt 2 Personen, Schritt 3 Prüfen) mit Schrittanzeige, Termine als Kalender mit Text „frei/ausgebucht“ oder ein Stepper für die Personenanzahl, der entsprechend viele Namensfelder einblendet.</div>
+    <p><strong>Erklärung:</strong> Die Teilaufgaben a) und b) hängen zusammen – der Prüfer vergleicht, ob die in a) genannten Mängel in b) behoben sind. Wer einen Mangel nennt, ihn in der Skizze aber wiederholt (z. B. wieder „Submit“), verliert dort Punkte. Ein Bildkarussell darf es geben, wenn es nicht automatisch wechselt und die Buchung nicht verdrängt – nötig ist es für die Aufgabe nicht.</p>
+  </div><p class="ap2-loesung-link"><a href="09_Benutzeroberflaeche_Loesungen.html#L-GUI-03-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== ORIGINALAUFGABEN ===================== -->
   <div style="break-inside: avoid">

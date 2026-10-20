@@ -37,6 +37,27 @@
     #aufgaben > h3:not(#a-01):not(#originale) { break-before: page; }
   }
 </style>
+<style id="ap2-loesung-stile">
+/* Stile aus 06_Schnittstellen_Datenformate_Loesungen.html, nur für eingebettete Lösungen (werkzeuge/loesungen_einbetten.py) */
+.ap2-loesung-inhalt table.kompakt td, .ap2-loesung-inhalt table.kompakt th { padding: 2px 6px; }
+.ap2-loesung-inhalt td.mono, .ap2-loesung-inhalt th.mono { font-family: Consolas, "Courier New", monospace; font-size: 13px; }
+.ap2-loesung-inhalt pre { font-size: 12px; }
+.ap2-loesung-inhalt pre.ausgabe { background: #fff; border-style: dashed; }
+.ap2-loesung-inhalt pre.java, .ap2-loesung-inhalt pre.ausgabe { break-inside: auto; }
+.ap2-loesung-inhalt pre.xml { border-left: 4px solid #6b7280; }
+.ap2-loesung-inhalt pre.json { border-left: 4px solid var(--oft); }
+.ap2-loesung-inhalt pre.http { border-left: 4px solid var(--accent); }
+.ap2-loesung-inhalt .zn { color: #888; }
+.ap2-loesung-inhalt .codelabel { break-after: avoid; page-break-after: avoid; }
+.ap2-loesung-inhalt .loesung .kopf { font-size: 16px; margin-bottom: 4px; break-after: avoid; page-break-after: avoid; }
+.ap2-loesung-inhalt .loesung h4 { margin: 12px 0 4px; font-size: 15px; break-after: avoid; }
+.ap2-loesung-inhalt .datei { font-size: 12px; color: var(--muted); }
+.ap2-loesung-inhalt pre { orphans: 3; widows: 3; }
+.ap2-loesung-inhalt pre.json, .ap2-loesung-inhalt pre.xml, .ap2-loesung-inhalt pre.http { break-inside: auto; }
+@media print {
+  .ap2-loesung-inhalt pre { font-size: 11px; }
+}
+</style>
 </head>
 <body>
 
@@ -1619,6 +1640,25 @@ Content-Length: 162
     <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 3cb</p>
     </div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SD-01-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SD-01.1 · 6 Punkte</div>
+    <h4>a) Bestandteile (2 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:42%">Bestandteil</th><th>Bezeichnung</th></tr>
+      <tr><td class="mono">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</td><td>XML-Deklaration (Prolog) mit Version und Zeichenkodierung</td></tr>
+      <tr><td>Element <code>lieferung</code> (Zeilen 2–6)</td><td>Wurzelelement (Root-Element), umschließt alle anderen Elemente</td></tr>
+      <tr><td class="mono">nr="88120"</td><td>Attribut des Elements <code>lieferung</code> (Name <code>nr</code>, Wert <code>88120</code>)</td></tr>
+      <tr><td class="mono">&lt;ablage hinweis="Garage"/&gt;</td><td>leeres Element (ohne Inhalt, Kurzschreibweise ohne End-Tag) mit einem Attribut</td></tr>
+    </table>
+    <h4>b) Wohlgeformt und gültig (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:15%">Eigenschaft</th><th>Erläuterung</th><th style="width:30%">Statusmeldung</th></tr>
+      <tr><td>wohlgeformt</td><td>Das Dokument hält die Syntaxregeln von XML ein: genau ein Wurzelelement, zu jedem Start-Tag ein passendes End-Tag (oder leeres Element), korrekte Verschachtelung, Attributwerte in Anführungszeichen, Groß-/Kleinschreibung beachtet. Das prüft jeder XML-Parser.</td><td><strong>ja</strong> – alle Regeln sind eingehalten, auch das leere Element ist korrekt geschlossen.</td></tr>
+      <tr><td>gültig</td><td>Das Dokument ist wohlgeformt <strong>und</strong> entspricht zusätzlich einer Strukturbeschreibung (DTD oder XML-Schema): nur erlaubte Elemente und Attribute, richtige Reihenfolge und Anzahl, Pflichtangaben vorhanden.</td><td><strong>nein / nicht prüfbar</strong> – ohne DTD bzw. XSD gibt es keine Grammatik, gegen die geprüft werden kann.</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Bestandteil 0,5 P („Prolog“ für Zeile 1 und „Element mit Attribut“ für die letzte Zeile werden akzeptiert). b) je Erläuterung 1,5 P, je richtige Einordnung 0,5 P. „Gültig: ja“ ist falsch – Gültigkeit setzt eine DTD/XSD voraus.</div>
+    <p><strong>Erklärung:</strong> Die Falle steckt in b): Viele schreiben „gültig, weil kein Fehler drin ist“. Gültigkeit ist aber immer relativ zu einer Grammatik. Ohne DTD/XSD ist ein Dokument höchstens wohlgeformt.</p>
+  </div><p class="ap2-loesung-link"><a href="06_Schnittstellen_Datenformate_Loesungen.html#L-SD-01-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SD-01-2">
     <div class="einheit">
@@ -1650,6 +1690,45 @@ Content-Length: 162
     <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 3c (DTD lesen)</p>
     </div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SD-01-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SD-01.2 · 10 Punkte</div>
+    <h4>a) Deklarationen (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:44%">Deklaration</th><th>Bedeutung</th></tr>
+      <tr><td class="mono">&lt;!ELEMENT erzeuger (name, telefon?, email+, hof)&gt;</td><td>Ein Erzeuger enthält in genau dieser Reihenfolge: genau einen Namen, optional eine Telefonnummer (0 oder 1), mindestens eine E-Mail-Adresse (1 bis beliebig viele) und genau einen Hof.</td></tr>
+      <tr><td class="mono">&lt;!ELEMENT hof (adresse | koordinaten)&gt;</td><td>Ein Hof enthält <strong>entweder</strong> eine Adresse <strong>oder</strong> Koordinaten (Auswahl, genau eines von beiden).</td></tr>
+      <tr><td class="mono">&lt;!ATTLIST erzeuger id ID #REQUIRED status (aktiv|pausiert) "aktiv"&gt;</td><td>Das Element <code>erzeuger</code> hat das Pflichtattribut <code>id</code>, dessen Wert im Dokument eindeutig sein muss (Typ ID), und das optionale Attribut <code>status</code> mit den erlaubten Werten <code>aktiv</code> oder <code>pausiert</code>; fehlt es, gilt der Standardwert <code>aktiv</code>.</td></tr>
+      <tr><td class="mono">&lt;xs:element name="zertifikat" type="xs:string" minOccurs="0" maxOccurs="unbounded"/&gt;</td><td>XML-Schema: Element <code>zertifikat</code> mit Textinhalt (Datentyp string), das fehlen oder beliebig oft vorkommen darf (0..n) – entspricht <code>zertifikat*</code> in einer DTD.</td></tr>
+    </table>
+    <h4>b) DTD für den Lieferschein (6 P)</h4>
+    <pre class="xml"><span class="zn"> 1</span>  &lt;!ELEMENT lieferschein (kunde, position+, fahrer?)&gt;
+<span class="zn"> 2</span>  &lt;!ATTLIST lieferschein nr    CDATA #REQUIRED
+<span class="zn"> 3</span>                         datum CDATA #REQUIRED&gt;
+<span class="zn"> 4</span>  &lt;!ELEMENT kunde (name, adresse)&gt;
+<span class="zn"> 5</span>  &lt;!ATTLIST kunde kundenNr CDATA #REQUIRED&gt;
+<span class="zn"> 6</span>  &lt;!ELEMENT name (#PCDATA)&gt;
+<span class="zn"> 7</span>  &lt;!ELEMENT adresse (#PCDATA)&gt;
+<span class="zn"> 8</span>  &lt;!ELEMENT position (kiste, anzahl, bemerkung*)&gt;
+<span class="zn"> 9</span>  &lt;!ELEMENT kiste (#PCDATA)&gt;
+<span class="zn">10</span>  &lt;!ELEMENT anzahl (#PCDATA)&gt;
+<span class="zn">11</span>  &lt;!ELEMENT bemerkung (#PCDATA)&gt;
+<span class="zn">12</span>  &lt;!ELEMENT fahrer (#PCDATA)&gt;</pre>
+    <p class="codelabel">Test · Aufgabe_SD_01_2.java (JDK-Parser mit Validierung, DTD per EntityResolver eingebunden)</p>
+    <pre class="ausgabe">--- Lieferschein aus Anlage 6
+    gültig (wohlgeformt und DTD-konform)
+--- Negativtest 1: keine Position (position+ verlangt mindestens eine)
+    ungültig, Zeile 9: Content des Elementtyps "lieferschein" muss "(kunde,position+,fahrer?)" entsprechen.
+--- Negativtest 2: Pflichtattribut nr fehlt
+    ungültig, Zeile 3: Attribut "nr" ist erforderlich und muss für Elementtyp "lieferschein" angegeben werden.
+--- Negativtest 3: anzahl vor kiste (Reihenfolge der Sequenz)
+    ungültig, Zeile 11: Content des Elementtyps "position" muss "(kiste,anzahl,bemerkung*)" entsprechen.
+--- Negativtest 4: zwei Fahrer (fahrer? erlaubt höchstens einen)
+    ungültig, Zeile 20: Content des Elementtyps "lieferschein" muss "(kunde,position+,fahrer?)" entsprechen.
+--- Positivtest: ohne Fahrer (optional) und ohne Bemerkung
+    gültig (wohlgeformt und DTD-konform)</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Zeile 1 P (Zeile 1: Reihenfolge und alle drei Kardinalitäten; Zeile 3: ID/Pflicht 0,5 P, Aufzählung mit Standardwert 0,5 P). b) Inhaltsmodell <code>lieferschein</code> mit <code>position+</code> und <code>fahrer?</code> 1,5 P; ATTLIST <code>lieferschein</code> 1 P; <code>kunde</code> mit ATTLIST 1 P; <code>position</code> mit <code>bemerkung*</code> 1,5 P; restliche Elemente als <code>(#PCDATA)</code> 1 P. Die Reihenfolge der Deklarationen ist beliebig; je Attribut eine eigene ATTLIST ist ebenso richtig. <code>nr</code> als Typ <code>ID</code> wird akzeptiert (der Wert beginnt mit einem Buchstaben).</div>
+    <p><strong>Erklärung:</strong> Jede Regel des Aufgabentexts wird zu genau einer Angabe: „genau ein“ = ohne Zeichen, „mindestens ein“ = <code>+</code>, „optional“ = <code>?</code>, „beliebig viele, auch keine“ = <code>*</code>. Typischer Fehler: <code>bemerkung+</code> (verlangt mindestens eine Bemerkung) oder Attribute als Kindelemente deklarieren.</p>
+  </div><p class="ap2-loesung-link"><a href="06_Schnittstellen_Datenformate_Loesungen.html#L-SD-01-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SD-01-3">
     <div class="einheit">
@@ -1688,6 +1767,95 @@ Content-Length: 162
     <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 3c (Fehler anhand einer DTD finden) und W25 Teil 1, Aufgabe 3bc (Grenzen der Schema-Validierung)</p>
     </div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SD-01-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SD-01.3 · 16 Punkte</div>
+    <h4>a) Zweck der DTD (2 P)</h4>
+    <p>Die DTD legt verbindlich fest, wie ein Wochenangebot aufgebaut sein muss: welche Elemente und Attribute erlaubt sind, in welcher Reihenfolge und Anzahl sie vorkommen und welche Angaben Pflicht sind. Sie ist damit die gemeinsame Schnittstellenvereinbarung zwischen den 28 Erzeugerbetrieben und dem KistenPortal. Mit ihr kann jede hochgeladene Datei vor dem Import <strong>automatisch validiert</strong> werden; fehlerhafte Dateien werden mit einer Meldung abgewiesen, statt falsche Daten zu importieren.</p>
+    <h4>b) Fehler im Wochenangebot (8 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:9%">Zeile</th><th>Beschreibung</th><th style="width:18%">Eigenschaft</th></tr>
+      <tr><td>3</td><td>Pflichtattribut <code>jahr</code> fehlt (<code>#REQUIRED</code>).</td><td>Gültigkeit</td></tr>
+      <tr><td>15</td><td>End-Tag <code>&lt;/Bezeichnung&gt;</code> passt nicht zum Start-Tag <code>&lt;bezeichnung&gt;</code> (Groß-/Kleinschreibung).</td><td>Wohlgeformtheit</td></tr>
+      <tr><td>22–23</td><td><code>preis</code> steht vor <code>menge</code>; die DTD verlangt die Reihenfolge <code>(bezeichnung, menge, preis, hinweis*)</code>.</td><td>Gültigkeit</td></tr>
+      <tr><td>25</td><td>Der Wert <code>A-101</code> des ID-Attributs <code>artNr</code> ist bereits in Zeile 9 vergeben; ID-Werte müssen eindeutig sein.</td><td>Gültigkeit</td></tr>
+      <tr><td>25</td><td><code>einheit="Kilo"</code> ist kein erlaubter Wert; zulässig sind nur <code>kg</code>, <code>stueck</code>, <code>bund</code>.</td><td>Gültigkeit</td></tr>
+      <tr><td>27</td><td>Das End-Tag von <code>menge</code> fehlt der Schrägstrich (<code>&lt;menge&gt;</code> statt <code>&lt;/menge&gt;</code>); das Element wird nicht geschlossen.</td><td>Wohlgeformtheit</td></tr>
+      <tr><td>29</td><td>(vorgegeben) Element <code>lieferant</code> ist in der DTD nicht deklariert.</td><td>Gültigkeit</td></tr>
+      <tr><td>31</td><td>Attributwert <code>A-105</code> steht nicht in Anführungszeichen.</td><td>Wohlgeformtheit</td></tr>
+    </table>
+    <p class="codelabel">Kontrolle mit dem JDK-Parser · Aufgabe_SD_01_3.java (Auszug der Ausgabe)</p>
+    <pre class="ausgabe">--- 1a) Originaldatei Anlage 5
+    GÜLTIGKEIT     Zeile 3: Attribut "jahr" ist erforderlich und muss für Elementtyp "wochenangebot" angegeben werden.
+    WOHLGEFORMTHEIT Zeile 15: Elementtyp "bezeichnung" muss mit dem entsprechenden Endtag "&lt;/bezeichnung&gt;" beendet werden.  -&gt; Parser bricht ab
+--- 1b) nach Korrektur Zeile 15
+    ... (Gültigkeitsfehler Zeilen 3, 24, 25, 25, 29)
+    WOHLGEFORMTHEIT Zeile 30: Elementtyp "menge" muss mit dem entsprechenden Endtag "&lt;/menge&gt;" beendet werden.  -&gt; Parser bricht ab
+--- 1c) nach Korrektur Zeile 27
+    ...
+    WOHLGEFORMTHEIT Zeile 31: Öffnendes Anführungszeichen wird für Attribut "artNr" erwartet, das mit Elementtyp "artikel" verknüpft ist.  -&gt; Parser bricht ab
+--- 2) nach Korrektur Zeile 31: wohlgeformt, Prüfung gegen die DTD
+    GÜLTIGKEIT     Zeile 3: Attribut "jahr" ist erforderlich und muss für Elementtyp "wochenangebot" angegeben werden.
+    GÜLTIGKEIT     Zeile 24: Content des Elementtyps "artikel" muss "(bezeichnung,menge,preis,hinweis*)" entsprechen.
+    GÜLTIGKEIT     Zeile 25: Attributwert "A-101" mit dem Typ ID muss eindeutig im Dokument sein.
+    GÜLTIGKEIT     Zeile 25: Attribut "einheit" mit Wert "Kilo" muss einen Wert aus der Liste "kg stueck bund " haben.
+    GÜLTIGKEIT     Zeile 29: Elementtyp "lieferant" muss deklariert werden.
+    GÜLTIGKEIT     Zeile 30: Content des Elementtyps "artikel" muss "(bezeichnung,menge,preis,hinweis*)" entsprechen.
+--- 3) korrigierte Fassung
+    gültig (wohlgeformt und DTD-konform)</pre>
+    <p class="klein">Der Parser meldet Verstöße gegen das Inhaltsmodell erst beim End-Tag (Zeile 24 bzw. 30) und den fehlenden Schrägstrich aus Zeile 27 erst in Zeile 30, wo das falsche End-Tag <code>&lt;/artikel&gt;</code> auftaucht. In der Prüfung gibst du die Zeile an, in der der Fehler entsteht. Die vollständig korrigierte Datei steht in <code>Aufgabe_SD_01_3.java</code> (Konstante <code>KORRIGIERT</code>); in Zeile 25 wurde dort die neue Artikelnummer <code>A-104</code> und die Einheit <code>kg</code> gewählt.</p>
+    <h4>c) Gültig, aber unsinnig (4 P)</h4>
+    <p><strong>Warum die Prüfung bestanden wird:</strong> In der DTD sind <code>menge</code> und <code>preis</code> als <code>(#PCDATA)</code> deklariert, also als beliebiger Text. Eine DTD kennt keine Datentypen und keine Wertebereiche; sie prüft nur, ob die Elemente vorhanden sind und in der richtigen Reihenfolge stehen. „ca. 80“ und „-1.90“ sind Text und damit zulässig.</p>
+    <p><strong>Maßnahmen</strong> (zwei davon):</p>
+    <ul>
+      <li><strong>XML-Schema statt DTD</strong> mit Datentypen und Einschränkungen, z. B. <code>menge</code> als positive ganze Zahl und <code>preis</code> als Dezimalzahl größer 0 (Auszug unten, getestet: die KW-47-Datei wird abgewiesen).</li>
+      <li><strong>Plausibilitätsprüfung im Importprogramm</strong> (Geschäftsregeln): Menge numerisch und größer 0, Preis größer 0 und in einem realistischen Bereich; fehlerhafte Dateien mit Fehlermeldung an den Erzeuger zurückgeben.</li>
+      <li>Alternativ: Schematron-Regeln, Eingabe über ein Webformular mit Feldprüfung statt Datei-Upload, automatisierte Tests mit fehlerhaften Beispieldateien.</li>
+    </ul>
+    <pre class="xml">&lt;xs:element name="artikel"&gt;
+  &lt;xs:complexType&gt;
+    &lt;xs:sequence&gt;
+      &lt;xs:element name="bezeichnung" type="xs:string"/&gt;
+      &lt;xs:element name="menge" type="xs:positiveInteger"/&gt;
+      &lt;xs:element name="preis"&gt;
+        &lt;xs:simpleType&gt;
+          &lt;xs:restriction base="xs:decimal"&gt;
+            &lt;xs:minExclusive value="0"/&gt;
+            &lt;xs:fractionDigits value="2"/&gt;
+          &lt;/xs:restriction&gt;
+        &lt;/xs:simpleType&gt;
+      &lt;/xs:element&gt;
+      &lt;xs:element name="hinweis" type="xs:string" minOccurs="0" maxOccurs="unbounded"/&gt;
+    &lt;/xs:sequence&gt;
+    &lt;xs:attribute name="artNr" type="xs:ID" use="required"/&gt;
+    &lt;xs:attribute name="einheit" default="kg"&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base="xs:string"&gt;
+          &lt;xs:enumeration value="kg"/&gt;
+          &lt;xs:enumeration value="stueck"/&gt;
+          &lt;xs:enumeration value="bund"/&gt;
+        &lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:attribute&gt;
+  &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;</pre>
+    <p class="codelabel">Ausgabe des Tests mit diesem Schema</p>
+    <pre class="ausgabe">wochenangebot_korrigiert.xml: XSD-gueltig
+wochenangebot_kw47.xml: Zeile 10 cvc-datatype-valid.1.2.1: 'ca. 80' ist kein gültiger Wert für 'integer'.</pre>
+    <p class="codelabel">Ausgabe von Aufgabe_SD_01_3.java (eigene Plausibilitätsprüfung nach erfolgreicher DTD-Validierung)</p>
+    <pre class="ausgabe">--- 4) Datei KW 47 gegen die DTD
+    gültig (wohlgeformt und DTD-konform)
+    ... aber fachliche Prüfung:
+    PLAUSIBILITÄT A-110: Menge ist keine ganze Zahl ("ca. 80")
+    PLAUSIBILITÄT A-110: Preis muss positiv sein (-1.90)</pre>
+    <h4>d) Vorteile eines XML-Schemas (2 P)</h4>
+    <ul>
+      <li>Datentypen und Wertebereiche (Zahl, Datum, Minimum/Maximum, Muster) sind prüfbar.</li>
+      <li>Genaue Kardinalitäten über <code>minOccurs</code>/<code>maxOccurs</code> (z. B. 2 bis 5).</li>
+      <li>Ein Schema ist selbst ein XML-Dokument (mit XML-Werkzeugen bearbeit- und prüfbar), unterstützt Namensräume und wiederverwendbare eigene Typen.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> a) 2 P (Struktur festlegen 1 P, automatische Prüfung/Zurückweisen vor dem Import 1 P). b) je Fehler 2 P (Zeile und Beschreibung 1,5 P, Eigenschaft 0,5 P), höchstens vier Fehler werden gewertet; Zeile 24 statt 22/23 bzw. 30 statt 27 wird akzeptiert, wenn die Beschreibung stimmt. c) Begründung (nur Text, keine Datentypen) 2 P, je Maßnahme 1 P. d) je Vorteil 1 P.</div>
+    <p><strong>Erklärung:</strong> b) ist die Aufgabe aus W22 in neuem Gewand: erst alle Tags auf Wohlgeformtheit prüfen (Zeilen 15, 27, 31), dann Element für Element gegen die DTD (Zeilen 3, 22/23, 25, 29). c) und d) zeigen die Grenze der DTD (bzw. der Schema-Validierung allgemein), die in W25 bei der eRechnung für die XSD abgefragt wurde.</p>
+  </div><p class="ap2-loesung-link"><a href="06_Schnittstellen_Datenformate_Loesungen.html#L-SD-01-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== SD-02 ===================== -->
   <h3 id="a-02">SD-02 · JSON</h3>
@@ -1718,6 +1886,27 @@ Content-Length: 162
     </table>
     </div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SD-02-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SD-02.1 · 6 Punkte</div>
+    <h4>a) Objekt und Array (2 P)</h4>
+    <p>Ein <strong>Objekt</strong> steht in geschweiften Klammern <code>{ }</code> und ist eine ungeordnete Menge von Schlüssel-Wert-Paaren; auf einen Wert greift man über seinen Namen (Schlüssel, immer ein String) zu, z. B. eine Kiste mit <code>"kisteId"</code> und <code>"preis"</code>. Ein <strong>Array</strong> steht in eckigen Klammern <code>[ ]</code> und ist eine geordnete Liste von Werten ohne Schlüssel; auf einen Wert greift man über seine Position (Index) zu, z. B. eine Liste mehrerer Kisten.</p>
+    <h4>b) Fehler (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:9%">Zeile</th><th>Fehler</th><th style="width:36%">Korrektur</th></tr>
+      <tr><td>2</td><td>Schlüssel in einfachen Anführungszeichen</td><td class="mono">"kisteId": "K-MIX-S",</td></tr>
+      <tr><td>3</td><td>Dezimalkomma – das Komma trennt in JSON die Paare, <code>20</code> wäre ein Schlüssel ohne Anführungszeichen</td><td class="mono">"preis": 14.20,</td></tr>
+      <tr><td>4</td><td><code>False</code> großgeschrieben – nur <code>true</code>/<code>false</code> sind erlaubt</td><td class="mono">"bio": false,</td></tr>
+      <tr><td>5</td><td>Komma nach dem letzten Element des Arrays</td><td class="mono">["Äpfel", "Möhren", "Kartoffeln"]</td></tr>
+    </table>
+    <p class="codelabel">Korrigiertes Dokument (mit Python <code>json</code> geprüft)</p>
+    <pre class="json">{
+  "kisteId": "K-MIX-S",
+  "preis": 14.20,
+  "bio": false,
+  "inhalt": ["Äpfel", "Möhren", "Kartoffeln"]
+}</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Begriff 1 P (Klammern und Aufbau bzw. Zugriff). b) je Fehler mit Korrektur 1 P (0,5 P Fehler, 0,5 P Korrektur).</div>
+  </div><p class="ap2-loesung-link"><a href="06_Schnittstellen_Datenformate_Loesungen.html#L-SD-02-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SD-02-2">
     <div class="einheit">
@@ -1739,6 +1928,66 @@ Content-Length: 162
     <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 3ca</p>
     </div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SD-02-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SD-02.2 · 10 Punkte</div>
+    <h4>a) Tabelle Kiste als JSON (5 P)</h4>
+    <pre class="json">{
+  "kisten": [
+    {
+      "kisteId": "K-OBST-M",
+      "bezeichnung": "Obstkiste mittel",
+      "groesse": "M",
+      "preis": 18.50,
+      "bio": true,
+      "gewichtKg": 4.5,
+      "saisonEnde": null
+    },
+    {
+      "kisteId": "K-GEM-L",
+      "bezeichnung": "Gemüsekiste groß",
+      "groesse": "L",
+      "preis": 27.90,
+      "bio": true,
+      "gewichtKg": 8.0,
+      "saisonEnde": "2027-03-31"
+    },
+    {
+      "kisteId": "K-MIX-S",
+      "bezeichnung": "Mischkiste klein",
+      "groesse": "S",
+      "preis": 14.20,
+      "bio": false,
+      "gewichtKg": 3.0,
+      "saisonEnde": null
+    }
+  ]
+}</pre>
+    <h4>b) Eingebettetes Array <code>inhalt</code> (3 P)</h4>
+    <p>Das Objekt der Kiste K-OBST-M aus a) mit eingebettetem Inhalt:</p>
+    <pre class="json">{
+  "kisteId": "K-OBST-M",
+  "bezeichnung": "Obstkiste mittel",
+  "groesse": "M",
+  "preis": 18.50,
+  "bio": true,
+  "gewichtKg": 4.5,
+  "saisonEnde": null,
+  "inhalt": [
+    { "artikel": "Äpfel Elstar", "menge": 1.5, "einheit": "kg" },
+    { "artikel": "Birnen Conference", "menge": 1, "einheit": "kg" },
+    { "artikel": "Bananen", "menge": 6, "einheit": "Stück" }
+  ]
+}</pre>
+    <h4>c) Gründe für JSON (2 P)</h4>
+    <ul>
+      <li>geringere Datenmenge als XML (keine End-Tags, kein Prolog) – wichtig bei Mobilfunkverbindungen,</li>
+      <li>lässt sich direkt in Objekte der App-Programmiersprache umwandeln (JavaScript, Kotlin, Swift, Java) und ist einfacher und schneller zu verarbeiten,</li>
+      <li>eingebaute Datentypen (Zahl, Boolean, null),</li>
+      <li>De-facto-Standard für REST-APIs mit vielen Bibliotheken.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Struktur (Objekt mit Array <code>kisten</code>, drei Objekte, Klammern und Kommas) 2 P; Zahlen ohne Anführungszeichen 1 P; <code>bio</code> als <code>true</code>/<code>false</code> 1 P; leere Zellen als <code>null</code> (Weglassen des Schlüssels wird akzeptiert) und Datum als String 1 P. <code>18.5</code> statt <code>18.50</code> oder <code>8</code> statt <code>8.0</code> sind gleichwertig. b) Array mit drei Objekten 1 P, richtige Schlüssel und Werte 1 P, Datentypen (Menge als Zahl) 1 P. c) je Grund 1 P.</div>
+    <p><strong>Erklärung:</strong> Die meisten Punktabzüge entstehen durch Datentypen: <code>"ja"</code> statt <code>true</code>, <code>"18.50"</code> als String, ein leerer String <code>""</code> statt <code>null</code>. Alle Lösungen wurden mit Python <code>json.load</code> auf Syntax geprüft.</p>
+  </div><p class="ap2-loesung-link"><a href="06_Schnittstellen_Datenformate_Loesungen.html#L-SD-02-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SD-02-3">
     <div class="einheit">
@@ -1770,6 +2019,132 @@ Content-Length: 162
     <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 3c (Tabellen in JSON, Embedding) und W24 Teil 1, Aufgabe 2c (Skript mit JSON-Ausgabe)</p>
     </div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SD-02-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SD-02.3 · 20 Punkte</div>
+    <h4>a) Kunden und Lieferadressen mit Referenz (5 P)</h4>
+    <pre class="json">{
+  "kunden": [
+    {
+      "kundenNr": 10427,
+      "name": "Jana Petersen",
+      "kundentyp": "privat",
+      "email": "j.petersen@mail.example",
+      "newsletter": true
+    },
+    {
+      "kundenNr": 20015,
+      "name": "Kita Sonnenblume",
+      "kundentyp": "oeffentlich",
+      "email": "verwaltung@kita-sonnenblume.example",
+      "newsletter": false
+    }
+  ],
+  "lieferadressen": [
+    {
+      "adrId": 1,
+      "kundenNr": 10427,
+      "strasse": "Lindenweg 4",
+      "plz": "21391",
+      "ort": "Heidmoor",
+      "ablageort": "Garage"
+    },
+    {
+      "adrId": 2,
+      "kundenNr": 10427,
+      "strasse": "Hafenstraße 18",
+      "plz": "21423",
+      "ort": "Kleinmoor",
+      "ablageort": null
+    },
+    {
+      "adrId": 3,
+      "kundenNr": 20015,
+      "strasse": "Am Mühlenbach 3",
+      "plz": "21391",
+      "ort": "Heidmoor",
+      "ablageort": "Küche, Hintereingang"
+    }
+  ]
+}</pre>
+    <h4>b) Lieferadressen eingebettet (3 P)</h4>
+    <pre class="json">{
+  "kundenNr": 10427,
+  "name": "Jana Petersen",
+  "kundentyp": "privat",
+  "email": "j.petersen@mail.example",
+  "newsletter": true,
+  "lieferadressen": [
+    {
+      "adrId": 1,
+      "strasse": "Lindenweg 4",
+      "plz": "21391",
+      "ort": "Heidmoor",
+      "ablageort": "Garage"
+    },
+    {
+      "adrId": 2,
+      "strasse": "Hafenstraße 18",
+      "plz": "21423",
+      "ort": "Kleinmoor",
+      "ablageort": null
+    }
+  ]
+}</pre>
+    <h4>c) Embedding oder Referenz (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:18%">Datenbestand</th><th style="width:14%">Entscheidung</th><th>Begründung</th></tr>
+      <tr><td>(1) Bestellungen eines Kunden</td><td><strong>Referenz</strong></td><td>Die Bestellungen wachsen unbegrenzt (mehrere Hundert je Kunde). Eingebettet würde das Kundendokument immer größer und langsamer zu laden, obwohl die App beim Öffnen des Kontos die Bestellungen gar nicht braucht. Bestellungen werden außerdem unabhängig abgefragt (z. B. nach Zeitraum). Daher eigene Sammlung <code>bestellungen</code> mit <code>kundenNr</code>.</td></tr>
+      <tr><td>(2) Positionen einer Bestellung</td><td><strong>Embedding</strong></td><td>Es sind nur wenige (1–5), sie gehören ausschließlich zu dieser Bestellung, werden immer zusammen mit ihr angezeigt und ändern sich danach nicht mehr. Eingebettet liefert ein einziger Zugriff die vollständige Bestellung.</td></tr>
+    </table>
+    <h4>d) offeneStoppsAlsJson (8 P)</h4>
+    <pre class="pseudo">funktion offeneStoppsAlsJson(stopps : List&lt;Stopp&gt;) : string
+  json : string := "["
+  erster : boolean := true                    // wurde schon ein Objekt ausgegeben?
+  zähle i von 0 bis stopps.size() - 1
+    s : Stopp := stopps.get(i)
+    wenn nicht s.isZugestellt() dann
+      wenn nicht erster dann
+        json := json + ", "                   // Komma nur ZWISCHEN den Objekten
+      Ende wenn
+      json := json + "{\"position\": " + s.getPosition()
+                   + ", \"kundenNr\": " + s.getKundenNr()
+                   + ", \"ort\": \"" + s.getOrt() + "\""
+                   + ", \"kisten\": " + s.getAnzahlKisten() + "}"
+      erster := false
+    Ende wenn
+  Ende zähle
+  json := json + "]"
+  rückgabe json
+Ende funktion</pre>
+    <p class="codelabel">Java · Aufgabe_SD_02_3.java (Auszug)</p>
+    <pre class="java">static String offeneStoppsAlsJson(List&lt;Stopp&gt; stopps) {
+    String json = "[";
+    boolean erster = true;
+    for (int i = 0; i &lt; stopps.size(); i++) {
+        Stopp s = stopps.get(i);
+        if (!s.isZugestellt()) {
+            if (!erster) {
+                json = json + ", ";                  // Trennzeichen nur ZWISCHEN Objekten
+            }
+            json = json + "{\"position\": " + s.getPosition()
+                    + ", \"kundenNr\": " + s.getKundenNr()
+                    + ", \"ort\": \"" + s.getOrt() + "\""   // Zeichenkette in Anführungszeichen
+                    + ", \"kisten\": " + s.getAnzahlKisten() + "}";
+            erster = false;
+        }
+    }
+    json = json + "]";
+    return json;
+}</pre>
+    <p class="codelabel">Ausgabe (die erste Zeile wurde zusätzlich mit Python <code>json.loads</code> als gültiges JSON bestätigt)</p>
+    <pre class="ausgabe">Tour T3 (Anlage 9):
+[{"position": 2, "kundenNr": 20015, "ort": "Heidmoor", "kisten": 6}, {"position": 3, "kundenNr": 10533, "ort": "Wiesede", "kisten": 1}, {"position": 5, "kundenNr": 20022, "ort": "Wiesede", "kisten": 4}]
+Leere Liste:            []
+Alles zugestellt:       []
+Nur letzter Stopp offen: [{"position": 2, "kundenNr": 20022, "ort": "Wiesede", "kisten": 4}]</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Array <code>kunden</code> mit passenden Datentypen (<code>newsletter</code> als Boolean) 2 P; Array <code>lieferadressen</code> mit <code>kundenNr</code> als Verweis und <code>null</code> für den leeren Ablageort 2 P; Syntax 1 P. <code>plz</code> als Zahl ist syntaktisch korrekt und wird akzeptiert; fachlich besser ist ein String (Postleitzahlen können mit 0 beginnen). b) Kundendaten 1 P, Array mit zwei Adressobjekten 1 P, Syntax 1 P (die <code>kundenNr</code> in den eingebetteten Adressen ist überflüssig, aber kein Fehler). c) je Datenbestand 2 P (Entscheidung 0,5 P, Begründung 1,5 P); eine andere Entscheidung mit schlüssiger Begründung erhält Teilpunkte. d) Initialisierung (<code>"["</code>, Merker) 1 P; Schleife über alle Stopps 1 P; Bedingung „nicht zugestellt“ 1 P; Komma nur zwischen den Objekten 2 P; Objekt korrekt aufgebaut (Schlüssel und String-Werte in Anführungszeichen, Zahlen ohne) 2 P; <code>"]"</code> und Rückgabe 1 P. Gleichwertig: Teilstrings in einer Liste sammeln und mit <code>", "</code> verbinden, oder am Ende ein überzähliges Komma entfernen (sofern der Fall „keine offenen Stopps“ richtig bleibt).</div>
+    <p><strong>Erklärung:</strong> Der Klassiker ist die Kommaregel. Mit <code>wenn i &gt; 0</code> entstünde hier <code>[, {"position": 2 …</code>, weil Stopp 1 (Index 0) zugestellt ist und gar nicht ausgegeben wird – ungültiges JSON. Deshalb merkt sich die Lösung, ob schon ein Objekt geschrieben wurde. Zweite häufige Fehlerquelle: der Ort ohne maskierte Anführungszeichen.</p>
+  </div><p class="ap2-loesung-link"><a href="06_Schnittstellen_Datenformate_Loesungen.html#L-SD-02-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== SD-03 ===================== -->
   <h3 id="a-03">SD-03 · REST-Grundlagen &amp; HTTP-Methoden</h3>
@@ -1796,6 +2171,20 @@ Content-Length: 162
     <p class="quelle">Angelehnt an: S24 Teil 1, Aufgabe 2b</p>
     </div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SD-03-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SD-03.1 · 6 Punkte</div>
+    <h4>a) CRUD-Tabelle (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:16%">Operation</th><th>Beispiel im KistenPortal</th><th style="width:28%">HTTP-Methode</th></tr>
+      <tr><td>C – Create</td><td>neues Abo anlegen: <code>/kunden/10427/abos</code></td><td>POST (PUT, wenn der Client die ID festlegt)</td></tr>
+      <tr><td>R – Read</td><td>alle Kistenarten anzeigen: <code>/kisten</code></td><td>GET</td></tr>
+      <tr><td>U – Update</td><td>Liefertag eines Abos ändern: <code>/kunden/10427/abos/5531</code></td><td>PUT (vollständig) oder PATCH (teilweise)</td></tr>
+      <tr><td>D – Delete</td><td>Lieferadresse löschen: <code>/kunden/10427/lieferadressen/2</code></td><td>DELETE</td></tr>
+    </table>
+    <h4>b) Zustandslosigkeit (2 P)</h4>
+    <p>Der Server speichert zwischen zwei Requests keinen Sitzungszustand der App. Jeder Request muss deshalb <strong>alle Informationen</strong> enthalten, die zu seiner Bearbeitung nötig sind: den API-Schlüssel bzw. das Token in jedem Request, die betroffene Ressource in der URI (z. B. Kundennummer) und alle Nutzdaten im Body. Der Server kann jeden Request unabhängig von vorherigen bearbeiten; dadurch kann z. B. jeder von mehreren Servern jeden Request beantworten (Lastverteilung).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Zeile 1 P (Beispiel 0,5 P, Methode 0,5 P); für Create wird POST oder PUT, für Update PUT oder PATCH akzeptiert (wie in der IHK-Lösung S24). b) 2 P: kein gespeicherter Zustand auf dem Server 1 P, Folge für die Requests (alle Infos, Authentifizierung in jedem Request) 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="06_Schnittstellen_Datenformate_Loesungen.html#L-SD-03-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SD-03-2">
     <div class="einheit">
@@ -1824,6 +2213,24 @@ Content-Length: 162
     <div class="antwort z3"></div>
     </div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SD-03-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SD-03.2 · 10 Punkte</div>
+    <h4>a) Endpunkte (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:4%">Nr.</th><th style="width:11%">Methode</th><th>Endpunkt</th><th style="width:30%">Bemerkung</th></tr>
+      <tr><td>1</td><td>GET</td><td class="mono">/kisten?bio=true&amp;groesse=L</td><td>Filter als Query-Parameter</td></tr>
+      <tr><td>2</td><td>PATCH</td><td class="mono">/kunden/10427/abos/5531</td><td>Body: <code>{"status": "pausiert", "pausiertBis": "2026-11-24"}</code></td></tr>
+      <tr><td>3</td><td>DELETE</td><td class="mono">/kunden/10427/lieferadressen/2</td><td></td></tr>
+      <tr><td>4</td><td>POST</td><td class="mono">/bestellungen/88120/reklamationen</td><td>Body: Daten der Reklamation</td></tr>
+      <tr><td>5</td><td>PUT</td><td class="mono">/kunden/10427/lieferadressen/1</td><td>Body: vollständige neue Adresse</td></tr>
+      <tr><td>6</td><td>GET</td><td class="mono">/kunden/10427/bestellungen?von=2026-11-01&amp;bis=2026-11-30</td><td>auch: <code>/bestellungen?kundenNr=10427&amp;von=…&amp;bis=…</code></td></tr>
+    </table>
+    <h4>b) Pfad- und Query-Parameter (2 P)</h4>
+    <p><strong>Pfadparameter</strong> sind Teil der Ressourcenadresse und identifizieren eine bestimmte Ressource, z. B. <code>10427</code> und <code>5531</code> in <code>/kunden/10427/abos/5531</code> – ohne sie wäre nicht klar, welches Abo gemeint ist. <strong>Query-Parameter</strong> stehen nach dem <code>?</code> als <code>name=wert</code>, sind meist optional und filtern, sortieren oder begrenzen eine Ergebnisliste, z. B. <code>bio=true&amp;groesse=L</code> bei <code>/kisten</code>.</p>
+    <h4>c) Zweck von /v1 (2 P)</h4>
+    <p><code>/v1</code> kennzeichnet die <strong>Version der Schnittstelle</strong>. Wird die API später inkompatibel geändert (Felder umbenannt, Struktur geändert), wird sie als <code>/v2</code> veröffentlicht, während <code>/v1</code> weiterläuft. So funktionieren bereits installierte, nicht aktualisierte Apps und Partner-Anbindungen weiter und können schrittweise umgestellt werden.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Zeile 1 P (Methode 0,5 P, Endpunkt 0,5 P); mit vorangestelltem <code>/v1</code> ebenfalls richtig. Verben im Pfad (<code>/abos/5531/pausieren</code>) oder IDs als Query-Parameter (<code>/abos?id=5531</code>) erhalten für den Endpunkt keine Punkte. Zeile 2 mit PUT nur, wenn die vollständige Repräsentation gesendet wird. b), c) je 2 P (Erläuterung 1 P, Beispiel bzw. Folge für Clients 1 P).</div>
+  </div><p class="ap2-loesung-link"><a href="06_Schnittstellen_Datenformate_Loesungen.html#L-SD-03-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SD-03-3">
     <div class="einheit">
@@ -1860,6 +2267,40 @@ Content-Length: 162
     <p class="quelle">Angelehnt an: S24 Teil 1, Aufgabe 2a/2b und S26 Teil 1, Aufgabe 2ba/2bc</p>
     </div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SD-03-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SD-03.3 · 18 Punkte</div>
+    <h4>a) Konzept einer REST-API (3 P)</h4>
+    <p>Eine REST-API stellt die Daten des KistenPortals als <strong>Ressourcen</strong> bereit (Kisten, Kunden, Abos …), die jeweils über eine <strong>eindeutige URI</strong> adressiert werden. Clients greifen über die <strong>Standardmethoden von HTTP</strong> darauf zu (GET lesen, POST anlegen, PUT/PATCH ändern, DELETE löschen) und tauschen <strong>Repräsentationen</strong> der Ressourcen aus, meist im JSON-Format. Die Kommunikation ist <strong>zustandslos</strong>: Jede Anfrage enthält alle nötigen Informationen, der Server speichert keine Sitzung. Client und Server sind dadurch lose gekoppelt, sodass App, Webshop und Partner dieselbe Schnittstelle nutzen können.</p>
+    <h4>b) Sicher und idempotent (5 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:34%">Request</th><th style="width:8%">sicher</th><th style="width:11%">idempotent</th><th>Begründung</th></tr>
+      <tr><td class="mono">GET /v1/kisten?bio=true</td><td>ja</td><td>ja</td><td>liest nur, ändert nichts auf dem Server</td></tr>
+      <tr><td class="mono">POST /v1/kunden/10427/abos</td><td>nein</td><td>nein</td><td>jeder Aufruf legt ein weiteres Abo an</td></tr>
+      <tr><td class="mono">PUT …/abos/5531</td><td>nein</td><td>ja</td><td>ersetzt das Abo vollständig; nach jeder Wiederholung ist der Zustand derselbe</td></tr>
+      <tr><td class="mono">PATCH …/abos/5531 (status, pausiertBis)</td><td>nein</td><td>ja (hier)</td><td>setzt feste Werte; erneutes Senden ändert nichts mehr. PATCH ist im Allgemeinen <em>nicht garantiert</em> idempotent (z. B. relative Änderungen).</td></tr>
+      <tr><td class="mono">DELETE …/lieferadressen/2</td><td>nein</td><td>ja</td><td>nach dem ersten Aufruf ist die Adresse gelöscht; weitere Aufrufe ändern den Zustand nicht (Antwort ggf. 404)</td></tr>
+    </table>
+    <h4>c) Doppeltes Abo (4 P)</h4>
+    <p><strong>Ursache:</strong> „Abo abschließen“ sendet einen <strong>POST</strong>-Request, und POST ist nicht idempotent. Der erste Request ist beim Server angekommen und hat das Abo angelegt, nur die Antwort (201) ging bei der schlechten Verbindung verloren. Das erneute Tippen sendet einen zweiten POST, der ein zweites, identisches Abo anlegt.</p>
+    <p><strong>Lösung:</strong> Die App erzeugt für jeden Bestellvorgang einen eindeutigen <strong>Idempotenzschlüssel</strong> (z. B. eine UUID) und sendet ihn in einem Header (z. B. <code>Idempotency-Key</code>) mit. Der Server merkt sich bereits verarbeitete Schlüssel und liefert bei einer Wiederholung die ursprüngliche Antwort zurück, statt ein neues Abo anzulegen. Weitere mögliche Lösungen: Die App vergibt die Abo-ID selbst und legt das Abo mit <code>PUT /kunden/10427/abos/{uuid}</code> an (idempotent); der Server prüft auf Dubletten (gleiche Kundin, gleiche Kiste innerhalb kurzer Zeit) und antwortet mit 409.</p>
+    <h4>d) PUT und PATCH (4 P)</h4>
+    <pre class="http">PUT /v1/kunden/10427/abos/5531 HTTP/1.1
+
+{"aboId": 5531, "kundenNr": 10427, "kisteId": "K-OBST-M", "rhythmus": "woechentlich",
+ "liefertag": "DO", "lieferadresseId": 1, "status": "aktiv", "pausiertBis": null}</pre>
+    <pre class="http">PATCH /v1/kunden/10427/abos/5531 HTTP/1.1
+
+{"liefertag": "DO"}</pre>
+    <h4>e) REST und SOAP (2 P)</h4>
+    <ul>
+      <li>REST ist ein Architekturstil, SOAP ein festgelegtes Protokoll.</li>
+      <li>REST erlaubt beliebige Formate (meist JSON), SOAP nutzt ausschließlich XML (SOAP-Envelope).</li>
+      <li>REST verwendet die HTTP-Methoden auf Ressourcen-URIs; bei SOAP steht die Operation im XML-Body, meist per POST an einen einzigen Endpunkt.</li>
+      <li>SOAP-Dienste werden verbindlich per WSDL beschrieben, bei REST ist eine Beschreibung (z. B. OpenAPI) optional.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je fachlich richtig erläutertem Aspekt 1 P, höchstens 3 P (Ressourcen/URI, HTTP-Methoden, Repräsentationen/JSON, zustandslos, lose Kopplung). b) je Zeile 1 P (beide Einträge richtig 0,5 P, Begründung 0,5 P); bei PATCH wird auch „nein“ mit Hinweis auf die allgemeine Nicht-Idempotenz voll bewertet. c) Ursache 2 P (POST nicht idempotent 1 P, Antwort verloren/zweiter Request 1 P), Lösung 2 P; „Button nach dem Tippen sperren“ allein 1 P, weil automatische Wiederholungen dadurch nicht verhindert werden. d) je Request 2 P (Request-Zeile mit richtiger Methode und URI 1 P, Body 1 P); beim PUT muss die vollständige Repräsentation gesendet werden, beim PATCH genügt der geänderte Wert. e) je Unterschied 1 P.</div>
+    <p><strong>Erklärung:</strong> b) prüft Verständnis statt Auswendiglernen: Ob ein PATCH idempotent ist, hängt von der konkreten Änderung ab. Das Setzen fester Werte ist idempotent, „erhöhe um 1“ wäre es nicht. Der Body des PUT in d) wurde gegen die Repräsentation aus Anlage 2 geprüft (alle acht Felder, nur der Liefertag ist geändert).</p>
+  </div><p class="ap2-loesung-link"><a href="06_Schnittstellen_Datenformate_Loesungen.html#L-SD-03-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== SD-04 ===================== -->
   <h3 id="a-04">SD-04 · HTTP-Request/Response &amp; Statuscodes</h3>
@@ -1888,6 +2329,25 @@ Content-Length: 162
     <p class="quelle">Angelehnt an: S24 Teil 1, Aufgabe 2d und W21 Teil 1, Aufgabe 3c</p>
     </div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SD-04-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SD-04.1 · 6 Punkte</div>
+    <h4>a) Statuscode-Klassen (3 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:10%">Code</th><th>Bedeutung</th></tr>
+      <tr><td>2xx</td><td><strong>Erfolg:</strong> Der Request wurde empfangen, verstanden und erfolgreich verarbeitet (z. B. 200 OK, 201 Created).</td></tr>
+      <tr><td>4xx</td><td><strong>Client-Fehler:</strong> Die Anfrage des Clients ist fehlerhaft oder nicht erlaubt, z. B. falsche URL, fehlende Berechtigung oder ungültige Daten (z. B. 400, 401, 404). Sie muss vom Client geändert werden.</td></tr>
+      <tr><td>5xx</td><td><strong>Server-Fehler:</strong> Die Anfrage war in Ordnung, der Server konnte sie aber wegen eines eigenen Problems nicht ausführen (z. B. 500, 503).</td></tr>
+    </table>
+    <h4>b) Ursachen für 404 (2 P)</h4>
+    <ul>
+      <li>Die App ruft eine falsche oder veraltete URL auf (Tippfehler im Pfad, z. B. <code>/abo</code> statt <code>/abos</code>, oder eine API-Version, die es nicht mehr gibt).</li>
+      <li>Die Kundennummer im Pfad existiert nicht (mehr), z. B. weil das Kundenkonto gelöscht oder zusammengelegt wurde.</li>
+      <li>Der Endpunkt ist auf dem Server nicht vorhanden bzw. nicht eingerichtet (falsche Basis-URL, z. B. Testserver, fehlerhafte Auslieferung/Routing).</li>
+    </ul>
+    <h4>c) Statuscode bei Wartung (1 P)</h4>
+    <p><strong>503 Service Unavailable</strong> (idealerweise mit dem Header <code>Retry-After</code>).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Klasse 1 P. b) je Ursache 1 P. „Die Kundin hat keine Abos“ ist bei sauberer API-Gestaltung kein 404 (sondern 200 mit leerer Liste) und wird nur mit dieser Einschränkung akzeptiert. c) 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="06_Schnittstellen_Datenformate_Loesungen.html#L-SD-04-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SD-04-2">
     <div class="einheit">
@@ -1934,6 +2394,35 @@ Content-Length: 162
     <p class="quelle">Angelehnt an: S24 Teil 1, Aufgabe 2c und S26 Teil 1, Aufgabe 2bb</p>
     </div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SD-04-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SD-04.2 · 12 Punkte</div>
+    <h4>a) Bestandteile des Requests (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:36%">Bestandteil</th><th>Bedeutung</th></tr>
+      <tr><td class="mono">/v1/kunden/10427/abos</td><td>Pfad des Endpunkts (Ressource): Version 1 der API, Sammlung der Abos der Kundin 10427, in der das neue Abo angelegt wird</td></tr>
+      <tr><td class="mono">Content-Type / Accept</td><td>Header: <code>Content-Type</code> gibt an, dass der Body JSON enthält; <code>Accept</code>, dass der Client die Antwort ebenfalls als JSON erwartet</td></tr>
+      <tr><td class="mono">X-API-Key: app-7Fq2-Lx91</td><td>Header mit dem API-Schlüssel der Kunden-App; der Server prüft damit, ob die anfragende Anwendung zugriffsberechtigt ist</td></tr>
+      <tr><td class="mono">{"kisteId": "K-GEM-L", …}</td><td>Body mit den Nutzdaten im JSON-Format: die Daten des neuen Abos (Gemüsekiste groß, 14-täglich, freitags, an Lieferadresse 2)</td></tr>
+    </table>
+    <h4>ba) Parameter der URL (3 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:36%">Parameter</th><th>Beschreibung</th></tr>
+      <tr><td class="mono">start=… / ziel=…</td><td>Koordinaten (Breiten- und Längengrad) des Start- und des Zielpunkts der Route, z. B. Lager und Kunde</td></tr>
+      <tr><td class="mono">profil=transporter</td><td>Fahrzeugprofil: Die Route wird für einen Transporter berechnet (andere erlaubte Straßen, Höhen- und Gewichtsgrenzen, Geschwindigkeiten als z. B. für Pkw oder Fahrrad)</td></tr>
+      <tr><td class="mono">apikey=GD-55K2-ZZ81</td><td>API-Schlüssel, mit dem sich das KistenPortal beim Kartendienst ausweist (Zugriffsberechtigung, Abrechnung, Begrenzung der Anfragen)</td></tr>
+    </table>
+    <h4>bb) Nachteil des Schlüssels in der URL (1 P)</h4>
+    <p>URLs werden in Server- und Proxy-Protokollen, im Browserverlauf und in Monitoring-Werkzeugen gespeichert; dort kann der Schlüssel ausgelesen und missbraucht werden (z. B. Anfragen auf Kosten der FrischeKiste). Besser: Übertragung im Header.</p>
+    <h4>c) Statuscodes (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:6%">Nr.</th><th style="width:22%">Code</th><th>Begründung</th></tr>
+      <tr><td>1</td><td>400 Bad Request</td><td>Die Anfrage ist inhaltlich fehlerhaft (Pflichtfeld fehlt); der Client muss sie korrigieren. (422 Unprocessable Content wird ebenfalls akzeptiert.)</td></tr>
+      <tr><td>2</td><td>403 Forbidden</td><td>Der Erzeugerbetrieb ist mit gültigem Schlüssel authentifiziert, als Partner aber nur zum Lesen berechtigt. 401 wäre falsch, weil der Schlüssel gültig ist.</td></tr>
+      <tr><td>3</td><td>204 No Content</td><td>Erfolgreich ausgeführt, die Antwort enthält bewusst keinen Body.</td></tr>
+      <tr><td>4</td><td>301 Moved Permanently</td><td>Die Ressource ist dauerhaft unter einer neuen Adresse erreichbar; der Header <code>Location: /v1/kisten</code> nennt sie, Clients sollen künftig die neue URL nutzen. (308 Permanent Redirect ebenfalls richtig.)</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Zeile 1 P. ba) je Parameter 1 P. bb) 1 P. c) je Situation 1 P (Code 0,5 P, Begründung 0,5 P); 405 bei (2) nur mit der Begründung, dass DELETE auf dieser Ressource grundsätzlich nicht angeboten wird (0,5 P).</div>
+  </div><p class="ap2-loesung-link"><a href="06_Schnittstellen_Datenformate_Loesungen.html#L-SD-04-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SD-04-3">
     <div class="einheit">
@@ -1976,6 +2465,119 @@ Content-Length: 57
     <p class="quelle">Angelehnt an: W24 Teil 2, Aufgabe 2a (HTTP-Antwort mit Statuscode, Content-Type und Content-Length bauen)</p>
     </div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SD-04-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SD-04.3 · 20 Punkte</div>
+    <h4>a) createErrorResponse (8 P)</h4>
+    <pre class="pseudo">private funktion createErrorResponse(statusCode : integer, meldung : string) : HttpResponse
+  body : string := "{\"status\": " + statusCode + ", \"fehler\": \"" + meldung + "\"}"
+  response : HttpResponse := new HttpResponse()
+  response.setStatus(statusCode)
+  response.setHeader("Content-Type", "application/json; charset=utf-8")
+  response.setHeader("Content-Length", body.byteLength().toString())   // Bytes, nicht Zeichen
+  response.setBody(body)
+  rückgabe response
+Ende funktion</pre>
+    <h4>b) Zeichen und Bytes (3 P)</h4>
+    <p><code>length()</code> zählt <strong>Zeichen</strong>, <code>Content-Length</code> muss aber die Länge des Bodys in <strong>Bytes</strong> angeben. In UTF-8 belegen Umlaute und ß 2 Bytes, das Eurozeichen 3 Bytes. Enthält die Meldung solche Zeichen, ist der Wert zu klein: Der Client liest dann zu wenig Bytes und schneidet den Body ab (ungültiges JSON) bzw. der Rest wird als Beginn der nächsten Nachricht fehlinterpretiert.</p>
+    <p>Body <code>{"status": 503, "fehler": "Katalog vorübergehend nicht verfügbar"}</code>: <strong>66 Zeichen</strong>, davon zweimal <code>ü</code> → <strong>Content-Length: 68</strong>.</p>
+    <h4>c) handleGetKiste (9 P)</h4>
+    <pre class="pseudo">funktion handleGetKiste(request : HttpRequest) : HttpResponse
+  // 1. Authentifizierung
+  key : string := request.getHeader("X-API-Key")
+  wenn key = null oder nicht schluessel.istGueltig(key) dann
+    rückgabe createErrorResponse(401, "API-Schlüssel fehlt oder ist ungültig")
+  Ende wenn
+  // 2. Verfügbarkeit des Katalogs
+  wenn nicht katalog.istVerfuegbar() dann
+    rückgabe createErrorResponse(503, "Katalog vorübergehend nicht verfügbar")
+  Ende wenn
+  // 3. Kiste suchen
+  kisteId : string := request.getPfadParameter("kisteId")
+  kiste : Kiste := katalog.findeKiste(kisteId)
+  wenn kiste = null dann
+    rückgabe createErrorResponse(404, "Kiste " + kisteId + " nicht gefunden")
+  Ende wenn
+  // 4. Erfolg
+  body : string := kiste.toJson()
+  response : HttpResponse := new HttpResponse()
+  response.setStatus(200)
+  response.setHeader("Content-Type", "application/json; charset=utf-8")
+  response.setHeader("Content-Length", body.byteLength().toString())
+  response.setBody(body)
+  rückgabe response
+Ende funktion</pre>
+    <p class="codelabel">Java · Aufgabe_SD_04_3.java (Auszug)</p>
+    <pre class="java">private HttpResponse createErrorResponse(int statusCode, String meldung) {
+    String body = "{\"status\": " + statusCode + ", \"fehler\": \"" + meldung + "\"}";
+    HttpResponse response = new HttpResponse();
+    response.setStatus(statusCode);
+    response.setHeader("Content-Type", "application/json; charset=utf-8");
+    response.setHeader("Content-Length", String.valueOf(byteLength(body)));   // Bytes, nicht Zeichen!
+    response.setBody(body);
+    return response;
+}
+
+HttpResponse handleGetKiste(HttpRequest request) {
+    String key = request.getHeader("X-API-Key");
+    if (key == null || !schluessel.istGueltig(key)) {
+        return createErrorResponse(401, "API-Schlüssel fehlt oder ist ungültig");
+    }
+    if (!katalog.istVerfuegbar()) {
+        return createErrorResponse(503, "Katalog vorübergehend nicht verfügbar");
+    }
+    String kisteId = request.getPfadParameter("kisteId");
+    Kiste kiste = katalog.findeKiste(kisteId);
+    if (kiste == null) {
+        return createErrorResponse(404, "Kiste " + kisteId + " nicht gefunden");
+    }
+    String body = kiste.toJson();
+    HttpResponse response = new HttpResponse();
+    response.setStatus(200);
+    response.setHeader("Content-Type", "application/json; charset=utf-8");
+    response.setHeader("Content-Length", String.valueOf(byteLength(body)));
+    response.setBody(body);
+    return response;
+}
+
+// byteLength() aus Anlage 4:
+static int byteLength(String text) {
+    return text.getBytes(StandardCharsets.UTF_8).length;
+}</pre>
+    <p class="codelabel">Ausgabe (Auszug)</p>
+    <pre class="ausgabe">=== 1) ohne X-API-Key
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json; charset=utf-8
+Content-Length: 68
+
+{"status": 401, "fehler": "API-Schlüssel fehlt oder ist ungültig"}
+[Kontrolle] Zeichen im Body: 66, Bytes (UTF-8): 68, Content-Length korrekt: true
+
+=== 3) unbekannte Kiste
+HTTP/1.1 404 Not Found
+Content-Type: application/json; charset=utf-8
+Content-Length: 57
+
+{"status": 404, "fehler": "Kiste K-XXL-Z nicht gefunden"}
+[Kontrolle] Zeichen im Body: 57, Bytes (UTF-8): 57, Content-Length korrekt: true
+
+=== 4) Kiste gefunden
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Content-Length: 104
+
+{"kisteId": "K-GEM-L", "bezeichnung": "Gemüsekiste groß", "groesse": "L", "preis": 27.90, "bio": true}
+[Kontrolle] Zeichen im Body: 102, Bytes (UTF-8): 104, Content-Length korrekt: true
+
+=== 5) Katalog nicht verfügbar (Teil b)
+HTTP/1.1 503 Service Unavailable
+Content-Type: application/json; charset=utf-8
+Content-Length: 68
+
+{"status": 503, "fehler": "Katalog vorübergehend nicht verfügbar"}
+[Kontrolle] Zeichen im Body: 66, Bytes (UTF-8): 68, Content-Length korrekt: true</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Body korrekt zusammengesetzt (maskierte Anführungszeichen, Statuscode als Zahl ohne, Meldung mit Anführungszeichen) 3 P; Objekt erzeugt und Statuscode gesetzt 1 P; Content-Type 1 P; Content-Length über <code>byteLength()</code> 2 P (mit <code>length()</code> 0 P); Body setzen und Rückgabe 1 P. b) Erläuterung 1 P, 66 Zeichen 1 P, 68 Bytes 1 P. c) Header lesen und auf fehlend/ungültig prüfen mit 401 2 P; 503-Prüfung 1 P; Pfadparameter lesen, <code>findeKiste</code>, 404 mit Kisten-ID in der Meldung 2 P; Erfolgsantwort mit Status 200, Body <code>toJson()</code>, beiden Headern 3 P; Reihenfolge eingehalten und nach jedem Fehler sofortige Rückgabe 1 P. Eine Variante mit <code>sonst wenn</code>-Kette statt frühem <code>rückgabe</code> ist gleichwertig.</div>
+    <p><strong>Erklärung:</strong> Die Aufgabe entspricht W24 T2 A2a, erweitert um die Prüfreihenfolge. Typische Fehler: kein <code>rückgabe</code> nach einem Fehlerfall (die Methode läuft dann weiter und überschreibt die Antwort), <code>istGueltig(null)</code> vor der Null-Prüfung, <code>Content-Length</code> in Zeichen, und im 404-Text der wörtliche Text „kisteId“ statt des Werts der Variablen.</p>
+  </div><p class="ap2-loesung-link"><a href="06_Schnittstellen_Datenformate_Loesungen.html#L-SD-04-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== SD-05 ===================== -->
   <h3 id="a-05">SD-05 · eRechnung</h3>
@@ -2001,6 +2603,20 @@ Content-Length: 57
     <p class="quelle">Angelehnt an: W25 Teil 1, Aufgabe 2ba</p>
     </div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SD-05-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SD-05.1 · 6 Punkte</div>
+    <h4>a) Hauptziel (2 P)</h4>
+    <p>Das Hauptziel einer eRechnung ist die <strong>automatische, elektronische Verarbeitung</strong> beim Empfänger: Die Rechnungsdaten liegen strukturiert (als XML) vor und können ohne Abtippen direkt in Buchhaltung bzw. ERP-System übernommen, geprüft und gebucht werden. Das spart Zeit und Kosten und vermeidet Erfassungsfehler. Eine für Menschen lesbare Darstellung ist dabei zweitrangig.</p>
+    <h4>b) eRechnung oder nicht? (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:5%">Nr.</th><th style="width:13%">eRechnung?</th><th>Begründung</th></tr>
+      <tr><td>1</td><td>nein</td><td>Eine PDF enthält keine strukturierten Daten, sondern nur eine Darstellung für Menschen („sonstige Rechnung“). Die Daten müssten abgetippt oder per Texterkennung gelesen werden.</td></tr>
+      <tr><td>2</td><td>ja</td><td>XRechnung ist ein strukturiertes XML-Format nach EN 16931 und maschinell verarbeitbar; der Übertragungsweg (Portal) spielt keine Rolle.</td></tr>
+      <tr><td>3</td><td>nein</td><td>Ein Bild enthält keine strukturierten Daten; es ist eine digitalisierte Papierrechnung.</td></tr>
+      <tr><td>4</td><td>ja</td><td>ZUGFeRD ist ein hybrides Format: Die in das PDF/A-3 eingebettete XML-Datei entspricht im Profil EN 16931 der Norm und kann automatisch verarbeitet werden.</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> a) automatische Verarbeitung 1 P, Erläuterung (strukturierte Daten, kein manuelles Erfassen, Darstellung zweitrangig) 1 P. b) je Zeile 1 P (Entscheidung 0,5 P, Begründung 0,5 P).</div>
+  </div><p class="ap2-loesung-link"><a href="06_Schnittstellen_Datenformate_Loesungen.html#L-SD-05-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SD-05-2">
     <div class="einheit">
@@ -2022,6 +2638,23 @@ Content-Length: 57
     <p class="quelle">Angelehnt an: W25 Teil 1, Aufgabe 2b (englischer Fachtext zur eRechnung)</p>
     </div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SD-05-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SD-05.2 · 10 Punkte</div>
+    <h4>a) Empfangen und ausstellen (3 P)</h4>
+    <ul>
+      <li><strong>Empfangen:</strong> Seit dem 1. Januar 2025 müssen alle Unternehmen in Deutschland eRechnungen von anderen Unternehmen empfangen können.</li>
+      <li><strong>Ausstellen – Übergangszeit:</strong> Bis Ende 2026 dürfen Unternehmen noch Papierrechnungen oder andere elektronische Formate wie PDF versenden (PDF nur mit Zustimmung des Empfängers). Im Jahr 2027 gilt das nur noch für Unternehmen, deren Gesamtumsatz im Vorjahr höchstens 800.000 € betrug.</li>
+      <li><strong>Ausstellen – Pflicht:</strong> Ab dem 1. Januar 2028 müssen alle Unternehmen eRechnungen ausstellen (ausgenommen Rechnungen bis 250 € und Fahrausweise).</li>
+    </ul>
+    <h4>b) XRechnung und ZUGFeRD (4 P)</h4>
+    <p><strong>XRechnung</strong> ist ein rein XML-basiertes Format: Die Rechnung besteht nur aus strukturierten Daten für die Software (Datenaspekt). Ein Mensch kann sie nur mit einem Anzeigeprogramm (Viewer) lesen. Viele Behörden verlangen XRechnung und nutzen die Leitweg-ID, um die Rechnung an die zuständige Stelle weiterzuleiten.</p>
+    <p><strong>ZUGFeRD</strong> ist ein hybrides Format: ein PDF/A-3-Dokument, das ein Mensch direkt lesen kann, mit einer eingebetteten XML-Datei, die die Software verarbeitet. Es vereint also visuellen und Datenaspekt. Weichen beide Teile voneinander ab, gelten die XML-Daten.</p>
+    <h4>c) PDF-Rechnungen im Jahr 2027 (3 P)</h4>
+    <p><strong>Geschäftskunden (B2B):</strong> Nicht mehr zulässig. Die FrischeKiste erwartet für 2026 einen Umsatz von rund 4,6 Mio. € und liegt damit deutlich über 800.000 €. Die Übergangsregel für 2027 gilt daher nicht; ab dem 1. Januar 2027 müssen Rechnungen an Geschäftskunden als eRechnung ausgestellt werden (ausgenommen Kleinbetragsrechnungen bis 250 €).</p>
+    <p><strong>Privatkunden (B2C):</strong> weiterhin zulässig, denn Rechnungen an Privatkunden sind von der Pflicht nicht betroffen.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Empfang ab 2025 1 P, Übergang 2025/2026 und 2027 mit 800.000-€-Grenze 1 P, Pflicht ab 2028 1 P. b) je Format 2 P (Aufbau 1 P, Folge für Mensch bzw. Software 1 P). c) Geschäftskunden mit Begründung über den Umsatz 2 P, Privatkunden 1 P. Antworten in englischer Sprache oder wörtliche Übersetzungen ohne eigene Formulierung erhalten Abzüge.</div>
+    <p><strong>Erklärung:</strong> c) verlangt, den Text auf die Situation anzuwenden: Entscheidend ist der Umsatz des <em>Vorjahres</em> (2026) – diese Angabe steht in Anlage 1, nicht im Text.</p>
+  </div><p class="ap2-loesung-link"><a href="06_Schnittstellen_Datenformate_Loesungen.html#L-SD-05-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="SD-05-3">
     <div class="einheit">
@@ -2056,6 +2689,49 @@ Content-Length: 57
     <p class="quelle">Angelehnt an: W25 Teil 1, Aufgabe 3a und 3b</p>
     </div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-SD-05-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe SD-05.3 · 18 Punkte</div>
+    <h4>a) Konformität sicherstellen (3 P)</h4>
+    <ul>
+      <li>Jede erzeugte Rechnung mit dem offiziellen <strong>Validator</strong> (KoSIT-Validator: XSD und Schematron) prüfen – auch automatisiert im Build- bzw. Testprozess.</li>
+      <li>Die <strong>Spezifikation</strong> (XRechnung/EN 16931) konsequent umsetzen, insbesondere alle verpflichtenden Angaben und Regeln.</li>
+      <li><strong>Erprobte Bibliotheken</strong> zur Erzeugung der XML-Dateien verwenden, statt alles selbst zu programmieren.</li>
+      <li><strong>Automatisierte Tests</strong> (Unit- und Integrationstests) mit den offiziellen Testrechnungen und eigenen Grenzfällen.</li>
+      <li><strong>Testläufe mit den Empfängern</strong>: Testrechnungen an die Testumgebung des Rechnungsportals der Stadt bzw. an Geschäftskunden senden (Interoperabilität).</li>
+    </ul>
+    <h4>b) Online-Prüfseite (4 P)</h4>
+    <ul>
+      <li><strong>Datenschutz und Geheimhaltung:</strong> Echte Rechnungen enthalten personenbezogene Daten (Namen, Anschriften, ggf. Bankverbindung) und Geschäftsdaten (Preise, Mengen, Kunden). Das Hochladen auf eine fremde Website ist eine Übermittlung an Dritte, für die es keine Rechtsgrundlage gibt (DSGVO). Deshalb nur Test- oder anonymisierte Rechnungen hochladen.</li>
+      <li><strong>Vertrauenswürdigkeit und Aussagekraft:</strong> Den Anbieter prüfen (Impressum, Serverstandort, Datenschutzerklärung, Speicherdauer). Das Ergebnis kann falsch, unvollständig oder veraltet sein (z. B. nur XSD statt Schematron, alte XRechnung-Version); es ersetzt keine Prüfung mit dem offiziellen Validator. Besser den KoSIT-Validator lokal betreiben.</li>
+    </ul>
+    <h4>c) Warum die Schema-Validierung nicht reicht (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:9%">Zeile</th><th>Fehler</th></tr>
+      <tr><td>5</td><td>Das Fälligkeitsdatum (16.11.2026) liegt vor dem Rechnungsdatum (30.11.2026).</td></tr>
+      <tr><td>25 (29)</td><td>Der Nettobetrag der Position 2 ist falsch: 4 × 27,90 € = 111,60 €, angegeben sind 101,60 €. Dadurch stimmt auch die Summe der Positionen (148,00 € + 101,60 € = 249,60 €) nicht mit dem Nettogesamtbetrag von 259,60 € (Zeile 29) überein.</td></tr>
+      <tr><td>31</td><td>Der Bruttogesamtbetrag ist falsch: 259,60 € + 18,17 € = 277,77 €, angegeben sind 278,77 €.</td></tr>
+    </table>
+    <p><strong>Erläuterung:</strong> Das XML-Schema prüft nur die <strong>Struktur</strong> (Elemente, Reihenfolge, Pflichtangaben) und die <strong>Datentypen</strong> einzelner Werte – hier, dass die Datumsangaben gültige Daten und die Beträge Dezimalzahlen sind. Das ist bei allen Werten der Fall. <strong>Logische und rechnerische Zusammenhänge zwischen mehreren Werten</strong> (Fälligkeit nach Rechnungsdatum, Menge × Preis = Nettobetrag, Summen) lassen sich mit einer XSD nicht ausdrücken. Dafür sind zusätzlich Geschäftsregeln nötig, z. B. die Schematron-Regeln der EN 16931/XRechnung im Validator sowie Plausibilitätsprüfungen und Tests der eigenen Berechnungslogik.</p>
+    <p class="codelabel">Kontrolle · Aufgabe_SD_05_3.java (Schema-Validierung mit javax.xml.validation, danach Geschäftsregeln)</p>
+    <pre class="ausgabe">Schritt 1 - Schema-Validierung: XSD-gültig
+Schritt 2 - Geschäftsregeln:
+  Regel 1 verletzt: Fälligkeitsdatum 2026-11-16 liegt vor dem Rechnungsdatum 2026-11-30
+  Regel 2 verletzt: Position 2: Menge x Einzelpreis = 111.60, angegeben 101.60
+  Regel 3 verletzt: Summe der Positionsbeträge = 249.60, Nettogesamt angegeben 259.60
+  Regel 5 verletzt: Netto + USt = 277.77, Bruttogesamt angegeben 278.77
+
+Gegenprobe A (Dezimalkomma 18,50): XSD-Fehler in Zeile 17: cvc-datatype-valid.1.2.1: '18,50' ist kein gültiger Wert für 'decimal'.
+Gegenprobe B (ungültiges Datum 2026-11-31): XSD-Fehler in Zeile 4: cvc-datatype-valid.1.2.1: '2026-11-31' ist kein gültiger Wert für 'date'.
+Gegenprobe C (Element summen fehlt): XSD-Fehler in Zeile 29: cvc-complex-type.2.4.b: Content des Elements 'rechnung' ist nicht vollständig. …</pre>
+    <p class="klein">Die Gegenproben zeigen, was das Schema sehr wohl erkennt: falsche Datentypen, unmögliche Daten und fehlende Elemente. Die Umsatzsteuer (7 % von 259,60 € = 18,17 €) ist korrekt (Regel 4 nicht verletzt). Das verwendete Schema ist vereinfacht (Datei im Java-Programm); echte XRechnungen werden gegen die XSD von UBL bzw. CII geprüft.</p>
+    <h4>d) Transportverschlüsselung (3 P)</h4>
+    <p><strong>da)</strong> TLS beruht auf einer <strong>hybriden Verschlüsselung</strong>: asymmetrisch für den sicheren Austausch eines Sitzungsschlüssels, symmetrisch für die schnelle Übertragung der Daten.</p>
+    <p><strong>db)</strong> TLS verschlüsselt nur die jeweilige <strong>Teilstrecke</strong> (Mailprogramm → Mailserver, Mailserver → Mailserver). Auf jedem beteiligten Mailserver wird die Nachricht entschlüsselt und liegt dort im Klartext vor; Betreiber oder Angreifer mit Zugriff auf einen Server könnten sie lesen oder verändern. Alternative: <strong>Ende-zu-Ende-Verschlüsselung</strong> der E-Mail mit S/MIME oder PGP – oder die Übermittlung über Peppol bzw. ein Rechnungsportal (HTTPS).</p>
+    <h4>e) Leitweg-ID (2 P)</h4>
+    <p>Die Leitweg-ID ist eine eindeutige Kennung des <strong>öffentlichen Rechnungsempfängers</strong> (hier der Stadt Heidmoor bzw. der Kita Sonnenblume). Der Auftraggeber teilt sie mit, und sie muss in der XRechnung angegeben werden (Käuferreferenz). Mit ihr wird die Rechnung im Rechnungseingangssystem der Verwaltung <strong>automatisch an die zuständige Stelle weitergeleitet</strong> und zugeordnet; fehlt sie, wird die Rechnung in der Regel abgelehnt.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Möglichkeit 1 P. b) je Punkt 2 P (Nennung 1 P, Erläuterung mit Begründung 1 P). c) je Fehler mit Zeile und Begründung 2 P (höchstens zwei Fehler werden gewertet), Erläuterung „Schema prüft nur Struktur und Datentypen, keine Zusammenhänge/Geschäftsregeln“ 2 P. d) da) 1 P, db) Begründung 1 P, Alternative 1 P. e) 2 P (Kennung des Empfängers 1 P, Zweck Weiterleitung/Zuordnung 1 P).</div>
+    <p><strong>Erklärung:</strong> c) entspricht W25 T1 A3bc: Dort war der Nettogesamtbetrag aus den Bruttowerten statt aus den Nettowerten gebildet – formal korrekt, fachlich falsch. Genau diese Klasse von Fehlern deckt eine XSD nie ab.</p>
+  </div><p class="ap2-loesung-link"><a href="06_Schnittstellen_Datenformate_Loesungen.html#L-SD-05-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== ORIGINALAUFGABEN ===================== -->
   <h3 id="originale">Originalaufgaben zum Üben</h3>

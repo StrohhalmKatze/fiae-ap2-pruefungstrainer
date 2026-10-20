@@ -28,6 +28,18 @@
   table.klein td, table.klein th { font-size: 12.5px; }
   @media print { .teilaufgabe, .aufgabe .kopf, h4 { break-after: avoid; } }
 </style>
+<style id="ap2-loesung-stile">
+/* Stile aus 11_Werkzeuge_Loesungen.html, nur für eingebettete Lösungen (werkzeuge/loesungen_einbetten.py) */
+.ap2-loesung-inhalt table.kompakt td, .ap2-loesung-inhalt table.kompakt th { padding: 2px 6px; }
+.ap2-loesung-inhalt td.mono, .ap2-loesung-inhalt th.mono { font-family: Consolas, "Courier New", monospace; font-size: 13px; }
+.ap2-loesung-inhalt pre { font-size: 12px; }
+.ap2-loesung-inhalt pre.java { break-inside: auto; }
+.ap2-loesung-inhalt .codelabel { break-after: avoid; }
+.ap2-loesung-inhalt .loesung .kopf { font-size: 16px; margin-bottom: 4px; break-after: avoid; page-break-after: avoid; }
+.ap2-loesung-inhalt .loesung h4 { margin: 12px 0 4px; font-size: 15px; break-after: avoid; }
+.ap2-loesung-inhalt .datei { font-size: 12px; color: var(--muted); }
+.ap2-loesung-inhalt ul.knapp li { margin: 1px 0; }
+</style>
 </head>
 <body>
 
@@ -1398,6 +1410,22 @@ public class EinsatzKalender extends Kalender {
     </table>
     <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 1c (Versionsverwaltung im Team)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-WZ-01-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe WZ-01.1 · 5 Punkte</div>
+    <h4>a) Zentral vs. verteilt (2 P)</h4>
+    <p>Bei einer <strong>zentralen</strong> Versionsverwaltung (z. B. Subversion) gibt es nur ein Repository mit der gesamten Historie auf einem Server. Die Entwickler haben lediglich eine Arbeitskopie; Commits, Historie und Vergleiche erfordern eine Verbindung zum Server. Bei einer <strong>verteilten</strong> Versionsverwaltung (z. B. Git) besitzt jeder Entwickler einen vollständigen Klon des Repositorys einschließlich Historie. Commits erfolgen lokal (auch offline); Änderungen werden per <code>push</code>/<code>pull</code> mit anderen Repositories, meist einem gemeinsamen Remote-Repository, ausgetauscht.</p>
+    <h4>b) Begriffe (3 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:16%">Begriff</th><th>Erläuterung (Beispiel)</th></tr>
+      <tr><td>Repository</td><td>Datenbank/Ablage eines Projekts mit allen Dateien und ihrer vollständigen Versionshistorie (lokal im Ordner <code>.git</code> oder als Remote-Repository auf dem GitLab-Server).</td></tr>
+      <tr><td>Commit</td><td>Gespeicherter Stand (Schnappschuss) der vorgemerkten Änderungen mit eindeutiger ID, Autor, Zeitpunkt, Nachricht und Verweis auf den Vorgänger.</td></tr>
+      <tr><td>Branch</td><td>Eigenständiger Entwicklungszweig, technisch ein beweglicher Zeiger auf den letzten Commit; ermöglicht paralleles Arbeiten, ohne den Hauptzweig zu verändern.</td></tr>
+      <tr><td>Merge</td><td>Zusammenführen der Änderungen eines Branches in einen anderen (Fast-Forward oder Merge-Commit; ggf. mit Konfliktauflösung).</td></tr>
+      <tr><td>Push</td><td>Übertragen lokaler Commits in ein entferntes Repository (Remote), damit andere sie erhalten.</td></tr>
+      <tr><td>Tag</td><td>Fester, unveränderlicher Name für einen bestimmten Commit, meist zur Kennzeichnung eines Releases (z. B. <code>v1.3.0</code>).</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Variante mit Kernmerkmal (Repository nur auf dem Server vs. vollständige Kopie bei jedem Entwickler) 1 P. b) je richtig erläutertem Begriff 0,5 P.</div>
+  </div><p class="ap2-loesung-link"><a href="11_Werkzeuge_Loesungen.html#L-WZ-01-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="WZ-01-2">
     <div class="kopf">
@@ -1436,6 +1464,56 @@ Automatic merge failed; fix conflicts and then commit the result.</pre>
     <div class="teilaufgabe"><span class="tp">1 P</span>d) Ein Kollege möchte nur sehen, welche neuen Commits auf <code>origin/main</code> liegen, ohne seinen lokalen Branch zu verändern. Nennen Sie den passenden Befehl und grenzen Sie ihn von <code>git pull</code> ab.</div>
     <div class="antwort z3"></div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-WZ-01-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe WZ-01.2 · 10 Punkte</div>
+    <h4>a) Commit-Graph nach Befehl (10) (4 P)</h4>
+    <figure>
+      <svg viewBox="0 0 640 215" width="640" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <line x1="22" y1="130" x2="93" y2="130" stroke="#222" stroke-width="2" stroke-dasharray="4,4"/>
+        <text x="14" y="106" font-size="11" fill="#555">… ältere Commits</text>
+        <line x1="110" y1="130" x2="450" y2="130" stroke="#222" stroke-width="2"/>
+        <line x1="110" y1="130" x2="200" y2="60" stroke="#222" stroke-width="2"/>
+        <line x1="200" y1="60" x2="290" y2="60" stroke="#222" stroke-width="2"/>
+        <line x1="290" y1="60" x2="450" y2="130" stroke="#222" stroke-width="2"/>
+        <circle cx="110" cy="130" r="17" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="110" y="135" text-anchor="middle">C</text>
+        <text x="110" y="166" text-anchor="middle" font-size="11" fill="#555">7d2e4b1</text>
+        <circle cx="200" cy="60" r="17" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="200" y="65" text-anchor="middle">F1</text>
+        <circle cx="290" cy="60" r="17" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="290" y="65" text-anchor="middle">F2</text>
+        <circle cx="340" cy="130" r="17" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="340" y="135" text-anchor="middle">N</text>
+        <circle cx="450" cy="130" r="19" fill="#eef3fa" stroke="#222" stroke-width="2"/><text x="450" y="135" text-anchor="middle" font-weight="bold">M</text>
+        <rect x="215" y="8" width="150" height="22" rx="3" fill="#fff" stroke="#222"/><text x="290" y="24" text-anchor="middle" font-size="12">feature/MP-130-fotos</text>
+        <line x1="290" y1="30" x2="290" y2="43" stroke="#222"/>
+        <rect x="492" y="84" width="124" height="22" rx="3" fill="#fff" stroke="#222"/><text x="554" y="100" text-anchor="middle" font-size="12">HEAD → main</text>
+        <line x1="492" y1="98" x2="467" y2="120" stroke="#222"/>
+        <rect x="492" y="132" width="124" height="22" rx="3" fill="#fff" stroke="#222" stroke-dasharray="4,3"/><text x="554" y="148" text-anchor="middle" font-size="12">origin/main</text>
+        <line x1="492" y1="140" x2="469" y2="135" stroke="#222" stroke-dasharray="4,3"/>
+        <path d="M420,172 L476,172 L486,183 L476,194 L420,194 Z" fill="#fff" stroke="#222"/><text x="451" y="188" text-anchor="middle" font-size="12">v1.3.0</text>
+        <line x1="450" y1="149" x2="450" y2="172" stroke="#222"/>
+        <text x="600" y="208" font-size="11" fill="#555" text-anchor="end">Zeit →</text>
+      </svg>
+      <figcaption>Abb. L-1: Commit-Graph nach Befehl (10): M hat die Vorgänger N und F2; main, HEAD, origin/main und Tag v1.3.0 zeigen auf M</figcaption>
+    </figure>
+    <p>Die Reihenfolge von N gegenüber F1/F2 auf der Zeitachse ist beliebig (N entstand parallel). <code>origin/main</code> steht nach Befehl (9) ebenfalls auf M; die Angabe ist optional.</p>
+    <h4>b) Fast-Forward? (2 P)</h4>
+    <ul>
+      <li><strong>Befehl (6) <code>git pull</code>: ja, Fast-Forward.</strong> Der lokale <code>main</code> hat seit C keine eigenen Commits; auf <code>origin/main</code> folgt nur N auf C. Git schiebt den Zeiger <code>main</code> einfach von C auf N vor – es entsteht kein neuer Commit.</li>
+      <li><strong>Befehl (7) <code>git merge</code>: kein Fast-Forward.</strong> Seit C haben sich beide Zweige weiterentwickelt: <code>main</code> um N, der Feature-Branch um F1 und F2. Git muss die Änderungen zusammenführen und erzeugt den Merge-Commit M mit den zwei Vorgängern N und F2.</li>
+    </ul>
+    <h4>c) Merge-Konflikt (3 P)</h4>
+    <p><strong>Ursache:</strong> Seit der Abzweigung von <code>feature/MP-131-anfahrt</code> wurde dieselbe Zeile in <code>anfahrtspauschale()</code> auf beiden Seiten unterschiedlich geändert: auf <code>main</code> (HEAD) wurden die Pauschalen auf 89/39 € erhöht, im Feature-Branch wurde die Berechnung um einen Entfernungsanteil (0,50 €/km) erweitert. Git kann nicht entscheiden, welche Fassung gelten soll, und bricht den automatischen Merge ab.</p>
+    <p><strong>Auflösen:</strong></p>
+    <ol class="knapp">
+      <li>Mit <code>git status</code> die betroffene Datei ermitteln und im Editor/IDE-Merge-Werkzeug öffnen.</li>
+      <li>Fachlich klären, welcher Inhalt richtig ist (Tickets MP-131 und Preisänderung, ggf. Rücksprache mit dem Kollegen bzw. Fachbereich). Hier ist vermutlich eine Kombination gewünscht:<br><code>return a.isNotdienst() ? 89.00 : 39.00 + 0.50 * a.getEntfernungKm();</code></li>
+      <li>Konfliktmarker <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> entfernen.</li>
+      <li>Kompilieren und Tests ausführen.</li>
+      <li>Datei mit <code>git add</code> als gelöst markieren, Merge mit <code>git commit</code> abschließen, danach <code>git push</code>. (Alternative bei Unklarheit: <code>git merge --abort</code> und erst klären.)</li>
+    </ol>
+    <h4>d) fetch (1 P)</h4>
+    <p><code>git fetch</code> (z. B. danach <code>git log main..origin/main</code>): lädt die neuen Commits vom Remote und aktualisiert nur den Remote-Zeiger <code>origin/main</code>; lokaler Branch und Arbeitsverzeichnis bleiben unverändert. <code>git pull</code> führt zusätzlich einen Merge (bzw. Rebase) in den aktuellen Branch aus und verändert ihn.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) F1/F2 auf eigenem Zweig ab C 1 P, N auf main 1 P, M mit zwei Vorgängern 1 P, Zeiger main/HEAD, Feature-Branch und Tag richtig 1 P (Pfeile in Zeitrichtung statt zum Vorgänger: keine Abzüge, wenn eindeutig). b) je Befehl Aussage mit Begründung 1 P. c) Ursache 1 P, Auflösung mit fachlicher Entscheidung, Marker entfernen, add/commit 2 P. d) Befehl und Abgrenzung 1 P.</div>
+    <p><strong>Erklärung / typische Fehler:</strong> Häufig wird bei (6) ein Merge-Commit gezeichnet – ohne eigene lokale Commits ist ein Pull aber immer ein Fast-Forward. Ebenso falsch: M nur mit einer Linie zu F2 verbinden; ein Merge-Commit hat immer zwei Vorgänger. Den Konflikt einfach durch „eine Seite übernehmen“ zu lösen, ohne die Fachlichkeit zu klären, verliert eine der beiden Änderungen.</p>
+  </div><p class="ap2-loesung-link"><a href="11_Werkzeuge_Loesungen.html#L-WZ-01-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="WZ-01-3">
     <div class="kopf">
@@ -1460,6 +1538,41 @@ Automatic merge failed; fix conflicts and then commit the result.</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 1c (Vorschlag des Teams zur Versionsverwaltung bewerten), erweitert um Team-Workflow</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-WZ-01-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe WZ-01.3 · 18 Punkte</div>
+    <h4>a) Stellungnahme zu Punkt 1 (4 P)</h4>
+    <p><strong>Ich stimme der Umstellung auf Git zu.</strong> Begründung (zwei der folgenden Argumente):</p>
+    <ul>
+      <li><strong>Paralleles Arbeiten ohne Datenverlust:</strong> Jeder arbeitet in seinem eigenen Repository bzw. Branch; Änderungen werden per Merge zusammengeführt, und wenn zwei Personen dieselbe Stelle ändern, meldet Git einen Konflikt, statt still zu überschreiben. Der Vorfall aus Anlage 2 (Lukas überschreibt Sarahs Änderungen am AuftragService) wäre so nicht passiert. Tagesordner auf dem Netzlaufwerk verhindern das nicht, sie erzeugen nur weitere Kopien.</li>
+      <li><strong>Nachvollziehbarkeit:</strong> Jede Änderung ist mit Autor, Zeitpunkt, Beschreibung und Ticketnummer gespeichert; Fehler lassen sich auf eine konkrete Änderung zurückführen (Vergleich, <code>git blame</code>). Bei Tagesordnern ist nicht erkennbar, wer was warum geändert hat.</li>
+      <li><strong>Wiederherstellbarkeit:</strong> Jeder frühere Stand ist abrufbar, einzelne fehlerhafte Änderungen können gezielt rückgängig gemacht werden (<code>git revert</code>), statt einen ganzen Ordner zurückzukopieren und dabei andere Änderungen zu verlieren.</li>
+      <li><strong>Grundlage für Qualitätssicherung und Automatisierung:</strong> Branches, Merge Requests mit Code-Review und die CI/CD-Pipeline (Anlage 5) setzen eine Versionsverwaltung voraus.</li>
+    </ul>
+    <h4>b) Punkte 2–4 (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:7%">Punkt</th><th style="width:47%">Problem</th><th>Verbesserungsvorschlag</th></tr>
+      <tr><td>2</td><td>Unfertige und ungetestete Änderungen landen sofort im gemeinsamen Stand; <code>main</code> ist häufig nicht lauffähig und nicht auslieferbar (vgl. Störung vom 03.07.2026). Acht Personen auf einem Branch erzeugen ständig Konflikte; vor der Integration gibt es keine Prüfung durch Review oder Pipeline.</td><td>Für jedes Ticket ein eigener, kurzlebiger Feature-Branch; Übernahme in <code>main</code> nur per Merge Request nach erfolgreicher Pipeline. <code>main</code> als geschützten Branch einrichten (kein direkter Push).</td></tr>
+      <tr><td>3</td><td>Die Testerin prüft fachliches Verhalten am Ende, sieht aber den Code nicht: Wartbarkeit, Verständlichkeit, Sicherheitslücken und Verstöße gegen Konventionen bleiben unentdeckt; Fehler werden spät und teuer gefunden; Wissen über Codeteile bleibt bei einer Person.</td><td>Code-Review im Merge Request durch mindestens eine weitere Person (Vier-Augen-Prinzip), kleine Merge Requests, damit Reviews schnell gehen; ergänzend automatische Prüfungen (statische Analyse, Tests) in der Pipeline. Tests der Testerin bleiben zusätzlich bestehen.</td></tr>
+      <tr><td>4</td><td><code>target/</code> enthält erzeugte Build-Dateien und <code>.idea/</code> persönliche IDE-Einstellungen → unnötige Konflikte, großes Repository, veraltete Artefakte. Die <code>application-local.properties</code> mit Zugangsdaten wäre für alle Leser des Repositorys sichtbar und bliebe dauerhaft in der Historie (Sicherheitsrisiko, Vertraulichkeit).</td><td><code>.gitignore</code> mit <code>target/</code>, <code>.idea/</code> und <code>application-local.properties</code> anlegen; nur eine Vorlage ohne Passwörter (z. B. <code>application-local.properties.example</code>) versionieren; Zugangsdaten über Umgebungsvariablen bzw. CI/CD-Variablen bereitstellen; bereits eingecheckte Passwörter ändern.</td></tr>
+    </table>
+    <h4>c) Branching-Strategie (4 P)</h4>
+    <p><strong>Feature-Branch-Workflow mit Merge Requests</strong> (GitLab-Flow). Ablauf für ein Ticket, z. B. MP-142:</p>
+    <ol class="knapp">
+      <li>Aktuellen Stand holen: <code>git switch main</code>, <code>git pull</code>.</li>
+      <li>Branch anlegen: <code>git switch -c feature/MP-142-materialliste</code>.</li>
+      <li>In kleinen Schritten committen (aussagekräftige Nachrichten mit Ticketnummer) und den Branch regelmäßig pushen.</li>
+      <li>Merge Request nach <code>main</code> öffnen → Pipeline läuft automatisch (Build, Tests, Analyse).</li>
+      <li>Code-Review durch eine Kollegin/einen Kollegen, Anmerkungen einarbeiten.</li>
+      <li>Bei grüner Pipeline und Freigabe: Merge in den geschützten <code>main</code>, Feature-Branch löschen; das Deployment erfolgt über die Pipeline.</li>
+    </ol>
+    <p>Begründung: Für ein Team von acht Personen, das ein SaaS-Produkt mit nur einer aktuellen Version kontinuierlich ausliefert, ist dieser Workflow einfach und passt zur Pipeline. Git-Flow (develop/release/hotfix-Branches) wäre unnötig aufwendig. Trunk-based Development mit sehr kurzlebigen Branches ist ebenfalls vertretbar, setzt aber sehr gute Testabdeckung voraus.</p>
+    <h4>d) Punkt 6 (2 P)</h4>
+    <p>ZIP-Kopien sind nicht mit der Historie verknüpft: Man weiß nicht, welcher Commit genau ausgeliefert wurde; Namen wie „final2“ sind uneindeutig; das Netzlaufwerk soll ohnehin schreibgeschützt werden. Stattdessen den Release-Commit mit einem <strong>Tag</strong> markieren, z. B. <code>git tag -a v1.3.0 -m "Release 1.3.0"</code> (Versionsnummer nach SemVer), und den Tag pushen; das Artefakt erzeugt die Pipeline (ggf. als GitLab-Release).</p>
+    <h4>e) Punkt 5 (2 P)</h4>
+    <p>Das Log zeigt Nachrichten wie <code>fix</code>, <code>asdf</code> und <code>Zwischenstand Freitag</code>: Ohne Blick in den Code ist nicht erkennbar, was und warum geändert wurde; Fehlersuche, Reviews und Release Notes werden erschwert. Commit-Nachrichten sollten verpflichtend sein (Ticketnummer + kurze Beschreibung). Vorschlag für <code>a41c9e2</code>:<br><code>MP-109: Fehlende Kundenadresse beim Speichern eines Auftrags abfangen</code><br>(optional zweiter Absatz: „Statt einer NullPointerException wird jetzt die Meldung ‚Kundenadresse fehlt‘ ausgegeben.“)</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Zustimmung mit zwei Argumenten, je Argument 2 P (genannt 1 P, auf die Situation bezogen erläutert 1 P); Ablehnung ohne tragfähige Begründung 0 P. b) je Punkt Problem 1 P und Verbesserung 1 P. c) Strategie benannt 1 P, Ablauf (Branch, Merge Request/Review, Pipeline, Merge) 3 P; Git-Flow oder Trunk-based mit schlüssiger Begründung ebenfalls volle Punktzahl. d) Bewertung 1 P, Tag 1 P. e) Bewertung 1 P, sinnvolle Nachricht 1 P.</div>
+    <p><strong>Erklärung:</strong> „Bewerten“ heißt hier: Problem benennen <em>und</em> eine konkrete Verbesserung vorschlagen. Besonders wichtig ist Punkt 4 – Zugangsdaten im Repository sind ein klassischer Sicherheitsfehler, der in Prüfungen gern mit IT-Sicherheit verknüpft wird.</p>
+  </div><p class="ap2-loesung-link"><a href="11_Werkzeuge_Loesungen.html#L-WZ-01-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== WZ-02 ===================== -->
   <h3 id="a-02">WZ-02 · CI/CD &amp; Deployment</h3>
@@ -1475,6 +1588,18 @@ Automatic merge failed; fix conflicts and then commit the result.</pre>
     <div class="teilaufgabe"><span class="tp">2 P</span>b) Für den Server wird Maven eingesetzt. Nennen Sie zwei Aufgaben, die ein Build-Werkzeug wie Maven übernimmt.</div>
     <div class="antwort z3"></div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-WZ-02-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe WZ-02.1 · 5 Punkte</div>
+    <h4>a) Abgrenzung (3 P)</h4>
+    <ul>
+      <li><strong>Continuous Integration:</strong> Die Entwickler führen ihre Änderungen häufig (mindestens täglich) in den gemeinsamen Hauptzweig zusammen; jede Integration wird automatisch gebaut und getestet, sodass Fehler sofort auffallen.</li>
+      <li><strong>Continuous Delivery:</strong> Zusätzlich wird jede erfolgreich geprüfte Version automatisch zu einem auslieferbaren Artefakt verpackt und in Test-/Staging-Umgebungen bereitgestellt. Die Software ist jederzeit releasefähig; die Übernahme in die Produktion erfolgt nach einer manuellen Freigabe.</li>
+      <li><strong>Continuous Deployment:</strong> Auch die Produktivsetzung erfolgt automatisch ohne manuelle Freigabe, sobald alle Prüfungen bestanden sind.</li>
+    </ul>
+    <h4>b) Aufgaben eines Build-Werkzeugs (2 P)</h4>
+    <p>Zwei davon: Abhängigkeiten (inkl. transitiver) auflösen und herunterladen · Quellcode kompilieren · automatische Tests ausführen · Artefakte packen (JAR/WAR) · Versionen in ein Repository veröffentlichen · Dokumentation/Berichte erzeugen · einheitlicher, reproduzierbarer Build-Ablauf (Lebenszyklus) auf jedem Rechner und dem CI-Server.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Begriff 1 P; der entscheidende Unterschied Delivery/Deployment (manuelle Freigabe ja/nein) muss erkennbar sein. b) je Aufgabe 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="11_Werkzeuge_Loesungen.html#L-WZ-02-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="WZ-02-2">
     <div class="kopf">
@@ -1491,6 +1616,90 @@ Automatic merge failed; fix conflicts and then commit the result.</pre>
     <div class="teilaufgabe"><span class="tp">2 P</span>d) Erläutern Sie den Zweck der Staging-Umgebung im Projekt MonteurPlus.</div>
     <div class="antwort z3"></div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-WZ-02-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe WZ-02.2 · 10 Punkte</div>
+    <h4>a) Ablauf der Pipeline für einen Push auf main (4 P)</h4>
+    <figure>
+      <svg viewBox="0 0 740 320" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+        <defs>
+          <marker id="lsg-l02a-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 Z" fill="#222"/>
+          </marker>
+        </defs>
+        <!-- Stage-Beschriftungen -->
+        <g font-size="11" fill="#555" text-anchor="middle">
+          <text x="90" y="22">Stage build</text>
+          <text x="243" y="22">Stage test</text>
+          <text x="415" y="22">Stage analyse</text>
+          <text x="562" y="22">Stage package</text>
+          <text x="562" y="248">Stage staging</text>
+          <text x="227" y="248">Stage production</text>
+        </g>
+        <!-- Start -->
+        <circle cx="22" cy="80" r="9" fill="#222"/>
+        <line x1="31" y1="80" x2="44" y2="80" stroke="#222" marker-end="url(#lsg-l02a-pfeil)"/>
+        <!-- build -->
+        <rect x="45" y="60" width="90" height="40" rx="6" fill="#fff" stroke="#222"/>
+        <text x="90" y="77" text-anchor="middle">build</text><text x="90" y="92" text-anchor="middle" font-size="11" fill="#555">mvn compile</text>
+        <line x1="135" y1="80" x2="154" y2="80" stroke="#222" marker-end="url(#lsg-l02a-pfeil)"/>
+        <!-- Fork -->
+        <rect x="155" y="34" width="6" height="92" fill="#222"/>
+        <line x1="161" y1="53" x2="179" y2="53" stroke="#222" marker-end="url(#lsg-l02a-pfeil)"/>
+        <line x1="161" y1="107" x2="179" y2="107" stroke="#222" marker-end="url(#lsg-l02a-pfeil)"/>
+        <rect x="180" y="34" width="125" height="38" rx="6" fill="#fff" stroke="#222"/>
+        <text x="242" y="50" text-anchor="middle">unit-tests</text><text x="242" y="65" text-anchor="middle" font-size="11" fill="#555">mvn test</text>
+        <text x="242" y="84" text-anchor="middle" font-size="11" fill="#555">parallel</text>
+        <rect x="180" y="88" width="125" height="38" rx="6" fill="#fff" stroke="#222"/>
+        <text x="242" y="104" text-anchor="middle">integration-tests</text><text x="242" y="119" text-anchor="middle" font-size="11" fill="#555">mvn verify, Test-DB</text>
+        <line x1="305" y1="53" x2="324" y2="53" stroke="#222" marker-end="url(#lsg-l02a-pfeil)"/>
+        <line x1="305" y1="107" x2="324" y2="107" stroke="#222" marker-end="url(#lsg-l02a-pfeil)"/>
+        <!-- Join -->
+        <rect x="325" y="34" width="6" height="92" fill="#222"/>
+        <line x1="331" y1="80" x2="349" y2="80" stroke="#222" marker-end="url(#lsg-l02a-pfeil)"/>
+        <!-- code-analyse -->
+        <rect x="350" y="60" width="130" height="40" rx="6" fill="#fff" stroke="#222"/>
+        <text x="415" y="77" text-anchor="middle">code-analyse</text><text x="415" y="92" text-anchor="middle" font-size="11" fill="#555">Checkstyle, SpotBugs</text>
+        <line x1="480" y1="80" x2="499" y2="80" stroke="#222" marker-end="url(#lsg-l02a-pfeil)"/>
+        <!-- package -->
+        <rect x="500" y="60" width="125" height="40" rx="6" fill="#fff" stroke="#222"/>
+        <text x="562" y="77" text-anchor="middle">package</text><text x="562" y="92" text-anchor="middle" font-size="11" fill="#555">Image bauen, pushen</text>
+        <line x1="562" y1="100" x2="562" y2="189" stroke="#222" marker-end="url(#lsg-l02a-pfeil)"/>
+        <text x="570" y="140" font-size="11" fill="#555">automatisch</text>
+        <text x="645" y="70" font-size="11" fill="#555">package bis</text>
+        <text x="645" y="84" font-size="11" fill="#555">production nur</text>
+        <text x="645" y="98" font-size="11" fill="#555">bei Branch main</text>
+        <text x="645" y="112" font-size="11" fill="#555">(rules)</text>
+        <!-- deploy-staging -->
+        <rect x="500" y="190" width="125" height="40" rx="6" fill="#fff" stroke="#222"/>
+        <text x="562" y="207" text-anchor="middle">deploy-staging</text><text x="562" y="222" text-anchor="middle" font-size="11" fill="#555">./deploy.sh staging</text>
+        <line x1="500" y1="210" x2="471" y2="210" stroke="#222" marker-end="url(#lsg-l02a-pfeil)"/>
+        <!-- Freigabe -->
+        <rect x="325" y="190" width="145" height="40" rx="6" fill="#fff" stroke="#222" stroke-dasharray="5,3"/>
+        <text x="397" y="207" text-anchor="middle">Freigabe per Klick</text><text x="397" y="222" text-anchor="middle" font-size="11" fill="#555">(when: manual)</text>
+        <line x1="325" y1="210" x2="301" y2="210" stroke="#222" marker-end="url(#lsg-l02a-pfeil)"/>
+        <!-- deploy-production -->
+        <rect x="155" y="190" width="145" height="40" rx="6" fill="#fff" stroke="#222"/>
+        <text x="227" y="207" text-anchor="middle">deploy-production</text><text x="227" y="222" text-anchor="middle" font-size="11" fill="#555">./deploy.sh production</text>
+        <line x1="155" y1="210" x2="133" y2="210" stroke="#222" marker-end="url(#lsg-l02a-pfeil)"/>
+        <!-- Ende -->
+        <circle cx="121" cy="210" r="11" fill="#fff" stroke="#222" stroke-width="1.5"/>
+        <circle cx="121" cy="210" r="6" fill="#222"/>
+        <!-- Fehlerfall -->
+        <rect x="20" y="262" width="700" height="50" fill="#fff" stroke="#222" stroke-dasharray="5,4"/>
+        <text x="32" y="282"><tspan font-weight="bold">Fehlerfall:</tspan> Schlägt ein Job fehl, laufen die übrigen Jobs derselben Stage zu Ende, die folgenden Stages starten nicht.</text>
+        <text x="32" y="300">Die Pipeline ist „fehlgeschlagen“, das Team wird benachrichtigt – nichts wird ausgeliefert.</text>
+      </svg>
+      <figcaption>Abb. L-2: Ablauf der Server-Pipeline aus Anlage 5 (Notation angelehnt an das UML-Aktivitätsdiagramm)</figcaption>
+    </figure>
+    <p>Eine einfachere Darstellung als Kette von Kästen (Stages nebeneinander, Jobs einer Stage untereinander) ist ebenso richtig.</p>
+    <h4>b) Delivery oder Deployment? (2 P)</h4>
+    <p>Es handelt sich um <strong>Continuous Delivery</strong>: Bis zur Staging-Umgebung läuft alles automatisch, der Job <code>deploy-production</code> hat aber <code>when: manual</code> und startet erst, wenn eine berechtigte Person ihn auslöst. Bei Continuous Deployment würde auch die Produktion ohne manuellen Schritt aktualisiert.</p>
+    <h4>c) Push auf einen Feature-Branch (2 P)</h4>
+    <p>Es laufen nur <code>build</code>, <code>unit-tests</code>, <code>integration-tests</code> und <code>code-analyse</code>; <code>package</code>, <code>deploy-staging</code> und <code>deploy-production</code> sind per <code>rules</code> auf <code>main</code> beschränkt. Schlägt <code>unit-tests</code> fehl, läuft <code>integration-tests</code> (gleiche Stage) noch zu Ende, die Stage <code>analyse</code> startet nicht mehr, die Pipeline wird als fehlgeschlagen markiert und die Entwicklerin benachrichtigt. Sie muss den Fehler beheben und erneut pushen; ein Merge in <code>main</code> sollte bei roter Pipeline gesperrt sein.</p>
+    <h4>d) Staging-Umgebung (2 P)</h4>
+    <p>Die Staging-Umgebung ist eine produktionsnahe Kopie (gleiches Container-Image, gleiche Java- und PostgreSQL-Version, ähnliche Konfiguration, anonymisierte Albers-Daten). Dort wird jede neue Version vor der Produktion installiert: Installation und Datenbankmigration werden geprüft, die Testerin und ggf. Disponenten von Albers nehmen die Version ab. Fehler wie ein fehlendes Datenbankskript (Störung vom 19.06.) fallen auf, ohne dass Monteure und Disponenten betroffen sind.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Reihenfolge der Stages 1 P, parallele Test-Jobs 1 P, manueller Schritt vor Produktion 1 P, Fehlerfall bzw. Bedingung „nur main“ 1 P. b) Entscheidung 1 P, Begründung mit <code>when: manual</code> 1 P. c) Jobs 1 P, Verhalten bei Fehler 1 P. d) Zweck (produktionsnaher Test/Abnahme vor Produktion) 1 P, Bezug zum Projekt 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="11_Werkzeuge_Loesungen.html#L-WZ-02-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="WZ-02-3">
     <div class="kopf">
@@ -1515,6 +1724,35 @@ Automatic merge failed; fix conflicts and then commit the result.</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 1c (automatisierte Kompilierung und Bereitstellung, Vorteile gegenüber manueller Bereitstellung)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-WZ-02-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe WZ-02.3 · 18 Punkte</div>
+    <h4>a) Automatisierte Kompilierung und Bereitstellung (3 P)</h4>
+    <p>Der Quellcode liegt ausschließlich in der Versionsverwaltung (Git). Ein CI/CD-Server (z. B. GitLab CI) startet bei jedem Push bzw. Merge auf <code>main</code> automatisch eine Pipeline, die in einer festgelegten Umgebung (Container-Image mit Java 21) mit Maven kompiliert, alle automatischen Tests und die statische Analyse ausführt und daraus ein versioniertes Artefakt (JAR bzw. Container-Image) erzeugt und in einer Registry ablegt. Ein Skript installiert dieses Artefakt automatisch auf der Staging-Umgebung und nach Freigabe auf dem Produktivserver, spielt Datenbankänderungen per Migrationswerkzeug ein, startet den Dienst neu und prüft per Health-Check, ob er läuft. Jeder Lauf wird protokolliert, bei Fehlern wird das Team benachrichtigt.</p>
+    <h4>b) Zwei Störungen und Vorteile (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:12%">Störung</th><th>So hätte die Automatisierung sie verhindert</th><th style="width:26%">Vorteil</th></tr>
+      <tr><td>05.06.</td><td>Gebaut wird immer im selben definierten Image (Java 21), ausgeliefert wird ein Image mit passender Laufzeit – Versionsunterschiede zwischen Admin-PC und Server gibt es nicht mehr.</td><td>einheitliche, reproduzierbare Umgebung</td></tr>
+      <tr><td>19.06.</td><td>Migrationsskripte liegen versioniert im Repository und werden bei jedem Deployment automatisch eingespielt (z. B. mit DbMigrate/Flyway); kein Versand per E-Mail, nichts wird vergessen.</td><td>vollständig und fehlerarm, keine vergessenen Schritte</td></tr>
+      <tr><td>03.07.</td><td>Ausgeliefert wird nur, was in <code>main</code> gemergt wurde und alle Tests bestanden hat; unfertige Stände auf Feature-Branches gelangen nicht in die Produktion.</td><td>Qualitätssicherung vor jeder Auslieferung</td></tr>
+      <tr><td>17.07.</td><td>Der Ablauf steckt im Skript; jede berechtigte Person kann per Klick ausliefern, der Neustart ist Teil des Skripts.</td><td>Unabhängigkeit von Einzelpersonen, schnellere Bereitstellung</td></tr>
+    </table>
+    <h4>c) Schwachstellen im Pipeline-Entwurf (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:4%">Nr.</th><th style="width:46%">Schwachstelle</th><th>Verbesserung</th></tr>
+      <tr><td>1</td><td>Keystore-Passwort und Play-Store-Zugang stehen im Klartext in der Datei – lesbar für alle 45 Mitarbeitenden und dauerhaft in der Git-Historie. Wer sie kennt, kann gefälschte App-Updates signieren und veröffentlichen.</td><td>Als geschützte, maskierte CI/CD-Variablen (nur für geschützte Branches) bzw. in einem Secret-Speicher hinterlegen; die bereits offengelegten Zugangsdaten sofort ändern.</td></tr>
+      <tr><td>2</td><td><code>allow_failure: true</code> bei den Unit-Tests: Schlagen Tests fehl, wird trotzdem veröffentlicht – die Tests sind wirkungslos.</td><td><code>allow_failure</code> entfernen; fehlschlagende Tests müssen die Pipeline stoppen; Tests reparieren statt ignorieren.</td></tr>
+      <tr><td>3</td><td><code>deploy-playstore</code> hat keine <code>rules</code> und keine Freigabe: Jeder Push auf jeden Branch (auch unfertige Feature-Branches) veröffentlicht sofort für alle Nutzer im Produktions-Track; keine Test-/Staging-Stufe.</td><td>Nur für <code>main</code> bzw. Release-Tags ausführen, zunächst in einen internen Test-Track (Testgruppe bei Albers) veröffentlichen, Produktion per <code>when: manual</code> freigeben, ggf. gestaffelter Rollout.</td></tr>
+      <tr><td>4</td><td>Keine statische Analyse (z. B. Android Lint) und keine Instrumentierungs-/UI-Tests.</td><td>Stage <code>analyse</code> mit <code>./gradlew lint</code> ergänzen.</td></tr>
+      <tr><td>5</td><td>Die App wird im Deploy-Job neu gebaut statt das geprüfte Ergebnis aus <code>build-app</code> zu verwenden.</td><td>Artefakt aus <code>build-app</code> per <code>artifacts</code> weitergeben und genau dieses veröffentlichen („build once, deploy many“).</td></tr>
+    </table>
+    <h4>d) Container (3 P)</h4>
+    <p>Das Container-Image enthält die Anwendung zusammen mit ihrer Laufzeitumgebung (Java 21) und allen Bibliotheken. Die Pipeline baut das Image einmal; genau dieses Image läuft unverändert in Staging und Produktion. Welche Java-Version auf dem Server installiert ist, spielt keine Rolle mehr – der Server benötigt nur eine Container-Laufzeit. Ein <code>UnsupportedClassVersionError</code> durch Java 21 vs. Java 17 kann dadurch nicht mehr auftreten.</p>
+    <p><strong>Unterschied zur VM</strong> (einer genügt): Container teilen sich den Kernel des Host-Betriebssystems und enthalten kein eigenes Betriebssystem → klein (MB) und in Sekunden gestartet; eine virtuelle Maschine virtualisiert Hardware und enthält ein vollständiges Gast-Betriebssystem → größer (GB), langsamer im Start, dafür stärker isoliert.</p>
+    <h4>e) DevOps (2 P)</h4>
+    <p>DevOps (Development + Operations) heißt, dass Entwicklung und Betrieb nicht als getrennte Abteilungen arbeiten, die Software „über den Zaun werfen“, sondern als ein Team <strong>gemeinsam Verantwortung</strong> für Entwicklung, Auslieferung und Betrieb tragen. Dazu gehören weitgehende Automatisierung (CI/CD, Infrastruktur als Code), kleine und häufige Releases, kurze Feedbackschleifen sowie Überwachung im Betrieb (Monitoring, Logging), deren Ergebnisse direkt in die Entwicklung zurückfließen – z. B. bindet das Team Herrn Okafor früh in Planung und Pipeline ein, und Entwickler sehen Fehlermeldungen aus der Produktion selbst.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Versionsverwaltung als Quelle/Auslöser 1 P, automatischer Build und Test 1 P, automatisches Deployment per Skript 1 P. b) je Störung Erläuterung 1 P, Vorteil 1 P. c) je Schwachstelle 1 P, je passender Verbesserung 1 P (drei von fünf). d) Wirkung des Containers auf die Störung 2 P, Unterschied zur VM 1 P. e) gemeinsame Verantwortung Dev/Ops 1 P, Automatisierung/Feedback 1 P.</div>
+    <p><strong>Erklärung:</strong> In W22 gab es für die Umsetzung nur 2 P – dort genügten Stichworte wie „CI/CD-Pipeline: bei jedem Commit automatisch bauen, testen und auf den Server verteilen“. Bei den Vorteilen immer auf das konkrete Problem (hier Verfügbarkeit) eingehen.</p>
+  </div><p class="ap2-loesung-link"><a href="11_Werkzeuge_Loesungen.html#L-WZ-02-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== WZ-03 ===================== -->
   <h3 id="a-03">WZ-03 · Softwarearchitektur</h3>
@@ -1535,6 +1773,19 @@ Automatic merge failed; fix conflicts and then commit the result.</pre>
     <div class="teilaufgabe"><span class="tp">2 P</span>b) Unterscheiden Sie Thin Client und Fat Client und ordnen Sie die Web-Disposition (ohne Plantafel) und die Monteur-App jeweils zu.</div>
     <div class="antwort z5"></div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-WZ-03-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe WZ-03.1 · 5 Punkte</div>
+    <h4>a) Drei Schichten (3 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:26%">Schicht</th><th>Aufgabe (eine genügt)</th></tr>
+      <tr><td>Präsentationsschicht</td><td>Daten für den Benutzer darstellen und Eingaben entgegennehmen (Web-Disposition im Browser, Monteur-App); einfache Eingabeprüfung; Anfragen an die Logikschicht senden.</td></tr>
+      <tr><td>Logikschicht (Anwendungs-/Geschäftslogik)</td><td>Verarbeitung nach den Geschäftsregeln: Aufträge planen und zuweisen, Fahrzeiten berechnen, Berechtigungen und Vollständigkeit prüfen, Arbeitsberichte erzeugen (Anwendungsserver).</td></tr>
+      <tr><td>Datenhaltungsschicht</td><td>Daten dauerhaft und konsistent speichern, lesen, ändern und löschen (PostgreSQL-Datenbank).</td></tr>
+    </table>
+    <h4>b) Thin Client und Fat Client (2 P)</h4>
+    <p>Ein <strong>Thin Client</strong> übernimmt nur Darstellung und Eingabe; Logik und Daten liegen auf dem Server, ohne Verbindung ist er nicht nutzbar. Ein <strong>Fat Client</strong> enthält selbst einen großen Teil der Logik und häufig eigene Daten und kann daher auch offline arbeiten. Die <strong>Web-Disposition</strong> ist ein Thin Client (der Server erzeugt die Seiten, der Browser zeigt sie nur an); die <strong>Monteur-App</strong> ist ein Fat Client (lokale SQLite-Datenbank, Offline-Logik, späterer Datenabgleich).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Schicht mit passender Aufgabe 1 P. b) Unterscheidung 1 P, beide Zuordnungen 1 P (je 0,5 P). Die Plantafel macht die Web-Disposition stellenweise „dicker“ – wer das erwähnt, liegt richtig.</div>
+  </div><p class="ap2-loesung-link"><a href="11_Werkzeuge_Loesungen.html#L-WZ-03-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="WZ-03-2">
     <div class="kopf">
@@ -1557,6 +1808,92 @@ Automatic merge failed; fix conflicts and then commit the result.</pre>
     <div class="teilaufgabe"><span class="tp">3 P</span>c) Ein Kollege fragt, ob man bei Verwendung von MVC überhaupt noch eine 3-Schichten-Architektur braucht. Erläutern Sie den Zusammenhang zwischen MVC und der 3-Schichten-Architektur am Beispiel der Auftragsübersicht.</div>
     <div class="antwort z5"></div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-WZ-03-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe WZ-03.2 · 10 Punkte</div>
+    <h4>a) Zuordnung (3 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:30%">Bestandteil</th><th style="width:16%">Rolle</th><th>Begründung</th></tr>
+      <tr><td><code>auftragsliste.html</code></td><td>View</td><td>stellt die Auftragsliste dar</td></tr>
+      <tr><td><code>auftragsliste.css</code></td><td>View</td><td>Gestaltung der Darstellung</td></tr>
+      <tr><td><code>AuftragController</code></td><td>Controller</td><td>nimmt die Anfrage entgegen, ruft das Model auf, wählt die View</td></tr>
+      <tr><td><code>AuftragService</code></td><td>Model</td><td>Geschäftslogik (filtern, sortieren, Überfälligkeit)</td></tr>
+      <tr><td><code>Auftrag</code></td><td>Model</td><td>fachliche Daten</td></tr>
+      <tr><td><code>AuftragRepository</code></td><td>Model</td><td>Datenzugriff (Persistenz) des Models</td></tr>
+    </table>
+    <h4>b) Zusammenarbeit (4 P)</h4>
+    <figure>
+      <svg viewBox="0 0 740 370" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+        <defs>
+          <marker id="lsg-l03b-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 Z" fill="#222"/>
+          </marker>
+          <marker id="lsg-l03b-offen" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10" fill="none" stroke="#222" stroke-width="1.5"/>
+          </marker>
+        </defs>
+        <!-- Browser -->
+        <rect x="10" y="150" width="140" height="60" fill="#fff" stroke="#222"/>
+        <text x="80" y="175" text-anchor="middle" font-weight="bold">Browser</text>
+        <text x="80" y="195" text-anchor="middle" font-size="12">(Disponentin)</text>
+        <!-- Controller -->
+        <rect x="230" y="20" width="180" height="56" fill="#eef3fa" stroke="#222"/>
+        <text x="320" y="43" text-anchor="middle" font-weight="bold">Controller</text>
+        <text x="320" y="63" text-anchor="middle" font-size="12">AuftragController</text>
+        <!-- Model -->
+        <rect x="560" y="10" width="170" height="350" fill="none" stroke="#222" stroke-dasharray="6,4"/>
+        <text x="572" y="28" font-weight="bold">Model</text>
+        <rect x="575" y="40" width="140" height="46" fill="#eef3fa" stroke="#222"/>
+        <text x="645" y="59" text-anchor="middle" font-size="12">AuftragService</text>
+        <text x="645" y="76" text-anchor="middle" font-size="11" fill="#555">filtern, sortieren</text>
+        <rect x="575" y="150" width="140" height="44" fill="#eef3fa" stroke="#222"/>
+        <text x="645" y="168" text-anchor="middle" font-size="12">AuftragRepository</text>
+        <text x="645" y="185" text-anchor="middle" font-size="11" fill="#555">Datenzugriff</text>
+        <ellipse cx="645" cy="236" rx="55" ry="7" fill="#fff" stroke="#222"/>
+        <path d="M590,236 L590,272 A55,7 0 0 0 700,272 L700,236" fill="#fff" stroke="#222"/>
+        <text x="645" y="262" text-anchor="middle" font-size="12">PostgreSQL</text>
+        <rect x="575" y="300" width="140" height="44" fill="#fff" stroke="#222"/>
+        <text x="645" y="318" text-anchor="middle" font-size="12">Auftrag</text>
+        <text x="645" y="335" text-anchor="middle" font-size="11" fill="#555">Datenobjekte</text>
+        <line x1="645" y1="86" x2="645" y2="149" stroke="#222" marker-end="url(#lsg-l03b-pfeil)"/>
+        <text x="651" y="122" font-size="12">3 lesen</text>
+        <line x1="645" y1="194" x2="645" y2="228" stroke="#222" marker-start="url(#lsg-l03b-pfeil)" marker-end="url(#lsg-l03b-pfeil)"/>
+        <text x="653" y="215" font-size="12">SQL</text>
+        <!-- View -->
+        <rect x="230" y="300" width="180" height="56" fill="#eef3fa" stroke="#222"/>
+        <text x="320" y="323" text-anchor="middle" font-weight="bold">View</text>
+        <text x="320" y="343" text-anchor="middle" font-size="12">auftragsliste.html + .css</text>
+        <!-- 1 -->
+        <line x1="150" y1="160" x2="229" y2="62" stroke="#222" marker-end="url(#lsg-l03b-pfeil)"/>
+        <text x="12" y="62" font-size="12">1 GET /auftraege?status=OFFEN</text>
+        <text x="24" y="78" font-size="12">&amp;niederlassung=Kassel</text>
+        <!-- 2 -->
+        <line x1="410" y1="36" x2="574" y2="56" stroke="#222" marker-end="url(#lsg-l03b-pfeil)"/>
+        <text x="420" y="30" font-size="12">2 findeAuftraege(…)</text>
+        <!-- 4 -->
+        <line x1="574" y1="78" x2="411" y2="64" stroke="#222" stroke-dasharray="5,3" marker-end="url(#lsg-l03b-offen)"/>
+        <text x="430" y="96" font-size="12">4 List&lt;Auftrag&gt;</text>
+        <!-- 5 -->
+        <line x1="320" y1="76" x2="320" y2="299" stroke="#222" marker-end="url(#lsg-l03b-pfeil)"/>
+        <text x="328" y="180" font-size="12">5 Liste an Template</text>
+        <text x="328" y="196" font-size="12">übergeben</text>
+        <!-- 6 -->
+        <line x1="230" y1="318" x2="151" y2="206" stroke="#222" marker-end="url(#lsg-l03b-pfeil)"/>
+        <text x="40" y="290" font-size="12">6 HTML-Seite</text>
+      </svg>
+      <figcaption>Abb. L-3: MVC in der Auftragsübersicht – nummerierte Schritte beim Aufruf der offenen Aufträge in Kassel</figcaption>
+    </figure>
+    <ol class="knapp">
+      <li>Der Browser sendet die Anfrage <code>GET /auftraege?status=OFFEN&amp;niederlassung=Kassel</code> an den <code>AuftragController</code>.</li>
+      <li>Der Controller ruft den <code>AuftragService</code> (Model) mit den Filterwerten auf.</li>
+      <li>Der Service lässt die Aufträge über das <code>AuftragRepository</code> per SQL aus der Datenbank lesen, filtert und sortiert sie.</li>
+      <li>Das Model liefert eine Liste von <code>Auftrag</code>-Objekten an den Controller zurück.</li>
+      <li>Der Controller übergibt die Liste an die View <code>auftragsliste.html</code>.</li>
+      <li>Die View erzeugt die HTML-Seite (mit CSS gestaltet), die an den Browser zurückgeht.</li>
+    </ol>
+    <h4>c) MVC und 3-Schichten-Architektur (3 P)</h4>
+    <p>Beide schließen sich nicht aus, sie betrachten unterschiedliche Ebenen. Die 3-Schichten-Architektur gliedert das <strong>gesamte System</strong> in Präsentation, Logik und Datenhaltung (auch über mehrere Rechner). MVC ist ein <strong>Muster für den Aufbau der Benutzeroberfläche</strong> einer Anwendung. Bei der Auftragsübersicht gehören View (<code>auftragsliste.html</code>, CSS) und <code>AuftragController</code> zur Präsentationsschicht – auch wenn das HTML auf dem Server erzeugt wird. Das Model verteilt sich auf die Logikschicht (<code>AuftragService</code>, <code>Auftrag</code>) und den Zugriff auf die Datenhaltungsschicht (<code>AuftragRepository</code> → PostgreSQL). Dieselbe Logikschicht wird außerdem von der REST-API für die App genutzt – ohne MVC-Views.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Bestandteil 0,5 P; <code>AuftragRepository</code> als „Datenhaltung/Model“ ebenfalls richtig, <code>AuftragService</code> als Controller falsch. b) Anfrage Browser → Controller 1 P, Controller → Model inkl. DB-Zugriff und Rückgabe 1 P, Controller → View mit Daten 1 P, View → Browser 1 P. c) unterschiedliche Reichweite 1 P, Zuordnung am Beispiel 2 P.</div>
+  </div><p class="ap2-loesung-link"><a href="11_Werkzeuge_Loesungen.html#L-WZ-03-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="WZ-03-3">
     <div class="kopf">
@@ -1574,6 +1911,124 @@ Automatic merge failed; fix conflicts and then commit the result.</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 2a (3-Schichten-Architektur einer Webanwendung und Zusammenarbeit der Komponenten)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-WZ-03-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe WZ-03.3 · 18 Punkte</div>
+    <h4>a) 3-Schichten-Architektur von MonteurPlus und Zusammenwirken (6 P)</h4>
+    <ul>
+      <li><strong>Präsentationsschicht:</strong> Web-Disposition im Browser der Disponenten (vom Server erzeugte HTML-Seiten, Plantafel als TypeScript-Modul) und Monteur-App auf den Android-Geräten. Die App ist ein Fat Client mit lokaler SQLite-Datenbank für den Offline-Betrieb.</li>
+      <li><strong>Logikschicht:</strong> Anwendungsserver (Spring Boot) mit REST-API und Web-Controllern als Schnittstelle sowie den Diensten Auftragsverwaltung, Einsatzplanung, Synchronisation und Berichtserstellung. Er bindet auch Kartendienst und ERP-System an.</li>
+      <li><strong>Datenhaltungsschicht:</strong> PostgreSQL-Datenbank, die nur über die Repositories des Servers per SQL angesprochen wird.</li>
+    </ul>
+    <p><strong>Ablauf „Auftrag mit Arbeitsbericht abschließen“:</strong> Der Monteur erfasst in der App Material, Fotos und die Unterschrift des Kunden; die App speichert alles zunächst lokal in SQLite – auch im Keller ohne Netz. Sobald eine Verbindung besteht, sendet die App die Daten per HTTPS als JSON an die REST-API. Der Synchronisationsdienst prüft Berechtigung und Vollständigkeit (und ggf. Konflikte), setzt den Auftrag auf „abgeschlossen“, der Berichtsdienst erzeugt den PDF-Arbeitsbericht. Über die Repositories werden Auftrag und Bericht per SQL in PostgreSQL gespeichert. Der Server bestätigt den Empfang (z. B. HTTP 200/201), die App markiert die Daten lokal als übertragen. Ruft eine Disponentin die Auftragsübersicht auf, liest der Server den neuen Status aus der Datenbank und liefert die Seite an den Browser. Nachts exportiert der Server die abgeschlossenen Aufträge als XML per SFTP an das ERP-System.</p>
+    <h4>b) Architekturskizze (5 P)</h4>
+    <figure>
+      <svg viewBox="0 0 740 480" width="740" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+        <defs>
+          <marker id="lsg-l03c-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 Z" fill="#222"/>
+          </marker>
+        </defs>
+        <!-- Schichtbeschriftung -->
+        <rect x="10" y="10" width="120" height="120" fill="#eef3fa" stroke="#222"/>
+        <text x="70" y="66" text-anchor="middle" font-weight="bold" font-size="13">Präsentation</text>
+        <text x="70" y="84" text-anchor="middle" font-size="11">Darstellung, Eingabe</text>
+        <rect x="10" y="145" width="120" height="190" fill="#eef3fa" stroke="#222"/>
+        <text x="70" y="236" text-anchor="middle" font-weight="bold" font-size="13">Logik</text>
+        <text x="70" y="254" text-anchor="middle" font-size="11">Geschäftsregeln</text>
+        <rect x="10" y="350" width="120" height="120" fill="#eef3fa" stroke="#222"/>
+        <text x="70" y="406" text-anchor="middle" font-weight="bold" font-size="13">Datenhaltung</text>
+        <text x="70" y="424" text-anchor="middle" font-size="11">Speicherung</text>
+        <rect x="140" y="10" width="420" height="120" fill="none" stroke="#999" stroke-dasharray="5,4"/>
+        <rect x="140" y="145" width="420" height="190" fill="none" stroke="#999" stroke-dasharray="5,4"/>
+        <rect x="140" y="350" width="420" height="120" fill="none" stroke="#999" stroke-dasharray="5,4"/>
+        <!-- Präsentation -->
+        <rect x="155" y="25" width="180" height="90" fill="#fff" stroke="#222"/>
+        <text x="165" y="44" font-weight="bold">Browser (Disponenten)</text>
+        <text x="165" y="64">Web-Disposition:</text>
+        <text x="165" y="81">HTML-Seiten</text>
+        <text x="165" y="98">Plantafel (TypeScript)</text>
+        <rect x="355" y="25" width="190" height="90" fill="#fff" stroke="#222"/>
+        <text x="365" y="44" font-weight="bold">Monteur-App (Android)</text>
+        <text x="365" y="64">Kotlin, Offline-Logik</text>
+        <text x="365" y="88">lokale</text>
+        <text x="365" y="104">Datenbank</text>
+        <ellipse cx="490" cy="80" rx="40" ry="5" fill="#fff" stroke="#222"/>
+        <path d="M450,80 L450,102 A40,5 0 0 0 530,102 L530,80" fill="#fff" stroke="#222"/>
+        <text x="490" y="98" text-anchor="middle" font-size="11">SQLite</text>
+        <!-- Logik -->
+        <rect x="155" y="158" width="390" height="167" fill="#fff" stroke="#222"/>
+        <text x="400" y="178" text-anchor="middle" font-weight="bold">Anwendungsserver</text>
+        <rect x="170" y="188" width="130" height="34" fill="#f3f4f6" stroke="#222"/>
+        <text x="235" y="202" text-anchor="middle">Web-Controller</text>
+        <text x="235" y="216" text-anchor="middle">+ Templates</text>
+        <rect x="315" y="188" width="215" height="34" fill="#f3f4f6" stroke="#222"/>
+        <text x="422" y="210" text-anchor="middle">REST-API</text>
+        <rect x="170" y="230" width="360" height="40" fill="#f3f4f6" stroke="#222"/>
+        <text x="350" y="246" text-anchor="middle">Services: Auftragsverwaltung, Einsatzplanung,</text>
+        <text x="350" y="262" text-anchor="middle">Synchronisation, Berichtserstellung (PDF)</text>
+        <rect x="170" y="278" width="360" height="24" fill="#f3f4f6" stroke="#222"/>
+        <text x="350" y="294" text-anchor="middle">Repositories (Datenzugriff)</text>
+        <text x="530" y="317" text-anchor="end" font-size="11" fill="#555">Spring Boot · Java 21 · Container (Linux)</text>
+        <!-- Daten -->
+        <ellipse cx="350" cy="372" rx="120" ry="9" fill="#fff" stroke="#222"/>
+        <path d="M230,372 L230,440 A120,9 0 0 0 470,440 L470,372" fill="#fff" stroke="#222"/>
+        <text x="350" y="404" text-anchor="middle" font-weight="bold">PostgreSQL 16</text>
+        <text x="350" y="422" text-anchor="middle">Kunden, Aufträge, Berichte …</text>
+        <!-- Extern -->
+        <text x="657" y="152" text-anchor="middle" font-weight="bold">Externe Systeme</text>
+        <rect x="585" y="162" width="145" height="72" fill="#fff" stroke="#222" stroke-dasharray="5,3"/>
+        <text x="595" y="180" font-weight="bold">Kartendienst</text>
+        <text x="595" y="196">Geokodierung,</text>
+        <text x="595" y="212">Fahrzeiten</text>
+        <text x="595" y="227" font-size="11" fill="#555">HTTPS-API, JSON</text>
+        <rect x="585" y="248" width="145" height="76" fill="#fff" stroke="#222" stroke-dasharray="5,3"/>
+        <text x="595" y="266" font-weight="bold">ERP-System Albers</text>
+        <text x="595" y="282">abgeschl. Aufträge</text>
+        <text x="595" y="298">XML-Datei per SFTP</text>
+        <text x="595" y="314" font-size="11" fill="#555">nachts</text>
+        <!-- Verbindungen -->
+        <line x1="230" y1="115" x2="230" y2="187" stroke="#222" marker-start="url(#lsg-l03c-pfeil)" marker-end="url(#lsg-l03c-pfeil)"/>
+        <text x="224" y="138" text-anchor="end">HTTPS</text>
+        <text x="224" y="152" text-anchor="end">HTML</text>
+        <line x1="320" y1="115" x2="320" y2="187" stroke="#222" marker-start="url(#lsg-l03c-pfeil)" marker-end="url(#lsg-l03c-pfeil)"/>
+        <text x="326" y="138">Plantafel:</text>
+        <text x="326" y="152">REST/JSON</text>
+        <line x1="480" y1="115" x2="480" y2="187" stroke="#222" marker-start="url(#lsg-l03c-pfeil)" marker-end="url(#lsg-l03c-pfeil)"/>
+        <text x="486" y="138">HTTPS,</text>
+        <text x="486" y="152">REST/JSON</text>
+        <line x1="300" y1="302" x2="300" y2="364" stroke="#222" marker-start="url(#lsg-l03c-pfeil)" marker-end="url(#lsg-l03c-pfeil)"/>
+        <text x="306" y="343">SQL (JDBC)</text>
+        <line x1="545" y1="198" x2="584" y2="198" stroke="#222" marker-start="url(#lsg-l03c-pfeil)" marker-end="url(#lsg-l03c-pfeil)"/>
+        <line x1="545" y1="286" x2="584" y2="286" stroke="#222" marker-end="url(#lsg-l03c-pfeil)"/>
+      </svg>
+      <figcaption>Abb. L-4: Architektur von MonteurPlus (Lösungsvorschlag)</figcaption>
+    </figure>
+    <p>Web-Controller und Templates werden auf dem Server ausgeführt, gehören fachlich aber zur Präsentation (serverseitiges Rendering). Beide Zuordnungen sind richtig, wenn sie begründet bzw. eindeutig dargestellt sind. Die lokale SQLite-Datenbank der App kann auch in der Datenhaltungsschicht gezeichnet werden, sofern erkennbar ist, dass sie auf dem Gerät liegt.</p>
+    <h4>c) Microservices oder Monolith (5 P)</h4>
+    <table class="kompakt">
+      <tr><th>Vorteile von Microservices</th><th>Nachteile von Microservices</th></tr>
+      <tr><td>
+        <ul>
+          <li>Dienste unabhängig deploybar: z. B. die Einsatzplanung ändern, ohne Synchronisation und Berichte neu auszuliefern.</li>
+          <li>Dienste einzeln skalierbar: z. B. mehr Instanzen der Synchronisation morgens, wenn alle Monteure gleichzeitig abgleichen, oder bei vielen SaaS-Kunden.</li>
+          <li>Fehlerisolation: Hängt die PDF-Erzeugung, funktioniert die Synchronisation weiter.</li>
+          <li>Technologie je Dienst frei wählbar; kleinere, überschaubare Codebasen.</li>
+        </ul>
+      </td><td>
+        <ul>
+          <li>Verteiltes System: Kommunikation über das Netz zwischen den Diensten, Latenz, Fehlerbehandlung bei Ausfällen einzelner Dienste.</li>
+          <li>Datenkonsistenz: Auftrag und Bericht liegen in getrennten Datenbanken, eine gemeinsame Transaktion ist nicht mehr einfach möglich.</li>
+          <li>Hoher Betriebsaufwand: viele Container, Orchestrierung, Monitoring, verteiltes Logging, je Dienst eine Pipeline.</li>
+          <li>Integrationstests und Fehlersuche über Dienstgrenzen sind aufwendiger; Schnittstellen müssen versioniert werden.</li>
+        </ul>
+      </td></tr>
+    </table>
+    <p><strong>Empfehlung:</strong> Für ein Team von acht Entwicklerinnen und Entwicklern, ein Produkt im Aufbau und einen einzigen Administrator empfiehlt sich zunächst ein <strong>modularer Monolith</strong>: ein Deployment, intern aber nach Fachbereichen (Aufträge, Einsatzplanung, Synchronisation, Berichte) mit klaren Schnittstellen getrennt. Die bestehende Pipeline kann weiterverwendet werden, Komplexität und Betriebsaufwand bleiben beherrschbar. Wächst die Last durch viele SaaS-Kunden, lassen sich einzelne Module (z. B. Synchronisation) später gezielt als Microservice herauslösen.</p>
+    <h4>d) Kein direkter Datenbankzugriff der App (2 P)</h4>
+    <p>Zwei davon: <strong>Sicherheit</strong> – der Datenbankserver bleibt aus dem Internet unerreichbar, und es stehen keine Datenbank-Zugangsdaten in der App, die sich aus der APK auslesen ließen. · <strong>Geschäftsregeln und Berechtigungen</strong> werden zentral auf dem Server geprüft und können nicht von einer manipulierten App umgangen werden. · <strong>Entkopplung:</strong> Das Datenbankschema kann sich ändern, ohne dass alle App-Versionen auf 140 Geräten angepasst werden müssen; die REST-API bleibt stabil. · Weniger offene Datenbankverbindungen, Schichtenprinzip wird eingehalten.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) drei Schichten mit den Komponenten aus Anlage 7 je 1 P, schlüssiger Ablauf durch die Schichten (lokal speichern, Übertragung REST/JSON, Verarbeitung, Speicherung, Rückmeldung) 3 P. b) alle Komponenten einer Schicht zugeordnet 2 P, externe Systeme 1 P, Kommunikationswege mit Protokoll/Format beschriftet 2 P. c) je Vor-/Nachteil 1 P (max. 4), Empfehlung mit Bezug auf Team/Situation 1 P – eine begründete Empfehlung für Microservices ist ebenfalls möglich. d) je Argument 1 P.</div>
+    <p><strong>Erklärung:</strong> Teilaufgabe a) entspricht W22 T1 A2a – dort gab es 6 P für Schichten <em>und</em> Zusammenarbeit. Wer nur die drei Schichten aufzählt, erhält etwa die Hälfte; erwartet wird der Weg einer Anfrage durch die Schichten und zurück.</p>
+  </div><p class="ap2-loesung-link"><a href="11_Werkzeuge_Loesungen.html#L-WZ-03-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== WZ-04 ===================== -->
   <h3 id="a-04">WZ-04 · Compiler vs. Interpreter</h3>
@@ -1600,6 +2055,24 @@ Automatic merge failed; fix conflicts and then commit the result.</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 1a</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-WZ-04-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe WZ-04.1 · 7 Punkte</div>
+    <h4>a) Unterschied (2 P)</h4>
+    <p>Ein <strong>Compiler</strong> übersetzt den gesamten Quellcode <em>vor</em> der Ausführung in Maschinencode und erzeugt eine ausführbare Datei, die anschließend ohne Compiler ausgeführt wird. Ein <strong>Interpreter</strong> liest den Quellcode <em>zur Laufzeit</em> Anweisung für Anweisung, übersetzt sie und führt sie sofort aus; es entsteht keine ausführbare Datei, und der Interpreter wird bei jeder Ausführung benötigt.</p>
+    <h4>b) Zuordnung (3 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:18%">Sprache</th><th>Compiler → Maschinencode</th><th>Interpreter</th><th>Compiler → Bytecode → VM</th></tr>
+      <tr><td>C++</td><td>X</td><td></td><td></td></tr>
+      <tr><td>Python</td><td></td><td>X</td><td>(auch akzeptiert)</td></tr>
+      <tr><td>Java</td><td></td><td></td><td>X</td></tr>
+      <tr><td>Go</td><td>X</td><td></td><td></td></tr>
+      <tr><td>PHP</td><td></td><td>X</td><td></td></tr>
+      <tr><td>C#</td><td></td><td></td><td>X (IL, CLR)</td></tr>
+    </table>
+    <h4>c) Vor- und Nachteil des Interpreters (2 P)</h4>
+    <p><strong>Vorteil</strong> (einer): plattformunabhängiger Quellcode – läuft überall, wo der Interpreter installiert ist · schneller Entwicklungs- und Testzyklus ohne Übersetzungsschritt, interaktives Ausprobieren.<br><strong>Nachteil</strong> (einer): langsamere Ausführung, da zur Laufzeit übersetzt wird · Fehler (auch Syntax- und Typfehler) zeigen sich erst bei der Ausführung der betreffenden Zeile · Interpreter muss auf dem Zielsystem installiert sein · Quellcode wird mit ausgeliefert.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Prinzip 1 P (Zeitpunkt der Übersetzung und ausführbare Datei ja/nein müssen erkennbar sein). b) je Sprache 0,5 P; für Python ist auch „Bytecode + VM“ richtig (CPython erzeugt intern Bytecode), Java/C# als „Compiler → Maschinencode“ ist falsch. c) je 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="11_Werkzeuge_Loesungen.html#L-WZ-04-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="WZ-04-2">
     <div class="kopf">
@@ -1620,6 +2093,38 @@ Automatic merge failed; fix conflicts and then commit the result.</pre>
     <div class="teilaufgabe"><span class="tp">4 P</span>c) Der Fehler in Ausschnitt (4) ist zunächst niemandem aufgefallen. Beschreiben Sie, wie Sie einen solchen Fehler mit dem Debugger Ihrer Entwicklungsumgebung finden. Verwenden Sie dabei mindestens drei Funktionen des Debuggers.</div>
     <div class="antwort z8"></div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-WZ-04-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe WZ-04.2 · 10 Punkte</div>
+    <h4>a) Fehlerarten (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:5%">Nr.</th><th style="width:20%">Fehlerart</th><th>Wann/wodurch bemerkt?</th></tr>
+      <tr><td>(1)</td><td>Typfehler (semantischer Fehler)</td><td>Beim Übersetzen durch den Compiler (statische Typprüfung), die IDE markiert ihn schon beim Tippen: <code>Fehler: Inkompatible Typen: int kann nicht in String konvertiert werden</code>. Es entsteht kein Programm.</td></tr>
+      <tr><td>(2)</td><td>Syntaxfehler (schließende Klammer fehlt)</td><td>Beim Übersetzen durch den Compiler bzw. sofort in der IDE: <code>Fehler: ')' erwartet</code>.</td></tr>
+      <tr><td>(3)</td><td>Laufzeitfehler</td><td>Kompiliert fehlerfrei; erst bei der Ausführung dieser Zeile wird eine <code>IndexOutOfBoundsException</code> geworfen (<code>Index 3 out of bounds for length 3</code>), da gültige Indizes von 0 bis <code>size() - 1</code> reichen. Korrektur: <code>auftraege.get(auftraege.size() - 1)</code>.</td></tr>
+      <tr><td>(4)</td><td>Logischer Fehler</td><td>Keine Fehlermeldung: <code>250 / 4</code> ist eine Ganzzahldivision (= 62), erst danach wird in <code>double</code> umgewandelt → 62,0 statt 62,5. Bemerkt nur durch Tests mit erwarteten Ergebnissen, Code-Review, Debugging oder aufmerksame Nutzer. Korrektur: <code>(double) summeMinuten / anzahl</code>.</td></tr>
+    </table>
+    <h4>b) Python (2 P)</h4>
+    <p>Python ist dynamisch typisiert und wird interpretiert. Zeile 12 ist gültig – <code>plz</code> verweist einfach auf eine Ganzzahl. Der Fehler wird erst <strong>zur Laufzeit</strong> bemerkt, wenn Zeile 87 tatsächlich ausgeführt wird: <code>AttributeError: 'int' object has no attribute 'zfill'</code> – möglicherweise erst nach langer Laufzeit des Imports oder nur bei bestimmten Datensätzen. In Java (Ausschnitt 1) prüft der Compiler die Typen vor der Ausführung, der Fehler fällt also schon beim Übersetzen auf. (Zusatz: Eine Postleitzahl gehört ohnehin als Text gespeichert, sonst geht die führende 0, z. B. bei 01067, verloren.)</p>
+    <h4>c) Fehlersuche mit dem Debugger (4 P)</h4>
+    <ol class="knapp">
+      <li>Fehler reproduzierbar machen: Testfall mit bekannten Werten (250 Minuten, 4 Einsätze → erwartet 62,5).</li>
+      <li><strong>Haltepunkt</strong> in der Methode setzen, die den Durchschnitt berechnet (bei unbekannter Stelle zunächst am Anfang der Berechnung), und das Programm im Debug-Modus starten.</li>
+      <li>Beim Anhalten die <strong>Variablen beobachten</strong> (Variablenansicht/Watch): <code>summeMinuten = 250</code>, <code>anzahl = 4</code> – die Eingangswerte stimmen.</li>
+      <li>Mit <strong>Step Over</strong> die Zeile ausführen: <code>schnitt = 62.0</code> → hier entsteht der Fehler. Mit „Ausdruck auswerten“ zeigt <code>summeMinuten / anzahl</code> den Wert 62 (int) → Ursache Ganzzahldivision. Liegt die Berechnung in einer aufgerufenen Methode, mit <strong>Step Into</strong> hineinspringen; über den <strong>Aufrufstapel</strong> sieht man, von wo sie aufgerufen wurde.</li>
+      <li>Code korrigieren, Unit-Test ergänzen und erneut ausführen.</li>
+    </ol>
+    <p class="datei">Zum Ausprobieren: <code>java/11_Werkzeuge/Aufgabe_WZ_04_2.java</code> enthält die Ausschnitte (3) und (4) mit Korrektur; Ausgabe des Programms:</p>
+    <pre>(3) Laufzeitfehler:
+    IndexOutOfBoundsException: Index 3 out of bounds for length 3
+    korrigiert: A-1003
+(4) Logischer Fehler (keine Fehlermeldung!):
+    fehlerhaft:  Durchschnitt = 62.0 min
+    korrigiert:  Durchschnitt = 62.5 min
+OK     Korrektur (4): erwartet 62.5, erhalten 62.5
+OK     Fehler (4) reproduziert: erwartet 62.0, erhalten 62.0
+OK     Korrektur (3): erwartet A-1003, erhalten A-1003</pre>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Ausschnitt Fehlerart 0,5 P und Zeitpunkt/Erkennung 0,5 P. b) Zeitpunkt (Laufzeit, erst in Zeile 87) 1 P, Begründung (dynamische Typisierung/Interpreter) mit Vergleich zu Java 1 P. c) je sinnvoll eingesetzter Debugger-Funktion 1 P (max. 3), nachvollziehbares Vorgehen bis zur Ursache 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="11_Werkzeuge_Loesungen.html#L-WZ-04-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="WZ-04-3">
     <div class="kopf">
@@ -1640,6 +2145,25 @@ Automatic merge failed; fix conflicts and then commit the result.</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 1a (Compiler- und Interpretersprachen), vertieft um Bytecode, Transpiler und Linker</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-WZ-04-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe WZ-04.3 · 16 Punkte</div>
+    <h4>a) Java vom Entwicklerrechner bis zum Linux-Server (4 P)</h4>
+    <ol class="knapp">
+      <li>Auf dem Windows-Rechner bzw. in der Pipeline übersetzt der Compiler <code>javac</code> (über Maven) die <code>.java</code>-Dateien in <strong>Bytecode</strong> (<code>.class</code>-Dateien) – plattformunabhängigen Zwischencode für eine gedachte Maschine, nicht für einen konkreten Prozessor. Die Klassen werden zu einer JAR-Datei bzw. einem Container-Image gepackt.</li>
+      <li>Dieselbe JAR-Datei wird ohne erneute Übersetzung auf den Linux-Server gebracht.</li>
+      <li>Dort lädt die <strong>Java Virtual Machine</strong> (Eclipse Temurin 21 für Linux) den Bytecode, prüft ihn und führt ihn zunächst interpretierend aus.</li>
+      <li>Der <strong>JIT-Compiler</strong> erkennt häufig ausgeführte Methoden („Hotspots“) und übersetzt sie zur Laufzeit in optimierten Maschinencode für den Prozessor des Servers – dadurch läuft der Server fast so schnell wie ein direkt kompiliertes Programm.</li>
+    </ol>
+    <p>Die Plattformunabhängigkeit („Write once, run anywhere“) entsteht, weil es für jedes Betriebssystem eine eigene JVM gibt, die denselben Bytecode ausführt.</p>
+    <h4>b) Python oder C++ für die Datenübernahme (4 P)</h4>
+    <p><strong>Python</strong> (interpretiert): sehr kurzer, gut lesbarer Code; CSV-Verarbeitung mit der Standardbibliothek; schneller Test-Zyklus ohne Übersetzen – Formatprobleme in den Altdaten lassen sich schnell anpassen und der Import erneut starten. Nachteil: langsamere Ausführung, Typfehler erst zur Laufzeit.<br><strong>C++</strong> (kompiliert): deutlich schnellere Ausführung, aber höherer Entwicklungsaufwand (Speicherverwaltung, CSV-Parsing, Datenbankanbindung), längerer Entwicklungszyklus, im Team (Java/Kotlin/TypeScript) kaum Erfahrung.<br><strong>Einsatzzweck:</strong> Der Import läuft <em>einmal</em>, mit nur ca. 60 000 Datensätzen (bei Python im Bereich von Sekunden bis Minuten) und unkritischer Laufzeit über Nacht. Der Geschwindigkeitsvorteil von C++ bringt hier nichts, die Entwicklungszeit zählt.<br><strong>Empfehlung: Python</strong> (alternativ Java als Teamsprache) – geringer Aufwand, schnelle Anpassung an fehlerhafte Altdaten.</p>
+    <h4>c) TypeScript und tsc (3 P)</h4>
+    <p><code>tsc</code> ist ein Transpiler (Source-to-Source-Compiler): Er übersetzt den TypeScript-Code vor der Auslieferung in JavaScript, denn Browser können nur JavaScript ausführen. Dabei prüft er die statischen Typangaben (z. B. <code>auftragNr: number</code>, Struktur der Daten aus der REST-API) und meldet Typfehler, Tippfehler in Eigenschaftsnamen oder fehlende Parameter bereits beim Übersetzen; im erzeugten JavaScript sind die Typen entfernt. Ausgeführt wird das JavaScript dann im Browser (Interpreter + JIT der JavaScript-Engine).<br><strong>Vorteil:</strong> Viele Fehler fallen vor der Ausführung auf statt erst bei den Disponenten; zudem bessere IDE-Unterstützung (Autovervollständigung, sicheres Umbenennen) und eine selbstdokumentierende Schnittstelle zur REST-API.</p>
+    <h4>d) Go-Programm mp-export (5 P)</h4>
+    <p><strong>da) (3 P)</strong> Der Go-Compiler (<code>go build</code>) prüft Syntax und Typen und übersetzt die Quelldateien des Programms und der verwendeten Pakete in Maschinencode (Objektcode) für die Zielplattform (hier Windows, x86-64). Der <strong>Linker</strong> fügt diesen Objektcode mit dem Code der benötigten Bibliotheken (Go-Standardbibliothek, Fremdpakete) und der Go-Laufzeitumgebung zusammen, löst die Verweise auf Funktionen in anderen Paketen auf und erzeugt die ausführbare Datei <code>mp-export.exe</code>. Go bindet die Bibliotheken in der Regel <strong>statisch</strong> ein – deshalb ist das Ergebnis eine einzelne Datei, die ohne weitere Installation läuft (Anforderung aus Anlage 8).</p>
+    <p><strong>db) (2 P)</strong> Die ausführbare Datei enthält Maschinencode und ein Dateiformat, die an Betriebssystem und Prozessor gebunden sind: Windows nutzt das PE-Format (<code>.exe</code>) und Windows-Systemaufrufe, Linux das ELF-Format und Linux-Systemaufrufe (ggf. auch eine andere Prozessorarchitektur). Deshalb muss für jede Zielplattform eigens übersetzt und gelinkt werden – bei Go per Cross-Compiling, z. B. <code>GOOS=linux GOARCH=amd64 go build</code>. Anders als bei Java gibt es keine virtuelle Maschine, die plattformneutralen Code ausführt.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Bytecode 1 P, JVM/Plattformunabhängigkeit 1 P, Interpretation und JIT 1 P, Gesamtablauf Windows → Linux 1 P. b) Bewertung Python 1 P, Bewertung C++ 1 P, Bezug zum Einsatzzweck (einmalig, Datenmenge, Laufzeit unkritisch) 1 P, begründete Empfehlung 1 P (C++ nur mit überzeugender Begründung). c) Übersetzung TS → JS und Ausführung im Browser 1 P, Typprüfung beim Übersetzen 1 P, Vorteil 1 P. da) Kompilieren in Maschinencode 1 P, Aufgabe des Linkers 1 P, eigenständige Datei (statisches Linken) 1 P. db) Plattformabhängigkeit des Maschinencodes/Formats 1 P, Folge (je Plattform eigener Build) 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="11_Werkzeuge_Loesungen.html#L-WZ-04-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== WZ-05 ===================== -->
   <h3 id="a-05">WZ-05 · Klassenbibliotheken, Frameworks &amp; Dokumentation</h3>
@@ -1656,6 +2180,15 @@ Automatic merge failed; fix conflicts and then commit the result.</pre>
     <div class="antwort z8"></div>
     <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 1ba</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-WZ-05-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe WZ-05.1 · 6 Punkte</div>
+    <h4>a) Bibliothek vs. Framework (2 P)</h4>
+    <p>Eine <strong>Klassenbibliothek</strong> ist eine Sammlung wiederverwendbarer Klassen und Methoden, die der eigene Code bei Bedarf aufruft; die Ablaufsteuerung bleibt beim eigenen Programm (z. B. TerminKern: MonteurPlus ruft <code>istFeiertag()</code> auf). Ein <strong>Framework</strong> gibt Struktur und Ablauf der Anwendung vor; der eigene Code wird an vorgesehenen Stellen eingefügt und <em>vom Framework aufgerufen</em> – Inversion of Control (z. B. Spring Boot nimmt HTTP-Anfragen an und ruft die passende Controller-Methode auf).</p>
+    <h4>b) Vor- und Nachteil einer umfangreichen PDF-Bibliothek (4 P)</h4>
+    <p><strong>Vorteil</strong> (einer, beschrieben): PDF-Erzeugung ist komplex (Schriften, Seitenumbrüche, Tabellen, Fotos, Unterschrift, ggf. PDF/A für die Archivierung). Eine erprobte Bibliothek spart Entwicklungszeit und Kosten, ist von vielen Nutzern getestet und enthält dadurch weniger Fehler als eine Eigenentwicklung; das Team kann sich auf die Fachlogik der Arbeitsberichte konzentrieren. Fehlerbehebungen und Sicherheitsupdates kommen vom Hersteller.</p>
+    <p><strong>Nachteil</strong> (einer, beschrieben): Abhängigkeit vom Hersteller bzw. Projekt – wird die Bibliothek nicht mehr gepflegt oder ändert sich die Lizenz, muss man sie mit großem Aufwand ersetzen. Weitere: Lizenzbedingungen und -kosten (PdfMaker Core: AGPL oder 2 400 € pro Jahr, Anlage 11), Einarbeitungsaufwand in eine umfangreiche API, größere Anwendung, obwohl nur ein Bruchteil genutzt wird, Sicherheitslücken im fremden Code.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Bibliothek 1 P, Framework mit Steuerungsumkehr 1 P. b) Vorteil 2 P, Nachteil 2 P (jeweils 1 P für das Stichwort, 1 P für die Beschreibung mit Begründung bzw. Bezug zur Situation).</div>
+  </div><p class="ap2-loesung-link"><a href="11_Werkzeuge_Loesungen.html#L-WZ-05-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="WZ-05-2">
     <div class="kopf">
@@ -1676,6 +2209,24 @@ Automatic merge failed; fix conflicts and then commit the result.</pre>
     <div class="teilaufgabe"><span class="tp">3 P</span>c) Beschreiben Sie das Risiko, das sich aus der Abhängigkeit <code>json-mini</code> für MonteurPlus ergibt, und zwei Maßnahmen, mit denen solche Risiken künftig früh erkannt oder begrenzt werden.</div>
     <div class="antwort z5"></div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-WZ-05-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe WZ-05.2 · 10 Punkte</div>
+    <h4>a) Aufgaben von Maven bei Abhängigkeiten (3 P)</h4>
+    <p>In der <code>pom.xml</code> werden nur die <strong>direkten</strong> Abhängigkeiten mit ihren Koordinaten (groupId, artifactId, version) deklariert. Maven lädt die passenden JAR-Dateien aus einem zentralen Repository (Maven Central bzw. Firmen-Repository) in den lokalen Zwischenspeicher und bindet sie beim Kompilieren, Testen und Packen ein. Dabei löst Maven die <strong>transitiven Abhängigkeiten</strong> automatisch auf: TerminKern benötigt seinerseits <code>feiertage-de</code> und <code>json-mini</code>; beide stehen nicht in der <code>pom.xml</code>, werden aber trotzdem geladen (im Abhängigkeitsbaum eingerückt unter TerminKern). Außerdem verwaltet Maven Versionen (Spring Boot gibt die Versionen für <code>spring-boot-starter-web</code> und <code>junit-jupiter</code> vor, daher fehlt dort die Versionsangabe), löst Versionskonflikte auf und trennt Gültigkeitsbereiche: <code>junit-jupiter</code> hat den Scope <code>test</code> und gelangt nicht in das ausgelieferte Programm.</p>
+    <h4>b) Release Notes und SemVer (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:10%">Version</th><th>Aussage / Inhalt</th><th style="width:30%">Update ohne Codeänderung?</th></tr>
+      <tr><td>2.4.2</td><td><strong>PATCH</strong>: nur abwärtskompatible Fehlerbehebungen – Berechnung des Ostermontags korrigiert, json-mini wegen einer Denial-of-Service-Lücke auf 0.9.3 aktualisiert.</td><td>Ja.</td></tr>
+      <tr><td>2.5.0</td><td><strong>MINOR</strong>: neue, abwärtskompatible Funktion <code>istBrueckentag()</code>; <code>feiertage(int)</code> wird als veraltet (deprecated) markiert und im nächsten Major-Release entfernt.</td><td>Ja; der Compiler warnt aber an den 14 Stellen, die <code>feiertage(int)</code> nutzen.</td></tr>
+      <tr><td>3.0.0</td><td><strong>MAJOR</strong>: inkompatible Änderungen – Paket umbenannt, <code>feiertage(int)</code> entfernt, Java 21 als Mindestversion (beim Server bereits erfüllt).</td><td>Nein: alle Imports und die 14 Aufrufe müssen angepasst und gründlich getestet werden.</td></tr>
+    </table>
+    <p><strong>Empfehlung:</strong> kurzfristig auf <strong>2.4.2</strong> aktualisieren – die Sicherheitslücke wird geschlossen, das Risiko ist minimal. Ebenfalls gut vertretbar: <strong>2.5.0</strong> (abwärtskompatibel, enthält als spätere Version in der Regel auch die Korrekturen aus 2.4.2; die Deprecation-Warnungen helfen, die 14 Stellen schon auf <code>feiertage(Year, Bundesland)</code> umzustellen). Den Umstieg auf 3.0.0 als eigenes Ticket mit Tests planen.</p>
+    <h4>c) Risiko json-mini und Maßnahmen (3 P)</h4>
+    <p><strong>Risiko:</strong> <code>json-mini 0.9.2</code> ist eine transitive Abhängigkeit, die in der <code>pom.xml</code> gar nicht auftaucht, und enthält eine bekannte Schwachstelle: Tief verschachtelte JSON-Eingaben können eine Endlosschleife auslösen. Verarbeitet der Server über TerminKern solche Daten, kann ein Angreifer (oder eine fehlerhafte Eingabe) den Server blockieren – MonteurPlus wäre für Disponenten und Monteure nicht verfügbar (Schutzziel Verfügbarkeit). Zudem signalisiert die Version 0.x eine noch instabile Bibliothek.</p>
+    <p><strong>Maßnahmen</strong> (zwei): automatischer Schwachstellen-Scan aller (auch transitiven) Abhängigkeiten in der Pipeline, z. B. OWASP Dependency-Check, GitLab Dependency Scanning, Dependabot/Renovate, mit Abbruch bei kritischen Lücken · SBOM erstellen und laufend mit Schwachstellendatenbanken abgleichen · Sicherheitshinweise und Release Notes der Bibliotheken verfolgen, regelmäßige Update-Termine · betroffene transitive Version gezielt anheben (Maven <code>dependencyManagement</code>), bis die direkte Abhängigkeit aktualisiert ist · vor dem Einsatz neuer Bibliotheken Pflegezustand und Abhängigkeiten prüfen, Anzahl der Abhängigkeiten gering halten.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Laden aus zentralem Repository 1 P, transitive Abhängigkeiten am Beispiel 1 P, Versionen/Scope 1 P. b) je Version Aussage und Update-Fähigkeit 1 P, Empfehlung mit Begründung 1 P (2.4.2 oder 2.5.0). c) Risiko 1 P, je Maßnahme 1 P.</div>
+    <p><strong>Erklärung:</strong> Entscheidend für den englischen Text sind die Signalwörter: <em>Fixed</em> und <em>Security</em> (Patch), <em>New</em> und <em>Deprecated</em> (Minor), <em>BREAKING</em> (Major). Genau das bildet SemVer in der Versionsnummer ab.</p>
+  </div><p class="ap2-loesung-link"><a href="11_Werkzeuge_Loesungen.html#L-WZ-05-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="WZ-05-3">
     <div class="kopf">
@@ -1693,6 +2244,54 @@ Automatic merge failed; fix conflicts and then commit the result.</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 1bb (Dokumentation einer eigenen Bibliothekserweiterung)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-WZ-05-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe WZ-05.3 · 16 Punkte</div>
+    <h4>a) Drei Aspekte der Dokumentation (6 P)</h4>
+    <ul>
+      <li><strong>Vollständige Beschreibung der öffentlichen Schnittstelle:</strong> Zweck von Klasse, Konstruktor und Methode; jeder Parameter mit Bedeutung und erlaubten Werten (<code>dauer</code> muss positiv sein, <code>ab</code> wird mitgeprüft, <code>m</code> und <code>ab</code> dürfen nicht <code>null</code> sein, Wirkung von <code>notdienst</code>: Feiertage und arbeitsfreie Tage werden mitgeprüft); Rückgabewert (frühester Termin als <code>Optional</code>, leer, wenn nichts frei ist); Ausnahmen (<code>IllegalArgumentException</code>); Einschränkungen wie die Suche über höchstens 30 Tage. Der vorhandene Kommentar „sucht termin“ reicht dafür nicht aus.</li>
+      <li><strong>Bezug zur Basisbibliothek und Kompatibilität:</strong> Die Klasse erweitert <code>Kalender</code> aus TerminKern 2.4.1 und nutzt deren Methode <code>istFeiertag()</code>. Zu dokumentieren ist, mit welcher TerminKern-Version die Erweiterung getestet ist, welches Verhalten von der Basisklasse übernommen bzw. ergänzt wird und dass ab TerminKern 3.0.0 eine Anpassung nötig ist (neues Paket). Ebenso die Abhängigkeiten zu <code>Arbeitszeitmodell</code>, <code>Monteur</code> und <code>Einsatzplan</code>.</li>
+      <li><strong>Versionierung und Änderungshistorie:</strong> eigene Versionsnummer der Erweiterung (z. B. nach SemVer), <code>@since</code>-Angaben, Changelog. Da zwei weitere Teams die Klasse nutzen, müssen Verhaltensänderungen (z. B. eine andere Suchdauer als 30 Tage) und veraltete Methoden (<code>@deprecated</code> mit Alternative) nachvollziehbar sein.</li>
+      <li><strong>Verständlichkeit für die Zielgruppe und einheitliche Form:</strong> Die Leser sind Entwickler anderer Teams – also Javadoc direkt im Code (daraus HTML erzeugen), einheitliche Sprache und Begriffe, Codebeispiel zur typischen Verwendung, Dokumentation bei jeder Änderung aktualisieren (Teil des Code-Reviews).</li>
+    </ul>
+    <h4>b) Javadoc-Kommentar (5 P)</h4>
+    <pre class="java">/**
+ * Sucht den frühesten freien Einsatztermin eines Monteurs ab einem Starttag.
+ *
+ * &lt;p&gt;Geprüft werden höchstens 30 aufeinanderfolgende Tage, beginnend mit
+ * {@code ab}. Für normale Aufträge werden nur Arbeitstage laut
+ * Arbeitszeitmodell berücksichtigt, die im Bundesland des Kalenders keine
+ * Feiertage sind. Bei Notdienst-Aufträgen ({@code notdienst = true}) wird jeder
+ * Tag geprüft, also auch Wochenenden und Feiertage. Innerhalb eines Tages
+ * liefert der Einsatzplan des Monteurs den frühesten freien Zeitraum der
+ * benötigten Dauer.&lt;/p&gt;
+ *
+ * @param m         Monteur, für den ein Termin gesucht wird; nicht {@code null}
+ * @param ab        erster Tag der Suche (wird mitgeprüft); nicht {@code null}
+ * @param dauer     benötigte Einsatzdauer; muss positiv sein (größer als 0)
+ * @param notdienst {@code true}, wenn auch Wochenenden, arbeitsfreie Tage und
+ *                  Feiertage berücksichtigt werden sollen (Notdienst-Auftrag)
+ * @return Beginn (Datum und Uhrzeit) des frühesten freien Termins oder ein leeres
+ *         {@link Optional}, wenn innerhalb von 30 Tagen kein passender Termin frei ist
+ * @throws IllegalArgumentException wenn {@code dauer} 0 Minuten lang oder negativ ist
+ * @throws NullPointerException     wenn {@code m}, {@code ab} oder {@code dauer}
+ *                                  {@code null} ist
+ * @since 1.0
+ * @see Kalender#istFeiertag(LocalDate)
+ */
+public Optional&lt;LocalDateTime&gt; naechsterFreierTermin(
+        Monteur m, LocalDate ab, Duration dauer, boolean notdienst) { … }</pre>
+    <p class="datei">Geprüft: Die vollständige Klasse mit diesem Kommentar steht in <code>java/11_Werkzeuge/Aufgabe_WZ_05_3.java</code>; sie kompiliert und erzeugt mit <code>javadoc -Xdoclint:all</code> für <code>EinsatzKalender</code> keine Warnungen. Programmausgabe des Beispiels (Fr 02.10.2026 belegt, 03.10. Feiertag und Samstag):</p>
+    <pre>Normaler Auftrag ab Fr 02.10.2026: Optional[2026-10-05T07:30]
+Notdienst ab Fr 02.10.2026:        Optional[2026-10-03T07:30]
+Ist 03.10.2026 Feiertag? true
+Dauer 0 -> IllegalArgumentException: dauer muss positiv sein: PT0S</pre>
+    <h4>c) Unterklasse statt Änderung der Bibliothek (3 P)</h4>
+    <p>Drei Argumente: <strong>Updates bleiben möglich</strong> – Änderungen im Quellcode der Bibliothek gingen beim nächsten Update von TerminKern verloren bzw. müssten bei jedem Update (auch bei Sicherheitsupdates wie 2.4.2) erneut eingepflegt werden; man bliebe auf einer alten Version „hängen“. · <strong>Trennung von allgemeiner und fachlicher Logik</strong> – TerminKern ist eine allgemeine Kalenderbibliothek und kennt keine Monteure, Einsatzpläne oder Arbeitszeitmodelle; diese MonteurPlus-spezifische Logik gehört in eigenen Code. · <strong>Vorgesehener Erweiterungsweg</strong> – Vererbung nutzt die öffentliche API (<code>istFeiertag</code>) ohne Eingriff in fremden Code (Open-Closed-Prinzip); die Erweiterung lässt sich eigenständig versionieren, testen und von anderen Teams einbinden. · <strong>Lizenz/Verantwortung</strong> – geänderter Bibliothekscode wäre ein eigener „Fork“, für den man selbst verantwortlich ist (Apache 2.0 verlangt z. B., Änderungen zu kennzeichnen).</p>
+    <h4>d) Weitere Bestandteile (2 P)</h4>
+    <p>Zwei davon: Einstieg/Installationsanleitung (Maven-Koordinaten, Voraussetzungen wie TerminKern-Version und Java 21) · Codebeispiele bzw. Tutorial für typische Anwendungsfälle · Changelog/Versionshinweise · Migrationshinweise bei inkompatiblen Änderungen · Überblick über Aufbau und Klassen (Architektur) · bekannte Einschränkungen · Lizenzhinweise · Ansprechpartner/Wartung.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Aspekt 2 P (1 P Aspekt benannt, 1 P konkret mit Bezug auf Anlage 10 beschrieben). b) Beschreibung inkl. Verhalten bei Notdienst und 30-Tage-Grenze 1 P, alle vier <code>@param</code> 2 P, <code>@return</code> inkl. leerem Optional 1 P, <code>@throws</code> 1 P (<code>@since</code>/<code>@see</code> optional). c) je Argument 1 P. d) je Bestandteil 1 P.</div>
+    <p><strong>Erklärung:</strong> Die Originalaufgabe W21 T1 A1bb fragte allgemein nach drei Aspekten (6 P). Wer konkret auf den Code eingeht (Parameter, Rückgabe, Ausnahmen, Kompatibilität zur Basisbibliothek), sammelt die Punkte sicherer als mit allgemeinen Floskeln wie „verständlich schreiben“.</p>
+  </div><p class="ap2-loesung-link"><a href="11_Werkzeuge_Loesungen.html#L-WZ-05-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== WZ-06 ===================== -->
   <h3 id="a-06">WZ-06 · Open Source &amp; Lizenzen</h3>
@@ -1711,6 +2310,16 @@ Automatic merge failed; fix conflicts and then commit the result.</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 2ca und 2cb</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-WZ-06-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe WZ-06.1 · 6 Punkte</div>
+    <h4>a) Open Source (3 P)</h4>
+    <p>Open-Source-Software ist Software, deren <strong>Quellcode öffentlich zugänglich</strong> ist und deren <strong>Lizenz</strong> jedem erlaubt, die Software für beliebige Zwecke (auch kommerziell) zu <strong>nutzen, zu untersuchen, zu verändern und – verändert oder unverändert – weiterzugeben</strong>. Welche Bedingungen dabei gelten (z. B. Lizenzhinweise beilegen, Änderungen offenlegen), legt die jeweilige Lizenz fest; anerkannte Open-Source-Lizenzen erfüllen die Open Source Definition der OSI (z. B. MIT, Apache 2.0, GPL). Das Urheberrecht bleibt beim Autor; meist ist die Nutzung kostenlos.</p>
+    <h4>b) Einsatz ohne Einschränkung? (2 P)</h4>
+    <p><strong>Nein.</strong> Open Source bedeutet nicht „rechtefrei“: Man darf eine Bibliothek nur unter den Bedingungen ihrer Lizenz einsetzen. Copyleft-Lizenzen wie die GPL verlangen z. B., dass ein Programm, das die Bibliothek enthält, bei Weitergabe ebenfalls unter der GPL mit vollständigem Quellcode weitergegeben wird – das widerspricht dem proprietären Modell von MonteurPlus. Auch permissive Lizenzen verlangen zumindest Lizenz- und Copyright-Hinweise.</p>
+    <h4>c) Beispiele (1 P)</h4>
+    <p>Permissiv: MIT, BSD, Apache 2.0. Copyleft: GPL, AGPL, LGPL (schwach), MPL 2.0 (schwach), EPL 2.0 (schwach).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) offener Quellcode 1 P, Nutzungs-/Änderungs-/Weitergaberechte 1 P, Bedingungen durch die Lizenz 1 P. b) „Nein“ mit Verweis auf Lizenzbedingungen 1 P, Beispiel/Begründung (z. B. Copyleft) 1 P. c) je Beispiel 0,5 P.</div>
+  </div><p class="ap2-loesung-link"><a href="11_Werkzeuge_Loesungen.html#L-WZ-06-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="WZ-06-2">
     <div class="kopf">
@@ -1734,6 +2343,25 @@ Automatic merge failed; fix conflicts and then commit the result.</pre>
       <tr><td>4</td><td></td><td></td></tr>
     </table>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-WZ-06-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe WZ-06.2 · 10 Punkte</div>
+    <h4>a) Software-Arten (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:22%">Software-Art</th><th>Quellcode verfügbar</th><th>Verändern erlaubt</th><th>Weitergabe erlaubt</th><th>kostenlos nutzbar</th></tr>
+      <tr><td>Open Source</td><td>ja</td><td>ja</td><td>ja (unter Lizenzbedingungen)</td><td>ja (in der Regel)</td></tr>
+      <tr><td>Freeware</td><td>nein</td><td>nein</td><td>meist ja / eingeschränkt</td><td>ja (oft nur privat → eingeschränkt)</td></tr>
+      <tr><td>Shareware</td><td>nein</td><td>nein</td><td>ja/eingeschränkt (Testversion)</td><td>eingeschränkt (Testzeitraum/Funktionsumfang)</td></tr>
+      <tr><td>Proprietäre Software</td><td>nein</td><td>nein</td><td>nein</td><td>nein</td></tr>
+    </table>
+    <h4>b) Bibliotheken Nr. 1, 3 und 4 (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:6%">Nr.</th><th style="width:16%">Einsatz zulässig?</th><th>Begründung und Pflichten</th></tr>
+      <tr><td>1 ChartLite (MIT)</td><td>ja</td><td>Permissive Lizenz. Die JavaScript-Datei wird an die Browser ausgeliefert, also weitergegeben; dafür verlangt MIT nur, den Copyright- und Lizenzhinweis in allen Kopien beizubehalten (z. B. Kommentarkopf der Datei, Seite „Lizenzen/Third-Party-Notices“). Der eigene Code von MonteurPlus darf proprietär bleiben.</td></tr>
+      <tr><td>3 GeoKit (LGPL-3.0)</td><td>ja, mit Auflagen</td><td>Schwaches Copyleft: Die proprietäre App darf GeoKit nutzen, solange die Bibliothek unverändert und als eigenständige, austauschbare Komponente eingebunden ist. Pflichten bei Verteilung der App: Hinweis auf GeoKit und den LGPL-Lizenztext (samt GPL-Text) mitliefern, den Quellcode von GeoKit bzw. ein Angebot dafür bereitstellen, Änderungen an GeoKit selbst unter LGPL offenlegen und den Austausch der Bibliothek durch eine andere Version nicht verhindern. Hinweis: Bei Android-Apps ist die Austauschbarkeit technisch anspruchsvoll – vor der Veröffentlichung im Play Store rechtlich prüfen lassen.</td></tr>
+      <tr><td>4 SignPad (GPL-3.0)</td><td>nein</td><td>Starkes Copyleft: Die Monteur-App wird an Albers und künftig über den Play Store weitergegeben. Mit SignPad entsteht ein abgeleitetes Werk, das als Ganzes unter der GPL-3.0 lizenziert und mit vollständigem Quellcode weitergegeben werden müsste. Das widerspricht dem Ziel, Quellcode und Rechte bei Lindner Digital zu behalten. Alternative: Bibliothek mit permissiver Lizenz, kommerzielle Lizenz beim Autor anfragen oder das Unterschriftenfeld selbst entwickeln.</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je vollständig richtiger Zeile 1 P (bei Freeware/Shareware sind „ja“ und „eingeschränkt“ in den Spalten Weitergabe/kostenlos gleichwertig). b) je Bibliothek Entscheidung 1 P, Begründung mit den konkreten Pflichten 1 P.</div>
+  </div><p class="ap2-loesung-link"><a href="11_Werkzeuge_Loesungen.html#L-WZ-06-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="WZ-06-3">
     <div class="kopf">
@@ -1757,6 +2385,28 @@ Automatic merge failed; fix conflicts and then commit the result.</pre>
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 2c (Open Source, Lizenzbedingungen, Vor- und Nachteile von Open-Source-Bibliotheken)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-WZ-06-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe WZ-06.3 · 18 Punkte</div>
+    <h4>a) Bibliotheken Nr. 5 bis 8 (8 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:15%">Nr.</th><th style="width:16%">Einsatz?</th><th>Begründung / Maßnahme</th></tr>
+      <tr><td>5 PdfMaker Core (AGPL-3.0 oder kommerziell)</td><td>unter AGPL: nein · mit kommerzieller Lizenz: ja, mit Auflagen</td><td>Der Server wird als SaaS über das Netz für Kunden betrieben. Die AGPL verlangt, dass Nutzern eines Netzdienstes, der auf der AGPL-Software aufbaut, der vollständige Quellcode angeboten wird – hier also der Quellcode des MonteurPlus-Servers. Das ist mit dem proprietären Modell unvereinbar. Maßnahme: kommerzielle Lizenz (2 400 € pro Jahr, Dual Licensing) erwerben oder eine Alternative mit permissiver Lizenz wählen.</td></tr>
+      <tr><td>6 RouteOpt SDK (proprietär)</td><td>ja, mit Auflagen</td><td>Nutzung nur mit gültigem Lizenzvertrag; Kosten von 3 € je Monteur und Monat einplanen (bei Albers 140 × 3 € = 420 € pro Monat, mit jedem SaaS-Kunden mehr). Laut Vertrag ist nur die Nutzung „für eigene interne Zwecke“ erlaubt – der Betrieb für Albers und weitere Kunden ist davon voraussichtlich nicht gedeckt. Maßnahme: mit dem Hersteller eine SaaS-/Mandantenlizenz vereinbaren, sonst droht eine Vertragsverletzung.</td></tr>
+      <tr><td>7 csv-quick (keine Lizenz)</td><td>nein</td><td>Ohne Lizenz liegen alle Rechte beim Urheber; Kopieren, Nutzen und Ändern ist nicht erlaubt – auch nicht für einen einmaligen internen Import. Zudem ist die Qualität unklar (Version 0.3, Privatperson). Maßnahme: Autor um eine Lizenz bitten oder eine Alternative verwenden (z. B. CSV-Funktionen der Standardbibliothek bzw. eine Bibliothek unter Apache-/MIT-Lizenz).</td></tr>
+      <tr><td>8 DbMigrate (GPL-2.0)</td><td>ja</td><td>DbMigrate läuft nur intern als Werkzeug in der eigenen Pipeline; es wird weder in MonteurPlus eingebaut noch weitergegeben. Die Copyleft-Pflichten der GPL greifen erst bei Weitergabe; interne Nutzung ist uneingeschränkt erlaubt, der Code von MonteurPlus wird nicht berührt. Auflage: neu prüfen, falls DbMigrate später an Kunden mitgeliefert wird (z. B. bei einer Installation im Rechenzentrum eines Kunden).</td></tr>
+    </table>
+    <h4>b) Vor- und Nachteile von Open-Source-Bibliotheken (4 P)</h4>
+    <p><strong>Vorteile</strong> (zwei): keine Lizenzkosten – wichtig, weil bei wachsender Kundenzahl keine Gebühren je Nutzer anfallen · Quellcode einsehbar: Qualität und Sicherheit prüfbar, Fehler selbst analysieren und notfalls beheben · große Community, weite Verbreitung, viel Wissen und schnelle Fehlerbehebung bei aktiven Projekten · keine Abhängigkeit von einem Hersteller, bei Einstellung kann das Projekt weitergeführt (geforkt) werden.</p>
+    <p><strong>Nachteile</strong> (zwei): Lizenzpflichten müssen geprüft und eingehalten werden; Copyleft (Nr. 4, 5) kann das Geschäftsmodell gefährden → Aufwand für Lizenz-Compliance · keine Gewährleistung und kein garantierter Support (Haftungsausschluss) – gegenüber Albers haftet Lindner Digital trotzdem selbst · Fortbestand unsicher (Projekt wird eingestellt oder Lizenz geändert) · Sicherheitslücken sind öffentlich sichtbar, Updates muss man selbst verfolgen (vgl. json-mini).</p>
+    <p class="klein">Fazit für die Geschäftsführung: Open Source ja, aber mit festem Prüfprozess (Lizenz, Pflegezustand, Sicherheit) vor jedem Einsatz.</p>
+    <h4>c) GPL-Code in eine MIT-Bibliothek kopieren (3 P)</h4>
+    <p><strong>Nicht zulässig.</strong> Der kopierte SignPad-Code bleibt urheberrechtlich geschützt und steht unter der GPL-3.0. Wird er in <code>lindner-utils</code> übernommen, entsteht ein abgeleitetes Werk, das bei der Veröffentlichung insgesamt unter der GPL-3.0 stehen muss. Eine Veröffentlichung unter MIT würde die GPL verletzen, weil MIT u. a. erlaubt, den Code in proprietäre Software einzubauen – GPL-Code lässt sich nicht in eine permissive Lizenz „umlizenzieren“ (umgekehrt wäre MIT-Code in einem GPL-Projekt zulässig). Außerdem würde <code>lindner-utils</code> selbst copyleft-pflichtig und wäre in MonteurPlus nicht mehr einsetzbar. <strong>Lösung:</strong> die Funktionen ohne Kopie selbst neu entwickeln, eine Bibliothek mit permissiver Lizenz nutzen oder den Rechteinhaber von SignPad um eine Lizenz unter MIT bitten (nur er kann umlizenzieren).</p>
+    <h4>d) SBOM (3 P)</h4>
+    <p>Eine <strong>Software Bill of Materials</strong> ist eine maschinenlesbare, vollständige „Stückliste“ aller Komponenten eines Softwareprodukts – einschließlich der <strong>transitiven Abhängigkeiten</strong> – mit Name, Version, Herkunft, Lizenz und Prüfsumme (Formate SPDX oder CycloneDX). Sie wird in der Pipeline automatisch für jede Version erzeugt (z. B. per Maven-Plugin).</p>
+    <p><strong>Nutzen am Beispiel:</strong> FeiertageDE und json-mini stehen nicht in der <code>pom.xml</code>, sondern kommen über TerminKern ins Produkt. Die SBOM führt sie trotzdem auf. Als die Denial-of-Service-Lücke in json-mini 0.9.2 bekannt wurde, hätte ein Abgleich der SBOM mit Schwachstellendatenbanken sofort gezeigt, dass Server-Version 1.3.0 betroffen ist (Schwachstellenmanagement). Außerdem lassen sich ihre Lizenzen (BSD-3-Clause, MIT) für Lizenzprüfung und Lizenzhinweise gegenüber den SaaS-Kunden erfassen. Der EU Cyber Resilience Act verlangt von Herstellern künftig eine SBOM.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Bibliothek Entscheidung 1 P und Begründung/Maßnahme 1 P (Nr. 5: „nein“ und „ja mit kommerzieller Lizenz“ gleichwertig, wenn die AGPL-Problematik im SaaS-Betrieb erkannt wird; Nr. 8: „nein“ nur mit nachvollziehbarer Begründung, z. B. Unternehmensrichtlinie). b) je Vor-/Nachteil 1 P. c) Ergebnis 1 P, Begründung (Copyleft/Kompatibilität) 1 P, Alternative 1 P. d) Definition inkl. transitiver Abhängigkeiten 1 P, Nutzen mit Bezug auf das Beispiel 2 P.</div>
+    <p><strong>Erklärung:</strong> Der Kern aller Lizenzfragen ist immer derselbe: Welche Lizenz, und <em>wird die Software weitergegeben</em> (App, Download, Browser-JavaScript) oder nur intern bzw. als Netzdienst genutzt? Bei der AGPL reicht schon der Netzdienst. In W22 genügte vermutlich (keine Musterlösung) für „Begründen Sie, ob Sie jede Open-Source-Bibliothek ohne Einschränkungen einsetzen dürfen“ (2 P) die Antwort „Nein, Lizenzbedingungen beachten, z. B. GPL – Offenlegung des Quellcodes“.</p>
+  </div><p class="ap2-loesung-link"><a href="11_Werkzeuge_Loesungen.html#L-WZ-06-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== ORIGINALAUFGABEN ===================== -->
   <h3 id="originale">Originalaufgaben zum Üben</h3>

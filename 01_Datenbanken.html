@@ -28,6 +28,21 @@
   table.syntax td:first-child { font-family: Consolas, "Courier New", monospace; font-size: 12.5px; white-space: pre-wrap; }
   table.syntax tr.gruppe td { background: #e8ecf1; font-weight: 700; font-style: italic; font-family: inherit; font-size: 13px; }
 </style>
+<style id="ap2-loesung-stile">
+/* Stile aus 01_Datenbanken_Loesungen.html, nur für eingebettete Lösungen (werkzeuge/loesungen_einbetten.py) */
+.ap2-loesung-inhalt table.ergebnis { width: auto; min-width: 40%; }
+.ap2-loesung-inhalt table.kompakt { width: auto; }
+.ap2-loesung-inhalt .rm { font-family: Consolas, "Courier New", monospace; font-size: 14px; margin: 3px 0; }
+.ap2-loesung-inhalt .loesung h4 { margin: 12px 0 4px; }
+.ap2-loesung-inhalt .loesung .kopf { font-size: 16px; margin-bottom: 6px; }
+.ap2-loesung-inhalt .loesung { break-inside: auto; }
+.ap2-loesung-inhalt .erklaerung { font-size: 14px; }
+.ap2-loesung-inhalt .nebeneinander { display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-start; }
+.ap2-loesung-inhalt .nebeneinander > div { flex: 1 1 210px; min-width: 0; }
+@media print {
+  .ap2-loesung-inhalt .loesung .kopf, .ap2-loesung-inhalt .loesung h4, .ap2-loesung-inhalt p.codelabel { break-after: avoid; }
+}
+</style>
 </head>
 <body>
 
@@ -1627,6 +1642,22 @@ oder
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 2b; W23 Teil 1, Aufgabe 4a (Kardinalitäten)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-01-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-01.1 (6 Punkte)</div>
+  <h4>a)</h4>
+  <table>
+    <tr><th>Nr.</th><th>Kardinalität</th><th>Begründung</th></tr>
+    <tr><td>1</td><td><strong>1:n</strong> (Station 1 : n Fahrrad)</td><td>Eine Station hat mehrere Fahrräder, ein Fahrrad gehört zu genau einer Station.</td></tr>
+    <tr><td>2</td><td><strong>1:1</strong></td><td>Eine Station hat genau einen Leiter, ein Mitarbeiter leitet höchstens eine Station.</td></tr>
+    <tr><td>3</td><td><strong>m:n</strong></td><td>Eine Ausleihe umfasst mehrere Zubehörteile, ein Zubehörteil wird bei vielen Ausleihen gebucht.</td></tr>
+  </table>
+  <h4>b)</h4>
+  <p class="rm">Kategorie(<u>KategorieNr</u>, Bezeichnung, Tagespreis)</p>
+  <p class="rm">Fahrrad(<u>FahrradNr</u>, Modell, Kaufpreis, ↑KategorieNr)</p>
+  <p>Der Fremdschlüssel kommt bei einer 1:n-Beziehung in die Tabelle der <strong>n-Seite</strong> (Fahrrad): Jedes Fahrrad hat genau eine Kategorie, also steht im Feld KategorieNr genau ein Wert. Würde man umgekehrt die FahrradNr in Kategorie speichern, bräuchte eine Kategorie mehrere Werte in einem Feld (Verstoß gegen die 1NF).</p>
+  <p class="bewertung">Bewertung: a) je Zeile 1 P (Kardinalität mit stimmiger Begründung; Kardinalität ohne Begründung ½ P). b) Kategorie mit PK 1 P, Fahrrad mit PK und FK 1 P, Begründung 1 P. Schreibweise „1:n“, „n:1“ oder „Station 1 – n Fahrrad“ gleichwertig.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Immer beide Richtungen fragen. Bei Nr. 2 kommt der FK in eine der beiden Tabellen (z. B. <code>Station.LeiterPersNr</code>) und wird zusätzlich <code>UNIQUE</code>; bei Nr. 3 braucht man eine Zwischentabelle (vgl. DB-08.3 d).</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-01-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-01-2">
     <div class="kopf">
@@ -1645,6 +1676,78 @@ oder
     <div class="zeichenflaeche gross" style="height:560px"></div>
     <p class="quelle">Angelehnt an: W21 Teil 1, Aufgabe 2b (rekursive Beziehung, m:n); W23 Teil 1, Aufgabe 4a (m:n mit Attributen)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-01-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-01.2 (12 Punkte)</div>
+  <figure>
+<svg viewBox="0 0 760 420" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+<rect x="320" y="30" width="120" height="40" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="380.0" y="55.0" text-anchor="middle" font-weight="bold">Station</text>
+<ellipse cx="215" cy="32" rx="50" ry="16" fill="#fff" stroke="#222"/><text x="215" y="36" text-anchor="middle" text-decoration="underline">StationNr</text>
+<line x1="265" y1="36" x2="320" y2="44" stroke="#222"/>
+<ellipse cx="225" cy="82" rx="34" ry="16" fill="#fff" stroke="#222"/><text x="225" y="86" text-anchor="middle">Name</text>
+<line x1="259" y1="78" x2="320" y2="62" stroke="#222"/>
+<polygon points="325,125 380,101 435,125 380,149" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="380" y="129" text-anchor="middle">startet an</text>
+<line x1="380" y1="70" x2="380" y2="101" stroke="#222"/>
+<line x1="380" y1="149" x2="380" y2="190" stroke="#222"/>
+<text x="386" y="88" font-weight="bold">1</text>
+<text x="386" y="184" font-weight="bold">n</text>
+<rect x="330" y="190" width="100" height="40" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="380.0" y="215.0" text-anchor="middle" font-weight="bold">Tour</text>
+<rect x="40" y="190" width="130" height="40" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="105.0" y="215.0" text-anchor="middle" font-weight="bold">Mitarbeiter</text>
+<ellipse cx="50" cy="140" rx="38" ry="16" fill="#fff" stroke="#222"/><text x="50" y="144" text-anchor="middle" text-decoration="underline">PersNr</text>
+<line x1="58" y1="156" x2="75" y2="190" stroke="#222"/>
+<ellipse cx="125" cy="116" rx="34" ry="16" fill="#fff" stroke="#222"/><text x="125" y="120" text-anchor="middle">Name</text>
+<line x1="122" y1="132" x2="112" y2="190" stroke="#222"/>
+<ellipse cx="190" cy="152" rx="38" ry="16" fill="#fff" stroke="#222"/><text x="190" y="156" text-anchor="middle">Telefon</text>
+<line x1="178" y1="167" x2="160" y2="190" stroke="#222"/>
+<polygon points="202,210 250,188 298,210 250,232" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="250" y="214" text-anchor="middle">leitet</text>
+<line x1="170" y1="210" x2="202" y2="210" stroke="#222"/>
+<line x1="298" y1="210" x2="330" y2="210" stroke="#222"/>
+<text x="176" y="203" font-weight="bold">1</text>
+<text x="314" y="203" font-weight="bold">n</text>
+<rect x="620" y="190" width="110" height="40" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="675.0" y="215.0" text-anchor="middle" font-weight="bold">Kunde</text>
+<ellipse cx="612" cy="138" rx="48" ry="16" fill="#fff" stroke="#222"/><text x="612" y="142" text-anchor="middle" text-decoration="underline">KundenNr</text>
+<line x1="620" y1="154" x2="645" y2="190" stroke="#222"/>
+<ellipse cx="690" cy="100" rx="32" ry="16" fill="#fff" stroke="#222"/><text x="690" y="104" text-anchor="middle">Name</text>
+<line x1="690" y1="116" x2="682" y2="190" stroke="#222"/>
+<ellipse cx="728" cy="150" rx="30" ry="16" fill="#fff" stroke="#222"/><text x="728" y="154" text-anchor="middle">E-Mail</text>
+<line x1="722" y1="166" x2="714" y2="190" stroke="#222"/>
+<polygon points="463,210 525,186 587,210 525,234" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="525" y="214" text-anchor="middle" font-size="12">nimmt teil an</text>
+<line x1="430" y1="210" x2="463" y2="210" stroke="#222"/>
+<line x1="587" y1="210" x2="620" y2="210" stroke="#222"/>
+<text x="438" y="203" font-weight="bold">n</text>
+<text x="602" y="203" font-weight="bold">m</text>
+<ellipse cx="484" cy="138" rx="36" ry="16" fill="#fff" stroke="#222"/><text x="484" y="142" text-anchor="middle">bezahlt</text>
+<line x1="500" y1="196" x2="488" y2="154" stroke="#222"/>
+<ellipse cx="545" cy="92" rx="46" ry="16" fill="#fff" stroke="#222"/><text x="545" y="96" text-anchor="middle">Bewertung</text>
+<line x1="527" y1="187" x2="541" y2="108" stroke="#222"/>
+<ellipse cx="250" cy="305" rx="40" ry="16" fill="#fff" stroke="#222"/><text x="250" y="309" text-anchor="middle" text-decoration="underline">TourNr</text>
+<line x1="345" y1="230" x2="278" y2="292" stroke="#222"/>
+<ellipse cx="292" cy="362" rx="32" ry="16" fill="#fff" stroke="#222"/><text x="292" y="366" text-anchor="middle">Titel</text>
+<line x1="358" y1="230" x2="302" y2="346" stroke="#222"/>
+<ellipse cx="380" cy="385" rx="36" ry="16" fill="#fff" stroke="#222"/><text x="380" y="389" text-anchor="middle">Datum</text>
+<line x1="380" y1="230" x2="380" y2="369" stroke="#222"/>
+<ellipse cx="470" cy="362" rx="46" ry="16" fill="#fff" stroke="#222"/><text x="470" y="366" text-anchor="middle">LaengeKm</text>
+<line x1="402" y1="230" x2="460" y2="346" stroke="#222"/>
+<ellipse cx="530" cy="305" rx="52" ry="16" fill="#fff" stroke="#222"/><text x="530" y="309" text-anchor="middle">Schwierigkeit</text>
+<line x1="418" y1="230" x2="500" y2="292" stroke="#222"/>
+<polygon points="23,310 105,284 187,310 105,336" fill="#fff" stroke="#222" stroke-width="1.5"/><text x="105" y="314" text-anchor="middle" font-size="12">ist Vorgesetzter von</text>
+<line x1="105" y1="230" x2="105" y2="284" stroke="#222"/>
+<polyline points="40,210 12,210 12,310 23,310" fill="none" stroke="#222"/>
+<text x="18" y="203" font-weight="bold">1</text>
+<text x="111" y="249" font-weight="bold">n</text>
+<text x="18" y="256" font-size="11" font-style="italic" fill="#444">Vorgesetzter</text>
+<text x="111" y="271" font-size="11" font-style="italic" fill="#444">Mitarbeiter</text>
+</svg>
+<figcaption>Lösung DB-01.2: ER-Modell „Geführte Touren“</figcaption>
+</figure>
+
+  <p>Zur Kontrolle die daraus folgende relationale Umsetzung (nicht verlangt):</p>
+  <p class="rm">Mitarbeiter(<u>PersNr</u>, Name, Telefon, ↑VorgesetzterPersNr)</p>
+  <p class="rm">Station(<u>StationNr</u>, Name) · Kunde(<u>KundenNr</u>, Name, EMail)</p>
+  <p class="rm">Tour(<u>TourNr</u>, Titel, Datum, LaengeKm, Schwierigkeit, ↑StationNr, ↑PersNr)</p>
+  <p class="rm">Teilnahme(<u>↑TourNr, ↑KundenNr</u>, bezahlt, Bewertung)</p>
+  <p class="bewertung">Bewertung: je Entitätstyp mit Attributen und unterstrichenem Schlüssel 1 P (4 P). Je Beziehung mit korrekter Kardinalität 2 P (8 P): „startet an“ (Station 1 : n Tour), „leitet“ (Mitarbeiter 1 : n Tour), „nimmt teil an“ (Tour n : m Kunde) mit den Attributen bezahlt und Bewertung <strong>an der Raute</strong> (hängen sie an einer Entität: nur 1 P), „ist Vorgesetzter von“ als rekursive 1:n-Beziehung (zwei Linien zwischen Mitarbeiter und Raute). Andere sinnvolle Beziehungsnamen werden akzeptiert.</p>
+  <p class="erklaerung"><em>Erklärung:</em> „bezahlt“ und „Bewertung“ beschreiben weder den Kunden allein (er nimmt an vielen Touren teil) noch die Tour allein (sie hat viele Teilnehmer) – sie gehören zur <em>Teilnahme</em>, also zur Beziehung. Typischer Fehler bei der rekursiven Beziehung: eine zweite Entität „Vorgesetzter“ anlegen. Der Vorgesetzte ist aber selbst ein Mitarbeiter.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-01-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-01-3">
     <div class="kopf">
@@ -1686,6 +1789,93 @@ oder
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S26 Teil 2, Aufgabe 3a (ER-Modell überführen und erweitern)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-01-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-01.3 (22 Punkte)</div>
+  <h4>a) Relationenmodell in 3NF</h4>
+  <figure>
+<svg viewBox="0 0 760 470" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+<rect x="20" y="60" width="170" height="114" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<text x="105.0" y="78" text-anchor="middle" font-weight="bold">Kunde</text>
+<line x1="20" y1="86" x2="190" y2="86" stroke="#222"/>
+<text x="28" y="102">KundenNr (PK)</text>
+<text x="28" y="122">Vorname</text>
+<text x="28" y="142">Nachname</text>
+<text x="28" y="162">Email</text>
+<rect x="290" y="100" width="220" height="194" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<text x="400.0" y="118" text-anchor="middle" font-weight="bold">Buchung</text>
+<line x1="290" y1="126" x2="510" y2="126" stroke="#222"/>
+<text x="298" y="142">BuchungsNr (PK)</text>
+<text x="298" y="162">Buchungsdatum</text>
+<text x="298" y="182">Abholdatum</text>
+<text x="298" y="202">Rueckgabedatum</text>
+<text x="298" y="222">KundenNr (FK)</text>
+<text x="298" y="242">AbholStationNr (FK)</text>
+<text x="298" y="262">RueckgabeStationNr (FK)</text>
+<text x="298" y="282">GutscheinCode (FK, UNIQUE)</text>
+<rect x="20" y="210" width="160" height="94" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<text x="100.0" y="228" text-anchor="middle" font-weight="bold">Station</text>
+<line x1="20" y1="236" x2="180" y2="236" stroke="#222"/>
+<text x="28" y="252">StationNr (PK)</text>
+<text x="28" y="272">Name</text>
+<text x="28" y="292">Ort</text>
+<rect x="320" y="360" width="160" height="94" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<text x="400.0" y="378" text-anchor="middle" font-weight="bold">Gutschein</text>
+<line x1="320" y1="386" x2="480" y2="386" stroke="#222"/>
+<text x="328" y="402">Code (PK)</text>
+<text x="328" y="422">RabattProzent</text>
+<text x="328" y="442">GueltigBis</text>
+<rect x="565" y="120" width="185" height="94" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<text x="657.5" y="138" text-anchor="middle" font-weight="bold">Buchung_Zubehoer</text>
+<line x1="565" y1="146" x2="750" y2="146" stroke="#222"/>
+<text x="573" y="162">BuchungsNr (PK, FK)</text>
+<text x="573" y="182">ZubehoerNr (PK, FK)</text>
+<text x="573" y="202">Anzahl</text>
+<rect x="575" y="330" width="165" height="94" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<text x="657.5" y="348" text-anchor="middle" font-weight="bold">Zubehoer</text>
+<line x1="575" y1="356" x2="740" y2="356" stroke="#222"/>
+<text x="583" y="372">ZubehoerNr (PK)</text>
+<text x="583" y="392">Bezeichnung</text>
+<text x="583" y="412">Tagespreis</text>
+<line x1="190" y1="140" x2="290" y2="140" stroke="#222"/>
+<text x="196" y="134" font-weight="bold">1</text>
+<text x="276" y="134" font-weight="bold">n</text>
+<line x1="180" y1="240" x2="290" y2="240" stroke="#222"/>
+<text x="186" y="234" font-weight="bold">1</text>
+<text x="276" y="234" font-weight="bold">n</text>
+<text x="235" y="256" text-anchor="middle" font-size="11" font-style="italic" fill="#444">Abholung</text>
+<line x1="180" y1="280" x2="290" y2="280" stroke="#222"/>
+<text x="186" y="274" font-weight="bold">1</text>
+<text x="276" y="274" font-weight="bold">n</text>
+<text x="235" y="296" text-anchor="middle" font-size="11" font-style="italic" fill="#444">Rückgabe</text>
+<line x1="400" y1="294" x2="400" y2="360" stroke="#222"/>
+<text x="406" y="310" font-weight="bold">1</text>
+<text x="406" y="354" font-weight="bold">1</text>
+<line x1="510" y1="165" x2="565" y2="165" stroke="#222"/>
+<text x="516" y="159" font-weight="bold">1</text>
+<text x="551" y="159" font-weight="bold">n</text>
+<line x1="657" y1="214" x2="657" y2="330" stroke="#222"/>
+<text x="663" y="230" font-weight="bold">n</text>
+<text x="663" y="324" font-weight="bold">1</text>
+</svg>
+<figcaption>Lösung DB-01.3 a: Relationenmodell in 3NF</figcaption>
+</figure>
+
+  <p class="rm">Kunde(<u>KundenNr</u>, Vorname, Nachname, Email)</p>
+  <p class="rm">Station(<u>StationNr</u>, Name, Ort)</p>
+  <p class="rm">Gutschein(<u>Code</u>, RabattProzent, GueltigBis)</p>
+  <p class="rm">Buchung(<u>BuchungsNr</u>, Buchungsdatum, Abholdatum, Rueckgabedatum, ↑KundenNr, ↑AbholStationNr, ↑RueckgabeStationNr, ↑GutscheinCode)</p>
+  <p class="rm">Zubehoer(<u>ZubehoerNr</u>, Bezeichnung, Tagespreis)</p>
+  <p class="rm">Buchung_Zubehoer(<u>↑BuchungsNr, ↑ZubehoerNr</u>, Anzahl)</p>
+  <p class="bewertung">Bewertung (18 P): je Tabelle mit allen Attributen und PK 1 P (6 P); je Beziehung mit Kardinalität 1 P (6 P: Kunde–Buchung 1:n, Station–Buchung „Abholung“ 1:n, Station–Buchung „Rückgabe“ 1:n, Gutschein–Buchung 1:1, Buchung–Buchung_Zubehoer 1:n, Zubehoer–Buchung_Zubehoer 1:n); je FK 1 P (6 P: KundenNr, AbholStationNr, RueckgabeStationNr, GutscheinCode, BuchungsNr und ZubehoerNr in der Zwischentabelle).<br>
+  Ebenfalls volle Punktzahl: Surrogatschlüssel in Buchung_Zubehoer (dann BuchungsNr + ZubehoerNr als FKs); FK zum Gutschein auf der anderen Seite (Gutschein.BuchungsNr, UNIQUE); Kardinalität Gutschein–Buchung als „1:c“. Wird die m:n-Beziehung nicht aufgelöst, gibt es für diese Beziehung und die zugehörigen FKs keine Punkte.</p>
+  <h4>b)</h4>
+  <p>Der Fremdschlüssel <code>GutscheinCode</code> in Buchung erhält zusätzlich die Einschränkung <strong>UNIQUE</strong>. Damit kann jeder Code höchstens in einer Buchung vorkommen. Er darf NULL sein, weil nicht jede Buchung einen Gutschein hat (mehrere NULL-Werte sind bei UNIQUE erlaubt). Alternativ: FK <code>BuchungsNr</code> in Gutschein mit UNIQUE.</p>
+  <p class="bewertung">Bewertung: UNIQUE auf dem Fremdschlüssel 2 P; nur „Fremdschlüssel“ ohne Eindeutigkeit 1 P.</p>
+  <h4>c)</h4>
+  <p>Die Anzahl hängt von der <strong>Kombination</strong> aus Buchung und Zubehör ab (voll funktional abhängig von BuchungsNr <em>und</em> ZubehoerNr). In Buchung müsste eine Buchung mit mehreren Zubehörteilen mehrere Anzahlen in einem Feld speichern (Verstoß gegen 1NF); in Zubehör gälte die Anzahl für alle Buchungen gleichzeitig, obwohl jede Buchung eine andere Anzahl hat. Sie gehört deshalb in die Zwischentabelle Buchung_Zubehoer.</p>
+  <p class="bewertung">Bewertung: je stimmige Begründung (Buchung / Zubehör) 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Die Abhol- und die Rückgabestation sind <strong>zwei verschiedene Beziehungen</strong> zwischen denselben Tabellen – das gibt zwei FKs mit sprechenden Namen und zwei Linien. Wer nur einen StationNr-Fremdschlüssel einträgt, verliert eine Beziehung und einen FK. Die 1:1-Beziehung zum Gutschein wird wie eine 1:n umgesetzt, nur dass der FK eindeutig sein muss.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-01-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ======================= DB-02 ======================= -->
   <h3 id="a-02">DB-02 · Normalisierung</h3>
@@ -1707,6 +1897,24 @@ oder
     <div class="teilaufgabe"><span class="tp">1 P</span>c) Begründen Sie, warum eine Tabelle in der 1NF, deren Primärschlüssel aus genau einem Attribut besteht, immer auch in der 2NF ist.</div>
     <div class="antwort z3"></div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-02-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-02.1 (6 Punkte)</div>
+  <h4>a)</h4>
+  <p>Ein Attribut B ist <strong>funktional abhängig</strong> von A (A → B), wenn zu jedem Wert von A genau ein Wert von B gehört. Beispiel aus Kunde: <strong>KundenNr → Nachname</strong> – zur KundenNr 1001 gehört immer der Nachname „Hoffmann“ (ebenso KundenNr → Email).</p>
+  <p class="bewertung">Bewertung: Erläuterung 1 P, passendes Beispiel 1 P (z. B. auch KundenNr → Ort).</p>
+  <h4>b)</h4>
+  <table class="kompakt">
+    <tr><th>Nr.</th><th>verletzte NF</th><th>Grund</th></tr>
+    <tr><td>1</td><td><strong>1NF</strong></td><td>Feld nicht atomar (zwei Werte in einem Feld)</td></tr>
+    <tr><td>2</td><td><strong>3NF</strong></td><td>transitive Abhängigkeit AusleiheNr → KundenNr → Nachname</td></tr>
+    <tr><td>3</td><td><strong>2NF</strong></td><td>Bezeichnung hängt nur von einem Teil des zusammengesetzten Schlüssels ab</td></tr>
+  </table>
+  <p class="bewertung">Bewertung: je richtige Zuordnung 1 P.</p>
+  <h4>c)</h4>
+  <p>Die 2NF ist verletzt, wenn ein Nichtschlüsselattribut nur von einem <em>Teil</em> des Primärschlüssels abhängt. Ein einspaltiger Schlüssel hat keinen echten Teil – jedes Nichtschlüsselattribut ist also automatisch voll funktional vom gesamten Schlüssel abhängig.</p>
+  <p class="bewertung">Bewertung: 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Merkhilfe für b): Mehrere Werte in einem Feld → immer 1NF. Hängt ein Attribut nur von einem <em>Teil</em> des zusammengesetzten Schlüssels ab → 2NF. Hängt es von einem <em>anderen Nichtschlüsselattribut</em> ab → 3NF. Die Verwechslung von 2NF und 3NF ist der häufigste Fehler.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-02-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-02-2">
     <div class="kopf">
@@ -1722,6 +1930,26 @@ oder
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W25 Teil 1, Aufgabe 4a/4b; S23 Teil 1, Aufgabe 4ca</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-02-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-02.2 (12 Punkte)</div>
+  <h4>a)</h4>
+  <p><strong>Redundanz</strong> bedeutet, dass dieselbe Information mehrfach gespeichert ist. Beispiel: Name und Telefonnummer von Tom Weber (PersNr 12) stehen in drei Zeilen; „Hauptbahnhof, Freiburg“ zur StationNr 1 steht in vier Zeilen; die Dauer „6,0“ steht bei jeder Frühschicht.</p>
+  <p class="bewertung">Bewertung: Erläuterung 1 P, konkretes Beispiel aus Anlage 5 1 P.</p>
+  <h4>b)</h4>
+  <ul>
+    <li><strong>Einfügeanomalie:</strong> Die neue Station 5 „Schauinsland“ (Oberried) kann nicht erfasst werden, solange dort keine Schicht geplant ist, weil jede Zeile ein Datum und eine PersNr (Schlüssel) braucht. Ebenso lässt sich ein neuer Mitarbeiter ohne Schicht nicht speichern.</li>
+    <li><strong>Änderungsanomalie:</strong> Ändert sich die Telefonnummer von Tom Weber, muss sie in allen drei Zeilen geändert werden. Wird eine Zeile vergessen, hat PersNr 12 zwei verschiedene Telefonnummern – die Daten sind inkonsistent. (Ebenso: Spätschicht wird auf 8 Stunden verlängert.)</li>
+    <li><strong>Löschanomalie:</strong> Wird die einzige Schicht von Lisa Frey (02.09.2026, Kaiserstuhl) gelöscht, gehen auch ihre Mitarbeiterdaten (Name, Telefon) und die einzigen Angaben zur Station 4 Kaiserstuhl/Vogtsburg verloren.</li>
+  </ul>
+  <p class="bewertung">Bewertung: je Anomalie 2 P (1 P Erläuterung, 1 P konkretes Beispiel aus Anlage 5).</p>
+  <h4>c)</h4>
+  <p class="rm">Mitarbeiter(<u>PersNr</u>, Vorname, Nachname, Telefon)</p>
+  <p class="rm">Station(<u>StationNr</u>, Name, Ort)</p>
+  <p class="rm">Schicht(<u>Schichtart</u>, Stunden)</p>
+  <p class="rm">Einsatz(<u>Datum, ↑PersNr</u>, ↑StationNr, ↑Schichtart)</p>
+  <p class="bewertung">Bewertung: je Tabelle mit korrektem PK/FK 1 P. Volle Punktzahl für Mitarbeiter nur, wenn der Name in Vor- und Nachname zerlegt ist. Statt Schichtart als PK auch SchichtNr möglich; Stunden dürfen alternativ aus Beginn/Ende der Schicht berechnet werden.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Schlüssel der Liste ist (Datum, PersNr), da ein Mitarbeiter höchstens eine Schicht pro Tag hat. PersNr → Name, Telefon ist eine Teilabhängigkeit (2NF-Verstoß); StationNr → Station, Ort und Schicht → Stunden sind transitive Abhängigkeiten (3NF-Verstöße). „Weber, Tom“ ist nicht atomar (1NF).</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-02-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-02-3">
     <div class="kopf">
@@ -1735,6 +1963,92 @@ oder
     <div class="zeichenflaeche gross"></div>
     <p class="quelle">Angelehnt an: W21 Teil 2, Aufgabe 3; S22 Teil 2, Aufgabe 3; W25 Teil 1, Aufgabe 4c (Datenmodell in 3NF aus Beleg bzw. Beispieldaten)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-02-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-02.3 (20 Punkte)</div>
+  <h4>a)</h4>
+  <p>Nicht gespeichert werden die <strong>berechneten Angaben</strong>: Positionsbetrag „Gesamt“ (Menge × Einzelpreis), Nettobetrag (Summe der Positionen), Umsatzsteuerbetrag (Netto × 19 %) und Rechnungsbetrag (Netto + USt). Sie lassen sich jederzeit aus den gespeicherten Werten berechnen; speichert man sie, entsteht Redundanz mit der Gefahr widersprüchlicher Werte.</p>
+  <p class="bewertung">Bewertung: zwei berechnete Angaben 1 P, Begründung 1 P.</p>
+  <h4>b) Relationenmodell in 3NF</h4>
+  <figure>
+<svg viewBox="0 0 760 450" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+<rect x="10" y="20" width="175" height="214" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<text x="97.5" y="38" text-anchor="middle" font-weight="bold">Kunde</text>
+<line x1="10" y1="46" x2="185" y2="46" stroke="#222"/>
+<text x="18" y="62">KundenNr (PK)</text>
+<text x="18" y="82">Anrede</text>
+<text x="18" y="102">Vorname</text>
+<text x="18" y="122">Nachname</text>
+<text x="18" y="142">Strasse</text>
+<text x="18" y="162">Hausnummer</text>
+<text x="18" y="182">PLZ</text>
+<text x="18" y="202">Ort</text>
+<text x="18" y="222">Telefon</text>
+<rect x="10" y="300" width="195" height="134" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<text x="107.5" y="318" text-anchor="middle" font-weight="bold">Kundenfahrrad</text>
+<line x1="10" y1="326" x2="205" y2="326" stroke="#222"/>
+<text x="18" y="342">KundenfahrradNr (PK)</text>
+<text x="18" y="362">Rahmennummer</text>
+<text x="18" y="382">Hersteller</text>
+<text x="18" y="402">Modell</text>
+<text x="18" y="422">KundenNr (FK)</text>
+<rect x="290" y="110" width="165" height="94" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<text x="372.5" y="128" text-anchor="middle" font-weight="bold">Mechaniker</text>
+<line x1="290" y1="136" x2="455" y2="136" stroke="#222"/>
+<text x="298" y="152">MechanikerNr (PK)</text>
+<text x="298" y="172">Vorname</text>
+<text x="298" y="192">Nachname</text>
+<rect x="270" y="300" width="205" height="134" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<text x="372.5" y="318" text-anchor="middle" font-weight="bold">Rechnung</text>
+<line x1="270" y1="326" x2="475" y2="326" stroke="#222"/>
+<text x="278" y="342">RechnungsNr (PK)</text>
+<text x="278" y="362">Rechnungsdatum</text>
+<text x="278" y="382">Zahlungsart</text>
+<text x="278" y="402">KundenfahrradNr (FK)</text>
+<text x="278" y="422">MechanikerNr (FK)</text>
+<rect x="560" y="90" width="180" height="114" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<text x="650.0" y="108" text-anchor="middle" font-weight="bold">Artikel</text>
+<line x1="560" y1="116" x2="740" y2="116" stroke="#222"/>
+<text x="568" y="132">ArtikelNr (PK)</text>
+<text x="568" y="152">Bezeichnung</text>
+<text x="568" y="172">Einheit</text>
+<text x="568" y="192">Preis</text>
+<rect x="550" y="300" width="200" height="134" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<text x="650.0" y="318" text-anchor="middle" font-weight="bold">Rechnungsposition</text>
+<line x1="550" y1="326" x2="750" y2="326" stroke="#222"/>
+<text x="558" y="342">RechnungsNr (PK, FK)</text>
+<text x="558" y="362">PosNr (PK)</text>
+<text x="558" y="382">ArtikelNr (FK)</text>
+<text x="558" y="402">Menge</text>
+<text x="558" y="422">Einzelpreis</text>
+<line x1="97" y1="234" x2="97" y2="300" stroke="#222"/>
+<text x="103" y="250" font-weight="bold">1</text>
+<text x="103" y="294" font-weight="bold">n</text>
+<line x1="205" y1="370" x2="270" y2="370" stroke="#222"/>
+<text x="211" y="364" font-weight="bold">1</text>
+<text x="256" y="364" font-weight="bold">n</text>
+<line x1="372" y1="204" x2="372" y2="300" stroke="#222"/>
+<text x="378" y="220" font-weight="bold">1</text>
+<text x="378" y="294" font-weight="bold">n</text>
+<line x1="475" y1="370" x2="550" y2="370" stroke="#222"/>
+<text x="481" y="364" font-weight="bold">1</text>
+<text x="536" y="364" font-weight="bold">n</text>
+<line x1="650" y1="204" x2="650" y2="300" stroke="#222"/>
+<text x="656" y="220" font-weight="bold">1</text>
+<text x="656" y="294" font-weight="bold">n</text>
+</svg>
+<figcaption>Lösung DB-02.3 b: Relationenmodell „Werkstattrechnung“ in 3NF</figcaption>
+</figure>
+
+  <p class="rm">Kunde(<u>KundenNr</u>, Anrede, Vorname, Nachname, Strasse, Hausnummer, PLZ, Ort, Telefon)</p>
+  <p class="rm">Kundenfahrrad(<u>KundenfahrradNr</u>, Rahmennummer, Hersteller, Modell, ↑KundenNr)</p>
+  <p class="rm">Mechaniker(<u>MechanikerNr</u>, Vorname, Nachname)</p>
+  <p class="rm">Rechnung(<u>RechnungsNr</u>, Rechnungsdatum, Zahlungsart, ↑KundenfahrradNr, ↑MechanikerNr)</p>
+  <p class="rm">Artikel(<u>ArtikelNr</u>, Bezeichnung, Einheit, Preis)</p>
+  <p class="rm">Rechnungsposition(<u>↑RechnungsNr, PosNr</u>, ↑ArtikelNr, Menge, Einzelpreis)</p>
+  <p class="bewertung">Bewertung (18 P): je Tabelle mit vollständigen Attributen und PK 1 P (6 P); je Beziehung mit Kardinalität 1 P (5 P); je FK 1 P (5 P); Einzelpreis (Preis zum Rechnungszeitpunkt) in der Positionstabelle 1 P; Name und Anschrift atomar zerlegt 1 P.<br>
+  Ebenfalls korrekt: PK der Position (RechnungsNr, ArtikelNr); Rahmennummer als PK von Kundenfahrrad; zusätzliche Tabellen Hersteller, Zahlungsart, Einheit oder Ort(PLZ, Ort); USt-Satz als Attribut von Rechnung oder Artikel; KundenNr zusätzlich in Rechnung, wenn begründet (z. B. Rechnungsempfänger kann vom Fahrradbesitzer abweichen).</p>
+  <p class="erklaerung"><em>Erklärung:</em> Aus dem Gespräch folgt: Kunde 1:n Fahrrad, Fahrrad 1:n Rechnung, Mechaniker 1:n Rechnung. Rechnung und Artikel stehen in einer m:n-Beziehung, die über die Rechnungsposition (mit Menge und Einzelpreis) aufgelöst wird. Arbeitsleistungen (L-100, Einheit Std.) sind einfach Artikel. Der Einzelpreis in der Position ist trotz Artikel.Preis <strong>keine Redundanz</strong>, weil er den historischen Preis festhält.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-02-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ======================= DB-03 ======================= -->
   <h3 id="a-03">DB-03 · SQL: SELECT mit JOIN</h3>
@@ -1753,6 +2067,42 @@ oder
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W22 Teil 2, Aufgabe 4c (LIKE-Muster PLZ); S23 Teil 2, Aufgabe 4a (YEAR, IS NULL)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-03-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-03.1 (6 Punkte)</div>
+  <h4>a)</h4>
+<pre class="sql">SELECT KundenNr, Vorname, Nachname
+FROM   Kunde
+WHERE  Email IS NULL;</pre>
+  <table class="daten ergebnis">
+<tr><th>KundenNr</th><th>Vorname</th><th>Nachname</th></tr>
+<tr><td>1003</td><td>Mira</td><td>Schulze</td></tr>
+<tr><td>1007</td><td>Emma</td><td>Vogel</td></tr>
+</table>
+  <h4>b)</h4>
+<pre class="sql">SELECT FahrradNr, Modell, Kaufpreis
+FROM   Fahrrad
+WHERE  YEAR(Kaufdatum) = 2024
+ORDER BY Kaufpreis DESC, FahrradNr;</pre>
+  <table class="daten ergebnis">
+<tr><th>FahrradNr</th><th>Modell</th><th>Kaufpreis</th></tr>
+<tr><td>107</td><td>Cargo L2</td><td>5390.00</td></tr>
+<tr><td>103</td><td>Tour T7</td><td>3199.00</td></tr>
+<tr><td>104</td><td>Tour T7</td><td>3199.00</td></tr>
+</table>
+  <h4>c)</h4>
+<pre class="sql">SELECT KundenNr, Nachname, PLZ, Ort
+FROM   Kunde
+WHERE  PLZ LIKE '791%';</pre>
+  <table class="daten ergebnis">
+<tr><th>KundenNr</th><th>Nachname</th><th>PLZ</th><th>Ort</th></tr>
+<tr><td>1002</td><td>Albrecht</td><td>79102</td><td>Freiburg</td></tr>
+<tr><td>1005</td><td>Keller</td><td>79100</td><td>Freiburg</td></tr>
+<tr><td>1009</td><td>Krüger</td><td>79194</td><td>Gundelfingen</td></tr>
+<tr><td>1010</td><td>Neumann</td><td>79108</td><td>Freiburg</td></tr>
+</table>
+  <p class="bewertung">Bewertung: je Teilaufgabe SELECT/FROM 1 P, WHERE (bei b mit ORDER BY) 1 P. Alternativ b) <code>WHERE Kaufdatum BETWEEN '2024-01-01' AND '2024-12-31'</code>.</p>
+  <p class="erklaerung"><em>Erklärung:</em> <code>Email = NULL</code> liefert nie ein Ergebnis. LIKE funktioniert, weil PLZ als Text gespeichert ist (vgl. Kunde 1008 mit PLZ 01067).</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-03-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-03-2">
     <div class="kopf">
@@ -1765,6 +2115,46 @@ oder
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W21 Teil 2, Aufgabe 4e (Join über mehrere Tabellen); S22 Teil 2, Aufgabe 4bc (LEFT JOIN)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-03-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-03.2 (9 Punkte)</div>
+  <h4>a)</h4>
+<pre class="sql">SELECT a.AusleiheNr, a.Beginn, k.Nachname, f.Modell
+FROM   Ausleihe a
+  INNER JOIN Kunde k   ON k.KundenNr  = a.KundenNr
+  INNER JOIN Fahrrad f ON f.FahrradNr = a.FahrradNr
+WHERE  a.Beginn BETWEEN '2026-07-01' AND '2026-08-31'
+ORDER BY a.Beginn;</pre>
+  <table class="daten ergebnis">
+<tr><th>AusleiheNr</th><th>Beginn</th><th>Nachname</th><th>Modell</th></tr>
+<tr><td>5009</td><td>2026-07-18</td><td>Hoffmann</td><td>Cargo L2</td></tr>
+<tr><td>5010</td><td>2026-08-08</td><td>Brandt</td><td>Trail X9</td></tr>
+<tr><td>5011</td><td>2026-08-22</td><td>Vogel</td><td>Urban C5</td></tr>
+</table>
+  <p class="bewertung">Bewertung: SELECT-Liste 1 P, Join Kunde 1 P, Join Fahrrad 1 P, Zeitraumbedingung 1 P, ORDER BY 1 P. Alternativ: <code>WHERE YEAR(a.Beginn) = 2026 AND MONTH(a.Beginn) IN (7, 8)</code> oder Join-Bedingungen im WHERE (<code>FROM Ausleihe a, Kunde k, Fahrrad f WHERE …</code>) – getestet, gleiches Ergebnis.</p>
+  <h4>b)</h4>
+<pre class="sql">SELECT f.FahrradNr, f.Modell, w.Datum, w.Art
+FROM   Fahrrad f
+  LEFT JOIN Wartung w ON w.FahrradNr = f.FahrradNr
+ORDER BY f.FahrradNr, w.Datum;</pre>
+  <table class="daten ergebnis">
+<tr><th>FahrradNr</th><th>Modell</th><th>Datum</th><th>Art</th></tr>
+<tr><td>101</td><td>Urban C5</td><td>2025-11-20</td><td>Inspektion</td></tr>
+<tr><td>102</td><td>Urban C5</td><td>NULL</td><td>NULL</td></tr>
+<tr><td>103</td><td>Tour T7</td><td>2026-02-03</td><td>Inspektion</td></tr>
+<tr><td>104</td><td>Tour T7</td><td>2026-09-15</td><td>Reifen</td></tr>
+<tr><td>105</td><td>Trail X9</td><td>2025-11-25</td><td>Bremsen</td></tr>
+<tr><td>105</td><td>Trail X9</td><td>2026-04-20</td><td>Akku-Check</td></tr>
+<tr><td>105</td><td>Trail X9</td><td>2026-09-30</td><td>Inspektion</td></tr>
+<tr><td>106</td><td>Trail X9</td><td>NULL</td><td>NULL</td></tr>
+<tr><td>107</td><td>Cargo L2</td><td>2026-01-14</td><td>Inspektion</td></tr>
+<tr><td>107</td><td>Cargo L2</td><td>2026-07-01</td><td>Bremsen</td></tr>
+<tr><td>108</td><td>Cargo L2</td><td>NULL</td><td>NULL</td></tr>
+<tr><td>109</td><td>Kiddy 20</td><td>2026-05-07</td><td>Reifen</td></tr>
+<tr><td>110</td><td>Urban C6</td><td>NULL</td><td>NULL</td></tr>
+</table>
+  <p class="bewertung">Bewertung: SELECT 1 P, LEFT JOIN mit Fahrrad als linker Tabelle 2 P (INNER JOIN: 0 P für diesen Teil, da 102, 106, 108 und 110 fehlen), ORDER BY 1 P. <code>Wartung w RIGHT JOIN Fahrrad f</code> ist gleichwertig.</p>
+  <p class="erklaerung"><em>Erklärung:</em> „Auch Fahrräder, die nie gewartet wurden“ → LEFT JOIN. Fahrrad 105 erscheint dreimal, weil es drei Wartungen hat.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-03-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-03-3">
     <div class="kopf">
@@ -1780,6 +2170,72 @@ oder
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W24 Teil 2, Aufgabe 4c (Datumsdifferenz); W22 Teil 2, Aufgabe 4a und S26 Teil 2, Aufgabe 4b (LEFT JOIN)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-03-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-03.3 (14 Punkte)</div>
+  <h4>a)</h4>
+<pre class="sql">SELECT a.AusleiheNr, k.Nachname, f.Modell, kat.Bezeichnung,
+       DATEDIFF(a.Ende, a.Beginn) + 1 AS Mietdauer,
+       kat.Tagespreis,
+       (DATEDIFF(a.Ende, a.Beginn) + 1) * kat.Tagespreis AS Sollbetrag
+FROM   Ausleihe a
+  INNER JOIN Kunde k       ON k.KundenNr      = a.KundenNr
+  INNER JOIN Fahrrad f     ON f.FahrradNr     = a.FahrradNr
+  INNER JOIN Kategorie kat ON kat.KategorieNr = f.KategorieNr
+WHERE  YEAR(a.Beginn) = 2026
+  AND  a.Ende IS NOT NULL
+ORDER BY Sollbetrag DESC;</pre>
+  <table class="daten ergebnis">
+<tr><th>AusleiheNr</th><th>Nachname</th><th>Modell</th><th>Bezeichnung</th><th>Mietdauer</th><th>Tagespreis</th><th>Sollbetrag</th></tr>
+<tr><td>5008</td><td>Brandt</td><td>Tour T7</td><td>Trekking-E-Bike</td><td>7</td><td>30.00</td><td>210.00</td></tr>
+<tr><td>5006</td><td>Keller</td><td>Cargo L2</td><td>E-Lastenrad</td><td>3</td><td>45.00</td><td>135.00</td></tr>
+<tr><td>5007</td><td>Albrecht</td><td>Trail X9</td><td>E-Mountainbike</td><td>3</td><td>39.00</td><td>117.00</td></tr>
+<tr><td>5010</td><td>Brandt</td><td>Trail X9</td><td>E-Mountainbike</td><td>2</td><td>39.00</td><td>78.00</td></tr>
+<tr><td>5011</td><td>Vogel</td><td>Urban C5</td><td>City-E-Bike</td><td>3</td><td>25.00</td><td>75.00</td></tr>
+<tr><td>5004</td><td>Hoffmann</td><td>Tour T7</td><td>Trekking-E-Bike</td><td>2</td><td>30.00</td><td>60.00</td></tr>
+<tr><td>5009</td><td>Hoffmann</td><td>Cargo L2</td><td>E-Lastenrad</td><td>1</td><td>45.00</td><td>45.00</td></tr>
+<tr><td>5005</td><td>Schulze</td><td>Kiddy 20</td><td>Kinderrad</td><td>1</td><td>12.00</td><td>12.00</td></tr>
+</table>
+  <p class="bewertung">Bewertung: SELECT-Liste mit Aliasen 1 P, Mietdauer mit +1 1 P, Sollbetrag 1 P, Joins über vier Tabellen 1 P, WHERE (2026 und abgeschlossen) 1 P, ORDER BY 1 P. Mit IHK-Belegsatz-Syntax ebenso richtig: <code>DATEDIFF(DAY, a.Beginn, a.Ende) + 1</code>. Ohne „+ 1“ 0 P für die Mietdauer.</p>
+  <p class="erklaerung"><em>Erklärung:</em> DATEDIFF liefert die Differenz (Ausleihe 5009: 0 Tage), deshalb +1. Die Kontrolle ergibt: Alle Sollbeträge stimmen mit den gespeicherten Beträgen überein. Die laufende Ausleihe 5012 fällt durch <code>Ende IS NOT NULL</code> heraus (ohne die Bedingung stünde sie mit Mietdauer NULL im Ergebnis).</p>
+  <h4>b)</h4>
+<pre class="sql">SELECT k.KundenNr, k.Nachname, a.AusleiheNr, a.Beginn
+FROM   Kunde k
+  LEFT JOIN Ausleihe a ON a.KundenNr = k.KundenNr
+                      AND YEAR(a.Beginn) = 2026
+ORDER BY k.KundenNr, a.Beginn;</pre>
+  <table class="daten ergebnis">
+<tr><th>KundenNr</th><th>Nachname</th><th>AusleiheNr</th><th>Beginn</th></tr>
+<tr><td>1001</td><td>Hoffmann</td><td>5004</td><td>2026-03-21</td></tr>
+<tr><td>1001</td><td>Hoffmann</td><td>5009</td><td>2026-07-18</td></tr>
+<tr><td>1002</td><td>Albrecht</td><td>5007</td><td>2026-05-30</td></tr>
+<tr><td>1003</td><td>Schulze</td><td>5005</td><td>2026-04-11</td></tr>
+<tr><td>1004</td><td>Wagner</td><td>NULL</td><td>NULL</td></tr>
+<tr><td>1005</td><td>Keller</td><td>5006</td><td>2026-05-01</td></tr>
+<tr><td>1005</td><td>Keller</td><td>5012</td><td>2026-10-08</td></tr>
+<tr><td>1006</td><td>Brandt</td><td>5008</td><td>2026-06-14</td></tr>
+<tr><td>1006</td><td>Brandt</td><td>5010</td><td>2026-08-08</td></tr>
+<tr><td>1007</td><td>Vogel</td><td>5011</td><td>2026-08-22</td></tr>
+<tr><td>1008</td><td>Roth</td><td>NULL</td><td>NULL</td></tr>
+<tr><td>1009</td><td>Krüger</td><td>NULL</td><td>NULL</td></tr>
+<tr><td>1010</td><td>Neumann</td><td>NULL</td><td>NULL</td></tr>
+</table>
+  <p class="bewertung">Bewertung: SELECT/FROM Kunde 1 P, LEFT JOIN 2 P, Jahresbedingung in der ON-Klausel 1 P, ORDER BY 1 P. Statt YEAR auch <code>AND a.Beginn &gt;= '2026-01-01' AND a.Beginn &lt; '2027-01-01'</code>.</p>
+  <h4>c)</h4>
+  <p>Es fehlen <strong>1004 Wagner, 1008 Roth, 1009 Krüger und 1010 Neumann</strong>. Die WHERE-Klausel wird erst <em>nach</em> dem Join ausgewertet: Für 1008, 1009 und 1010 erzeugt der LEFT JOIN eine Zeile mit NULL in den Ausleihe-Spalten; <code>YEAR(NULL) = 2026</code> ist nicht wahr, die Zeile wird verworfen. Für 1004 entsteht eine Zeile mit der Ausleihe 5003 aus 2025, die die Bedingung ebenfalls nicht erfüllt. Der LEFT JOIN wirkt dadurch wie ein INNER JOIN.</p>
+  <table class="daten ergebnis">
+<tr><th>KundenNr</th><th>Nachname</th><th>AusleiheNr</th><th>Beginn</th></tr>
+<tr><td>1001</td><td>Hoffmann</td><td>5004</td><td>2026-03-21</td></tr>
+<tr><td>1001</td><td>Hoffmann</td><td>5009</td><td>2026-07-18</td></tr>
+<tr><td>1002</td><td>Albrecht</td><td>5007</td><td>2026-05-30</td></tr>
+<tr><td>1003</td><td>Schulze</td><td>5005</td><td>2026-04-11</td></tr>
+<tr><td>1005</td><td>Keller</td><td>5006</td><td>2026-05-01</td></tr>
+<tr><td>1005</td><td>Keller</td><td>5012</td><td>2026-10-08</td></tr>
+<tr><td>1006</td><td>Brandt</td><td>5008</td><td>2026-06-14</td></tr>
+<tr><td>1006</td><td>Brandt</td><td>5010</td><td>2026-08-08</td></tr>
+<tr><td>1007</td><td>Vogel</td><td>5011</td><td>2026-08-22</td></tr>
+</table>
+  <p class="bewertung">Bewertung: fehlende Kunden genannt 1 P (alle vier; auch Wagner, der nur 2025 ausgeliehen hat), Begründung (WHERE nach dem Join, NULL bzw. anderes Jahr erfüllt Bedingung nicht → wie INNER JOIN) 2 P.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-03-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ======================= DB-04 ======================= -->
   <h3 id="a-04">DB-04 · SQL: Aggregatfunktionen, GROUP BY, HAVING</h3>
@@ -1796,6 +2252,29 @@ oder
     <div class="teilaufgabe"><span class="tp">2 P</span>c) Geben Sie das Ergebnis der Abfrage <code>SELECT COUNT(*), COUNT(Kosten) FROM Wartung;</code> an und begründen Sie den Unterschied.</div>
     <div class="antwort z3"></div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-04-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-04.1 (6 Punkte)</div>
+  <h4>a)</h4>
+<pre class="sql">SELECT COUNT(*) AS Anzahl, SUM(Kilometer) AS SummeKm, AVG(Kilometer) AS DurchschnittKm
+FROM   Ausleihe
+WHERE  Ende IS NOT NULL;</pre>
+  <table class="daten ergebnis">
+<tr><th>Anzahl</th><th>SummeKm</th><th>DurchschnittKm</th></tr>
+<tr><td>11</td><td>885</td><td>80.4545</td></tr>
+</table>
+  <p class="bewertung">Bewertung: Aggregatfunktionen 1 P, Bedingung „abgeschlossen“ 1 P. Statt <code>COUNT(*)</code> mit WHERE auch <code>COUNT(Kilometer)</code> ohne WHERE richtig.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Ohne WHERE liefert <code>COUNT(*)</code> 12 (inklusive der laufenden Ausleihe 5012), SUM und AVG bleiben gleich, weil sie NULL ignorieren. MySQL zeigt AVG mit vier Nachkommastellen (80.4545).</p>
+  <h4>b)</h4>
+  <p><strong>WHERE</strong> filtert einzelne Datensätze <em>vor</em> der Gruppierung und darf keine Aggregatfunktionen enthalten. <strong>HAVING</strong> filtert die Gruppen <em>nach</em> dem GROUP BY und kann sich auf Aggregatfunktionen beziehen (z. B. <code>HAVING COUNT(*) &gt;= 2</code>).</p>
+  <p class="bewertung">Bewertung: je Klausel 1 P.</p>
+  <h4>c)</h4>
+  <table class="daten ergebnis">
+<tr><th>COUNT(*)</th><th>COUNT(Kosten)</th></tr>
+<tr><td>9</td><td>8</td></tr>
+</table>
+  <p><code>COUNT(*)</code> zählt alle 9 Zeilen, <code>COUNT(Kosten)</code> nur die Zeilen, in denen Kosten nicht NULL ist. Die Wartung 9 (noch nicht abgerechnet) hat Kosten = NULL.</p>
+  <p class="bewertung">Bewertung: Ergebnis 1 P, Begründung 1 P.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-04-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-04-2">
     <div class="kopf">
@@ -1808,6 +2287,41 @@ oder
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W25 Teil 2, Aufgabe 4c (HAVING) und 4e (SUM je Kategorie)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-04-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-04.2 (10 Punkte)</div>
+  <h4>a)</h4>
+<pre class="sql">SELECT kat.Bezeichnung, COUNT(*) AS Anzahl, SUM(a.Betrag) AS Umsatz
+FROM   Ausleihe a
+  INNER JOIN Fahrrad f     ON f.FahrradNr     = a.FahrradNr
+  INNER JOIN Kategorie kat ON kat.KategorieNr = f.KategorieNr
+GROUP BY kat.KategorieNr, kat.Bezeichnung
+ORDER BY Umsatz DESC;</pre>
+  <table class="daten ergebnis">
+<tr><th>Bezeichnung</th><th>Anzahl</th><th>Umsatz</th></tr>
+<tr><td>E-Lastenrad</td><td>3</td><td>315.00</td></tr>
+<tr><td>Trekking-E-Bike</td><td>3</td><td>270.00</td></tr>
+<tr><td>E-Mountainbike</td><td>3</td><td>234.00</td></tr>
+<tr><td>City-E-Bike</td><td>2</td><td>125.00</td></tr>
+<tr><td>Kinderrad</td><td>1</td><td>12.00</td></tr>
+</table>
+  <p class="bewertung">Bewertung: Joins 2 P, COUNT und SUM 1 P, GROUP BY 1 P, ORDER BY 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Tandem hat keine Ausleihen und erscheint wegen des INNER JOIN nicht – genau so verlangt. Bei Trekking zählt die laufende Ausleihe 5012 mit (Anzahl 3), ihr Betrag NULL wird von SUM ignoriert.</p>
+  <h4>b)</h4>
+<pre class="sql">SELECT k.KundenNr, k.Vorname, k.Nachname, COUNT(*) AS Anzahl
+FROM   Kunde k
+  INNER JOIN Ausleihe a ON a.KundenNr = k.KundenNr
+GROUP BY k.KundenNr, k.Vorname, k.Nachname
+HAVING COUNT(*) &gt;= 2
+ORDER BY Anzahl DESC, k.Nachname;</pre>
+  <table class="daten ergebnis">
+<tr><th>KundenNr</th><th>Vorname</th><th>Nachname</th><th>Anzahl</th></tr>
+<tr><td>1001</td><td>Lena</td><td>Hoffmann</td><td>3</td></tr>
+<tr><td>1002</td><td>Jonas</td><td>Albrecht</td><td>2</td></tr>
+<tr><td>1006</td><td>Tim</td><td>Brandt</td><td>2</td></tr>
+<tr><td>1005</td><td>Sofia</td><td>Keller</td><td>2</td></tr>
+</table>
+  <p class="bewertung">Bewertung: Join 1 P, GROUP BY mit allen Nicht-Aggregat-Spalten 1 P, HAVING 2 P (Bedingung im WHERE: 0 P), ORDER BY 1 P.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-04-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-04-3">
     <div class="kopf">
@@ -1829,6 +2343,57 @@ GROUP BY k.KundenNr;</pre>
     <div class="antwort z8"></div>
     <p class="quelle">Angelehnt an: S22 Teil 2, Aufgabe 4bc (LEFT JOIN mit COUNT); W21 Teil 2, Aufgabe 4d (HAVING)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-04-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-04.3 (16 Punkte)</div>
+  <h4>a)</h4>
+<pre class="sql">SELECT s.StationNr, s.Name, COUNT(f.FahrradNr) AS AnzahlFahrraeder
+FROM   Station s
+  LEFT JOIN Fahrrad f ON f.StationNr = s.StationNr
+GROUP BY s.StationNr, s.Name
+ORDER BY s.StationNr;</pre>
+  <table class="daten ergebnis">
+<tr><th>StationNr</th><th>Name</th><th>AnzahlFahrraeder</th></tr>
+<tr><td>1</td><td>Hauptbahnhof</td><td>3</td></tr>
+<tr><td>2</td><td>Messe</td><td>2</td></tr>
+<tr><td>3</td><td>Titisee</td><td>3</td></tr>
+<tr><td>4</td><td>Kaiserstuhl</td><td>2</td></tr>
+<tr><td>5</td><td>Schauinsland</td><td>0</td></tr>
+</table>
+  <p class="bewertung">Bewertung: LEFT JOIN mit Station links 2 P, <code>COUNT(f.FahrradNr)</code> 2 P (mit <code>COUNT(*)</code> nur 1 P, weil Schauinsland dann 1 statt 0 erhält), GROUP BY 1 P. ORDER BY nicht verlangt.</p>
+  <h4>b)</h4>
+<pre class="sql">SELECT f.FahrradNr, f.Modell, COUNT(*) AS AnzahlWartungen, SUM(w.Kosten) AS Kosten
+FROM   Fahrrad f
+  INNER JOIN Wartung w ON w.FahrradNr = f.FahrradNr
+WHERE  YEAR(w.Datum) = 2026
+GROUP BY f.FahrradNr, f.Modell
+HAVING SUM(w.Kosten) &gt; 50
+ORDER BY Kosten DESC;</pre>
+  <table class="daten ergebnis">
+<tr><th>FahrradNr</th><th>Modell</th><th>AnzahlWartungen</th><th>Kosten</th></tr>
+<tr><td>107</td><td>Cargo L2</td><td>2</td><td>287.00</td></tr>
+<tr><td>103</td><td>Tour T7</td><td>1</td><td>89.00</td></tr>
+<tr><td>104</td><td>Tour T7</td><td>1</td><td>55.00</td></tr>
+</table>
+  <p class="bewertung">Bewertung: Join 1 P, WHERE mit Jahr 1 P, COUNT und SUM 1 P, GROUP BY 1 P, HAVING 1 P, ORDER BY 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Ohne HAVING kämen noch 109 (42.90) und 105 (2 Wartungen, Summe 35.00 – die Inspektion vom 30.09. hat Kosten NULL) hinzu. Die Jahresbedingung betrifft Einzelzeilen → WHERE; „Summe über 50 €“ betrifft die Gruppe → HAVING.</p>
+  <h4>c)</h4>
+  <p><strong>Fehler 1:</strong> Die Aggregatfunktion <code>COUNT</code> steht in der WHERE-Klausel. WHERE wird vor der Gruppierung ausgewertet; die Bedingung gehört in <strong>HAVING</strong>.<br>
+  <strong>Fehler 2:</strong> <code>k.Nachname</code> steht im SELECT, aber nicht im GROUP BY (Verstoß gegen die GROUP-BY-Regel).</p>
+<pre class="sql">SELECT k.KundenNr, k.Nachname, COUNT(a.AusleiheNr) AS Anzahl
+FROM   Kunde k
+  LEFT JOIN Ausleihe a ON k.KundenNr = a.KundenNr
+GROUP BY k.KundenNr, k.Nachname
+HAVING COUNT(a.AusleiheNr) = 0;</pre>
+  <table class="daten ergebnis">
+<tr><th>KundenNr</th><th>Nachname</th><th>Anzahl</th></tr>
+<tr><td>1008</td><td>Roth</td><td>0</td></tr>
+<tr><td>1009</td><td>Krüger</td><td>0</td></tr>
+<tr><td>1010</td><td>Neumann</td><td>0</td></tr>
+</table>
+  <p>Mit <code>COUNT(*)</code> wäre das Ergebnis <strong>leer</strong>: Nach dem LEFT JOIN hat jeder Kunde ohne Ausleihe trotzdem genau eine Zeile (mit NULL in den Ausleihe-Spalten). <code>COUNT(*)</code> zählt diese Zeile, liefert also 1 und nie 0.</p>
+  <p class="bewertung">Bewertung: je Fehler 1 P, korrigierte Abfrage 2 P, Erläuterung zu COUNT(*) 1 P. Ebenso richtig: Lösung mit <code>WHERE NOT EXISTS</code> oder <code>WHERE KundenNr NOT IN (SELECT KundenNr FROM Ausleihe)</code>.</p>
+  <p class="erklaerung"><em>Dialekt-Hinweis:</em> MySQL 8 lässt Fehler 2 hier ausnahmsweise durchgehen, weil Nachname funktional vom Primärschlüssel KundenNr abhängt. SQL Server, Oracle und die IHK-Lösungen erwarten aber alle Nicht-Aggregat-Spalten im GROUP BY.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-04-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ======================= DB-05 ======================= -->
   <h3 id="a-05">DB-05 · SQL: INSERT, UPDATE, DELETE</h3>
@@ -1846,6 +2411,23 @@ GROUP BY k.KundenNr;</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W25 Teil 2, Aufgabe 4a; S24 Teil 2, Aufgabe 4a</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-05-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-05.1 (5 Punkte)</div>
+  <h4>a)</h4>
+<pre class="sql">INSERT INTO Kunde (KundenNr, Vorname, Nachname, PLZ, Ort, Email)
+VALUES (1011, 'Clara', 'Fischer', '79104', 'Freiburg', 'c.fischer@mail.de');</pre>
+  <p class="bewertung">Bewertung: INSERT INTO mit Tabelle und Spaltenliste 1 P, Werte vollständig und in passender Reihenfolge (Texte und PLZ in Anführungszeichen) 1 P. Ohne Spaltenliste richtig, wenn die Werte in Tabellenreihenfolge stehen.</p>
+  <h4>b)</h4>
+<pre class="sql">UPDATE Kunde
+SET    Email = 'paul.wagner@posteo.de'
+WHERE  KundenNr = 1004;</pre>
+  <p class="bewertung">Bewertung: 1 P (ohne WHERE 0 P – dann hätten alle Kunden diese Adresse).</p>
+  <h4>c)</h4>
+  <p>Auf den Kunden 1004 verweist noch die Ausleihe 5003 über den Fremdschlüssel <code>Ausleihe.KundenNr</code>. Die <strong>referenzielle Integrität</strong> verhindert das Löschen (Standardverhalten RESTRICT), sonst entstünde eine Ausleihe zu einem nicht existierenden Kunden.</p>
+  <p>Möglichkeiten: zuerst die abhängigen Ausleihen archivieren bzw. löschen und danach den Kunden löschen; oder den Fremdschlüssel mit <code>ON DELETE CASCADE</code> definieren (löscht die Ausleihhistorie mit); oder den Kunden statt zu löschen anonymisieren bzw. als inaktiv markieren (Soft Delete).</p>
+  <p class="bewertung">Bewertung: Grund (FK/referenzielle Integrität mit Bezug auf Ausleihe 5003) 1 P, eine sinnvolle Möglichkeit 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Die PLZ ist Text und steht deshalb in Anführungszeichen ('79104'). In c) reicht „der Kunde wird noch verwendet“ nicht – erwartet wird der Bezug zum Fremdschlüssel bzw. zur referenziellen Integrität. Ob die Ausleihhistorie gelöscht werden darf, ist eine fachliche Frage (Aufbewahrungspflichten); Archivieren oder Anonymisieren ist deshalb meist besser als CASCADE.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-05-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-05-2">
     <div class="kopf">
@@ -1858,6 +2440,47 @@ GROUP BY k.KundenNr;</pre>
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W21 Teil 2, Aufgabe 4c (UPDATE mit Unterabfrage); W23 Teil 2, Aufgabe 4c (UPDATE mit JOIN)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-05-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-05.2 (10 Punkte)</div>
+  <h4>a)</h4>
+<pre class="sql">UPDATE Kategorie
+SET    Tagespreis = Tagespreis * 1.10
+WHERE  KategorieNr IN (SELECT f.KategorieNr
+                       FROM   Ausleihe a
+                         INNER JOIN Fahrrad f ON f.FahrradNr = a.FahrradNr
+                       WHERE  YEAR(a.Beginn) = 2026
+                       GROUP BY f.KategorieNr
+                       HAVING COUNT(*) &gt;= 2);</pre>
+  <p>Ausleihen 2026 je Kategorie: City 1, Trekking 3, E-Mountainbike 2, E-Lastenrad 2, Kinderrad 1. Ergebnis nach dem UPDATE (Tabelle Kategorie):</p>
+  <table class="daten ergebnis">
+<tr><th>KategorieNr</th><th>Bezeichnung</th><th>Tagespreis</th></tr>
+<tr><td>1</td><td>City-E-Bike</td><td>25.00</td></tr>
+<tr><td>2</td><td>Trekking-E-Bike</td><td>33.00</td></tr>
+<tr><td>3</td><td>E-Mountainbike</td><td>42.90</td></tr>
+<tr><td>4</td><td>E-Lastenrad</td><td>49.50</td></tr>
+<tr><td>5</td><td>Kinderrad</td><td>12.00</td></tr>
+<tr><td>6</td><td>Tandem</td><td>35.00</td></tr>
+</table>
+  <p class="bewertung">Bewertung: UPDATE … SET mit Berechnung (+10 %) 2 P, Unterabfrage mit Join und Jahresbedingung 2 P, GROUP BY/HAVING in der Unterabfrage 1 P.</p>
+  <h4>b)</h4>
+<pre class="sql">UPDATE Fahrrad
+SET    StationNr = (SELECT StationNr FROM Station WHERE Name = 'Messe')
+WHERE  KategorieNr = (SELECT KategorieNr FROM Kategorie WHERE Bezeichnung = 'E-Lastenrad');
+
+-- gleichwertig in MySQL: UPDATE mit JOIN
+UPDATE Fahrrad f
+  INNER JOIN Kategorie k ON k.KategorieNr = f.KategorieNr
+  INNER JOIN Station s   ON s.Name = 'Messe'
+SET    f.StationNr = s.StationNr
+WHERE  k.Bezeichnung = 'E-Lastenrad';</pre>
+  <table class="daten ergebnis">
+<tr><th>FahrradNr</th><th>Modell</th><th>KategorieNr</th><th>StationNr</th></tr>
+<tr><td>107</td><td>Cargo L2</td><td>4</td><td>2</td></tr>
+<tr><td>108</td><td>Cargo L2</td><td>4</td><td>2</td></tr>
+</table>
+  <p class="bewertung">Bewertung: SET mit Unterabfrage auf Station 2 P, WHERE mit Unterabfrage auf Kategorie 2 P, vollständige Syntax 1 P. Feste Werte (<code>SET StationNr = 2 WHERE KategorieNr = 4</code>) entsprechen nicht der Aufgabenstellung: max. 2 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Betroffen sind die Fahrräder 107 (bisher Station 1) und 108 (stand schon an der Messe). Die skalaren Unterabfragen sind zulässig, weil Name bzw. Bezeichnung jeweils genau eine Zeile liefern.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-05-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-05-3">
     <div class="kopf">
@@ -1875,6 +2498,64 @@ GROUP BY k.KundenNr;</pre>
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W22 Teil 2, Aufgabe 4b; S24 Teil 2, Aufgabe 4c; S26 Teil 2, Aufgabe 4ca/4cb (Archivierung)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-05-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-05.3 (16 Punkte)</div>
+  <h4>a)</h4>
+<pre class="sql">START TRANSACTION;
+
+INSERT INTO Ausleihe_Archiv (AusleiheNr, KundenNr, FahrradNr, Beginn, Ende, Kilometer, Betrag)
+SELECT AusleiheNr, KundenNr, FahrradNr, Beginn, Ende, Kilometer, Betrag
+FROM   Ausleihe
+WHERE  Ende &lt; '2026-01-01';
+
+DELETE FROM Ausleihe
+WHERE  Ende &lt; '2026-01-01';
+
+COMMIT;</pre>
+  <p>Ergebnis: Die Ausleihen 5001, 5002 und 5003 stehen jetzt in Ausleihe_Archiv (11 Zeilen), Ausleihe enthält noch 5004–5012 (9 Zeilen). Die laufende Ausleihe 5012 bleibt erhalten, weil <code>NULL &lt; '2026-01-01'</code> nicht wahr ist.</p>
+  <table class="daten ergebnis">
+<tr><th>AusleiheNr</th><th>KundenNr</th><th>FahrradNr</th><th>Beginn</th><th>Ende</th><th>Kilometer</th><th>Betrag</th></tr>
+<tr><td>4001</td><td>1001</td><td>101</td><td>2024-05-10</td><td>2024-05-11</td><td>55</td><td>50.00</td></tr>
+<tr><td>4002</td><td>1009</td><td>105</td><td>2024-06-22</td><td>2024-06-23</td><td>81</td><td>78.00</td></tr>
+<tr><td>4003</td><td>1002</td><td>102</td><td>2024-07-06</td><td>2024-07-06</td><td>31</td><td>25.00</td></tr>
+<tr><td>4004</td><td>1004</td><td>109</td><td>2024-08-15</td><td>2024-08-17</td><td>20</td><td>36.00</td></tr>
+<tr><td>4005</td><td>1009</td><td>107</td><td>2024-09-28</td><td>2024-09-28</td><td>18</td><td>45.00</td></tr>
+<tr><td>4006</td><td>1006</td><td>103</td><td>2024-10-12</td><td>2024-10-13</td><td>104</td><td>60.00</td></tr>
+<tr><td>4007</td><td>1003</td><td>104</td><td>2025-04-19</td><td>2025-04-20</td><td>66</td><td>60.00</td></tr>
+<tr><td>4008</td><td>1001</td><td>101</td><td>2025-06-07</td><td>2025-06-08</td><td>64</td><td>50.00</td></tr>
+<tr><td>5001</td><td>1001</td><td>101</td><td>2025-08-02</td><td>2025-08-03</td><td>64</td><td>50.00</td></tr>
+<tr><td>5002</td><td>1002</td><td>105</td><td>2025-09-13</td><td>2025-09-13</td><td>38</td><td>39.00</td></tr>
+<tr><td>5003</td><td>1004</td><td>107</td><td>2025-10-04</td><td>2025-10-06</td><td>41</td><td>135.00</td></tr>
+</table>
+  <p class="bewertung">Bewertung: INSERT INTO … SELECT (ohne VALUES) mit passenden Spalten 2 P, korrekte Bedingung 2 P, DELETE mit derselben Bedingung 2 P. <code>WHERE YEAR(Ende) &lt; 2026</code> ist gleichwertig; <code>INSERT INTO Ausleihe_Archiv SELECT * FROM Ausleihe …</code> ist wegen gleicher Struktur ebenfalls richtig.</p>
+  <h4>b)</h4>
+  <p><strong>Transaktion:</strong> Beide Befehle bilden eine logische Einheit. Bricht das System nach dem INSERT ab, würde ohne Transaktion das DELETE fehlen (Datensätze doppelt); mit Transaktion wird alles zurückgesetzt (ROLLBACK) bzw. nur gemeinsam bestätigt (COMMIT).<br>
+  <strong>Reihenfolge:</strong> Erst kopieren, dann löschen. Umgekehrt wären die Daten nach dem DELETE weg und könnten nicht mehr ins Archiv übernommen werden.</p>
+  <p class="bewertung">Bewertung: Transaktion 1 P, Reihenfolge 1 P.</p>
+  <h4>c)</h4>
+<pre class="sql">INSERT INTO Fahrrad_Archiv (FahrradNr, Rahmennummer, Modell, Kategorie, Kaufdatum, Ausmusterung, GesamtKm)
+SELECT f.FahrradNr, f.Rahmennummer, f.Modell, k.Bezeichnung, f.Kaufdatum, '2026-10-10',
+       (SELECT SUM(a.Kilometer)  FROM Ausleihe a         WHERE a.FahrradNr  = f.FahrradNr)
+     + (SELECT SUM(aa.Kilometer) FROM Ausleihe_Archiv aa WHERE aa.FahrradNr = f.FahrradNr)
+FROM   Fahrrad f
+  INNER JOIN Kategorie k ON k.KategorieNr = f.KategorieNr
+WHERE  f.FahrradNr = 105;</pre>
+  <table class="daten ergebnis">
+<tr><th>FahrradNr</th><th>Rahmennummer</th><th>Modell</th><th>Kategorie</th><th>Kaufdatum</th><th>Ausmusterung</th><th>GesamtKm</th></tr>
+<tr><td>95</td><td>WAW-21-0004</td><td>Urban C4</td><td>City-E-Bike</td><td>2021-04-01</td><td>2025-12-31</td><td>4120</td></tr>
+<tr><td>98</td><td>MTN-21-0102</td><td>Trail X8</td><td>E-Mountainbike</td><td>2021-06-15</td><td>2026-01-15</td><td>2875</td></tr>
+<tr><td>105</td><td>MTN-22-0456</td><td>Trail X9</td><td>E-Mountainbike</td><td>2022-05-20</td><td>2026-10-10</td><td>195</td></tr>
+</table>
+  <p>GesamtKm = 38 + 76 (Ausleihe 5002, 5010) + 81 (Archiv 4002) = <strong>195</strong>. Das Ergebnis ist dasselbe, wenn a) vorher ausgeführt wurde (dann liegt 5002 im Archiv) – getestet.</p>
+  <p class="bewertung">Bewertung: INSERT INTO … SELECT mit Spaltenliste 1 P, Join auf Kategorie (Bezeichnung statt Nummer) 1 P, Ausmusterungsdatum 1 P, Kilometersumme aus beiden Tabellen 2 P (nur aus einer Tabelle: 1 P). Statt <code>'2026-10-10'</code> auch <code>CURDATE()</code>.</p>
+  <p class="erklaerung"><em>Robuster:</em> Hat ein Fahrrad in einer der Tabellen keine Ausleihe, liefert SUM dort NULL und die Summe wird NULL. Abhilfe: <code>COALESCE((SELECT SUM(…) …), 0) + COALESCE((SELECT SUM(…) …), 0)</code> oder die Kilometer beider Tabellen per <code>UNION ALL</code> in einer Unterabfrage zusammenfassen und einmal summieren.</p>
+  <h4>d)</h4>
+<pre class="sql">DELETE FROM Wartung  WHERE FahrradNr = 105;
+DELETE FROM Ausleihe WHERE FahrradNr = 105;
+DELETE FROM Fahrrad  WHERE FahrradNr = 105;</pre>
+  <p>Wartung und Ausleihe verweisen über Fremdschlüssel auf Fahrrad. Solange dort noch Datensätze zu Fahrrad 105 existieren, verhindert die referenzielle Integrität das Löschen des Fahrrads (getestet: <code>DELETE FROM Fahrrad WHERE FahrradNr = 105</code> zuerst → Fehler „FOREIGN KEY constraint failed“). Daher zuerst die abhängigen Datensätze (Reihenfolge Wartung/Ausleihe beliebig), dann das Fahrrad. Ausleihe_Archiv hat keinen Fremdschlüssel und bleibt unverändert.</p>
+  <p class="bewertung">Bewertung: drei DELETE-Anweisungen 1 P, Reihenfolge 1 P, Begründung 1 P.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-05-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ======================= DB-06 ======================= -->
   <h3 id="a-06">DB-06 · Datenbank-Theorie</h3>
@@ -1890,6 +2571,21 @@ GROUP BY k.KundenNr;</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 3a (ACID); S22 Teil 2, Aufgabe 4ac (Index)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-06-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-06.1 (6 Punkte)</div>
+  <h4>a)</h4>
+  <ul>
+    <li><strong>Atomicity (Atomarität):</strong> Eine Transaktion wird ganz oder gar nicht ausgeführt; bei einem Fehler werden alle Änderungen zurückgesetzt.</li>
+    <li><strong>Consistency (Konsistenz):</strong> Nach der Transaktion ist die Datenbank wieder in einem konsistenten Zustand; alle Integritätsbedingungen sind erfüllt.</li>
+    <li><strong>Isolation:</strong> Parallel laufende Transaktionen beeinflussen sich nicht; das Ergebnis ist so, als liefen sie nacheinander.</li>
+    <li><strong>Durability (Dauerhaftigkeit):</strong> Nach dem COMMIT bleiben die Änderungen dauerhaft gespeichert, auch bei Systemabsturz.</li>
+  </ul>
+  <p class="bewertung">Bewertung: je Eigenschaft (Begriff und Erläuterung) 1 P.</p>
+  <h4>b)</h4>
+  <p>Vorteil: schnelleres Suchen, Sortieren und Verknüpfen (kein Durchsuchen der ganzen Tabelle). Nachteil: zusätzlicher Speicherbedarf bzw. langsamere INSERT-, UPDATE- und DELETE-Operationen, weil der Index mitgepflegt werden muss.</p>
+  <p class="bewertung">Bewertung: je 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Bei „Nennen und erläutern“ gibt es den Punkt nur mit Erläuterung – die vier Begriffe allein reichen nicht. Merkhilfe: A = alles oder nichts, C = Regeln bleiben eingehalten, I = keine gegenseitige Störung, D = bleibt gespeichert.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-06-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-06-2">
     <div class="kopf">
@@ -1904,6 +2600,21 @@ GROUP BY k.KundenNr;</pre>
     <div class="teilaufgabe"><span class="tp">2 P</span>c) Im Kundenportal wird sehr häufig die Abfrage „alle Ausleihen eines Kunden“ ausgeführt. Nennen Sie die Spalte, für die ein Index angelegt werden sollte, und begründen Sie Ihre Wahl.</div>
     <div class="antwort z3"></div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-06-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-06.2 (10 Punkte)</div>
+  <h4>a)</h4>
+  <p>Eine <strong>Transaktion</strong> ist eine Folge von Datenbankoperationen, die als logische Einheit vollständig oder gar nicht ausgeführt wird (START TRANSACTION … COMMIT bzw. ROLLBACK).</p>
+  <p>Stürzt der Server ohne Transaktion nach Schritt 1 ab, ist die Ausleihe bereits abgeschlossen (Ende, Kilometer, Betrag gesetzt), aber es gibt <strong>keine Rechnung</strong> – der Kunde wird nicht abgerechnet, der Umsatz fehlt. Außerdem fehlt ggf. der <strong>Wartungsauftrag</strong>, sodass ein wartungsbedürftiges Fahrrad weiter verliehen wird. Die Daten sind inkonsistent; eine Wiederholung der Rückgabe ist nicht möglich, weil die Ausleihe schon beendet ist. Mit Transaktion würde Schritt 1 beim Neustart zurückgesetzt und die Rückgabe könnte komplett wiederholt werden.</p>
+  <p class="bewertung">Bewertung: Erläuterung Transaktion 2 P, Folgen des Absturzes 2 P.</p>
+  <h4>b)</h4>
+  <p><strong>Referenzielle Integrität:</strong> Jeder Wert im Fremdschlüssel <code>Ausleihe.FahrradNr</code> muss als Primärschlüssel in <code>Fahrrad.FahrradNr</code> existieren. Eine Ausleihe für ein Fahrrad 999 kann nicht eingefügt werden, und das Fahrrad 103 kann nicht einfach gelöscht werden, solange die Ausleihen 5004 und 5012 darauf verweisen.</p>
+  <p>Reaktionsmöglichkeiten beim Löschen: <strong>RESTRICT / NO ACTION</strong> – das Löschen wird abgewiesen; <strong>CASCADE</strong> – die abhängigen Ausleihen werden mitgelöscht; <strong>SET NULL</strong> – der FK in den Ausleihen wird auf NULL gesetzt (hier nicht möglich, weil FahrradNr NOT NULL ist).</p>
+  <p class="bewertung">Bewertung: Erläuterung mit Bezug auf Ausleihe/Fahrrad 2 P, je Reaktionsmöglichkeit 1 P (zwei verlangt).</p>
+  <h4>c)</h4>
+  <p><strong>Ausleihe.KundenNr</strong> – nach ihr wird gefiltert (<code>WHERE KundenNr = …</code>) und über sie mit Kunde verknüpft. Die Tabelle Ausleihe wächst ständig; ohne Index müsste bei jeder Abfrage die gesamte Tabelle durchsucht werden.</p>
+  <p class="bewertung">Bewertung: Spalte 1 P, Begründung 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> In a) wird ein Bezug zur Situation erwartet (fehlende Rechnung, fehlender Wartungsauftrag), nicht nur die Definition. Zu c): MySQL (InnoDB) legt für Fremdschlüsselspalten automatisch einen Index an, andere DBMS nicht. Erwartet wird trotzdem die Begründung „häufig in WHERE/JOIN verwendet, Tabelle wächst ständig“.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-06-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-06-3">
     <div class="kopf">
@@ -1924,6 +2635,51 @@ GROUP BY k.KundenNr;</pre>
     <div class="antwort z8"></div>
     <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 3b/3c (Begriffe, JSON, Einbettung); S22 Teil 1, Aufgabe 2c (NoSQL aus englischem Text)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-06-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-06.3 (16 Punkte)</div>
+  <h4>a)</h4>
+  <table class="kompakt">
+    <tr><th>Relationale Datenbank</th><th>Dokumentenorientierte Datenbank</th></tr>
+    <tr><td>Tabelle</td><td>Collection (Sammlung)</td></tr>
+    <tr><td>Datensatz (Zeile)</td><td>Document (Dokument)</td></tr>
+    <tr><td>Spalte (Attribut)</td><td>Field (Feld bzw. Schlüssel-Wert-Paar)</td></tr>
+  </table>
+  <p class="bewertung">Bewertung: je Zuordnung 1 P.</p>
+  <h4>b)</h4>
+<pre>{
+  "_id": 1001,
+  "vorname": "Lena",
+  "nachname": "Hoffmann",
+  "plz": "79098",
+  "ort": "Freiburg",
+  "email": "lena.hoffmann@mail.de",
+  "ausleihen": [
+    { "ausleiheNr": 5001, "beginn": "2025-08-02", "ende": "2025-08-03",
+      "kilometer": 64, "betrag": 50.00, "modell": "Urban C5" },
+    { "ausleiheNr": 5004, "beginn": "2026-03-21", "ende": "2026-03-22",
+      "kilometer": 92, "betrag": 60.00, "modell": "Tour T7" },
+    { "ausleiheNr": 5009, "beginn": "2026-07-18", "ende": "2026-07-18",
+      "kilometer": 23, "betrag": 45.00, "modell": "Cargo L2" }
+  ]
+}</pre>
+  <p class="klein">Datengrundlage (getestete Abfrage über Kunde, Ausleihe und Fahrrad):</p>
+  <table class="daten ergebnis">
+<tr><th>KundenNr</th><th>Nachname</th><th>AusleiheNr</th><th>Beginn</th><th>Ende</th><th>Kilometer</th><th>Betrag</th><th>Modell</th></tr>
+<tr><td>1001</td><td>Hoffmann</td><td>5001</td><td>2025-08-02</td><td>2025-08-03</td><td>64</td><td>50.00</td><td>Urban C5</td></tr>
+<tr><td>1001</td><td>Hoffmann</td><td>5004</td><td>2026-03-21</td><td>2026-03-22</td><td>92</td><td>60.00</td><td>Tour T7</td></tr>
+<tr><td>1001</td><td>Hoffmann</td><td>5009</td><td>2026-07-18</td><td>2026-07-18</td><td>23</td><td>45.00</td><td>Cargo L2</td></tr>
+</table>
+  <p class="bewertung">Bewertung: gültige JSON-Syntax (Klammern, doppelte Anführungszeichen, Kommas) 2 P, Kundendaten 1 P, Array für die Ausleihen 1 P, drei Ausleihen mit richtigen Werten 2 P, Modell je Ausleihe 1 P. Ebenfalls richtig: Fahrrad als eingebettetes Objekt (<code>"fahrrad": { "fahrradNr": 101, "modell": "Urban C5" }</code>), andere Feldnamen, KundenNr als eigenes Feld statt <code>_id</code>.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Zahlen ohne Anführungszeichen, die PLZ aber als String (führende Null bei z. B. 01067). Datumswerte gibt es in JSON nicht als eigenen Typ – sie werden als String gespeichert.</p>
+  <h4>c)</h4>
+  <ul>
+    <li><strong>Vorteil – flexibles Schema:</strong> Laut Text müssen Dokumente einer Collection nicht gleich aufgebaut sein; neue Felder können ohne Schemaänderung und Datenmigration ergänzt werden. Für die App können so schnell neue Funktionen (z. B. Lieblingsstation, Fahrtstatistik) eingeführt werden.</li>
+    <li><strong>Vorteil – Daten, die zusammen gelesen werden, liegen zusammen:</strong> Die App lädt Kunde und Ausleihhistorie mit einem einzigen Zugriff ohne Joins → kurze Antwortzeiten.</li>
+    <li>(weiterer Vorteil) <strong>Horizontale Skalierung:</strong> Bei vielen App-Nutzern kann die Collection auf mehrere Server verteilt werden (Sharding).</li>
+    <li><strong>Nachteil – Duplikate und schwache Transaktionen:</strong> Eingebettete Daten (z. B. Modellname) stehen mehrfach in vielen Dokumenten und müssen bei Änderung überall angepasst werden. Transaktionen über mehrere Dokumente sind laut Text nicht oder nur langsam möglich – für Abrechnung und Fahrradverfügbarkeit mit strengen Konsistenzanforderungen bleibt die relationale Datenbank besser geeignet.</li>
+  </ul>
+  <p class="bewertung">Bewertung: je Vorteil 2 P, Nachteil 2 P (jeweils 1 P für die Aussage aus dem Text, 1 P für den Bezug zum VeloManager).</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-06-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ======================= DB-07 ======================= -->
   <h3 id="a-07">DB-07 · SQL: Unterabfragen</h3>
@@ -1938,6 +2694,22 @@ GROUP BY k.KundenNr;</pre>
     <div class="teilaufgabe"><span class="tp">2 P</span>b) Erläutern Sie den Unterschied zwischen einer korrelierten und einer nicht korrelierten Unterabfrage.</div>
     <div class="antwort z3"></div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-07-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-07.1 (5 Punkte)</div>
+  <h4>a)</h4>
+<pre class="sql">SELECT FahrradNr, Modell
+FROM   Fahrrad
+WHERE  FahrradNr NOT IN (SELECT FahrradNr FROM Ausleihe);</pre>
+  <table class="daten ergebnis">
+<tr><th>FahrradNr</th><th>Modell</th></tr>
+<tr><td>110</td><td>Urban C6</td></tr>
+</table>
+  <p class="bewertung">Bewertung: äußere Abfrage 1 P, NOT IN 1 P, Unterabfrage 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> NOT IN ist hier sicher, weil <code>Ausleihe.FahrradNr</code> NOT NULL ist. Enthielte die Unterabfrage einen NULL-Wert, wäre das Ergebnis leer – dann besser NOT EXISTS.</p>
+  <h4>b)</h4>
+  <p>Eine <strong>nicht korrelierte</strong> Unterabfrage ist unabhängig von der äußeren Abfrage, wird einmal ausgewertet und ihr Ergebnis weiterverwendet (wie in a). Eine <strong>korrelierte</strong> Unterabfrage verweist auf eine Spalte der äußeren Abfrage und wird deshalb für jede Zeile der äußeren Abfrage erneut ausgewertet.</p>
+  <p class="bewertung">Bewertung: je Begriff 1 P.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-07-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-07-2">
     <div class="kopf">
@@ -1950,6 +2722,49 @@ GROUP BY k.KundenNr;</pre>
     <div class="antwort z8"></div>
     <p class="quelle">Angelehnt an: W23 Teil 2, Aufgabe 4d (Vergleich mit AVG); S22 Teil 2, Aufgabe 4bb (Unterabfrage mit IN)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-07-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-07.2 (9 Punkte)</div>
+  <h4>a)</h4>
+<pre class="sql">SELECT AusleiheNr, KundenNr, Kilometer
+FROM   Ausleihe
+WHERE  Kilometer &gt; (SELECT AVG(Kilometer) FROM Ausleihe)
+ORDER BY AusleiheNr;</pre>
+  <table class="daten ergebnis">
+<tr><th>AusleiheNr</th><th>KundenNr</th><th>Kilometer</th></tr>
+<tr><td>5004</td><td>1001</td><td>92</td></tr>
+<tr><td>5007</td><td>1002</td><td>118</td></tr>
+<tr><td>5008</td><td>1006</td><td>315</td></tr>
+</table>
+  <p class="bewertung">Bewertung: Unterabfrage mit AVG 2 P, Vergleich in WHERE 1 P, SELECT 1 P. Durchschnitt: 885 / 11 = 80,45 km (NULL der laufenden Ausleihe wird ignoriert).</p>
+  <h4>b)</h4>
+<pre class="sql">SELECT KundenNr, Vorname, Nachname
+FROM   Kunde
+WHERE  KundenNr IN (SELECT a.KundenNr
+                    FROM   Ausleihe a
+                    WHERE  a.FahrradNr IN (SELECT f.FahrradNr
+                                           FROM   Fahrrad f
+                                           WHERE  f.KategorieNr = (SELECT KategorieNr
+                                                                   FROM   Kategorie
+                                                                   WHERE  Bezeichnung = 'E-Lastenrad')))
+ORDER BY KundenNr;</pre>
+  <table class="daten ergebnis">
+<tr><th>KundenNr</th><th>Vorname</th><th>Nachname</th></tr>
+<tr><td>1001</td><td>Lena</td><td>Hoffmann</td></tr>
+<tr><td>1004</td><td>Paul</td><td>Wagner</td></tr>
+<tr><td>1005</td><td>Sofia</td><td>Keller</td></tr>
+</table>
+  <p>Gleichwertig mit EXISTS (getestet, gleiches Ergebnis):</p>
+<pre class="sql">SELECT k.KundenNr, k.Vorname, k.Nachname
+FROM   Kunde k
+WHERE  EXISTS (SELECT *
+               FROM   Ausleihe a
+                 INNER JOIN Fahrrad f     ON f.FahrradNr     = a.FahrradNr
+                 INNER JOIN Kategorie kat ON kat.KategorieNr = f.KategorieNr
+               WHERE  a.KundenNr = k.KundenNr
+                 AND  kat.Bezeichnung = 'E-Lastenrad');</pre>
+  <p class="bewertung">Bewertung: äußere Abfrage 1 P, Unterabfrage auf Ausleihe 1 P, Unterabfrage auf Fahrrad 1 P, Kategorie über die Bezeichnung ermittelt 2 P. Eine reine JOIN-Lösung mit DISTINCT liefert dasselbe Ergebnis, erfüllt aber die Vorgabe „mit Unterabfragen“ nicht: max. 3 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Häufiger Fehler in a): <code>WHERE Kilometer &gt; AVG(Kilometer)</code> – Aggregatfunktionen sind in WHERE nicht erlaubt, deshalb die Unterabfrage. In b) liefert die mittlere Unterabfrage mehrere Fahrräder, dort ist <code>IN</code> nötig; die innerste liefert genau eine Kategorie, dort genügt <code>=</code>.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-07-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-07-3">
     <div class="kopf">
@@ -1964,6 +2779,51 @@ GROUP BY k.KundenNr;</pre>
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W23 Teil 2, Aufgabe 4d (korrelierte Unterabfrage); S22 Teil 2, Aufgabe 4bb (DELETE mit NOT EXISTS)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-07-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-07.3 (14 Punkte)</div>
+  <h4>a)</h4>
+<pre class="sql">SELECT f.FahrradNr, f.Modell, f.Kaufpreis
+FROM   Fahrrad f
+WHERE  f.Kaufpreis &gt; (SELECT AVG(f2.Kaufpreis)
+                      FROM   Fahrrad f2
+                      WHERE  f2.KategorieNr = f.KategorieNr)
+ORDER BY f.FahrradNr;</pre>
+  <table class="daten ergebnis">
+<tr><th>FahrradNr</th><th>Modell</th><th>Kaufpreis</th></tr>
+<tr><td>106</td><td>Trail X9</td><td>4490.00</td></tr>
+<tr><td>108</td><td>Cargo L2</td><td>5590.00</td></tr>
+<tr><td>110</td><td>Urban C6</td><td>2799.00</td></tr>
+</table>
+  <p class="klein">Durchschnittlicher Kaufpreis je Kategorie zur Kontrolle:</p>
+  <table class="daten ergebnis">
+<tr><th>KategorieNr</th><th>Schnitt</th></tr>
+<tr><td>1</td><td>2599.00</td></tr>
+<tr><td>2</td><td>3199.00</td></tr>
+<tr><td>3</td><td>4390.00</td></tr>
+<tr><td>4</td><td>5490.00</td></tr>
+<tr><td>5</td><td>649.00</td></tr>
+</table>
+  <p class="bewertung">Bewertung: zwei Aliase für dieselbe Tabelle 1 P, Unterabfrage mit AVG 2 P, Korrelation <code>f2.KategorieNr = f.KategorieNr</code> 2 P, SELECT 1 P. Alternativ: Join mit einer Unterabfrage in FROM (<code>SELECT KategorieNr, AVG(Kaufpreis) AS Schnitt FROM Fahrrad GROUP BY KategorieNr</code>).</p>
+  <p class="erklaerung"><em>Erklärung:</em> Ohne Korrelation würde mit dem Gesamtdurchschnitt aller Fahrräder (3460,40 €) verglichen – das Ergebnis wären dann die Fahrräder 105 bis 108 (alle E-Mountainbikes und Lastenräder), das Fahrrad 110 fehlte. In Kategorie 2 kosten beide Räder gleich viel, Kategorie 5 hat nur ein Rad – dort liegt keins über dem Durchschnitt.</p>
+  <h4>b)</h4>
+<pre class="sql">DELETE FROM Kunde
+WHERE  NOT EXISTS (SELECT * FROM Ausleihe a
+                   WHERE a.KundenNr = Kunde.KundenNr)
+  AND  NOT EXISTS (SELECT * FROM Ausleihe_Archiv aa
+                   WHERE aa.KundenNr = Kunde.KundenNr);</pre>
+  <p>Gelöscht werden <strong>1008 Roth und 1010 Neumann</strong> (2 Zeilen). 1009 Krüger hat keine aktuelle Ausleihe, aber zwei archivierte (4002, 4005) und bleibt deshalb erhalten.</p>
+  <p class="bewertung">Bewertung: DELETE FROM Kunde 1 P, NOT EXISTS auf Ausleihe mit Korrelation 1 P, NOT EXISTS auf Ausleihe_Archiv 1 P, Verknüpfung mit AND 1 P, gelöschte Kunden 1 P.</p>
+  <h4>c)</h4>
+<pre class="sql">SELECT AVG(Anzahl) AS AusleihenProKunde
+FROM   (SELECT KundenNr, COUNT(*) AS Anzahl
+        FROM   Ausleihe
+        GROUP BY KundenNr) AS tbl;</pre>
+  <table class="daten ergebnis">
+<tr><th>AusleihenProKunde</th></tr>
+<tr><td>1.7143</td></tr>
+</table>
+  <p class="bewertung">Bewertung: Unterabfrage mit COUNT und GROUP BY 1 P, Alias der Unterabfrage 1 P, äußeres AVG 1 P. Ergebnis: 12 Ausleihen / 7 Kunden ≈ 1,71.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-07-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ======================= DB-08 ======================= -->
   <h3 id="a-08">DB-08 · SQL: DDL</h3>
@@ -1988,6 +2848,25 @@ GROUP BY k.KundenNr;</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S26 Teil 2, Aufgabe 4a; W22 Teil 2, Aufgabe 3c</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-08-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-08.1 (5 Punkte)</div>
+  <h4>a)</h4>
+  <table class="kompakt">
+    <tr><th>DDL</th><th>DML</th><th>DCL</th></tr>
+    <tr><td>CREATE TABLE, ALTER TABLE</td><td>UPDATE, DELETE</td><td>GRANT, REVOKE</td></tr>
+  </table>
+  <p class="bewertung">Bewertung: alle sechs richtig 2 P, vier oder fünf richtig 1 P.</p>
+  <h4>b)</h4>
+  <table class="kompakt">
+    <tr><th>Spalte</th><th>Datentyp</th></tr>
+    <tr><td>Kunde.PLZ</td><td>CHAR(5) (oder VARCHAR(5))</td></tr>
+    <tr><td>Fahrrad.Kaufpreis</td><td>DECIMAL(8,2)</td></tr>
+    <tr><td>Ausleihe.Beginn</td><td>DATE</td></tr>
+  </table>
+  <p>Begründung PLZ: Postleitzahlen können mit 0 beginnen (Kunde 1008: 01067 Dresden) – als Zahl ginge die führende Null verloren. Außerdem wird mit PLZ nicht gerechnet, und Mustersuchen wie <code>LIKE '791%'</code> setzen Text voraus.</p>
+  <p class="bewertung">Bewertung: drei passende Datentypen 2 P (Kaufpreis als DOUBLE: ½ P Abzug), Begründung PLZ 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> INSERT, SELECT, UPDATE und DELETE (die CRUD-Befehle) sind DML, die Strukturbefehle CREATE, ALTER und DROP sind DDL, GRANT und REVOKE sind DCL. Für Geldbeträge wird DECIMAL statt DOUBLE erwartet, weil Gleitkommazahlen Rundungsfehler haben.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-08-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-08-2">
     <div class="kopf">
@@ -2000,6 +2879,26 @@ GROUP BY k.KundenNr;</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W21 Teil 2, Aufgabe 4a (CREATE TABLE); S22 Teil 2, Aufgabe 4ba (CREATE INDEX)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-08-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-08.2 (9 Punkte)</div>
+  <h4>a)</h4>
+<pre class="sql">CREATE TABLE Wartung (
+  WartungNr INTEGER      NOT NULL,
+  FahrradNr INTEGER      NOT NULL,
+  Datum     DATE         NOT NULL,
+  Art       VARCHAR(30)  NOT NULL DEFAULT 'Inspektion',
+  Kosten    DECIMAL(8,2) CHECK (Kosten &gt;= 0),
+  PRIMARY KEY (WartungNr),
+  FOREIGN KEY (FahrradNr) REFERENCES Fahrrad (FahrradNr)
+);</pre>
+  <p class="klein">Getestet: Ein INSERT ohne Art erhält 'Inspektion'; negative Kosten werden mit „CHECK constraint failed“, eine nicht existierende FahrradNr mit „FOREIGN KEY constraint failed“ abgewiesen.</p>
+  <p class="bewertung">Bewertung: Spalten mit sinnvollen Datentypen 1 P, PRIMARY KEY 1 P, FOREIGN KEY … REFERENCES 1 P, NOT NULL für die Pflichtfelder 1 P, DEFAULT 1 P, CHECK 1 P. <code>AUTO_INCREMENT</code> für WartungNr ist zulässig.</p>
+  <h4>b)</h4>
+<pre class="sql">CREATE INDEX idx_kunde_nachname ON Kunde (Nachname);</pre>
+  <p>Nachteil: zusätzlicher Speicherbedarf und langsamere Schreibzugriffe (INSERT, UPDATE, DELETE auf Kunde), weil der Index jeweils mit aktualisiert werden muss.</p>
+  <p class="bewertung">Bewertung: CREATE INDEX 2 P, Nachteil 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Die Tabelle Fahrrad muss vor Wartung existieren, sonst schlägt der FOREIGN KEY fehl. CHECK-Bedingungen prüft MySQL erst ab Version 8.0.16 (ältere Versionen ignorieren sie). Der Index auf Nachname lohnt sich, weil oft danach gesucht wird und die Kundentabelle stetig wächst.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-08-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-08-3">
     <div class="kopf">
@@ -2017,6 +2916,52 @@ GROUP BY k.KundenNr;</pre>
     <div class="antwort z12"></div>
     <p class="quelle">Angelehnt an: W25 Teil 2, Aufgabe 4d (ALTER TABLE ADD/DROP und UPDATE mit SUBSTRING)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-08-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-08.3 (13 Punkte)</div>
+  <h4>a)</h4>
+<pre class="sql">ALTER TABLE Fahrrad ADD COLUMN Hersteller CHAR(3);</pre>
+  <p class="bewertung">Bewertung: ALTER TABLE … ADD 1 P, Spaltenname und Datentyp 1 P.</p>
+  <h4>b)</h4>
+<pre class="sql">UPDATE Fahrrad
+SET    Hersteller = LEFT(Rahmennummer, 3);       -- oder SUBSTRING(Rahmennummer, 1, 3)</pre>
+  <table class="daten ergebnis">
+<tr><th>FahrradNr</th><th>Rahmennummer</th><th>Hersteller</th></tr>
+<tr><td>101</td><td>WAW-23-0017</td><td>WAW</td></tr>
+<tr><td>102</td><td>WAW-23-0018</td><td>WAW</td></tr>
+<tr><td>103</td><td>KTX-24-1120</td><td>KTX</td></tr>
+<tr><td>104</td><td>KTX-24-1121</td><td>KTX</td></tr>
+<tr><td>105</td><td>MTN-22-0456</td><td>MTN</td></tr>
+<tr><td>106</td><td>MTN-25-0811</td><td>MTN</td></tr>
+<tr><td>107</td><td>CRG-24-0033</td><td>CRG</td></tr>
+<tr><td>108</td><td>CRG-25-0090</td><td>CRG</td></tr>
+<tr><td>109</td><td>KID-23-0301</td><td>KID</td></tr>
+<tr><td>110</td><td>WAW-26-0002</td><td>WAW</td></tr>
+</table>
+  <p class="bewertung">Bewertung: UPDATE … SET 1 P, Textfunktion mit richtigen Parametern 2 P. Ein WHERE ist nicht nötig, da alle Fahrräder betroffen sind.</p>
+  <h4>c)</h4>
+<pre class="sql">ALTER TABLE Kunde ADD CONSTRAINT uq_kunde_email UNIQUE (Email);
+-- alternativ: CREATE UNIQUE INDEX uq_kunde_email ON Kunde (Email);</pre>
+  <p>Die Kunden 1003 und 1007 sind <strong>kein Problem</strong>: UNIQUE verbietet nur doppelte Werte; NULL bedeutet „kein Wert“ und darf (in MySQL) mehrfach vorkommen. Getestet: Eine doppelte E-Mail wird abgewiesen, ein weiterer Kunde ohne E-Mail ist erlaubt.</p>
+  <p class="bewertung">Bewertung: Constraint 1 P, Erläuterung NULL 1 P.</p>
+  <p class="erklaerung"><em>Dialekt-Hinweis:</em> SQL Server lässt bei einem UNIQUE-Constraint nur einen NULL-Wert zu; MySQL, PostgreSQL und SQLite erlauben mehrere.</p>
+  <h4>d)</h4>
+<pre class="sql">CREATE TABLE Zubehoer (
+  ZubehoerNr  INTEGER      NOT NULL,
+  Bezeichnung VARCHAR(40)  NOT NULL,
+  Tagespreis  DECIMAL(5,2) NOT NULL,
+  PRIMARY KEY (ZubehoerNr)
+);
+
+CREATE TABLE Ausleihe_Zubehoer (
+  AusleiheNr INTEGER NOT NULL,
+  ZubehoerNr INTEGER NOT NULL,
+  Anzahl     INTEGER NOT NULL DEFAULT 1,
+  PRIMARY KEY (AusleiheNr, ZubehoerNr),
+  FOREIGN KEY (AusleiheNr) REFERENCES Ausleihe (AusleiheNr),
+  FOREIGN KEY (ZubehoerNr) REFERENCES Zubehoer (ZubehoerNr)
+);</pre>
+  <p class="bewertung">Bewertung: Zubehoer mit Datentypen und PK 2 P; Ausleihe_Zubehoer: Spalten inkl. <code>DEFAULT 1</code> 1 P, zusammengesetzter PK 1 P, je FK 1 P (2 P). Zubehoer muss vor Ausleihe_Zubehoer angelegt werden. Getestet: Ein zweiter Eintrag mit gleicher AusleiheNr und ZubehoerNr wird wegen des PK abgewiesen.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-08-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ======================= DB-09 ======================= -->
   <h3 id="a-09">DB-09 · SQL: UNION</h3>
@@ -2031,6 +2976,16 @@ GROUP BY k.KundenNr;</pre>
     <div class="teilaufgabe"><span class="tp">1 P</span>b) Nennen Sie eine Voraussetzung, die zwei SELECT-Anweisungen erfüllen müssen, damit sie mit UNION verbunden werden können.</div>
     <div class="antwort z3"></div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-09-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-09.1 (3 Punkte)</div>
+  <h4>a)</h4>
+  <p>Beide verbinden die Ergebnismengen zweier SELECT-Anweisungen untereinander. <strong>UNION</strong> entfernt dabei doppelte Zeilen (wie DISTINCT), <strong>UNION ALL</strong> behält alle Zeilen einschließlich Duplikaten und ist deshalb schneller.</p>
+  <p class="bewertung">Bewertung: 2 P (je Operator 1 P).</p>
+  <h4>b)</h4>
+  <p>Beide SELECT-Anweisungen müssen dieselbe Anzahl Spalten mit kompatiblen Datentypen in gleicher Reihenfolge liefern.</p>
+  <p class="bewertung">Bewertung: 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Merkhilfe: UNION = Menge (ohne Doppelte), UNION ALL = Liste (alles). Die Spaltennamen des Gesamtergebnisses kommen aus dem ersten SELECT.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-09-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-09-2">
     <div class="kopf">
@@ -2042,6 +2997,31 @@ GROUP BY k.KundenNr;</pre>
     <div class="teilaufgabe"><span class="tp">3 P</span>b) Geben Sie an, wie viele Zeilen die Abfrage <code>SELECT KundenNr FROM Ausleihe UNION SELECT KundenNr FROM Ausleihe_Archiv;</code> liefert und wie viele es mit UNION ALL wären. Begründen Sie den Unterschied.</div>
     <div class="antwort z5"></div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-09-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-09.2 (7 Punkte)</div>
+  <h4>a)</h4>
+<pre class="sql">SELECT AusleiheNr, FahrradNr, Beginn, Betrag
+FROM   Ausleihe
+WHERE  KundenNr = 1001
+UNION ALL
+SELECT AusleiheNr, FahrradNr, Beginn, Betrag
+FROM   Ausleihe_Archiv
+WHERE  KundenNr = 1001
+ORDER BY Beginn;</pre>
+  <table class="daten ergebnis">
+<tr><th>AusleiheNr</th><th>FahrradNr</th><th>Beginn</th><th>Betrag</th></tr>
+<tr><td>4001</td><td>101</td><td>2024-05-10</td><td>50.00</td></tr>
+<tr><td>4008</td><td>101</td><td>2025-06-07</td><td>50.00</td></tr>
+<tr><td>5001</td><td>101</td><td>2025-08-02</td><td>50.00</td></tr>
+<tr><td>5004</td><td>103</td><td>2026-03-21</td><td>60.00</td></tr>
+<tr><td>5009</td><td>108</td><td>2026-07-18</td><td>45.00</td></tr>
+</table>
+  <p class="bewertung">Bewertung: zwei SELECTs mit Bedingung 2 P, UNION ALL 1 P (UNION ist hier ebenfalls richtig, weil die AusleiheNr jede Zeile eindeutig macht), ORDER BY nur am Ende 1 P.</p>
+  <h4>b)</h4>
+  <p>Mit <strong>UNION: 8 Zeilen</strong> (die KundenNr 1001–1007 und 1009), mit <strong>UNION ALL: 20 Zeilen</strong> (12 aus Ausleihe + 8 aus Ausleihe_Archiv). UNION entfernt die doppelten KundenNr – z. B. kommt 1001 dreimal in Ausleihe und zweimal im Archiv vor –, UNION ALL hängt alle Zeilen unverändert aneinander.</p>
+  <p class="bewertung">Bewertung: je Anzahl 1 P, Begründung 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> In a) steht ORDER BY nur einmal am Ende und sortiert das Gesamtergebnis; ein ORDER BY im ersten SELECT wäre ein Syntaxfehler. In b) entfernt UNION Duplikate sowohl innerhalb einer Tabelle als auch über beide Tabellen hinweg.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-09-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-09-3">
     <div class="kopf">
@@ -2066,6 +3046,46 @@ ORDER BY Jahr;</pre>
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: S24 Teil 2, Aufgabe 4d (UNION ALL mit GROUP BY YEAR)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-09-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-09.3 (13 Punkte)</div>
+  <h4>a)</h4>
+<pre class="sql">SELECT Jahr, COUNT(*) AS Anzahl, SUM(Betrag) AS Umsatz, SUM(Kilometer) AS Kilometer
+FROM   (SELECT YEAR(Beginn) AS Jahr, Betrag, Kilometer
+        FROM   Ausleihe
+        UNION ALL
+        SELECT YEAR(Beginn), Betrag, Kilometer
+        FROM   Ausleihe_Archiv) AS alle
+GROUP BY Jahr
+ORDER BY Jahr;</pre>
+  <table class="daten ergebnis">
+<tr><th>Jahr</th><th>Anzahl</th><th>Umsatz</th><th>Kilometer</th></tr>
+<tr><td>2024</td><td>6</td><td>294.00</td><td>309</td></tr>
+<tr><td>2025</td><td>5</td><td>334.00</td><td>273</td></tr>
+<tr><td>2026</td><td>9</td><td>732.00</td><td>742</td></tr>
+</table>
+  <p class="bewertung">Bewertung: innere SELECTs mit YEAR 2 P, UNION ALL 1 P, Unterabfrage in FROM mit Alias 2 P, COUNT/SUM 1 P, GROUP BY Jahr 1 P, ORDER BY 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> 2026 enthält auch die laufende Ausleihe 5012 (Anzahl 9); deren NULL-Werte werden bei SUM ignoriert. Das Jahr 2025 kommt in <em>beiden</em> Tabellen vor (Archiv: 4007, 4008; aktuell: 5001–5003) – deshalb muss erst vereinigt und dann gruppiert werden.</p>
+  <h4>b)</h4>
+  <p>UNION würde Zeilen entfernen, die in allen ausgewählten Spalten gleich sind, obwohl es verschiedene Ausleihen sind. Beispiel: Archiv 4008 und Ausleihe 5001 ergeben beide (2025; 50.00; 64 km) – mit UNION bliebe nur eine Zeile übrig, 2025 hätte dann 4 statt 5 Ausleihen, 284 € statt 334 € und 209 statt 273 km (getestet):</p>
+  <table class="daten ergebnis">
+<tr><th>Jahr</th><th>Anzahl</th><th>Umsatz</th><th>Kilometer</th></tr>
+<tr><td>2024</td><td>6</td><td>294.00</td><td>309</td></tr>
+<tr><td>2025</td><td>4</td><td>284.00</td><td>209</td></tr>
+<tr><td>2026</td><td>9</td><td>732.00</td><td>742</td></tr>
+</table>
+  <p class="bewertung">Bewertung: Begründung 1 P, konkretes Beispiel 1 P.</p>
+  <h4>c)</h4>
+  <p>Der Kollege gruppiert jede Tabelle <strong>getrennt</strong> und hängt die Gruppenergebnisse aneinander. Da das Jahr 2025 in beiden Tabellen vorkommt, erscheint 2025 <strong>zweimal</strong> (einmal mit 3 Ausleihen aus Ausleihe, einmal mit 2 aus dem Archiv) – die Anforderung „jedes Jahr genau einmal“ ist verletzt. Richtig ist, erst beide Tabellen zu vereinigen und dann zu gruppieren (wie in a).</p>
+  <table class="daten ergebnis">
+<tr><th>Jahr</th><th>Anzahl</th><th>Umsatz</th><th>Kilometer</th></tr>
+<tr><td>2024</td><td>6</td><td>294.00</td><td>309</td></tr>
+<tr><td>2025</td><td>3</td><td>224.00</td><td>143</td></tr>
+<tr><td>2025</td><td>2</td><td>110.00</td><td>130</td></tr>
+<tr><td>2026</td><td>9</td><td>732.00</td><td>742</td></tr>
+</table>
+  <p class="bewertung">Bewertung: Erläuterung (getrennte Gruppierung → doppelte Gruppe) 2 P, Bezug auf 2025 bzw. Lösungsweg 1 P.</p>
+  <p class="erklaerung"><em>Hinweis:</em> In der Originalaufgabe S24 T2 4d funktionierte die Variante des Kollegen, weil dort alle älteren Jahre ausschließlich im Archiv lagen. Prüfe also immer, ob sich die Gruppen der beiden Tabellen überschneiden.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-09-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ======================= DB-10 ======================= -->
   <h3 id="a-10">DB-10 · SQL: Benutzer und Rechte</h3>
@@ -2080,6 +3100,16 @@ ORDER BY Jahr;</pre>
     <div class="teilaufgabe"><span class="tp">1 P</span>b) Nennen Sie den SQL-Befehl, mit dem einem Benutzer ein Recht wieder entzogen wird.</div>
     <div class="antwort z3"></div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-10-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-10.1 (3 Punkte)</div>
+  <h4>a)</h4>
+  <p>Jeder Benutzer bzw. jede Anwendung erhält nur die Rechte, die für die jeweilige Aufgabe unbedingt erforderlich sind. Dadurch werden Schäden durch Fehlbedienung, Missbrauch oder kompromittierte Zugangsdaten begrenzt und personenbezogene Daten nur Berechtigten zugänglich gemacht.</p>
+  <p class="bewertung">Bewertung: Erläuterung 1 P, Zweck/Nutzen 1 P.</p>
+  <h4>b)</h4>
+  <p><code>REVOKE</code> (z. B. <code>REVOKE UPDATE ON velomanager.Kunde FROM benutzer;</code>)</p>
+  <p class="bewertung">Bewertung: 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Das Prinzip gilt auch für Anwendungen: Der Datenbankbenutzer des Kundenportals erhält nur die DML-Rechte, die das Portal braucht – keine DDL- oder Administrationsrechte.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-10-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-10-2">
     <div class="kopf">
@@ -2097,6 +3127,24 @@ ORDER BY Jahr;</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S23 Teil 2, Aufgabe 4d (CREATE USER, GRANT SELECT)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-10-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-10.2 (6 Punkte)</div>
+<pre class="sql">-- a)
+CREATE USER werkstatt IDENTIFIED BY 'Passwort';
+
+-- b)
+GRANT SELECT ON velomanager.Fahrrad   TO werkstatt;
+GRANT SELECT ON velomanager.Kategorie TO werkstatt;
+GRANT SELECT, INSERT, UPDATE ON velomanager.Wartung TO werkstatt;
+
+-- c)
+REVOKE UPDATE ON velomanager.Wartung FROM werkstatt;</pre>
+  <p class="bewertung">Bewertung: a) 1 P; b) je GRANT-Anweisung 1 P (3 P); c) 1 P. In MySQL wird der Benutzer genauer als <code>'werkstatt'@'localhost'</code> (oder <code>@'%'</code>) angegeben – beide Schreibweisen sind richtig. Pro GRANT ist in MySQL nur ein Objekt erlaubt, daher zwei getrennte Anweisungen für Fahrrad und Kategorie.</p>
+  <h4>d)</h4>
+  <p>Nach dem Prinzip der minimalen Rechte: Die Werkstatt muss Wartungen erfassen, aber keine Historie löschen. Gelöschte Wartungen würden Nachweise (Sicherheit, Gewährleistung, Kostenauswertung) vernichten; versehentliches oder missbräuchliches Löschen wird so ausgeschlossen.</p>
+  <p class="bewertung">Bewertung: 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Häufige Fehler: mehrere Tabellen in einer GRANT-Anweisung (in MySQL nicht erlaubt), REVOKE mit TO statt FROM, Passwort ohne Anführungszeichen. Maßgeblich für die Syntax ist in der Prüfung der Belegsatz.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-10-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-10-3">
     <div class="kopf">
@@ -2121,6 +3169,31 @@ ORDER BY Jahr;</pre>
     <div class="teilaufgabe"><span class="tp">2 P</span>c) Erläutern Sie zwei Vorteile der Rechtevergabe über Rollen gegenüber der Vergabe an einzelne Benutzer.</div>
     <div class="antwort z5"></div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-10-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-10.3 (10 Punkte)</div>
+  <h4>a)</h4>
+  <table>
+    <tr><th>Rolle</th><th>Kunde</th><th>Fahrrad</th><th>Ausleihe</th><th>Wartung</th></tr>
+    <tr><td>Stationspersonal</td><td>S, I, U</td><td>S</td><td>S, I, U</td><td>–</td></tr>
+    <tr><td>Werkstatt</td><td>–</td><td>S</td><td>–</td><td>S, I, U</td></tr>
+    <tr><td>Controlling</td><td>S</td><td>S</td><td>S</td><td>S</td></tr>
+  </table>
+  <p class="bewertung">Bewertung: Stationspersonal 2 P, Werkstatt 1 P, Controlling 1 P.</p>
+  <h4>b)</h4>
+<pre class="sql">CREATE ROLE stationspersonal;
+GRANT SELECT, INSERT, UPDATE ON velomanager.Kunde    TO stationspersonal;
+GRANT SELECT, INSERT, UPDATE ON velomanager.Ausleihe TO stationspersonal;
+GRANT SELECT                 ON velomanager.Fahrrad  TO stationspersonal;
+GRANT stationspersonal TO mueller;</pre>
+  <p class="bewertung">Bewertung: CREATE ROLE 1 P, Rechte-Vergabe an die Rolle 2 P, Rolle dem Benutzer zuweisen 1 P. (In MySQL 8 wird die Rolle zusätzlich mit <code>SET DEFAULT ROLE stationspersonal TO mueller;</code> beim Anmelden aktiviert – nicht verlangt.)</p>
+  <h4>c)</h4>
+  <ul>
+    <li><strong>Weniger Verwaltungsaufwand:</strong> Ein neuer Mitarbeiter erhält mit einer Anweisung alle Rechte seiner Tätigkeit; beim Abteilungswechsel wird nur die Rolle getauscht.</li>
+    <li><strong>Einheitlich und weniger fehleranfällig:</strong> Ändern sich die Anforderungen, wird nur die Rolle angepasst und die Änderung gilt sofort für alle Mitglieder; vergessene Einzelrechte und unterschiedliche Rechtestände werden vermieden, die Rechtevergabe ist nachvollziehbar (Audit).</li>
+  </ul>
+  <p class="bewertung">Bewertung: je erläutertem Vorteil 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Zum Anlegen und Ändern gehört praktisch immer das Leserecht (sonst kann der Datensatz nicht gesucht werden) – deshalb steht S überall dabei. DELETE erhält keine Rolle, weil es in den Anforderungen nicht vorkommt.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-10-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ======================= DB-11 ======================= -->
   <h3 id="a-11">DB-11 · Trigger, Stored Procedure, View</h3>
@@ -2136,6 +3209,16 @@ ORDER BY Jahr;</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S22 Teil 2, Aufgabe 4aa/4ab</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-11-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-11.1 (4 Punkte)</div>
+  <h4>a)</h4>
+  <p>Eine <strong>Stored Procedure</strong> ist eine in der Datenbank gespeicherte, benannte Folge von SQL-Anweisungen (ggf. mit Parametern, Variablen und Kontrollstrukturen), die mit <code>CALL name(…)</code> aufgerufen wird. Sie bündelt wiederkehrende Abläufe zentral im DBMS, verringert den Datenverkehr zwischen Anwendung und Datenbank und erlaubt, Benutzern nur das Ausführungsrecht statt Tabellenrechte zu geben.</p>
+  <p class="bewertung">Bewertung: Begriff 1 P, Aufruf/Zweck 1 P.</p>
+  <h4>b)</h4>
+  <p>Ein <strong>Trigger</strong> ist SQL-Code, der automatisch ausgeführt wird, wenn auf einer bestimmten Tabelle ein Ereignis (INSERT, UPDATE oder DELETE) eintritt – vor (BEFORE) oder nach (AFTER) der Änderung, meist für jede betroffene Zeile. Einsatz z. B. für Protokollierung, Plausibilitätsprüfungen oder das Aktualisieren abgeleiteter Werte.</p>
+  <p class="bewertung">Bewertung: Begriff/automatische Auslösung durch Ereignis 1 P, Zeitpunkt oder Einsatzzweck 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Abgrenzung: Eine Stored Procedure wird ausdrücklich aufgerufen, ein Trigger läuft automatisch beim Ereignis. Beide sind in der Datenbank gespeichert – im Unterschied zu SQL-Anweisungen im Anwendungscode.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-11-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-11-2">
     <div class="kopf">
@@ -2147,6 +3230,27 @@ ORDER BY Jahr;</pre>
     <div class="teilaufgabe"><span class="tp">2 P</span>b) Nennen Sie zwei Vorteile von Views.</div>
     <div class="antwort z3"></div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-11-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-11.2 (6 Punkte)</div>
+  <h4>a)</h4>
+<pre class="sql">CREATE VIEW v_laufende_ausleihen AS
+SELECT a.AusleiheNr, a.Beginn, k.Nachname, f.Modell, s.Name AS Station
+FROM   Ausleihe a
+  INNER JOIN Kunde k   ON k.KundenNr  = a.KundenNr
+  INNER JOIN Fahrrad f ON f.FahrradNr = a.FahrradNr
+  INNER JOIN Station s ON s.StationNr = f.StationNr
+WHERE  a.Ende IS NULL;</pre>
+  <p>Ergebnis von <code>SELECT * FROM v_laufende_ausleihen;</code>:</p>
+  <table class="daten ergebnis">
+<tr><th>AusleiheNr</th><th>Beginn</th><th>Nachname</th><th>Modell</th><th>Station</th></tr>
+<tr><td>5012</td><td>2026-10-08</td><td>Keller</td><td>Tour T7</td><td>Messe</td></tr>
+</table>
+  <p class="bewertung">Bewertung: CREATE VIEW … AS 1 P, Joins über vier Tabellen 1 P, <code>WHERE a.Ende IS NULL</code> 1 P, Ergebniszeile 1 P.</p>
+  <h4>b)</h4>
+  <p>Vorteile (zwei genügen): komplexe Abfragen werden vereinfacht und wiederverwendet; Zugriffsschutz, weil Benutzer nur die freigegebenen Spalten/Zeilen sehen; die Anwendung bleibt stabil, wenn sich die darunterliegenden Tabellen ändern; immer aktuelle Daten, da die View keine Kopie speichert.</p>
+  <p class="bewertung">Bewertung: je Vorteil 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Die View speichert keine Daten, nur die Abfrage. Wird die Ausleihe 5012 zurückgegeben (Ende gesetzt), taucht sie beim nächsten Aufruf automatisch nicht mehr auf.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-11-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-11-3">
     <div class="kopf">
@@ -2178,6 +3282,41 @@ END</pre>
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S22 Teil 2, Aufgabe 4a (Trigger, Stored Procedure)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-11-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-11.3 (10 Punkte)</div>
+  <h4>a)</h4>
+  <table>
+    <tr><th>Tabelle</th><th>Ereignis</th><th>Zeitpunkt</th></tr>
+    <tr><td>Ausleihe</td><td>INSERT (neue Ausleihe)</td><td>BEFORE – nur vor dem Einfügen kann die Änderung noch verhindert werden</td></tr>
+    <tr><th colspan="2">Bedingung</th><th>Aktion</th></tr>
+    <tr><td colspan="2">Es existiert bereits eine Ausleihe mit derselben FahrradNr (<code>NEW.FahrradNr</code>), deren Ende NULL ist.</td><td>Einfügen abbrechen und Fehlermeldung ausgeben („Fahrrad ist bereits verliehen“).</td></tr>
+  </table>
+  <p class="bewertung">Bewertung: Tabelle und Ereignis 1 P, Zeitpunkt 1 P, Bedingung 1 P, Aktion 1 P.</p>
+  <p>Umsetzung in MySQL (nicht verlangt):</p>
+<pre class="sql">CREATE TRIGGER trg_keine_doppelausleihe
+BEFORE INSERT ON Ausleihe
+FOR EACH ROW
+BEGIN
+  IF EXISTS (SELECT * FROM Ausleihe
+             WHERE FahrradNr = NEW.FahrradNr AND Ende IS NULL) THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Fahrrad ist bereits verliehen';
+  END IF;
+END;</pre>
+  <p class="klein">Getestet (gleichwertiger SQLite-Trigger mit <code>RAISE(ABORT, …)</code>): Eine neue Ausleihe für Fahrrad 103 (laufende Ausleihe 5012) wird abgewiesen, eine für Fahrrad 101 wird angenommen.</p>
+  <h4>b)</h4>
+  <p>Die Prozedur <strong>schließt eine laufende Ausleihe ab</strong>: Für die Ausleihe mit der übergebenen Nummer – aber nur, wenn sie noch kein Ende hat – setzt sie das Rückgabedatum auf das heutige Datum, speichert die gefahrenen Kilometer und berechnet den Betrag als Anzahl der Miettage (einschließlich Abholtag) × Tagespreis der Kategorie des Fahrrads. Bereits abgeschlossene Ausleihen bleiben unverändert.</p>
+<pre class="sql">CALL rueckgabe(5012, 84);</pre>
+  <p>Ausleihe 5012: Beginn 08.10.2026, Fahrrad 103 (Trekking-E-Bike, 30,00 € je Tag). DATEDIFF('2026-10-10', '2026-10-08') + 1 = 3 Tage → <strong>3 × 30,00 € = 90,00 €</strong>.</p>
+  <table class="daten ergebnis">
+<tr><th>AusleiheNr</th><th>KundenNr</th><th>FahrradNr</th><th>Beginn</th><th>Ende</th><th>Kilometer</th><th>Betrag</th></tr>
+<tr><td>5012</td><td>1005</td><td>103</td><td>2026-10-08</td><td>2026-10-10</td><td>84</td><td>90.00</td></tr>
+</table>
+  <p class="bewertung">Bewertung: Beschreibung 2 P, Aufruf 1 P, Betrag 1 P.</p>
+  <h4>c)</h4>
+  <p><strong>Vorteil:</strong> Die Regel gilt zentral für alle Anwendungen (Webportal, App, Stationsterminal) und kann nicht umgangen werden; weniger Datenübertragung. <strong>Nachteil:</strong> Herstellerspezifische Syntax (Bindung an das DBMS); Logik ist schwerer zu testen, zu debuggen und zu versionieren und für Entwickler „versteckt“.</p>
+  <p class="bewertung">Bewertung: je 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Zu a): Ein AFTER-Trigger käme zu spät – die doppelte Ausleihe wäre dann schon gespeichert. Zu b): Die Bedingung <code>a.Ende IS NULL</code> verhindert, dass eine bereits abgeschlossene Ausleihe durch einen zweiten Aufruf überschrieben wird. Typischer Rechenfehler: 2 statt 3 Tage, weil das „+ 1“ übersehen wird.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-11-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ======================= DB-12 ======================= -->
   <h3 id="a-12">DB-12 · Datenqualität beim Import</h3>
@@ -2192,6 +3331,20 @@ END</pre>
     <div class="teilaufgabe"><span class="tp">3 P</span>b) Beim Import von Altdaten wird häufig nach dem ETL-Prinzip vorgegangen. Erläutern Sie die drei Schritte.</div>
     <div class="antwort z5"></div>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-12-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-12.1 (5 Punkte)</div>
+  <h4>a)</h4>
+  <p>Vier aus: Vollständigkeit, Korrektheit (Richtigkeit), Konsistenz (Widerspruchsfreiheit), Einheitlichkeit, Eindeutigkeit (keine Dubletten), Atomarität, Gültigkeit/Plausibilität, Aktualität.</p>
+  <p class="bewertung">Bewertung: je Kriterium ½ P.</p>
+  <h4>b)</h4>
+  <ul>
+    <li><strong>Extract:</strong> Daten aus dem Quellsystem lesen, z. B. Export der Excel-Datei als CSV, und in einen Zwischenspeicher (Staging) laden.</li>
+    <li><strong>Transform:</strong> Daten bereinigen und umwandeln: Formate vereinheitlichen, Felder aufteilen, Dubletten zusammenführen, Schlüssel zuordnen, Plausibilität prüfen.</li>
+    <li><strong>Load:</strong> Die bereinigten Daten in die Zieltabellen laden (Reihenfolge der Fremdschlüssel beachten) und den Import prüfen.</li>
+  </ul>
+  <p class="bewertung">Bewertung: je Schritt 1 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> „Nennen“ heißt: Der Begriff genügt. Bei „Erläutern“ (b) gehört zu jedem Schritt, was dort passiert.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-12-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-12-2">
     <div class="kopf">
@@ -2203,6 +3356,21 @@ END</pre>
     <div class="antwort z12"></div>
     <p class="quelle">Angelehnt an: W24 Teil 2, Aufgabe 3ba</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-12-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-12.2 (9 Punkte)</div>
+  <p>Drei der folgenden Probleme mit je einer Folge:</p>
+  <table>
+    <tr><th>Problem (mit Beispiel aus Anlage 6)</th><th>Folge beim Import</th></tr>
+    <tr><td><strong>Uneinheitliche, unvollständige oder ungültige Datumsangaben:</strong> „03.02.2025“, „4.2.“ (ohne Jahr), „2025-02-07“, „11.02.25“, „Feb 25“ (ohne Tag), „14.13.2025“ (Monat 13 existiert nicht).</td><td>Der Import in die Spalte Datum (DATE, NOT NULL) schlägt fehl oder es werden falsche Daten gespeichert (welches Jahr hat „4.2.“?); zeitliche Auswertungen werden falsch.</td></tr>
+    <tr><td><strong>Fahrrad nicht eindeutig gekennzeichnet:</strong> mal FahrradNr („101“), mal Modell und Farbe („Urban C5 blau“), mal Rahmennummer, mal nur das Modell („Tour T7“ gibt es zweimal), mal zwei Räder in einem Feld („103/104“).</td><td>Der Fremdschlüssel FahrradNr kann nicht oder nur falsch zugeordnet werden → FK-Verletzung oder Wartungen beim falschen Fahrrad; die Wartungshistorie ist unbrauchbar.</td></tr>
+    <tr><td><strong>Kosten nicht numerisch bzw. uneinheitlich:</strong> „89,00 €“, „145,5“, „ca. 130“, „inkl.“, „2x 89 €“, „29.90 EUR“ (Währungsangaben, Text, Schätzwerte, Sammelbeträge, unterschiedliche Dezimaltrennzeichen).</td><td>Der Import in DECIMAL schlägt fehl oder liefert falsche Beträge (z. B. „29.90“ als 2990 interpretiert); Kostenauswertungen je Fahrrad sind falsch.</td></tr>
+    <tr><td><strong>Mehrere Werte in einem Feld / uneinheitliche Schreibweisen:</strong> Mechaniker „Weber, Sanchez“, Arbeiten „Insp. + Reifen“; „Weber“ / „T. Weber“, „Inspektion“ / „Insp.“.</td><td>Keine eindeutige Zuordnung zu einer Wartungsart bzw. einem Mitarbeiter; Auswertungen je Art oder Mechaniker zersplittern.</td></tr>
+    <tr><td><strong>Fehlende Werte:</strong> Mechaniker leer.</td><td>NOT NULL-Verletzung bzw. unvollständige Datensätze.</td></tr>
+    <tr><td><strong>Dubletten:</strong> Die Zeile „11.02.25 – 105 – Akku geprüft“ steht doppelt.</td><td>Die Wartung wird doppelt gespeichert; Anzahl und Kosten der Wartungen werden zu hoch ausgewiesen.</td></tr>
+  </table>
+  <p class="bewertung">Bewertung: je Problem 3 P (Beschreibung mit Beispiel aus der Anlage 2 P, Folge 1 P); maximal 9 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Der Operator „beschreiben“ verlangt den konkreten Bezug zur Anlage: „Datum uneinheitlich“ allein reicht nicht für die volle Punktzahl, „4.2. ohne Jahr, 14.13.2025 ungültig“ schon. Die Folge muss sich auf den Import in die Tabelle Wartung beziehen (Datentyp, Fremdschlüssel, Auswertungen).</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-12-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="DB-12-3">
     <div class="kopf">
@@ -2223,6 +3391,29 @@ END</pre>
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W24 Teil 2, Aufgabe 3bb/3bc</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-DB-12-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+  <div class="kopf">Lösung DB-12.3 (12 Punkte)</div>
+  <h4>a)</h4>
+  <table>
+    <tr><th>Spalte</th><th>Problem</th><th>Transformation</th></tr>
+    <tr><td>Name</td><td>Vor- und Nachname in einem Feld (nicht atomar), uneinheitliche Reihenfolge („Hoffmann, Lena“, „Jonas Albrecht“, „Schulze Mira“), abgekürzte Vornamen („Hoffmann, L.“).</td><td>Aufteilen in Vorname und Nachname: bei Komma ist der Teil davor der Nachname; ohne Komma Abgleich mit einer Vornamensliste; nicht eindeutige Fälle (Zeilen 3, 7) in eine Klärungsliste; Abkürzungen bei der Dublettenprüfung auflösen.</td></tr>
+    <tr><td>Adresse</td><td>Straße, PLZ und Ort in einem Feld, unterschiedliche Trennzeichen, teilweise fehlt die PLZ (Zeilen 3–6) oder nur ein Ortsteil („Wiehre“).</td><td>Per Muster zerlegen (fünfstellige Zahl = PLZ, Rest danach = Ort, davor = Straße/Hausnummer); fehlende PLZ über ein PLZ-Verzeichnis ergänzen bzw. nachfragen; die Straße wird in der Zieltabelle Kunde nicht gespeichert (oder Zieltabelle erweitern).</td></tr>
+    <tr><td>E-Mail</td><td>Ungültige Adressen („j.albrecht@web,de“, „s.keller(at)posteo.de“), fehlende Werte.</td><td>Syntaxprüfung (genau ein @, gültige Domain); bekannte Muster korrigieren („(at)“ → „@“, „,de“ → „.de“); fehlende Adressen als NULL übernehmen (Spalte erlaubt NULL); nicht reparierbare Adressen in die Klärungsliste.</td></tr>
+  </table>
+  <p class="bewertung">Bewertung: je Spalte 2 P (Problem 1 P, Transformation 1 P).</p>
+  <h4>b)</h4>
+  <ol>
+    <li>Daten vereinheitlichen (Kleinschreibung, „str.“ → „straße“, Telefonnummern nur als Ziffern, Namen zerlegt).</li>
+    <li>Dublettenkandidaten über Vergleichsmerkmale finden: gleiche E-Mail-Adresse, gleiche Telefonnummer oder gleicher Nachname + gleiche Adresse bei ähnlichem Vornamen (Ähnlichkeitsvergleich, z. B. „Lena“ / „L.“). Zeilen 1 und 5 stimmen in E-Mail, Telefon und Adresse überein.</li>
+    <li>Kandidaten von der Fachabteilung bestätigen lassen, dann zu <strong>einem</strong> Datensatz zusammenführen (vollständigste Angaben übernehmen, „Kunde seit“ = früheres Datum) und die Dublette verwerfen; bereits vorhandene Verweise (z. B. Ausleihen) auf den verbleibenden Datensatz umhängen.</li>
+  </ol>
+  <p class="bewertung">Bewertung: Vergleichsmerkmale/Erkennung 2 P, Zusammenführen/Bereinigen 1 P.</p>
+  <h4>c)</h4>
+  <p><strong>Beispiel für eine Entscheidung (Import mit Bereinigung):</strong> Die Kartei umfasst rund 950 Kunden, darunter Stammkunden. Eine Neuerfassung wäre sehr aufwendig (mehrere Personentage) und selbst fehleranfällig. Die meisten Mängel (Namensformat, Adressaufteilung, E-Mail-Tippfehler, Datumsformate) lassen sich regelbasiert per Skript beheben; nur Restfälle müssen manuell geklärt werden. Daher: Import über ETL mit Staging-Tabelle, Fehlerliste und Testimport – ggf. nur Kunden, die in den letzten Jahren aktiv waren (Datenminimierung nach DSGVO).</p>
+  <p class="klein">Ebenso vertretbar ist eine begründete Entscheidung gegen den Import, z. B.: hohe Fehlerquote, viele unvollständige Datensätze, Kunden registrieren sich für die Online-Buchung ohnehin neu, alte Daten inaktiver Kunden dürften nach DSGVO ohnehin nicht weiter gespeichert werden.</p>
+  <p class="bewertung">Bewertung: nachvollziehbare Entscheidung 1 P, mindestens zwei Argumente mit Bezug zur Situation 2 P.</p>
+  <p class="erklaerung"><em>Erklärung:</em> Welche Transformationen nötig sind, bestimmt die Zieltabelle Kunde (Anlage 2): Sie verlangt Vor- und Nachname getrennt sowie PLZ und Ort – für Straße und Telefon gibt es dort keine Spalte. In c) gibt es Punkte für Argumente aus der Situation (rund 950 Datensätze, Art der Fehler, Nutzen der Historie), nicht für die Richtung der Entscheidung.</p>
+</div><p class="ap2-loesung-link"><a href="01_Datenbanken_Loesungen.html#L-DB-12-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ======================= Originalaufgaben ======================= -->
   <h3 id="originale">Originalaufgaben zum Üben</h3>

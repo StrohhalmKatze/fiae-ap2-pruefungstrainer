@@ -50,6 +50,23 @@
     #e-02, #e-03, #e-04, #e-05 { break-before: page; margin-top: 0; }
   }
 </style>
+<style id="ap2-loesung-stile">
+/* Stile aus 12_Querschnitt_Loesungen.html, nur für eingebettete Lösungen (werkzeuge/loesungen_einbetten.py) */
+.ap2-loesung-inhalt table.kompakt td, .ap2-loesung-inhalt table.kompakt th { padding: 2px 6px; }
+.ap2-loesung-inhalt td.mono, .ap2-loesung-inhalt th.mono { font-family: Consolas, "Courier New", monospace; font-size: 12.5px; }
+.ap2-loesung-inhalt pre { font-size: 12.5px; }
+.ap2-loesung-inhalt pre.formel { border-left: 4px solid var(--wahrsch); margin: 4px 0 8px; }
+.ap2-loesung-inhalt .loesung .kopf { font-size: 16px; margin-bottom: 4px; break-after: avoid; page-break-after: avoid; }
+.ap2-loesung-inhalt .loesung h4 { margin: 12px 0 4px; font-size: 15px; break-after: avoid; }
+.ap2-loesung-inhalt .loesung ul { margin: 4px 0; }
+.ap2-loesung-inhalt .zweispaltig { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+.ap2-loesung-inhalt .zweispaltig > * { flex: 1 1 300px; min-width: 0; }
+.ap2-loesung-inhalt .geprueft { font-size: 12px; color: var(--muted); }
+@media print {
+  .ap2-loesung-inhalt .loesung { break-inside: auto; }
+  .ap2-loesung-inhalt table.lang { break-inside: auto; }
+}
+</style>
 </head>
 <body>
 
@@ -1229,6 +1246,23 @@
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 2a (Fachbegriffe aus einem englischen Text zu agilen Methoden)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-QU-01-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe QU-01.1 · 6 Punkte</div>
+    <h4>a) Unterschiede zu Scrum (2 P)</h4>
+    <p>Zwei der folgenden (Text, Absatz 1):</p>
+    <ul>
+      <li>Kanban schreibt <strong>keine Iterationen fester Länge</strong> (Sprints) vor.</li>
+      <li>Kanban legt <strong>keine bestimmten Rollen</strong> fest (wie Product Owner oder Scrum Master).</li>
+      <li>Kanban kennt <strong>kein Sprint Backlog</strong>.</li>
+      <li>Kanban beginnt mit dem <strong>bestehenden Prozess</strong> des Teams und verbessert ihn schrittweise, statt ein neues Rahmenwerk einzuführen.</li>
+    </ul>
+    <h4>b) WIP-Limit (2 P)</h4>
+    <p>Ein WIP-Limit (<em>work in progress</em>) legt fest, wie viele Karten bzw. Aufgaben sich <strong>höchstens gleichzeitig in einer Spalte</strong> des Kanban-Boards befinden dürfen. Ist das Limit erreicht, darf niemand neue Arbeit in die Spalte ziehen; stattdessen hilft das Team, die angefangenen Aufgaben fertigzustellen. Laut Text verringert das die Kontextwechsel, macht Engpässe sichtbar und verkürzt die Zeit, die eine Aufgabe vom Start bis zur Fertigstellung braucht – auch wenn es sich anfangs langsamer anfühlt.</p>
+    <h4>c) Lead time und cycle time (2 P)</h4>
+    <p><strong>Lead time</strong> (Durchlaufzeit) ist die Zeit von der Annahme einer Anfrage bis zur Auslieferung an den Kunden, einschließlich aller Wartezeiten. <strong>Cycle time</strong> (Bearbeitungszeit) umfasst nur den Zeitraum, in dem das Team aktiv an der Aufgabe arbeitet. Die lead time ist daher immer mindestens so lang wie die cycle time.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je richtigem Unterschied 1 P. b) 1 P für die Definition, 1 P für mindestens eine Wirkung laut Text. c) je Begriff 1 P. Nur die englischen Begriffe zu übersetzen („Durchlaufzeit“, „Zykluszeit“) ohne Erklärung: 0 P.</div>
+    <p><strong>Erklärung:</strong> Die Antwort auf c) steckt in einem Satz mit dem Signalwort <em>whereas</em> (Gegensatz). In a) zählt nur, was im Text steht; „Kanban hat keine Meetings“ steht dort nicht und wäre auch falsch.</p>
+  </div><p class="ap2-loesung-link"><a href="12_Querschnitt_Loesungen.html#L-QU-01-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="QU-01-2">
     <div class="kopf">
@@ -1246,6 +1280,28 @@
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: S22 Teil 1, Aufgabe 2c (Datenbanktechnik aus englischem Text erläutern)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-QU-01-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe QU-01.2 · 10 Punkte</div>
+    <h4>a) Synchrone und asynchrone Replikation (4 P)</h4>
+    <table class="kompakt">
+      <tr><th></th><th>synchron</th><th>asynchron</th></tr>
+      <tr><td>Ablauf</td><td>Der Primärserver bestätigt der Anwendung eine Transaktion erst, wenn mindestens ein Replikat die Änderung ebenfalls gespeichert hat.</td><td>Der Primärserver bestätigt die Transaktion sofort und überträgt die Änderungen erst danach an die Replikate.</td></tr>
+      <tr><td>Vorteil</td><td>Fällt der Primärserver aus, gehen keine bestätigten Daten verloren.</td><td>Schreibvorgänge sind schnell.</td></tr>
+      <tr><td>Nachteil</td><td>Jeder Schreibvorgang dauert länger, besonders wenn das Replikat in einem anderen Rechenzentrum steht.</td><td>Die Replikate können dem Primärserver hinterherhinken (<em>replication lag</em>, meist unter einer Sekunde, unter Last bis zu Minuten) und veraltete Daten liefern.</td></tr>
+    </table>
+    <h4>b) Einsatzzwecke (2 P)</h4>
+    <ul>
+      <li><strong>Verfügbarkeit erhöhen:</strong> Fällt der Primärserver aus, wird ein Replikat zum neuen Primärserver (<em>Failover</em>), bei vielen Cloud-Anbietern automatisch in ein bis zwei Minuten.</li>
+      <li><strong>Leistung verbessern:</strong> Lesereplikate übernehmen reine Leseabfragen wie Berichte oder Produktsuchen und entlasten so den Primärserver.</li>
+    </ul>
+    <h4>c) Stellungnahme zum Verzicht auf die Datensicherung (2 P)</h4>
+    <p>Der Vorschlag ist abzulehnen. Laut Text ist Replikation <strong>keine Datensicherung</strong>: Löscht jemand versehentlich eine Tabelle, wird der DELETE-Befehl innerhalb von Sekunden auf alle Replikate übertragen, die Daten sind dann überall weg. Nur eine Sicherung, mit der man auf einen früheren Zeitpunkt zurückgehen kann (<em>point-in-time backup</em>), schützt davor. Die nächtliche Sicherung muss also bleiben.</p>
+    <h4>d) Problem bei asynchroner Replikation (2 P)</h4>
+    <p><strong>Problem:</strong> Eine Kundin ändert z. B. ihre Lieferadresse und lädt die Seite sofort neu. Die Leseanfrage landet auf einem Replikat, das die Änderung noch nicht erhalten hat, und sie sieht die alte Adresse (veraltete Daten). Ebenso kann beim Bezahlen ein veralteter Lagerbestand angezeigt werden: Eine Pflanze erscheint noch als verfügbar, obwohl sie gerade verkauft wurde.<br>
+    <strong>Lösung laut Text:</strong> Leseanfragen, die aktuell sein müssen (eigene gerade gespeicherte Änderungen, Lagerbestand im Bestellvorgang), werden an den Primärserver geschickt („read-your-writes“-Konsistenz).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Verfahren 1 P für den Ablauf, je 0,5 P für Vor- und Nachteil. b) je Zweck 1 P. c) 1 P Entscheidung, 1 P Begründung mit Textbezug (Replikation überträgt auch Fehler). d) 1 P Problem mit Bezug zum Shop, 1 P Lösung.</div>
+    <p><strong>Erklärung:</strong> Die Fangfrage steckt in c): Viele verwechseln Replikation mit Backup. Der Text markiert die Einschränkung mit <em>However</em> am Absatzanfang – ein typisches Signal für die Punkte, nach denen gefragt wird.</p>
+  </div><p class="ap2-loesung-link"><a href="12_Querschnitt_Loesungen.html#L-QU-01-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="QU-01-3">
     <div class="kopf">
@@ -1265,6 +1321,34 @@
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S22 Teil 1, Aufgabe 2c, und S24 Teil 2, Aufgabe 3b (Inhalte eines englischen Fachtextes erläutern und übertragen)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-QU-01-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe QU-01.3 · 16 Punkte</div>
+    <h4>a) Monolith und Microservices (3 P)</h4>
+    <p>Eine <strong>monolithische Anwendung</strong> wird als eine Einheit gebaut und ausgeliefert. Alle Funktionen (Benutzerverwaltung, Produktkatalog, Bestellung, Zahlung) liegen in einer gemeinsamen Codebasis und nutzen meist eine Datenbank. Jede Änderung erfordert, die ganze Anwendung neu zu bauen und auszuliefern; ein Fehler in einem Modul kann das ganze System lahmlegen.</p>
+    <p>Bei einer <strong>Microservice-Architektur</strong> wird die Anwendung in kleine, unabhängige Dienste aufgeteilt. Jeder Dienst deckt eine fachliche Aufgabe ab, läuft in einem eigenen Prozess und verwaltet seine eigenen Daten. Andere Dienste greifen nur über seine API auf diese Daten zu. Die Dienste kommunizieren über das Netzwerk, meist per REST (HTTP, JSON) oder asynchron über einen Message Broker.</p>
+    <h4>b) Zwei Vorteile mit Bezug zu GrünBlick (4 P)</h4>
+    <ul>
+      <li><strong>Unabhängige Skalierung:</strong> Nur stark belastete Dienste bekommen zusätzliche Instanzen. Beim Frühjahrsverkauf kann Nordwind den Katalogdienst des Shops vervielfachen, während Gewächshaus-Monitoring und Liefer-App mit einer Instanz weiterlaufen. Das spart Rechenleistung und Kosten.</li>
+      <li><strong>Unabhängige Auslieferung:</strong> Ein Dienst kann neu ausgeliefert werden, ohne das ganze System zu veröffentlichen. Ein Fehler in der Liefer-App (wie T-1046) könnte behoben und ausgeliefert werden, ohne Shop und Monitoring anzufassen.</li>
+      <li><strong>Fehlerisolation:</strong> Fällt ein Dienst aus, arbeiten die anderen weiter, sofern sie den Ausfall abfangen (Timeouts, Ersatzwerte). Stürzt PflanzenCheck ab, können Kundinnen und Kunden trotzdem bestellen.</li>
+      <li><strong>Technologiefreiheit:</strong> PflanzenCheck könnte z. B. in Python mit KI-Bibliotheken entwickelt werden, der Shop in Java.</li>
+    </ul>
+    <h4>c) Aufgaben eines API-Gateways (3 P)</h4>
+    <p>Das API-Gateway ist der <strong>einzige Einstiegspunkt</strong> für alle Clients (App auf den Diensthandys, Browser der Kundschaft). Es <strong>leitet jede Anfrage an den zuständigen Dienst weiter</strong> (Routing) und übernimmt <strong>Querschnittsaufgaben</strong> wie Authentifizierung, Begrenzung der Anfragerate (<em>rate limiting</em>) und Protokollierung. Diese Funktionen müssen dadurch nicht in jedem Dienst einzeln programmiert werden.</p>
+    <h4>d) Empfehlung (4 P)</h4>
+    <p><strong>Empfehlung:</strong> GrünBlick zunächst als gut strukturierten, modularen Monolithen entwickeln und Dienste erst herauslösen, wenn es einen klaren Bedarf gibt. Begründung mit dem Text:</p>
+    <ul>
+      <li>Das Team ist klein (sechs Personen). Der Text empfiehlt kleinen Teams ausdrücklich, mit einem modularen Monolithen zu beginnen.</li>
+      <li>Ein verteiltes System ist deutlich komplexer: Netzwerkaufrufe können langsam sein oder ausfallen, die Daten liegen in mehreren Datenbanken, Transaktionen über mehrere Dienste (z. B. Bestellung, Lagerbestand und Zahlung) sind schwer umzusetzen.</li>
+      <li>Testen und Fehlersuche kosten mehr Aufwand, weil eine Anfrage viele Dienste durchläuft.</li>
+      <li>Der Betrieb vieler Dienste erfordert Automatisierung (Container-Orchestrierung, zentrales Logging, Monitoring), also zusätzliche Kosten und Know-how.</li>
+    </ul>
+    <p>Ein Argument <em>für</em> eine spätere Aufteilung nennt der Text ebenfalls: sehr unterschiedliche Lastprofile. Der Produktkatalog mit seinen Spitzen beim Frühjahrsverkauf ist deshalb ein guter Kandidat, um ihn später als eigenen Dienst herauszulösen.</p>
+    <h4>e) Versionsnummer in der URL (2 P)</h4>
+    <p>Sobald externe Clients wie die Liefer-App auf den Diensthandys die Schnittstelle nutzen, müssen Änderungen <strong>abwärtskompatibel</strong> bleiben, sonst funktionieren die alten Clients nicht mehr. Mit der Versionsnummer kann Nordwind eine geänderte, nicht kompatible Schnittstelle unter <code>/api/v2/orders</code> anbieten, während ältere App-Versionen weiter <code>/api/v1/orders</code> verwenden, bis alle Geräte umgestellt sind.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) 1,5 P je Architektur (Aufbau + Konsequenz). b) je Vorteil 1 P aus dem Text, 1 P für einen sinnvollen Bezug zu GrünBlick. c) 1 P Einstiegspunkt, 1 P Routing, 1 P mindestens eine Querschnittsaufgabe. d) 1 P für eine klare Empfehlung, 3 P für mindestens zwei textgestützte Argumente. Eine Empfehlung <em>für</em> Microservices ist ebenfalls vertretbar, wenn sie mit dem Text begründet wird und auf die Nachteile (Komplexität, kleines Team) eingeht. e) 1 P Abwärtskompatibilität, 1 P paralleler Betrieb mehrerer Versionen.</div>
+    <p><strong>Erklärung:</strong> Bei Transferfragen wie d) gibt es keine einzige richtige Entscheidung, aber die Argumente müssen aus dem Text kommen und zum Szenario passen (kleines Team, eine Lastspitze im Katalog). Das Signalwort <em>provided that</em> in der Fehlerisolation ist eine Bedingung: Ohne Timeouts und Ersatzwerte ziehen ausgefallene Dienste die anderen mit.</p>
+  </div><p class="ap2-loesung-link"><a href="12_Querschnitt_Loesungen.html#L-QU-01-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== QU-02 ===================== -->
   <h3 id="a-02">QU-02 · Tabellenkalkulation</h3>
@@ -1285,6 +1369,26 @@
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S23 Teil 1, Aufgabe 3a und 3ba (Formeln, Einsatzmöglichkeit)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-QU-02-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe QU-02.1 · 6 Punkte</div>
+    <h4>a) Zelle D2 (1 P)</h4>
+    <pre class="formel">=B2*C2</pre>
+    <h4>b) Zelle E2 (2 P)</h4>
+    <pre class="formel">=D2*(1-$G$2)</pre>
+    <p class="klein">Englisch identisch. Gleichwertig: <code>=D2-D2*$G$2</code>, <code>=D2*(100%-$G$2)</code> oder <code>=D2*(1-G$2)</code> (gemischter Bezug: Zeile fest genügt beim Kopieren nach unten).</p>
+    <h4>c) Formel ohne $ (2 P)</h4>
+    <p>Beim Kopieren wandert der relative Bezug mit: In E3 steht <code>=D3*(1-G3)</code>. Die Zelle G3 ist leer und wird als 0 gewertet, also rechnet die Formel <code>149,40 · (1 − 0)</code> und zeigt <strong>149,40</strong> an – den Preis ohne Rabatt statt richtig 137,45. Gleiches gilt für E4 (187,50 statt 172,50). E2 ist zufällig richtig, deshalb fällt der Fehler leicht nicht auf.</p>
+    <table class="kompakt" style="width:auto">
+      <tr><th>Zeile</th><th>D (Gesamt)</th><th>E richtig <code>=D2*(1-$G$2)</code></th><th>E falsch <code>=D2*(1-G2)</code></th></tr>
+      <tr><td>2</td><td>156,00</td><td>143,52</td><td>143,52</td></tr>
+      <tr><td>3</td><td>149,40</td><td>137,45 (137,448)</td><td>149,40</td></tr>
+      <tr><td>4</td><td>187,50</td><td>172,50</td><td>187,50</td></tr>
+    </table>
+    <p class="geprueft">Werte in Excel geprüft (Formeln eingegeben und nach unten kopiert).</p>
+    <h4>d) Einsatzmöglichkeit (1 P)</h4>
+    <p>Eine der folgenden: Kalkulation von Angeboten und Preisen, Auswertung der Umsätze je Monat und Warengruppe mit Diagramm, Planung des Budgets für Heizenergie der Gewächshäuser, Simulation eines neuen Preismodells, Inventurliste, Entwurf eines Schichtplans, Auswertung exportierter Sensordaten.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) 1 P. b) 1 P für die Rechnung, 1 P für den absoluten Bezug. c) 1 P für die Formel in E3 bzw. die Erklärung „Bezug wandert mit“, 1 P für den Wert ohne Rabatt. d) 1 P für eine sinnvolle Einsatzmöglichkeit.</div>
+  </div><p class="ap2-loesung-link"><a href="12_Querschnitt_Loesungen.html#L-QU-02-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="QU-02-2">
     <div class="kopf">
@@ -1304,6 +1408,32 @@
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S23 Teil 1, Aufgabe 3a (Formeln mit Funktionen aus dem Belegsatz)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-QU-02-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe QU-02.2 · 10 Punkte</div>
+    <table class="kompakt">
+      <tr><th style="width:8%">Zelle</th><th>Formel deutsch</th><th>Formel englisch</th><th style="width:10%">Ergebnis</th></tr>
+      <tr><td>E14</td><td class="mono">=ZÄHLENWENN(D2:D11;2)</td><td class="mono">=COUNTIF(D2:D11,2)</td><td>4</td></tr>
+      <tr><td>E15</td><td class="mono">=SUMMEWENN(C2:C11;"Gewerbe";E2:E11)</td><td class="mono">=SUMIF(C2:C11,"Gewerbe",E2:E11)</td><td>1.980,40</td></tr>
+      <tr><td>E16</td><td class="mono">=RUNDEN(MITTELWERT(E2:E11);2)</td><td class="mono">=ROUND(AVERAGE(E2:E11),2)</td><td>251,48</td></tr>
+    </table>
+    <h4>d) Zelle G2 (3 P)</h4>
+    <pre class="formel">=WENN(UND(F2="nein";HEUTE()-B2&gt;14);"Mahnung";"")
+=IF(AND(F2="nein",TODAY()-B2&gt;14),"Mahnung","")</pre>
+    <p class="klein">Gleichwertig: <code>B2&lt;HEUTE()-14</code>, <code>HEUTE()-B2&gt;=15</code> oder verschachtelt <code>=WENN(F2="nein";WENN(HEUTE()-B2&gt;14;"Mahnung";"");"")</code>. Keine Bezüge mit $ nötig, alle wandern zeilenweise mit.</p>
+    <h4>e) Mahnungen am 10.10.2026 (1 P)</h4>
+    <p><strong>5102</strong> (22 Tage, nicht bezahlt) und <strong>5104</strong> (15 Tage, nicht bezahlt). Die Bestellungen 5106 (10 Tage), 5108 (5 Tage) und 5109 (3 Tage) sind ebenfalls offen, aber noch nicht älter als 14 Tage.</p>
+    <table class="kompakt" style="width:auto">
+      <tr><th>BestellNr</th><th>Datum</th><th>Bezahlt</th><th>Tage bis 10.10.</th><th>G</th></tr>
+      <tr><td>5102</td><td>18.09.2026</td><td>nein</td><td>22</td><td>Mahnung</td></tr>
+      <tr><td>5104</td><td>25.09.2026</td><td>nein</td><td>15</td><td>Mahnung</td></tr>
+      <tr><td>5106</td><td>30.09.2026</td><td>nein</td><td>10</td><td>(leer)</td></tr>
+      <tr><td>5108</td><td>05.10.2026</td><td>nein</td><td>5</td><td>(leer)</td></tr>
+      <tr><td>5109</td><td>07.10.2026</td><td>nein</td><td>3</td><td>(leer)</td></tr>
+    </table>
+    <p class="geprueft">Alle Formeln in Excel eingegeben (deutsch per Formeleingabe, englisch zusätzlich zur Kontrolle); Ergebnisse identisch, Status mit HEUTE() am 10.10.2026 und mit festem Datum geprüft. Summe aller Warenwerte 2.514,83 → Mittelwert 251,483.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a), b), c) je 1 P für die richtige Funktion, 1 P für richtige Bereiche und Kriterium (bei c: 1 P MITTELWERT, 1 P RUNDEN mit 2 Stellen). d) 1 P WENN mit Dann/Sonst-Wert, 1 P Bedingung „nein“, 1 P Datumsbedingung mit HEUTE() und Verknüpfung durch UND. Ein festes Datum statt HEUTE() erfüllt die Vorgabe „aktuelles Tagesdatum“ nicht: −1 P. e) 1 P für beide Nummern.</div>
+    <p><strong>Erklärung:</strong> „mehr als 14 Tage“ heißt <code>&gt;14</code>: Bei genau 14 Tagen gibt es noch keine Mahnung. Bei SUMMEWENN steht der Kriterienbereich vorn und der Summenbereich hinten; ohne Summenbereich würde SUMMEWENN die Textspalte C summieren und 0 liefern.</p>
+  </div><p class="ap2-loesung-link"><a href="12_Querschnitt_Loesungen.html#L-QU-02-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="QU-02-3">
     <div class="kopf">
@@ -1328,6 +1458,50 @@
     <div class="antwort z8"></div>
     <p class="quelle">Angelehnt an: S23 Teil 1, Aufgabe 3 (Folgetag, VLOOKUP, IF mit WEEKDAY, Einsatzmöglichkeit und Problem)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-QU-02-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe QU-02.3 · 20 Punkte</div>
+    <h4>a) Zellen A6 und A7 (2 P)</h4>
+    <pre class="formel">A6: =$B$1+1        (oder =B1+1, da A6 nicht kopiert wird)
+A7: =A6+1          (nach unten kopiert: A8 =A7+1, A9 =A8+1 …)</pre>
+    <h4>b) Zelle B6 (2 P)</h4>
+    <pre class="formel">=WOCHENTAG(A6;2)          englisch: =WEEKDAY(A6,2)</pre>
+    <h4>c) Zelle B4 (2 P)</h4>
+    <pre class="formel">=WENN(B3&gt;=SVERWEIS(B2;Zonen!$A$2:$E$5;4;FALSCH);"ja";"nein")
+=IF(B3&gt;=VLOOKUP(B2,Zonen!$A$2:$E$5,4,FALSE),"ja","nein")</pre>
+    <h4>d) Zelle C6 (4 P)</h4>
+    <pre class="formel">=WENN($B$3&gt;=SVERWEIS($B$2;Zonen!$A$2:$E$5;5;FALSCH);0;
+      SVERWEIS($B$2;Zonen!$A$2:$E$5;3;FALSCH))
+=IF($B$3&gt;=VLOOKUP($B$2,Zonen!$A$2:$E$5,5,FALSE),0,
+    VLOOKUP($B$2,Zonen!$A$2:$E$5,3,FALSE))</pre>
+    <p class="klein">In Excel wird die Formel in einer Zeile eingegeben (der Umbruch dient nur der Lesbarkeit). Mit XVERWEIS: <code>=WENN($B$3&gt;=XVERWEIS($B$2;Zonen!$A$2:$A$5;Zonen!$E$2:$E$5);0;XVERWEIS($B$2;Zonen!$A$2:$A$5;Zonen!$C$2:$C$5))</code>. Ebenfalls richtig: die Grundgebühr einmal in einer Hilfszelle (z. B. F1) berechnen und in C6 nur <code>=$F$1</code> eintragen.</p>
+    <h4>e) Zelle D6 (4 P)</h4>
+    <pre class="formel">=WENN(B6=7;"keine Lieferung";WENN(B6=6;C6+Zonen!$G$2;C6))
+=IF(B6=7,"keine Lieferung",IF(B6=6,C6+Zonen!$G$2,C6))</pre>
+    <p class="klein">Gleichwertig: <code>=WENN(B6=7;"keine Lieferung";C6+WENN(B6=6;Zonen!$G$2;0))</code>. Ohne Hilfsspalte B ginge auch <code>WOCHENTAG(A6;2)=7</code> direkt in der Bedingung.</p>
+    <h4>f) Werte bei Warenwert 125,00 (2 P)</h4>
+    <p><strong>C6 = 0,00</strong>, weil 125,00 ≥ 120,00 („Lieferfrei ab“ in Zone 3). <strong>D7 = 5,00</strong>, weil der 10.10.2026 ein Samstag ist: 0,00 + 5,00 Samstagszuschlag.</p>
+    <table class="kompakt" style="width:auto">
+      <tr><th>Liefertag</th><th>B</th><th>C / D bei 89,50 (Anlage)</th><th>C / D bei 125,00</th></tr>
+      <tr><td>Fr, 09.10.2026</td><td>5</td><td>9,90 / 9,90</td><td>0,00 / 0,00</td></tr>
+      <tr><td>Sa, 10.10.2026</td><td>6</td><td>9,90 / 14,90</td><td>0,00 / 5,00</td></tr>
+      <tr><td>So, 11.10.2026</td><td>7</td><td>9,90 / keine Lieferung</td><td>0,00 / keine Lieferung</td></tr>
+      <tr><td>Mo, 12.10.2026</td><td>1</td><td>9,90 / 9,90</td><td>0,00 / 0,00</td></tr>
+      <tr><td>Di–Mi</td><td>2, 3</td><td>9,90 / 9,90</td><td>0,00 / 0,00</td></tr>
+    </table>
+    <p class="geprueft">In Excel mit den Daten aus Anlage 7 nachgebaut: Alle deutschen und englischen Formeln (auch die XVERWEIS- und die Alternativ-Variante) liefern genau die Werte der Anlage; zusätzlich mit Warenwert 125,00 und 35,00 (B4 = „nein“) geprüft. Die Datumslogik wurde außerdem mit Python nachgerechnet (Seriennummer 08.10.2026 = 46303).</p>
+    <h4>g) Probleme der gemeinsamen Datei (4 P)</h4>
+    <p>Zwei der folgenden, jeweils mit Lösung durch die Anwendung:</p>
+    <table class="kompakt lang">
+      <tr><th style="width:50%">Problem bei der Tabellenkalkulation</th><th>So vermeidet es GrünBlick (Anwendung mit Datenbank)</th></tr>
+      <tr><td><strong>Gleichzeitiges Bearbeiten:</strong> Die Datei ist für andere gesperrt oder schreibgeschützt geöffnet; Änderungen überschreiben sich oder es entstehen Kopien.</td><td>Viele Nutzer arbeiten gleichzeitig; die Datenbank sichert die Änderungen mit Transaktionen und sperrt nur einzelne Datensätze.</td></tr>
+      <tr><td><strong>Fehleranfälligkeit:</strong> Formeln werden versehentlich überschrieben, Bezüge verrutschen, falsche Zonen werden eingetippt; niemand bemerkt es.</td><td>Die Berechnung steht zentral im getesteten Programmcode; Eingaben werden geprüft (Datentypen, Pflichtfelder, Zone muss existieren).</td></tr>
+      <tr><td><strong>Keine Nachvollziehbarkeit:</strong> Unklar, wer wann was geändert hat; viele Versionen der Datei.</td><td>Eine zentrale Datenhaltung mit Änderungsprotokoll.</td></tr>
+      <tr><td><strong>Zugriffsrechte und Datenschutz:</strong> Wer auf das Laufwerk zugreifen kann, sieht alle Kundendaten und kann die Datei kopieren oder verschicken.</td><td>Rollen und Rechte je Funktion, Zugriffe werden protokolliert.</td></tr>
+      <tr><td><strong>Doppelte Erfassung:</strong> Bestellungen aus dem Online-Shop müssen abgetippt werden.</td><td>Shop, Gebührenberechnung und Tourenplanung nutzen dieselbe Datenbank; keine Medienbrüche.</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Formel 1 P. b) 1 P WOCHENTAG, 1 P Typ 2 (ohne Typ nur richtig, wenn in e) konsequent So = 1 und Sa = 7 verwendet wird). c) 1 P SVERWEIS mit Spalte 4 und FALSCH, 1 P WENN mit „ja“/„nein“. d) 1 P SVERWEIS Spalte 3, 1 P SVERWEIS Spalte 5, 1 P WENN-Logik, 1 P absolute Bezüge auf B2, B3 und die Matrix (kopierbar). e) 1 P Sonntag, 1 P Samstag mit Zuschlag aus Zonen!G2, 1 P sonst Grundgebühr, 1 P korrekte Verschachtelung und absoluter Bezug auf den Zuschlag. f) je Wert 1 P. g) je Problem 1 P, je Lösung 1 P. Fehlendes <code>FALSCH</code> im SVERWEIS: je −1 P (hier zufällig richtig, weil die Zonen sortiert sind, aber fachlich unsauber).</div>
+    <p><strong>Erklärung:</strong> Typische Fehler: A6 als <code>=B1+1</code> schreiben und nach unten kopieren (A7 wird zu <code>=B2+1</code> = 4, also kein Datum mehr) · den Spaltenindex ab Spalte A des Blattes statt ab der ersten Spalte der Matrix zählen (hier zufällig gleich, weil die Matrix bei A beginnt) · den Zuschlag außerhalb des WENN addieren, z. B. <code>=WENN(B6=7;"keine Lieferung";C6)+WENN(B6=6;Zonen!$G$2;0)</code>: Am Sonntag wird dann Text + Zahl gerechnet, und es erscheint <code>#WERT!</code>.</p>
+  </div><p class="ap2-loesung-link"><a href="12_Querschnitt_Loesungen.html#L-QU-02-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== QU-03 ===================== -->
   <h3 id="a-03">QU-03 · Ticketsystem / IT-Service</h3>
@@ -1350,6 +1524,20 @@
     <div class="antwort z3"></div>
     <p class="quelle">Neu (Grundlagen zu S22 Teil 1, Aufgabe 4a)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-QU-03-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe QU-03.1 · 6 Punkte</div>
+    <h4>a) Kategorien (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:5%">Nr.</th><th style="width:22%">Kategorie</th><th>Begründung</th></tr>
+      <tr><td>1</td><td><strong>Incident</strong></td><td>ungeplante Störung: Ein Dienst funktioniert für eine Nutzergruppe nicht.</td></tr>
+      <tr><td>2</td><td><strong>Service Request</strong></td><td>Standardanfrage ohne Störung (Zugang einrichten).</td></tr>
+      <tr><td>3</td><td><strong>Problem</strong></td><td>Gesucht wird die gemeinsame Ursache mehrerer Incidents.</td></tr>
+      <tr><td>4</td><td><strong>Change</strong></td><td>geplante Änderung bzw. Erweiterung der Anwendung (Änderungsantrag, <em>Request for Change</em>).</td></tr>
+    </table>
+    <h4>b) Reaktionszeit und Lösungszeit (2 P)</h4>
+    <p>Die <strong>Reaktionszeit</strong> ist die maximale Zeit vom Eingang einer Meldung bis zur ersten qualifizierten Rückmeldung bzw. bis zum Beginn der Bearbeitung durch den Support. Die <strong>Lösungszeit</strong> ist die maximale Zeit vom Eingang bis zur Behebung, also bis der Service wieder funktioniert bzw. die Anfrage erledigt ist. Beide hängen von der Priorität ab und zählen nur innerhalb der vereinbarten Servicezeit.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je richtiger Zuordnung 1 P. Bei 4 wird auch „Change (Erweiterungswunsch, wird über das Change-Management geplant)“ akzeptiert, nicht aber „Incident“. b) je Begriff 1 P; eine automatische Eingangsbestätigung als „Reaktion“ wird nicht akzeptiert.</div>
+  </div><p class="ap2-loesung-link"><a href="12_Querschnitt_Loesungen.html#L-QU-03-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="QU-03-2">
     <div class="kopf">
@@ -1367,6 +1555,27 @@
     <div class="antwort z3"></div>
     <p class="quelle">Neu (Vertiefung zu S22 Teil 1, Aufgabe 4)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-QU-03-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe QU-03.2 · 10 Punkte</div>
+    <h4>a) Prioritäten (2 P)</h4>
+    <p>T-1042: Auswirkung hoch, Dringlichkeit hoch → <strong>P1</strong>. T-1044: Auswirkung gering, Dringlichkeit gering → <strong>P4</strong>.</p>
+    <h4>b) Einstufung T-1043 und T-1046 (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:10%">Ticket</th><th>Auswirkung</th><th>Dringlichkeit</th><th style="width:10%">Priorität</th></tr>
+      <tr><td>T-1043</td><td><strong>mittel</strong>: nur Gewächshaus 4 betroffen; die Anzeige fehlt, die Lüftung läuft im Notprogramm weiter (Teilfunktion gestört)</td><td><strong>hoch</strong>: bei starker Mittagssonne können die Pflanzen ohne Temperaturkontrolle schnell überhitzen, der Schaden wächst schnell</td><td><strong>P2</strong></td></tr>
+      <tr><td>T-1046</td><td><strong>hoch</strong>: Kernfunktion Lieferung, alle Fahrer betroffen</td><td><strong>mittel</strong>: Workaround mit Papier möglich, aber mit Mehraufwand und Fehlerrisiko beim Nachtragen</td><td><strong>P2</strong></td></tr>
+    </table>
+    <p class="klein">Ebenfalls vertretbar, wenn begründet: T-1043 Auswirkung hoch (Gewächshaussteuerung ist laut Vertrag Kernfunktion) → P1; T-1046 Auswirkung mittel (eine Nutzergruppe) → P3 oder Dringlichkeit hoch (Lieferdaten können verloren gehen) → P1.</p>
+    <h4>c) SLA-Prüfung T-1042 (2 P)</h4>
+    <p>P1: Reaktionszeit 15 min, Lösungszeit 4 h. Eingang Montag 10:30 Uhr (innerhalb der Servicezeit).</p>
+    <ul>
+      <li>Reaktion um 10:52 Uhr → 22 min &gt; 15 min → Reaktionszeit <strong>nicht eingehalten</strong>.</li>
+      <li>Gelöst um 13:10 Uhr → 2 h 40 min ≤ 4 h → Lösungszeit <strong>eingehalten</strong>.</li>
+    </ul>
+    <h4>d) Problem-Ticket zu T-1047 (2 P)</h4>
+    <p>Das gleiche Fehlerbild tritt zum dritten Mal auf (September, T-1043, T-1047). Der Neustart des Gateways ist nur ein <strong>Workaround</strong>: Die Störung ist behoben, die <strong>Ursache aber unbekannt</strong>, und sie wird wieder auftreten – jedes Mal mit Gefahr für die Pflanzen. Ein Problem-Ticket sorgt dafür, dass der 2nd/3rd Level (bzw. der Hersteller SensoTec) die Ursache analysiert und dauerhaft beseitigt (ggf. über einen Change, z. B. ein Firmware-Update). Es verknüpft die zusammengehörenden Incidents, und der Workaround wird bis dahin als bekannter Fehler in der Wissensdatenbank dokumentiert.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Ticket 1 P. b) je Ticket 1 P für eine begründete Einstufung beider Größen, 1 P für die dazu passende Priorität laut Matrix. c) je Frist 1 P (Rechnung + Ergebnis). d) 1 P „wiederkehrend/Ursache unbekannt, Neustart = Workaround“, 1 P „Ziel: Ursache dauerhaft beheben“.</div>
+  </div><p class="ap2-loesung-link"><a href="12_Querschnitt_Loesungen.html#L-QU-03-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="QU-03-3">
     <div class="kopf">
@@ -1384,6 +1593,45 @@
     <div class="antwort z8"></div>
     <p class="quelle">Angelehnt an: S22 Teil 1, Aufgabe 4a (Vor- und Nachteile eines Ticketsystems für den App-Support)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-QU-03-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe QU-03.3 · 18 Punkte</div>
+    <h4>a) Drei Vorteile (6 P)</h4>
+    <p>Drei der folgenden, jeweils erläutert:</p>
+    <ul>
+      <li><strong>Nichts geht verloren:</strong> Alle Meldungen aus Telefon, E-Mail und Portal werden zentral mit Ticketnummer erfasst. Bisher hingen sie an einzelnen Entwicklern; ist einer krank oder im Urlaub, bleibt nichts liegen, weil jeder den Verlauf im Ticket sieht.</li>
+      <li><strong>Priorisierung und SLA-Überwachung:</strong> Jede Meldung wird nach Auswirkung und Dringlichkeit eingestuft, die Fristen werden überwacht und bei drohender Überschreitung automatisch eskaliert. Kritische Störungen (Zahlung, Gewächshaus) werden zuerst bearbeitet; Nordwind kann die Einhaltung des Vertrags nachweisen.</li>
+      <li><strong>Transparenz für die Melder:</strong> Beschäftigte und Kundschaft sehen den Status ihres Anliegens und werden automatisch benachrichtigt. Das spart Nachfragen.</li>
+      <li><strong>Entlastung der Entwickler:</strong> Der 1st Level löst Standardfälle (Passwort, Zugänge) selbst und leitet nur echte Fehler mit vollständiger Beschreibung weiter. Die Entwickler werden seltener unterbrochen.</li>
+      <li><strong>Wissensaufbau:</strong> Lösungen werden dokumentiert und in der Wissensdatenbank wiederverwendet; wiederkehrende Fehler (T-1043/T-1047) fallen auf und können über das Problemmanagement dauerhaft behoben werden.</li>
+      <li><strong>Auswertbarkeit:</strong> Kennzahlen zu Anzahl, Kategorien und Dauer zeigen Schwachstellen von GrünBlick und helfen bei Personalplanung und Abrechnung.</li>
+    </ul>
+    <h4>b) Zwei Nachteile bzw. Risiken (4 P)</h4>
+    <ul>
+      <li><strong>Kosten und Aufwand:</strong> Lizenz bzw. Betrieb der Webanwendung, Einrichtung (Kategorien, Workflows, SLA-Regeln) und Schulung aller Beteiligten; jedes Ticket muss sorgfältig gepflegt werden.</li>
+      <li><strong>Akzeptanz und Formalismus:</strong> Beschäftigte empfinden das System als umständlich und unpersönlich und rufen weiter direkt „ihren“ Entwickler an. Dann fehlen Tickets, Statistiken werden falsch, und der Entwickler wird trotzdem unterbrochen.</li>
+      <li><strong>Datenschutz und Sicherheit:</strong> Tickets enthalten personenbezogene Daten (Namen, Adressen, Screenshots). Die Webanwendung muss abgesichert werden, Zugriffsrechte und Löschfristen sind nötig.</li>
+      <li><strong>Fehleinstufung und Verzögerung:</strong> Wird ein Ticket falsch kategorisiert oder zu niedrig priorisiert, wartet es in der falschen Warteschlange.</li>
+      <li><strong>Abhängigkeit:</strong> Fällt das Ticketsystem aus, ist der Support nur eingeschränkt arbeitsfähig.</li>
+    </ul>
+    <h4>c) Weg von T-1046 durch die Support-Level (4 P)</h4>
+    <ol>
+      <li><strong>1st Level</strong> (Service Desk des Pflanzenhofs): nimmt die Meldung des Lieferdienstes auf, erfasst Fehlerbild (Absturz beim Scannen seit dem Update vom 06.10.), Gerät und App-Version, stuft das Ticket ein (Incident, P2), dokumentiert den Workaround (Papierliste) und sucht in der Wissensdatenbank. Da es keine bekannte Lösung gibt: <strong>funktionale Eskalation</strong>.</li>
+      <li><strong>2nd Level</strong> (Anwendungsbetreuung Nordwind): analysiert Logs, reproduziert den Fehler, prüft Konfiguration und Daten. Stellt sich ein Programmfehler aus dem Update heraus: erneute <strong>funktionale Eskalation</strong>.</li>
+      <li><strong>3rd Level</strong> (Entwicklungsteam Nordwind): behebt den Fehler im Code und liefert einen getesteten Hotfix aus (oder nimmt das Update zurück).</li>
+      <li><strong>Hierarchische Eskalation:</strong> Droht die Lösungszeit von 8 Stunden (P2) überschritten zu werden oder sind zusätzliche Ressourcen bzw. Entscheidungen nötig (z. B. Rollback, andere Aufgaben zurückstellen), informiert der Support die Teamleitung Support, danach die Projektleitung GrünBlick und gegebenenfalls die Geschäftsführung. Diese stellen Personal bereit, entscheiden und informieren den Pflanzenhof.</li>
+      <li>Abschluss: Lösung dokumentieren, Ticket „gelöst“, nach Bestätigung durch den Lieferdienst „geschlossen“; Eintrag in der Wissensdatenbank.</li>
+    </ol>
+    <h4>d) Zwei Kennzahlen (4 P)</h4>
+    <ul>
+      <li><strong>SLA-Erfüllungsquote</strong> = Tickets, deren Reaktions- und Lösungszeit eingehalten wurde, ÷ alle Tickets · 100. Zeigt, ob Nordwind den Servicevertrag erfüllt.</li>
+      <li><strong>Erstlösungsquote</strong> = beim ersten Kontakt gelöste Tickets ÷ alle Tickets · 100. Zeigt, wie gut der 1st Level und die Wissensdatenbank funktionieren.</li>
+      <li><strong>mittlere Lösungszeit je Priorität</strong>: Durchschnitt der Zeit vom Eingang bis zur Lösung; zeigt Schnelligkeit und Trends.</li>
+      <li><strong>Wiedereröffnungsquote</strong>: Anteil der gelösten Tickets, die wiedereröffnet werden; zeigt die Qualität der Lösungen.</li>
+      <li><strong>Backlog</strong> (offene Tickets und ihr Alter) oder <strong>Kundenzufriedenheit</strong> (Umfrage nach Abschluss).</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Vorteil 2 P (1 P Nennung, 1 P Erläuterung bzw. Wirkung, gern mit Bezug zum Szenario); derselbe Vorteil in anderen Worten zählt nur einmal. b) je Nachteil 2 P. c) 2 P für die funktionale Eskalation mit den richtigen Stellen aus Anlage 8, 2 P für die hierarchische Eskalation mit Anlass und Ansprechpartnern. d) je Kennzahl 1 P Nennung, 1 P Erläuterung (Berechnung oder Aussage).</div>
+    <p><strong>Erklärung:</strong> Die Original-Aufgabe (S22) fragte nur nach „drei Vorteilen und einem Nachteil“ mit 12 Punkten, also 3 P je Punkt – entsprechend ausführlich muss erläutert werden. Funktionale und hierarchische Eskalation schließen sich nicht aus: Bei T-1046 laufen beide parallel.</p>
+  </div><p class="ap2-loesung-link"><a href="12_Querschnitt_Loesungen.html#L-QU-03-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== QU-04 ===================== -->
   <h3 id="a-04">QU-04 · Künstliche Intelligenz</h3>
@@ -1405,6 +1653,24 @@
     </table>
     <p class="quelle">Neu (KI-Grundbegriffe; KI war in W23 und S26 Teil des Szenarios)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-QU-04-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe QU-04.1 · 6 Punkte</div>
+    <h4>a) KI, Machine Learning, Deep Learning (3 P)</h4>
+    <ul>
+      <li><strong>Künstliche Intelligenz</strong> ist der Oberbegriff für Systeme, die Aufgaben lösen, für die sonst menschliche Intelligenz nötig ist (erkennen, entscheiden, Sprache verstehen) – auch mit fest programmierten Regeln.</li>
+      <li><strong>Machine Learning</strong> ist ein Teilgebiet der KI: Das System lernt Muster und Regeln selbstständig aus Beispieldaten, statt dass ein Mensch sie programmiert. Ergebnis des Trainings ist ein Modell.</li>
+      <li><strong>Deep Learning</strong> ist ein Teilgebiet des Machine Learning, das tiefe künstliche neuronale Netze mit vielen Schichten nutzt; besonders geeignet für Bilder und Sprache, z. B. für PflanzenCheck.</li>
+    </ul>
+    <p>Zusammenhang: Deep Learning ⊂ Machine Learning ⊂ KI.</p>
+    <h4>b) Lernverfahren (3 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:8%">Nr.</th><th style="width:22%">Verfahren</th><th>Begründung</th></tr>
+      <tr><td>1</td><td>überwacht</td><td>Die Fotos sind mit der richtigen Antwort beschriftet (Labels); Klassifikation.</td></tr>
+      <tr><td>2</td><td>unüberwacht</td><td>Es gibt keine Beispiele mit bekannter Antwort; das Verfahren sucht Auffälligkeiten, die vom normalen Muster abweichen (Anomalieerkennung).</td></tr>
+      <tr><td>3</td><td>überwacht</td><td>Aus historischen Daten mit bekannten Ergebnissen (Verkaufszahlen früherer Jahre) wird ein Zahlenwert vorhergesagt (Regression).</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Begriff 1 P; der Zusammenhang (Teilmengen) muss erkennbar sein. b) je Vorhaben 1 P nur mit Begründung.</div>
+  </div><p class="ap2-loesung-link"><a href="12_Querschnitt_Loesungen.html#L-QU-04-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="QU-04-2">
     <div class="kopf">
@@ -1420,6 +1686,27 @@
     <div class="antwort z8"></div>
     <p class="quelle">Neu (Trainings- und Testdaten, Bias)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-QU-04-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe QU-04.2 · 10 Punkte</div>
+    <h4>a) Getrennte Testdaten (2 P)</h4>
+    <p>Mit den Testdaten wird geprüft, wie gut das Modell bei <strong>neuen, unbekannten</strong> Fotos funktioniert, also im späteren Einsatz. Wären die Testfotos im Training enthalten, hätte das Modell sie quasi auswendig gelernt; das Testergebnis wäre zu gut, und ein Überanpassen (<em>Overfitting</em>) bliebe unentdeckt.</p>
+    <h4>b) Berechnung und Beurteilung (4 P)</h4>
+    <ul>
+      <li>Genauigkeit = (210 + 1.640) ÷ 2.000 = 1.850 ÷ 2.000 = <strong>92,5 %</strong></li>
+      <li>übersehene kranke Pflanzen = 90 ÷ 300 = <strong>30 %</strong> (erkannt werden nur 70 %)</li>
+    </ul>
+    <p><strong>Beurteilung:</strong> Das Ergebnis reicht für einen selbstständigen Einsatz nicht aus. Fast jede dritte kranke Pflanze bleibt unentdeckt, und Krankheiten wie Mehltau oder Grauschimmel breiten sich im Gewächshaus schnell aus. Die hohe Genauigkeit täuscht, weil 85 % der Testfotos gesunde Pflanzen zeigen: Ein Modell, das immer „gesund“ meldet, käme schon auf 85 %. Außerdem stammen die Testfotos aus denselben Gewächshäusern und derselben Jahreszeit wie das Training; im geplanten Einsatz (andere Pflanzen, Kunstlicht) ist eher ein schlechteres Ergebnis zu erwarten. Vertretbar ist allenfalls ein Pilotbetrieb, bei dem PflanzenCheck nur Hinweise gibt und die Sichtkontrolle durch das Personal bleibt (Fehlalarme: 60 von 270 Meldungen, also rund 22 %).</p>
+    <h4>c) Probleme der Trainingsdaten (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:50%">Problem</th><th>Gegenmaßnahme</th></tr>
+      <tr><td><strong>Nicht repräsentativ:</strong> nur Rosen und Geranien aus zwei Gewächshäusern, nur Sommer und Tageslicht. Eingesetzt werden soll das Modell auch für Kräuter und Gemüsejungpflanzen und im Winter unter Kunstlicht; diese Bilder kennt es nicht.</td><td>Fotos aus allen Gewächshäusern, von allen Pflanzenarten, zu allen Jahreszeiten und Lichtverhältnissen sammeln und labeln; bis dahin nur für Rosen und Geranien einsetzen.</td></tr>
+      <tr><td><strong>Unausgewogene Klassen:</strong> Grauschimmel nur 120 Fotos (1 %), Blattläuse 480 (4 %). Seltene Krankheiten lernt das Modell schlecht.</td><td>gezielt mehr Fotos der seltenen Klassen erfassen bzw. künstlich erweitern und stärker gewichten; Ergebnis je Klasse auswerten.</td></tr>
+      <tr><td><strong>Labelqualität:</strong> Aushilfen nach einer Stunde Einweisung, keine Kontrolle. Falsche Labels lernt das Modell mit.</td><td>Labeln oder Prüfen durch Gärtnerinnen und Gärtner bzw. Pflanzenschutz-Fachleute, Label-Richtlinie, Stichproben und Vier-Augen-Prinzip.</td></tr>
+      <tr><td><strong>Testdaten aus derselben Quelle</strong> wie die Trainingsdaten: Die Bewertung sagt wenig über den echten Einsatz.</td><td>Testdaten aus den späteren Einsatzbedingungen zusammenstellen (andere Gewächshäuser, Winter).</td></tr>
+    </table>
+    <p class="geprueft">Rechnung mit Python nachgeprüft: Genauigkeit 0,925; Anteil übersehen 0,30; Fehlalarme unter den Meldungen 60/270 ≈ 0,222; „immer gesund“ ergäbe 0,85.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) 1 P „Test auf unbekannten Daten“, 1 P „sonst zu optimistisch/Overfitting“. b) je Rechnung 1 P (Rechenweg + Ergebnis), 2 P für eine begründete Beurteilung; „ja, 92,5 % reicht“ ohne Bezug auf die übersehenen Fälle: höchstens 1 P. c) je Problem 1 P, je Gegenmaßnahme 1 P. Der Hinweis, dass Beschäftigte auf Fotos zu sehen sind, ist ein Datenschutzthema (Personen unkenntlich machen), aber keine Ursache für verzerrte Ergebnisse.</div>
+  </div><p class="ap2-loesung-link"><a href="12_Querschnitt_Loesungen.html#L-QU-04-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="QU-04-3">
     <div class="kopf">
@@ -1443,6 +1730,57 @@
     <div class="antwort z8"></div>
     <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 1b (Widerstände gegen ein KI-System); AI Act und Halluzinationen neu</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-QU-04-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe QU-04.3 · 20 Punkte</div>
+    <h4>a) Einordnung nach dem EU AI Act (8 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:24%">Anwendung</th><th style="width:20%">Risikostufe</th><th>Folge für den Einsatz</th></tr>
+      <tr><td>1. PflanzenCheck</td><td><strong>minimales Risiko</strong> (Bilderkennung bei Pflanzen, keine Entscheidung über Menschen)</td><td>keine besonderen Pflichten aus dem AI Act; freiwillige Verhaltenskodizes möglich. Allgemeine Pflichten bleiben: KI-Kompetenz der Nutzer, DSGVO für Beschäftigte auf den Fotos.</td></tr>
+      <tr><td>2. Chatbot im Shop</td><td><strong>begrenztes Risiko</strong> (KI interagiert mit Menschen)</td><td><strong>Transparenzpflicht:</strong> Die Kundschaft muss klar erkennen, dass sie mit einer KI chattet (Hinweis im Chatfenster).</td></tr>
+      <tr><td>3. Vorauswahl von Bewerbungen</td><td><strong>hohes Risiko</strong> (Bereich Beschäftigung: Einstellung, Auswahl von Bewerbern)</td><td>erlaubt, aber mit strengen Pflichten: Der Anbieter braucht Risikomanagement, geprüfte Trainingsdaten (Bias), Dokumentation, Konformitätsbewertung und CE-Kennzeichnung. Der Pflanzenhof als Betreiber muss das System bestimmungsgemäß nutzen, eine geschulte Person muss die Ergebnisse prüfen und entscheiden (menschliche Aufsicht), Protokolle aufbewahren, Bewerbende und Betriebsrat informieren.</td></tr>
+      <tr><td>4. Stress-Erkennung an den Packtischen</td><td><strong>unannehmbares Risiko</strong> (Emotionserkennung am Arbeitsplatz)</td><td><strong>verboten</strong>, darf nicht eingesetzt werden (Bußgeld bis 35 Mio. € oder 7 % des Jahresumsatzes); zusätzlich wären Mitbestimmung des Betriebsrats und DSGVO betroffen.</td></tr>
+    </table>
+    <h4>b) Halluzinationen (4 P)</h4>
+    <p><strong>Entstehung:</strong> Ein Sprachmodell erzeugt Text, indem es Wort für Wort die wahrscheinlichste Fortsetzung berechnet. Es hat kein geprüftes Faktenwissen und erkennt nicht, ob eine Aussage stimmt. Fehlt eine passende Information, entsteht trotzdem eine flüssige, glaubwürdige Antwort – etwa ein erfundenes Pflanzenschutzmittel.</p>
+    <p><strong>Maßnahmen</strong> (zwei davon):</p>
+    <ul>
+      <li>Antworten nur auf geprüfte eigene Quellen stützen (RAG): Produktdatenbank und Pflegeanleitungen des Pflanzenhofs; Empfehlungen nur für Produkte aus dem Sortiment.</li>
+      <li>Themenbereich begrenzen; bei Pflanzenschutzmitteln (rechtlich und gesundheitlich heikel) an die Fachberatung verweisen.</li>
+      <li>Quellen bzw. Produktlinks anzeigen und Hinweis „automatisch erzeugt, bitte prüfen“.</li>
+      <li>vor der Freigabe mit typischen Kundenfragen testen, im Betrieb Feedback sammeln und auswerten.</li>
+    </ul>
+    <h4>c) KI-Coding-Assistent (4 P)</h4>
+    <div class="zweispaltig">
+      <div>
+        <p><strong>Chancen</strong> (zwei davon)</p>
+        <ul>
+          <li>Routinecode (REST-Endpunkte, Datenklassen) schneller schreiben</li>
+          <li>Unit-Tests und Dokumentation erzeugen lassen</li>
+          <li>vorhandenen Code erklären, Fehler finden, Refactoring vorschlagen</li>
+          <li>schnellere Einarbeitung in neue Bibliotheken</li>
+        </ul>
+      </div>
+      <div>
+        <p><strong>Risiken</strong> (zwei davon)</p>
+        <ul>
+          <li>fehlerhafter oder unsicherer Code, der plausibel aussieht</li>
+          <li>erfundene Methoden oder Pakete</li>
+          <li>Quellcode oder Kundendaten des Pflanzenhofs fließen an den Anbieter (Vertraulichkeit, Vertrag)</li>
+          <li>Lizenz- und Urheberrechtsfragen, Abhängigkeit und Kompetenzverlust</li>
+        </ul>
+      </div>
+    </div>
+    <h4>d) Akzeptanz (4 P)</h4>
+    <p>Zwei der folgenden, jeweils beschrieben:</p>
+    <ul>
+      <li><strong>Früh und offen informieren:</strong> Ziel ist, Krankheiten früher zu erkennen und weniger Pflanzenschutzmittel einzusetzen. PflanzenCheck unterstützt, ersetzt aber niemanden; Entscheidungen über Behandlung oder Aussortieren treffen weiter die Beschäftigten.</li>
+      <li><strong>Beteiligen:</strong> Workshop mit den Gewächshausteams; ihre Erfahrung wird gebraucht, um Fotos richtig zu labeln, Ergebnisse zu prüfen und das System zu verbessern (das zeigt, dass ihr Wissen wichtiger wird, nicht überflüssig).</li>
+      <li><strong>Keine Überwachung zusichern:</strong> Kameras nur auf die Pflanzentische ausrichten, Personen auf Fotos unkenntlich machen, Betriebsvereinbarung mit dem Betriebsrat, die eine Leistungs- und Verhaltenskontrolle ausschließt.</li>
+      <li><strong>Schulen und schrittweise einführen:</strong> Pilot in einem Gewächshaus, Ansprechpartner benennen, Rückmeldungen ernst nehmen, Erfolge sichtbar machen.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Anwendung 1 P für die Stufe, 1 P für die Folge. Für 1. wird auch „begrenzt/minimal“ mit Begründung akzeptiert, solange keine Hochrisiko-Einstufung erfolgt. b) 2 P für die Entstehung (Wahrscheinlichkeit statt Faktenprüfung), je Maßnahme 1 P. c) je Chance und Risiko 1 P. d) je Maßnahme 2 P (Maßnahme + wie sie gegen die konkrete Befürchtung wirkt).</div>
+    <p><strong>Erklärung:</strong> Die Einordnung hängt am <em>Zweck</em>, nicht an der Technik: Dieselbe Kamera-Bilderkennung ist bei Pflanzen minimal riskant und bei der Stimmung von Beschäftigten verboten. Teil d) entspricht der Logik von W23 T1 A1b; Querverweis Block 04 (Change-Management, Stakeholder).</p>
+  </div><p class="ap2-loesung-link"><a href="12_Querschnitt_Loesungen.html#L-QU-04-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== QU-05 ===================== -->
   <h3 id="a-05">QU-05 · Green IT</h3>
@@ -1467,6 +1805,22 @@
     </table>
     <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 1c (Green IT erläutern, Ziele nennen)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-QU-05-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe QU-05.1 · 6 Punkte</div>
+    <h4>a) Begriff (2 P)</h4>
+    <p>Green IT bezeichnet Bestrebungen, Informations- und Kommunikationstechnik über ihren gesamten Lebenszyklus – Herstellung, Betrieb und Entsorgung – umwelt- und ressourcenschonend zu gestalten (z. B. weniger Energie, längere Nutzung, Recycling). Dazu gehört auch, IT so einzusetzen, dass sie in anderen Bereichen Energie und Ressourcen einspart.</p>
+    <h4>b) Ziele (2 P)</h4>
+    <p>Zwei von: Energieverbrauch und Stromkosten senken · CO₂-Emissionen verringern (Beitrag zur Klimaneutralität 2030) · Rohstoffe schonen und Elektroschrott vermeiden (längere Nutzung, Recycling) · Wasser- und Ressourcenverbrauch im Betrieb mit IT senken · Image und Nachhaltigkeitsbericht verbessern.</p>
+    <h4>c) Zuordnung (2 P)</h4>
+    <table class="kompakt" style="width:auto">
+      <tr><th>Maßnahme</th><th>Zuordnung</th></tr>
+      <tr><td>1. Server virtualisieren</td><td>Green <strong>in</strong> IT</td></tr>
+      <tr><td>2. sensorgesteuerte Bewässerung</td><td>Green <strong>by</strong> IT</td></tr>
+      <tr><td>3. Videokonferenz statt Dienstreise</td><td>Green <strong>by</strong> IT</td></tr>
+      <tr><td>4. Notebooks aufrüsten und länger nutzen</td><td>Green <strong>in</strong> IT</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> a) 1 P Lebenszyklus bzw. umweltschonende IT, 1 P Ressourcen/Energie oder Einsparung in anderen Bereichen. b) je Ziel 1 P. c) je richtiger Zuordnung 0,5 P.</div>
+  </div><p class="ap2-loesung-link"><a href="12_Querschnitt_Loesungen.html#L-QU-05-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="QU-05-2">
     <div class="kopf">
@@ -1484,6 +1838,27 @@
     <div class="antwort z3"></div>
     <p class="quelle">Neu (Rechnung zu Green IT; Rechenweg wie bei Speicherbedarfsaufgaben in W23/S26)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-QU-05-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe QU-05.2 · 10 Punkte</div>
+    <h4>a) PUE Ist (2 P)</h4>
+    <p>IT-Leistung = 14 · 0,32 kW + 1,02 kW = 4,48 kW + 1,02 kW = <strong>5,50 kW</strong><br>
+    PUE = Gesamtleistung ÷ IT-Leistung = 10,45 kW ÷ 5,50 kW = <strong>1,9</strong></p>
+    <h4>b) Verbrauch und Kosten Ist (2 P)</h4>
+    <p>10,45 kW · 8.760 h = <strong>91.542 kWh</strong> pro Jahr<br>
+    91.542 kWh · 0,28 €/kWh = <strong>25.631,76 €</strong> pro Jahr</p>
+    <h4>c) Verbrauch nach der Modernisierung und Einsparung (4 P)</h4>
+    <p>IT-Leistung neu = 3 · 0,55 kW + 1,05 kW = 1,65 kW + 1,05 kW = 2,70 kW<br>
+    Gesamtleistung neu = 2,70 kW · 1,4 = 3,78 kW<br>
+    Verbrauch neu = 3,78 kW · 8.760 h = <strong>33.112,8 kWh</strong> pro Jahr (Kosten 9.271,58 €)</p>
+    <p>Einsparung = 91.542 kWh − 33.112,8 kWh = <strong>58.429,2 kWh</strong> pro Jahr (≈ 64 %)<br>
+    in Euro: 58.429,2 kWh · 0,28 €/kWh = <strong>16.360,18 €</strong><br>
+    in CO₂: 58.429,2 kWh · 0,38 kg/kWh = <strong>22.203,1 kg</strong> ≈ 22,2 t</p>
+    <h4>d) Amortisation (2 P)</h4>
+    <p>38.000 € ÷ 16.360,18 €/Jahr ≈ <strong>2,3 Jahre</strong> (rund 2 Jahre und 4 Monate).</p>
+    <p class="geprueft">Alle Werte mit Python nachgerechnet (PUE 1,9; 91.542 kWh; 33.112,8 kWh; 58.429,2 kWh; 16.360,18 €; 22.203,096 kg; 2,32 Jahre).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) 1 P IT-Leistung, 1 P PUE. b) je Ergebnis 1 P. c) 1 P neue Gesamtleistung, 1 P Verbrauch neu, 1 P Einsparung kWh, 1 P Euro und CO₂. d) 1 P Ansatz, 1 P Ergebnis. Folgefehler werden nicht doppelt abgezogen; gerundete Zwischenwerte sind in Ordnung.</div>
+    <p><strong>Erklärung:</strong> Die Einsparung entsteht aus zwei Effekten: Die Virtualisierung senkt die IT-Leistung von 5,5 auf 2,7 kW, die neue Kühlung die PUE von 1,9 auf 1,4. Nur virtualisieren ohne neue Kühlung hätte bei gleichbleibender PUE 2,7 · 1,9 · 8.760 ≈ 44.939 kWh ergeben – in der Praxis eher mehr, weil das alte Klimagerät nicht kleiner wird (die PUE würde steigen).</p>
+  </div><p class="ap2-loesung-link"><a href="12_Querschnitt_Loesungen.html#L-QU-05-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="QU-05-3">
     <div class="kopf">
@@ -1499,6 +1874,33 @@
     <div class="antwort z8"></div>
     <p class="quelle">Neu (nachhaltige Softwareentwicklung, Hardware-Lebenszyklus; Ergänzung zu W23 Teil 1, Aufgabe 1c)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-QU-05-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe QU-05.3 · 16 Punkte</div>
+    <h4>a) Beobachtungen und Maßnahmen (8 P)</h4>
+    <p>Vier der sechs, z. B.:</p>
+    <table class="kompakt lang">
+      <tr><th style="width:5%">Nr.</th><th style="width:47%">warum unnötiger Verbrauch</th><th>Maßnahme</th></tr>
+      <tr><td>1</td><td>Für ein 400 × 300 Pixel kleines Vorschaubild wird das 40-mal größere Original übertragen: unnötige Datenmenge, Server- und Netzlast, Datenvolumen und Akku der Kundschaft.</td><td>Bilder beim Hochladen in passenden Größen und modernem Format (WebP/AVIF) erzeugen, je nach Bildschirm die passende Größe ausliefern, Lazy Loading, Caching bzw. CDN.</td></tr>
+      <tr><td>2</td><td>Ständiges Nachfragen (Polling) alle 5 s: 17.280 Anfragen pro Gerät und Tag, bei 25 Geräten 432.000, auch nachts und sonntags ohne Nutzen; belastet Server, Funknetz und Akkus.</td><td>Push-Benachrichtigung bzw. WebSocket, wenn ein Auftrag vorliegt; Abfragen nur während der Lieferzeiten, längeres Intervall.</td></tr>
+      <tr><td>3</td><td>Rohwerte wachsen unbegrenzt (600 · 1.440 = 864.000 Werte pro Tag) und werden jede Nacht komplett kopiert: Speicher und Übertragung wachsen ständig.</td><td>Löschkonzept bzw. ältere Daten verdichten (z. B. Stundenmittel nach 30 Tagen), inkrementelle Sicherung nur der Änderungen, Kompression.</td></tr>
+      <tr><td>4</td><td>6 GPU-Stunden pro Nacht (≈ 2.190 GPU-Stunden im Jahr), obwohl sich ohne neue Daten am Modell nichts ändert.</td><td>Training nur auslösen, wenn genügend neue, geprüfte Fotos vorliegen; nur nachtrainieren statt komplett neu; Zeiten mit viel Ökostrom nutzen.</td></tr>
+      <tr><td>5</td><td>Server laufen 168 h pro Woche, genutzt werden 45 h (≈ 27 %).</td><td>automatisch außerhalb der Arbeitszeit herunterfahren und bei Bedarf starten; bedarfsgerecht skalieren.</td></tr>
+      <tr><td>6</td><td>Software erzwingt den Austausch funktionsfähiger Geräte; bei Smartphones entsteht ein großer Teil der Umweltbelastung bei der Herstellung, dazu Elektroschrott und Kosten.</td><td>auch ältere Betriebssystemversionen unterstützen und das bei der Entwicklung einplanen (Kriterium des Blauen Engels für Software).</td></tr>
+    </table>
+    <h4>b) Datenmenge Produktbilder (4 P)</h4>
+    <p>vorher: 30.000 · 4,8 MB = 144.000 MB = <strong>144 GB pro Tag</strong><br>
+    nachher: 30.000 · 0,12 MB = 3.600 MB = <strong>3,6 GB pro Tag</strong><br>
+    Einsparung: 140,4 GB pro Tag · 365 = <strong>51.246 GB pro Jahr</strong> (≈ 51,2 TB; −97,5 %)<br>
+    Energie: 51.246 GB · 0,03 kWh/GB ≈ <strong>1.537 kWh pro Jahr</strong></p>
+    <h4>c) Beschaffung der Tablets (4 P)</h4>
+    <ul>
+      <li><strong>Kriterien</strong> (zwei davon): geringer Energieverbrauch; robust und für feuchte Umgebung geeignet (lange Lebensdauer); reparierbar, Akku tauschbar; lange Zusage für Sicherheitsupdates und Ersatzteile; Rücknahme und Recycling durch den Hersteller; schadstoffarm; ggf. generalüberholte Geräte.</li>
+      <li><strong>Umweltzeichen:</strong> Blauer Engel, TCO Certified (auch EPEAT oder Energy Star für die Energieeffizienz).</li>
+      <li><strong>Stellungnahme:</strong> Der Vorschlag ist abzulehnen. Ein großer Teil der Umweltbelastung eines Tablets entsteht bei der Herstellung; ein Austausch alle zwei Jahre statt nach vier bis sechs Jahren vervielfacht Rohstoffverbrauch, CO₂-Emissionen, Elektroschrott und Kosten. Besser: Geräte nutzen, solange sie funktionieren und Sicherheitsupdates erhalten, Akkus tauschen, Altgeräte nach sicherer Datenlöschung weitergeben oder fachgerecht recyceln.</li>
+    </ul>
+    <p class="geprueft">Rechnungen mit Python nachgeprüft (144 GB; 3,6 GB; 51.246 GB; 1.537,38 kWh; 432.000 Anfragen; 864.000 Messwerte).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Beobachtung 1 P für die Begründung, 1 P für eine passende Maßnahme. b) 1 P vorher, 1 P nachher, 1 P Einsparung GB/Jahr, 1 P kWh. c) je Kriterium 1 P, 1 P Umweltzeichen, 1 P begründete Stellungnahme.</div>
+  </div><p class="ap2-loesung-link"><a href="12_Querschnitt_Loesungen.html#L-QU-05-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== ORIGINALE ===================== -->
   <h3 id="originale">Originalaufgaben zum Üben</h3>

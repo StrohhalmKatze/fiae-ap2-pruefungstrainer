@@ -33,6 +33,19 @@
   .zweispaltig { break-inside: avoid; }
   @media print { .seitenumbruch { break-before: page; } }
 </style>
+<style id="ap2-loesung-stile">
+/* Stile aus 04_Projektmanagement_Loesungen.html, nur für eingebettete Lösungen (werkzeuge/loesungen_einbetten.py) */
+.ap2-loesung-inhalt table.kompakt td, .ap2-loesung-inhalt table.kompakt th { padding: 2px 6px; }
+.ap2-loesung-inhalt tr { break-inside: avoid; }
+.ap2-loesung-inhalt h3 + p.klein { break-after: avoid; }
+.ap2-loesung-inhalt table.lang, .ap2-loesung-inhalt table[style*="break-inside:auto"] { break-inside: auto; }
+.ap2-loesung-inhalt td.num, .ap2-loesung-inhalt th.num { text-align: right; white-space: nowrap; }
+.ap2-loesung-inhalt .loesung .kopf { font-size: 16px; margin-bottom: 4px; break-after: avoid; page-break-after: avoid; }
+.ap2-loesung-inhalt .loesung h4 { margin: 12px 0 4px; font-size: 15px; break-after: avoid; }
+.ap2-loesung-inhalt .loesung ul { margin: 4px 0; }
+.ap2-loesung-inhalt .bewertung { margin: 8px 0 4px; }
+.ap2-loesung-inhalt td.krit { font-weight: 700; color: #b91c1c; }
+</style>
 </head>
 <body>
 
@@ -1523,6 +1536,22 @@
     <div class="antwort z5"></div>
     <p class="quelle">Grundlagen zu: W24 Teil 1, Aufgabe 1 und S26 Teil 1, Aufgabe 1 (Projektbegriffe, Projekterfolg)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-01-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-01.1 · 6 Punkte</div>
+    <h4>a) Projektmerkmale (3 P) – drei der folgenden</h4>
+    <ul>
+      <li><strong>Einmaligkeit:</strong> Lindenhof führt erstmals eine mobile, papierlose Pflegedokumentation mit App, Webportal und CareBill-Schnittstelle ein – in dieser Kombination gab es das im Unternehmen noch nicht.</li>
+      <li><strong>Zeitliche Begrenzung:</strong> Laufzeit vom 01.02.2027 bis 30.11.2027, Go-Live am 01.11.2027.</li>
+      <li><strong>Klare Zielvorgabe:</strong> messbare Ziele, z. B. Dokumentationsaufwand um mindestens 30 % senken, Abrechnung bis zum 5. Werktag.</li>
+      <li><strong>Begrenzte Ressourcen:</strong> Budget 420.000 €, festes Team (Projektleiter, Product Owner, vier Entwickler/innen …).</li>
+      <li><strong>Komplexität / Risiko:</strong> viele Beteiligte (Pflege, Verwaltung, Betriebsrat, Datenschutzbeauftragter, CareBill-Hersteller), Schnittstelle zu Fremdsoftware, Gesundheitsdaten.</li>
+      <li><strong>Eigene Projektorganisation:</strong> Projektleiter Tobias Wendt, Scrum-Team mit Product Owner und Scrum Master.</li>
+    </ul>
+    <h4>b) Magisches Dreieck (3 P)</h4>
+    <p>Zeit, Kosten und Leistung/Qualität hängen voneinander ab. Wird die <strong>Zeit</strong> um zwei Monate verkürzt und bleiben die <strong>Kosten</strong> gleich, muss die <strong>Leistung bzw. Qualität</strong> nachgeben: Zum Go-Live stehen weniger Funktionen zur Verfügung (z. B. Auswertungen im Webportal erst später), Pilotbetrieb und Tests werden verkürzt – Fehler, etwa bei der Übergabe an CareBill, werden eher in den Echtbetrieb getragen; Schulungen werden gedrängt. Alternativ müsste mehr Personal eingesetzt werden (Überstunden, zusätzliche Entwickler), was die Kosten erhöht und das feste Budget sprengt.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Merkmal mit passendem Beleg aus Anlage 1 1 P, Merkmal ohne Beleg 0,5 P. b) 1 P für den Zusammenhang der drei Größen, 2 P für zwei konkrete Folgen (weniger Leistung/Qualität, Kostendruck, Risiko für Pilot und Schulung).</div>
+    <p><strong>Erklärung:</strong> „Einmaligkeit“ heißt nicht, dass es so etwas weltweit noch nie gab, sondern dass die Bedingungen für <em>dieses</em> Vorhaben einmalig sind. In b) reicht „geht nicht“ nicht – gefragt ist, welche Größe nachgeben muss.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-01-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-01-2">
     <div class="kopf">
@@ -1543,6 +1572,26 @@
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 1a (Stakeholder und ihre Interessen in einer Tabelle)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-01-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-01.2 · 10 Punkte</div>
+    <h4>a) Stakeholder-Tabelle (8 P) – vier der folgenden</h4>
+    <table class="kompakt">
+      <tr><th style="width:24%">Stakeholder</th><th>Interesse / Erwartung</th><th style="width:16%">Einfluss</th><th style="width:16%">Einstellung</th></tr>
+      <tr><td>Sabine Hartmann, Pflegedienstleitung</td><td>schnelle Tourenplanung, lückenlose, prüfsichere Dokumentation</td><td>hoch (entscheidet fachlich)</td><td>positiv (wenig Zeit)</td></tr>
+      <tr><td>Pflegekräfte</td><td>einfache, schnelle Erfassung, kein Nachtragen von Papier; keine Überwachung</td><td>mittel (als Gruppe hoch: ohne Nutzung kein Erfolg)</td><td>gemischt: jüngere positiv, ältere eher negativ</td></tr>
+      <tr><td>Betriebsrat (Yusuf Demir)</td><td>Schutz vor Leistungs- und Verhaltenskontrolle, Betriebsvereinbarung</td><td>hoch (Mitbestimmung, kann Start blockieren)</td><td>negativ / kritisch</td></tr>
+      <tr><td>Petra Lange, Abrechnung</td><td>sicherer Arbeitsplatz; vollständige Leistungsnachweise</td><td>gering bis mittel (Fachwissen Abrechnung)</td><td>negativ</td></tr>
+      <tr><td>Patientinnen, Patienten, Angehörige</td><td>verlässliche Einsatzzeiten, dieselbe Pflegekraft, Schutz ihrer Daten</td><td>gering</td><td>neutral, teils skeptisch</td></tr>
+      <tr><td>Externer Datenschutzbeauftragter</td><td>DSGVO-konforme Verarbeitung der Gesundheitsdaten, Folgenabschätzung, EU-Hosting</td><td>hoch (Freigabe nötig)</td><td>neutral</td></tr>
+      <tr><td>Lars Nowak, IT-Administration</td><td>beherrschbarer Betreuungsaufwand, zentrale Geräteverwaltung</td><td>mittel</td><td>neutral bis skeptisch</td></tr>
+      <tr><td>CareBill Software AG</td><td>Umsatz mit Schnittstelle und Zusatzmodul</td><td>mittel (Testumgebung, Termine)</td><td>neutral bis positiv</td></tr>
+      <tr><td>Geschäftsleitung Kranich</td><td>Referenzprojekt, Gewinn trotz Festpreis</td><td>hoch (für das Kranich-Team)</td><td>positiv</td></tr>
+    </table>
+    <h4>b) Umgang mit dem Betriebsrat (2 P)</h4>
+    <p>Der Betriebsrat ist ein <strong>kritischer Stakeholder</strong> (hoher Einfluss, negative Einstellung) und muss <strong>intensiv betreut</strong> werden: frühzeitig und regelmäßig einbinden (z. B. Teilnahme an Sprint Reviews, eigener Abstimmungstermin), Bedenken ernst nehmen und offenlegen, welche Daten gespeichert und ausgewertet werden, und gemeinsam die Betriebsvereinbarung erarbeiten (Zweckbindung, keine Leistungskontrolle).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Zeile 2 P – 1 P für ein passendes Interesse, 1 P für eine plausible Einschätzung von Einfluss und Einstellung. Abweichende Einschätzungen sind richtig, wenn sie zu Anlage 2 passen (z. B. Pflegekräfte „negativ“). b) 1 P Einordnung/Strategie, 1 P konkrete Maßnahme.</div>
+    <p><strong>Erklärung:</strong> Die Beispielzeile (Geschäftsführerin) zählt nicht. Häufiger Fehler: nur „Kunde“ und „Nutzer“ nennen – gerade Betriebsrat und Datenschutzbeauftragter haben hier großen Einfluss.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-01-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-01-3">
     <div class="kopf">
@@ -1571,6 +1620,41 @@
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W24 Teil 1, Aufgabe 1c (Begriffstabelle), S24 Teil 1, Aufgabe 1d (Befürchtungen und Maßnahmen) und S26 Teil 1, Aufgabe 1a (Projekterfolg prüfen)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-01-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-01.3 · 22 Punkte</div>
+    <h4>a) Begriffe (8 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:17%">Begriff</th><th>Erläuterung</th><th style="width:38%">Beispiel aus PflegeMobil</th></tr>
+      <tr><td><strong>Projektauftrag</strong></td><td>verbindliche, schriftliche Beauftragung durch den Auftraggeber; legt Ziele, Umfang, Budget, Termine, Projektleitung und deren Befugnisse fest; offizieller Startpunkt</td><td>Lindenhof (Dr. Esser) beauftragt Kranich mit PflegeMobil: Laufzeit 01.02.–30.11.2027, Budget 420.000 €, Ziele (1)–(4), Projektleiter Tobias Wendt</td></tr>
+      <tr><td><strong>Kick-off-Meeting</strong></td><td>Auftaktveranstaltung zum Projektstart: Ziele, Umfang, Rollen, Kommunikationswege und erste Termine vorstellen; Team und Stakeholder lernen sich kennen; gemeinsames Verständnis und Motivation</td><td>Anfang Februar 2027 mit Geschäftsführerin, PDL, Betriebsrat, Herrn Nowak und dem Kranich-Team; Vorstellung des Zeitplans bis zum Go-Live</td></tr>
+      <tr><td><strong>Meilenstein</strong></td><td>Ereignis besonderer Bedeutung, Zeitpunkt ohne Dauer, an dem ein prüfbares Ergebnis vorliegen muss; Kontroll- und Entscheidungspunkt</td><td>„Betriebsvereinbarung unterzeichnet“, „Start Pilotbetrieb Nord“ (Juli 2027), „CareBill-Schnittstelle abgenommen“, „Go-Live aller Standorte“ (01.11.2027)</td></tr>
+      <tr><td><strong>Lessons Learned</strong></td><td>systematisches Sammeln und Dokumentieren von Erfahrungen (positiv und negativ) am Projektende bzw. nach Phasen, damit künftige Projekte davon profitieren</td><td>Abschluss-Workshop: „Testumgebung beim Dritthersteller sofort mit Projektstart bestellen“, „Betriebsrat ab Kick-off einbinden“ – nützlich für weitere Pflegedienst-Projekte (Referenz)</td></tr>
+    </table>
+    <h4>b) Befürchtungen und Maßnahmen (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:20%">Stakeholder</th><th>Befürchtung</th><th>Maßnahme</th></tr>
+      <tr><td>Geschäftsführung Lindenhof</td><td>Projekt wird teurer als 420.000 €; die Umstellung stört den laufenden Pflegebetrieb</td><td>regelmäßige Statusberichte mit Kostenübersicht an den Lenkungsausschuss, Änderungen nur per Change Request; Pilot an einem Standort, schrittweiser Rollout, Papierverfahren als Notfallplan</td></tr>
+      <tr><td>Patientinnen und Patienten</td><td>Missbrauch ihrer Gesundheitsdaten; Unsicherheit beim Unterschreiben auf dem Tablet</td><td>Datenschutzkonzept (Verschlüsselung, EU-Hosting, Rechtekonzept) und verständliches Informationsblatt; Pflegekraft erklärt die Unterschrift, große Unterschriftsfläche, Unterschrift durch Angehörige/Bevollmächtigte möglich</td></tr>
+      <tr><td>Geschäftsleitung Kranich</td><td>zusätzliche Anforderungen gehen beim Festpreis zu ihren Lasten (Verlust)</td><td>Leistungsumfang im Pflichtenheft klar abgrenzen; konsequentes Change-Request-Management mit Nachtragsangeboten; Risikopuffer in der Kalkulation</td></tr>
+    </table>
+    <h4>c) Projekterfolg prüfen (4 P) – zwei der folgenden</h4>
+    <ul>
+      <li><strong>Soll-Ist-Vergleich der Projektziele</strong> nach einigen Monaten Betrieb: Dokumentationszeit je Einsatz messen (Ziel: von 4,0 auf höchstens 2,8 Minuten = −30 %), Abrechnungstermin (bis 5. Werktag?), Fehlerquote der Nachweise (&lt; 0,5 %?), alle vier Standorte papierlos?</li>
+      <li><strong>Termin und Budget</strong>: Go-Live am 01.11.2027 erreicht, Kosten innerhalb von 420.000 €?</li>
+      <li><strong>Abnahme</strong>: Abnahmeprotokoll ohne wesentliche Mängel, Anforderungen aus dem Pflichtenheft erfüllt.</li>
+      <li><strong>Zufriedenheit und Nutzung</strong>: Befragung von Pflegekräften, PDL und Verwaltung; Nutzungsquote der App, Anzahl Supportanfragen, wird noch auf Papier dokumentiert?</li>
+      <li><strong>Abschlussbericht und Lessons-Learned-Workshop</strong> mit Bewertung aller Abweichungen.</li>
+    </ul>
+    <h4>d) Change Request „Angehörigenportal“ (4 P)</h4>
+    <ol>
+      <li><strong>Erfassen:</strong> Die Anforderung wird als formaler Änderungsantrag (Beschreibung, Begründung, Antragstellerin, Nummer) aufgenommen – nicht einfach „nebenbei“ umgesetzt.</li>
+      <li><strong>Bewerten:</strong> Kranich schätzt Aufwand und Kosten (Nachtragsangebot wegen Festpreis), Auswirkung auf den Go-Live-Termin, zusätzliche Risiken (Datenschutz beim Zugang Angehöriger, Testaufwand) und Nutzen.</li>
+      <li><strong>Entscheiden:</strong> Der Auftraggeber bzw. Lenkungsausschuss (Dr. Esser) entscheidet – annehmen (mit Budget- und ggf. Terminanpassung), ablehnen oder auf Phase 2 verschieben.</li>
+      <li><strong>Umsetzen und dokumentieren:</strong> Bei Annahme Product Backlog, Projektplan, Budget und Vertrag anpassen; die Entscheidung dokumentieren und allen Beteiligten mitteilen.</li>
+    </ol>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Begriff 1 P Erläuterung + 1 P passendes Beispiel. b) je Stakeholder 1 P Befürchtung + 1 P passende Maßnahme. c) je Aspekt 2 P (Aspekt + Konkretisierung an den Zielen). d) je Schritt 1 P. Auch richtig: „Eintrag ins Product Backlog, Priorisierung durch den Product Owner“ – voll nur, wenn erkannt wird, dass beim Festpreis die Kosten- und Terminfolgen durch den Auftraggeber entschieden werden müssen.</div>
+    <p><strong>Erklärung:</strong> Typischer Fehler in a): Meilenstein als „Abschnitt“ oder „Phase“ erklären – er ist ein Zeitpunkt. In d) gilt: Ein Change Request wird immer erst bewertet und vom Auftraggeber entschieden; die Pflegedienstleitung kann den Umfang nicht allein erweitern.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-01-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== PM-02 ===================== -->
   <h3 id="a-02">PM-02 · Agil / Scrum / User Stories</h3>
@@ -1594,6 +1678,27 @@
     <div class="antwort z3"></div>
     <p class="quelle">Grundlagen zu: W22 Teil 1, Aufgabe 2b (Elemente des gewählten agilen Modells, z. B. Scrum)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-02-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-02.1 · 6 Punkte</div>
+    <h4>a) Zuordnung (3 P)</h4>
+    <table class="kompakt" style="width:auto">
+      <tr><th>Begriff</th><th>Kategorie</th><th>Begriff</th><th>Kategorie</th></tr>
+      <tr><td>Product Owner</td><td>Rolle</td><td>Developers</td><td>Rolle</td></tr>
+      <tr><td>Sprint Review</td><td>Event</td><td>Daily Scrum</td><td>Event</td></tr>
+      <tr><td>Increment</td><td>Artefakt</td><td>Product Backlog</td><td>Artefakt</td></tr>
+    </table>
+    <h4>b) Werte des agilen Manifests (2 P) – zwei der folgenden</h4>
+    <ul>
+      <li>Individuen und Interaktionen mehr als Prozesse und Werkzeuge</li>
+      <li>Funktionierende Software mehr als umfassende Dokumentation</li>
+      <li>Zusammenarbeit mit dem Kunden mehr als Vertragsverhandlung</li>
+      <li>Reagieren auf Veränderung mehr als das Befolgen eines Plans</li>
+    </ul>
+    <h4>c) Zweck des WIP-Limits (1 P)</h4>
+    <p>Das WIP-Limit begrenzt die Anzahl der Aufgaben, die gleichzeitig in einer Spalte bearbeitet werden. So wird Überlastung und paralleles Anfangen vieler Aufgaben vermieden, Engpässe werden sichtbar und Aufgaben werden schneller fertig.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Begriff 0,5 P. b) je Wert 1 P; die Kurzform („Reagieren auf Veränderung“) genügt. c) 1 P für Begrenzung gleichzeitiger Arbeit mit Zweck.</div>
+    <p><strong>Erklärung:</strong> Der Sprint selbst ist ebenfalls ein Event, das Sprint-Ziel eine Verpflichtung zum Sprint Backlog. Prinzipien (z. B. „Änderungen sind willkommen“) statt Werte werden mit 0,5 P bewertet.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-02-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-02-2">
     <div class="kopf">
@@ -1612,6 +1717,25 @@
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 2bb (drei Elemente des gewählten agilen Modells, z. B. Scrum, beschreiben) und W23 Teil 1, Aufgabe 2b (User Stories formulieren)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-02-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-02.2 · 10 Punkte</div>
+    <h4>a) Events (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:18%">Event</th><th>Beschreibung</th></tr>
+      <tr><td><strong>Sprint Planning</strong></td><td>Zu Beginn jedes Sprints legt das Scrum Team (Product Owner, Scrum Master, Developers) das Sprint-Ziel fest, wählt die wichtigsten Einträge aus dem Product Backlog aus und plant, wie sie umgesetzt werden. Ergebnis: <strong>Sprint Backlog</strong>. Beispiel: Sprint-Ziel „Eine Pflegekraft sieht ihre Tagestour auf dem Tablet und kann Leistungen erfassen.“</td></tr>
+      <tr><td><strong>Daily Scrum</strong></td><td>Tägliches, höchstens 15-minütiges Treffen der Developers zur gleichen Zeit: Fortschritt zum Sprint-Ziel prüfen, Plan für die nächsten 24 Stunden anpassen, Hindernisse benennen (z. B. „Die Testtablets sind noch nicht geliefert“), um die sich der Scrum Master kümmert. Ergebnis: angepasster Tagesplan.</td></tr>
+      <tr><td><strong>Sprint Review</strong></td><td>Am Ende des Sprints zeigt das Scrum Team den Stakeholdern (z. B. PDL Hartmann, Key-User aus der Pflege, Frau Lange) das fertige Increment, etwa die Leistungserfassung auf dem Tablet. Das Feedback wird gesammelt und das Product Backlog angepasst. Ergebnis: überarbeitetes Product Backlog.</td></tr>
+    </table>
+    <h4>b) User Stories (4 P) – Beispiele</h4>
+    <ul>
+      <li>„Als <strong>Pflegekraft</strong> möchte ich <strong>Leistungen auch ohne Mobilfunkempfang erfassen</strong>, damit <strong>ich in Orten ohne Netz nichts auf Papier nachtragen muss</strong>.“</li>
+      <li>„Als Pflegekraft möchte ich die Navigation zur nächsten Adresse mit einem Fingertipp starten, damit ich ohne Suchen schnell zum nächsten Einsatz komme.“</li>
+      <li>„Als <strong>Pflegedienstleitung</strong> möchte ich <strong>Einsätze per Drag &amp; Drop einer anderen Tour zuweisen</strong>, damit <strong>ich Krankmeldungen am Morgen innerhalb von zehn Minuten umplanen kann</strong>.“</li>
+      <li>„Als Pflegedienstleitung möchte ich jederzeit sehen, welche Einsätze erledigt sind, damit ich bei Verzögerungen rechtzeitig reagieren kann.“</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Event 2 P (1 P Zweck/Ablauf, 1 P Ergebnis bzw. Bezug zu PflegeMobil). b) je Story 2 P; fehlt der Nutzen („damit …“), 1 P Abzug; falsche Perspektive oder Inhalt nicht aus Anlage 3: 0 P für diese Story.</div>
+    <p><strong>Erklärung:</strong> Das Review betrifft das <em>Produkt</em> und findet mit Stakeholdern statt; die Retrospektive (nicht gefragt) betrifft die Zusammenarbeit im Team.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-02-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-02-3">
     <div class="kopf">
@@ -1635,6 +1759,41 @@
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 2a (englischer Fachtext zu User Stories: Ersteller, Aufbau, INVEST)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-02-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-02.3 · 20 Punkte</div>
+    <h4>a) Wer schreibt, wer entscheidet? (2 P)</h4>
+    <p>Jeder Projektbeteiligte darf User Stories schreiben – Entwickler, Tester, Designer und sogar Anwender (1 P). Über die Reihenfolge der Umsetzung entscheidet der <strong>Product Owner</strong>, der für das Product Backlog verantwortlich ist (1 P).</p>
+    <h4>b) Die „three Cs“ (3 P)</h4>
+    <ul>
+      <li><strong>Card:</strong> der kurze, schriftliche Text der Story.</li>
+      <li><strong>Conversation:</strong> das Gespräch zwischen Product Owner, Entwicklern und Anwendern, in dem die Details geklärt werden.</li>
+      <li><strong>Confirmation:</strong> die Akzeptanzkriterien, mit denen geprüft wird, ob die Story richtig umgesetzt wurde.</li>
+    </ul>
+    <h4>c) Akzeptanzkriterien und Definition of Done (4 P)</h4>
+    <p>Akzeptanzkriterien gehören zu <strong>genau einer Story</strong> und beschreiben das erwartete Verhalten aus Sicht des Anwenders (1 P). Die Definition of Done gilt für <strong>alle</strong> Backlog-Einträge gleichermaßen und beschreibt allgemeine Qualitätsanforderungen (Code geprüft, automatische Tests bestanden, auf dem Testsystem installiert) (1 P).</p>
+    <ul>
+      <li>Beispiel Akzeptanzkriterium (Story „Offline-Erfassung“): „Ohne Netz erfasste Leistungen bleiben gespeichert und erscheinen spätestens eine Minute nach Wiederherstellung der Verbindung im Webportal.“ (1 P)</li>
+      <li>Beispiel DoD: „Code wurde von einer zweiten Entwicklerin geprüft, alle Unit-Tests sind grün, die neue App-Version ist auf den Testtablets installiert.“ (1 P)</li>
+    </ul>
+    <h4>d) INVEST-Prüfung (4 P) – zwei der folgenden</h4>
+    <ul>
+      <li><strong>Small:</strong> Die Story bündelt mehrere große Funktionen (Offline-Erfassung, Synchronisation, Benachrichtigung der Angehörigen) und passt nicht in einen Sprint – sie ist ein Epic.</li>
+      <li><strong>Testable:</strong> „schnell und benutzerfreundlich“ ist nicht messbar; es lassen sich keine prüfbaren Akzeptanzkriterien ableiten.</li>
+      <li><strong>Valuable:</strong> Der Nutzen („damit …“) fehlt, die Rolle „Benutzer“ ist unklar (Pflegekraft? PDL? Angehörige?) – der Wert für eine bestimmte Nutzergruppe ist nicht erkennbar.</li>
+      <li><strong>Estimable:</strong> Wegen Größe und vager Formulierung kann das Team den Aufwand nicht schätzen.</li>
+      <li><strong>Independent:</strong> Die Teile hängen voneinander ab (Synchronisation setzt Offline-Speicherung voraus) und lassen sich so nicht unabhängig planen.</li>
+    </ul>
+    <h4>e) Aufgeteilte Stories (4 P) – Beispiele</h4>
+    <ul>
+      <li>„Als Pflegekraft möchte ich Leistungen ohne Mobilfunkempfang erfassen, damit ich auch in Funklöchern papierlos dokumentieren kann.“<br><em>Akzeptanzkriterium:</em> Bei fehlender Verbindung werden erfasste Leistungen verschlüsselt auf dem Tablet gespeichert und als „noch nicht übertragen“ gekennzeichnet.</li>
+      <li>„Als Pflegedienstleitung möchte ich, dass offline erfasste Leistungen automatisch übertragen werden, sobald wieder Netz verfügbar ist, damit ich einen aktuellen Überblick über erledigte Einsätze habe.“<br><em>Akzeptanzkriterium:</em> Spätestens 60 Sekunden nach Wiederherstellung der Verbindung sind alle lokal gespeicherten Einträge auf dem Server; es entstehen keine doppelten Einträge.</li>
+      <li>Auch richtig: eine Story für die Angehörigen-Information, wenn sie als eigene, kleine Story mit Rolle „Angehörige/r“ formuliert ist (fachlich gehört sie in Phase 2).</li>
+    </ul>
+    <h4>f) Schätzen laut Text (3 P)</h4>
+    <p>Geschätzt wird in <strong>Story Points</strong>, nicht in Stunden; sie geben die Größe einer Story <strong>relativ</strong> zu anderen Stories an und berücksichtigen Aufwand, Komplexität und Unsicherheit (1 P). Das ganze Entwicklungsteam schätzt gemeinsam mit <strong>Planning Poker</strong> (1 P), damit unterschiedliche Sichtweisen früh diskutiert werden und ein gemeinsames Verständnis der Story entsteht (1 P).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> d) je INVEST-Kriterium 2 P (Kriterium 1 P, Begründung an der konkreten Story 1 P). e) je Story 2 P (1 P Format Rolle – Ziel – Nutzen, 1 P passendes, prüfbares Akzeptanzkriterium). Antworten in englischer Sprache oder wörtliche Übersetzungen ohne Verständnis: höchstens halbe Punktzahl.</div>
+    <p><strong>Erklärung:</strong> In a) ist „nur der Product Owner schreibt Stories“ falsch – laut Text darf jeder schreiben, der PO <em>ordnet</em>. Bei englischen Texten werden die Antworten im Text gesucht; Vorwissen ist nur Hilfe zum Verstehen.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-02-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== PM-03 ===================== -->
   <h3 id="a-03">PM-03 · Anforderungen</h3>
@@ -1658,6 +1817,18 @@
     </table>
     <p class="quelle">Angelehnt an: W22 Teil 1, Aufgabe 1b und S23 Teil 1, Aufgabe 1c (funktionale/nicht-funktionale Anforderung)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-03-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-03.1 · 5 Punkte</div>
+    <h4>a) Unterschied (2 P)</h4>
+    <p><strong>Funktionale</strong> Anforderungen beschreiben, <strong>was</strong> das System leisten soll – seine Funktionen und sein Verhalten (1 P). <strong>Nicht-funktionale</strong> Anforderungen beschreiben, <strong>wie gut</strong> bzw. unter welchen Rahmenbedingungen es das tut – Qualitätseigenschaften wie Leistung, Sicherheit, Benutzbarkeit, Zuverlässigkeit sowie technische, rechtliche und organisatorische Vorgaben (1 P).</p>
+    <h4>b) Zuordnung (3 P)</h4>
+    <table class="kompakt" style="width:auto">
+      <tr><th>Nr.</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
+      <tr><td>Art</td><td>f</td><td>nf (Leistung)</td><td>f</td><td>nf (Sicherheit)</td><td>f</td><td>nf (Verfügbarkeit)</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> b) je richtige Zuordnung 0,5 P.</div>
+    <p><strong>Erklärung:</strong> Nr. 4 beschreibt <em>wie</em> sicher Daten gespeichert werden – Sicherheitsanforderungen zählen nach IHK-Lösungen zu den nicht-funktionalen Anforderungen. Nr. 2 und 6 enthalten Messgrößen (3 Sekunden, 99,5 %), typisch für nicht-funktionale Anforderungen.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-03-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-03-2">
     <div class="kopf">
@@ -1681,6 +1852,26 @@
     <div class="antwort z5"></div>
     <p class="quelle">Grundlagen zu: S22 Teil 1, Aufgabe 2b und S24 Teil 1, Aufgabe 1c (Anforderungen)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-03-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-03.2 · 10 Punkte</div>
+    <h4>a) Zuordnung (3 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:6%">Nr.</th><th style="width:10%">L / P</th><th>Begründung</th></tr>
+      <tr><td>1</td><td><strong>L</strong></td><td>fachliche Anforderung aus Sicht der Nutzer – <em>was</em> gebraucht wird</td></tr>
+      <tr><td>2</td><td><strong>P</strong></td><td>technische Umsetzung (Datenbank, Verschlüsselung, REST) – <em>wie</em> es gelöst wird</td></tr>
+      <tr><td>3</td><td><strong>L</strong></td><td>Ziel bzw. Anforderung des Auftraggebers</td></tr>
+      <tr><td>4</td><td><strong>P</strong></td><td>konkrete Realisierung der Schnittstelle (Zeitpunkt, Format)</td></tr>
+      <tr><td>5</td><td><strong>L</strong></td><td>Mengengerüst als Rahmenbedingung des Auftraggebers</td></tr>
+      <tr><td>6</td><td><strong>P</strong></td><td>Architektur- und Betriebsentscheidung des Auftragnehmers</td></tr>
+    </table>
+    <h4>b) Ersteller und Bedeutung für die Abnahme (3 P)</h4>
+    <p>Das <strong>Lastenheft</strong> hat der <strong>Auftraggeber</strong>, die Lindenhof Pflege gGmbH (Geschäftsführung und PDL), vor der Vergabe erstellt; es beschreibt die Anforderungen aus ihrer Sicht und war Grundlage für das Angebot (1 P). Das <strong>Pflichtenheft</strong> hat der <strong>Auftragnehmer</strong>, die Kranich Softwarehaus GmbH, auf Basis des Lastenhefts erstellt; es beschreibt, wie und womit die Anforderungen umgesetzt werden (1 P). Nachdem Lindenhof das Pflichtenheft bestätigt hat, ist es <strong>verbindliche Vertragsgrundlage</strong>: Bei der Abnahme wird geprüft, ob PflegeMobil die dort festgelegten Leistungen und Abnahmekriterien erfüllt; was nicht darin steht, ist eine Zusatzleistung (Change Request) (1 P).</p>
+    <h4>c) Beobachtung im Vergleich zum Interview (4 P)</h4>
+    <p><strong>Vorteil:</strong> Die Beobachtung zeigt den <strong>tatsächlichen Arbeitsablauf</strong> unter echten Bedingungen – Arbeiten mit Handschuhen, Funklöcher, Zeitdruck zwischen den Einsätzen, Unterschrift in der Wohnung. Auch unbewusste Tätigkeiten und Umgehungslösungen werden sichtbar, die eine Pflegekraft im Interview gar nicht erwähnen würde (2 P).</p>
+    <p><strong>Nachteil:</strong> hoher Zeitaufwand für wenig Breite – ein ganzer Tag ergibt die Sicht nur <strong>einer</strong> Pflegekraft an einem Standort; zudem ist eine fremde Person in den Wohnungen der Patienten anwesend (Privatsphäre, Einwilligung, Datenschutz), und die Pflegekraft verhält sich beobachtet evtl. anders (2 P).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je richtige Zuordnung 0,5 P. b) je 1 P für Ersteller Lastenheft, Ersteller Pflichtenheft und Bedeutung für die Abnahme. c) je 2 P für Vorteil und Nachteil, davon jeweils 1 P für den Bezug zur Pflegearbeit.</div>
+    <p><strong>Erklärung:</strong> Prüffrage für a): Beschreibt der Satz ein <em>Ziel oder Bedürfnis</em> des Kunden (Lastenheft) oder eine <em>technische Entscheidung</em> des Dienstleisters (Pflichtenheft)? Merkhilfe: <strong>L</strong>astenheft vom <strong>L</strong>aien (Kunde) – Was?; <strong>P</strong>flichtenheft vom <strong>P</strong>rofi (Dienstleister) – Wie?</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-03-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-03-3">
     <div class="kopf">
@@ -1707,6 +1898,45 @@
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S22 Teil 1, Aufgabe 2b (je drei funktionale und nicht-funktionale Anforderungen beschreiben)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-03-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-03.3 · 18 Punkte</div>
+    <h4>a) Funktionale Anforderungen (6 P) – drei der folgenden</h4>
+    <ul>
+      <li><strong>Tourenplanung:</strong> Die PDL kann im Webportal Einsätze per Drag &amp; Drop Touren zuweisen und bei Krankmeldungen umplanen; die geänderte Tour erscheint auf dem Tablet der Pflegekraft.</li>
+      <li><strong>Leistungserfassung:</strong> Die Pflegekraft erfasst in der App die je Einsatz erbrachten Leistungen.</li>
+      <li><strong>Unterschrift:</strong> Patientin bzw. Patient unterschreibt den Leistungsnachweis auf dem Tablet.</li>
+      <li><strong>Navigation:</strong> Die App startet per Fingertipp die Navigation zur Adresse des nächsten Einsatzes.</li>
+      <li><strong>Statusübersicht:</strong> Das Portal zeigt der PDL, welche Einsätze erledigt sind.</li>
+      <li><strong>Änderungsprotokoll:</strong> Jede Änderung an der Dokumentation wird mit Benutzer, Zeitpunkt und Inhalt protokolliert.</li>
+      <li><strong>Monatsabschluss/Export:</strong> Das System prüft die Nachweise je Patient auf Vollständigkeit (fehlende Unterschriften) und übergibt sie im XML-Format der CareBill-Importschnittstelle.</li>
+      <li><strong>Fernsperrung:</strong> Ein verlorenes Tablet kann zentral gesperrt und gelöscht werden.</li>
+    </ul>
+    <h4>b) Nicht-funktionale Anforderungen, messbar (6 P) – drei der folgenden</h4>
+    <ul>
+      <li><strong>Zuverlässigkeit / Offline-Fähigkeit:</strong> „Erfassung und Unterschrift funktionieren ohne Netzverbindung vollständig; offline gespeicherte Daten werden nach Wiederverbindung innerhalb von 60 Sekunden ohne Datenverlust übertragen.“</li>
+      <li><strong>Benutzbarkeit (Handschuhe):</strong> „Alle Schaltflächen der Erfassungsmaske sind mindestens 15 × 15 mm groß.“</li>
+      <li><strong>Effizienz der Bedienung:</strong> „Eine Standardleistung lässt sich mit höchstens drei Fingertipps erfassen; im Usability-Test benötigen 9 von 10 Pflegekräften nicht länger als mit dem Papierformular.“</li>
+      <li><strong>Sicherheit / Zugriffsschutz:</strong> „Eine Pflegekraft kann ausschließlich die Daten der Patienten ihrer eigenen Tour des Tages abrufen (Rollen- und Rechtekonzept, im Test mit fremder Tour geprüft).“</li>
+      <li><strong>Nachvollziehbarkeit / Revisionssicherheit:</strong> „Änderungen an Dokumentationseinträgen werden mit Benutzer, Zeitstempel sowie altem und neuem Wert protokolliert; Protokolleinträge können nicht gelöscht werden.“</li>
+      <li><strong>Kompatibilität:</strong> „Die App läuft auf den beiden jeweils neuesten Android-Hauptversionen.“</li>
+      <li><strong>Leistung:</strong> „Eine Umplanung im Webportal ist nach höchstens 2 Sekunden gespeichert und spätestens nach einer Minute auf dem Tablet sichtbar (bei Netzverbindung).“</li>
+    </ul>
+    <h4>c) MoSCoW (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:6%">Nr.</th><th>Anforderung</th><th style="width:12%">Einordnung</th><th>Kurzbegründung</th></tr>
+      <tr><td>1</td><td>Offline-Erfassung</td><td><strong>M</strong></td><td>ohne sie in Funklöchern unbrauchbar (Anlage 3)</td></tr>
+      <tr><td>2</td><td>Unterschrift auf dem Tablet</td><td><strong>M</strong></td><td>ohne Unterschrift kein vollständiger Nachweis, nicht abrechenbar</td></tr>
+      <tr><td>3</td><td>Angehörigenportal</td><td><strong>W</strong></td><td>laut Geschäftsführung erst Phase 2</td></tr>
+      <tr><td>4</td><td>Dunkelmodus</td><td><strong>C</strong></td><td>„angenehm, aber nicht entscheidend“</td></tr>
+      <tr><td>5</td><td>Navigation per Fingertipp</td><td><strong>S</strong></td><td>wichtig, aber Umgehung mit üblicher Navi-App möglich</td></tr>
+      <tr><td>6</td><td>Änderungsprotokoll</td><td><strong>M</strong></td><td>nötig für Prüfungen durch den Medizinischen Dienst</td></tr>
+    </table>
+    <p><strong>Begründung (3):</strong> Das Angehörigenportal ist ausdrücklich für Phase 2 vorgesehen (Anlage 1 und Notiz der Geschäftsführung in Anlage 3). Es wird in diesem Release bewusst nicht umgesetzt („Won’t have this time“), damit Budget und Go-Live-Termin für die zwingenden Funktionen gesichert sind.</p>
+    <h4>d) „schnell und einfach“ (2 P)</h4>
+    <p>Die Formulierung enthält <strong>keine Messgröße und keinen Grenzwert</strong>; „schnell“ und „einfach“ sind subjektiv. Bei der Abnahme lässt sich nicht objektiv entscheiden, ob die Anforderung erfüllt ist – das führt zu Streit zwischen Auftraggeber und Auftragnehmer. Außerdem werden zwei Anforderungen vermischt. Besser: z. B. „Start der App in höchstens 3 Sekunden“ und „Erfassung mit höchstens drei Fingertipps“.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Anforderung 2 P (eindeutig beschrieben und aus Anlage 3 ableitbar). b) je Anforderung 2 P: 1 P passende nicht-funktionale Anforderung, 1 P prüfbare Formulierung mit Messgröße. c) je richtige Einordnung 0,5 P (Nr. 5 auch C, Nr. 6 auch S mit Begründung), Begründung (3) 1 P. d) 1 P „nicht messbar/prüfbar“, 1 P Folge für die Abnahme oder Verbesserungsvorschlag.</div>
+    <p><strong>Erklärung:</strong> Typischer Fehler in b): eine messbare Formulierung ohne Zahl („möglichst große Schaltflächen“). Ob „nur eigene Patienten sehen“ als funktional (Anzeige der eigenen Tour) oder nicht-funktional (Zugriffsschutz) gezählt wird, hängt von der Formulierung ab – beides wird akzeptiert, aber nicht doppelt.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-03-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== PM-04 ===================== -->
   <h3 id="a-04">PM-04 · Risikoanalyse</h3>
@@ -1728,6 +1958,21 @@
     </table>
     <p class="quelle">Grundlagen zu: S23 Teil 1, Aufgabe 1b und W25 Teil 1, Aufgabe 1c (Risikoanalyse)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-04-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-04.1 · 6 Punkte</div>
+    <h4>a) Risiko und Problem (2 P)</h4>
+    <p>Ein <strong>Risiko</strong> ist ein mögliches, zukünftiges Ereignis, das nur mit einer gewissen Wahrscheinlichkeit eintritt und dann die Projektziele gefährdet (1 P). Ein <strong>Problem</strong> ist bereits eingetreten und muss sofort behandelt werden (1 P). Beispiel: Ein möglicher Lieferengpass bei den Tablets (R2) ist ein Risiko; sagt der Lieferant die Lieferung tatsächlich ab, ist es ein Problem.</p>
+    <h4>b) Strategien (4 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:22%">Strategie</th><th>Maßnahme in PflegeMobil (Beispiele)</th></tr>
+      <tr><td><strong>Vermeiden</strong></td><td>Pilotbetrieb nur mit unterschriebener Betriebsvereinbarung starten (R5); auf den US-Clouddienst verzichten (kein Drittlandtransfer)</td></tr>
+      <tr><td><strong>Vermindern</strong></td><td>Offline-Synchronisation früh als Prototyp in Funklöchern testen (R3); zweite Person in die Android-Entwicklung einarbeiten, Pair Programming (R4); Tablets verschlüsseln und per MDM fernlöschbar machen (R7, Schaden ↓)</td></tr>
+      <tr><td><strong>Übertragen</strong></td><td>Liefervertrag mit festem Liefertermin und Vertragsstrafe (R2); Versicherung gegen Diebstahl/Cyberschäden (R7); Testumgebung vertraglich mit Termin und Vertragsstrafe bei CareBill bestellen (R1)</td></tr>
+      <tr><td><strong>Akzeptieren</strong></td><td>geringes Lieferrisiko der Tablets (R2) bewusst tragen und einen Zeitpuffer einplanen</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> b) je Strategie 0,5 P, je passende Maßnahme 0,5 P. Synonyme (ausweichen, mindern/reduzieren, abwälzen, tragen/selbst tragen) sind gleichwertig.</div>
+    <p><strong>Erklärung:</strong> Vermindern kann an der Wahrscheinlichkeit <em>oder</em> am Schaden ansetzen; Verschlüsselung verhindert den Verlust nicht, begrenzt aber den Schaden.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-04-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-04-2">
     <div class="kopf">
@@ -1814,6 +2059,100 @@
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: S23 Teil 1, Aufgabe 1b (Risikotabelle) – ergänzt um Risikowert und Risikomatrix</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-04-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-04.2 · 10 Punkte</div>
+    <h4>a) Risikowerte und Rang (3 P)</h4>
+    <table class="kompakt">
+      <tr><th>Risiko</th><th class="num">R1</th><th class="num">R2</th><th class="num">R3</th><th class="num">R4</th><th class="num">R5</th><th class="num">R6</th><th class="num">R7</th></tr>
+      <tr><td>Rechnung</td><td class="num">3 × 4</td><td class="num">2 × 3</td><td class="num">4 × 4</td><td class="num">2 × 5</td><td class="num">3 × 5</td><td class="num">3 × 3</td><td class="num">2 × 5</td></tr>
+      <tr><td>Risikowert</td><td class="num">12</td><td class="num">6</td><td class="num">16</td><td class="num">10</td><td class="num">15</td><td class="num">9</td><td class="num">10</td></tr>
+      <tr><td>Rang</td><td class="num">3</td><td class="num">7</td><td class="num">1</td><td class="num">4</td><td class="num">2</td><td class="num">6</td><td class="num">4</td></tr>
+    </table>
+    <p class="klein">R4 und R7 teilen sich Rang 4 (auch „4 und 5“ ist richtig).</p>
+    <h4>b) Risikomatrix (3 P)</h4>
+    <figure>
+      <svg viewBox="0 0 690 320" width="690" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+<rect x="150" y="204" width="104" height="46" fill="#d8ecd6" stroke="#555"/>
+<text x="249" y="217" text-anchor="end" font-size="10.5" fill="#666">1</text>
+<rect x="254" y="204" width="104" height="46" fill="#d8ecd6" stroke="#555"/>
+<text x="353" y="217" text-anchor="end" font-size="10.5" fill="#666">2</text>
+<rect x="358" y="204" width="104" height="46" fill="#d8ecd6" stroke="#555"/>
+<text x="457" y="217" text-anchor="end" font-size="10.5" fill="#666">3</text>
+<rect x="462" y="204" width="104" height="46" fill="#d8ecd6" stroke="#555"/>
+<text x="561" y="217" text-anchor="end" font-size="10.5" fill="#666">4</text>
+<rect x="566" y="204" width="104" height="46" fill="#d8ecd6" stroke="#555"/>
+<text x="665" y="217" text-anchor="end" font-size="10.5" fill="#666">5</text>
+<rect x="150" y="158" width="104" height="46" fill="#d8ecd6" stroke="#555"/>
+<text x="249" y="171" text-anchor="end" font-size="10.5" fill="#666">2</text>
+<rect x="254" y="158" width="104" height="46" fill="#d8ecd6" stroke="#555"/>
+<text x="353" y="171" text-anchor="end" font-size="10.5" fill="#666">4</text>
+<rect x="358" y="158" width="104" height="46" fill="#fbecc0" stroke="#555"/>
+<text x="457" y="171" text-anchor="end" font-size="10.5" fill="#666">6</text>
+<text x="410.0" y="189.0" text-anchor="middle" font-weight="bold">R2</text>
+<rect x="462" y="158" width="104" height="46" fill="#fbecc0" stroke="#555"/>
+<text x="561" y="171" text-anchor="end" font-size="10.5" fill="#666">8</text>
+<rect x="566" y="158" width="104" height="46" fill="#fbecc0" stroke="#555"/>
+<text x="665" y="171" text-anchor="end" font-size="10.5" fill="#666">10</text>
+<text x="618.0" y="189.0" text-anchor="middle" font-weight="bold">R4 · R7</text>
+<rect x="150" y="112" width="104" height="46" fill="#d8ecd6" stroke="#555"/>
+<text x="249" y="125" text-anchor="end" font-size="10.5" fill="#666">3</text>
+<rect x="254" y="112" width="104" height="46" fill="#fbecc0" stroke="#555"/>
+<text x="353" y="125" text-anchor="end" font-size="10.5" fill="#666">6</text>
+<rect x="358" y="112" width="104" height="46" fill="#fbecc0" stroke="#555"/>
+<text x="457" y="125" text-anchor="end" font-size="10.5" fill="#666">9</text>
+<text x="410.0" y="143.0" text-anchor="middle" font-weight="bold">R6</text>
+<rect x="462" y="112" width="104" height="46" fill="#f3c9c9" stroke="#555"/>
+<text x="561" y="125" text-anchor="end" font-size="10.5" fill="#666">12</text>
+<text x="514.0" y="143.0" text-anchor="middle" font-weight="bold">R1</text>
+<rect x="566" y="112" width="104" height="46" fill="#f3c9c9" stroke="#555"/>
+<text x="665" y="125" text-anchor="end" font-size="10.5" fill="#666">15</text>
+<text x="618.0" y="143.0" text-anchor="middle" font-weight="bold">R5</text>
+<rect x="150" y="66" width="104" height="46" fill="#d8ecd6" stroke="#555"/>
+<text x="249" y="79" text-anchor="end" font-size="10.5" fill="#666">4</text>
+<rect x="254" y="66" width="104" height="46" fill="#fbecc0" stroke="#555"/>
+<text x="353" y="79" text-anchor="end" font-size="10.5" fill="#666">8</text>
+<rect x="358" y="66" width="104" height="46" fill="#f3c9c9" stroke="#555"/>
+<text x="457" y="79" text-anchor="end" font-size="10.5" fill="#666">12</text>
+<rect x="462" y="66" width="104" height="46" fill="#f3c9c9" stroke="#555"/>
+<text x="561" y="79" text-anchor="end" font-size="10.5" fill="#666">16</text>
+<text x="514.0" y="97.0" text-anchor="middle" font-weight="bold">R3</text>
+<rect x="566" y="66" width="104" height="46" fill="#f3c9c9" stroke="#555"/>
+<text x="665" y="79" text-anchor="end" font-size="10.5" fill="#666">20</text>
+<rect x="150" y="20" width="104" height="46" fill="#d8ecd6" stroke="#555"/>
+<text x="249" y="33" text-anchor="end" font-size="10.5" fill="#666">5</text>
+<rect x="254" y="20" width="104" height="46" fill="#fbecc0" stroke="#555"/>
+<text x="353" y="33" text-anchor="end" font-size="10.5" fill="#666">10</text>
+<rect x="358" y="20" width="104" height="46" fill="#f3c9c9" stroke="#555"/>
+<text x="457" y="33" text-anchor="end" font-size="10.5" fill="#666">15</text>
+<rect x="462" y="20" width="104" height="46" fill="#f3c9c9" stroke="#555"/>
+<text x="561" y="33" text-anchor="end" font-size="10.5" fill="#666">20</text>
+<rect x="566" y="20" width="104" height="46" fill="#f3c9c9" stroke="#555"/>
+<text x="665" y="33" text-anchor="end" font-size="10.5" fill="#666">25</text>
+<text x="142" y="232.0" text-anchor="end">1</text>
+<text x="202.0" y="268" text-anchor="middle">1</text>
+<text x="142" y="186.0" text-anchor="end">2</text>
+<text x="306.0" y="268" text-anchor="middle">2</text>
+<text x="142" y="140.0" text-anchor="end">3</text>
+<text x="410.0" y="268" text-anchor="middle">3</text>
+<text x="142" y="94.0" text-anchor="end">4</text>
+<text x="514.0" y="268" text-anchor="middle">4</text>
+<text x="142" y="48.0" text-anchor="end">5</text>
+<text x="618.0" y="268" text-anchor="middle">5</text>
+<text x="410.0" y="288" text-anchor="middle" font-weight="bold">Schadensausmaß (S) →</text>
+<text transform="translate(28,135.0) rotate(-90)" text-anchor="middle" font-weight="bold">Eintrittswahrscheinlichkeit (EW) →</text>
+<text x="120" y="310" font-size="11.5" fill="#444">Zahl oben rechts = Risikowert EW × S · dunkel/rot: hoch (≥ 12) · mittel: 6–11 · hell/grün: gering (≤ 5)</text>
+</svg>
+      <figcaption>Abb. L-1: Risiken R1–R7 in der Risikomatrix</figcaption>
+    </figure>
+    <p>Sofort Maßnahmen erforderlich (RW ≥ 12): <strong>R3</strong> (16), <strong>R5</strong> (15) und <strong>R1</strong> (12).</p>
+    <h4>c) Gegenmaßnahmen (4 P)</h4>
+    <ul>
+      <li><strong>R3 – fehlender Empfang / Synchronisationskonflikte:</strong> Die App wird „offline-first“ entwickelt: alle Daten werden lokal verschlüsselt gespeichert und später mit Konflikterkennung (Zeitstempel/Versionsnummer, nichts wird stillschweigend überschrieben) synchronisiert; Test genau in den bekannten Funklöchern während des Pilots. Strategie: <strong>vermindern</strong>.</li>
+      <li><strong>R5 – Betriebsvereinbarung nicht rechtzeitig:</strong> Betriebsrat sofort einbinden und den Entwurf gemeinsam erarbeiten (Zweckbindung, keine Leistungskontrolle); Meilenstein „Betriebsvereinbarung unterzeichnet“ vor den Pilotstart legen, regelmäßige Termine. Strategie: <strong>vermindern</strong> (ein Pilot ohne Vereinbarung wird zusätzlich <strong>vermieden</strong>).</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> a) Risikowerte 2 P (je Fehler 0,5 P Abzug), Rangfolge 1 P. b) Einträge 2 P, Nennung R1, R3, R5 1 P. c) je Risiko 1 P konkrete Maßnahme, 1 P passende Strategie.</div>
+    <p><strong>Erklärung:</strong> Die Schwelle „≥ 12“ stammt aus Anlage 5 – R4 und R7 haben zwar das höchste Schadensausmaß (5), wegen der geringen Wahrscheinlichkeit aber nur RW 10.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-04-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-04-3">
     <div class="kopf">
@@ -1839,6 +2178,31 @@
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W25 Teil 1, Aufgabe 1c (Problem → Risiko → Gegenmaßnahme), S23 Teil 1, Aufgabe 1b (Ursache und Auswirkung) und S26 Teil 1, Aufgabe 1b</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-04-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-04.3 · 18 Punkte</div>
+    <h4>a) Problem → Risiko → Gegenmaßnahme (8 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:22%">Problem</th><th>Risiko</th><th>Gegenmaßnahme</th></tr>
+      <tr><td>PDL sagt Abstimmungstermine häufig ab</td><td>Anforderungen werden nicht rechtzeitig geklärt, Entscheidungen verzögern sich, Sprint Reviews ohne fachliches Feedback → es werden falsche oder unvollständige Funktionen entwickelt; Nacharbeit, Terminverzug beim Go-Live, geringere Akzeptanz</td><td>Stellvertretung bzw. Key-User aus der Pflege mit Entscheidungsbefugnis benennen; kurze, feste Termine (z. B. 30 Minuten nach dem Frühdienst) im Kalender reservieren; Freistellung durch die Geschäftsführung; offene Entscheidungen an den Lenkungsausschuss eskalieren</td></tr>
+      <tr><td>Festpreis auf Basis grober Schätzung</td><td>Der tatsächliche Aufwand liegt über der Kalkulation → Verlust für Kranich; Zeit- und Kostendruck führt zu Abkürzungen bei Tests und Dokumentation (Qualität ↓); Streit über den Leistungsumfang</td><td>detaillierte Aufwandsschätzung auf Basis des Pflichtenhefts (Expertenschätzung, Planning Poker); Risikozuschlag; Leistungsumfang im Vertrag klar abgrenzen; konsequentes Change-Request-Management mit Nachtragsangeboten; laufendes Kostencontrolling</td></tr>
+    </table>
+    <h4>b) Zwei weitere Risiken (6 P) – Beispiele</h4>
+    <table class="kompakt">
+      <tr><th style="width:24%">Risiko</th><th>Ursache</th><th>Auswirkung</th></tr>
+      <tr><td>Fehlerhafte Stammdatenmigration</td><td>uneinheitliche Daten in der bisherigen Tabellenkalkulation (Dubletten, Tippfehler, veraltete Adressen)</td><td>falsche Touren und Leistungen, Abrechnungsfehler, Nacharbeit, Pilotstart verzögert sich</td></tr>
+      <tr><td>Patienten verweigern die Unterschrift auf dem Tablet</td><td>Skepsis älterer Patienten gegenüber Technik und Datenschutz</td><td>Leistungsnachweise unvollständig, Leistungen nicht abrechenbar, Ziel (3) verfehlt</td></tr>
+      <tr><td>Wachsender Leistungsumfang (Scope Creep)</td><td>viele Stakeholder mit zusätzlichen Wünschen (z. B. Angehörigenportal)</td><td>Aufwand steigt, Go-Live-Termin und Budget gefährdet</td></tr>
+      <tr><td>CareBill ändert die Importschnittstelle</td><td>Versionsupdate beim Hersteller</td><td>Export funktioniert nicht mehr, Abrechnung verzögert sich</td></tr>
+      <tr><td>Ausfall des einzigen IT-Administrators</td><td>nur eine Teilzeitkraft bei Lindenhof</td><td>Tablets werden nicht betreut, Störungen bleiben liegen, Pflegekräfte können nicht dokumentieren</td></tr>
+      <tr><td>Personalengpass in der Pflege zum Go-Live</td><td>Krankheitswelle, Urlaub im Herbst</td><td>Schulungen fallen aus, Go-Live mit ungeschultem Personal oder verschoben</td></tr>
+    </table>
+    <h4>c) Subunternehmer (2 P)</h4>
+    <p>Strategie: <strong>Übertragen</strong> (Risikotransfer) (1 P). Neues Risiko, z. B.: Abhängigkeit vom Subunternehmer (Terminverzug, schlechte Qualität, Insolvenz), fehlendes eigenes Know-how für Wartung und Fehlerbehebung, Abstimmungs- und Schnittstellenprobleme, zusätzlicher Datenschutzaufwand (Auftragsverarbeitung) (1 P).</p>
+    <h4>d) Regelmäßige Wiederholung (2 P)</h4>
+    <p>Risiken verändern sich im Projektverlauf: neue Risiken kommen hinzu (z. B. durch Change Requests oder Erkenntnisse aus dem Pilot), Eintrittswahrscheinlichkeiten und Schäden ändern sich (R1 entfällt, sobald die Testumgebung bereitsteht), und die Wirkung der Maßnahmen muss überprüft werden. Nur mit einer aktuellen Risikoliste kann rechtzeitig gegengesteuert werden.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Zeile 2 P Risiko (Ereignis mit Auswirkung auf Termin, Kosten oder Qualität) + 2 P passende, konkrete Gegenmaßnahme. b) je Risiko 3 P (Risiko, Ursache, Auswirkung je 1 P); Risiken aus Anlage 5 oder aus a) zählen nicht. c) und d) je 1 P pro Aspekt.</div>
+    <p><strong>Erklärung:</strong> In a) ist das Problem schon da – das Risiko ist die mögliche <em>Folge</em> für das Projekt. „Die PDL hat keine Zeit“ noch einmal als Risiko hinzuschreiben, bringt keine Punkte.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-04-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== PM-05 ===================== -->
   <h3 id="a-05">PM-05 · Klassische Vorgehensmodelle und Prototyping</h3>
@@ -1860,6 +2224,21 @@
     </table>
     <p class="quelle">Angelehnt an: W24 Teil 1, Aufgabe 1a (Kategorien von Vorgehensmodellen)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-05-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-05.1 · 6 Punkte</div>
+    <h4>a) Kategorien (2 P)</h4>
+    <p><strong>Klassische (sequenzielle, plangetriebene)</strong> Vorgehensmodelle, z. B. Wasserfallmodell oder V-Modell (1 P); <strong>agile (iterativ-inkrementelle)</strong> Vorgehensmodelle, z. B. Scrum oder Kanban (1 P).</p>
+    <h4>b) V-Modell (4 P)</h4>
+    <table class="kompakt">
+      <tr><th>Testaktivität</th><th>Teststufe</th><th>Entwurfsphase</th></tr>
+      <tr><td>1. Gesamtsystem gegen Pflichtenheft, inkl. Antwortzeiten</td><td>Systemtest</td><td>funktionaler Systementwurf</td></tr>
+      <tr><td>2. Frau Lange prüft mit echten Monatsdaten gegen das Lastenheft</td><td>Abnahmetest</td><td>Anforderungsdefinition</td></tr>
+      <tr><td>3. Methode, die ein XML-Element erzeugt</td><td>Komponententest (Modul-/Unit-Test)</td><td>Komponentenspezifikation (Feinentwurf)</td></tr>
+      <tr><td>4. Zusammenspiel Export-Modul, Plausibilitätsprüfung und CareBill</td><td>Integrationstest</td><td>technischer Systementwurf (Architektur)</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Kategorie mit Beispiel 1 P („sequenziell/iterativ“ wird ebenfalls akzeptiert). b) je Zeile 0,5 P Teststufe + 0,5 P Entwurfsphase.</div>
+    <p><strong>Erklärung:</strong> Je „höher“ die Teststufe, desto gröber die Entwurfsstufe, gegen die geprüft wird. Der Abnahmetest validiert gegen die Anforderungen des Kunden.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-05-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-05-2">
     <div class="kopf">
@@ -1875,6 +2254,26 @@
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W25 Teil 1, Aufgabe 3c (Prototyping)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-05-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-05.2 · 10 Punkte</div>
+    <h4>a) Horizontal und vertikal (4 P)</h4>
+    <p>Ein <strong>horizontaler Prototyp</strong> bildet eine Schicht des Systems – meist die Benutzungsoberfläche – in der <strong>Breite</strong> ab (viele oder alle Masken), ohne dahinterliegende Logik und Datenhaltung. Er dient dazu, Bedienung und Abläufe mit den Anwendern abzustimmen (2 P).</p>
+    <p>Ein <strong>vertikaler Prototyp</strong> realisiert einen schmalen, ausgewählten Funktionsausschnitt <strong>vollständig durch alle Schichten</strong> (Oberfläche, Logik, Datenhaltung, Schnittstellen). Er dient dazu, die technische Machbarkeit zu prüfen (2 P).</p>
+    <h4>b) Eignung (4 P)</h4>
+    <ul>
+      <li><strong>Leistungserfassung mit Pflegekräften testen → horizontaler Prototyp</strong> (z. B. Klick-Dummy auf dem Tablet): Es geht um Bedienung – Größe der Schaltflächen mit Handschuhen, Zahl der Schritte, Erfassungsdauer im Vergleich zum Papier. Logik ist dafür nicht nötig; der Prototyp ist schnell erstellt und leicht änderbar (2 P).</li>
+      <li><strong>Offline-Speicherung und Synchronisation prüfen → vertikaler Prototyp</strong> („Durchstich“): Eine Leistung wird in der App erfasst, lokal gespeichert, nach Wiederverbindung synchronisiert und in der Server-Datenbank abgelegt. Nur so lassen sich Konflikte, Datenverlust und Verhalten bei Netzabbruch über alle Schichten testen (2 P).</li>
+    </ul>
+    <h4>c) Risiken des Prototypings (2 P) – zwei der folgenden</h4>
+    <ul>
+      <li>Auftraggeber oder Nutzer halten den Prototyp für fast fertig → falsche Erwartungen an Termin und Kosten.</li>
+      <li>Zusätzlicher Aufwand und zusätzliche Kosten.</li>
+      <li>Wegwerf-Code wird aus Zeitdruck ins Produkt übernommen → schlechte Qualität und Wartbarkeit.</li>
+      <li>Nicht-funktionale Anforderungen (Performance, Sicherheit) und Dokumentation werden vernachlässigt.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Prototyp 1 P Merkmal + 1 P Zweck. b) je Vorhaben 1 P richtige Art + 1 P Begründung am Szenario. c) je Risiko 1 P.</div>
+    <p><strong>Erklärung:</strong> Der horizontale Prototyp für die Oberfläche ist typischerweise ein Wegwerf-Prototyp; der vertikale Durchstich kann evolutionär weiterentwickelt werden, wenn er sauber programmiert ist.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-05-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-05-3">
     <div class="kopf">
@@ -1896,6 +2295,29 @@
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: W25 Teil 1, Aufgabe 1b (klassisch vs. agil, Tabelle) und S22 Teil 1, Aufgabe 1a</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-05-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-05.3 · 20 Punkte</div>
+    <h4>a) Klassisch und agil (8 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:15%"></th><th>Projektplanung und Anforderungen</th><th>Flexibilität bei Änderungen</th></tr>
+      <tr><td><strong>klassisch</strong></td><td>Alle Anforderungen (Tourenplanung, Offline-Erfassung, Unterschrift, CareBill-Export …) werden zu Projektbeginn vollständig erhoben und im Lasten- und Pflichtenheft festgeschrieben. Ein detaillierter Gesamtplan mit Phasen und Meilensteinen bis zum Go-Live am 01.11.2027 entsteht vorab.</td><td>Änderungen, z. B. neue Wünsche aus dem Pilotbetrieb oder das Angehörigenportal, sind nur über formale Change Requests möglich. Sie sind aufwendig und teuer, weil bereits abgeschlossene Phasen wiederholt werden müssen, und verschieben oft Termine oder Kosten.</td></tr>
+      <tr><td><strong>agil</strong></td><td>Anforderungen stehen als User Stories im Product Backlog, das laufend ergänzt und von der Product Ownerin priorisiert wird. Es gibt eine grobe Release-Planung; geplant wird im Detail jeweils für den nächsten Zwei-Wochen-Sprint. Die Anforderungen der Pflegekräfte konkretisieren sich durch deren Feedback.</td><td>Änderungen sind erwünscht: Neue oder geänderte Anforderungen werden ins Backlog aufgenommen und können ab dem nächsten Sprint umgesetzt werden. Das Feedback aus jedem Sprint Review (PDL, Pflegekräfte) fließt direkt ein. Grenzen setzen Gesamtbudget und Festpreis.</td></tr>
+    </table>
+    <h4>b) Begründung mit der Stacey-Matrix (6 P)</h4>
+    <p><strong>App und Webportal:</strong> Die Anforderungen der Pflegekräfte und der PDL sind zu Beginn noch unklar und ändern sich beim Ausprobieren (Bedienung mit Handschuhen, Erfassungsablauf, Darstellung der Tour); technisch ist die Offline-Synchronisation für das Team teilweise Neuland. Das Vorhaben liegt damit im Bereich <strong>„komplex“</strong> → agiles Vorgehen mit kurzen Sprints und regelmäßigem Feedback (3 P).</p>
+    <p><strong>CareBill-Schnittstelle:</strong> Die Anforderungen sind klar und stabil (festes XML-Format der Importschnittstelle, bekannte Abrechnungsregeln), die Technik ist bekannt (XML-Export). Das Vorhaben liegt im Bereich <strong>„einfach“ bzw. „kompliziert“</strong> → gut im Voraus planbar, klassisches Vorgehen (z. B. V-Modell mit festgelegten Teststufen). Zusätzlich verlangt die Abhängigkeit vom Hersteller (Testumgebung mit sechs Wochen Vorlauf) eine verbindliche Terminplanung (3 P).</p>
+    <h4>c) Nachteile des Wasserfallmodells (4 P) – zwei der folgenden</h4>
+    <ul>
+      <li>Die Anforderungen der Pflegekräfte hätten zu Beginn vollständig feststehen müssen, obwohl sie sich erst beim Ausprobieren ergeben → Gefahr, an den Bedürfnissen vorbei zu entwickeln.</li>
+      <li>Lauffähige Software gibt es erst spät; Fehler (z. B. Synchronisationsprobleme in Funklöchern) würden erst in der Testphase kurz vor dem Go-Live entdeckt → teure Nacharbeit, Terminrisiko.</li>
+      <li>Erkenntnisse aus dem Pilotbetrieb ließen sich nur schwer und teuer einarbeiten.</li>
+      <li>Die Nutzer wären kaum beteiligt → geringere Akzeptanz bei der Einführung.</li>
+    </ul>
+    <h4>d) Spiralmodell (2 P)</h4>
+    <p>Das Spiralmodell ist ein <strong>iteratives, risikogetriebenes</strong> Vorgehen: Das Projekt durchläuft mehrere Zyklen (1 P), und in jedem Zyklus werden vor der Entwicklung zuerst die größten Risiken analysiert und z. B. durch Prototypen reduziert (Ziele festlegen → Risiken analysieren → entwickeln und testen → nächsten Zyklus planen) (1 P).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Zelle 2 P, davon 1 P für den Bezug zu PflegeMobil. b) je Teilsystem 1 P Einordnung in die Stacey-Matrix, 2 P Begründung (Anforderungen und Technik). c) je Nachteil 2 P. d) 1 P iterativ/Zyklen, 1 P Risikoorientierung.</div>
+    <p><strong>Erklärung:</strong> Gute Antworten in a) bleiben nicht allgemein („agil ist flexibel“), sondern sagen, <em>was</em> in PflegeMobil konkret passiert – z. B. dass Pilot-Erkenntnisse im nächsten Sprint umgesetzt werden können.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-05-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== PM-06 ===================== -->
   <h3 id="a-06">PM-06 · Change-Management und Akzeptanz</h3>
@@ -1911,6 +2333,15 @@
     <div class="antwort z3"></div>
     <p class="quelle">Grundlagen zu: S22 Teil 1, Aufgabe 1b (Befürchtungen und Gegenmaßnahmen)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-06-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-06.1 · 4 Punkte</div>
+    <h4>a) Gründe für Ablehnung (2 P) – vier der folgenden</h4>
+    <p>Angst vor Arbeitsplatzverlust · Angst vor Überforderung durch neue Technik · Angst vor Überwachung/Leistungskontrolle · Mehrarbeit während der Umstellung · Gewohnheit („Es hat doch immer funktioniert“) · Verlust von Kompetenz oder Status · fehlende Information, Unsicherheit · schlechte Erfahrungen mit früheren Einführungen · Nutzen nicht erkennbar.</p>
+    <h4>b) Maßnahmen zur Akzeptanzförderung (2 P) – vier der folgenden</h4>
+    <p>frühzeitige, offene Information · Beteiligung der Betroffenen (Workshops, Key-User, Feedback zu Prototypen) · Schulungen · Ansprechpartner und Support · Pilotphase mit Freiwilligen · Einbindung des Betriebsrats, Betriebsvereinbarung · Nutzen aufzeigen, schnelle Erfolge sichtbar machen · Zusagen zur Arbeitsplatzsicherheit · Feedbackkanal.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> je Nennung 0,5 P.</div>
+    <p><strong>Erklärung:</strong> „Nennen“ verlangt nur Stichworte; Erläuterungen bringen keine Zusatzpunkte.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-06-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-06-2">
     <div class="kopf">
@@ -1929,6 +2360,25 @@
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: S22 Teil 1, Aufgabe 1b (Befürchtungen und Gegenmaßnahmen) und S23 Teil 1, Aufgabe 1a (Konflikt um befürchteten Arbeitsplatzverlust)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-06-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-06.2 · 10 Punkte</div>
+    <h4>a) Befürchtungen und Maßnahmen (6 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:38%">Befürchtung</th><th>Maßnahme</th></tr>
+      <tr><td><strong>Überwachung / Leistungskontrolle</strong>: „mit der Stoppuhr kontrolliert“ – Zeitstempel könnten zur Bewertung einzelner Pflegekräfte genutzt werden</td><td>Betriebsvereinbarung mit dem Betriebsrat: Daten nur für Dokumentation und Abrechnung, keine personenbezogene Auswertung von Einsatzzeiten; offenlegen, welche Daten gespeichert werden und wer sie sieht</td></tr>
+      <tr><td><strong>Überforderung durch die Technik</strong> und Angst, durch Fehleingaben die Abrechnung zu gefährden (Pflegekraft, 61 Jahre)</td><td>Schulungen in Kleingruppen nach Kenntnisstand mit Übungsmodus; Key-User/Paten an jedem Standort und Hotline; Plausibilitätsprüfung und Korrekturmöglichkeit, sodass Fehler auffallen und behoben werden können</td></tr>
+      <tr><td><strong>Technische Bedenken</strong>: in Orten ohne Netz funktioniert die App nicht</td><td>Offline-Fähigkeit vorführen und erklären; den Pilotbetrieb bewusst auch in bekannten Funklöchern (z. B. Oberwiesental) testen; Rückmeldungen ernst nehmen</td></tr>
+    </table>
+    <h4>b) Konflikt mit Frau Lange (4 P)</h4>
+    <ul>
+      <li>Frühzeitiges <strong>persönliches Gespräch</strong> mit Geschäftsführung bzw. Projektleitung: Sorge ernst nehmen, Ziele und Gründe erklären.</li>
+      <li><strong>Verbindliche Zusage</strong> der Geschäftsführung, dass niemand entlassen wird (Anlage 7).</li>
+      <li><strong>Neue Aufgaben aufzeigen</strong>: Kontrolle und Korrektur der Nachweise bleiben (ca. 20 Stunden pro Monat), dazu Klärung mit den Pflegekassen, Bearbeitung abgelehnter Abrechnungen.</li>
+      <li><strong>Ins Projekt einbinden</strong>: Ihr Wissen über die Abrechnungsregeln ist für Plausibilitätsprüfung, Testfälle und Abnahme der CareBill-Schnittstelle unverzichtbar – z. B. als Key-Userin; Qualifizierung für die neuen Aufgaben.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Zeile 1 P Befürchtung (aus Anlage 2, unterschiedlich), 1 P passende Maßnahme. Die positive Aussage der 27-jährigen Pflegekraft ist keine Befürchtung. b) je beschriebene Maßnahme 1 P, höchstens 4 P; nur „ein Gespräch führen“ ohne Inhalt 1 P.</div>
+    <p><strong>Erklärung:</strong> Konfliktlösung bedeutet hier nicht, Frau Lange zu „überzeugen“, sondern ihre berechtigte Sorge durch Zusagen und eine neue, wertgeschätzte Rolle aufzulösen (Win-win).</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-06-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-06-3">
     <div class="kopf">
@@ -1944,6 +2394,35 @@
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W23 Teil 1, Aufgabe 1b (Ziele eines Workshops gegen Widerstände bei einem KI-System)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-06-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-06.3 · 14 Punkte</div>
+    <h4>a) Ziele des Workshops (6 P) – drei der folgenden</h4>
+    <ul>
+      <li><strong>Informieren und Gerüchte ausräumen:</strong> Was die Spracheingabe kann und was nicht (Aufnahme nur auf Knopfdruck, kein Dauermithören; die KI schlägt vor, die Pflegekraft entscheidet und gibt frei), warum sie geplant ist (weniger Schreibarbeit).</li>
+      <li><strong>Befürchtungen und Erwartungen sammeln</strong> (z. B. Kartenabfrage) und ernst nehmen: Überwachung, Datenschutz in den Wohnungen, Fehlerkennung, Arbeitsverdichtung.</li>
+      <li><strong>Beteiligung:</strong> Pflegekräfte gestalten Regeln und Anforderungen mit und melden sich freiwillig für die Pilotgruppe.</li>
+      <li><strong>Befürworter, Unentschlossene und Gegner erkennen</strong>; Befürworter als Multiplikatoren stärken.</li>
+      <li><strong>Nutzen und Status quo bewusst machen:</strong> heutiger Dokumentationsaufwand, erwartete Entlastung.</li>
+      <li><strong>Vereinbarungen festhalten:</strong> nächste Schritte, Pilot, Feedbackkanal, Termin für die Auswertung.</li>
+    </ul>
+    <h4>b) Vorteile der Pilotgruppe (4 P) – zwei der folgenden</h4>
+    <ul>
+      <li>Erprobung unter echten Bedingungen (Fernseher und Angehörige im Raum, Fachbegriffe, Funklöcher) bei <strong>begrenztem Risiko</strong>: Probleme werden erkannt und behoben, bevor alle betroffen sind.</li>
+      <li><strong>Messbare Entscheidungsgrundlage:</strong> tatsächliche Erkennungsrate (≥ 90 %?) und Zeitersparnis werden ermittelt; ein Abbruch ist ohne großen Schaden möglich.</li>
+      <li><strong>Akzeptanz:</strong> Die Pilotteilnehmenden werden zu Fürsprechern und berichten Kolleginnen und Kollegen aus erster Hand.</li>
+      <li><strong>Geringe Kosten</strong> in der Erprobungsphase (wenige Lizenzen, kleiner Schulungsaufwand).</li>
+    </ul>
+    <h4>c) Betriebsrat (4 P)</h4>
+    <p>Die Spracheingabe ist eine technische Einrichtung, die dazu <strong>geeignet ist, Verhalten oder Leistung der Beschäftigten zu überwachen</strong> (Aufnahmen, Zeitpunkte, Dauer). Dafür hat der Betriebsrat ein <strong>Mitbestimmungsrecht</strong> (§ 87 Abs. 1 Nr. 6 BetrVG) – ohne seine Zustimmung darf sie nicht eingeführt werden; die bestehende Betriebsvereinbarung muss erweitert werden (2 P). Mögliche Regelungen (je 1 P):</p>
+    <ul>
+      <li>Zweckbindung: Nutzung nur für die Pflegedokumentation, Verbot der Auswertung zur Leistungs- oder Verhaltenskontrolle.</li>
+      <li>Aufnahme nur nach aktivem Auslösen durch die Pflegekraft; Audiodaten werden nach der Umwandlung in Text sofort gelöscht.</li>
+      <li>Zugriffsrechte und Speicherort (nur EU); Löschfristen.</li>
+      <li>Freiwilligkeit bzw. Tastatureingabe bleibt als Alternative; Regeln für die Pilotphase.</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Ziel 2 P (Ziel + Konkretisierung zur KI-Spracheingabe). b) je Vorteil 2 P. c) 2 P Begründung (Mitbestimmung bei Überwachungseignung; Paragraf nicht erforderlich), je Regelungspunkt 1 P.</div>
+    <p><strong>Erklärung:</strong> Entscheidend ist die <em>Eignung</em> zur Überwachung – ob der Arbeitgeber tatsächlich überwachen will, spielt für die Mitbestimmung keine Rolle.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-06-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== PM-07 ===================== -->
   <h3 id="a-07">PM-07 · Kosten, Make-or-Buy, Nutzwertanalyse</h3>
@@ -1965,6 +2444,25 @@
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S23 Teil 1, Aufgabe 1d (zwei Kostenarten mit konkretem Beispiel)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-07-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-07.1 · 6 Punkte</div>
+    <h4>a) Kostenarten (4 P) – Beispiele</h4>
+    <table class="kompakt">
+      <tr><th style="width:14%"></th><th style="width:34%">Kostenart</th><th>konkretes Beispiel</th></tr>
+      <tr><td>einmalig</td><td>Fremdleistung / Personalkosten Entwicklung</td><td>Festpreis von Kranich für App, Webportal und Schnittstelle</td></tr>
+      <tr><td>einmalig</td><td>Sachkosten / Hardware</td><td>120 Tablets à 380 €</td></tr>
+      <tr><td>einmalig</td><td>Lizenzkosten (Kauf)</td><td>CareBill-Importmodul 6.000 €</td></tr>
+      <tr><td>einmalig</td><td>Schulungskosten</td><td>4 Stunden Schulung je Pflegekraft, Trainerin von Kranich</td></tr>
+      <tr><td>laufend</td><td>Lizenzkosten (Abo)</td><td>MDM-Lizenz 3 € je Tablet und Monat</td></tr>
+      <tr><td>laufend</td><td>Kommunikationskosten</td><td>Mobilfunkverträge 8 € je Tablet und Monat</td></tr>
+      <tr><td>laufend</td><td>Betriebskosten</td><td>Hosting im EU-Rechenzentrum 450 € pro Monat</td></tr>
+      <tr><td>laufend</td><td>Wartungskosten</td><td>Wartungsvertrag Kranich 1.800 € pro Monat, CareBill-Wartung 900 € pro Jahr</td></tr>
+    </table>
+    <h4>b) Make-or-Buy (2 P)</h4>
+    <p>Entscheidung, ob eine Leistung <strong>selbst erstellt</strong> („Make“, Eigenentwicklung) oder <strong>von außen bezogen</strong> wird („Buy“, Kauf von Standardsoftware oder einer Komponente bzw. Fremdvergabe an einen Dienstleister) (1 P). Entschieden wird anhand von Kriterien wie Kosten, Zeit, eigenem Know-how, Abhängigkeit und Anpassbarkeit – in PflegeMobil z. B. beim Modul „automatische Tourenvorschläge“ (1 P).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Zeile 0,5 P Kostenart + 0,5 P konkretes Beispiel; Einordnung einmalig/laufend muss stimmen. b) 1 P Definition, 1 P Kriterien oder Beispiel.</div>
+    <p><strong>Erklärung:</strong> Kostenarten sind Oberbegriffe (Personal-, Sach-, Lizenzkosten …), Beispiele sind die konkreten Posten aus der Situation.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-07-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-07-2">
     <div class="kopf">
@@ -1980,6 +2478,34 @@
     <div class="antwort z3"></div>
     <p class="quelle">Grundlagen zu: S23 Teil 1, Aufgabe 1d (Kostenplan)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-07-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-07.2 · 10 Punkte</div>
+    <h4>a) Festpreis Kranich (4 P)</h4>
+    <table class="kompakt" style="width:auto">
+      <tr><th>Rolle</th><th>Rechnung</th><th class="num">Betrag</th></tr>
+      <tr><td>Projektleitung</td><td>320 h × 95 €</td><td class="num">30.400 €</td></tr>
+      <tr><td>Entwicklung</td><td>2.400 h × 85 €</td><td class="num">204.000 €</td></tr>
+      <tr><td>UX-Design</td><td>240 h × 80 €</td><td class="num">19.200 €</td></tr>
+      <tr><td>Test</td><td>480 h × 75 €</td><td class="num">36.000 €</td></tr>
+      <tr><td>Auszubildende/r</td><td>300 h × 30 €</td><td class="num">9.000 €</td></tr>
+      <tr><th colspan="2">Festpreis</th><th class="num">298.600 €</th></tr>
+    </table>
+    <h4>b) Einmalige Gesamtkosten (4 P)</h4>
+    <table class="kompakt" style="width:auto">
+      <tr><th>Position</th><th>Rechnung</th><th class="num">Betrag</th></tr>
+      <tr><td>Kranich (Festpreis)</td><td>aus a)</td><td class="num">298.600 €</td></tr>
+      <tr><td>Tablets</td><td>120 × 380 €</td><td class="num">45.600 €</td></tr>
+      <tr><td>CareBill-Importmodul</td><td>einmalig</td><td class="num">6.000 €</td></tr>
+      <tr><td>Schulungszeit Pflegekräfte</td><td>118 × 4 h × 32 €</td><td class="num">15.104 €</td></tr>
+      <tr><td>Trainerin Kranich</td><td>24 h × 80 €</td><td class="num">1.920 €</td></tr>
+      <tr><th colspan="2">einmalige Kosten gesamt</th><th class="num">367.224 €</th></tr>
+    </table>
+    <p>Das Budget von 420.000 € wird <strong>eingehalten</strong>; es bleibt eine Reserve von 52.776 € (ca. 12,6 %).</p>
+    <h4>c) Laufende Kosten pro Jahr (2 P)</h4>
+    <p>MDM 120 × 3 € × 12 = 4.320 € · Mobilfunk 120 × 8 € × 12 = 11.520 € · Hosting 450 € × 12 = 5.400 € · CareBill-Wartung 900 € · Wartungsvertrag 1.800 € × 12 = 21.600 € → <strong>43.740 € pro Jahr</strong>.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) 3 P Rechenweg (je zwei richtige Positionen 1 P), 1 P Summe. b) 3 P Positionen (Tablets, Modul, Schulung inkl. Trainerin), 1 P Budgetvergleich. c) 1 P Positionen, 1 P Summe. Folgefehler werden nicht erneut abgezogen.</div>
+    <p><strong>Erklärung:</strong> Häufige Fehler: Arbeitszeit der Pflegekräfte in der Schulung vergessen (sie kostet Geld, auch wenn keine Rechnung kommt), laufende Kosten in die einmaligen Kosten mischen oder monatliche Beträge nicht auf das Jahr hochrechnen.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-07-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-07-3">
     <div class="kopf">
@@ -2011,6 +2537,36 @@
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: S22 Teil 1, Aufgabe 2a (Make-or-Buy, Fremdvergabe) – erweitert um Gesamtkosten und Nutzwertanalyse</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-07-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-07.3 · 18 Punkte</div>
+    <h4>a) Zukauf statt Eigenentwicklung (4 P)</h4>
+    <p><strong>Vorteile</strong> (zwei der folgenden): schneller einsatzbereit (6 bzw. 4 Wochen statt ca. 4 Monate) · geringere Gesamtkosten über fünf Jahre · erprobte Lösung mit Spezialwissen des Anbieters zur Routenoptimierung, das Kranich fehlt → geringeres technisches Risiko · Wartung und Weiterentwicklung durch den Anbieter · eigene Entwickler bleiben frei für die Kernfunktionen.</p>
+    <p><strong>Nachteile</strong> (zwei der folgenden): Abhängigkeit vom Anbieter (Preiserhöhungen, Produkteinstellung) · eingeschränkte Anpassbarkeit an Besonderheiten der Pflege (feste Zeitfenster, möglichst dieselbe Pflegekraft) · laufende Lizenz- bzw. Abokosten · bei Variante C Datenschutzproblem: Patientenadressen werden auf Server in den USA übertragen · Know-how bleibt beim Anbieter.</p>
+    <h4>b) Gesamtkosten über fünf Jahre (4 P)</h4>
+    <table class="kompakt">
+      <tr><th>Variante</th><th>einmalige Kosten</th><th>laufende Kosten pro Jahr</th><th class="num">Gesamtkosten 5 Jahre</th></tr>
+      <tr><td>A Eigenentwicklung</td><td>600 h × 85 € = 51.000 €</td><td>60 h × 85 € = 5.100 €</td><td class="num">51.000 + 5 × 5.100 = <strong>76.500 €</strong></td></tr>
+      <tr><td>B RouteMaster SDK</td><td>9.500 € + 120 h × 85 € = 19.700 €</td><td>4.800 €</td><td class="num">19.700 + 5 × 4.800 = <strong>43.700 €</strong></td></tr>
+      <tr><td>C OptiRoute API</td><td>80 h × 85 € = 6.800 €</td><td>650 € × 12 = 7.800 €</td><td class="num">6.800 + 5 × 7.800 = <strong>45.800 €</strong></td></tr>
+    </table>
+    <h4>c) Nutzwertanalyse (6 P)</h4>
+    <table class="kompakt">
+      <tr><th>Kriterium</th><th class="num">Gewicht</th><th class="num">A gewichtet</th><th class="num">B gewichtet</th><th class="num">C gewichtet</th></tr>
+      <tr><td>Kosten über 5 Jahre</td><td class="num">30 %</td><td class="num">0,3 × 3 = 0,90</td><td class="num">0,3 × 9 = 2,70</td><td class="num">0,3 × 8 = 2,40</td></tr>
+      <tr><td>Datenschutz / Rechtssicherheit</td><td class="num">25 %</td><td class="num">0,25 × 9 = 2,25</td><td class="num">0,25 × 8 = 2,00</td><td class="num">0,25 × 2 = 0,50</td></tr>
+      <tr><td>Zeit bis zur Einsatzbereitschaft</td><td class="num">15 %</td><td class="num">0,15 × 3 = 0,45</td><td class="num">0,15 × 8 = 1,20</td><td class="num">0,15 × 9 = 1,35</td></tr>
+      <tr><td>Anpassbarkeit</td><td class="num">15 %</td><td class="num">0,15 × 10 = 1,50</td><td class="num">0,15 × 6 = 0,90</td><td class="num">0,15 × 4 = 0,60</td></tr>
+      <tr><td>Unabhängigkeit</td><td class="num">15 %</td><td class="num">0,15 × 10 = 1,50</td><td class="num">0,15 × 5 = 0,75</td><td class="num">0,15 × 3 = 0,45</td></tr>
+      <tr><th>Nutzwert</th><th class="num">100 %</th><th class="num">6,60</th><th class="num">7,55</th><th class="num">5,30</th></tr>
+      <tr><th>Rang</th><th></th><th class="num">2</th><th class="num">1</th><th class="num">3</th></tr>
+    </table>
+    <p class="klein">Mit Gewichten als ganze Zahlen (30 × 3 = 90 …) ergeben sich 660 / 755 / 530 – ebenfalls richtig.</p>
+    <h4>d) Empfehlung (4 P)</h4>
+    <p>Empfohlen wird <strong>Variante B (RouteMaster SDK)</strong>: Sie hat den höchsten Nutzwert (7,55) <em>und</em> die geringsten Gesamtkosten über fünf Jahre (43.700 €). Die Daten bleiben auf dem eigenen Server im EU-Rechenzentrum, und mit ca. sechs Wochen ist das Modul rechtzeitig vor dem Go-Live einsatzbereit. Variante C scheidet trotz niedriger Kosten praktisch aus, weil Patientenadressen in die USA übertragen würden; Variante A ist am teuersten und langsamsten, und dem Team fehlt das Know-how (2 P).</p>
+    <p><strong>Schwäche der Nutzwertanalyse:</strong> Gewichte und Punkte sind <strong>subjektiv</strong> – mit anderen Gewichten (z. B. Kosten nur 15 %, Unabhängigkeit 30 %) läge A mit 7,65 vor B mit 6,95; die Zahlen täuschen eine Genauigkeit vor, die es nicht gibt. Außerdem kann ein schwerer Mangel (Datenschutzverstoß bei C) durch gute Werte bei anderen Kriterien „ausgeglichen“ werden – deshalb sollten K.-o.-Kriterien vorher geprüft werden (2 P).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Vor- bzw. Nachteil 1 P. b) je Variante 1 P, 1 P für den vollständigen Ansatz (einmalig + 5 × laufend). c) 3 P gewichtete Punkte (je Variante 1 P), 2 P Nutzwerte, 1 P Rangfolge. d) 2 P begründete Empfehlung mit Bezug auf b) und c), 2 P Schwäche. Eine andere Empfehlung (z. B. A wegen Know-how-Aufbau für weitere Pflegeprojekte) ist bei schlüssiger Begründung ebenfalls voll zu bewerten.</div>
+    <p><strong>Erklärung:</strong> Kosten- und Nutzwertvergleich zeigen hier in dieselbe Richtung. Interessant wird es, wenn sie sich widersprechen – dann muss die Empfehlung abwägen.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-07-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== PM-08 ===================== -->
   <h3 id="a-08">PM-08 · Netzplan</h3>
@@ -2100,6 +2656,106 @@
     <div class="antwort z3"></div>
     <p class="quelle">Grundlagen zu: S26 Teil 1, Aufgabe 1c–d (Netzplan, kritischer Pfad)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-08-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-08.1 · 6 Punkte</div>
+    <h4>a) Vollständiger Netzplan (4 P)</h4>
+    <figure>
+      <svg viewBox="0 0 760 207" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+<defs><marker id="lsg-l081-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#222"/></marker><marker id="lsg-l081-pfeilk" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#b91c1c"/></marker></defs>
+<path d="M160,101.5 L180.0,101.5 L180.0,151.5 L200,151.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l081-pfeil)"/>
+<path d="M350,151.5 L390,151.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l081-pfeil)"/>
+<path d="M540,151.5 L560.0,151.5 L560.0,101.5 L580,101.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l081-pfeil)"/>
+<path d="M160,101.5 L180.0,101.5 L180.0,51.5 L200,51.5" fill="none" stroke="#b91c1c" stroke-width="2.6" marker-end="url(#lsg-l081-pfeilk)"/>
+<path d="M350,51.5 L560.0,51.5 L560.0,101.5 L580,101.5" fill="none" stroke="#b91c1c" stroke-width="2.6" marker-end="url(#lsg-l081-pfeilk)"/>
+<rect x="10" y="76.0" width="150" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="10" y1="108.0" x2="160" y2="108.0" stroke="#222"/>
+<line x1="46" y1="76.0" x2="46" y2="127.0" stroke="#222"/>
+<line x1="103.0" y1="108.0" x2="103.0" y2="127.0" stroke="#222"/>
+<text x="28.0" y="97.0" text-anchor="middle" font-weight="bold" font-size="13">1</text>
+<text x="103.0" y="89.0" text-anchor="middle">Angebote</text>
+<text x="103.0" y="103.0" text-anchor="middle">einholen</text>
+<text x="28.0" y="122.0" text-anchor="middle">4</text>
+<text x="11" y="72.0" text-anchor="start" font-weight="bold">0</text>
+<text x="159" y="72.0" text-anchor="end" font-weight="bold">4</text>
+<text x="11" y="141.0" text-anchor="start" font-weight="bold">0</text>
+<text x="159" y="141.0" text-anchor="end" font-weight="bold">4</text>
+<text x="74.5" y="122.0" text-anchor="middle">0</text>
+<text x="131.5" y="122.0" text-anchor="middle">0</text>
+<rect x="200" y="26" width="150" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="200" y1="58" x2="350" y2="58" stroke="#222"/>
+<line x1="236" y1="26" x2="236" y2="77" stroke="#222"/>
+<line x1="293.0" y1="58" x2="293.0" y2="77" stroke="#222"/>
+<text x="218.0" y="47.0" text-anchor="middle" font-weight="bold" font-size="13">2</text>
+<text x="293.0" y="39" text-anchor="middle">Tablets bestellen</text>
+<text x="293.0" y="53" text-anchor="middle">und liefern lassen</text>
+<text x="218.0" y="72" text-anchor="middle">10</text>
+<text x="201" y="22" text-anchor="start" font-weight="bold">4</text>
+<text x="349" y="22" text-anchor="end" font-weight="bold">14</text>
+<text x="201" y="91" text-anchor="start" font-weight="bold">4</text>
+<text x="349" y="91" text-anchor="end" font-weight="bold">14</text>
+<text x="264.5" y="72" text-anchor="middle">0</text>
+<text x="321.5" y="72" text-anchor="middle">0</text>
+<rect x="200" y="126" width="150" height="51" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="200" y1="158" x2="350" y2="158" stroke="#222"/>
+<line x1="236" y1="126" x2="236" y2="177" stroke="#222"/>
+<line x1="293.0" y1="158" x2="293.0" y2="177" stroke="#222"/>
+<text x="218.0" y="147.0" text-anchor="middle" font-weight="bold" font-size="13">3</text>
+<text x="293.0" y="139" text-anchor="middle">MDM-Server</text>
+<text x="293.0" y="153" text-anchor="middle">einrichten</text>
+<text x="218.0" y="172" text-anchor="middle">3</text>
+<text x="201" y="122" text-anchor="start" font-weight="bold">4</text>
+<text x="349" y="122" text-anchor="end" font-weight="bold">7</text>
+<text x="201" y="191" text-anchor="start" font-weight="bold">9</text>
+<text x="349" y="191" text-anchor="end" font-weight="bold">12</text>
+<text x="264.5" y="172" text-anchor="middle">5</text>
+<text x="321.5" y="172" text-anchor="middle">0</text>
+<rect x="390" y="126" width="150" height="51" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="390" y1="158" x2="540" y2="158" stroke="#222"/>
+<line x1="426" y1="126" x2="426" y2="177" stroke="#222"/>
+<line x1="483.0" y1="158" x2="483.0" y2="177" stroke="#222"/>
+<text x="408.0" y="147.0" text-anchor="middle" font-weight="bold" font-size="13">4</text>
+<text x="483.0" y="139" text-anchor="middle">MDM-Richtlinien</text>
+<text x="483.0" y="153" text-anchor="middle">festlegen</text>
+<text x="408.0" y="172" text-anchor="middle">2</text>
+<text x="391" y="122" text-anchor="start" font-weight="bold">7</text>
+<text x="539" y="122" text-anchor="end" font-weight="bold">9</text>
+<text x="391" y="191" text-anchor="start" font-weight="bold">12</text>
+<text x="539" y="191" text-anchor="end" font-weight="bold">14</text>
+<text x="454.5" y="172" text-anchor="middle">5</text>
+<text x="511.5" y="172" text-anchor="middle">5</text>
+<rect x="580" y="76.0" width="150" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="580" y1="108.0" x2="730" y2="108.0" stroke="#222"/>
+<line x1="616" y1="76.0" x2="616" y2="127.0" stroke="#222"/>
+<line x1="673.0" y1="108.0" x2="673.0" y2="127.0" stroke="#222"/>
+<text x="598.0" y="97.0" text-anchor="middle" font-weight="bold" font-size="13">5</text>
+<text x="673.0" y="89.0" text-anchor="middle">Tablets registrieren,</text>
+<text x="673.0" y="103.0" text-anchor="middle">App installieren</text>
+<text x="598.0" y="122.0" text-anchor="middle">4</text>
+<text x="581" y="72.0" text-anchor="start" font-weight="bold">14</text>
+<text x="729" y="72.0" text-anchor="end" font-weight="bold">18</text>
+<text x="581" y="141.0" text-anchor="start" font-weight="bold">14</text>
+<text x="729" y="141.0" text-anchor="end" font-weight="bold">18</text>
+<text x="644.5" y="122.0" text-anchor="middle">0</text>
+<text x="701.5" y="122.0" text-anchor="middle">0</text>
+
+</svg>
+      <figcaption>Abb. L-2: Netzplan „Tablets bereitstellen“ – kritischer Pfad dick/rot</figcaption>
+    </figure>
+    <table class="kompakt">
+<tr><th>Nr.</th><th>Vorgang</th><th class="num">D</th><th class="num">FAZ</th><th class="num">FEZ</th><th class="num">SAZ</th><th class="num">SEZ</th><th class="num">GP</th><th class="num">FP</th></tr>
+<tr><td class="krit">1</td><td>Angebote einholen</td><td class="num">4</td><td class="num">0</td><td class="num">4</td><td class="num">0</td><td class="num">4</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td class="krit">2</td><td>Tablets bestellen und liefern lassen</td><td class="num">10</td><td class="num">4</td><td class="num">14</td><td class="num">4</td><td class="num">14</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>3</td><td>MDM-Server einrichten</td><td class="num">3</td><td class="num">4</td><td class="num">7</td><td class="num">9</td><td class="num">12</td><td class="num">5</td><td class="num">0</td></tr>
+<tr><td>4</td><td>MDM-Richtlinien festlegen</td><td class="num">2</td><td class="num">7</td><td class="num">9</td><td class="num">12</td><td class="num">14</td><td class="num">5</td><td class="num">5</td></tr>
+<tr><td class="krit">5</td><td>Tablets registrieren, App installieren</td><td class="num">4</td><td class="num">14</td><td class="num">18</td><td class="num">14</td><td class="num">18</td><td class="num">0</td><td class="num">0</td></tr>
+</table>
+    <p>Ergänzte Werte: Vorgang 1 FP = 0 · Vorgang 3 FEZ = 7, SAZ = 9, SEZ = 12, GP = 5, FP = 0 · Vorgang 4 FAZ = 7, FEZ = 9, SAZ = 12, SEZ = 14, GP = 5, FP = 5 · Vorgang 5 SAZ = 14, SEZ = 18, GP = 0, FP = 0.</p>
+    <p>Rechenweg (Auszug): FEZ(3) = 4 + 3 = 7 · FAZ(4) = FEZ(3) = 7 → FEZ(4) = 9 · Rückwärts: SEZ(4) = SAZ(5) = 14 → SAZ(4) = 12 · SEZ(3) = SAZ(4) = 12 → SAZ(3) = 9 · GP(3) = 9 − 4 = 5 · FP(3) = FAZ(4) − FEZ(3) = 7 − 7 = 0 · FP(4) = FAZ(5) − FEZ(4) = 14 − 9 = 5.</p>
+    <h4>b) Kritischer Pfad und Dauer (2 P)</h4>
+    <p>Kritischer Pfad: <strong>1 → 2 → 5</strong>; Dauer: <strong>18 Tage</strong>.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) 16 fehlende Werte, je vier richtige Werte 1 P (Folgefehler werden nicht erneut abgezogen). b) je 1 P für Pfad und Dauer.</div>
+    <p><strong>Erklärung:</strong> Vorgang 3 hat 5 Tage Gesamtpuffer, aber keinen freien Puffer: Verzögert er sich, beginnt Vorgang 4 sofort später. Erst Vorgang 4 „besitzt“ den Puffer bis zum Start von Vorgang 5. Die 18 Tage passen zur Dauer von Vorgang B im Rollout-Netzplan (PM-08.3).</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-08-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-08-2">
     <div class="kopf">
@@ -2115,6 +2771,284 @@
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: S26 Teil 1, Aufgabe 1c–d (Netzplan erstellen, kritischer Pfad)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-08-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-08.2 · 12 Punkte</div>
+    <h4>a) Netzplan (7 P)</h4>
+    <figure>
+      <svg viewBox="0 0 760 307" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="11.5">
+<defs><marker id="lsg-l082-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#222"/></marker><marker id="lsg-l082-pfeilk" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#b91c1c"/></marker></defs>
+<path d="M138,151.5 L151.0,151.5 L151.0,251.5 L164,251.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l082-pfeil)"/>
+<path d="M292,51.5 L305.0,51.5 L305.0,151.5 L318,151.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l082-pfeil)"/>
+<path d="M292,251.5 L318,251.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l082-pfeil)"/>
+<path d="M446,151.5 L472,151.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l082-pfeil)"/>
+<path d="M446,251.5 L459.0,251.5 L459.0,151.5 L472,151.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l082-pfeil)"/>
+<path d="M138,151.5 L151.0,151.5 L151.0,51.5 L164,51.5" fill="none" stroke="#b91c1c" stroke-width="2.6" marker-end="url(#lsg-l082-pfeilk)"/>
+<path d="M292,51.5 L318,51.5" fill="none" stroke="#b91c1c" stroke-width="2.6" marker-end="url(#lsg-l082-pfeilk)"/>
+<path d="M446,51.5 L459.0,51.5 L459.0,151.5 L472,151.5" fill="none" stroke="#b91c1c" stroke-width="2.6" marker-end="url(#lsg-l082-pfeilk)"/>
+<path d="M600,151.5 L626,151.5" fill="none" stroke="#b91c1c" stroke-width="2.6" marker-end="url(#lsg-l082-pfeilk)"/>
+<rect x="10" y="126" width="128" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="10" y1="158" x2="138" y2="158" stroke="#222"/>
+<line x1="41" y1="126" x2="41" y2="177" stroke="#222"/>
+<line x1="89.5" y1="158" x2="89.5" y2="177" stroke="#222"/>
+<text x="25.5" y="147.0" text-anchor="middle" font-weight="bold" font-size="12.5">A</text>
+<text x="89.5" y="139" text-anchor="middle">Spezifikation</text>
+<text x="89.5" y="153" text-anchor="middle">auswerten</text>
+<text x="25.5" y="172" text-anchor="middle">4</text>
+<text x="11" y="122" text-anchor="start" font-weight="bold">0</text>
+<text x="137" y="122" text-anchor="end" font-weight="bold">4</text>
+<text x="11" y="191" text-anchor="start" font-weight="bold">0</text>
+<text x="137" y="191" text-anchor="end" font-weight="bold">4</text>
+<text x="65.25" y="172" text-anchor="middle">0</text>
+<text x="113.75" y="172" text-anchor="middle">0</text>
+<rect x="164" y="26" width="128" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="164" y1="58" x2="292" y2="58" stroke="#222"/>
+<line x1="195" y1="26" x2="195" y2="77" stroke="#222"/>
+<line x1="243.5" y1="58" x2="243.5" y2="77" stroke="#222"/>
+<text x="179.5" y="47.0" text-anchor="middle" font-weight="bold" font-size="12.5">B</text>
+<text x="243.5" y="39" text-anchor="middle">Datenmodell</text>
+<text x="243.5" y="53" text-anchor="middle">festlegen</text>
+<text x="179.5" y="72" text-anchor="middle">3</text>
+<text x="165" y="22" text-anchor="start" font-weight="bold">4</text>
+<text x="291" y="22" text-anchor="end" font-weight="bold">7</text>
+<text x="165" y="91" text-anchor="start" font-weight="bold">4</text>
+<text x="291" y="91" text-anchor="end" font-weight="bold">7</text>
+<text x="219.25" y="72" text-anchor="middle">0</text>
+<text x="267.75" y="72" text-anchor="middle">0</text>
+<rect x="164" y="226" width="128" height="51" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="164" y1="258" x2="292" y2="258" stroke="#222"/>
+<line x1="195" y1="226" x2="195" y2="277" stroke="#222"/>
+<line x1="243.5" y1="258" x2="243.5" y2="277" stroke="#222"/>
+<text x="179.5" y="247.0" text-anchor="middle" font-weight="bold" font-size="12.5">C</text>
+<text x="243.5" y="239" text-anchor="middle">Testumgebung</text>
+<text x="243.5" y="253" text-anchor="middle">bereitstellen</text>
+<text x="179.5" y="272" text-anchor="middle">8</text>
+<text x="165" y="222" text-anchor="start" font-weight="bold">4</text>
+<text x="291" y="222" text-anchor="end" font-weight="bold">12</text>
+<text x="165" y="291" text-anchor="start" font-weight="bold">7</text>
+<text x="291" y="291" text-anchor="end" font-weight="bold">15</text>
+<text x="219.25" y="272" text-anchor="middle">3</text>
+<text x="267.75" y="272" text-anchor="middle">0</text>
+<rect x="318" y="26" width="128" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="318" y1="58" x2="446" y2="58" stroke="#222"/>
+<line x1="349" y1="26" x2="349" y2="77" stroke="#222"/>
+<line x1="397.5" y1="58" x2="397.5" y2="77" stroke="#222"/>
+<text x="333.5" y="47.0" text-anchor="middle" font-weight="bold" font-size="12.5">D</text>
+<text x="397.5" y="39" text-anchor="middle">Export-Modul</text>
+<text x="397.5" y="53" text-anchor="middle">entwickeln</text>
+<text x="333.5" y="72" text-anchor="middle">10</text>
+<text x="319" y="22" text-anchor="start" font-weight="bold">7</text>
+<text x="445" y="22" text-anchor="end" font-weight="bold">17</text>
+<text x="319" y="91" text-anchor="start" font-weight="bold">7</text>
+<text x="445" y="91" text-anchor="end" font-weight="bold">17</text>
+<text x="373.25" y="72" text-anchor="middle">0</text>
+<text x="421.75" y="72" text-anchor="middle">0</text>
+<rect x="318" y="126" width="128" height="51" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="318" y1="158" x2="446" y2="158" stroke="#222"/>
+<line x1="349" y1="126" x2="349" y2="177" stroke="#222"/>
+<line x1="397.5" y1="158" x2="397.5" y2="177" stroke="#222"/>
+<text x="333.5" y="147.0" text-anchor="middle" font-weight="bold" font-size="12.5">E</text>
+<text x="397.5" y="139" text-anchor="middle">Plausibilitäts-</text>
+<text x="397.5" y="153" text-anchor="middle">prüfung entw.</text>
+<text x="333.5" y="172" text-anchor="middle">6</text>
+<text x="319" y="122" text-anchor="start" font-weight="bold">7</text>
+<text x="445" y="122" text-anchor="end" font-weight="bold">13</text>
+<text x="319" y="191" text-anchor="start" font-weight="bold">11</text>
+<text x="445" y="191" text-anchor="end" font-weight="bold">17</text>
+<text x="373.25" y="172" text-anchor="middle">4</text>
+<text x="421.75" y="172" text-anchor="middle">4</text>
+<rect x="318" y="226" width="128" height="51" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="318" y1="258" x2="446" y2="258" stroke="#222"/>
+<line x1="349" y1="226" x2="349" y2="277" stroke="#222"/>
+<line x1="397.5" y1="258" x2="397.5" y2="277" stroke="#222"/>
+<text x="333.5" y="247.0" text-anchor="middle" font-weight="bold" font-size="12.5">F</text>
+<text x="397.5" y="239" text-anchor="middle">Testdaten</text>
+<text x="397.5" y="253" text-anchor="middle">anlegen</text>
+<text x="333.5" y="272" text-anchor="middle">2</text>
+<text x="319" y="222" text-anchor="start" font-weight="bold">12</text>
+<text x="445" y="222" text-anchor="end" font-weight="bold">14</text>
+<text x="319" y="291" text-anchor="start" font-weight="bold">15</text>
+<text x="445" y="291" text-anchor="end" font-weight="bold">17</text>
+<text x="373.25" y="272" text-anchor="middle">3</text>
+<text x="421.75" y="272" text-anchor="middle">3</text>
+<rect x="472" y="126" width="128" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="472" y1="158" x2="600" y2="158" stroke="#222"/>
+<line x1="503" y1="126" x2="503" y2="177" stroke="#222"/>
+<line x1="551.5" y1="158" x2="551.5" y2="177" stroke="#222"/>
+<text x="487.5" y="147.0" text-anchor="middle" font-weight="bold" font-size="12.5">G</text>
+<text x="551.5" y="139" text-anchor="middle">Integrations-</text>
+<text x="551.5" y="153" text-anchor="middle">test CareBill</text>
+<text x="487.5" y="172" text-anchor="middle">5</text>
+<text x="473" y="122" text-anchor="start" font-weight="bold">17</text>
+<text x="599" y="122" text-anchor="end" font-weight="bold">22</text>
+<text x="473" y="191" text-anchor="start" font-weight="bold">17</text>
+<text x="599" y="191" text-anchor="end" font-weight="bold">22</text>
+<text x="527.25" y="172" text-anchor="middle">0</text>
+<text x="575.75" y="172" text-anchor="middle">0</text>
+<rect x="626" y="126" width="128" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="626" y1="158" x2="754" y2="158" stroke="#222"/>
+<line x1="657" y1="126" x2="657" y2="177" stroke="#222"/>
+<line x1="705.5" y1="158" x2="705.5" y2="177" stroke="#222"/>
+<text x="641.5" y="147.0" text-anchor="middle" font-weight="bold" font-size="12.5">H</text>
+<text x="705.5" y="139" text-anchor="middle">Abnahme durch</text>
+<text x="705.5" y="153" text-anchor="middle">Abrechnung</text>
+<text x="641.5" y="172" text-anchor="middle">2</text>
+<text x="627" y="122" text-anchor="start" font-weight="bold">22</text>
+<text x="753" y="122" text-anchor="end" font-weight="bold">24</text>
+<text x="627" y="191" text-anchor="start" font-weight="bold">22</text>
+<text x="753" y="191" text-anchor="end" font-weight="bold">24</text>
+<text x="681.25" y="172" text-anchor="middle">0</text>
+<text x="729.75" y="172" text-anchor="middle">0</text>
+
+</svg>
+      <figcaption>Abb. L-3: Netzplan „Schnittstelle CareBill“ – kritischer Pfad A → B → D → G → H</figcaption>
+    </figure>
+    <table class="kompakt">
+<tr><th>Nr.</th><th>Vorgang</th><th class="num">D</th><th class="num">FAZ</th><th class="num">FEZ</th><th class="num">SAZ</th><th class="num">SEZ</th><th class="num">GP</th><th class="num">FP</th></tr>
+<tr><td class="krit">A</td><td>Schnittstellenspezifikation auswerten</td><td class="num">4</td><td class="num">0</td><td class="num">4</td><td class="num">0</td><td class="num">4</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td class="krit">B</td><td>Datenmodell festlegen</td><td class="num">3</td><td class="num">4</td><td class="num">7</td><td class="num">4</td><td class="num">7</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>C</td><td>Testumgebung bereitstellen</td><td class="num">8</td><td class="num">4</td><td class="num">12</td><td class="num">7</td><td class="num">15</td><td class="num">3</td><td class="num">0</td></tr>
+<tr><td class="krit">D</td><td>Export-Modul entwickeln</td><td class="num">10</td><td class="num">7</td><td class="num">17</td><td class="num">7</td><td class="num">17</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>E</td><td>Plausibilitätsprüfung entwickeln</td><td class="num">6</td><td class="num">7</td><td class="num">13</td><td class="num">11</td><td class="num">17</td><td class="num">4</td><td class="num">4</td></tr>
+<tr><td>F</td><td>Testdaten anlegen</td><td class="num">2</td><td class="num">12</td><td class="num">14</td><td class="num">15</td><td class="num">17</td><td class="num">3</td><td class="num">3</td></tr>
+<tr><td class="krit">G</td><td>Integrationstest mit CareBill</td><td class="num">5</td><td class="num">17</td><td class="num">22</td><td class="num">17</td><td class="num">22</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td class="krit">H</td><td>Abnahme durch die Abrechnung</td><td class="num">2</td><td class="num">22</td><td class="num">24</td><td class="num">22</td><td class="num">24</td><td class="num">0</td><td class="num">0</td></tr>
+</table>
+    <p>Vorwärts: G hat drei Vorgänger → FAZ(G) = max(FEZ D = 17; FEZ E = 13; FEZ F = 14) = 17. Rückwärts: B hat zwei Nachfolger → SEZ(B) = min(SAZ D = 7; SAZ E = 11) = 7; A: SEZ(A) = min(SAZ B = 4; SAZ C = 7) = 4.</p>
+    <h4>b) Kritischer Pfad und Dauer (2 P)</h4>
+    <p>Kritischer Pfad: <strong>A → B → D → G → H</strong>; Dauer des Teilprojekts: <strong>24 Arbeitstage</strong>.</p>
+    <h4>c) Testumgebung dauert 12 statt 8 Tage (3 P)</h4>
+    <p>C hat einen Gesamtpuffer von 3 Tagen. Die Verlängerung um 4 Tage übersteigt den Puffer um 1 Tag → das Teilprojekt endet <strong>einen Tag später, nach 25 Tagen</strong>. C wird kritisch; der <strong>neue kritische Pfad</strong> ist <strong>A → C → F → G → H</strong> (C: 4 → 16, F: 16 → 18, G: 18 → 23, H: 23 → 25). B und D haben nun je 1 Tag Gesamtpuffer.</p>
+    <figure>
+      <svg viewBox="0 0 760 307" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="11.5">
+<defs><marker id="lsg-l082b-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#222"/></marker><marker id="lsg-l082b-pfeilk" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#b91c1c"/></marker></defs>
+<path d="M138,151.5 L151.0,151.5 L151.0,51.5 L164,51.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l082b-pfeil)"/>
+<path d="M292,51.5 L318,51.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l082b-pfeil)"/>
+<path d="M292,51.5 L305.0,51.5 L305.0,151.5 L318,151.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l082b-pfeil)"/>
+<path d="M446,51.5 L459.0,51.5 L459.0,151.5 L472,151.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l082b-pfeil)"/>
+<path d="M446,151.5 L472,151.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l082b-pfeil)"/>
+<path d="M138,151.5 L151.0,151.5 L151.0,251.5 L164,251.5" fill="none" stroke="#b91c1c" stroke-width="2.6" marker-end="url(#lsg-l082b-pfeilk)"/>
+<path d="M292,251.5 L318,251.5" fill="none" stroke="#b91c1c" stroke-width="2.6" marker-end="url(#lsg-l082b-pfeilk)"/>
+<path d="M446,251.5 L459.0,251.5 L459.0,151.5 L472,151.5" fill="none" stroke="#b91c1c" stroke-width="2.6" marker-end="url(#lsg-l082b-pfeilk)"/>
+<path d="M600,151.5 L626,151.5" fill="none" stroke="#b91c1c" stroke-width="2.6" marker-end="url(#lsg-l082b-pfeilk)"/>
+<rect x="10" y="126" width="128" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="10" y1="158" x2="138" y2="158" stroke="#222"/>
+<line x1="41" y1="126" x2="41" y2="177" stroke="#222"/>
+<line x1="89.5" y1="158" x2="89.5" y2="177" stroke="#222"/>
+<text x="25.5" y="147.0" text-anchor="middle" font-weight="bold" font-size="12.5">A</text>
+<text x="89.5" y="139" text-anchor="middle">Spezifikation</text>
+<text x="89.5" y="153" text-anchor="middle">auswerten</text>
+<text x="25.5" y="172" text-anchor="middle">4</text>
+<text x="11" y="122" text-anchor="start" font-weight="bold">0</text>
+<text x="137" y="122" text-anchor="end" font-weight="bold">4</text>
+<text x="11" y="191" text-anchor="start" font-weight="bold">0</text>
+<text x="137" y="191" text-anchor="end" font-weight="bold">4</text>
+<text x="65.25" y="172" text-anchor="middle">0</text>
+<text x="113.75" y="172" text-anchor="middle">0</text>
+<rect x="164" y="26" width="128" height="51" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="164" y1="58" x2="292" y2="58" stroke="#222"/>
+<line x1="195" y1="26" x2="195" y2="77" stroke="#222"/>
+<line x1="243.5" y1="58" x2="243.5" y2="77" stroke="#222"/>
+<text x="179.5" y="47.0" text-anchor="middle" font-weight="bold" font-size="12.5">B</text>
+<text x="243.5" y="39" text-anchor="middle">Datenmodell</text>
+<text x="243.5" y="53" text-anchor="middle">festlegen</text>
+<text x="179.5" y="72" text-anchor="middle">3</text>
+<text x="165" y="22" text-anchor="start" font-weight="bold">4</text>
+<text x="291" y="22" text-anchor="end" font-weight="bold">7</text>
+<text x="165" y="91" text-anchor="start" font-weight="bold">5</text>
+<text x="291" y="91" text-anchor="end" font-weight="bold">8</text>
+<text x="219.25" y="72" text-anchor="middle">1</text>
+<text x="267.75" y="72" text-anchor="middle">0</text>
+<rect x="164" y="226" width="128" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="164" y1="258" x2="292" y2="258" stroke="#222"/>
+<line x1="195" y1="226" x2="195" y2="277" stroke="#222"/>
+<line x1="243.5" y1="258" x2="243.5" y2="277" stroke="#222"/>
+<text x="179.5" y="247.0" text-anchor="middle" font-weight="bold" font-size="12.5">C</text>
+<text x="243.5" y="239" text-anchor="middle">Testumgebung</text>
+<text x="243.5" y="253" text-anchor="middle">bereitstellen</text>
+<text x="179.5" y="272" text-anchor="middle">12</text>
+<text x="165" y="222" text-anchor="start" font-weight="bold">4</text>
+<text x="291" y="222" text-anchor="end" font-weight="bold">16</text>
+<text x="165" y="291" text-anchor="start" font-weight="bold">4</text>
+<text x="291" y="291" text-anchor="end" font-weight="bold">16</text>
+<text x="219.25" y="272" text-anchor="middle">0</text>
+<text x="267.75" y="272" text-anchor="middle">0</text>
+<rect x="318" y="26" width="128" height="51" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="318" y1="58" x2="446" y2="58" stroke="#222"/>
+<line x1="349" y1="26" x2="349" y2="77" stroke="#222"/>
+<line x1="397.5" y1="58" x2="397.5" y2="77" stroke="#222"/>
+<text x="333.5" y="47.0" text-anchor="middle" font-weight="bold" font-size="12.5">D</text>
+<text x="397.5" y="39" text-anchor="middle">Export-Modul</text>
+<text x="397.5" y="53" text-anchor="middle">entwickeln</text>
+<text x="333.5" y="72" text-anchor="middle">10</text>
+<text x="319" y="22" text-anchor="start" font-weight="bold">7</text>
+<text x="445" y="22" text-anchor="end" font-weight="bold">17</text>
+<text x="319" y="91" text-anchor="start" font-weight="bold">8</text>
+<text x="445" y="91" text-anchor="end" font-weight="bold">18</text>
+<text x="373.25" y="72" text-anchor="middle">1</text>
+<text x="421.75" y="72" text-anchor="middle">1</text>
+<rect x="318" y="126" width="128" height="51" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="318" y1="158" x2="446" y2="158" stroke="#222"/>
+<line x1="349" y1="126" x2="349" y2="177" stroke="#222"/>
+<line x1="397.5" y1="158" x2="397.5" y2="177" stroke="#222"/>
+<text x="333.5" y="147.0" text-anchor="middle" font-weight="bold" font-size="12.5">E</text>
+<text x="397.5" y="139" text-anchor="middle">Plausibilitäts-</text>
+<text x="397.5" y="153" text-anchor="middle">prüfung entw.</text>
+<text x="333.5" y="172" text-anchor="middle">6</text>
+<text x="319" y="122" text-anchor="start" font-weight="bold">7</text>
+<text x="445" y="122" text-anchor="end" font-weight="bold">13</text>
+<text x="319" y="191" text-anchor="start" font-weight="bold">12</text>
+<text x="445" y="191" text-anchor="end" font-weight="bold">18</text>
+<text x="373.25" y="172" text-anchor="middle">5</text>
+<text x="421.75" y="172" text-anchor="middle">5</text>
+<rect x="318" y="226" width="128" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="318" y1="258" x2="446" y2="258" stroke="#222"/>
+<line x1="349" y1="226" x2="349" y2="277" stroke="#222"/>
+<line x1="397.5" y1="258" x2="397.5" y2="277" stroke="#222"/>
+<text x="333.5" y="247.0" text-anchor="middle" font-weight="bold" font-size="12.5">F</text>
+<text x="397.5" y="239" text-anchor="middle">Testdaten</text>
+<text x="397.5" y="253" text-anchor="middle">anlegen</text>
+<text x="333.5" y="272" text-anchor="middle">2</text>
+<text x="319" y="222" text-anchor="start" font-weight="bold">16</text>
+<text x="445" y="222" text-anchor="end" font-weight="bold">18</text>
+<text x="319" y="291" text-anchor="start" font-weight="bold">16</text>
+<text x="445" y="291" text-anchor="end" font-weight="bold">18</text>
+<text x="373.25" y="272" text-anchor="middle">0</text>
+<text x="421.75" y="272" text-anchor="middle">0</text>
+<rect x="472" y="126" width="128" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="472" y1="158" x2="600" y2="158" stroke="#222"/>
+<line x1="503" y1="126" x2="503" y2="177" stroke="#222"/>
+<line x1="551.5" y1="158" x2="551.5" y2="177" stroke="#222"/>
+<text x="487.5" y="147.0" text-anchor="middle" font-weight="bold" font-size="12.5">G</text>
+<text x="551.5" y="139" text-anchor="middle">Integrations-</text>
+<text x="551.5" y="153" text-anchor="middle">test CareBill</text>
+<text x="487.5" y="172" text-anchor="middle">5</text>
+<text x="473" y="122" text-anchor="start" font-weight="bold">18</text>
+<text x="599" y="122" text-anchor="end" font-weight="bold">23</text>
+<text x="473" y="191" text-anchor="start" font-weight="bold">18</text>
+<text x="599" y="191" text-anchor="end" font-weight="bold">23</text>
+<text x="527.25" y="172" text-anchor="middle">0</text>
+<text x="575.75" y="172" text-anchor="middle">0</text>
+<rect x="626" y="126" width="128" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="626" y1="158" x2="754" y2="158" stroke="#222"/>
+<line x1="657" y1="126" x2="657" y2="177" stroke="#222"/>
+<line x1="705.5" y1="158" x2="705.5" y2="177" stroke="#222"/>
+<text x="641.5" y="147.0" text-anchor="middle" font-weight="bold" font-size="12.5">H</text>
+<text x="705.5" y="139" text-anchor="middle">Abnahme durch</text>
+<text x="705.5" y="153" text-anchor="middle">Abrechnung</text>
+<text x="641.5" y="172" text-anchor="middle">2</text>
+<text x="627" y="122" text-anchor="start" font-weight="bold">23</text>
+<text x="753" y="122" text-anchor="end" font-weight="bold">25</text>
+<text x="627" y="191" text-anchor="start" font-weight="bold">23</text>
+<text x="753" y="191" text-anchor="end" font-weight="bold">25</text>
+<text x="681.25" y="172" text-anchor="middle">0</text>
+<text x="729.75" y="172" text-anchor="middle">0</text>
+
+</svg>
+      <figcaption>Abb. L-4: Neuberechnung mit C = 12 Tage – der kritische Pfad wechselt</figcaption>
+    </figure>
+    <div class="bewertung"><strong>Bewertung:</strong> a) 2 P Struktur (alle Knoten, Pfeile, insbesondere G nach D, E und F), 2 P Vorwärtsrechnung, 2 P Rückwärtsrechnung, 1 P Puffer. b) 1 P Pfad, 1 P Dauer. c) 1 P Ende nach 25 Tagen, 1 P Begründung über den Gesamtpuffer, 1 P neuer kritischer Pfad.</div>
+    <p><strong>Erklärung:</strong> Typischer Fehler in c): „C ist nicht kritisch, also keine Auswirkung“. Ein nicht kritischer Vorgang verschiebt das Ende sehr wohl, sobald die Verzögerung seinen Gesamtpuffer übersteigt.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-08-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-08-3">
     <div class="kopf">
@@ -2196,6 +3130,195 @@
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: S26 Teil 1, Aufgabe 1c–e (Netzplan aus Stichpunkten erweitern, kritischer Pfad, freier Puffer vs. Gesamtpuffer)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-08-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-08.3 · 23 Punkte</div>
+    <h4>a) Erweiterter Netzplan (14 P)</h4>
+    <p>Vorgangsliste aus dem Text: A (5, –) · B (18, A) · C (6, A) · D (12, A) · E (4, C) · F (10, B und D) · G (6, F) · H (8, E und G) · I (5, G) · J (2, H und I).</p>
+    <figure>
+      <svg viewBox="0 0 760 299" width="760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="10.5">
+<defs><marker id="lsg-l083-pfeil" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#222"/></marker><marker id="lsg-l083-pfeilk" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#b91c1c"/></marker></defs>
+<path d="M116.0,147.5 L126.8,147.5 L126.8,243.5 L137.6,243.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l083-pfeil)"/>
+<path d="M116.0,147.5 L137.6,147.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l083-pfeil)"/>
+<path d="M243.6,243.5 L265.2,243.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l083-pfeil)"/>
+<path d="M243.6,147.5 L254.39999999999998,147.5 L254.39999999999998,99.5 L265.2,99.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l083-pfeil)"/>
+<path d="M371.2,243.5 L509.59999999999997,243.5 L509.59999999999997,195.5 L520.4,195.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l083-pfeil)"/>
+<path d="M498.79999999999995,99.5 L509.59999999999997,99.5 L509.59999999999997,51.5 L520.4,51.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l083-pfeil)"/>
+<path d="M626.4,51.5 L637.2,51.5 L637.2,123.5 L648.0,123.5" fill="none" stroke="#222" stroke-width="1.3" marker-end="url(#lsg-l083-pfeil)"/>
+<path d="M116.0,147.5 L126.8,147.5 L126.8,51.5 L137.6,51.5" fill="none" stroke="#b91c1c" stroke-width="2.6" marker-end="url(#lsg-l083-pfeilk)"/>
+<path d="M243.6,51.5 L254.39999999999998,51.5 L254.39999999999998,99.5 L265.2,99.5" fill="none" stroke="#b91c1c" stroke-width="2.6" marker-end="url(#lsg-l083-pfeilk)"/>
+<path d="M371.2,99.5 L392.79999999999995,99.5" fill="none" stroke="#b91c1c" stroke-width="2.6" marker-end="url(#lsg-l083-pfeilk)"/>
+<path d="M498.79999999999995,99.5 L509.59999999999997,99.5 L509.59999999999997,195.5 L520.4,195.5" fill="none" stroke="#b91c1c" stroke-width="2.6" marker-end="url(#lsg-l083-pfeilk)"/>
+<path d="M626.4,195.5 L637.2,195.5 L637.2,123.5 L648.0,123.5" fill="none" stroke="#b91c1c" stroke-width="2.6" marker-end="url(#lsg-l083-pfeilk)"/>
+<rect x="10.0" y="122" width="106" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="10.0" y1="154" x2="116.0" y2="154" stroke="#222"/>
+<line x1="35.0" y1="122" x2="35.0" y2="173" stroke="#222"/>
+<line x1="75.5" y1="154" x2="75.5" y2="173" stroke="#222"/>
+<text x="22.5" y="143.0" text-anchor="middle" font-weight="bold" font-size="11.5">A</text>
+<text x="75.5" y="135" text-anchor="middle">Rollout-</text>
+<text x="75.5" y="149" text-anchor="middle">Konzept</text>
+<text x="22.5" y="168" text-anchor="middle">5</text>
+<text x="11.0" y="118" text-anchor="start" font-weight="bold">0</text>
+<text x="115.0" y="118" text-anchor="end" font-weight="bold">5</text>
+<text x="11.0" y="187" text-anchor="start" font-weight="bold">0</text>
+<text x="115.0" y="187" text-anchor="end" font-weight="bold">5</text>
+<text x="55.25" y="168" text-anchor="middle">0</text>
+<text x="95.75" y="168" text-anchor="middle">0</text>
+<rect x="137.6" y="26" width="106" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="137.6" y1="58" x2="243.6" y2="58" stroke="#222"/>
+<line x1="162.6" y1="26" x2="162.6" y2="77" stroke="#222"/>
+<line x1="203.1" y1="58" x2="203.1" y2="77" stroke="#222"/>
+<text x="150.1" y="47.0" text-anchor="middle" font-weight="bold" font-size="11.5">B</text>
+<text x="203.1" y="39" text-anchor="middle">Tablets</text>
+<text x="203.1" y="53" text-anchor="middle">bereitstellen</text>
+<text x="150.1" y="72" text-anchor="middle">18</text>
+<text x="138.6" y="22" text-anchor="start" font-weight="bold">5</text>
+<text x="242.6" y="22" text-anchor="end" font-weight="bold">23</text>
+<text x="138.6" y="91" text-anchor="start" font-weight="bold">5</text>
+<text x="242.6" y="91" text-anchor="end" font-weight="bold">23</text>
+<text x="182.85" y="72" text-anchor="middle">0</text>
+<text x="223.35" y="72" text-anchor="middle">0</text>
+<rect x="137.6" y="218" width="106" height="51" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="137.6" y1="250" x2="243.6" y2="250" stroke="#222"/>
+<line x1="162.6" y1="218" x2="162.6" y2="269" stroke="#222"/>
+<line x1="203.1" y1="250" x2="203.1" y2="269" stroke="#222"/>
+<text x="150.1" y="239.0" text-anchor="middle" font-weight="bold" font-size="11.5">C</text>
+<text x="203.1" y="231" text-anchor="middle">Schulungs-</text>
+<text x="203.1" y="245" text-anchor="middle">konzept</text>
+<text x="150.1" y="264" text-anchor="middle">6</text>
+<text x="138.6" y="214" text-anchor="start" font-weight="bold">5</text>
+<text x="242.6" y="214" text-anchor="end" font-weight="bold">11</text>
+<text x="138.6" y="283" text-anchor="start" font-weight="bold">29</text>
+<text x="242.6" y="283" text-anchor="end" font-weight="bold">35</text>
+<text x="182.85" y="264" text-anchor="middle">24</text>
+<text x="223.35" y="264" text-anchor="middle">0</text>
+<rect x="137.6" y="122" width="106" height="51" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="137.6" y1="154" x2="243.6" y2="154" stroke="#222"/>
+<line x1="162.6" y1="122" x2="162.6" y2="173" stroke="#222"/>
+<line x1="203.1" y1="154" x2="203.1" y2="173" stroke="#222"/>
+<text x="150.1" y="143.0" text-anchor="middle" font-weight="bold" font-size="11.5">D</text>
+<text x="203.1" y="135" text-anchor="middle">Stammdaten</text>
+<text x="203.1" y="149" text-anchor="middle">migrieren</text>
+<text x="150.1" y="168" text-anchor="middle">12</text>
+<text x="138.6" y="118" text-anchor="start" font-weight="bold">5</text>
+<text x="242.6" y="118" text-anchor="end" font-weight="bold">17</text>
+<text x="138.6" y="187" text-anchor="start" font-weight="bold">11</text>
+<text x="242.6" y="187" text-anchor="end" font-weight="bold">23</text>
+<text x="182.85" y="168" text-anchor="middle">6</text>
+<text x="223.35" y="168" text-anchor="middle">6</text>
+<rect x="265.2" y="218" width="106" height="51" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="265.2" y1="250" x2="371.2" y2="250" stroke="#222"/>
+<line x1="290.2" y1="218" x2="290.2" y2="269" stroke="#222"/>
+<line x1="330.7" y1="250" x2="330.7" y2="269" stroke="#222"/>
+<text x="277.7" y="239.0" text-anchor="middle" font-weight="bold" font-size="11.5">E</text>
+<text x="330.7" y="231" text-anchor="middle">Schulungs-</text>
+<text x="330.7" y="245" text-anchor="middle">unterlagen</text>
+<text x="277.7" y="264" text-anchor="middle">4</text>
+<text x="266.2" y="214" text-anchor="start" font-weight="bold">11</text>
+<text x="370.2" y="214" text-anchor="end" font-weight="bold">15</text>
+<text x="266.2" y="283" text-anchor="start" font-weight="bold">35</text>
+<text x="370.2" y="283" text-anchor="end" font-weight="bold">39</text>
+<text x="310.45" y="264" text-anchor="middle">24</text>
+<text x="350.95" y="264" text-anchor="middle">24</text>
+<rect x="265.2" y="74.0" width="106" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="265.2" y1="106.0" x2="371.2" y2="106.0" stroke="#222"/>
+<line x1="290.2" y1="74.0" x2="290.2" y2="125.0" stroke="#222"/>
+<line x1="330.7" y1="106.0" x2="330.7" y2="125.0" stroke="#222"/>
+<text x="277.7" y="95.0" text-anchor="middle" font-weight="bold" font-size="11.5">F</text>
+<text x="330.7" y="87.0" text-anchor="middle">Pilotbetrieb</text>
+<text x="330.7" y="101.0" text-anchor="middle">Nord</text>
+<text x="277.7" y="120.0" text-anchor="middle">10</text>
+<text x="266.2" y="70.0" text-anchor="start" font-weight="bold">23</text>
+<text x="370.2" y="70.0" text-anchor="end" font-weight="bold">33</text>
+<text x="266.2" y="139.0" text-anchor="start" font-weight="bold">23</text>
+<text x="370.2" y="139.0" text-anchor="end" font-weight="bold">33</text>
+<text x="310.45" y="120.0" text-anchor="middle">0</text>
+<text x="350.95" y="120.0" text-anchor="middle">0</text>
+<rect x="392.79999999999995" y="74.0" width="106" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="392.79999999999995" y1="106.0" x2="498.79999999999995" y2="106.0" stroke="#222"/>
+<line x1="417.79999999999995" y1="74.0" x2="417.79999999999995" y2="125.0" stroke="#222"/>
+<line x1="458.29999999999995" y1="106.0" x2="458.29999999999995" y2="125.0" stroke="#222"/>
+<text x="405.29999999999995" y="95.0" text-anchor="middle" font-weight="bold" font-size="11.5">G</text>
+<text x="458.29999999999995" y="87.0" text-anchor="middle">Pilot</text>
+<text x="458.29999999999995" y="101.0" text-anchor="middle">auswerten</text>
+<text x="405.29999999999995" y="120.0" text-anchor="middle">6</text>
+<text x="393.79999999999995" y="70.0" text-anchor="start" font-weight="bold">33</text>
+<text x="497.79999999999995" y="70.0" text-anchor="end" font-weight="bold">39</text>
+<text x="393.79999999999995" y="139.0" text-anchor="start" font-weight="bold">33</text>
+<text x="497.79999999999995" y="139.0" text-anchor="end" font-weight="bold">39</text>
+<text x="438.04999999999995" y="120.0" text-anchor="middle">0</text>
+<text x="478.54999999999995" y="120.0" text-anchor="middle">0</text>
+<rect x="520.4" y="170.0" width="106" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="520.4" y1="202.0" x2="626.4" y2="202.0" stroke="#222"/>
+<line x1="545.4" y1="170.0" x2="545.4" y2="221.0" stroke="#222"/>
+<line x1="585.9" y1="202.0" x2="585.9" y2="221.0" stroke="#222"/>
+<text x="532.9" y="191.0" text-anchor="middle" font-weight="bold" font-size="11.5">H</text>
+<text x="585.9" y="183.0" text-anchor="middle">Pflegekräfte</text>
+<text x="585.9" y="197.0" text-anchor="middle">schulen</text>
+<text x="532.9" y="216.0" text-anchor="middle">8</text>
+<text x="521.4" y="166.0" text-anchor="start" font-weight="bold">39</text>
+<text x="625.4" y="166.0" text-anchor="end" font-weight="bold">47</text>
+<text x="521.4" y="235.0" text-anchor="start" font-weight="bold">39</text>
+<text x="625.4" y="235.0" text-anchor="end" font-weight="bold">47</text>
+<text x="565.65" y="216.0" text-anchor="middle">0</text>
+<text x="606.15" y="216.0" text-anchor="middle">0</text>
+<rect x="520.4" y="26" width="106" height="51" fill="#fff" stroke="#222" stroke-width="1.2"/>
+<line x1="520.4" y1="58" x2="626.4" y2="58" stroke="#222"/>
+<line x1="545.4" y1="26" x2="545.4" y2="77" stroke="#222"/>
+<line x1="585.9" y1="58" x2="585.9" y2="77" stroke="#222"/>
+<text x="532.9" y="47.0" text-anchor="middle" font-weight="bold" font-size="11.5">I</text>
+<text x="585.9" y="39" text-anchor="middle">Standorte</text>
+<text x="585.9" y="53" text-anchor="middle">vorbereiten</text>
+<text x="532.9" y="72" text-anchor="middle">5</text>
+<text x="521.4" y="22" text-anchor="start" font-weight="bold">39</text>
+<text x="625.4" y="22" text-anchor="end" font-weight="bold">44</text>
+<text x="521.4" y="91" text-anchor="start" font-weight="bold">42</text>
+<text x="625.4" y="91" text-anchor="end" font-weight="bold">47</text>
+<text x="565.65" y="72" text-anchor="middle">3</text>
+<text x="606.15" y="72" text-anchor="middle">3</text>
+<rect x="648.0" y="98.0" width="106" height="51" fill="#fff" stroke="#b91c1c" stroke-width="2.4"/>
+<line x1="648.0" y1="130.0" x2="754.0" y2="130.0" stroke="#222"/>
+<line x1="673.0" y1="98.0" x2="673.0" y2="149.0" stroke="#222"/>
+<line x1="713.5" y1="130.0" x2="713.5" y2="149.0" stroke="#222"/>
+<text x="660.5" y="119.0" text-anchor="middle" font-weight="bold" font-size="11.5">J</text>
+<text x="713.5" y="111.0" text-anchor="middle">Go-Live und</text>
+<text x="713.5" y="125.0" text-anchor="middle">Abnahme</text>
+<text x="660.5" y="144.0" text-anchor="middle">2</text>
+<text x="649.0" y="94.0" text-anchor="start" font-weight="bold">47</text>
+<text x="753.0" y="94.0" text-anchor="end" font-weight="bold">49</text>
+<text x="649.0" y="163.0" text-anchor="start" font-weight="bold">47</text>
+<text x="753.0" y="163.0" text-anchor="end" font-weight="bold">49</text>
+<text x="693.25" y="144.0" text-anchor="middle">0</text>
+<text x="733.75" y="144.0" text-anchor="middle">0</text>
+
+</svg>
+      <figcaption>Abb. L-5: Netzplan „Rollout PflegeMobil“ – kritischer Pfad A → B → F → G → H → J (49 Tage)</figcaption>
+    </figure>
+    <table class="kompakt">
+<tr><th>Nr.</th><th>Vorgang</th><th class="num">D</th><th class="num">FAZ</th><th class="num">FEZ</th><th class="num">SAZ</th><th class="num">SEZ</th><th class="num">GP</th><th class="num">FP</th></tr>
+<tr><td class="krit">A</td><td>Rollout-Konzept erstellen</td><td class="num">5</td><td class="num">0</td><td class="num">5</td><td class="num">0</td><td class="num">5</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td class="krit">B</td><td>Tablets bereitstellen</td><td class="num">18</td><td class="num">5</td><td class="num">23</td><td class="num">5</td><td class="num">23</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>C</td><td>Schulungskonzept erstellen</td><td class="num">6</td><td class="num">5</td><td class="num">11</td><td class="num">29</td><td class="num">35</td><td class="num">24</td><td class="num">0</td></tr>
+<tr><td>D</td><td>Stammdaten migrieren</td><td class="num">12</td><td class="num">5</td><td class="num">17</td><td class="num">11</td><td class="num">23</td><td class="num">6</td><td class="num">6</td></tr>
+<tr><td>E</td><td>Schulungsunterlagen erstellen</td><td class="num">4</td><td class="num">11</td><td class="num">15</td><td class="num">35</td><td class="num">39</td><td class="num">24</td><td class="num">24</td></tr>
+<tr><td class="krit">F</td><td>Pilotbetrieb Standort Nord</td><td class="num">10</td><td class="num">23</td><td class="num">33</td><td class="num">23</td><td class="num">33</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td class="krit">G</td><td>Pilot auswerten, App anpassen</td><td class="num">6</td><td class="num">33</td><td class="num">39</td><td class="num">33</td><td class="num">39</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td class="krit">H</td><td>Pflegekräfte schulen</td><td class="num">8</td><td class="num">39</td><td class="num">47</td><td class="num">39</td><td class="num">47</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>I</td><td>Standorte vorbereiten</td><td class="num">5</td><td class="num">39</td><td class="num">44</td><td class="num">42</td><td class="num">47</td><td class="num">3</td><td class="num">3</td></tr>
+<tr><td class="krit">J</td><td>Go-Live und Abnahme</td><td class="num">2</td><td class="num">47</td><td class="num">49</td><td class="num">47</td><td class="num">49</td><td class="num">0</td><td class="num">0</td></tr>
+</table>
+    <p>Wichtige Rechenschritte: FAZ(F) = max(FEZ B = 23; FEZ D = 17) = 23 · FAZ(H) = max(FEZ E = 15; FEZ G = 39) = 39 · FAZ(J) = max(FEZ H = 47; FEZ I = 44) = 47 · SEZ(G) = min(SAZ H = 39; SAZ I = 42) = 39 · SEZ(A) = min(SAZ B = 5; SAZ C = 29; SAZ D = 11) = 5.</p>
+    <h4>b) Kritischer Pfad und Gesamtdauer (3 P)</h4>
+    <p>Kritischer Pfad: <strong>A → B → F → G → H → J</strong>; Gesamtdauer: <strong>49 Arbeitstage</strong>.</p>
+    <h4>c) Freier Puffer und Gesamtpuffer am Beispiel C (2 P)</h4>
+    <p>Der <strong>Gesamtpuffer</strong> ist die Zeit, um die ein Vorgang verschoben oder verlängert werden kann, <strong>ohne dass sich das Projektende verschiebt</strong>. Der <strong>freie Puffer</strong> ist die Zeit, um die er sich verschieben kann, <strong>ohne dass sich der früheste Anfang eines Nachfolgers verschiebt</strong>. C (Schulungskonzept) hat GP = 24 Tage: Er könnte bis zu 24 Tage später fertig werden, ohne den Go-Live zu gefährden. Sein FP ist aber 0: Jede Verzögerung verschiebt sofort den frühesten Beginn von E (Schulungsunterlagen), weil E direkt anschließt – der Puffer liegt „hinter“ E.</p>
+    <h4>d) Verzögerungen (4 P)</h4>
+    <ul>
+      <li><strong>(1) D + 4 Tage:</strong> D hat GP = FP = 6 Tage. D endet dann am Tag 21 statt 17; F kann trotzdem erst am Tag 23 beginnen (wegen B). → <strong>keine Auswirkung</strong>, Ende bleibt Tag 49.</li>
+      <li><strong>(2) I + 5 Tage:</strong> I hat nur GP = 3 Tage. I endet am Tag 49 statt 44; J kann erst am Tag 49 statt 47 beginnen. → Das Teilprojekt endet <strong>2 Tage später, am Tag 51</strong>; I wird kritisch (neuer kritischer Pfad A → B → F → G → I → J).</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> a) 4 P Struktur und Abhängigkeiten (besonders F nach B <em>und</em> D, H nach E <em>und</em> G, J nach H <em>und</em> I), 4 P FAZ/FEZ, 4 P SAZ/SEZ, 2 P GP/FP; Folgefehler werden nicht erneut abgezogen. b) 2 P Pfad, 1 P Dauer. c) 1 P Unterschied, 1 P Anwendung auf C. d) je Fall 2 P (Ergebnis + Begründung über den Puffer).</div>
+    <p><strong>Erklärung:</strong> Die häufigsten Fehler: E als Vorgänger von F statt von H eintragen (die Schulungsunterlagen werden erst für die Schulung gebraucht) und bei H das Maximum vergessen. Wer den Text zuerst in eine Vorgangsliste übersetzt, vermeidet beides.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-08-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== PM-09 ===================== -->
   <h3 id="a-09">PM-09 · Machbarkeitsanalyse</h3>
@@ -2211,6 +3334,15 @@
     <div class="antwort z3"></div>
     <p class="quelle">Grundlagen zu: W25 Teil 1, Aufgabe 1a (Machbarkeitsanalyse)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-09-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-09.1 · 4 Punkte</div>
+    <h4>a) Zeitpunkt und Ziel (2 P)</h4>
+    <p>Die Machbarkeitsanalyse findet <strong>vor dem eigentlichen Projektstart</strong> statt, in der Initialisierungsphase bzw. vor dem Projektauftrag oder der Vergabe (1 P). Sie prüft, ob das Vorhaben unter den gegebenen Rahmenbedingungen realisierbar und sinnvoll ist, und liefert eine <strong>Entscheidungsgrundlage</strong> (durchführen, anpassen, verwerfen), damit keine Fehlinvestition entsteht (1 P).</p>
+    <h4>b) Kriterien (2 P) – vier der folgenden</h4>
+    <p>technische · wirtschaftliche · rechtliche · organisatorische bzw. personelle · zeitliche Machbarkeit (auch: ökologische).</p>
+    <div class="bewertung"><strong>Bewertung:</strong> b) je Kriterium 0,5 P.</div>
+    <p><strong>Erklärung:</strong> Die Machbarkeitsanalyse beantwortet „Können und sollen wir das?“, die Risikoanalyse im laufenden Projekt „Was kann schiefgehen?“.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-09-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-09-2">
     <div class="kopf">
@@ -2222,6 +3354,19 @@
     <div class="antwort z12"></div>
     <p class="quelle">Angelehnt an: W25 Teil 1, Aufgabe 1a (zwei Kriterien der Machbarkeitsanalyse benennen und erläutern)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-09-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-09.2 · 8 Punkte</div>
+    <p>Zwei der folgenden Kriterien, jeweils benannt und am Projekt erläutert:</p>
+    <ul>
+      <li><strong>Technische Machbarkeit:</strong> Lässt sich das Vorhaben mit verfügbarer Technik und vorhandenem Know-how umsetzen? Für PflegeMobil: Kann eine App offline Daten erfassen und später konfliktfrei synchronisieren (viele Funklöcher im Landkreis)? Bietet CareBill eine Importschnittstelle (XML), die angebunden werden kann? Gibt es geeignete Tablets und eine zentrale Geräteverwaltung? Hat Kranich Erfahrung mit Android und Synchronisation?</li>
+      <li><strong>Wirtschaftliche Machbarkeit:</strong> Stehen Kosten und Nutzen in einem sinnvollen Verhältnis, ist das Projekt finanzierbar? Für PflegeMobil: einmalige Kosten (Entwicklung, 120 Tablets, Lizenzen, Schulung) und laufende Kosten gegenüber Zeitersparnis bei Dokumentation und Verwaltung, schnellerer Abrechnung und weniger nicht abrechenbaren Leistungen; Einhaltung des Budgets von 420.000 €; Amortisation.</li>
+      <li><strong>Rechtliche Machbarkeit:</strong> Ist das Vorhaben rechtlich zulässig? Für PflegeMobil: Gesundheitsdaten (Art. 9 DSGVO) – Datenschutz-Folgenabschätzung, Hosting in der EU, Verschlüsselung, Rechtekonzept; Mitbestimmung des Betriebsrats; Anforderungen an die Dokumentation bei Prüfungen durch den Medizinischen Dienst und an die Abrechnung mit den Pflegekassen; Anerkennung der Unterschrift auf dem Tablet.</li>
+      <li><strong>Organisatorische / personelle Machbarkeit:</strong> Passt das Vorhaben zu Personal und Abläufen? Für PflegeMobil: Können 118 Pflegekräfte, teils ohne Tablet-Erfahrung, rechtzeitig geschult werden? Reicht ein Teilzeit-Administrator für 120 Tablets? Hat die PDL Zeit für die Projektarbeit? Wie hoch ist die Akzeptanz?</li>
+      <li><strong>Zeitliche Machbarkeit:</strong> Ist der Termin realistisch? Für PflegeMobil: Go-Live 01.11.2027 trotz Lieferzeit der Tablets, sechs Wochen Vorlauf für die CareBill-Testumgebung und notwendiger Betriebsvereinbarung vor dem Pilot?</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> je Kriterium 4 P: 1 P Benennung, 1 P allgemeine Erläuterung (Leitfrage), 2 P konkrete Prüfpunkte für PflegeMobil. Ohne Projektbezug höchstens 2 P je Kriterium.</div>
+    <p><strong>Erklärung:</strong> Das entspricht genau dem Aufgabentyp aus W25 T1 A1a. Der Projektbezug bringt die Hälfte der Punkte – Fakten aus der Ausgangssituation nutzen.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-09-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-09-3">
     <div class="kopf">
@@ -2241,6 +3386,21 @@
     <div class="antwort z5"></div>
     <p class="quelle">Angelehnt an: W25 Teil 1, Aufgabe 1a (Machbarkeitsanalyse) – erweitert um eine Bewertung anhand von Fakten</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-09-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-09.3 · 12 Punkte</div>
+    <h4>a) Prüfung der Varianten (8 P)</h4>
+    <table class="kompakt">
+      <tr><th style="width:14%">Kriterium</th><th>Variante 1 (Cloud „VoxCloud“)</th><th>Variante 2 (Offline auf dem Tablet)</th></tr>
+      <tr><td><strong>technisch</strong></td><td>Erkennungsrate 95 % ≥ 90 % → Nutzen erreichbar; benötigt aber durchgehend Internet – in den vielen Funklöchern nicht nutzbar; keine Erfahrung bei Kranich. → <strong>eingeschränkt machbar</strong></td><td>funktioniert ohne Netz, aber Erkennungsrate 82 % &lt; 90 % → Korrekturaufwand frisst die Ersparnis; benötigt 8 GB RAM, die Tablets haben nur 4 GB. → <strong>nicht machbar</strong> (mit vorhandener Hardware)</td></tr>
+      <tr><td><strong>wirtschaftlich</strong></td><td>25.000 € Entwicklung + 1.800 € pro Monat (21.600 € pro Jahr); im ersten Jahr im Budget von 60.000 €; dem steht ein kalkulatorischer Nutzen von ca. 260.000 × 1 Min. ≈ 4.333 h × 32 € ≈ 138.700 € pro Jahr gegenüber. → <strong>machbar</strong></td><td>45.000 € + 120 × 520 € = 62.400 € → 107.400 € &gt; 60.000 € Budget; Nutzen wegen 82 % fraglich. → <strong>nicht machbar</strong></td></tr>
+      <tr><td><strong>rechtlich</strong></td><td>Gesundheitsdaten werden auf Server in den USA übertragen; der Datenschutzbeauftragte lehnt das ohne zusätzliche Garantien ab; Aufnahmen Dritter. → <strong>nicht machbar</strong> (in dieser Form)</td><td>Verarbeitung lokal, kein Drittlandtransfer; Aufnahmen Dritter und Erweiterung der Betriebsvereinbarung müssen geregelt werden. → <strong>eingeschränkt machbar</strong></td></tr>
+      <tr><td><strong>zeitlich</strong></td><td>Team ab April 2028 frei, Frist 30.06.2028 = 3 Monate; Entwicklung 3 Monate → nur ohne jeden Puffer. → <strong>eingeschränkt machbar</strong></td><td>5 Monate Entwicklung &gt; 3 Monate verfügbar. → <strong>nicht machbar</strong></td></tr>
+    </table>
+    <h4>b) Empfehlung (4 P)</h4>
+    <p>Die Spracheingabe sollte <strong>in der geplanten Form nicht umgesetzt</strong> werden: Variante 1 scheitert rechtlich (US-Server für Gesundheitsdaten) und ist in Funklöchern nicht nutzbar; Variante 2 scheitert am Budget, an der Hardware, an der zu geringen Erkennungsrate und am Termin. Empfehlung an die Geschäftsführerin: Phase 2 zunächst ohne Spracheingabe abschließen und die Spracheingabe <strong>mit Änderungen neu prüfen</strong> – z. B. einen Anbieter mit Servern in der EU suchen, Diktate offline zwischenspeichern und bei Netz übertragen, vorab einen Pilot mit zehn Freiwilligen durchführen, die Betriebsvereinbarung erweitern und den Termin auf Ende 2028 verschieben.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Zelle 1 P (Fakten aus Anlage 8 + nachvollziehbare Bewertung; Rechnung bei „wirtschaftlich“ Variante 2 erforderlich). b) 2 P klare Empfehlung mit Bezug auf a), 2 P Begründung bzw. Alternative. Eine andere Empfehlung (z. B. „Variante 1 nach Wechsel zu einem EU-Anbieter durchführen“) ist bei schlüssiger Begründung voll zu bewerten.</div>
+    <p><strong>Erklärung:</strong> Eine Machbarkeitsanalyse endet nicht mit „ja/nein“ je Kriterium, sondern mit einer Gesamtempfehlung. Ein einziges „nicht machbar“ in einem K.-o.-Bereich (Recht) reicht, um eine Variante in der vorliegenden Form zu stoppen.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-09-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== PM-10 ===================== -->
   <h3 id="a-10">PM-10 · Nutzen eines Systems beschreiben</h3>
@@ -2256,6 +3416,15 @@
     <div class="antwort z3"></div>
     <p class="quelle">Grundlagen zu: S24 Teil 1, Aufgabe 1a (Systemnutzen)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-10-1"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-10.1 · 4 Punkte</div>
+    <h4>a) Unterschied (2 P)</h4>
+    <p><strong>Quantitativer</strong> Nutzen lässt sich in Zahlen bzw. Geld messen, z. B. eingesparte Stunden oder Euro (1 P). <strong>Qualitativer</strong> Nutzen lässt sich nicht oder nur schwer in Zahlen ausdrücken und wird beschrieben, z. B. Zufriedenheit oder Image (1 P).</p>
+    <h4>b) Beispiele (2 P)</h4>
+    <p><strong>Quantitativ:</strong> 1,5 Minuten weniger Dokumentation je Einsatz (rund 6.500 Stunden pro Jahr); 7.800 € pro Jahr weniger Druck- und Papierkosten; 4 % weniger gefahrene Kilometer. <strong>Qualitativ:</strong> zufriedenere Pflegekräfte (kein Nachtragen am Wochenende); bessere, prüfsichere Dokumentation; attraktiverer Arbeitgeber; mehr Transparenz für die PDL.</p>
+    <div class="bewertung"><strong>Bewertung:</strong> a) je Begriff 1 P. b) je passendes Beispiel aus PflegeMobil 1 P.</div>
+    <p><strong>Erklärung:</strong> Ein qualitativer Nutzen kann manchmal nachträglich gemessen werden (z. B. per Umfrage) – entscheidend ist, dass er sich nicht direkt in Geld ausdrücken lässt.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-10-1">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-10-2">
     <div class="kopf">
@@ -2273,6 +3442,18 @@
     </table>
     <p class="quelle">Angelehnt an: S24 Teil 1, Aufgabe 1a (Vorteile einer E-Service-Plattform beschreiben)</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-10-2"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-10.2 · 8 Punkte</div>
+    <table class="kompakt">
+      <tr><th style="width:22%">Zielgruppe</th><th>Vorteil (Beispiele)</th></tr>
+      <tr><td><strong>Pflegekräfte</strong></td><td>weniger Zeit für die Dokumentation (von 4,0 auf 2,5 Minuten je Einsatz) und kein Nachtragen von Zetteln am Wochenende; Tourenplan und Navigation auf dem Tablet, Änderungen bei Krankmeldungen sofort sichtbar – mehr Zeit für die eigentliche Pflege</td></tr>
+      <tr><td><strong>Patientinnen, Patienten, Angehörige</strong></td><td>die Pflegekraft hat mehr Zeit für die Pflege statt für Papierkram; verlässlichere Einsatzzeiten durch bessere Tourenplanung; vollständige, gut lesbare Dokumentation; später Information über die Ankunftszeit (Phase 2)</td></tr>
+      <tr><td><strong>Verwaltung / Abrechnung</strong></td><td>kein manuelles Übertragen mehr (120 statt 20 Stunden pro Monat); weniger Übertragungsfehler (von ca. 4 % auf unter 0,5 %); fehlende Unterschriften werden sofort erkannt; Abrechnung bis zum 5. statt 15. Werktag</td></tr>
+      <tr><td><strong>Geschäftsführung</strong></td><td>schnellere Abrechnung verbessert die Liquidität; weniger nicht abrechenbare Leistungen (0,8 % → 0,2 % von 9,5 Mio. € ≈ 57.000 € Mehrerlös pro Jahr); geringere Sach- und Fahrtkosten; attraktiver Arbeitgeber im Fachkräftemangel; prüfsichere Dokumentation</td></tr>
+    </table>
+    <div class="bewertung"><strong>Bewertung:</strong> je Zielgruppe 2 P: 1 P Vorteil, 1 P Begründung bzw. Konkretisierung (möglichst mit Zahl aus Anlage 1 oder 7). Ein Vorteil, der nicht zur Zielgruppe passt, wird nicht gewertet.</div>
+    <p><strong>Erklärung:</strong> Wie in S24 zählt die Perspektive: Derselbe Effekt (schnellere Abrechnung) ist für die Verwaltung Arbeitserleichterung und für die Geschäftsführung Liquidität.</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-10-2">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <div class="aufgabe" id="PM-10-3">
     <div class="kopf">
@@ -2297,6 +3478,35 @@
     <div class="antwort z3"></div>
     <p class="quelle">Angelehnt an: S24 Teil 1, Aufgabe 1a (Systemnutzen) – erweitert um eine Wirtschaftlichkeitsrechnung</p>
   </div>
+<details class="ap2-loesung no-print" data-loesung="L-PM-10-3"><summary><span class="ap2-auf">Lösung anzeigen</span><span class="ap2-zu">Lösung ausblenden</span></summary><div class="ap2-loesung-inhalt"><div class="loesung">
+    <div class="kopf">Aufgabe PM-10.3 · 16 Punkte</div>
+    <h4>a) Jährlicher quantitativer Nutzen (6 P)</h4>
+    <table class="kompakt">
+      <tr><th>Position</th><th>Rechnung</th><th class="num">Betrag pro Jahr</th></tr>
+      <tr><td>(1) Pflegekräfte</td><td>260.000 Einsätze × (4,0 − 2,5) Min. = 390.000 Min. = 6.500 h × 32 €/h</td><td class="num">208.000 €</td></tr>
+      <tr><td>(2) Verwaltung</td><td>(120 − 20) h × 12 Monate = 1.200 h × 28 €/h</td><td class="num">33.600 €</td></tr>
+      <tr><td>(3) Sach- und Raumkosten</td><td>7.800 € + 2.400 €</td><td class="num">10.200 €</td></tr>
+      <tr><td>(4) Fahrtkosten</td><td>1.100.000 km × 4 % = 44.000 km × 0,30 €/km</td><td class="num">13.200 €</td></tr>
+      <tr><th colspan="2">Summe</th><th class="num">265.000 €</th></tr>
+    </table>
+    <h4>b) Amortisationsdauer (3 P)</h4>
+    <p>Jährlicher Rückfluss = 265.000 € − 43.740 € = 221.260 € · Amortisationsdauer = 367.224 € ÷ 221.260 € pro Jahr ≈ <strong>1,66 Jahre</strong> (ca. 1 Jahr und 8 Monate).</p>
+    <p class="klein">Mit den Ersatzwerten: (265.000 € − 45.000 €) = 220.000 € · 360.000 € ÷ 220.000 € ≈ 1,64 Jahre.</p>
+    <h4>c) Nur zahlungswirksame Effekte (4 P)</h4>
+    <p>Mehrerlös durch weniger nicht abrechenbare Leistungen: 9.500.000 € × (0,8 % − 0,2 %) = 57.000 € · Zahlungswirksamer Nutzen = 10.200 € + 13.200 € + 57.000 € = 80.400 € · Rückfluss = 80.400 € − 43.740 € = 36.660 € pro Jahr · Amortisationsdauer = 367.224 € ÷ 36.660 € ≈ <strong>10,0 Jahre</strong> <span class="klein">(Ersatzwerte: 35.400 €; 360.000 € ÷ 35.400 € ≈ 10,2 Jahre)</span>.</p>
+    <p><strong>Beurteilung:</strong> Rein finanziell amortisiert sich das Projekt erst nach etwa zehn Jahren – deutlich länger als die übliche Nutzungsdauer von Tablets (3–5 Jahre) und Software. Der große Nutzen aus a) besteht vor allem aus <strong>gewonnener Arbeitszeit</strong> (6.500 Stunden, rund vier Vollzeitstellen), die nicht automatisch Geld spart, weil niemand entlassen wird. Wirtschaftlich wird sie erst, wenn sie genutzt wird – für zusätzliche abrechenbare Einsätze, weniger Überstunden und Aushilfen oder als Entlastung im Fachkräftemangel. Die Entscheidung sollte daher nicht allein an der Amortisationsdauer hängen, sondern auch die qualitativen Nutzen einbeziehen.</p>
+    <h4>d) Qualitative Nutzen (3 P) – drei der folgenden</h4>
+    <ul>
+      <li>bessere Dokumentationsqualität und Rechtssicherheit bei Prüfungen durch den Medizinischen Dienst</li>
+      <li>Entlastung und Zufriedenheit der Pflegekräfte → attraktiver Arbeitgeber, geringere Fluktuation</li>
+      <li>mehr Zeit für die Patienten → höhere Pflegequalität und Patientenzufriedenheit</li>
+      <li>Transparenz und bessere Steuerung durch die Echtzeitübersicht der PDL</li>
+      <li>besserer Datenschutz (verschlüsselte Daten statt Papierakten im Auto)</li>
+      <li>Nachhaltigkeit (papierlos) und modernes Image</li>
+    </ul>
+    <div class="bewertung"><strong>Bewertung:</strong> a) (1) 2 P, (2)–(4) je 1 P, Summe 1 P. b) 1 P Rückfluss, 1 P Ansatz, 1 P Ergebnis. c) 2 P Rechnung (Mehrerlös 57.000 € erkannt), 2 P Beurteilung (Zeitersparnis ≠ Geldersparnis, Vergleich mit der Nutzungsdauer). d) je qualitativer Nutzen 1 P. Folgefehler aus PM-07.2 werden nicht abgezogen.</div>
+    <p><strong>Erklärung:</strong> Die zweite Rechnung ist der Kern der Aufgabe: Eine ehrliche Projektbegründung trennt zahlungswirksame von kalkulatorischen Einsparungen. Wer die laufenden Kosten vergisst, kommt auf zu kurze Amortisationszeiten (1,39 bzw. 4,6 Jahre).</p>
+  </div><p class="ap2-loesung-link"><a href="04_Projektmanagement_Loesungen.html#L-PM-10-3">In der Lösungsdatei öffnen ↗</a></p></div></details>
 
   <!-- ===================== ORIGINALAUFGABEN ===================== -->
   <h3 id="originale">Originalaufgaben zum Üben</h3>
