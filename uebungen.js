@@ -199,10 +199,15 @@
     var counters = {};
     var n = 0;
     document.querySelectorAll(".aufgabe td, .aufgabe .luecke").forEach(function (cell) {
-      if (cell.textContent.trim() !== "" || cell.querySelector("img,svg,input,textarea")) return;
+      var leer = cell.textContent.trim() === "" && !cell.querySelector("img,svg,input,textarea");
+      var kaestchen = cell.matches("table.ankreuz td") && (leer || cell.textContent.trim() === "☐");
+      if (!leer && !kaestchen) return;
+      // leere Zellen behalten ihre Nummer z1, z2 … (auch als Kästchen), damit Gespeichertes an seiner Zelle bleibt
+      var art = leer ? "z" : "k";
       var ck = containerKey(cell);
-      counters[ck] = (counters[ck] || 0) + 1;
-      var key = PREFIX + FILE + ":" + ck + ":z" + counters[ck];
+      counters[ck + art] = (counters[ck + art] || 0) + 1;
+      var key = PREFIX + FILE + ":" + ck + ":" + art + counters[ck + art];
+      if (kaestchen) { richteKaestchenEin(cell, key); n++; return; }
       cell.setAttribute("contenteditable", "true");
       cell.classList.add("ap2-zelle");
       var v = lsGet(key);
@@ -224,6 +229,39 @@
       n++;
     });
     return n;
+  }
+
+  /* ---------- Ankreuzfelder (table.ankreuz): Klick oder Leertaste setzt das Kreuz, je Zeile eins ---------- */
+  function setzeKreuz(cell, an) {
+    cell.setAttribute("aria-checked", an ? "true" : "false");
+    if (an) lsSet(cell.dataset.ap2Key, "X"); else lsDel(cell.dataset.ap2Key);
+  }
+  function richteKaestchenEin(cell, key) {
+    var zeile = cell.parentNode;
+    var kopf = cell.closest("table").rows[0].cells[cell.cellIndex];
+    var aussage = Array.prototype.filter.call(zeile.cells, function (c) {
+      return c.cellIndex < cell.cellIndex && !c.classList.contains("ap2-kaestchen") && c.textContent.trim();
+    }).pop();
+    cell.classList.add("ap2-kaestchen");
+    if (cell.textContent.trim()) cell.setAttribute("data-druck", "☐");   // gedruckt wie bisher mit leerem Kästchen
+    cell.textContent = "";
+    cell.dataset.ap2Key = key;
+    cell.tabIndex = 0;
+    cell.setAttribute("role", "checkbox");
+    cell.setAttribute("aria-label", ((aussage ? aussage.textContent.trim() + " – " : "") +
+      (kopf ? kopf.textContent : "")).replace(/­/g, ""));
+    var v = lsGet(key);
+    cell.setAttribute("aria-checked", v && v.trim() ? "true" : "false");
+    var umschalten = function () {
+      var an = cell.getAttribute("aria-checked") !== "true";
+      if (an) zeile.querySelectorAll('.ap2-kaestchen[aria-checked="true"]').forEach(function (c) { setzeKreuz(c, false); });
+      setzeKreuz(cell, an);
+      gespeichert();
+    };
+    cell.addEventListener("click", umschalten);
+    cell.addEventListener("keydown", function (e) {
+      if (e.key === " " || e.key === "Enter") { e.preventDefault(); umschalten(); }
+    });
   }
 
   /* ---------- Bildzonen (Zeichenflächen) ---------- */

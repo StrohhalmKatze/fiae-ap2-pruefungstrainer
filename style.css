@@ -230,6 +230,23 @@ textarea.ap2-eingabe.ap2-code { font-family: Consolas, "Courier New", monospace;
   .luecke.ap2-zelle:empty::after { content: "\00a0"; }
 }
 
+/* Ankreuzfelder (table.ankreuz): Kästchen per Klick oder Leertaste, je Zeile ein Kreuz */
+td.ap2-kaestchen { text-align: center; vertical-align: middle; cursor: pointer; user-select: none; touch-action: manipulation; }
+td.ap2-kaestchen:focus { outline: 2px solid var(--accent); outline-offset: -2px; }
+td.ap2-kaestchen[aria-checked="true"]::before { content: "✗"; font-weight: bold; }
+@media screen {
+  td.ap2-kaestchen:hover { background: rgba(127, 160, 210, .10); }
+  td.ap2-kaestchen::before {
+    content: ""; display: inline-block; box-sizing: border-box; width: 18px; height: 18px;
+    border: 1.5px solid #8a93a1; border-radius: 3px; vertical-align: middle;
+    font-size: 15px; line-height: 15px; text-align: center; color: var(--accent);
+  }
+  td.ap2-kaestchen:hover::before, td.ap2-kaestchen[aria-checked="true"]::before { border-color: var(--accent); }
+}
+@media print {
+  td.ap2-kaestchen[data-druck]:not([aria-checked="true"])::before { content: "☐"; }
+}
+
 /* Bildzonen (Zeichenflächen) */
 .ap2-bildzone { position: relative; outline: none; }
 .ap2-bildzone.ap2-mit-bild { height: auto !important; min-height: 0; }
