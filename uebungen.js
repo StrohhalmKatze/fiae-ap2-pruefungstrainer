@@ -126,6 +126,38 @@
     ta.style.height = Math.max(minH, ta.scrollHeight) + "px";
   }
 
+  // ersetzt [a, b) über execCommand, damit Strg+Z weiter funktioniert; das löst auch "input" aus (Speichern)
+  function ersetze(ta, a, b, text) {
+    ta.setSelectionRange(a, b);
+    if (!document.execCommand("insertText", false, text)) {
+      ta.setRangeText(text, a, b, "end");
+      ta.dispatchEvent(new Event("input"));
+    }
+  }
+
+  // Tab rückt ein (bei mehreren markierten Zeilen alle), Umschalt+Tab rückt die Zeilen aus.
+  // Im Code-Modus ein echtes Tabzeichen (eine Rücktaste löscht es ganz), im Fließtext vier Leerzeichen.
+  function einruecken(ta, zurueck) {
+    var EINZUG = ta.classList.contains("ap2-code") ? "\t" : "    ";
+    var v = ta.value, s = ta.selectionStart, en = ta.selectionEnd;
+    var mehrzeilig = v.slice(s, en).indexOf("\n") !== -1;
+    if (!zurueck && !mehrzeilig) { ersetze(ta, s, en, EINZUG); return; }
+    var start = s === 0 ? 0 : v.lastIndexOf("\n", s - 1) + 1;
+    var ende = en > s && v[en - 1] === "\n" ? en - 1 : en;   // Zeile hinter einem markierten Zeilenende nicht mitnehmen
+    var zeilenende = v.indexOf("\n", ende);
+    if (zeilenende === -1) zeilenende = v.length;
+    var alt = v.slice(start, zeilenende), erste = 0, summe = 0;
+    var neu = alt.split("\n").map(function (z, i) {
+      var diff = zurueck ? -/^(\t| {1,4})?/.exec(z)[0].length : EINZUG.length;
+      if (i === 0) erste = diff;
+      summe += diff;
+      return zurueck ? z.slice(-diff) : EINZUG + z;
+    }).join("\n");
+    if (neu === alt) return;
+    ersetze(ta, start, zeilenende, neu);
+    ta.setSelectionRange(mehrzeilig && s === start ? start : Math.max(start, s + erste), Math.max(start, en + summe));
+  }
+
   function setupTextfelder() {
     var counters = {};
     var felder = document.querySelectorAll(".antwort");
@@ -176,14 +208,12 @@
           gespeichert();
         }, 300);
       });
+      var tabFrei = false;   // nach Esc verlässt der nächste Tab das Feld wie gewohnt
       ta.addEventListener("keydown", function (e) {
-        if (e.key === "Tab" && !e.shiftKey && !e.ctrlKey && !e.altKey && ta.classList.contains("ap2-code")) {
-          e.preventDefault();
-          var s = ta.selectionStart, en = ta.selectionEnd;
-          ta.value = ta.value.slice(0, s) + "    " + ta.value.slice(en);
-          ta.selectionStart = ta.selectionEnd = s + 4;
-          ta.dispatchEvent(new Event("input"));
-        }
+        if (e.key === "Escape") { tabFrei = true; return; }
+        if (e.key !== "Tab" || e.ctrlKey || e.altKey || e.metaKey || tabFrei) { tabFrei = false; return; }
+        e.preventDefault();
+        einruecken(ta, e.shiftKey);
       });
     });
     window.addEventListener("beforeprint", function () {

@@ -212,7 +212,7 @@ textarea.ap2-eingabe {
   display: block; width: 100%; box-sizing: border-box; margin: 0;
   border: none; outline: none; resize: none; overflow: hidden; background: transparent;
   color: var(--text); font: inherit; font-size: 15px; line-height: 28px;
-  padding: 0 40px 0 8px;
+  padding: 0 40px 0 8px; tab-size: 4;
 }
 textarea.ap2-eingabe.ap2-code { font-family: Consolas, "Courier New", monospace; font-size: 14px; }
 .ap2-mono {
