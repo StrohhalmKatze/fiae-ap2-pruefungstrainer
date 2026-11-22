@@ -580,11 +580,14 @@ ORDER BY Spalte [ASC | DESC], …;</pre>
   <table>
     <tr><th>Funktion (MySQL)</th><th>Ergebnis</th></tr>
     <tr><td><code>YEAR(d)</code>, <code>MONTH(d)</code>, <code>DAY(d)</code></td><td>Jahr, Monat (1–12), Tag aus einem Datum</td></tr>
+    <tr><td><code>HOUR(t)</code>, <code>MINUTE(t)</code></td><td>Stunde (0–23), Minute (0–59) aus einer Uhrzeit oder einem Zeitpunkt (<code>DATETIME</code>)</td></tr>
+    <tr><td><code>WEEKDAY(d)</code></td><td>Wochentag als Zahl: Montag = 0 … Sonntag = 6, so auch im IHK-Belegsatz (S23 T2 4b: Wochentage der geplanten Pflegearbeiten). Nicht verwechseln mit <code>DAYOFWEEK(d)</code>, dort ist Sonntag = 1</td></tr>
     <tr><td><code>CURDATE()</code>, <code>NOW()</code></td><td>heutiges Datum bzw. Datum mit Uhrzeit</td></tr>
     <tr><td><code>DATEDIFF(d1, d2)</code></td><td>Anzahl Tage <code>d1 − d2</code> (<code>DATEDIFF('2026-04-08', '2026-04-06')</code> = 2)</td></tr>
+    <tr><td><code>TIMESTAMPDIFF(Einheit, von, bis)</code></td><td>Differenz <code>bis − von</code> in der Einheit <code>MINUTE</code>, <code>HOUR</code>, <code>DAY</code>, <code>MONTH</code> oder <code>YEAR</code>; gezählt werden nur volle Einheiten. Alter in Jahren: <code>TIMESTAMPDIFF(YEAR, GebDat, CURDATE())</code> (wer am 15.06.2020 geboren ist, ist am 14.06.2026 noch 5). Verspätung in Minuten: <code>TIMESTAMPDIFF(MINUTE, Plan, Ist)</code></td></tr>
     <tr><td><code>Preis * 10 AS Zehnerkarte</code></td><td>berechnete Spalte mit Alias</td></tr>
   </table>
-  <p class="klein">Dialekt-Hinweis: Im IHK-Belegsatz (z. B. S22) steht <code>DATEDIFF(Datumsteil, Anfangsdatum, Enddatum)</code> sowie <code>TODAY</code>/<code>CURRENT</code> (SQL-Server-Stil). Verwende in der Prüfung die Schreibweise aus dem Belegsatz deiner Prüfung; sinnvolle Varianten werden akzeptiert.</p>
+  <p class="klein">Dialekt-Hinweis: Im IHK-Belegsatz (z. B. S22) steht <code>DATEDIFF(Datumsteil, Anfangsdatum, Enddatum)</code> sowie <code>TODAY</code>/<code>CURRENT</code> (SQL-Server-Stil). Verwende in der Prüfung die Schreibweise aus dem Belegsatz deiner Prüfung; sinnvolle Varianten werden akzeptiert. Im aktuellen IHK-Belegsatz (Stand 2024-10-07, z. B. W25) stehen <code>NOW()</code> und <code>DATEDIFF(Datumsteil, Anfangsdatum, Enddatum)</code> mit den Datumsteilen DAY, MONTH, YEAR, HOUR, MINUTE. Das entspricht <code>TIMESTAMPDIFF</code> in MySQL: Das Alter aus S26 T2 4b lautet dort <code>DATEDIFF(YEAR, TB_GebDat, NOW())</code>. Vorsicht: <code>YEAR(NOW()) - YEAR(TB_GebDat)</code> ist vor dem Geburtstag um 1 zu hoch.</p>
 <pre class="sql">SELECT Nachname, Ort, YEAR(Eintritt) AS Jahr
 FROM   Mitglied
 WHERE  YEAR(Eintritt) &gt;= 2025 AND (Ort = 'Bonn' OR Ort = 'Siegburg')
@@ -1378,8 +1381,11 @@ oder
     <tr><td><strong>MIN</strong>(Spalte | Formel), <strong>MAX</strong>(Spalte | Formel)</td><td>kleinster, größter Wert</td></tr>
     <tr class="gruppe"><td colspan="2">Funktionen</td></tr>
     <tr><td><strong>YEAR</strong>(Datum), <strong>MONTH</strong>(Datum), <strong>DAY</strong>(Datum)</td><td>Jahr, Monat, Tag eines Datums</td></tr>
+    <tr><td><strong>HOUR</strong>(Zeit), <strong>MINUTE</strong>(Zeit)</td><td>Stunde, Minute einer Zeitangabe</td></tr>
+    <tr><td><strong>WEEKDAY</strong>(Datum)</td><td>Wochentag als Zahl (Montag = 0, …, Sonntag = 6)</td></tr>
     <tr><td><strong>CURDATE</strong>(), <strong>NOW</strong>()</td><td>aktuelles Datum, aktuelles Datum mit Uhrzeit</td></tr>
     <tr><td><strong>DATEDIFF</strong>(Datum1, Datum2)</td><td>Anzahl Tage Datum1 − Datum2</td></tr>
+    <tr><td><strong>TIMESTAMPDIFF</strong>(<strong>MINUTE</strong> | <strong>HOUR</strong> | <strong>DAY</strong> | <strong>MONTH</strong> | <strong>YEAR</strong>, Anfang, Ende)</td><td>Differenz Ende − Anfang in der angegebenen Einheit (nur volle Einheiten)</td></tr>
     <tr><td><strong>DATE_ADD</strong>(Datum, <strong>INTERVAL</strong> n <strong>DAY</strong> | <strong>MONTH</strong> | <strong>YEAR</strong>)</td><td>addiert ein Intervall zu einem Datum</td></tr>
     <tr><td><strong>LEFT</strong>(Text, n), <strong>RIGHT</strong>(Text, n)</td><td>n Zeichen von links / rechts</td></tr>
     <tr><td><strong>SUBSTRING</strong>(Text, Start, Länge)</td><td>Teilzeichenkette ab Position Start (erstes Zeichen = 1)</td></tr>
